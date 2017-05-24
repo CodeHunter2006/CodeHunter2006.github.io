@@ -135,7 +135,7 @@ func httpDo(ctx context.Context, req *http.Request, f func(*http.Response, error
     }
 }
 ```
-
+注意上面的用法，在最后一层goroutine中调用了网络操作等待最后的结果，由于没有传入Context所以无法立即停止调用。在收到了当前Context撤销后，要继续等待结果，然后不做任何操作地返回。这样避免在外部函数内部发生泄漏。
 
 引用：<br/>
 [Go Concurrency Patterns: Timing out, moving on - The Go Blog](https://blog.golang.org/go-concurrency-patterns-timing-out-and)<br/>
