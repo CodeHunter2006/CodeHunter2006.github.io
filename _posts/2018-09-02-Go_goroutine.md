@@ -44,3 +44,10 @@ __P__ 是M上调度G运行的一个中间层，是CPU的抽象，所以一般P�
 * 当goroutine较多时，Runtime会创建很多线程。当这些G执行完毕后，线程仍然不会释放，等待以后的执行。
 
 * 当P对应的队列处理完后，就会从总队列取G。如果总队列没有，则会去其他的P对应的队列中"偷取"，一般会偷一半过来执行。这样避免出现线程空闲。
+
+<br/>
+PS:<br/>
+协程并不是Go的专属，Lua等语言都实现了协程，golang team成员之一的Russ cox在加入golang team之前用C实现过协程。<br/>
+[源码](https://swtch.com/libtask/)，[中文注释版本](https://www.cnblogs.com/foxmailed/p/3509359.html)
+
+(转)[漫画：什么是协程？](https://www.sohu.com/a/236536167_684445)
