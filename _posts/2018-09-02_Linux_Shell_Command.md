@@ -95,3 +95,84 @@ cat /etc/issue
 
 ifconfig
 查看IP信息
+
+wall
+广播一段文字消息，以Ctrl+D输入EOF结束符。
+
+创建一个软连接，相当于快捷方式
+ln   -s   /sourcedirectory   /destdirectory
+source 是已经存在的文件或文件夹
+dest 是将要创建的文件或文件夹
+
+查看进程 PS(Process Shot)
+ps -ef
+查看进程位置
+ps -ef|grep xxxx
+
+查看进程内存使用
+ps -aux
+
+查看进程端口使用情况
+netstat -ntlp
+
+内存总容量查询
+free
+
+运行某个".sh"文件
+bash file.sh
+sh file.sh
+sh -x file.sh   // 在执行命令时显示执行细节
+./file.sh
+
+查看磁盘剩余空间(Disk File)
+df -h
+
+du -sh *
+查看当前文件夹下各文件和文件夹的容量
+
+查看CPU使用情况
+top
+
+把执行结果重定向到文件
+cmd > file    // 覆盖原有文件
+cmd >> file    // 追加到原文件后面
+cmd 1> file   // 只重定向stdout
+cmd 2> file   // 只重定向stderr
+cmd &> /dev/null    // 抛弃所有的log
+
+$? -eq 0    // 判断前面执行的命令是否成功，一般成功返回0，失败返回1
+
+修改密码
+passwd    //修改当前用户密码
+passwd name    //修改name用户的密码
+
+dpkg -i xxx.deb
+安装.deb包。
+
+apt-get update    //更新最新的软件版本列表
+apt-get upgrade    //将所有软件更新到最新版本，系统也可能升级
+apt-get install xxx    //安装某个软件
+
+压缩文件夹
+tar -zcvf /home/xahot.tar.gz /xahot --exclude=xxx
+tar -zcvf 打包后生成的文件名全路径 要打包的目录 要排除的目录名
+
+通过命令行滚动查看执行结果：
+xxx|more
+b向前翻页，空格向后翻页
+
+poweroff  关机
+
+date 查看系统时间
+clock --show 查看硬件时间
+clock --hctosys 将硬件时间应用到系统时间
+
+cp -Rf /home/user1/* /root/temp/
+将 /home/user1目录下的所有东西拷到/root/temp/下而不拷贝user1目录本身。
+即格式为：cp -Rf 原路径/ 目的路径/
+
+last -10
+查看最后10次登录情况
+
+iptables -nv -L
+查看网络访问控制情况
