@@ -63,11 +63,12 @@ redis 127.0.0.1:6379> LPUSH dqname value2
 (integer) 2
 redis 127.0.0.1:6379> RPUSH dqname value3
 (integer) 3
-redis 127.0.0.1:6379> LRANGE dqname 0 10
+redis 127.0.0.1:6379> LRANGE dqname 0 -1
 1) "value2"
 2) "value1"
 3) "value3"
 ```
+注意，下标从0算起，-1表示最后一个元素、-2表示倒数第二个元素...
 
 ### Set(集合)
 * 特性
