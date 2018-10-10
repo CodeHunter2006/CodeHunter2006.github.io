@@ -28,11 +28,11 @@ goroutine是Go最核心的特性。为什么它可以比多线程效率更高？
 # Go的GPM模型
 ![](/assets/images/2018-09-02-Go_goroutine.png)
 
-__G__ 是应用层代码开启的goroutine
+__G(Goroutine)__ 是应用层代码开启的goroutine
 
-__M__ 是Go Runtime自动开启的线程，具体数量取决于CPU核数和goroutine数量，实际数量往往要多于CPU数量，多个M构成线程池
+__M(Machine)__ 是Go Runtime自动开启的线程，具体数量取决于CPU核数和goroutine数量，实际数量往往要多于CPU数量，多个M构成线程池
 
-__P__ 是M上调度G运行的一个中间层，是CPU的抽象，所以一般P的数量与CPU核数一致，可以调用runtime.GOMAXPROCS(num)执行，程序运行后不再改变
+__P(Process)__ 是M上调度G运行的一个中间层，是CPU的抽象，所以一般P的数量与CPU核数一致，可以调用runtime.GOMAXPROCS(num)执行，程序运行后不再改变
 
 最上面有一个总的队列，用户启动的G、耗时操作后返回的G都是从这里入队。在每一个P上，对应着一个G的队列。G在运行时要绑定一个P，由P绑定一个M进行运行。
 
