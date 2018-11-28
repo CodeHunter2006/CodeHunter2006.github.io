@@ -11,7 +11,8 @@ tags: Algorithm
 
 <br/>
 ### 数据结构的实现
-```
+``` C++
+// C++版本
 class DSU{
     private:
     vector<int> parent_; // 用于集合关联，默认每个元素自己是一个集合。
@@ -47,6 +48,70 @@ class DSU{
         return true;
     }
 };
+```
+
+``` Golang
+// Go 版本
+type DSU struct {
+    parents []int
+    ranks []int
+}
+
+// 创建DSU对象
+func NewDSU(size int) (res *DSU) {
+    if size <= 0 {
+        return
+    }
+    
+    res = &DSU{
+        parents : make([]int, size),
+        ranks : make([]int, size),
+    }
+    
+    for i := 0; i < size; i++ {
+        res.parents[i] = i
+        res.ranks[i] = 1
+    }
+    return
+}
+
+func (p *DSU) Find(x int) (root int, err error) {
+    if x < 0 || x >= len(p.parents) {
+        err = errors.New("invalid index")
+        return
+    }
+    
+    if p.parents[x] != x {
+        p.parents[x], _ = p.Find(p.parents[x])
+    }
+    root = p.parents[x]
+    return
+}
+
+func (p *DSU) Union(x ,y int) (res bool, err error) {
+    if x < 0 || x >= len(p.parents) || y < 0 || y >= len(p.parents) {
+        err = errors.New("invalid index")
+        return
+    }
+    
+    xRoot, _ := p.Find(x)
+    yRoot, _ := p.Find(y)
+    
+    if xRoot == yRoot {
+        res = false
+        return
+    }
+    
+    if p.ranks[xRoot] >= p.ranks[yRoot] {
+        p.parents[yRoot] = xRoot
+        p.ranks[xRoot] += p.ranks[yRoot]
+    } else {
+        p.parents[xRoot] = yRoot
+        p.ranks[yRoot] += p.ranks[xRoot]        
+    }
+    res = true
+    return
+}
 ```
 
 <br/>
