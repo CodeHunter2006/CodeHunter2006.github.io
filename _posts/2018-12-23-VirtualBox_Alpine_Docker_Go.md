@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "VritualBox+Alpine+Docker+Go 环境搭建"
-date:   2018-12-08 10:00:00 +0800
+date:   2018-12-23 09:00:00 +0800
 tags: VirtualBox Docker
 ---
 本文只记录了Docker环境搭建的关键步骤，适合对各个部分都很熟练的人，不适合新手。
@@ -59,7 +59,41 @@ Alpine是一种精简、安全的Linux操作系统，系统镜像文件只有104
 ```
 * 重启，Docker安装完成
 
-### 创建HelloWord容器
+### 测试Docker
+执行"docker run hello-world"，将会自动下载hello-world image，然后创建一个容器运行image，打印出一系列文字：
+```
+alpine-host:~# docker run hello-world
+Unable to find image 'hello-world:latest' locally
+latest: Pulling from library/hello-world
+1b930d010525: Pull complete
+Digest: sha256:41a65640635299bab090f783209c1e3a3f11934cf7756b09cb2f1e02147c6ed8
+Status: Downloaded newer image for hello-world:latest
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+```
+
+按照提示，又执行了"docker run -it ubuntu bash"，果然进入了bash，可以执行各种基本命令。进入一个系统不到一秒！
+
+### 创建Go HelloWord容器
 
 
 
