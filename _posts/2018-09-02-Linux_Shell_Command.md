@@ -8,8 +8,8 @@ tags: Linux
 Ctrl+C 打断程序运行
 Ctrl+Z 暂停进程
 jobs 查看已经暂定的进程
-fg ### 将后台进程加载到前台运行
-bg ### 在后台继续运行暂停的进程
+fg %### 将后台进程加载到前台运行
+bg %### 在后台继续运行暂停的进程
 如果要退出terminal时仍然运行后台进程，进程的输出要重定向，例如 xxx >>tmp.log
 
 "xxx \<回车>"
@@ -127,6 +127,9 @@ ps -aux
 
 查看进程端口使用情况
 netstat -ntlp
+
+查看<设定>最大连接数
+ulimit -n <newValue>
 
 内存总容量查询
 free
