@@ -12,11 +12,22 @@ fg ### 将后台进程加载到前台运行
 bg ### 在后台继续运行暂停的进程
 如果要退出terminal时仍然运行后台进程，进程的输出要重定向，例如 xxx >>tmp.log
 
+"xxx \<回车>"
+可以实现多行命令一起执行
+
+查看当前使用的用户名
+whoami
+
 查看操作系统信息
 uname -a
 
 查看CentOS系统版本
 cat /etc/issue
+
+切换为root用户权限
+su	// 相当于 su root
+su - root	// 切换时，同时保持环境变量
+在"/etc/passwd"中可以查看已经存在的用户及用户组
 
 改变文件权限为可执行可修改
 chmod 755 ./xxx
@@ -26,7 +37,6 @@ touch ./xxx
 
 将某文件或文件夹授权给某用户
 chown username filefoldername
-
 
 insmod
 将文件安装到内核
