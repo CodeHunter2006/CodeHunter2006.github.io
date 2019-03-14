@@ -2,7 +2,7 @@
 layout: post
 title:  "秒杀架构与乐观锁"
 date:   2019-03-03 10:30:00 +0800
-tags: Go HighConcurrency
+tags: Go HighConcurrency Redis
 ---
 ### 秒杀与高并发
 "秒杀"是指一种购物模式，在特定时间所有买家同时抢购商品，最后只有与库存数量对应的买家可以买到。
