@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "算法学习，Enigma密码生成器"
-date:   2019-02-05 10:00:00 +0800
+date:   2019-04-01 9:00:00 +0800
 tags: Algorithm
 ---
 ### 题目
