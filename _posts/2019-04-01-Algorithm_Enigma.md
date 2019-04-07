@@ -43,6 +43,7 @@ void getPrimes(vector<int> &primes, int n) {
             primes.push_back(i);
     }
 }
+
 void getFactors(vector<vector<int>> &factors, int minValue, int maxValue) {
     const int N = maxValue - minValue + 1;
     vector<int> primes;
@@ -61,6 +62,7 @@ void getFactors(vector<vector<int>> &factors, int minValue, int maxValue) {
         }
     }
 }
+
 bool hasCommon(vector<int> &v1, vector<int> &v2) {
     int i = 0, j = 0;
     while (i < v1.size() && j < v2.size()) {
@@ -73,6 +75,7 @@ bool hasCommon(vector<int> &v1, vector<int> &v2) {
     }
     return false;
 }
+
 int calculateTotalRotorConfiguration(int rotorCount, int minRotorValue, int maxRotorValue) {
     const int N = maxRotorValue - minRotorValue + 1, MOD = 1e9 + 7;
     vector<vector<int>> factors(N);
