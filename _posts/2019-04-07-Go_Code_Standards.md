@@ -6,11 +6,13 @@ tags: Go
 ---
 转自：[https://segmentfault.com/a/1190000000464394?utm_medium=referral&utm_source=tuicool](https://segmentfault.com/a/1190000000464394?utm_medium=referral&utm_source=tuicool)
 
+<br/>
 ### gofmt
 大部分的格式问题可以通过gofmt解决，gofmt自动格式化代码，保证所有的go代码一致的格式。
 
-正常情况下，采用Sublime编写go代码时，插件GoSublilme已经调用gofmt对代码实现了格式化。
+正常情况下，采用Sublime或VSCode编写go代码时，插件已经调用gofmt对代码实现了格式化。
 
+<br/>
 ### 注释
 在编码阶段同步写好变量、函数、包注释，注释可以通过godoc导出生成文档。
 
@@ -35,4 +37,104 @@ package regexp
 // Compile parses a regular expression and returns, if successful, a Regexp
 // object that can be used to match against text.
 func Compile(str string) (regexp *Regexp, err error) {
+```
+
+<br/>
+### 命名
+使用短命名，长名字并不会自动使得事物更易读，文档注释会比格外长的名字更有用。
+
+* 包名
+
+包名应该为小写单词，不要使用下划线或者混合大小写。
+
+* 接口名
+
+单个函数的接口名以"er"作为后缀，如Reader,Writer
+
+接口的实现则去掉“er”
+```
+type Reader interface {
+        Read(p []byte) (n int, err error)
+}
+```
+两个函数的接口名综合两个函数名
+```
+type WriteFlusher interface {
+    Write([]byte) (int, error)
+    Flush() error
+}
+```
+三个以上函数的接口名，类似于结构体名
+```
+type Car interface {
+    Start([]byte) 
+    Stop() error
+    Recover()
+}
+```
+* 混合大小写
+
+采用驼峰式命名
+```
+MixedCaps 大写开头，可导出
+mixedCaps 小写开头，不可导出
+```
+* 变量
+
+```
+全局变量：驼峰式，结合是否可导出确定首字母大小写
+参数传递：驼峰式，小写字母开头
+局部变量：下划线形式
+```
+
+<br/>
+### 控制结构
+* if
+
+if接受初始化语句，约定如下方式建立局部变量
+```
+if err := file.Chmod(0664); err != nil {
+    return err
+}
+```
+* for
+
+采用短声明建立局部变量
+```
+sum := 0
+for i := 0; i < 10; i++ {
+    sum += i
+}
+```
+* range
+
+如果只需要第一项（key），就丢弃第二个：
+```
+for key := range m {
+    if key.expired() {
+        delete(m, key)
+    }
+}
+```
+如果只需要第二项，则把第一项置为下划线
+```
+sum := 0
+for _, value := range array {
+    sum += value
+}
+```
+* return
+
+尽早return：一旦有错误发生，马上返回
+```
+f, err := os.Open(name)
+if err != nil {
+    return err
+}
+d, err := f.Stat()
+if err != nil {
+    f.Close()
+    return err
+}
+codeUsing(f, d)
 ```
