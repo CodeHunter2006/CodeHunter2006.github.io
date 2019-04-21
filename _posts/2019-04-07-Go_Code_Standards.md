@@ -138,3 +138,50 @@ if err != nil {
 }
 codeUsing(f, d)
 ```
+
+<br/>
+### 函数（必须）
+* 函数采用命名的多值返回
+* 传入变量和返回变量以小写字母开头
+```
+func nextInt(b []byte, pos int) (value, nextPos int) {
+```
+在godoc生成的文档中，带有返回值的函数声明更利于理解
+
+<br/>
+### 错误处理
+* error作为函数的值返回,必须对error进行处理
+* 错误描述如果是英文必须为小写，不需要标点结尾
+* 采用独立的错误流进行处理
+
+不要采用这种方式
+```
+if err != nil {
+	// error handling
+} else {
+	// normal code
+}
+```
+而要采用下面的方式
+```
+if err != nil {
+	// error handling
+	return // or continue, etc.
+}
+// normal code
+```
+如果返回值需要初始化，则采用下面的方式
+```
+x, err := f()
+if err != nil {
+    // error handling
+    return
+}
+// use x
+```
+
+<br/>
+### panic
+* 尽量不要使用panic，除非你知道你在做什么
+
+<br/>
