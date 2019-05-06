@@ -143,6 +143,7 @@ codeUsing(f, d)
 ### 函数（必须）
 * 函数采用命名的多值返回
 * 传入变量和返回变量以小写字母开头
+
 ```
 func nextInt(b []byte, pos int) (value, nextPos int) {
 ```
@@ -183,5 +184,48 @@ if err != nil {
 <br/>
 ### panic
 * 尽量不要使用panic，除非你知道你在做什么
+
+<br/>
+### import
+* 对import的包进行分组管理，而且标准库作为第一组
+
+```
+package main
+
+import (
+    "fmt"
+    "hash/adler32"
+    "os"
+
+    "appengine/user"
+    "appengine/foo"
+
+    "code.google.com/p/x/y"
+    "github.com/foo/bar"
+)
+```
+
+`goimports`实现了自动格式化
+
+<br/>
+### 缩写
+* 采用全部大写或者全部小写来表示缩写单词
+
+比如对于url这个单词，不要使用
+```
+UrlPony
+```
+而要使用
+```
+urlPony 或者 URLPony
+```
+
+<br/>
+### 参数传递
+* 对于少量数据，不要传递指针
+* 对于大量数据的struct可以考虑使用指针
+* 传入参数是map，slice，chan不要传递指针
+
+因为map，slice，chan是引用类型，不需要传递指针的指针
 
 <br/>
