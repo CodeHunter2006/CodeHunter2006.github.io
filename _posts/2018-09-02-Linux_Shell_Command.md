@@ -15,6 +15,13 @@ bg %### 在后台继续运行暂停的进程
 "xxx \<回车>"
 可以实现多行命令一起执行
 
+查看历史命令
+history
+
+通过命令行滚动查看执行结果：
+xxx|more
+b向前翻页，空格向后翻页
+
 查看当前使用的用户名
 whoami
 
@@ -172,10 +179,6 @@ apt-get install xxx    //安装某个软件
 压缩文件夹
 tar -zcvf /home/xahot.tar.gz /xahot --exclude=xxx
 tar -zcvf 打包后生成的文件名全路径 要打包的目录 要排除的目录名
-
-通过命令行滚动查看执行结果：
-xxx|more
-b向前翻页，空格向后翻页
 
 poweroff  关机
 
