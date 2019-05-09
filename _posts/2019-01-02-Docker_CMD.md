@@ -58,6 +58,11 @@ docker ps
 docker ps -a
 ```
 
+查看一个容器的详细信息
+```
+docker inspect ...
+```
+
 查看当前所有镜像
 ```
 docker images
