@@ -229,3 +229,70 @@ urlPony 或者 URLPony
 因为map，slice，chan是引用类型，不需要传递指针的指针
 
 <br/>
+### 接受者
+* 名称
+
+统一采用单字母'p'而不是this，me或者self
+```
+type T struct{} 
+
+func (p *T)Get(){}
+```
+* 类型
+
+对于go初学者，接受者的类型如果不清楚，统一采用指针型
+```
+func (p *T)Get(){}
+```
+而不是
+```
+func (p T)Get(){}
+```
+在某些情况下，出于性能的考虑，或者类型本来就是引用类型，有一些特例
+
+* 如果接收者是map,slice或者chan，不要用指针传递
+
+```
+//Map
+package main
+
+import (
+    "fmt"
+)
+
+type mp map[string]string
+
+func (m mp) Set(k, v string) {
+    m[k] = v
+}
+
+func main() {
+    m := make(mp)
+    m.Set("k", "v")
+    fmt.Println(m)
+}
+```
+```
+//Channel
+package main
+
+import (
+    "fmt"
+)
+
+type ch chan interface{}
+
+func (c ch) Push(i interface{}) {
+    c <- i
+}
+
+func (c ch) Pop() interface{} {
+    return <-c
+}
+
+func main() {
+    c := make(ch, 1)
+    c.Push("i")
+    fmt.Println(c.Pop())
+}
+```
