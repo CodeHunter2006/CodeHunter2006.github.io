@@ -5,8 +5,9 @@ date:   2018-09-02 10:00:00 +0800
 tags: Linux
 ---
 
-Ctrl+C 打断程序运行
-Ctrl+Z 暂停进程
+Ctrl+C 关闭程序(发送SIGINT)
+Ctrl+Z 暂停进程(发送SIGTSTP)
+Ctrl+D 输入EOF
 jobs 查看已经暂定的进程
 fg %### 将后台进程加载到前台运行
 bg %### 在后台继续运行暂停的进程
