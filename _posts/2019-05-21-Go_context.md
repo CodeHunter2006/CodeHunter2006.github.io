@@ -87,6 +87,56 @@ func TODO() Context
 * Context的使用场景是一次调用的上下文，类似闭包的使用，所以上面说"不要保存为成员变量"。
 * 如果把同一个Context传到很多goroutine中，由于Context对象是线程安全的会隐式加锁，所以可能出现所竞争的情况。可以通过创建子Context避免。
 
+# 示例分析
+在 [Go Concurrency Patterns: Context - The Go Blog](https://blog.golang.org/context) 中讲述了Google API的一段代码，如何利用Context对象进行超时撤销、数据返回。其中有一些代码调用模式比较典型，在这里分析一下(直接在代码加注释)：
+```
+func handleSearch(w http.ResponseWriter, req *http.Request) {
+    // ctx is the Context for this handler. Calling cancel closes the
+    // ctx.Done channel, which is the cancellation signal for requests
+    // started by this handler.
+    var (
+        ctx    context.Context
+        cancel context.CancelFunc
+    )
+    timeout, err := time.ParseDuration(req.FormValue("timeout"))
+    if err == nil {
+        // The request has a timeout, so create a context that is
+        // canceled automatically when the timeout expires.
+        ctx, cancel = context.WithTimeout(context.Background(), timeout)
+    } else {
+        ctx, cancel = context.WithCancel(context.Background())
+    }
+    defer cancel() // Cancel ctx as soon as handleSearch returns.
+```
+这是最初的根goroutine，不可以被撤销。注意最后一句，当下一级Context和CancelFunc同时创建好之后，立即defer CancelFunc的调用，也就是无论最后是超时还是返回了正确值，都会调用CancelFunc。
+
+```
+func httpDo(ctx context.Context, req *http.Request, f func(*http.Response, error) error) error {
+    // Run the HTTP request in a goroutine and pass the response to f.
+    // 注意，这里为什么设置缓冲区为1，因为不希望子goroutine被阻塞(不读就会阻塞对方)，
+    // 只想自己被子goroutine阻塞(对方不写，自己就阻塞)
+    c := make(chan error, 1)
+	
+    // 将当前Context传递给真正执行http的对象，以便其写入结果，这里并不是为了撤销而传入
+    req = req.WithContext(ctx)
+	
+    go func() { c <- f(http.DefaultClient.Do(req)) }()
+    select {
+    // 如果当前Context被撤销，那么当前goroutine仍然要等待下一级调用结果，然后再返回。避免下一级goroutine泄漏。
+    // 同时返回的错误也不是子goroutine返回的错误，而是当前Context被撤销的原因。
+    case <-ctx.Done():
+        <-c // Wait for f to return.
+        return ctx.Err()
+	
+    // 调用子gotoutine有三种结果：正确、错误、超时。正确的话，Context中的map可以记录结果，这里返回nil；
+    // 错误的话，可以通过这里返回错误，并告诉父goroutine不必继续等待；超时的话走上面的case。
+    case err := <-c:
+        return err
+    }
+}
+```
+
+
 引用：<br/>
 [Go Concurrency Patterns: Timing out, moving on - The Go Blog](https://blog.golang.org/go-concurrency-patterns-timing-out-and)<br/>
 [Go Concurrency Patterns: Pipelines and cancellation - The Go Blog](https://blog.golang.org/pipelines)<br/>
