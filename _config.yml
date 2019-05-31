@@ -24,6 +24,8 @@ github_username:  CodeHunter2006
 
 # Build settings
 markdown: kramdown
+kramdown:
+  input: GFM	# use Github Flavored Markdown !important
 theme: minima
 plugins:
   - jekyll-feed
