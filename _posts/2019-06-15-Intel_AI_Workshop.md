@@ -111,9 +111,10 @@ Intel提供一系列学习资源，支持AI社区的发展<br/>
 [https://communities.intel.com/community/tech/intel-ai-academy](https://communities.intel.com/community/tech/intel-ai-academy)<br/>
 [https://devmesh.intel.com](https://devmesh.intel.com)
 
-
+[课程对应的PDF文档链接](https://software.intel.com/en-us/ai/courses)
 
 ![Intel_AI_Workshop_讲师合影](/assets/201906151330_Intel_AI_Workshop_2.jpg)
 会后讲师合影（左起：Derek Fattibene、Cao Huiyan、Pei Fanjiang、Gu Jianjun）
 
-[课程对应的PDF文档链接](https://software.intel.com/en-us/ai/courses)
+![Intel_AI_Workshop_证书](/assets/201906151330_Intel_AI_Workshop_6.png)
+笔记还没有写完就收到了证书，惭愧呀!:joy: 一定要尽快完成总结！:muscle:
