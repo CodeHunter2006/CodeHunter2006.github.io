@@ -7,7 +7,7 @@ tags: Algorithm
 ![Edsger Wybe Dijkstra](/assets/images/2019-02-18-Algorithm_Dijkstra_1.jpg)
 
 # 吐槽
-Dijkstra翻译为"迪杰特斯拉"，但是音标是/ˈdaɪkstrə/，应该是"戴格特斯拉"才对呀。不过/ai/ /i/只是嘴巴大小不同，可能是传过来时被别的语言音译了。
+Dijkstra翻译为"迪杰特斯拉"，但是音标是/ˈdaɪkstrə/，应该是"戴克特斯拉"才对呀。不过/ai/ /i/只是嘴巴大小不同，可能是传过来时被别的语言音译了。
 
 Go中没有像C++ STL那么多的常用容器，不过list可以作为stack、queue来用，Go提供的heap需要自己实现一些接口从而实现priority_queue的功能。希望Go能支持泛型，提供更多容器。
 
