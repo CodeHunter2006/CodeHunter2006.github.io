@@ -66,7 +66,8 @@ func (p *SkipList) Add(key int, val interface{}) {
 	}
 
 	var upNode *SkipElement
-	for curLevel, curNode := level, p.lists[level]; curLevel >= 0 && curNode != nil; curLevel, curNode = curLevel-1, curNode.down {
+	for curLevel, curNode := level, p.lists[level]; curLevel >= 0 &&
+		curNode != nil; curLevel, curNode = curLevel-1, curNode.down {
 
 		for curNode.next != nil && curNode.next.seq < key {
 			curNode = curNode.next
@@ -95,7 +96,8 @@ func (p *SkipList) Add(key int, val interface{}) {
 
 // Find the element, if not found return nil
 func (p *SkipList) Find(key int) (res interface{}) {
-	for curLevel, curNode := len(p.lists)-1, p.lists[len(p.lists)-1]; curLevel >= 0 && curNode != nil; curLevel, curNode = curLevel-1, curNode.down {
+	for curLevel, curNode := len(p.lists)-1, p.lists[len(p.lists)-1]; curLevel >= 0 &&
+		curNode != nil; curLevel, curNode = curLevel-1, curNode.down {
 		for curNode.next != nil && curNode.next.seq <= key {
 			curNode = curNode.next
 		}
@@ -110,7 +112,8 @@ func (p *SkipList) Find(key int) (res interface{}) {
 
 // Remove the element
 func (p *SkipList) Remove(key int) {
-	for curLevel, curNode := len(p.lists)-1, p.lists[len(p.lists)-1]; curLevel >= 0 && curNode != nil; curLevel, curNode = curLevel-1, curNode.down {
+	for curLevel, curNode := len(p.lists)-1, p.lists[len(p.lists)-1]; curLevel >= 0 &&
+		curNode != nil; curLevel, curNode = curLevel-1, curNode.down {
 		for curNode.next != nil && curNode.next.seq < key {
 			curNode = curNode.next
 		}
