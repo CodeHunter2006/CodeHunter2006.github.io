@@ -22,36 +22,91 @@ tags: Algorithm
 package skiplist
 
 import (
+	"fmt"
 	"math"
 	"math/rand"
 )
 
 // SkipElement is the element for Skiplist
 type SkipElement struct {
-	value interface{}
+	Value interface{}
 	seq   int
+	pre   *SkipElement
 	next  *SkipElement
 	down  *SkipElement
+	list  *SkipList
+}
+
+// Prev return previous element
+func (p *SkipElement) Prev() *SkipElement {
+	return p.pre
+}
+
+// Next return next element
+func (p *SkipElement) Next() *SkipElement {
+	return p.next
 }
 
 // SkipList is a multilevel list. All operate time complexty is O(logn)
 type SkipList struct {
-	lists []*SkipElement
+	lists  []*SkipElement
+	rend   *SkipElement
+	end    *SkipElement
+	length int
 }
 
 // NewList create a SkipList and return the pointer
 func NewList() *SkipList {
-	return &SkipList{
+	begin := &SkipElement{
+		seq: math.MinInt32,
+	}
+	begin.next = &SkipElement{
+		seq: math.MaxInt32,
+		pre: begin,
+	}
+	res := &SkipList{
 		lists: []*SkipElement{
-			&SkipElement{
-				seq: math.MinInt32,
-			},
+			begin,
 		},
 	}
+	res.rend = begin
+	res.end = begin.next
+	return res
+}
+
+// Len return the lenth
+func (p *SkipList) Len() int {
+	return p.length
+}
+
+// Begin return the first iterator
+func (p *SkipList) Begin() *SkipElement {
+	if p.rend.next != p.end {
+		return p.rend.next
+	}
+	return p.end
+}
+
+// RBegin return the last iterator
+func (p *SkipList) RBegin() *SkipElement {
+	if p.rend.next != p.end {
+		return p.end.pre
+	}
+	return p.rend
+}
+
+// End return the last iterator
+func (p *SkipList) End() *SkipElement {
+	return p.end
+}
+
+// REnd return the rend iterator
+func (p *SkipList) REnd() *SkipElement {
+	return p.rend
 }
 
 // Add or update value of a key
-func (p *SkipList) Add(key int, val interface{}) {
+func (p *SkipList) Add(key int, val interface{}) (e *SkipElement, isNew bool) {
 	level := 0
 	// get insert level by random
 	for (rand.Int() & 1) == 1 {
@@ -76,26 +131,40 @@ func (p *SkipList) Add(key int, val interface{}) {
 		// already exists, update value
 		if curNode.next != nil && curNode.next.seq == key {
 			for tempNode := curNode; tempNode != nil; tempNode = tempNode.down {
-				tempNode.value = val
+				tempNode.Value = val
+				e = tempNode
 			}
 			return
 		}
 
 		newNode := &SkipElement{
 			seq:   key,
-			value: val,
+			Value: val,
+			pre:   curNode,
 			next:  curNode.next,
 		}
+
 		if upNode != nil {
 			upNode.down = newNode
 		}
+
+		if curLevel == 0 {
+			curNode.next.pre = newNode
+			p.length++
+
+			// set return value
+			e = newNode
+			isNew = true
+		}
+
 		curNode.next = newNode
 		upNode = newNode
 	}
+	return
 }
 
 // Find the element, if not found return nil
-func (p *SkipList) Find(key int) (res interface{}) {
+func (p *SkipList) Find(key int) (res *SkipElement) {
 	for curLevel, curNode := len(p.lists)-1, p.lists[len(p.lists)-1]; curLevel >= 0 &&
 		curNode != nil; curLevel, curNode = curLevel-1, curNode.down {
 		for curNode.next != nil && curNode.next.seq <= key {
@@ -103,7 +172,7 @@ func (p *SkipList) Find(key int) (res interface{}) {
 		}
 
 		if curNode.seq == key {
-			res = curNode.value
+			res = curNode
 			return
 		}
 	}
@@ -111,30 +180,103 @@ func (p *SkipList) Find(key int) (res interface{}) {
 }
 
 // Remove the element
-func (p *SkipList) Remove(key int) {
+func (p *SkipList) Remove(key int) (exists bool) {
 	for curLevel, curNode := len(p.lists)-1, p.lists[len(p.lists)-1]; curLevel >= 0 &&
 		curNode != nil; curLevel, curNode = curLevel-1, curNode.down {
 		for curNode.next != nil && curNode.next.seq < key {
 			curNode = curNode.next
 		}
 
-		if curNode.next.seq == key {
+		if curNode.next != nil && curNode.next.seq == key {
 			curNode.next = curNode.next.next
+			if curLevel == 0 {
+				curNode.next.pre = curNode
+				exists = true
+				p.length--
+			}
 		}
 	}
 	return
 }
-```
 
-# 待改进
-* 增加迭代器，可以从某元素进行迭代
-* 增加向前的指针，可以双向迭代
-* 真正的value应该作为卫星数据存储在最底层，Find时返回最底层元素的迭代器
-* Add函数应该返回一个bool型，表示是否是首次插入
-* Remove函数也返回bool型，表示是否存在
+// Print out the list structure
+func (p *SkipList) Print() {
+	for curLevel, curNode := len(p.lists)-1, p.lists[len(p.lists)-1]; curLevel >= 0 &&
+		curNode != nil; {
+		fmt.Printf("level %v : ", curLevel)
+		for curNode != nil {
+			fmt.Printf("%v ", curNode.seq)
+			curNode = curNode.next
+		}
+		fmt.Println()
+		curLevel--
+		if curLevel >= 0 {
+			curNode = p.lists[curLevel]
+		}
+	}
+}
+```
 
 # 应用示例
 ```	Golang
-// 暂无
+Challenge:
+In an exam room, there are N seats in a single row, numbered 0, 1, 2, ..., N-1.
+
+When a student enters the room, they must sit in the seat that maximizes the distance 
+to the closest person.  If there are multiple such seats, they sit in the seat with the lowest number.  
+(Also, if no one is in the room, then the student sits at seat number 0.)
+
+Return a class ExamRoom(int N) that exposes two functions: ExamRoom.
+seat() returning an int representing what seat the student sat in, and ExamRoom.
+leave(int p) representing that the student in seat number p now leaves the room.  
+It is guaranteed that any calls to ExamRoom.leave(p) have a student sitting in seat p.
+
+type ExamRoom struct {
+    size int
+    list *SkipList
+}
+
+func Constructor(N int) ExamRoom {
+    return ExamRoom{
+        size: N,
+        list: NewList(),
+    }
+}
+
+func (this *ExamRoom) Seat() int {
+    res := 0
+    
+    if this.list.Len() != 0 {
+        maxLen := 0 // max lenth between two seats
+        
+        if this.list.Find(0) == nil {
+            maxLen = this.list.Begin().Value.(int)
+        }
+        
+        for index, element := 0, this.list.Begin(); element != this.list.End(); 
+        element, index = element.Next(), element.Value.(int) {
+            if tempLen := (element.Value.(int) - index) / 2; tempLen > maxLen {
+                maxLen = tempLen
+                res = (element.Value.(int) + index) / 2
+            }
+        }
+        
+        if this.list.Find(this.size - 1) == nil {
+            tempLen := this.size - 1 - this.list.RBegin().Value.(int)
+            if tempLen > maxLen {
+                maxLen = tempLen
+                res = this.size - 1
+            }
+        }
+        
+    }
+    
+    this.list.Add(res, res)
+    return res
+}
+
+func (this *ExamRoom) Leave(p int)  {
+    this.list.Remove(p)
+}
 ```
 
