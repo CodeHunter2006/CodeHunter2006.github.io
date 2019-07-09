@@ -7,6 +7,8 @@ tags: [resources, jekyll]
 image: http://gastonsanchez.com/images/blog/mathjax_logo.png
 ---
 
+(转)[Mathjax公式教程](https://blog.csdn.net/dabokele/article/details/79577072)
+
 One of the rewards of switching my website to [Jekyll](http://jekyllrb.com/) is the
 ability to support **MathJax**, which means I can write LaTeX-like equations that get
 nicely displayed in a web browser, like this one \\( \sqrt{\frac{n!}{k!(n-k)!}} \\) or
