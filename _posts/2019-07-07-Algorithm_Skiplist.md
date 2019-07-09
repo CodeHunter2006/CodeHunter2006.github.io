@@ -268,7 +268,6 @@ func (this *ExamRoom) Seat() int {
                 res = this.size - 1
             }
         }
-        
     }
     
     this.list.Add(res, res)
