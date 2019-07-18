@@ -4,6 +4,7 @@ title:  "算法学习，极限数据结构之——跳跃表(Skip List)"
 date:   2019-07-07 10:00:00 +0800
 tags: Algorithm
 ---
+
 # 数据结构特性
 ![Skip List](/assets/images/2019-07-07-Algorithm_Skiplist_1.jpg)
 跳跃表，Skip List<br/>
@@ -287,6 +288,7 @@ for (rand.Int() & 1) == 1 {
 	level++
 }
 ```
+※在实际的Redis源码中，深度最大值为64，可以支持2^64个元素。没必要无限的增长，反而会降低效率。
 
 插入n个key后，每一层的节点数期望：
 * 第1层n，任何节点至少要插入第一层
