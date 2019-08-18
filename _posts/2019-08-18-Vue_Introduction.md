@@ -4,9 +4,9 @@ title:  "Vue介绍"
 date:   2019-08-18 23:00:00 +0800
 tags: Vue
 ---
+![Vue](/assets/images/2019-08-18-Vue_Introduction_1.png)
 PS:最近入坑Vue，发现了个宝藏，要好好总结。
 
-![Vue](/assets/images2019-08-18-Vue_Introduction_1.png)
 # Feature(功能/特性)
 Vue读作/vju:/(与view同音)，是一个基于js的前端渐进式框架。它按照MVVM模式设计，专注于View层。
 
