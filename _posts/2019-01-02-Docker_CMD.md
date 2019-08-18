@@ -38,6 +38,12 @@ Ctrl+P+Q
 
 可以充分利用Docker Hub，上面有各种官方Docker以及其他人制作的Docekr。利用Git Hub可以维护DockerFile，结合使用，随时可以组合出自己的容器集群配置方案。
 
+下载一个镜像
+```
+// ":tag"为可选项
+docker pull repository_name/image_name:tag
+```
+
 运行一个镜像为容器
 ```
 docker run ...
