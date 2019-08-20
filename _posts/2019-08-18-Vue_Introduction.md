@@ -54,6 +54,11 @@ Vue对象的computed属性可以根据data数据动态计算结果（比如根�
 ### 非子父关系的组件间通信
 通过对VueX对象的监听、mutation赋值、getter查询进行间接通信。
 
+## 生命周期Hook
+<img src="/assets/images/2019-08-18-Vue_Introduction_3.png" alt="drawing" width="800" height="517"/>
+如图，在Vue对象生命周期的各个阶段的时机点，你都有机会执行特定代码。只要在对象构造时注册各阶段的Hook函数即可。
+
+
 # Key-Words(关键概念）
 ## Directive(指令)
 刚开始接触Vue看到这个词会一头雾水，其实就是指标签上添加的动态属性。(大概是因为Vue开发者是后端程序员，导致的这种命名...)

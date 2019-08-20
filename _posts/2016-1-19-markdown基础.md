@@ -43,6 +43,16 @@ Github中的markdown添加一些新语法，叫作GFM(Github flavored markdown)
 
 本地图片：
 ![picture_alt](/assets/local_test_pic.png)
+* 可以给图片加尺寸
+```
+<img src="/assets/local_test_pic.png" alt="drawing" width="100" height="28"/>
+````
+<img src="/assets/local_test_pic.png" alt="drawing" width="100" height="28"/>
+* 也可以只加宽度
+```
+<img src="/assets/local_test_pic.png" alt="drawing" width="100"/>
+````
+<img src="/assets/local_test_pic.png" alt="drawing" width="100"/>
 
 表格标题1 | 表格标题2
 --------|--------
