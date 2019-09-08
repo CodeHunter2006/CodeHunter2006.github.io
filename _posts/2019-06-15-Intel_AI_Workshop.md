@@ -2,7 +2,7 @@
 layout: post
 title:  "Intel AI Workshop 笔记"
 date:   2019-06-15 22:00:00 +0800
-tags: CNN
+tags: CNN TensorFlow
 ---
 ![Intel_AI_Workshop](/assets/201906151330_Intel_AI_Workshop.jpg)
 
@@ -90,6 +90,7 @@ VMMRdb提供了9170个型号、76个厂家、291,752张图片...
 * 可以对网络进行局部Debug
 * 更好的库管理，利用Keras可以很容易的迁移至TensorFlow2.0
 
+![TensorFlow VS PyTorch](/assets/201906151330_Intel_AI_Workshop_7.jpg)
 *PS：后来与现场的小伙伴们交流，Intel与Google有合作关系，所以Intel会优先推Google的TensorFlow。其实PyTorch现在发展势头很好，原因是门槛低，适合快速入门。并且TensorFlow新的版本已经开始借鉴PyTorch中一些比较好的设计了。
 
 ### 选择神经网络模型
