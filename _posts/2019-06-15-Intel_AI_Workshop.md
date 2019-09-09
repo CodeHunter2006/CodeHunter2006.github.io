@@ -2,7 +2,7 @@
 layout: post
 title:  "Intel AI Workshop 笔记"
 date:   2019-06-15 22:00:00 +0800
-tags: CNN TensorFlow
+tags: CNN TensorFlow ML
 ---
 ![Intel_AI_Workshop](/assets/201906151330_Intel_AI_Workshop.jpg)
 
