@@ -1,39 +1,68 @@
 ---
 layout: post
-title:  "Linux 常用命令"
+title:  "Linux Shell 常用命令"
 date:   2018-09-02 10:00:00 +0800
 tags: Linux
 ---
 
-Ctrl+C 关闭程序(发送SIGINT)
-Ctrl+Z 暂停进程(发送SIGTSTP)
-Ctrl+D 输入EOF
-jobs 查看已经暂定的进程
-fg %### 将后台进程加载到前台运行
-bg %### 在后台继续运行暂停的进程
-如果要退出terminal时仍然运行后台进程，进程的输出要重定向，例如 xxx >>tmp.log
+## 进程相关操作
+`Ctrl+C`
+关闭程序(发送SIGINT)
 
-"xxx \<回车>"
+`Ctrl+Z`
+暂停进程(发送SIGTSTP)
+
+`Ctrl+D`
+输入EOF
+
+`jobs`
+查看已经暂定的进程
+
+`fg %###`
+将后台进程加载到前台运行
+
+`bg %###`
+在后台继续运行暂停的进程。如果要退出terminal时仍然运行后台进程，进程的输出要重定向，例如 xxx >>tmp.log
+
+`xxx \<回车>`
 可以实现多行命令一起执行
 
+`xxx1 ; xxx2 ; xxx3`
+顺序执行多条命令。
+
+`xxx1 | xxx2 | xxx3`
+`|`piepline(管道)，表示左边(前边)执行的命令结果作为右边命令的参数传入，可以连续使用。
+
+`xxx1 & xxx2 & xxx3`
+`&`符号左边的命令后台执行(多进程)，
+
+`xxx1 || xxx2`
+或关系，表示上一条命令执行失败后才执行下一条命令。
+
+`xxx1 && xxx2 ; wait`
+与关系，表示上一条命令执行成功后才执行下一条命令。一般最后要加一个`wait`，让shell主进程等待子进程执行完毕再退出，避免主进程过早结束导致子进程意外结束。
+
+### 显示相关
+`history`
 查看历史命令
-history
 
+`clear`
 清空屏幕显示
-clear
 
-通过命令行滚动查看执行结果：
-xxx|more
-b向前翻页，空格向后翻页
+`xxx|more`
+通过命令行滚动查看执行结果。b向前翻页，空格向后翻页
 
+## 系统信息
+
+`whoami`
 查看当前使用的用户名
-whoami
 
+`uname -a`
 查看操作系统信息
-uname -a
 
+`cat /etc/issue`
 查看CentOS系统版本
-cat /etc/issue
+
 
 切换为root用户权限
 su	// 相当于 su root
