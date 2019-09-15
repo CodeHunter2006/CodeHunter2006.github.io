@@ -68,5 +68,5 @@ VOLUME /data/dbout /data/dbin
 ### ENTRYPOINT
 和CMD类似，指定容器启动时要执行的命令。如果docker run也有命令，会被放在ENTRYPOINT后面。
 
-在docker run命令中可以通过 --entrypoin覆盖ENTRYPOINT。
+* 在`docker run`命令中可以通过`--entrypoint xxx`覆盖`ENTRYPOINT`。
 
