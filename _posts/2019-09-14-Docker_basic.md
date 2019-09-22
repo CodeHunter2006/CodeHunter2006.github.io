@@ -48,7 +48,7 @@ Docker镜像可以与Git控制下的项目相类比，每个镜像相当于一�
 ![Docker VS VM](/assets/images/2019-09-14-Docker_basic_4.jpg)
 
 ### Base操作系统镜像
-操作系统镜像往往是镜像的Base，所以选择一个合适的系统镜像可以降低总的容量，但是过于精简的又缺少足够的功能。`Alpine`(阿尔卑斯山)做为最精简的linux收到Docker社区的欢迎，几乎所有官方Docker镜像都提供了Alpine版本的Tag。
+操作系统镜像往往是镜像的Base，所以选择一个合适的系统镜像可以降低总的容量，但是过于精简的又缺少足够的功能。`Alpine`(阿尔卑斯山)做为最精简的linux受到Docker社区的欢迎，几乎所有官方Docker镜像都提供了Alpine版本的Tag。
 
 
 ![Docker VS VM](/assets/images/2019-09-14-Docker_basic_3.jpg)
