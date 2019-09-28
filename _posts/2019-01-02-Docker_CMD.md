@@ -79,6 +79,8 @@ docker images
 docker rm ...
 ```
 
+`docker container rename srcName tarName` 重命名container
+
 删除一个镜像
 ```
 docker rmi ...
