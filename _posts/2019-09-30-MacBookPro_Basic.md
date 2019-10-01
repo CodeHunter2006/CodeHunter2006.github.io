@@ -31,17 +31,19 @@ tags: Mac
 
 `CMD+SPACE` 呼出搜索
 
-`CMD+TAB` 切换最近使用程序
+`CMD+TAB[+SHIFT]` 切换最近使用程序
 
 `CMD+SHIFT+3` 截屏。3 全屏、4 特定区域、5 精确选择区域、6 Touch Bar
 
 `CMD+OPT+ESC` 呼出强制关闭程序界面
 
+`CTRL+➡️/⬅️` 切换 Workspace，相当于触摸板三指左右滑动
+
 ## 程序内操作
 
 `CMD+Q` 退出当前程序
 
-`CTRL+TAB` 切换 Tab
+`CTRL+TAB[+SHIFT]` 切换 Tab
 
 `CMD+W` 关闭当前 Tab
 
@@ -59,13 +61,14 @@ tags: Mac
 `CMD+Z` 撤销
 `CMD+S` 保存
 
-`CMD+F` 查找
-`CMD+G` 继续向后查找
-`CMD+SHIFT+G` 继续向前查找
+`CMD+F` 开启查找
+`CMD+G+[SHIFT]` 继续查找
 
 ## 系统设置
 
 `TouchBar调节音量+SHIFT` 可以听到音量变化
+
+`长按指纹解锁键` 可以强制关机
 
 PS：与 Windows 对比<br/>
 基本上把 Win 键和 Ctrl 都综合到了 CMD 键
