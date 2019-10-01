@@ -6,7 +6,7 @@ tags: Go
 ---
 
 ![Go Modules](/assets/images/2019-10-01-Go_Modules_1.png)
-Go Modules 是 Golang 1.11 版本时加入的模块依赖管理解决方案，在 1.13 版本发布时加入了 Go Proxy，可以 **很方便** 的下载依赖包，目前已经比较成熟，值得引入项目使用。
+Go Modules 是 Golang 1.11 版本时加入的模块依赖管理解决方案，解决对 VCS 的依赖。在 1.13 版本发布时加入了 Go Proxy，原来的目的是通过代理加速拉取和 build 速度，但是间接的解决了国内的拉取问题，可以 **很方便** 的下载依赖包，目前已经比较成熟，值得引入项目使用。
 
 # 涉及的概念
 
@@ -66,7 +66,9 @@ xxx.com/xxx v0.1.1 h1:xxxxxxx
 
 域名/模块路径(或 go.mod 文件路径) [空格] 版本号 [空格] 对模块 SHA-256 生成的 Hash 值
 
-# 原有的项目如何使用 Go Modules 而不再使用 GOPATH?
+# 其他问题
+
+## 如何用 Go Modules 替代 GOPATH ?
 
 - 使用 Go 1.13，对 Go Modules 支持较好
 - 使用 GOPATH 环境变量的升级替代方案：
@@ -76,6 +78,12 @@ xxx.com/xxx v0.1.1 h1:xxxxxxx
 - 项目不需要在放在 GOPATH/src 下
 - 在项目根目录执行`go mod init 模块路径`，以生成 go.mod 文件
 
-# 其他
+## 如何拉取私有模块 ?
 
-如果遇到编译问题，可以执行`go clean -modcache`清空缓存的模块，重新下载。
+TODO 待补充
+
+## 常见问题
+
+- 如果遇到编译问题，可以执行`go clean -modcache`清空缓存的模块，重新下载。
+- `go get xxx.com/xxx/xxx@version`，get 命令增加了版本选项，默认会查找名为`latest`的 tag，然后查找 master 的最新 commit。也可以执行版本号(形为`vx.x.x`的 tag)或者 Hash。
+- `go get -u all`更新所有模块及其单元测试，不会更新主版本号。
