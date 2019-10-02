@@ -5,6 +5,8 @@ date: 2019-09-30 23:10:00 +0800
 tags: Mac
 ---
 
+![Mac](/assets/images/2019-09-30-MacBookPro_Basic_1.png)
+
 # 安装软件
 
 ## 软件来源
@@ -47,15 +49,17 @@ tags: Mac
 
 ## 文件操作
 
-`CMD+X CMD+OPT+V`剪切文件
+`CMD+X CMD+OPT+V` 剪切文件
 
-`CMD+DEL`删除文件
+`CMD+DEL` 删除文件
 
-`SPACE`快速预览文件内容，在未选中文件下预览文件夹属性
+`SPACE` 快速预览文件内容，在未选中文件下预览文件夹属性
+
+`ENTER` 重命名文件
 
 ## 屏幕操作
 
-`长按最大化按钮`分屏
+`长按最大化按钮` 分屏
 
 `CMD+H` 隐藏当前程序
 
