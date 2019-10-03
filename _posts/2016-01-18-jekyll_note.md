@@ -34,9 +34,11 @@ bundle exe jekyll clean
 # 关于换行符
 
 现在通常有两种换行符：
+`CR` Carriage Return，回车符，"\r"，是以前打字机用来移动到下一行第一个位置的按键。
+`LF` Linefeed，ASCII 换行符，"\n"。
 
-- Windows 采用的 CRLF("\r\n")
-- Linux/Mac 采用的 LF("\n")
+- Windows 采用的 CRLF
+- Linux/Mac 采用的 LF
 
 在 jekyll 中要用 LF("\n")，否则所有内容将被认为是在同一行的。
 

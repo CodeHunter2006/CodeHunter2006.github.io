@@ -87,3 +87,5 @@ TODO 待补充
 - 如果遇到编译问题，可以执行`go clean -modcache`清空缓存的模块，重新下载。
 - `go get xxx.com/xxx/xxx@version`，get 命令增加了版本选项，默认会查找名为`latest`的 tag，然后查找 master 的最新 commit。也可以执行版本号(形为`vx.x.x`的 tag)或者 Hash。
 - `go get -u all`更新所有模块及其单元测试，不会更新主版本号。
+- 使用了 Go Modules 之后，import 包时的路径对大小写敏感，如果之前大小写不规范可能报找不到包的错误。
+- Go Modules 目前和 GitLab 有些兼容问题，可能引发问题。
