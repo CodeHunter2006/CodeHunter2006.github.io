@@ -100,6 +100,8 @@ tags: Mac
 `CMD+F` 开启查找
 `CMD+G+[SHIFT]` 继续查找
 
+`FN+DELETE` 删除后面的内容
+
 ## 系统设置
 
 `TouchBar调节音量+SHIFT` 可以听到音量变化
