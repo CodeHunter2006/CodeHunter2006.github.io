@@ -108,9 +108,9 @@ tags: Mac
 
 ## 系统设置
 
-`TouchBar调节音量+SHIFT` 可以听到音量变化
+`TouchBar调节音量+SHIFT` 调节音量时不发出声音，避免影响他人
 
-`长按指纹解锁键` 可以强制关机
+`长按指纹解锁键` 强制关机
 
 PS：与 Windows 对比<br/>
 基本上把 Win 键和 Ctrl 都综合到了 CMD 键，OPT 相当于 ALT 键。
