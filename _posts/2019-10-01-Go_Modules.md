@@ -89,4 +89,4 @@ TODO 待补充
 - `go get -u all`更新所有模块及其单元测试，不会更新主版本号。
 - 使用了 Go Modules 之后，import 包时的路径对大小写敏感，如果之前大小写不规范可能报找不到包的错误。
 - Go Modules 目前和 GitLab 有些兼容问题，可能引发问题。
-- 使用 Go Proxy 之前，如果没有梯子，可以用`gopm`代替`go get`
+- 使用 Go Proxy 之前，如果没有梯子，可以用`gopm get -g xxx`代替`go get xxx`
