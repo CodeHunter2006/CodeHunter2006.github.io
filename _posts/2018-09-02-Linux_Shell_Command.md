@@ -232,3 +232,9 @@ last -10
 
 iptables -nv -L
 查看网络访问控制情况
+
+`kill [-signalSeq] processId`
+向进程发送信号。在不设定信号序号时默认发送`SIGTERM`。
+
+`kill -l`
+显示可发送信号列表。
