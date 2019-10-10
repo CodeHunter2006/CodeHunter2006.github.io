@@ -97,7 +97,7 @@ tags: Mac
 
 `FN+⬅️➡️⬆️⬇️` 行首/行尾/PageUp/PageDown
 
-`CMD+⬆️⬇️` 第一行/最后一行
+`CMD+⬅️➡️⬆️⬇️` 行首/行尾/第一行/最后一行
 
 `CMD+C` 复制
 `CMD+X` 剪切
