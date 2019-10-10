@@ -142,7 +142,7 @@ whereis xxx
 查找命令路径
 
 which xxx
-判断 xxx 的类型，是 bin、函数还是 gems 等
+返回路径，同时可以判断 xxx 的类型，是 bin、函数还是 gems 等
 
 cat xxx | grep error
 查找某文件中包含 error 字符串的行
