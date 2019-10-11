@@ -113,7 +113,7 @@ ctrl+shift+t
 man xxx
 
 当前文件夹正则搜索
-find -name "xxx"
+find . -name "xxx"
 
 全盘定位文件
 locate xxx

@@ -122,5 +122,7 @@ tags: Mac
 
 `长按指纹解锁键` 强制关机
 
+`CMD+CTRL+Q` 锁屏
+
 PS：与 Windows 对比<br/>
 基本上把 Win 键和 Ctrl 都综合到了 CMD 键，OPT 相当于 ALT 键。

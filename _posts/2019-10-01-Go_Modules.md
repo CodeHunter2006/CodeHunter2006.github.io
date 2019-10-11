@@ -90,3 +90,4 @@ TODO 待补充
 - 使用了 Go Modules 之后，import 包时的路径对大小写敏感，如果之前大小写不规范可能报找不到包的错误。
 - Go Modules 目前和 GitLab 有些兼容问题，可能引发问题。
 - 使用 Go Proxy 之前，如果没有梯子，可以安装`github.com/gpmgo/gopm`，用`gopm get -g xxx`代替`go get xxx`
+- Go Modules 下编译动态库(.so)会有问题，目前 Go 的项目是以源码依赖编译为主的，在硬盘、内存没有因为可执行文件体积过大而产生问题前，不需要考虑动态库。
