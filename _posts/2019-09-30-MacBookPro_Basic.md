@@ -67,6 +67,8 @@ tags: Mac
 
 `长按最大化按钮` 分屏
 
+`双击窗口上方的拖动条` 扩大窗口占据中心区域，但是非最大化
+
 `CMD+H` 隐藏当前程序
 
 `CMD+OPT+H` 隐藏所有程序
@@ -102,6 +104,7 @@ tags: Mac
 `CMD+C` 复制
 `CMD+X` 剪切
 `CMD+V` 粘贴
+`CMD+SHIFT+V` 粘贴纯文本
 `CMD+Z` 撤销
 `CMD+S` 保存
 
@@ -124,5 +127,9 @@ tags: Mac
 
 `CMD+CTRL+Q` 锁屏
 
-PS：与 Windows 对比<br/>
-基本上把 Win 键和 Ctrl 都综合到了 CMD 键，OPT 相当于 ALT 键。
+`CMD+SPACE` 调出 Sportlight
+
+- 输入`term`回车，可以快速打开 terminal
+- 输入`calc`回车，可以打开 calculator
+
+PS：与 Windows 相比，基本上把 Win 键和 Ctrl 都综合到了 CMD 键，OPT 相当于 ALT 键。
