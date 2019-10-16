@@ -238,3 +238,12 @@ iptables -nv -L
 
 `kill -l`
 显示可发送信号列表。
+
+`export VALUE_NAME="value"`
+设置环境变量
+
+`echo $VALUE_NAME`
+输出环境变量的值
+
+`unset VALUE_NAME`
+删除环境变量

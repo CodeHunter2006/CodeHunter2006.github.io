@@ -49,7 +49,8 @@ protobuf 协议用于在网络间传输对象，适用于高并发服务端程�
 
 - 安装 protobuf go 插件 `go get -u github.com/golang/protobuf/protoc-gen-go`
 
-- 在 .proto 文件所在的文件夹下执行命令 `protoc --proto_path=./ --go_out=. *.proto`，就可以生成了
+- 在 .proto 文件所在的文件夹下执行命令 `protoc --proto_path=./ --go_out=./ xxx/xxx/*.proto`，就可以生成了
+  - `xxx/xxx/*.proto` 表示哪些文件将被编译
   - `--proto_path` 可以指定去什么路径寻找`import`所需的文件。这个参数可以传入多次。
   - `--go_out` 表示`go`语言对应的文件生成在什么路径下。其他语言有对应的参数。
 
@@ -70,6 +71,12 @@ protobuf 协议用于在网络间传输对象，适用于高并发服务端程�
 | repeated | 数组         | -      |
 
 - 在不赋值的情况下，会根据不同类型自动赋默认值
+
+## 限定符
+
+- required 表示该字段是必须的否则消息无法发送
+- optional 表示该字段是可选的，如果不填则自动填写默认值
+- repeated 表示 0 ～ n 个元素组成的数组，由于包含 0，所以与 optional 一样是可选的
 
 ## .proto 示例：
 
