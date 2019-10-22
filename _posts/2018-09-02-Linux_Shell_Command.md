@@ -216,6 +216,10 @@ apt-get install xxx //安装某个软件
 压缩文件夹
 tar -zcvf /home/xahot.tar.gz /xahot --exclude=xxx
 tar -zcvf 打包后生成的文件名全路径 要打包的目录 要排除的目录名
+tar –xvf file.tar 解压 tar 包
+tar -xzvf file.tar.gz 解压 tar.gz
+tar -xjvf file.tar.bz2 解压 tar.bz2
+tar –xZvf file.tar.Z 解压 tar.Z
 
 poweroff 关机
 
