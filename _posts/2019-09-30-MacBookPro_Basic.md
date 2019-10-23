@@ -144,3 +144,8 @@ tags: Mac
 - 输入`calc`回车，可以打开 calculator
 
 PS：与 Windows 相比，基本上把 Win 键和 Ctrl 都综合到了 CMD 键，OPT 相当于 ALT 键。
+
+# 文件夹结构
+
+`/private/etc/hosts`
+hosts 文件
