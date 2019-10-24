@@ -47,10 +47,6 @@ xxx
 
 定义变量
 
-## read / put
-
-读入、输出文本
-
 # expect 互动脚本示例
 
 一段需要人互动的 shell 脚本示例：`questions.sh`

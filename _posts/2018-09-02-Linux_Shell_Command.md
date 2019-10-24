@@ -156,10 +156,14 @@ ifconfig
 wall
 广播一段文字消息，以 Ctrl+D 输入 EOF 结束符。
 
-创建一个软连接，相当于快捷方式
-ln -s /sourcedirectory /destdirectory
-source 是已经存在的文件或文件夹
-dest 是将要创建的文件或文件夹
+## ln
+
+link 创建一个文件或文件夹的链接，这样可以在修改一处时影响多处。
+
+`ln source target`
+创建一个硬链接，相当于不同文件名对应同一个文件。
+
+- `-s` 创建软连接，相当于快捷方式
 
 查看进程 PS(Process Shot)
 ps -ef
@@ -251,3 +255,26 @@ iptables -nv -L
 
 `unset VALUE_NAME`
 删除环境变量
+
+# 文本操作
+
+## grep
+
+global regular expression print
+在文本、文件中查找符合模式的文本行。
+
+`cat aaa | grep bbb`
+在 cat 命令结果的字符串中查找 bbb
+
+`grep -e "test.*" xxx.xx`
+在 xxx.xx 文件中查匹配`test.*`正则表达式的行
+
+- `-A n` add，增加匹配行后 n 行的显示
+- `-B n` before，增加匹配行前 n 行的显示
+- `-C n` context，增加匹配行前后 n 行的显示
+- `-c` count，只输出匹配的总行数
+- `-e` regexp，匹配正则表达式
+- `-m` max-count，控制输出的最大行数
+- `-d` directory，以文件夹为目标进行搜索
+- `-r` recursive，递归搜索自文件夹
+- `-v` invert-match，从后向前搜索
