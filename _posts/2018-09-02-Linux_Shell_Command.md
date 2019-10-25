@@ -83,13 +83,12 @@ insmod
 将文件安装到内核
 通常是驱动。
 
-ls 列出文件名
-ls -a 列出所有文件，包含隐藏文件
-ls -l 列出详细信息，最后会表示软连接信息
+## ls
 
-ll
-列出详细信息
-显示的时间为文件或文件夹的修改时间
+列出文件名
+
+- `-a` 列出所有文件，包含以`.`开头的隐藏文件
+- `-l` 以列的方式显示，列出详细信息(权限、修改时间、软连接信息)
 
 du --apparent-size
 显示当前文件夹空间以及各子文件夹空间
@@ -125,9 +124,6 @@ find -newer abc // 在当前文件夹下，查找比刚才那个临时文件更�
 
 `sudo updatedb`
 更新 locate 数据库
-
-`grep "test" -r /usr`
-按文件内容搜索
 
 `cat xxx`
 查看文件文本内容
@@ -278,3 +274,4 @@ global regular expression print
 - `-d` directory，以文件夹为目标进行搜索
 - `-r` recursive，递归搜索自文件夹
 - `-v` invert-match，从后向前搜索
+- `-o` --only-matching，只输出完全匹配模式的部分
