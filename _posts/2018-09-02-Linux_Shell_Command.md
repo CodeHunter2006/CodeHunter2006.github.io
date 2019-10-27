@@ -247,7 +247,7 @@ iptables -nv -L
 设置环境变量
 
 `echo $VALUE_NAME`
-输出环境变量的值
+输出(环境)变量的值
 
 `unset VALUE_NAME`
 删除环境变量
@@ -275,3 +275,43 @@ global regular expression print
 - `-r` recursive，递归搜索自文件夹
 - `-v` invert-match，从后向前搜索
 - `-o` --only-matching，只输出完全匹配模式的部分
+
+# shell 语法
+
+## 注释
+
+```shell
+# 注释在 '#' 右边
+```
+
+## 变量赋值
+
+`VALUE_NAME=value`
+给变量赋值，右边直接写值，字符串也可以直接写
+
+`VALUE_NAME=(grep test testFile)`
+将命令执行结果作为值赋值给变量
+
+```shell
+VALUE_NAME1=value1
+VALUE_NAME2=value2
+
+# 用一个变量的值赋值给另一个变量
+# VALUE_NAME3 的结果是 "value1"
+VALUE_NAME3=$VALUE_NAME1
+
+# 用变量的值进行字符串拼接，结果赋值给另一个变量
+# VALUE_NAME4 的结果是 "value1+value2"
+VALUE_NAME4=${VALUE_NAME1}+${VALUE_NAME2}
+```
+
+## 条件判断
+
+如果文件存在，则删除该文件。
+
+```shell
+FILE_PATH=/test/test.txt
+if [ -f "$FILE_PATH" ]; then
+    rm -rf $FILE_PATH
+fi
+```
