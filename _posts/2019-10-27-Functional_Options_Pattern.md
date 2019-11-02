@@ -95,3 +95,8 @@ db.Connect(
   db.WithTimeout(newTimeout),
 )
 ```
+
+```plantuml
+@startuml
+@enduml
+```
