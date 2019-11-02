@@ -70,8 +70,11 @@ su // 相当于 su root
 su - root // 切换时，同时保持环境变量
 在"/etc/passwd"中可以查看已经存在的用户及用户组
 
+`chmod +x xxx/xxx`
+赋予文件可执行权限
+
+`chmod 755 ./xxx`
 改变文件权限为可执行可修改
-chmod 755 ./xxx
 
 更新一下文件的最新修改时间
 touch ./xxx
@@ -146,8 +149,11 @@ cat xxx | grep error
 cat /etc/issue
 查看操作系统版本
 
-ifconfig
+## ifconfig
+
 查看 IP 信息
+`ifconfig en0`
+查看本地 IP
 
 wall
 广播一段文字消息，以 Ctrl+D 输入 EOF 结束符。
@@ -275,6 +281,10 @@ global regular expression print
 - `-r` recursive，递归搜索自文件夹
 - `-v` invert-match，从后向前搜索
 - `-o` --only-matching，只输出完全匹配模式的部分
+
+## tailf
+
+对文件末尾保持观察，用于查看 log 文件
 
 # shell 语法
 
