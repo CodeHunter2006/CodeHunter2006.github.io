@@ -53,7 +53,9 @@ tags: Mac
 
 `CMD+⬆️` 回到上一层目录
 
-`CMD+X CMD+OPT+V` 剪切文件
+`CMD+C CMD+OPT+V` 剪切文件
+
+`OPT+拖拽` 复制文件
 
 `CMD+DEL` 删除文件
 
