@@ -5,6 +5,8 @@ date: 2018-09-02 10:00:00 +0800
 tags: Linux
 ---
 
+# 命令
+
 ## 进程相关操作
 
 `Ctrl+C`
@@ -17,7 +19,7 @@ tags: Linux
 输入 EOF
 
 `jobs`
-查看已经暂定的进程
+查看后台(运行/暂停)的进程
 
 `fg %###`
 将后台进程加载到前台运行
@@ -43,7 +45,7 @@ tags: Linux
 `xxx1 && xxx2 ; wait`
 与关系，表示上一条命令执行成功后才执行下一条命令。一般最后要加一个`wait`，让 shell 主进程等待子进程执行完毕再退出，避免主进程过早结束导致子进程意外结束。
 
-### 显示相关
+## 显示相关
 
 `history`
 查看历史命令
@@ -114,16 +116,27 @@ ctrl+shift+t
 查询命令帮助
 man xxx
 
-当前文件夹正则搜索
-find . -name "xxx"
+## find
+
+查找文件
+
+`find root_path -name "abc*"`
+在 root_path 下按名字查找文件，其中`*`为通配符
+
+- `-newer xyz` 查找比 xyz 文件修改时间更新的文件
+
+## touch
+
+更新文件时间
+
+`touch xxx`
+更新 xxx 的修改时间为当前时间
+
+- `-t 201407201710.00` 更新到一个特定时间，如`2014 年 07 月 20 日 17 点 10 分 00 秒`
 
 全盘定位文件
 locate xxx
 locate -r xxx 正则查找
-
-查找特定时间之后创建或修改的文件
-touch -t 201407201710.00 abc //在当前文件夹创建一个 2014 年 07 月 20 日 17 点 10 分 00 秒 创建的临时文件
-find -newer abc // 在当前文件夹下，查找比刚才那个临时文件更新的文件
 
 `sudo updatedb`
 更新 locate 数据库
@@ -149,6 +162,13 @@ cat xxx | grep error
 cat /etc/issue
 查看操作系统版本
 
+## nohup
+
+no hang up(不挂起)，将当前命令的输出改为当前目录的 nohup.out 文件，避免在终端退出时程序中断
+
+`nohup Command [ Arg … ] [ & ]`
+在后台执行某个命令，重定向输出到 nohup.out
+
 ## ifconfig
 
 查看 IP 信息
@@ -169,7 +189,7 @@ link 创建一个文件或文件夹的链接，这样可以在修改一处时影
 
 查看进程 PS(Process Shot)
 ps -ef
-查看进程位置
+查看特定进程
 ps -ef|grep xxxx
 
 查看进程内存使用
@@ -177,6 +197,9 @@ ps -aux
 
 查看进程端口使用情况
 netstat -ntlp
+
+`lsof -i:8090`
+查看占用特定端口的进程
 
 查看<设定>最大连接数
 ulimit -n <newValue>
@@ -324,4 +347,16 @@ FILE_PATH=/test/test.txt
 if [ -f "$FILE_PATH" ]; then
     rm -rf $FILE_PATH
 fi
+```
+
+# 应用场景
+
+## 查找特定时间之后创建或修改的文件
+
+```shell
+touch -t 201407201710.00 abc
+# 在当前文件夹创建一个 2014 年 07 月 20 日 17 点 10 分 00 秒 创建的临时文件
+
+find -newer abc
+# 在当前文件夹下，查找比刚才那个临时文件更新的文件
 ```
