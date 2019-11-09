@@ -149,6 +149,38 @@ tags: Mac
 
 PS：与 Windows 相比，基本上把 Win 键和 Ctrl 都综合到了 CMD 键，OPT 相当于 ALT 键。
 
+## terminal 快捷键
+
+### terminal 窗口和 tab 相关
+
+| 快捷键         | 说明                     |
+| -------------- | ------------------------ |
+| cmd+t          | 开一个 terminal 标签页   |
+| cmd+shift+r    | 标签页切换               |
+| cmd+shift+left | 标签页切换               |
+| cmd+n          | 开一个新的 terminal 窗口 |
+| cmd+left       | 窗口切换                 |
+| cmd+right      | 窗口切换                 |
+| cmd+d          | 垂直切分当前窗口         |
+
+### terminal 命令行内操作
+
+| 命令          | 说明                     |
+| ------------- | ------------------------ |
+| ctrl+a        | 将光标移动到首行         |
+| ctrl+e        | 将光标移动到行尾         |
+| Ctrl+l        | 清除屏幕                 |
+| Ctrl+r        | 搜索以前使用命令         |
+| Ctrl+u        | 删除当前到开始的内容     |
+| Ctrl+k        | 清除至当前行尾           |
+| option+方向键 | 单词为单位移动           |
+| Ctrl+c        | 停止运行                 |
+| Ctrl+s        | 暂停屏幕输出             |
+| Ctrl+q        | 恢复屏幕输出             |
+| alt+left      | 跳到上一个单词           |
+| alt+right     | 跳到下一个单词           |
+| ctrl+w        | 删除当前至开头的一个单词 |
+
 # 文件夹结构
 
 `/private/etc/hosts`

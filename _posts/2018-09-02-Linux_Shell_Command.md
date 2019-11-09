@@ -305,9 +305,33 @@ global regular expression print
 - `-v` invert-match，从后向前搜索
 - `-o` --only-matching，只输出完全匹配模式的部分
 
+## tail
+
+从文件末尾开始对日志保持观察
+
+`tail -20f xxx.log`
+从最后 20 行开始观察文件
+
 ## tailf
 
-对文件末尾保持观察，用于查看 log 文件
+与 tail 功能相同，会从文件开头读起，并对末尾保持观察。
+
+- 对于较大的文件 tailf 开始时候会较慢，因为 tail 会从末尾反向读取
+- tailf 对文件没有增长的文件不会去读取，所以会较省电一点
+
+`tailf -20 xxx.log`
+从最后 20 行开始观察文件
+
+## scp
+
+基于 ssh 协议传输文件，会要求输入密码
+
+`scp [-r] source target`
+从源拷贝到目标
+
+- 本地路径可以用绝对或相对路径表示
+- 目标路径用`username@servername:/path`表示
+- `-r` 表示以文件夹形式传输
 
 # shell 语法
 
