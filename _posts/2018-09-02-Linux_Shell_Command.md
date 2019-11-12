@@ -322,6 +322,17 @@ global regular expression print
 `tailf -20 xxx.log`
 从最后 20 行开始观察文件
 
+## less
+
+以较小的缓存区读取文件，不需要全部扫描文件后再打开问文件，适合查看容量较大的 log。less 的最小操作单位和 grep 一样，以行为单位。
+
+`less xxx/xxx`
+打开文件查看
+
+# 远程通信
+
+## ssh
+
 ## scp
 
 基于 ssh 协议传输文件，会要求输入密码
