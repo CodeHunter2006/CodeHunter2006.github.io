@@ -281,6 +281,15 @@ iptables -nv -L
 `unset VALUE_NAME`
 删除环境变量
 
+# 命令相关操作
+
+## history
+
+查看历史命令。
+
+- 这些命令都被写到了`~/.bash_history`中，可以用环境变量`HISTSIZE`设置保存的命令数。
+- 按'上/下'按键可以查看历史命令
+
 # 文本操作
 
 ## grep
