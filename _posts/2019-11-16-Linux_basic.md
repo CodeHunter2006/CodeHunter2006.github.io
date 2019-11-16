@@ -6,7 +6,11 @@ tags:
 ---
 
 ![Vim](/assets/images/2019-11-16-Linux_basic_1.jpg)
-记录 Linux 基本结构和使用方法
+记录 Linux 基本概念、结构和用法
+
+# Kernel Shell Bash
+
+通常我们说的 Linux 其实就是"Linux Kernel(内核)"的简称，它提供了 Linux 最核心的功能。而`Shell`直译为外壳，它基于 Linux Kernel，为用户提供操作 Linux 的各种命令接口或者为程序提供函数接口。`Bash`是 Linux 自带的一个命令行工具软件，提供命令行界面来执行`Shell`命令或其它可可执行文件。
 
 # 文件
 
