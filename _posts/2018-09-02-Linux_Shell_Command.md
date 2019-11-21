@@ -47,8 +47,19 @@ tags: Linux
 
 ## 显示相关
 
-`history`
+`history [n]`
 查看历史命令
+
+- `[n]` number，打印最近的 n 条命令
+- `-c` clear，清空当前历史命令缓冲区
+- `-w` write，将当前历史命令缓冲区写入文件。如果当前命令缓冲区为空则删除文件中所有历史命令
+- `-r` read，将文件中历史命令读入当前历史命令缓冲区
+- `-a` append，将当前历史命令缓冲区续写入文件
+
+```bash
+export HISTSIZE=1000         # 设置内存中的history命令的个数
+export HISTFILESIZE=1000     # 设置文件中的history命令的个数
+```
 
 `clear`
 清空屏幕显示
@@ -338,6 +349,13 @@ global regular expression print
 
 `less xxx/xxx`
 打开文件查看
+
+## diff
+
+查看文件差异
+
+`diff file1 file2`
+显示两个文件的差异
 
 # 远程通信
 
