@@ -8,7 +8,7 @@ tags:
 ![Pattern](/assets/images/2019-11-16-Pattern_Oriented_Software_Architecture_notes_1.png)
 《Pattern-Oriented Software Architecture--Volume 1--A System of Pattern》中文版于 2013 年出版，被公认为是架构师的必读读物，与《设计模式》同被奉为经典。
 
-<TODO 全文读后感>
+// TODO 全文读后感
 
 - 本书的知识体系发源于《设计模式》，但是又提高了一个层次，以更通用的视角总结模式
 - 模式有助于将复杂的代码抽象成可学习的内容，提高学习效率、提高沟通效率
@@ -613,4 +613,4 @@ Blackboard 架构背后的理念是，一系列独立的程序携手合作，致
 
 ## 6. 结语
 
-<TODO 按章节拆解>
+// TODO 按章节拆解
