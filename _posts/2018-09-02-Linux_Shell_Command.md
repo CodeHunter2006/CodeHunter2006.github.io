@@ -84,17 +84,24 @@ su // 相当于 su root
 su - root // 切换时，同时保持环境变量
 在"/etc/passwd"中可以查看已经存在的用户及用户组
 
+## 权限控制
+
 `chmod +x xxx/xxx`
 赋予文件可执行权限
 
 `chmod 755 ./xxx`
 改变文件权限为可执行可修改
 
+`chown username filefoldername`
+将某文件或文件夹授权给某用户
+
+`sudo xxx`
+以 root 权限执行命令
+
+- `-u` 以指定的身份(默认 root)作为新的用户身份，保持 root 权限执行以后的命令。
+
 更新一下文件的最新修改时间
 touch ./xxx
-
-将某文件或文件夹授权给某用户
-chown username filefoldername
 
 insmod
 将文件安装到内核
