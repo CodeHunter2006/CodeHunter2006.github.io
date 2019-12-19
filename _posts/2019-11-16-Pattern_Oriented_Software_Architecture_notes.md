@@ -2083,7 +2083,55 @@ PS: 后面 示例、背景、问题、解决方案、实现、变种、参考，
 
 软件架构模式系统包含一系列软件架构模式，并提供了如何在软件开发中实现、组合和使用这些模式的指南。
 
+模式系统必须符合如下条件：
+- 包含的模式足够多
+- 以统一的方式描述所有模式
+- 揭示模式之间的各种关系
+- 对模式进行组织
+- 能够帮助打造软件系统
+- 能够不断发展
+
 ## 2. 模式分类
+模式类别：
+- 架构模式 
+- 设计模式 
+- 成例
+
+问题类别，模式类别：
+- 从混沌到有序，架构模式
+  - Layers
+  - Pipes and Filters
+  - Blackboard
+- 分布式系统，架构模式
+  - Broker
+  - Pipes and Filters
+  - Microkernel
+  - Reactor
+  - Client-Server
+- 交互式系统，架构模式
+  - MVC
+  - PAC
+- 可适应系统，架构模式
+  - Microkernel
+  - Reflection
+- 结构分解，设计模式
+  - Whole-Part
+- 工作组织，设计模式
+  - Master-Slave
+- 访问控制
+  - Proxy(设计模式)
+  - Handle-Body(成例)
+- 管理，设计模式
+  - Command Processor
+  - View Handler
+- 通信，设计模式
+  - Publisher-Subscriber
+  - Forwarder-Reciever
+  - Client-Dispatcher-Server
+  - Composite Message
+- 资源管理，成例
+  - Counted Pointer
+
 
 ## 3. 选择模式
 
