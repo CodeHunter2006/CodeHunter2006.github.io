@@ -2084,6 +2084,7 @@ PS: 后面 示例、背景、问题、解决方案、实现、变种、参考，
 软件架构模式系统包含一系列软件架构模式，并提供了如何在软件开发中实现、组合和使用这些模式的指南。
 
 模式系统必须符合如下条件：
+
 - 包含的模式足够多
 - 以统一的方式描述所有模式
 - 揭示模式之间的各种关系
@@ -2092,58 +2093,76 @@ PS: 后面 示例、背景、问题、解决方案、实现、变种、参考，
 - 能够不断发展
 
 ## 2. 模式分类
+
 模式类别：
-- 架构模式 
-- 设计模式 
+
+- 架构模式
+- 设计模式
 - 成例
 
-问题类别，模式类别：
-- 从混沌到有序，架构模式
-  - Layers
-  - Pipes and Filters
-  - Blackboard
-- 分布式系统，架构模式
-  - Broker
-  - Pipes and Filters
-  - Microkernel
-  - Reactor
-  - Client-Server
-- 交互式系统，架构模式
-  - MVC
-  - PAC
-- 可适应系统，架构模式
-  - Microkernel
-  - Reflection
-- 结构分解，设计模式
-  - Whole-Part
-- 工作组织，设计模式
-  - Master-Slave
-- 访问控制
-  - Proxy(设计模式)
-  - Handle-Body(成例)
-- 管理，设计模式
-  - Command Processor
-  - View Handler
-- 通信，设计模式
-  - Publisher-Subscriber
-  - Forwarder-Reciever
-  - Client-Dispatcher-Server
-  - Composite Message
-- 资源管理，成例
-  - Counted Pointer
+将《设计模式》中的模式融合到本书的模式体系中后，新的模式分类：
+|问题类别|架构模式|设计模式|成例|
+|---|---|---|---|
+|从混沌到有序|Layers<br>Pipes and Filters<br>Blackboard<br>|interpreter||
+|分布式系统|Broker<br>Pipes and Filters<br>Microkernel|||
+|交互式系统|MVC<br>PAC|||
+|可适应系统|Microkernel<br>Reflection|||
+|创建||Abstract Factory<br>Prototype<br>Builder|Singleton<br>Factory Method|
+|结构分解||Whole-Part<br>Composite||
+|工作组织||Master-Slave<br>Chain of Responsibility<br>Command<br>Mediator||
+|访问控制||Proxy<br>Facade<br>Iterator||
+|服务变更||Bridge<br>Strategy<br>State|Template Method|
+|服务扩展||Decorator<br>Visitor||
+|管理||Command Processor<br>View Handler<br>Memento||
+|适配||Adapter||
+|通信||Publisher-Subscriber<br>Forwarder-Receiver<br>Client-Dispatcher-Server||
+|资源管理||Flyweight|Counted Pointer|
 
+- GoF 的组织方案不太好，因为结构模式和行为模式之间的界限太模糊，不如直接用问题类别更具表达力。
 
 ## 3. 选择模式
 
+1. 明确问题
+
+- 问题是什么？
+- 作用力有哪些？
+
+2. 根据设计活动选择模式类别
+3. 根据设计问题的基本特性选择问题类别
+4. 比较问题描述
+5. 比较优点和缺点
+6. 选择为设计问题提供了最佳解决方案的变种
+7. 选择替代问题类别
+
 ## 4. 作为实现指南的模式系统
+1. 使用你喜欢的任意方法定义软件开发总体流程以及每个开发阶段需要执行的详细任务。
+2. 以合适的模式系统为知道，设计并实现具体问题的解决方案。
+3. 在这个模式系统中，如果找不到能解决你的设计问题的模式，尝试在其他地方寻找合适的模式。
+4. 如果没有合适的模式，求助于你采用的分析于设计方法中的指南，这些指南至少能为你解决手头的设计问题提供些许帮助。
 
 ## 5. 模式系统的演化
+1. 模式描述的演化
+2. 创意写作工坊式审阅
+3. 模式发掘
+4. 添加新模式
+5. 删除过时的模式
+6. 扩展组织方案
 
 ## 6 总结
+
+为充分发挥一组模式的威力，需要将它们组织成模式系统。模式系统为管理数量庞大的模式提供了方便的途径：它以统一的方式描述所有模式；通过分类让用户对其中的模式有大致认识；提供了合适的查找策略，可帮助用户选择模式；提供了使用模式开发软件系统的指南；还可不断发展演化。
 
 # 第六章 模式与软件架构
 
 ## 1. 导言
+
+为了理清软件架构领域的认识，先给出下列术语的定义：
+1. 软件架构
+2. 组件
+3. 关系
+4. 视图
+5. 功能特性和非功能特性
+6. 软件设计
 
 ## 2. 软件架构中的模式
 
