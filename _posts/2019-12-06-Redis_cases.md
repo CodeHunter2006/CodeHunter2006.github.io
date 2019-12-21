@@ -2,7 +2,7 @@
 layout: post
 title: "Redis使用记录"
 date: 2019-12-06 22:00:00 +0800
-tags:
+tags: Redis
 ---
 
 记录一些特殊的 Redis 应用场景

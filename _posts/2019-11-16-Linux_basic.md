@@ -2,7 +2,7 @@
 layout: post
 title: "Linux基础"
 date: 2019-11-16 20:00:00 +0800
-tags:
+tags: Linux
 ---
 
 ![Vim](/assets/images/2019-11-16-Linux_basic_1.jpg)

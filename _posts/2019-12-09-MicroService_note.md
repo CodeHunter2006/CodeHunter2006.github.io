@@ -2,7 +2,7 @@
 layout: post
 title: "微服务相关笔记"
 date: 2019-12-09 22:00:00 +0800
-tags:
+tags: Server
 ---
 
 ### 客户端请求的顺序性

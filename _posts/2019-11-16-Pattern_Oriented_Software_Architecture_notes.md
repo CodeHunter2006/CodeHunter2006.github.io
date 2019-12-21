@@ -2,7 +2,7 @@
 layout: post
 title: "面向模式的软件架构 读书笔记"
 date: 2019-11-22 23:00:00 +0800
-tags:
+tags: DesignPattern
 ---
 
 ![Pattern](/assets/images/2019-11-16-Pattern_Oriented_Software_Architecture_notes_1.png)
