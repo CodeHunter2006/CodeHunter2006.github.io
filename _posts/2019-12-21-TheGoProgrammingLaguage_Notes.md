@@ -19,6 +19,8 @@ Package main is special. It defines a standalone executable program, not a libra
 
 In effect, new lines following certain tokens are converted into semicolons, so where newlines are placed matters to proper parsing of Go code.
 
+A map is a reference to the datastructure created by make. When a map is passed to a func-tion, the function receives a copy of the reference, so any changes the called function makes to the underlying datastructure will be visible through the caller’s map reference too.
+
 # 2. Program Structure
 
 # 3. Basic Data Types
