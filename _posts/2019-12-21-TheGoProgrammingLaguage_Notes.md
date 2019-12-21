@@ -19,7 +19,25 @@ Package main is special. It defines a standalone executable program, not a libra
 
 In effect, new lines following certain tokens are converted into semicolons, so where newlines are placed matters to proper parsing of Go code.
 
-A map is a reference to the datastructure created by make. When a map is passed to a func-tion, the function receives a copy of the reference, so any changes the called function makes to the underlying datastructure will be visible through the caller’s map reference too.
+A map is a reference to the datastructure created by make. When a map is passed to a function, the function receives a copy of the reference, so any changes the called function makes to the underlying datastructure will be visible through the caller’s map reference too.
+
+- Switch case expression are evaluated left-to-right and top-to-bottom
+- default can be anywhere and only appear onece. if no case can be matched default will execute.
+
+```Go
+func Signum(x int) int {
+    switch {
+        case x > 0:
+            return +1
+        default:
+            return 0
+        case x < 0:
+            return -1
+    }
+}
+```
+
+This form is called a tagless switch; it’s equivalent to switch true.
 
 # 2. Program Structure
 
