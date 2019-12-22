@@ -357,10 +357,20 @@ global regular expression print
 
 ## tail
 
-从文件末尾开始对日志保持观察
+截取文件后半截
+
+`tail 200 xxx.log`
+从 200 行向后截取
 
 `tail -20f xxx.log`
-从最后 20 行开始观察文件
+截取最后 20 行
+
+## head
+
+截取文件前半截
+
+`head -c 2000 xxx.log`
+截取前 2000 行
 
 ## tailf
 
@@ -469,3 +479,7 @@ touch -t 201407201710.00 abc
 find -newer abc
 # 在当前文件夹下，查找比刚才那个临时文件更新的文件
 ```
+
+## 查找某 log 中 2000 行之后的匹配项
+
+`tail 2000 xxx.log|grep "test"`
