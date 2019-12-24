@@ -13,13 +13,21 @@ As Rob Pike put it, "complexity is multiplicative": fixing a problem by making o
 
 # 1. Turorial
 
+### Package main
+
 Package main is special. It defines a standalone executable program, not a library. Within package main the function main is also special—it’s where execution of the program begins.
 
 - PS: but the folder name may not named 'main'.
 
+### semicolons in line ends
+
 In effect, new lines following certain tokens are converted into semicolons, so where newlines are placed matters to proper parsing of Go code.
 
+### map
+
 A map is a reference to the datastructure created by make. When a map is passed to a function, the function receives a copy of the reference, so any changes the called function makes to the underlying datastructure will be visible through the caller’s map reference too.
+
+### switch
 
 - Switch case expression are evaluated left-to-right and top-to-bottom
 - default can be anywhere and only appear onece. if no case can be matched default will execute.
@@ -40,6 +48,16 @@ func Signum(x int) int {
 This form is called a tagless switch; it’s equivalent to switch true.
 
 # 2. Program Structure
+
+### new
+
+Since new is a predeclared function, not a keyword, it’s possible to redefine the name for something else within a function.
+
+### package
+
+Packages in Go serve the same purposes as libraries or modules in other languages, supporting modularity, encapsulation, separate compilation, and reuse.
+
+Only one file in each package should have a package doc comment. Extensive doc comments are of ten placed in a file of their own, conventionally called doc.go.
 
 # 3. Basic Data Types
 
