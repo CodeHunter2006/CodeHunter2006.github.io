@@ -49,6 +49,10 @@ This form is called a tagless switch; it’s equivalent to switch true.
 
 # 2. Program Structure
 
+### Short Variable Declarations
+
+One subtle but importantpoint: a short variable declaration does not necessarily declare all the variables on its left-hand side. If some of them were already declared in the same lexical block, then the short variable declaration acts like anassignment to those variables.
+
 ### new
 
 Since new is a predeclared function, not a keyword, it’s possible to redefine the name for something else within a function.
@@ -58,6 +62,23 @@ Since new is a predeclared function, not a keyword, it’s possible to redefine 
 Packages in Go serve the same purposes as libraries or modules in other languages, supporting modularity, encapsulation, separate compilation, and reuse.
 
 Only one file in each package should have a package doc comment. Extensive doc comments are of ten placed in a file of their own, conventionally called doc.go.
+
+### implicit lexical blocks
+
+```Go
+if x := f(); x == 0 {
+    fmt.Println(x)
+} else if y := g(x); x == y {
+    fmt.Println(x, y)
+} else {
+    fmt.Println(x, y)
+}
+fmt.Println(x, y) // compile error: x and y are not visible here
+```
+
+The second if statement is nested within the first, so variables declared within the first statement’s initializer are visible within the second. Similar rules apply to each case of a switch statement: there is a block for the condition and a block for each case body.
+
+At the package level, the order in which declarations appear has no effect on their scope, so a declaration may refer to itself or to another that follows it, letting us declare recursive or mutually recursive types and functions. The compiler will report an error if a constant or variable declaration refers to itself, however.
 
 # 3. Basic Data Types
 

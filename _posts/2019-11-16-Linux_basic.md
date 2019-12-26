@@ -27,9 +27,12 @@ tags: Linux
 
 # 常用服务
 
-## cron
+## crontab
 
 cron 是 Linux 自带的 service 提供定时执行命令的功能，类似 Windows 任务计划。
+
+`crontab -e`
+打开 cron 的定时任务编辑页面，可参照说明进行编辑。
 
 - cron 可执行文件位于`/usr/sbin/crond`
 
