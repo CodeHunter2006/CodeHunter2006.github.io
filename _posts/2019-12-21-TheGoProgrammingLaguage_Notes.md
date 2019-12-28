@@ -82,6 +82,49 @@ At the package level, the order in which declarations appear has no effect on th
 
 # 3. Basic Data Types
 
+### uintptr
+
+there is an unsigned integer type uintptr, whose width is not specified but is sufficient to hold all the bits of a pointer value. The uintptr type is used only for lowlevel programming , such as at the boundary of a Go program with a C library or an operating system.
+
+## `&^` bit clear(AND NOT)
+
+The &^ operator is bit clear (AND NOT): in the expression z = x &^ y, each bit of z is 0 if the corresponding bit of y is 1; other wise it equals the corresponding bit of x.
+
+## Left/Right shifts
+
+Left shifts fill the vacated bits with zeros, as do right shifts of unsigned numbers, but right shifts of signed numbers fill the vacated bits with copies of the sign bit. For this reason, it is important to use unsigned arithmetic when you’re treating an integer as a bit pattern.
+
+## implicit uint type panic
+
+```Go
+medals := []string{"gold", "silver", "bronze"}
+for i := len(medals) - 1; i >= 0; i-- {
+    fmt.Println(medals[i]) // "bronze", "silver", "gold"
+}
+```
+
+The alternative would be calamitous. If len returned an unsigned number, then i too would be a uint, and the condition i >= 0 would always be true by definition. After the third iteration, in which i == 0, the i-- statement would cause i to become not −1, but the maximum uint value (for example, 2^64−1), and the evalu ation of medals[i] would fail at runtime, or panic , by attempting to access an element outside the bounds of the slice.
+
+For this reason, unsigned numbers tend to be used only when their bitwise operators or peculiar arithmetic operators are required, as when implementing bit sets, parsing binary file formats, or for hashing and cryptography. They are typically not used for merely non-negative quantities.
+
+### string
+
+A string is an immutable sequence of bytes.
+
+Immutability means that it is safe for two copies of a string to share the same underlying memory, making it cheap to copy strings of any length. Similarly, a string s and a substring like s[7:] may safely share the same data, so the substring operation is also cheap. No new memory is allocated in either case.
+
+The built-in len function returns the number of bytes (not runes) in a string , and the index operation s[i] retrieves the i-th byte of string s, where 0 ≤ i < len(s).
+
+A []rune conversion applied to a UTF-8-encoded string returns the sequence of Unicode code points that the string encodes.
+
+```Go
+// "program" in Japanese katakana
+s := "プログラム"
+fmt.Printf("%x\n", s) // "e3 83 97 e3 83 ad e3 82 b0 e3 83 a9 e3 83 a0"
+r := []rune(s)
+fmt.Printf("%x\n", r) // "[30d7 30ed 30b0 30e9 30e0]"
+```
+
 # 4. Composite Types
 
 # 5. Functions
