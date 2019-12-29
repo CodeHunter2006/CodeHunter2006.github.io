@@ -181,7 +181,26 @@ PS: the buildin function copy is like memcpy in C++, it can copy source slice el
 
 In practice, the order is random, varying from one execution to the next. This is intentional; making the sequence vary helps force programs to be robust across implementations.
 
+### Struct Embedding and Anonymous Fields
+
+In this section, we’ll see how Go’s unusual struct embedding mechanism lets us use one named struct type as ananonymous field of another struct type, providing a convenient syntactic shortcut so that a simple dot expression like x.f can stand for a chain of fields like x.d.e.f.
+
 # 5. Functions
+
+You may occasionally encounter a function declaration without a body, indicating that the function is implemented in a language other than Go. Such a declaration defines the function signature.
+
+```Go
+package math
+func Sin(x float64) float64 // implemented in assembly language
+```
+
+### callstack size
+
+Many programming language implementations use a fixed-size function callstack; sizes from 64KB to 2MB are typical. Fixed-size stacks impose a limit on the depth of recursion, so one must be careful to avoid a stack overflow when traversing large data structures recursively; fixed-size stacks may even pose a security risk. In contrast, typical Go implementations use variable-size stacks that start small and grow as needed up to a limit on the order of a gigabyte. This lets us use recursion safely and without worrying about overflow.
+
+### Error-Handling Strategies
+
+Because error messages are frequently chained together, message strings should not be capitalized and new lines should be avoided. The resulting errors may be long , but they will be self-contained when found by tools like grep. like: "genesis: crashed: no parachute: G-switch failed: bad relay orientation"
 
 # 6. Methods
 
