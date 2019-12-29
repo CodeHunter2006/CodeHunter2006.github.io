@@ -125,7 +125,61 @@ r := []rune(s)
 fmt.Printf("%x\n", r) // "[30d7 30ed 30b0 30e9 30e0]"
 ```
 
+### constant generator iota
+
+A const declaration may use the constant generator iota, which is used to create a sequence of related values without spelling out each one explicitly. In a const declaration, the value of iota begins at zero and increments by one for each item in the sequence.
+
+```Go
+const (
+    _ = 1 << (10 * iota) // omit 0
+    KiB // 1024
+    MiB // 1048576
+    GiB // 1073741824
+    TiB // 1099511627776 (exceeds 1 << 32)
+    PiB // 1125899906842624
+    EiB // 1152921504606846976
+    ZiB // 1180591620717411303424 (exceeds 1 << 64)
+    YiB // 1208925819614629174706176
+)
+```
+
+### Untyped Constants
+
+PS:
+Go's constants can be compared with C++'s macro.
+
+Constants in Go are a bit unusual. Although a constant can have any of the basic data types like int or float64, including named basic types like time.Duration, many constants are not committed to a particular type. The compiler represents these uncommitted constants with much greater numeric precision than values of basic types, and arithmetic on them is more precise than machine arithmetic; you may assume at least 256 bits of precision. There are six flavors of these uncommitted constants, called untyped boolean, untyped integer, untyped rune, untyped floating-point, untyped complex, and untyped string.
+
+By deferring this commitment, untyped constants not only retain their higher precision until later, but they can participate in many more expressions than committed constants without requiring conversions. For example, the values ZiB and YiB in the example above are too big to store in any integer variable, but they are legitimate constants that may be used in expressions like this one:`fmt.Println(YiB/ZiB) // "1024"`
+
+For literals(also untyped constants), syntax determines flavor.
+
+```
+var f float64 = 212
+fmt.Println((f - 32) * 5 / 9) // "100"; (f - 32) * 5 is a float64
+fmt.Println(5 / 9 * (f - 32)) // "0"; 5/9 is an untyped integer, 0
+fmt.Println(5.0 / 9.0 * (f - 32)) // "100"; 5.0/9.0 is an untyped float
+```
+
 # 4. Composite Types
+
+### array
+
+PS: array like array in C++，and slice like vector in C++.
+
+In an array literal, if an ellipsis ‘‘...’’ appears in place of the length, the array length is determined by the number of initializers.`q := [...]int{1, 2, 3}`
+
+Indices can appear in any order and some may be omitted; as before, unspecified values take on the zero value for the element type. For instance,`r := [...]int{99: -1}`defines an array r with 100 elements, all zero except for the last, which has value −1.
+
+### slice
+
+Unlike arrays, slices are not comparable, so we cannot use == to test whether two slices contain the same elements. The standard library provides the highly optimized bytes.Equal function for comparing two slices of bytes ([]byte), but for other types of slice, we must do the comparison ourselves.
+
+PS: the buildin function copy is like memcpy in C++, it can copy source slice elements to target slice and check whether the two slice has intersection in the underlying array.
+
+### map
+
+In practice, the order is random, varying from one execution to the next. This is intentional; making the sequence vary helps force programs to be robust across implementations.
 
 # 5. Functions
 
