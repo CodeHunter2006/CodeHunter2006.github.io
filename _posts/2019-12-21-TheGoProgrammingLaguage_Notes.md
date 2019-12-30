@@ -200,7 +200,58 @@ Many programming language implementations use a fixed-size function callstack; s
 
 ### Error-Handling Strategies
 
-Because error messages are frequently chained together, message strings should not be capitalized and new lines should be avoided. The resulting errors may be long , but they will be self-contained when found by tools like grep. like: "genesis: crashed: no parachute: G-switch failed: bad relay orientation"
+Because error messages are frequently chained together, message strings should not be capitalized and new lines should be avoided. The resulting errors may be long , but they will be self-contained when found by tools like grep.
+PS: the error message should separated by ':'.
+
+### Caveat: Capturing Iteration Variables
+
+```Go
+var rmdirs []func()
+    for _, d := range tempDirs() {
+        dir := d // NOTE: necessary!
+        os.MkdirAll(dir, 0755) // creates parent directories too
+        rmdirs = append(rmdirs, func() {
+        os.RemoveAll(dir)
+    })
+}
+// ...do some work...
+for _, rmdir := range rmdirs {
+    rmdir() // clean up
+}
+```
+
+The reason is a consequence of the scope rules for loop variables. In the program immediately above, the for loop introduces a new lexical block in which the variable dir is declared. All function values created by this loop "capture" and share the same variable—an addressable storage location, not its value at that particular moment.
+
+### Variadic Function
+
+Although the ...int parameter behaves like a slice within the function body, the type of a variadic function is distinct from the type of a function with an ordinary slice parameter.
+
+```Go
+func f(...int) {}
+func g([]int) {}
+fmt.Printf("%T\n", f) // "func(...int)"
+fmt.Printf("%T\n", g) // "func([]int)"
+```
+
+### Deferred Function Calls
+
+Deferred functions run after return statements have updated the function’s result variables. Because an anonymous function can access its enclosing function’s variables, including named results, a deferred anonymous function can observe the function’s results or even change it.
+
+On many file systems, notably NFS, write errors are not reported immediately but may be postponed until the file is closed. So the close function should not be called by defer to make sure the error were handled properly.
+
+### Recover
+
+PS: panic and recover is like try catch exception mechanism in C++.
+
+If the built-in recover function is called within a deferred function and the function containing the defer statement is panicking, recover ends the current state of panic and returns the panic value. The function that was panicking does not continue where it left off but returns normally. If recover is called at any other time, it has no effect and returns nil.
+
+Recovering from a panic within the same package can help simplify the handling of complex or unexpected errors, but as a general rule, you should not attempt to recover from another package’s panic. Public APIs should report failures as errors. Similarly, you should not recover from a panic that may pass through a function you do not maintain, such as a caller-provided callback, since you cannot reason about its safety.
+
+For example, the net/http package provides a web server that dispatches incoming requests to user-provided hand ler functions. Rather than let a panic in one of these handlers kill the process, the server calls recover, prints a stack trace, and continues serving. This is convenient in practice, but it does risk leaking resources or leaving the failed handler in an unspecified state that could lead to other problems.
+
+For all the above reasons, it’s safest to recover selectively if at all. In other words, recover only from panics that were intended to be recovered from, which should be rare. This intention can be encoded by using a distinct, unexported type for the panic value and testing whether the value returned by recover has that type. (We’ll see one way to do this in the next example.) If so, we report the panic as an ordinary error; if not, we call panic with the same value to resume the state of panic.
+
+From some conditions there is no recovery. Running out of memory, for example, causes the Go runtime to terminate the program with a fatal error.
 
 # 6. Methods
 
