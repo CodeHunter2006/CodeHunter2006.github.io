@@ -253,7 +253,47 @@ For all the above reasons, it’s safest to recover selectively if at all. In ot
 
 From some conditions there is no recovery. Running out of memory, for example, causes the Go runtime to terminate the program with a fatal error.
 
+PS: this is not like C++, which return a null when no memory can be use for new.
+
 # 6. Methods
+
+method, receiver, selector, field
+
+Go is often convenient to define additional behaviors for simple types such as numbers, strings, slices, maps, and sometimes even functions. Methods may be declared on any named type defined in the same package, so long as its underlying type is neither a pointer nor an interface.
+
+### Nil Is a Valid Receiver Value
+
+### Method Values and Expressions
+
+Usually we select and call a method in the same expression, as in p.Distance(), but it’s possible to separate these two operations. The selector p.Distance yields a method value, a function that binds a method(Point.Distance) to a specific receiver value p. This function can then be invoked without a receiver value; it needs only the non-receiver arguments.
+
+```Go
+p := Point{1, 2}
+q := Point{4, 6}
+distanceFromP := p.Distance // method value
+fmt.Println(distanceFromP(q))
+```
+
+```Go
+type Rocket struct { /* ... */ }
+func (r *Rocket) Launch() { /* ... */ }
+r := new(Rocket)
+time.AfterFunc(10 * time.Second, func() { r.Launch() })
+
+// The method value syntax is shorter:
+time.AfterFunc(10 * time.Second, r.Launch)
+```
+
+Related to the method value is the method expression. When calling a method, as opposed to an ordinary function, we must supply the receiver in a special way using the selector syntax. A method expression, written T.f or (\*T).f where T is a type, yields a function value with a regular first parameter taking the place of t he receiver, so it can be called in the usual way.
+
+```Go
+p := Point{1, 2}
+q := Point{4, 6}
+distance := Point.Distance
+// the next two lines are the same
+fmt.Println(distance(p, q))
+fmt.Println(p.Distance(q))
+```
 
 # 7. Interfaces
 
