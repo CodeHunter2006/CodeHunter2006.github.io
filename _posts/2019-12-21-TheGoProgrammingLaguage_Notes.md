@@ -261,6 +261,11 @@ method, receiver, selector, field
 
 Go is often convenient to define additional behaviors for simple types such as numbers, strings, slices, maps, and sometimes even functions. Methods may be declared on any named type defined in the same package, so long as its underlying type is neither a pointer nor an interface.
 
+### Methods with a Pointer Receiver
+
+PS: interface satisfaction
+it is legal to call a *T method on an argument of type T so long as the argument is a variable; the compiler implicitly takes its address. But this is mere syntactic sugar: a value of type T does not possess all the methods that a *T pointer does, and as a result it might satisfy fewer interfaces.
+
 ### Nil Is a Valid Receiver Value
 
 ### Method Values and Expressions
@@ -295,7 +300,45 @@ fmt.Println(distance(p, q))
 fmt.Println(p.Distance(q))
 ```
 
+### Example: Bit Vector Type
+
 # 7. Interfaces
+
+contract, substituability
+
+### embedding an interface
+
+```Go
+package io
+type Reader interface {
+    Read(p []byte) (n int, err error)
+}
+type Closer interface {
+    Close() error
+}
+type ReadWriter interface {
+    Reader
+    // Read(p []byte) (n int, err error)
+    // the up one is OK too
+    Writer
+}
+type ReadWriteCloser interface {
+    Reader
+    Writer
+    Closer
+}
+```
+
+The syntax used above, which resembles struct embedding , lets us name another interface as a shorthand for writing out all of its methods. This is called embedding an interface.
+
+### Interface Satisfaction
+
+As a shorthand, Go programmers often say that a concrete type "is a" particular interface type, meaning that it satisfies the interface. For example, a *bytes.Buffer is an io.Writer; an *os.File is an io.ReadWriter.
+
+An interface with more methods, such as io.ReadWriter, tells us more about the values it contains, and places greater demands on the types that implement it, than do es an interface with fewer methods such as io.Reader. So what does the type interface{}, which has no methods at all, tell us about the concrete types that satisfy it?
+That’s right: nothing. This may seem useless, but in fact the type interface{}, which is called the empty interface type, is indispensable. Because the empty interface type places no demands on the types that satisfy it, we can assign any value to the empty interface.
+
+Example: Parsing Flags with flag.Value
 
 # 8. Goroutines and Channels
 
