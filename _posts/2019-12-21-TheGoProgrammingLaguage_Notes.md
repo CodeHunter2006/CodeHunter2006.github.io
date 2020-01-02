@@ -340,6 +340,21 @@ That’s right: nothing. This may seem useless, but in fact the type interface{}
 
 Example: Parsing Flags with flag.Value
 
+### Interface Values
+
+interface value = dynamic type + dynamic value
+
+Interface values may be compared using == and !=. Two interface values are equal if both are nil, or if their dynamic types are identical and their dynamic values are equal according to the usual behavior of == for that type. Because interface values are comparable, they may be used as the keys of a map or as the operand of a switch statement.
+
+However, if two interface values are compared and have the same dynamic type, but that type is not comparable (a slice, for instance), then the comparison fails with a panic:
+
+```Go
+var x interface{} = []int{1, 2, 3}
+fmt.Println(x == x) // panic: comparing uncomparable type []int
+```
+
+- can not comparable type: `slice/map/function`
+
 # 8. Goroutines and Channels
 
 # 9. Concurrency with Shared Variables
