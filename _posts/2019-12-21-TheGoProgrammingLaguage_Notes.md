@@ -355,7 +355,80 @@ fmt.Println(x == x) // panic: comparing uncomparable type []int
 
 - can not comparable type: `slice/map/function`
 
+### Caveat: An Interface Containing a Nil Pointer Is Non-Nil
+
+```Go
+const debug = true
+func main() {
+    var buf *bytes.Buffer
+    // the correct one should be "var buf bytes.Buffer"
+    if debug {
+        buf = new(bytes.Buffer) // enable collection of output
+    }
+    f(buf) // NOTE: subtly incorrect!
+}
+
+func f(out io.Writer) {
+    if out != nil {
+        out.Write([]byte("done!\n"))
+    }
+}
+```
+
+When main calls f, it assigns a nil pointer of type *bytes.Buffer to the out parameter, so the dynamic value of out is nil. However, its dynamic type is *bytes.Buffer, meaning that out is a non-nil interface containing a nil pointer value, so the defensive check out != nil is still true.
+
+The problem is that although a nil \*bytes.Buffer pointer has the methods needed to satisfy the interface, it doesn’t satisfy the behavioral requirements of the interface. In particular, the call violates the implicit precondition of (\*bytes.Buffer). Write that its receiver is not nil, so assigning the nil pointer to the interface was a mistake.
+
+### Type Assertions
+
+There are two possibilities. First, if the asserted type T is a concrete type, then the type assertion checks whether x’s dynamic type is identical to T. If this check succeeds, the result of the type assertion is x’s dynamic value, whose type is of course T. In other words, a type assertion to a concrete type extracts the concrete value from its operand. If the check fails, then the operation panics.
+
+Second, if instead the asserted type T is an interface type, then the type assertion checks whether x’s dynamic type satisfies T. If this check succeeds, the dynamic value is not extracted; the result is still an interface value with the same type and value components, but the result has the interface type T. In other words, a type assertion to an interface type changes the type of the expression, making a different (and usually larger) set of methods accessible, but it preserves the dynamic type and value components inside the interface value.
+
+No matter what type was asserted, if the operand is a nil interface value, the type assertion fails. A type assertion to a less restrictive interface type (one w ith fewer methods) is rarely needed, as it behaves just like an assignment, except in the nil case.
+
+### Querying Behaviors with Interface Type Assertions
+
+```Go
+// writeString writes s to w.
+// If w has a WriteString method, it is invoked instead of w.Write.
+func writeString(w io.Writer, s string) (n int, err error) {
+    type stringWriter interface {
+        WriteString(string) (n int, err error)
+    }
+    if sw, ok := w.(stringWriter); ok {
+        return sw.WriteString(s) // avoid a copy
+    }
+    return w.Write([]byte(s)) // allocate temporary copy
+}
+```
+
+What’s curious in this example is that there is no standard interface that defines the WriteString method and specifies its required behavior. Further more, whether or not a concrete type satisfies the stringWriter interface is determined only by its methods, not by any declared relationship between it and the interface type. What this means is that the technique above relies on the assumption that if a type satisfies the interface below, then WriteString(s) must have the same effect as Write([]byte(s)).
+
+### Type Switches
+
+- object-oriented programming, subtype polymorphism, ad hoc polymorphism
+
+```Go
+switch x.(type) {
+    case nil:         // ...
+    case int, uint:   // ...
+    case bool:        // ...
+    case string:      // ...
+    default:          // ...
+```
+
+As with an ordinary switch statement, cases are considered in order and, when a match is found, the case’s body is executed. Case order becomes significant when one or more case types are interfaces, since then there is a possibility of two cases matching. The position of the default case relative to the others is immaterial. No fallthrough is allowed.
+
+```Go
+switch y := x.(type) { /* ... */ }
+```
+
 # 8. Goroutines and Channels
+
+- CSP(communicating sequential processes)
+  In discussions of concurrency, when we say x happens before y, we don’t mean merely that x occurs earlier in time than y; we mean that it is guaranteed to do so and that all its prior effects, such as updates to variables, are complete and that you may rely on them.
+  When x neither happens before y nor after y, we say that x is concurrent with y. This doesn’t mean that x and y are necessarily simultaneous, merely that we cannot assume anything about their ordering .
 
 # 9. Concurrency with Shared Variables
 
