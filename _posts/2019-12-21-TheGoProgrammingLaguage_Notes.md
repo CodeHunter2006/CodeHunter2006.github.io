@@ -430,9 +430,98 @@ switch y := x.(type) { /* ... */ }
   In discussions of concurrency, when we say x happens before y, we don’t mean merely that x occurs earlier in time than y; we mean that it is guaranteed to do so and that all its prior effects, such as updates to variables, are complete and that you may rely on them.
   When x neither happens before y nor after y, we say that x is concurrent with y. This doesn’t mean that x and y are necessarily simultaneous, merely that we cannot assume anything about their ordering .
 
+### range loop to iterate over channels
+
+```Go
+go func() {
+    for x := range naturals {
+        squares <- x * x
+    }
+    close(squares)
+}()
+
+// this one is clumsy
+go func() {
+    for {
+        x, ok := <-naturals if !ok {
+            break // channel was closed and drained
+        }
+        squares <- x * x
+    }
+    close(squares)
+}()
+```
+
+### Unidirectional Channel Types
+
+- it is a compile-time error to attempt to close a receive-only channel.
+
+### Multiplexing with select
+
+```Go
+select {
+    case <-ch1:
+    // ...
+    case x := <-ch2:
+    // ...use x...
+    case ch3 <- y:
+    // ...
+    default:
+    // ...
+}
+```
+
+The general form of a select statement is shown above. Like a switch statement, it has a number of cases and an optional default. Each case specifies a communication(as end or receive operation on some channel) and an associated block of statements. A receive expression may appear on its own, as in the first case, or within a short variable declaration, as in the second case; the second form lets you refer to the received value.
+A select waits until a communication for some case is ready to proceed. It then performs that communication and executes the case’s associated statements; the other communications do not happen. A select with no cases, select{}, waits forever.And a select with default is non-blocking, which specifies what to do when none of the other communications can proceed immediately.
+
 # 9. Concurrency with Shared Variables
 
+### The Race Detector
+
+Just add the -race flag to your go build, go run, or go test command. This causes the compiler to build a modified version of your application or test with additional instrumentation that effectively records all accesses to shared variables that occurred during execution, along with the identity of the goroutine that read or wrote the variable. In addition, the modified program records all synchronization events, such as go statements, channel operations, and calls to (\*sync.Mutex).Lock, (\*sync.WaitGroup).Wait, and so on. (The complete set of synchronization events is specified by the The Go Memory Model document that accompanies the language specification.)
+The race detector studies this stream of events, looking for cases in which one goroutine reads or writes a shared variable that was most recently written by a different goroutine without an intervening synchronization operation. This indicates a concurrent access to the shared variable, and thus a data race. The tool prints a report that includes the identity of the variable, and the stacks of active function calls in the reading goroutine and the writing goroutine. This is usually sufficient to pinpoint the problem.
+
+### Growable Stacks
+
+Each OS thread has a fixed-size block of memory (often as large as 2MB) for its stack, the work area where it saves the local variables of function calls that are in progress or temporarily suspended while another function is called. This fixed-size stack is simultaneously too much and too little. A 2MB stack would be a huge waste of memory for a little goroutine, such as one that merely waits for a WaitGroup then closes a channel. It’s not uncommon for a Go program to create hundreds of thousands of goroutines at one time, which would be impossible with stacks this large. Yet despite their size, fixed-size stacks are not always big enough for the most complex and deeply recursive of functions. Changing the fixed size can improve space efficiency and allow more threads to be created, or it can enable more deeply recursive functions, but it cannot do both.
+
+In contrast, a goroutine starts life with a small stack, typically 2KB. A goroutine’s stack, like the stack of an OS thread, holds the local variables of active and suspended function calls, but unlike an OS thread, a goroutine’s stack is not fixed; it grows and shrinks as needed. The size limit for a goroutine stack may be as much as 1GB, orders of magnitude larger than a typical fixed-size thread stack, though of course few goroutines use that much.
+
+### Goroutine Scheduling
+
+Because OS threads are scheduled by the kernel, passing control from one thread to another requires a full context switch, that is, saving the state of one user thread to memory, restoring the state of another, and updating the scheduler’s datastructures. This operation is slow, due to its poor locality and the number of memory accesses required, and has historically only gotten worse as the number of CPU cycles required to access memory has increased.
+
+The Go runtime contains its own scheduler that uses a technique known as m:n scheduling, because it multiplexes (or schedules) m goroutines on n OS threads. The job of the Go scheduler is analogous to that of the kernel scheduler, but it is concerned only with the goroutines of a single Go program.
+
+Unlike the operating system’s thread scheduler, the Go scheduler is not invoked periodically by a hardware timer, but implicitly by certain Go language constructs. For example, when a goroutine calls time.Sleep or blocks in a channel or mutex operation, the scheduler puts it to sleep and runs another goroutine until it is time to wake the first one up. Because it doesn’t need a switch to kernel context, rescheduling a goroutine is much cheaper than rescheduling a thread.
+
+### Goroutines Have No Identity
+
+Go encourages a simpler style of programming in which parameters that affect the behavior of a function are explicit. Not only does this make programs easier to read, but it lets us freely assign subtasks of a given function to many different goroutines without worrying about their identity.
+
 # 10. Packages and the Go Tool
+
+### why Go compile faster ?
+
+Go compilation is notably faster than most other compiled languages, even when building from scratch. There are three main reasons for the compiler’s speed.
+
+- First, all imports must be explicitly listed at the beginning of each source file, so the compiler does not have to read and process an entire file to determine its dependencies.
+- Second, the dependencies of a package form a directed acyclic graph, and because there are no cycles, packages can be compiled separately and perhaps in parallel.
+- Finally, the object file for a compiled Go package records export information not just for the package itself, but for its dependencies too. When compiling apackage, the compiler must read one object file for each import but need not look beyond these files.
+
+### The Package Declaration
+
+There are three major exceptions to the "last segment" convention:
+
+- The first is that a package defining a command (an executable Go program) always has the name main, regardless of the package’s import path. This is a signal to go build that it must invoke the linker to make an executable file.
+- The second exception is that some files in the directory may have the suffix \_test on their package name if the file name ends with \_test.go. Such a directory may define two packages: the usual one, plus another one called an external test package. The \_test suffix signals to go test that it must build both packages, and it indicates which files belong to each package. External test packages are used to avoid cycles in the import graph arising from dependencies of the test;
+- The third exception is that some tools for dependency management append version number suffixes to package import paths, such as "gopkg.in/yaml.v2". The package name excludes the suffix, so in this case it would be just yaml.
+
+### Import Declarations
+
+A renaming import may be useful even when there is no conflict. If the name of the imported package is unwieldy, as is sometimes the case for automatically generated code, an abbreviated name may be more convenient. The same short name should be used consistently to avoid confusion. Choosing an alternative name can help avoid conflicts with common local variable names. For example, in a file with many local variables named path, we might import the standard "path" package as pathpkg.
+
+- blank import
 
 # 11. Testing
 
