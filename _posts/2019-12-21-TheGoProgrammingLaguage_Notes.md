@@ -523,7 +523,43 @@ A renaming import may be useful even when there is no conflict. If the name of t
 
 - blank import
 
+### The Go Tool
+
+\$ go ...
+build compile packages and dependencies
+clean remove object files
+doc show documentation for package or symbol
+env print Go environment information
+fmt run gofmt on package sources
+get download and install packages and dependencies
+install compile and install packages and dependencies
+list list packages
+run compile and run Go program
+test test packages
+version print Go version
+vet run go tool vet on packages
+mod package dependency management
+Use "go help [command]" for more information about a command.
+...
+
+### build tags
+
+### Internal Packages
+
+To address these needs, the go build tool treats a package specially if its import path contains a path segment named internal. Such packages are called internal packages. An internal package may be imported only by another package that is inside the tree rooted at the parent of the internal directory. For example, given the packages below, net/http/internal/chunked can be imported from net/http/httputil or net/http, but not from net/url. However,net/url may importnet/http/httputil.
+
+```
+net/http
+net/http/internal/chunked
+net/http/httputil
+net/url
+```
+
 # 11. Testing
+
+- Test Banchmark Example
+
+- profile
 
 # 12. Reflection
 
