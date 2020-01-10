@@ -96,6 +96,8 @@ Left shifts fill the vacated bits with zeros, as do right shifts of unsigned num
 
 ## implicit uint type panic
 
+PS: in go1.13.1 this problem is solved, because `len()` will return int not uint.
+
 ```Go
 medals := []string{"gold", "silver", "bronze"}
 for i := len(medals) - 1; i >= 0; i-- {
@@ -563,4 +565,80 @@ net/url
 
 # 12. Reflection
 
+- reflect.Type, reflect.TypeOf
+- reflect.Value, reflect.ValueOf
+
+```Go
+func display(path string, v reflect.Value) {
+    switch v.Kind() {
+        case reflect.Invalid:
+            fmt.Printf("%s = invalid\n", path)
+        case reflect.Slice, reflect.Array:
+            for i := 0; i < v.Len(); i++ {
+                display(fmt.Sprintf("%s[%d]", path, i), v.Index(i))
+            }
+        case reflect.Struct:
+            for i := 0; i < v.NumField(); i++ {
+                fieldPath := fmt.Sprintf("%s.%s", path, v.Type().Field(i).Name)
+                display(fieldPath, v.Field(i))
+            }
+        case reflect.Map:
+            for _, key := range v.MapKeys() {
+                display(fmt.Sprintf("%s[%s]", path, formatAtom(key)), v.MapIndex(key))
+            }
+        case reflect.Ptr:
+            if v.IsNil() {
+                fmt.Printf("%s = nil\n", path)
+            } else {
+                display(fmt.Sprintf("(*%s)", path), v.Elem())
+            }
+        case reflect.Interface:
+            if v.IsNil() {
+                fmt.Printf("%s = nil\n", path)
+            } else {
+                fmt.Printf("%s.type = %s\n", path, v.Elem().Type()) display(path+".value", v.Elem())
+             }
+         default: // basic types, channels, funcs
+            fmt.Printf("%s = %s\n", path, formatAtom(v)
+    }
+}
+```
+
+### A Word of Caution
+
+There is a lot more to the reflection API than we have space to show, but the preceding examples give an idea of what is possible. Reflection is a powerful and expressive tool, but it should be used with care, for three reasons.
+
+The first reason is that reflection-based code can be fragile. For every mistake that would cause a compiler to report a type error, there is a corresponding way to misuse reflection, but where as the compiler reports the mistake at build time, a reflection error is reported during execution as apanic, possibly long after the program was written or even long after it has started running.
+
+The best way to avoid this fragility is to ensure that the use of reflection is fully encapsulated within your package and, if possible, avoid reflect.Value in favor of specific types in your package’s API, to restrict inputs to legal values. If this is not possible, perform additional dynamic checks before each risky operation.
+
+Reflection also reduces the safety and accuracy of automated refactoring and analysis tools, because they can’t determine or rely on type information.
+
+The second reason to avoid reflection is that since types serve as a form of documentation and the operations of reflection cannot be subject to static type checking, heavily reflective code is often hard to understand. Always carefully document the expected types and other invariants of functions that accept an interface{} or a reflect.Value.
+
+The third reason is that reflection-based functions may be one or two orders of magnitude slower than code specialized for a particular type. In a typical program, the majority of functions are not relevant to the overall performance, so it’s fine to use reflection when it makes the program clearer. Testing is a particularly good fit for reflection since most tests use small datasets. But for functions on the critical path, reflection is best avoided.
+
 # 13. Low-Level Programming
+
+### unsafe.Sizeof, Alignof, and Offsetof
+
+Despite their names, these functions are not in fact unsafe, and they may be helpful for understanding the layout of raw memory in a program when optimizing for space.
+
+### unsafe.Pointer
+
+Most pointer types are written *T, meaning "a pointer to a variable of type T." The unsafe.Pointer type is a special kind of pointer that can hold the address of any variable. Of course, we can’t indirect through an unsafe.Pointer using *p because we don’t know what type that expression should have. Like ordinary pointers, unsafe.Pointers are comparable and may be compared with nil, which is the zero value of the type.
+An ordinary *T pointer may be converted to an unsafe.Pointer, and an unsafe.Pointer may be converted back to an ordinary pointer, not necessarily of the same type *T.
+
+Some garbage collectors move variables around in memory to reduce fragmentation or book keeping . Garbage collectors of this kind are known as moving GCs. When a variable is moved, all pointers that hold the address of the old location must be updated to point to the new one. From the perspective of the garbage collector, an unsafe.Pointer is a pointer and thus its value must change as the variable moves, but a uintptr is just a number so its value must not change.
+
+Recall from Section 5.2 that goroutine stacks grow as needed. When this happens, all variables on the old stack may be relocated to a new, larger stack, so we cannot rely on the numeric value of a variable’s address remaining unchanged throughout its lifetime.
+
+```Go
+// NOTE: subtly incorrect!
+tmp := uintptr(unsafe.Pointer(&x)) + unsafe.Offsetof(x.b) pb := (*int16)(unsafe.Pointer(tmp))
+*pb = 42
+```
+
+At the time of writing , there is little clear guidance on what Go programmers may rely up on after an unsafe.Pointer to uintptr conversion (see Go issue 7192), so we strongly recommend that you assume the bare minimum. Treat all uintptr values as if they contain the former address of a variable, and minimize the number of operations between converting an unsafe.Pointer to a uintptr and using that uintptr. In our first example above, the three operations—conversion to a uintptr, addition of the field offset, conversion back—all appeared within a single expression.
+
+### Calling C Code with cgo
