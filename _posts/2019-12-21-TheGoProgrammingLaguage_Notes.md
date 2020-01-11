@@ -634,11 +634,27 @@ Some garbage collectors move variables around in memory to reduce fragmentation 
 Recall from Section 5.2 that goroutine stacks grow as needed. When this happens, all variables on the old stack may be relocated to a new, larger stack, so we cannot rely on the numeric value of a variable’s address remaining unchanged throughout its lifetime.
 
 ```Go
+var x struct {
+    a bool
+    b int16
+    c []int
+}
+// equivalent to pb := &x.b
+pb := (*int16)(unsafe.Pointer(
+    uintptr(unsafe.Pointer(&x)) + unsafe.Offsetof(x.b)))
+*pb = 42
+fmt.Println(x.b) // "42"
+```
+
+```Go
 // NOTE: subtly incorrect!
-tmp := uintptr(unsafe.Pointer(&x)) + unsafe.Offsetof(x.b) pb := (*int16)(unsafe.Pointer(tmp))
+tmp := uintptr(unsafe.Pointer(&x)) + unsafe.Offsetof(x.b)
+pb := (*int16)(unsafe.Pointer(tmp))
 *pb = 42
 ```
 
 At the time of writing , there is little clear guidance on what Go programmers may rely up on after an unsafe.Pointer to uintptr conversion (see Go issue 7192), so we strongly recommend that you assume the bare minimum. Treat all uintptr values as if they contain the former address of a variable, and minimize the number of operations between converting an unsafe.Pointer to a uintptr and using that uintptr. In our first example above, the three operations—conversion to a uintptr, addition of the field offset, conversion back—all appeared within a single expression.
+
+### Example: Deep Equivalence
 
 ### Calling C Code with cgo
