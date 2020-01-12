@@ -561,7 +561,7 @@ net/url
 
 - Test Banchmark Example
 
-- profile
+- profile(CPU Memory Goroutine Heap Deadlock)
 
 # 12. Reflection
 
@@ -658,3 +658,8 @@ At the time of writing , there is little clear guidance on what Go programmers m
 ### Example: Deep Equivalence
 
 ### Calling C Code with cgo
+
+### Another Word of Caution
+
+Most programmers will never need to use unsafe at all. Never theless, there will occasionally be situations where some critical piece of code can be best written using unsafe. If careful study and measurement indicates that unsafe really is the best approach, restrict it to as small a region as possible, so that most of the program is oblivious to its use.
+For now, put the last two chapters in the back of your mind. Write some substantial Go programs. Avoid reflect and unsafe; come back to these chapters only if you must.
