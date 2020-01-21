@@ -164,8 +164,19 @@ locate -r xxx 正则查找
 `sudo updatedb`
 更新 locate 数据库
 
+### cat
+
+concatenate 将文本连接并输出到标准输出
+
 `cat xxx`
 查看文件文本内容
+
+### zcat
+
+与 cat 类似，处理压缩文件
+
+`zcat xxx.gz`
+将压缩包解压后输出文本
 
 连续执行命令
 xxx;xxx

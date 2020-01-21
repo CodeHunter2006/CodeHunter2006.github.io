@@ -1,14 +1,12 @@
 ---
 layout: post
-title: "面向模式的软件架构 读书笔记"
+title: "面向模式的软件架构——卷1——模式系统 读书笔记"
 date: 2019-11-22 23:00:00 +0800
 tags: DesignPattern
 ---
 
 ![Pattern](/assets/images/2019-11-16-Pattern_Oriented_Software_Architecture_notes_1.png)
 《Pattern-Oriented Software Architecture--Volume 1--A System of Pattern》中文版于 2013 年出版，被公认为是架构师的必读读物，与《设计模式》同被奉为经典。
-
-// TODO 全文读后感
 
 - 本书的知识体系发源于《设计模式》，但是又提高了一个层次，以更通用的视角总结模式。将模式分为三个层次：架构模式、设计模式和成例(方言)。介绍了常用的架构模式、成例，补充了《设计模式》中没有介绍但常用的一些模式。
 - 模式有助于将复杂的代码抽象成可学习的内容，提高学习效率、提高沟通效率
@@ -2308,5 +2306,3 @@ Master-Slave演示了模式如何改善可靠性的特定方面。
 ## 5. 模式的规范化
 
 ## 6. 结语
-
-// TODO 按章节拆解
