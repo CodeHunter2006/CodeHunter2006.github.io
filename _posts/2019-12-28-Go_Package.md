@@ -39,3 +39,13 @@ rand.Seed(time.Now().Unix())
 ## sync.WaitGroup
 
 可以为多个 goroutine 设置统一起跑时机或统计统一结束时机。
+
+## log
+
+log 相关
+
+`log.Panic()`
+输出 panic 级别日志后，开启 panic
+
+`log.Fatal()`
+输出 fatal 级别日志后，执行 os.Exit()
