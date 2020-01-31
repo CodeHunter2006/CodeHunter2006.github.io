@@ -25,6 +25,14 @@ tags: Linux
 - 使用`ls -li`命令可以查看文件的 Inode Index 和软连接信息。注意 alias 在 linux 中只是一个普通的文件，并不会认为有连接关系。
   - 执行命令时可以看到容量关系 `hard link` > `alias` > `symbolic link`，与前面的说明一致，`hard link`直接显示文件本身的容量，`alias`比`symbolic link`包含的信息更多所以容量更大。
 
+# 文件夹结构
+
+`/tmp/`
+该文件夹下可以存放临时文件，Debian/Ubuntu 每次启动会清空一次，RHEL/CentOS/Fedora 每隔特定天数(至少一天)会清空一次近期未更新的文件。
+
+`/var/log/`
+系统日志目录
+
 # 常用服务
 
 ## crontab
@@ -33,6 +41,7 @@ cron 是 Linux 自带的 service 提供定时执行命令的功能，类似 Wind
 
 `crontab -e`
 打开 cron 的定时任务编辑页面，可参照说明进行编辑。
+编辑完成退出后显示`crontab：installing new crontab`表示成功添加任务，不过这个任务要在三分钟后才生效，所以时间过近的不会执行。
 
 ```sh
 分 时 日 月 周 命令
@@ -50,3 +59,10 @@ cron 是 Linux 自带的 service 提供定时执行命令的功能，类似 Wind
 - 在/etc/rc.d/rc.local 这个脚本的末尾加上：
   `/sbin/service crond start`
   则系统启动时就会运行 cron 服务
+
+# 内核机制
+
+## OOM killer(Out Of Memory killer)
+
+当系统内存不足时，会杀掉占用内存最大的程序，并输出系统日志。
+查看相关日志的命令`grep "Out of memory" /var/log/messages`、`egrep -i -r 'killed process' /var/log`

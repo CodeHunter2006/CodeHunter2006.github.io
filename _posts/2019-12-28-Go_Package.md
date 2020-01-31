@@ -49,3 +49,19 @@ log 相关
 
 `log.Fatal()`
 输出 fatal 级别日志后，执行 os.Exit()
+
+## time
+
+提供时间日期相关操作
+
+- 如果想在某个时间基础上减掉一段时间，可以用 Add 负数的方式。
+
+## io/ioutil
+
+提供简易的 IO 操作
+
+`ioutil.WriteFile`
+简易写入文件
+
+`ioutil.ReadFile`
+简易读取文件

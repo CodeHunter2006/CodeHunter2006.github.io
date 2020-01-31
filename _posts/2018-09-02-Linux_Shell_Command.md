@@ -486,6 +486,35 @@ if [ -f "$FILE_PATH" ]; then
 fi
 ```
 
+## 数组
+
+`array_name=(ele1 ele2 ele3 ... elen)`
+数组元素类型不确定，下标从 0 开始
+
+`nums[6]=88`
+为某个下标元素赋值
+
+`echo ${nums[3]}`
+输出一个数组元素
+
+`echo ${nums[*]}`或`echo ${nums[@]}`
+输出所有数组元素
+
+数组元素循环：
+
+```shell
+for(( i=0;i<${#array[@]};i++)) do
+#${#array[@]}获取数组长度用于循环
+echo ${array[i]};
+done;
+
+for element in ${array[@]}
+#也可以写成for element in ${array[*]}
+do
+echo $element
+done
+```
+
 # 应用场景
 
 ## 查找特定时间之后创建或修改的文件
