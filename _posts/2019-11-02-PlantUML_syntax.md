@@ -9,6 +9,9 @@ tags: UML
 
 # (sequence chart)时序图
 
+`@startuml`和`@enduml`
+将时序图代码包住
+
 `A -> B: func`
 A 对象调用 B 对象的 func 函数
 
@@ -54,6 +57,9 @@ end note
 激活/不激活 A 的生命周期(开始/结束生命周期)
 
 # 思维导图
+
+`@startmindmap`和`@endmindmap`
+将思维导图文本包在其中
 
 `-*+`
 分别表示`左中右`位置，后加空格和节点名称，用数量表示层级关系。

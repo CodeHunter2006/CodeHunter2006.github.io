@@ -291,6 +291,14 @@ tar -xzvf file.tar.gz 解压 tar.gz
 tar -xjvf file.tar.bz2 解压 tar.bz2
 tar –xZvf file.tar.Z 解压 tar.Z
 
+## zip/unzip
+
+`zip -r target.zip srcFolder`
+把源文件夹压缩到目标 zip 文件
+
+`unzip target.zip`
+解压文件到当前目录
+
 poweroff 关机
 
 date 查看系统时间
