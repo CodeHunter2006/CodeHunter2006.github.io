@@ -478,6 +478,54 @@ A select waits until a communication for some case is ready to proceed. It then 
 
 # 9. Concurrency with Shared Variables
 
+### 9.4. Memory Synchronization
+
+In a modern computer there may be dozens of processors, each with its own local cache of the main memory. For efficiency, writes to memory are buffered within each processor and flushed out to main memory only when necessary. They may even be committed to main memory in a different order than they were written by the writing goroutine. Synchronization primitives like channel communications and mutex operations cause the processor to flush out and commit all its accumulated writes so that the effects of goroutine execution up to that point are guaranteed to be visible to goroutines running on other processors.
+
+```Golang
+package memo
+
+type Func func(key string) (interface{}, error)
+
+type result struct {
+    value interface{}
+    err   error
+}
+
+type entry struct {
+    res   result
+    ready chan struct{} // closed when res is ready
+}
+
+func New(f Func) *Memo {
+    return &Memo{f: f, cache: make(map[string]*entry)}
+}
+
+type Memo struct {
+    f     Func
+    mu sync.Mutex // guards cache
+    cache map[string]*entry
+}
+
+func (memo *Memo) Get(key string) (value interface{}, err error) {
+    memo.mu.Lock()
+    e := memo.cache[key] if e == nil {
+        // This is the first request for this key.
+        // This goroutine becomes responsible for computing
+        // the value and broadcasting the ready condition.
+        e = &entry{ready: make(chan struct{})} memo.cache[key] = e
+        memo.mu.Unlock()
+        e.res.value, e.res.err = memo.f(key)
+        close(e.ready) // broadcast ready condition
+    } else {
+        // This is a repeat request for this key.
+        memo.mu.Unlock()
+        <-e.ready // wait for ready condition
+    }
+    return e.res.value, e.res.err
+}
+```
+
 ### The Race Detector
 
 Just add the -race flag to your go build, go run, or go test command. This causes the compiler to build a modified version of your application or test with additional instrumentation that effectively records all accesses to shared variables that occurred during execution, along with the identity of the goroutine that read or wrote the variable. In addition, the modified program records all synchronization events, such as go statements, channel operations, and calls to (\*sync.Mutex).Lock, (\*sync.WaitGroup).Wait, and so on. (The complete set of synchronization events is specified by the The Go Memory Model document that accompanies the language specification.)
