@@ -160,6 +160,57 @@ var app = new Vue({
 
 # Convention(惯例约定)
 
+# 常用语法
+
+## 数组元素赋值
+
+Vue 数组对象的元素直接通过`arr[0] = {...}`赋值，会由于没有调用重写的函数而没有通知监听者更新。
+需要使用下面函数才能正常更新数组：
+
+```Javascript
+数组对象赋值'='(是整体数组，不是数组元素)
+push
+pop
+shift
+unshift
+splice
+sort
+reverse
+```
+
+也可以使用 Vue 自带的赋值函数来增加一个元素，同时进行绑定：
+
+```Javascript
+// this 是Vue对象
+this.$set(this.arr, 0, {...})
+
+// 对于非数组元素可以用
+this.$set(this.obj, "newAttribuit", 123)
+```
+
+## watch 的两个可选参数
+
+通常的 watch 定义是一个函数:
+
+```Javascript
+watch: {
+    watchedValue(newValue, oldValue) {
+      // xxx
+    }
+}
+```
+
+也可以增加两个可选参数，形式如下：
+
+```Javascript
+  obj: {
+    handler(newValue, oldValue) {
+      // xxx
+    },
+    immediate: true,  // 第一次绑定时就调用(通常刚绑定是不调用的)
+    deep: true  // 子孙对象属性变化时也监听(通常只监听要监听的对象本身的属性或元素)
+```
+
 # 性能优化(包括一般 Javascript 优化)
 
 由于 JS 运行于 UI 线程，所以出现性能问题后会直接影响用户体验。

@@ -101,7 +101,7 @@ tags: Mac
 
 `CMD+TAB[+SHIFT]` 切换最近使用程序
 
-`CMD+SHIFT+3` 截屏。3 全屏、4 特定区域、5 精确选择区域、6 Touch Bar
+`CMD+SHIFT+3` 截屏。3 全屏、4 特定区域、5 精确选择区域、6 Touch Bar。截屏时同时按`CTRL`会截屏进剪贴板，不会生成文件。
 
 `CMD+OPT+ESC` 呼出强制关闭程序界面
 
