@@ -114,6 +114,9 @@ docker save ...
 docker load ...
 ```
 
+`docker commit container_name image_name`
+将 container 导出为镜像
+
 `docker exec [OPTIONS] CONTAINER COMMAND [ARG...]`
 在运行的容器中执行命令
 
