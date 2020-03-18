@@ -343,7 +343,7 @@ global regular expression print
 在 cat 命令结果的字符串中查找 bbb
 
 `grep -e "test.*" xxx.xx`
-在 xxx.xx 文件中查匹配`test.*`正则表达式的行
+在 xxx.xx 文件中查匹配`test.*`正则表达式的行，其中 xxx.xxx 也可以使用通配符`*`
 
 - `-v` invert-match，查找没有出现目标文本的内容
 - `-o` --only-matching，只输出完全匹配模式的部分
@@ -372,6 +372,10 @@ global regular expression print
 - `[^a-zA-Z]` 反向选择，没有字母的
 - `"^test"` 定位行首为 test 的行
 - `"test$"` 定位行尾为 test 的行
+
+## egrep
+
+相当于`grep -e`
 
 ## tail
 
