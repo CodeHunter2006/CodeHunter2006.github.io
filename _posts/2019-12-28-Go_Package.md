@@ -56,6 +56,15 @@ log 相关
 
 - 如果想在某个时间基础上减掉一段时间，可以用 Add 负数的方式。
 
+### ticker
+
+使用 ticker 时，可能由于 ticker 设置时间较长同时没有及时关闭而导致的 ticker 泄漏。
+
+```golang
+ticker := time.NewTicker(duration)
+defer ticker.Stop() // 通过 defer 避免忘记 Stop
+```
+
 ## io/ioutil
 
 提供简易的 IO 操作
