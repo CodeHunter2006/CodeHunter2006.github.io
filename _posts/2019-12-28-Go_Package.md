@@ -13,32 +13,20 @@ Go 常用包的功能，及注意点
 
 可以获得各种类型的参数，无法获得无参数标记的参数
 
-## os.signal
-
-可以设置监听哪些系统信号
-
-## rand
-
-使用前要先做一个种子，否则其实不随机。
-rand.Seed(time.Now().Unix())
-
-## pool
-
-提供对象池接口，用于缓存对象，避免频繁申请、释放内存造成的性能问题。
-
-- 池不可以指定大小，大小受限于 GC 的临界值
-- 对象的最大缓存周期是 GC 周期，当 GC 调用时没有引用的对象会被清理掉
-  - pool 包在 init 中注册一个 poolCleanup 函数用于清除所 pool 里的缓存对象，每次 GC 之前会被调用
-- Get 方法返回时是返回池中任意一个对象，没有顺序；如果池中没有对象，会调用指定的 New 方法生成一个；如果没有指定 New 方法，那么返回 nil
-
 ## fmt
 
 `%+v` 格式符表示将数据结构打印出来
 `%[2]v%[2]v%[1]v` 可以通过这种形式选定后边的第几个参数，避免重复传入相同参数
 
-## sync.WaitGroup
+## io/ioutil
 
-可以为多个 goroutine 设置统一起跑时机或统计统一结束时机。
+提供简易的 IO 操作
+
+`ioutil.WriteFile`
+简易写入文件
+
+`ioutil.ReadFile`
+简易读取文件
 
 ## log
 
@@ -50,6 +38,42 @@ log 相关
 `log.Fatal()`
 输出 fatal 级别日志后，执行 os.Exit()
 
+## os.signal
+
+可以设置监听哪些系统信号
+
+## path
+
+提供路径相关操作
+
+`path.Base(string)`
+取得文件全名·
+
+## pool
+
+提供对象池接口，用于缓存对象，避免频繁申请、释放内存造成的性能问题。
+
+- 池不可以指定大小，大小受限于 GC 的临界值
+- 对象的最大缓存周期是 GC 周期，当 GC 调用时没有引用的对象会被清理掉
+  - pool 包在 init 中注册一个 poolCleanup 函数用于清除所 pool 里的缓存对象，每次 GC 之前会被调用
+- Get 方法返回时是返回池中任意一个对象，没有顺序；如果池中没有对象，会调用指定的 New 方法生成一个；如果没有指定 New 方法，那么返回 nil
+
+## rand
+
+使用前要先做一个种子，否则其实不随机。
+rand.Seed(time.Now().Unix())
+
+## sync.WaitGroup
+
+可以为多个 goroutine 设置统一起跑时机或统计统一结束时机。
+
+## strings
+
+字符串操作函数
+
+`strings.Split(str, seperator string) []string`
+将字符串按照分隔符切割为多个子字符串组成的切片
+
 ## time
 
 提供时间日期相关操作
@@ -58,19 +82,28 @@ log 相关
 
 ### ticker
 
-使用 ticker 时，可能由于 ticker 设置时间较长同时没有及时关闭而导致的 ticker 泄漏。
+- 使用 ticker 时，可能由于 ticker 设置时间较长同时没有及时关闭而导致的 ticker 泄漏，可以用`defer ticker.Stop()`解决。
+- 注意 Stop ticker 后，ticker.C 并不会关闭，只是不再有值返回了。
 
-```golang
-ticker := time.NewTicker(duration)
-defer ticker.Stop() // 通过 defer 避免忘记 Stop
+```Go
+// ticker 结合 for select 的用法
+func testFunc(){
+  ticker := time.NewTicker(time.Second)
+  defer ticker.Stop()
+  doneCh := make(chan struct{})
+  defer close(doneCh)
+  go func() {
+  waitLoop:
+    for {
+      select {
+      case <-doneCh:
+        // 注意，这里直接用 break 的话，由于被 select 吸收，所以永远无法退出循环
+        break waitLoop
+      case <-ticker.C:
+        // do something
+      }
+    }
+  }()
+  // some code
+}
 ```
-
-## io/ioutil
-
-提供简易的 IO 操作
-
-`ioutil.WriteFile`
-简易写入文件
-
-`ioutil.ReadFile`
-简易读取文件
