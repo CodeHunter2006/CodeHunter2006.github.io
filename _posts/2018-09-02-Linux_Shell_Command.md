@@ -516,6 +516,17 @@ if [ -f "$FILE_PATH" ]; then
 fi
 ```
 
+## 循环
+
+### 数字循环
+
+```shell
+for i in {1..10}
+do
+echo $i
+done
+```
+
 ## 数组
 
 `array_name=(ele1 ele2 ele3 ... elen)`
