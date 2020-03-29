@@ -107,3 +107,13 @@ func testFunc(){
   // some code
 }
 ```
+
+- 对于等待时间较短的，可以利用`time.After`实现简易等待，但是如果频率高、时间长，可能会造成 ticker 泄漏
+
+```Go
+select {
+  case <-time.After(time.Second):
+    // do something
+  case ...:
+}
+```
