@@ -5,7 +5,7 @@ date: 2020-04-04 22:00:00 +0800
 tags: book
 ---
 
-![ES6](/assets/images/2020-04-04-ECMAScript_6_1.jpg)
+![ES6](/assets/images/2020-04-04-Book_Summary_Note_1.jpg)
 一些泛读笔记
 
 ## 《白话全本红楼梦》—— 苟守庆

@@ -6,7 +6,7 @@ tags: Javascript
 ---
 
 ![ES6](/assets/images/2020-04-04-ECMAScript_6_1.jpg)
-ECMAScript 6 是 ECMA 于 2015.06 发布的版本，感觉变得"正规"了许多，记录一下变更点。
+ECMAScript 6 是 ECMA 于 2015.06 发布的版本，以前总感觉 JS 是一个"临时"发明的语言，现在终于变得"正规"了许多，值得记录一下变更点。
 
 ## let
 
@@ -289,3 +289,40 @@ import {a as a1,b as b1} from 'url'
 - import 时可以不指定变量名，表示只是导入一次文件并不关心导出变量，通常是用于预处理或引入样式
 - import 时的对象名要与导出的一致，也可以在导入同时重命名，可以只导入所需的对象
 - import 默认导出对象时，可以用任意名字接收，因为这个名字不会造成歧义，无须区分名字
+
+## Generator yield
+
+类似 Python 的 yield 语法，可以实现迭代功能的对象
+
+```ES6
+function* idMaker(){
+    let index = 0;
+    while(true)
+        yield index++;
+}
+let gen = idMaker(); // "Generator { }"
+console.log(gen.next().value); // 0
+console.log(gen.next().value); // 1
+console.log(gen.next().value); // 2
+```
+
+## Promise
+
+Promise 对象类似 setTimeout(xxx, 0)，可以实现异步调用。如果浏览器支持，可以实现多线程加速。
+
+```ES6
+let myFirstPromise = new Promise((resolve, reject) => {
+  // We call resolve(...) when what we were doing asynchronously was successful, and reject(...) when it failed.
+  // In this example, we use setTimeout(...) to simulate async code.
+  // In reality, you will probably be using something like XHR or an HTML5 API.
+  setTimeout( function() {
+    resolve("Success!")  // Yay! Everything went well!
+  }, 250)
+})
+
+myFirstPromise.then((successMessage) => {
+  // successMessage is whatever we passed in the resolve(...) function above.
+  // It doesn't have to be a string, but if it is only a succeed message, it probably will be.
+  console.log("Yay! " + successMessage)
+});
+```
