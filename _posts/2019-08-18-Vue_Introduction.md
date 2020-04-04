@@ -2,7 +2,7 @@
 layout: post
 title: "Vue介绍"
 date: 2019-08-18 23:00:00 +0800
-tags: Vue
+tags: Vue Javascript
 ---
 
 ![Vue](/assets/images/2019-08-18-Vue_Introduction_1.png)
@@ -95,6 +95,7 @@ Vue 的指令名称都是以`v-xxx`开头的，v 表示 Vue。例如：
 
 - 指令后边可以跟指令参数，如`<button @click.stop="doThis">`，具体每种指令可以加哪些参数要查看 API 文档。
 - Vue 为最常用的`v-bind`、`v-on`分别指定了缩略形式`:`、`@`。(从这点也可以看出 Vue 的人性化设计)
+- 可以添加自定义指令，这样可以把常用处理过程写成通用指令函数
 
 ## Scope(作用域)
 
@@ -154,9 +155,14 @@ var app = new Vue({
 - Lifecycle Hooks 前面已经说过，定义的函数可以根据生命周期的各个阶段被回调。
 - watch 与 computed 类似，可以监控某成员变量，重点在于这个变量发生变化时执行的函数动作
 
-## 其它字段：component
+## 其它字段：component/mixin
 
 - component 用于指定当前 Vue 对象会用到哪些组件。
+- mixin 可以实现类似面向对象的继承机制
+  - 具有相同成员时，以当前组件成员为准
+  - 具有相同 hook 时，都会被调用，被 mixin 的会先被调用
+  - 可以在全局范围 mixin，将影响所有 Vue 对象，所以要小心
+  - 可以设定全局的自定义混合策略
 
 # Convention(惯例约定)
 
