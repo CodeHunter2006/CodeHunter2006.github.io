@@ -155,14 +155,15 @@ var app = new Vue({
 - Lifecycle Hooks 前面已经说过，定义的函数可以根据生命周期的各个阶段被回调。
 - watch 与 computed 类似，可以监控某成员变量，重点在于这个变量发生变化时执行的函数动作
 
-## 其它字段：component/mixin
+## 其它字段：component/mixin/slot
 
-- component 用于指定当前 Vue 对象会用到哪些组件。
-- mixin 可以实现类似面向对象的继承机制
+- component(组件) 用于指定当前 Vue 对象会用到哪些组件。
+- mixin(混合) 可以实现类似面向对象的继承机制
   - 具有相同成员时，以当前组件成员为准
   - 具有相同 hook 时，都会被调用，被 mixin 的会先被调用
   - 可以在全局范围 mixin，将影响所有 Vue 对象，所以要小心
   - 可以设定全局的自定义混合策略
+- slot(插槽) 为定制 component 提供了一种机制，可以在 component 特定位置插入调用 component 时才决定的 html 结构
 
 # Convention(惯例约定)
 
