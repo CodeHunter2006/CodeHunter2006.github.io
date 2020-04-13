@@ -63,21 +63,45 @@ SQL 的优化，主要是围绕索引进行
 
 在 SQL 前加上`explain`可以查询执行计划，模拟 SQL 优化器执行 SQL 语句，从而分析自己的 SQL 被执行的情况。
 
-### 显示的字段及其意义:
+### 显示的字段及其意义
 
 - id 优先级
-- select_type 查询类型(PIMARY/SUBQUERY)
-- table 表
-- type 索引类型
-- possible_keys 预测用到的索引
-- key 实际用到的索引
-- key_len 实际使用索引的长度，可以通过长度反推用到了什么索引
-- ref 表间的引用关系
-- rows 通过索引查到的数据个数
-- extra 额外信息
-
-### explain 各字段用法
-
-- id 值相同，从上向下顺序执行; 值不同，数值越大越优先执行;
+  - id 值相同，从上向下顺序执行; 值不同，数值越大越优先执行;
   - 多表联查，id 值相同，优化器会把数据量小的表优先查询，这样做笛卡尔积时中间结果数据量更小
   - 多表联查可以转换为嵌套子查询，id 值不同，内层查询优先级更高
+- select_type 查询类型
+  - SIMPLE 简单查询(不包含子查询、union)
+  - PIMARY 主查询(最外层查询)
+  - SUBQUERY 子查询(嵌套在里面的查询)
+  - DERIVED/UNION 衍生查询，用到了临时表
+    - 在 from 子查询中只有一张表，则该表是衍生表
+    - 在 from 子查询中如果 t1 union t2，则 t1 是衍生表，t2 是 UNION 表
+- table 表名
+- type 遍历时对索引的利用类型，按性能排序：
+  system > const > eq_ref > ref > range > index > all
+  - type 中 system、const 是理想情况，实际上能达到 ref、range 就可以了
+  - 对 type 优化的前提是建立过索引
+  - system 只有一条数据的系统表或衍生表只有一条数据的主查询
+  - const 仅能查到一条数据的 SQL，用于 Primary key 或 Unique index
+  - eq_ref 唯一性索引，对于每个索引键的查询，有且仅有一条数据返回。常见于唯一索引或主键索引
+  - ref 非唯一性索引，通常可以命中
+  - range 范围查询，`between and, >, <, >=`都能命中，`in`有时会失效
+  - index 查询全部索引的数据
+  - all 查询全部表中的数据
+- possible_keys 预测用到的索引，NULL 为没有使用索引
+- key 实际用到的索引
+- key_len 实际使用索引的字段长度(字节数)之和，可以通过长度反推复合索引用是否被完全使用
+  - 根据不同的字符集、编码，字符串索引命中长度可能不同
+  - 可以为空的字符串，len 会多 1，使用一个字节标识可以为 NULL
+  - varchar 相比 char，len 会多 2，用来表示字符串长度
+- ref 指明当前表参照的字段
+  - const 引用的是一个常量
+- rows 实际通过索引查到的数据个数
+- extra 额外信息
+  - using filesort 性能较差，需要额外一次查询或排序，常见于 order by 语句，查找(where)和排序(order by)不是同一字段
+    - 对于单索引，可以 where 哪些字段就 order by 哪些字段，这样就不需要多查一次
+    - 对于复合索引，按照"最佳左前缀"原则，where 和 order by 按照顺序使用，不要跨列或无序使用
+  - using temporary 性能较差，用到了临时表，常见于 group by 语句，where 和 group by 不是同一字段
+  - using index 性能较好，索引覆盖，不读取原文件(回表查询)只读取索引
+  - using where 即需要索引查询也需要回表查询
+  - impossible where , where 子句永远为 false，SQL 语句里有自相矛盾
