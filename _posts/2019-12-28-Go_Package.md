@@ -101,6 +101,7 @@ func testFunc(){
         break waitLoop
       case <-ticker.C:
         // do something
+        // 注意，如果有多个 case，并且想保持循环，要用 continue 继续循环，不小心 return error 就会跳出循环
       }
     }
   }()

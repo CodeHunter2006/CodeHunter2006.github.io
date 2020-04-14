@@ -293,7 +293,10 @@ tar –xZvf file.tar.Z 解压 tar.Z
 
 poweroff 关机
 
-date 查看系统时间
+## date
+
+查看系统时间
+
 clock --show 查看硬件时间
 clock --hctosys 将硬件时间应用到系统时间
 
