@@ -105,3 +105,4 @@ SQL 的优化，主要是围绕索引进行
   - using index 性能较好，索引覆盖，不读取原文件(回表查询)只读取索引。这里是指查询阶段不需要回表，由于 select 字段不同导致最后一次查询需要回表不算在内
   - using where 即需要索引查询也需要回表查询
   - impossible where , where 子句永远为 false，SQL 语句里有自相矛盾
+  - using join buffer 优化器修改了 SQL，在连表查询时增加了连接缓存
