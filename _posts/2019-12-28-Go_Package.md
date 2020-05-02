@@ -118,3 +118,7 @@ select {
   case ...:
 }
 ```
+
+## golang.org/x/text
+
+实现了各种文本编码、字符集相关操作

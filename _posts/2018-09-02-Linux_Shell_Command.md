@@ -61,6 +61,12 @@ export HISTFILESIZE=1000     # 设置文件中的history命令的个数
 `cat /etc/issue`
 查看 CentOS 系统版本
 
+`cat /proc/meminfo`
+查看内存信息
+
+`cat /proc/cpuinfo`
+查看 CPU 信息
+
 切换为 root 用户权限
 su // 相当于 su root
 su - root // 切换时，同时保持环境变量
@@ -88,6 +94,15 @@ touch ./xxx
 insmod
 将文件安装到内核
 通常是驱动。
+
+## echo
+
+将后边的文字显示在标准输出
+
+`echo -e "\a"`
+
+- `-e` 显示特殊字符
+- `"\a"` 报错声音"嘟嘟"声
 
 ## ls
 
@@ -300,9 +315,13 @@ poweroff 关机
 clock --show 查看硬件时间
 clock --hctosys 将硬件时间应用到系统时间
 
-cp -Rf /home/user1/\* /root/temp/
+## cp
+
+`cp -Rf /home/user1/* /root/temp/`
 将 /home/user1 目录下的所有东西拷到/root/temp/下而不拷贝 user1 目录本身。
 即格式为：cp -Rf 原路径/ 目的路径/
+
+- 有时`cp -f xxx`仍然会出现覆盖提示，这是因为`cp`命令被重命名了，可以执行`\cp`强制执行原始命令
 
 last -10
 查看最后 10 次登录情况
@@ -310,11 +329,19 @@ last -10
 iptables -nv -L
 查看网络访问控制情况
 
+## kill
+
 `kill [-signalSeq] processId`
 向进程发送信号。在不设定信号序号时默认发送`SIGTERM`。
 
 `kill -l`
 显示可发送信号列表。
+
+## pkill
+
+与 kill 类似，可直接以进程名称为参数
+
+`pkill procname`
 
 `export VALUE_NAME="value"`
 设置环境变量
@@ -456,6 +483,10 @@ global regular expression print
 - 目标路径用`username@servername:/path`表示
 - `-r` 表示以文件夹形式传输
 
+## alias
+
+查看有哪些命令被改写过
+
 # shell 语法
 
 ## 顺序执行
@@ -495,7 +526,7 @@ global regular expression print
 `VALUE_NAME=value`
 给变量赋值，右边直接写值，字符串也可以直接写
 
-`VALUE_NAME=(grep test testFile)`
+`VALUE_NAME=$(grep test testFile)`
 将命令执行结果作为值赋值给变量
 
 ```shell
@@ -529,6 +560,19 @@ shell 中的字符串与脚本命令之间不像 C++那样"隔绝"，往往可�
 传入的第一个参数。`$2`、`$3`...表示后面的参数
 
 ## 条件判断
+
+```shell
+if [ command ];then
+   符合该条件执行的语句
+elif [ command ];then
+   符合该条件执行的语句
+else
+   符合该条件执行的语句
+fi
+```
+
+- 注意，在字符串比较时，`=`或`==`都可以判断相等，但是两边的字符串值一定要与`=`间有空格，否则会被识别为赋值，永远为真
+- 在字符串比较时，往往需要字符串变量相比较，这时候最好变量外边加上`"`，以免字符串内容是空格隔开的多段字符，会报`[: too many arguments`错误
 
 如果文件存在，则删除该文件。
 
