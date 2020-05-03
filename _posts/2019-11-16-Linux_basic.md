@@ -66,3 +66,7 @@ cron 是 Linux 自带的 service 提供定时执行命令的功能，类似 Wind
 
 当系统内存不足时，会杀掉占用内存最大的程序，并输出系统日志。
 查看相关日志的命令`grep "Out of memory" /var/log/messages`、`egrep -i -r 'killed process' /var/log`
+
+# 进程线程
+
+Linux 最初是没有线程的设计的，后来其他操作系统有了线程，Linux 就通过进程模拟线程，通过 fork 创建进程将新的进程的资源句柄与原进程一致，这样就实现了线程的功能。

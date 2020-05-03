@@ -32,6 +32,10 @@ db.createUser(
 `db.auth('userName', 'dbName')`
 检查用户是否有权限操作某库，如果有则返回 1，否则返回 0
 
+## sh.status()
+
+在 mongos 查看集群分片信息
+
 # 其他命令
 
 `db.system.users.find().pretty()`
