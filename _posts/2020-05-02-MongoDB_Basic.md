@@ -8,7 +8,7 @@ tags: MongoDB
 ![MongoDB](/assets/images/2020-05-02-MongoDB_Basic_1.jpeg)
 
 - mongodb 属于 NoSQL(Not only SQL)，提供的查询语句更加人性化
-- 与 mysql 可以类比，库(database)、表(table collection)、行()。其中 mongodb 的行是一个 json 字符串，其中包含了每列名称和值。
+- 与 mysql 可以类比，库(database)、表(table collection)、行(row document)。其中 mongodb 的行是一个 json 字符串，其中包含了每列名称和值。
 - 库、表、列名，都不需要提前创建，随插入数据时会自动创建
 - 插入一行中的字段名(列名)不需要提前声明，每一行列可以不同
 - 插入一行数据时，会自动填写"\_id"，底层会按照聚集索引存储

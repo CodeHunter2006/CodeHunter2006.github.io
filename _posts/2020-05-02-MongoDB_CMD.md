@@ -5,6 +5,12 @@ date: 2020-05-02 23:00:00 +0800
 tags: MongoDB
 ---
 
+# 命令分类
+
+- db(database) 数据对象相关
+- rs(replica set) 复制集相关
+- sh(sharding cluster) 分片集群相关
+
 ## db.createUser()
 
 创建用户
