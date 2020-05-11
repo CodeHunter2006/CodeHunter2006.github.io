@@ -55,3 +55,4 @@ arbiter
 oplog 对应于 MySQL 中的 binlog，记录了所有操作。
 
 - 通常 oplog 的容量设置为足够一个全备周期内的使用即可
+- `rs.printReplicationInfo()` 显示 log 容量和可覆盖的时间长度，可作为备份周期的评估
