@@ -1,16 +1,30 @@
 ---
 layout: post
-title: "MongoDB 分片、备份"
+title: "MongoDB 复制集、分片、备份"
 date: 2020-05-03 23:00:00 +0800
 tags: MongoDB
 ---
 
+# Replica Set(复制集)
+
+![MongoDB](/assets/images/2020-05-03-MongoDB_Sharding_2.png)
+
+- mongodb 复制集基本构成是 1 主 2 从的结构，主会实时、无损的向从复制
+- 客户端需要安装一个驱动包，初始化时将集群的所有 ip 地址告诉驱动，进行连接
+- 集群中结点是独立的，自带互相监控投票机制，如果半数以上认为某节点宕机则自动切换，宕机重联后自动恢复功能，在集群变化时会自动通知驱动以便客户端连接最新的主
+- monggodb 采用 Raft 协议作为分布式一致性协议，MySQL 用的是 MGL 协议(Paxos 协议的变种，Paxos 协议是 ZooKeeper 使用的协议)
+
+## Arbiter(仲裁者)模式
+
+mongodb 也可以用 1 主+1 从+1Arbiter 架构，类似 Redis 主从复制+哨兵模式
+
+- Arbiter 结点只负责仲裁，可以减少从主同步到从的数据的压力
+-  避免只有两个结点的情况下，无法选出主的情况
+- Arbiter 可以用性能较差的主机
+
+# Sharding(分片)
+
 ![MongoDB](/assets/images/2020-05-03-MongoDB_Sharding_1.png)
-
-复制集
-arbiter
-
-# 分片
 
 - 通过分片机制，将数据分散到不同的 mongodb 实例(shard)上存储，这样可以提高写入、读取效率，避免单实例过高的并发
 - mongodb 集群基本构成：
