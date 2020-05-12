@@ -232,13 +232,18 @@ link 创建一个文件或文件夹的链接，这样可以在修改一处时影
 `sleep 1h`
 休眠 1 小时
 
-查看进程 PS(Process Shot)
-ps -ef
-查看特定进程
-ps -ef|grep xxxx
+## ps
 
-查看进程内存使用
-ps -aux
+(process status)查看进程
+
+- `-A`/`-e` (All)显示全部用户的进程，默认只显示当前用户
+- `-f` (full)显示全部字段信息
+
+`ps -ef|grep xxxx`
+查看特定进程
+
+`ps aux`
+查看进程内存使用情况
 
 查看进程端口使用情况
 netstat -ntlp
