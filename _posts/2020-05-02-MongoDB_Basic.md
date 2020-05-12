@@ -6,6 +6,7 @@ tags: MongoDB
 ---
 
 ![MongoDB](/assets/images/2020-05-02-MongoDB_Basic_1.jpeg)
+mongodb 适合字段不确定、相关数据集合在一个 json 中、不需要经常联表查询的数据。非常适合网络产生的数据特点，并且原生支持集群、分片，并发高、容量大、稳定性好。
 
 - mongodb 属于 NoSQL(Not only SQL)，提供的查询语句更加人性化
 - 与 mysql 可以类比，库(database)、表(table collection)、行(row document)。其中 mongodb 的行是一个 json 字符串，其中包含了每列名称和值。
