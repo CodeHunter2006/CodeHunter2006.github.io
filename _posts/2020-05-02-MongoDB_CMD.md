@@ -38,8 +38,20 @@ db.createUser(
 `db.auth('userName', 'dbName')`
 检查用户是否有权限操作某库，如果有则返回 1，否则返回 0
 
-## sh.status()
+## rs
 
+`rs.conf()`
+查看复制集各成员状态
+
+`rs.status()`
+查看复制集信息
+
+`rs.printSlaveReplicationInfo()`
+查看复制过程的延迟信息
+
+## sh
+
+`sh.status()`
 在 mongos 查看集群分片信息
 
 # 其他命令
