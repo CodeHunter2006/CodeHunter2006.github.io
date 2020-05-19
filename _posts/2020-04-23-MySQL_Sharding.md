@@ -30,3 +30,16 @@ tags: MySQL
 ## 可支持分区的引擎
 
 MyISAM、InnoDB 都支持分区。同一个表的所有分区必须用同一种引擎。
+
+- `show plugins;` 列表中显示`partition Active`表示支持分区
+
+## 分区类型
+
+1. RANGE 分区
+   给予一个给定连续区间的列值，把多行分配给分区
+2. LIST 分区
+   每个分区按照指定的离散值进行分区
+3. HASH 分区
+   用用户指定的表达式产生非负 HASH 值选择分区
+4. KEY 分区
+   类似 HASH 分区，由 MySQL 提供 Hash 函数
