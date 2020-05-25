@@ -63,6 +63,14 @@ log 相关
 使用前要先做一个种子，否则其实不随机。
 rand.Seed(time.Now().Unix())
 
+## regexp
+
+正则表达式类
+
+```Go
+var reRet []string = regexp.MustCompile(`pattern`).FindStringSubmatch(`string`)
+```
+
 ## sync.WaitGroup
 
 可以为多个 goroutine 设置统一起跑时机或统计统一结束时机。
