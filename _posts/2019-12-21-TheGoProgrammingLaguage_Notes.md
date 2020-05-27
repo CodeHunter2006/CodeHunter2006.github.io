@@ -183,6 +183,10 @@ PS: the buildin function copy is like memcpy in C++, it can copy source slice el
 
 In practice, the order is random, varying from one execution to the next. This is intentional; making the sequence vary helps force programs to be robust across implementations.
 
+The zero value for a map type is nil, that is, a reference to no hash table at all.
+
+Most operations on maps, including lookup, delete, len, and range loops, are safe to perform on a nil map reference, since it behaves like an empty map. But storing to a nil map causes a panic.
+
 ### Struct Embedding and Anonymous Fields
 
 In this section, we’ll see how Go’s unusual struct embedding mechanism lets us use one named struct type as ananonymous field of another struct type, providing a convenient syntactic shortcut so that a simple dot expression like x.f can stand for a chain of fields like x.d.e.f.
