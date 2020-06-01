@@ -5,7 +5,7 @@ date: 2020-05-24 23:00:00 +0800
 tags: book
 ---
 
-![MongoDB](/assets/images/2020-05-24-BehavioralEconomics_1.png)
+![BehavioralEconomics](/assets/images/2020-05-24-BehavioralEconomics_1.png)
 经济学遇上心理学，多一个角度看世界。
 ——孟涓涓教授(北京大学光华管理学院)
 

@@ -5,7 +5,7 @@ date: 2020-05-31 18:00:00 +0800
 tags: MQ
 ---
 
-![MongoDB](/assets/images/2020-05-31-Kafka_Basic_1.jpg)
+![Kafka](/assets/images/2020-05-31-Kafka_Basic_1.jpg)
 Apache Kafka 是一个分布式、开源消息队列(MQ message quere)系统，由 Scala 写成。可为网络服务提供一个高通量、低延迟的异步消息中间件。
 
 - Scala 也是基于 JVM，可以和 Java 混编
@@ -24,7 +24,7 @@ MQ 类似 Queue，符合 FIFO(First In First Out)规则，通常用于生产者�
 
 # 核心结构
 
-![MongoDB](/assets/images/2020-05-31-Kafka_Basic_2.jpeg)
+![Kafka](/assets/images/2020-05-31-Kafka_Basic_2.jpeg)
 
 - Topic(主题)
   消息按照 Topic 进行分类，在一个类型中进行生产、消费
@@ -37,7 +37,7 @@ MQ 类似 Queue，符合 FIFO(First In First Out)规则，通常用于生产者�
 - Broker(服务)
   Kafka 集群是由多个实例组成的，每个服务实例称为 Broker
 
-![MongoDB](/assets/images/2020-05-31-Kafka_Basic_3.jpeg)
+![Kafka](/assets/images/2020-05-31-Kafka_Basic_3.jpeg)
 
 - Partition(分区)
   为了实现扩展性，一个 Topic 可以分不到多个 Broker 上，每个 Broker 上对应这个 Topic 分配一个 Partition。每个 Partition 是一个有序队列，Partition 中的每条消息会分配一个 id(offset)。kafka 只能保证一个 Partition 中的消息顺序发给 Consumer，不保证一个 Topic(多个 Partition 间)的顺序。Kafka 集群会自动分散分配 Partition，一个 Broker 不会存储同一个 Topic 的多个 Partition，创建时会失败，这样可以更好的利用磁盘的吞吐量。
