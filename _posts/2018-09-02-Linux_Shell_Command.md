@@ -139,6 +139,11 @@ ctrl+shift+t
 查询命令帮助
 man xxx
 
+```bash
+# 查看容量最大的日志文件夹
+du . -h --max-depth=3|grep log
+```
+
 ## find
 
 查找文件
@@ -373,7 +378,7 @@ iptables -nv -L
 
 ## grep
 
-global regular expression print
+Globally search a Regular Expression and Print
 在文本、文件中查找符合通配符模式的文本行。
 
 `cat aaa | grep bbb`
@@ -434,9 +439,42 @@ global regular expression print
 
 相当于`grep -e`
 
+## awk
+
+awk 可以遍历文件或标准输入的每一行，进行处理，功能强大。这里只列出与 grep 配合取出指定位置值的功能。
+
+`awk 'BEGIN{ print "start" } pattern{ commands } END{ print "end" }' file`
+一个 awk 脚本通常由：BEGIN 语句块、能够使用模式匹配的通用语句块、END 语句块 3 部分组成，这三个部分是可选的。任意一个部分都可以不出现在脚本中，脚本通常是被 单引号 或 双引号 中。
+
+- `-F "xxx"`指定处理一行数据时的分割符，分割之后，可以用`$1`、`$2`...取得被分割后的每个子串
+
+- 假设有`test.log`文件内容如下：
+
+```log
+xxx,id:123,xxx
+xxx,id:456,xxx
+```
+
+- 执行命令`grep "id:" test.log|awk -F "id:" '{print $2}'|awk -F "," '{print $1}'`可以得到输出：
+  - `'{print $2}'`，表示取第一个`"id:"`分割符分割后的右半边
+  - `'{print $1}'`，表示取第一个`","`分符分割后的左半边
+
+```log
+123
+456
+```
+
+## head
+
+截取文件最前面一段
+
+`head xx.file`
+
+- `-n count` 设定显示行数
+
 ## tail
 
-截取文件后半截
+截取文件最后一段
 
 `tail 200 xxx.log`
 从 200 行向后截取
