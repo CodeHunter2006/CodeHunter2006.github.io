@@ -27,32 +27,53 @@ MQ 类似 Queue，符合 FIFO(First In First Out)规则，通常用于生产者�
 ![Kafka](/assets/images/2020-05-31-Kafka_Basic_2.jpeg)
 
 - Topic(主题)
-  消息按照 Topic 进行分类，在一个类型中进行生产、消费
-- Procucer(生产者)
+  消息按照 Topic 进行分类，在一个类型中进行生产、消费。
+- Producer(生产者)
   向 Topic 发送消息
 - Consumer(消费者)
   从 Topick 取消息消费。分为 push 和 pull 两种消费模型
-  - push 模式，也叫"发布订阅模式"，Consumer 先订阅指定的 Topic，当有新消息时，Kafka 主动将消息 push 给消费者客户端
+  - push 模式，也叫"发布订阅模式"，Consumer 先订阅指定的 Topic，当有新消息时，Kafka 主动将消息 push 给消费者客户端。
   - pull 模式，由 Consumer 主动拉数据。
 - Broker(服务)
-  Kafka 集群是由多个实例组成的，每个服务实例称为 Broker
+  Kafka Cluster(集群)是由多个实例组成的，每个服务实例称为 Broker
 
 ![Kafka](/assets/images/2020-05-31-Kafka_Basic_3.jpeg)
 
 - Partition(分区)
   为了实现扩展性，一个 Topic 可以分不到多个 Broker 上，每个 Broker 上对应这个 Topic 分配一个 Partition。每个 Partition 是一个有序队列，Partition 中的每条消息会分配一个 id(offset)。kafka 只能保证一个 Partition 中的消息顺序发给 Consumer，不保证一个 Topic(多个 Partition 间)的顺序。Kafka 集群会自动分散分配 Partition，一个 Broker 不会存储同一个 Topic 的多个 Partition，创建时会失败，这样可以更好的利用磁盘的吞吐量。
-- Partition 副本
+  - Offset(偏移量)
+    在 Producer 发送一条消息到 Kafka 时，会产生一个 Offset，表示在一个 P artition 中的唯一偏移量，这个值在一个 Partition 中的自增的
+  - 订阅的最小粒度是 Topic，不可以订阅 Partition。Consumer 在每个 Partition 上的当前 offset 存储在 Zookeeper 中。
+  - Partition 中存储的每条数据包含：index(索引, offset)、event log(二进制内容)、timeIndex(时间索引)
+  - Partition 中的数据存储在磁盘中，可以按照 offset(index)、时间段进行查询。
+- Replicated Partition(副本分区)
   为了实现高可用、避免单个 Broker 宕机后无法使用的情况，一个 Partition 可以有多个副本。各个副本与原 Partition 以及各个副本间不允许在同一个 Broker 上，创建时会失败。往同一个 Topic 发送消息时，默认以轮训的方式发到 Partition，也可以自己指定 Hash 方式确定 Partition。
-  - 订阅的最小粒度是 Topic，不可以订阅 Partition
-  - Partition 中存储的每条数据包含：index(索引)、log(内容)、timeIndex(时间索引)
 - Leader
   原 Partition 所在的 Brokder 也叫 Leader，负责对应 Partition 的读写
 - Follwer
   副本 Partition 所在的 Broker 也叫 Follwer，副本在原 Partition 失效后起作用
+- Controller
+  在集群中负责管理的 Broker，负责分配 Partition、监控 Broker 失效
 - Zookeeper
   分布式文件系统，Zookeeper 集群可以为上面各个角色保存 meta data(元数据)，来保证系统可用性。可以通过 Zookeeper 查询到 Kafka 的各种信息。
+  ![Kafka](/assets/images/2020-05-31-Kafka_Basic_4.png)
+- Consumer Group(消费组)
+  Consumer 并不是独立存在的，一个 Consumer 必定属于一个 Consumer Group。有时，单个 Consumer 消费速度不足，可以通过设定几个 Consumner 在一个 Consumer Group 中。
+  - 一个 Consumer Group 有一个 group.id，是唯一标识
+  - 一个 Consumer Group 可以订阅多个 Topic，但该 Topic 的一个 Partition 只能分配给一个 Consumer 实例消费
+  - 不同的 Consumer Group 可以消费同一个 Topic 下的同一 Partition
+  - 一个 Consumer Group 中 Consumer 的实例数不应超过 Topic 的 Partition 数，超过了不会起作用
+  - 如果已经分配了一个 Topic 的 Partition 和一个 Consumer Group 的 Consumer 绑定，但是这个 Consumer Group 宕机了，则会自动进行 Rebalance 动作，分配一个新的该 Consumer Group 下的 Consumer
 
 # 性能和特性
+
+## 处理速度
+
+- 每个 Broker 每秒可读取百万次
+
+## 容量
+
+- 每个 Broker 可存储上千个 Partition
 
 ## Topic 有序机制
 
