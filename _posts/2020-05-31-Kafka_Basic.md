@@ -104,3 +104,33 @@ Producer 启动参数要有 Kafka 集群节点
 
 Consumer 启动参数需要填 Zookeeper，在 Zookeeper 会自动保存该 Consumer 的消费到的 offset
 `./kafka-console-consumer.sh --zookeeper node01:2181,node02:2181,node03:2181 --topic test1`
+
+# 应用场景
+
+## 推/拉模式
+
+### 推
+
+### 拉
+
+### 先推后拉
+
+# 常见问题
+
+### Consumer 重复收到消息
+
+- 问题现象
+  Consumer 有规律重复处理消息，大概每隔 30 秒重复处理一次消息
+- 原因分析
+  Consumer Group 中的另一个 Consumer 原本负责其中一个 Partition 中的消息，但是这个 Consumer 处理一条数据结束时崩溃，没有给 Kafka 返回 ACK。Consumer 宕机后，Kafka 进行 Rebalance，分配到发生重复收消息的那个 Consumer 上，重复处理了消息。而宕机的 Consumer 被 Supervisor 自动重启，然后再次 Rebalance、处理消息，所以有规律的重复。
+- 解决方案
+  修正代码，不再宕机即可
+
+### Consumer 处理消息速度很慢
+
+- 问题现象
+  Consumer 处理消息速度慢、吞吐量低，从 log 查看是从 Kafka 拉取数据较慢
+- 原因分析
+  Consumer 消费消息时缓冲时间设定过短，导致网络交互次数过多，严重影响吞吐率
+- 解决方案
+  设定缓冲时间为 1 秒，即可解决
