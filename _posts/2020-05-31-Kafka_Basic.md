@@ -67,6 +67,22 @@ MQ 类似 Queue，符合 FIFO(First In First Out)规则，通常用于生产者�
 
 # 性能和特性
 
+- 优点
+  - 通过消息队列解偶
+  - 可实现 ETL(Extract-Transform-Load)/CDC(Change-Data-Capture)架构
+  - 可消化海量数据
+  - 高吞吐率
+  - 基于硬盘的存储
+  - 多个 Producer/Consumer 并行处理
+  - 高可伸缩性(集群横向扩展)
+  - 容错性(一致性保证机制)
+  - 低延迟
+  - 高可配置性
+  - 可实现 Backpressure 反向限流机制
+- 缺点
+  - 异步机制不易理解，容易出设计漏洞
+  - 并不适合真正"实时响应"的低延迟系统
+
 ## 处理速度
 
 - 每个 Broker 每秒可读取百万次
@@ -74,19 +90,38 @@ MQ 类似 Queue，符合 FIFO(First In First Out)规则，通常用于生产者�
 ## 容量
 
 - 每个 Broker 可存储上千个 Partition
+- 可以设置通用的消息保留条件，可以设定保存多大容量之内的消息或保存多长时间之内的消息
+- 也可以为每个 Topic 可以设置消息保留条件
 
 ## Topic 有序机制
 
 同一个 Topic 的多个 Partition 间的顺序不能保证，如果想整个 Topic 的顺序保证，那只能建一个分区。
 如果想保证特定的一些消息有序，可以利用 Hash 等方法，将这些消息发往同一个 Partition，这样无论 Consumer 如何消费，都能保证这些消息被有序消费。
 
+## 一致性保证机制
+
+- At-Least-Onece 最少一次，可能重复
+- At-Most-Onece 最多一次，可能丢失
+- Exactly-Onece 精确一次，不多不少
+
 ## ACK 应答机制
 
-Producer 向 Kafka 发送数据后，Kafka 会以下面三种方式应答:
+Producer 向 Kafka 发送消息后，Kafka 会以下面三种方式应答:
 
-- 0, 生产数据不需要 ACK。速度较快，数据可能丢失(例如 Broker 宕机)
-- 1, Leader 写入磁盘后给响应，速度一般，可能数据重复。
-- -1, Follwer 都写成功后给响应，速度慢，可能数据重复。
+- 0, 生产数据不需要 ACK。速度较快，数据可能丢失(例如 Broker 宕机)。属于 AT-MOST-ONECE
+- 1, Leader 写入磁盘后给响应，速度一般，可能数据重复。属于 AT-LEAST-ONECE
+- -1, Follwer 都写成功后给响应，速度慢，可能数据重复。属于 AT-LEAST-ONECE
+
+Kafka 向订阅的 Consumer 发送消息，符合 AT-LEAST-ONECE 机制。Consumer 应答后则认为收到了消息，否则会重试。
+
+- Kafka 原生不提供 Exactly-Onece 机制，但是可以使用 KAFKA STREAMS 等第三方库 实现。Exactly-Onece 机制的关键是对每个消息进行唯一标识并判断是否重复，由 Kafka 保证 At-Least-Onece。
+
+## 权衡组合
+
+通常 Kafka 集群有下面两种使用模式：
+
+1. RELIABILITY(高可靠)+CONSISTENCY(一致性)
+2. AVAILABILITY(高可用)+HIGH-THROUGHPUT(高吞吐量)+LOW-LATENCY(低延迟)
 
 # 常用命令
 
