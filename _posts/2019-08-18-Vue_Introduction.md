@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Vue介绍"
+title: "Vue 介绍"
 date: 2019-08-18 23:00:00 +0800
 tags: Vue Javascript
 ---
