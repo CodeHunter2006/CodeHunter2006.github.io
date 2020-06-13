@@ -140,16 +140,6 @@ Producer 启动参数要有 Kafka 集群节点
 Consumer 启动参数需要填 Zookeeper，在 Zookeeper 会自动保存该 Consumer 的消费到的 offset
 `./kafka-console-consumer.sh --zookeeper node01:2181,node02:2181,node03:2181 --topic test1`
 
-# 应用场景
-
-## 推/拉模式
-
-### 推
-
-### 拉
-
-### 先推后拉
-
 # 常见问题
 
 ### Consumer 重复收到消息
