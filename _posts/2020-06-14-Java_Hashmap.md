@@ -78,3 +78,16 @@ int threshold;                                      // 判断是否需要调整H
 
 * 链表重构为红黑树的条件
   在新增一个元素时，链表长度达到 8 同时 HashMap 容量已达到 64 时，才会重构。如果链表长度达到 8 但是 HashMap 容量不足 64，则会触发 bucket 扩容。
+
+# 线程安全的 HashMap
+
+HashMap 并非线程安全，在多线程情况下链表操作可能引起死循环。所以就有了三种线程安全的 HashMap：
+Collections.synchronizedMap(map)、Hashtable、ConcurrentHashMap
+
+- Collections.synchronizedMap(map)是直接用 synchronized 包装过的线程安全的 Map，而 Hashtable 是在一些可能引起线程安全问题的特定方法增加了 synchronized 锁。
+
+- ConcurrentHashMap 是专门做了线程安全优化的 HashMap，构造比较复杂
+  - 每一个 slot 加一个锁，这样发生锁竞争的情况就会很少
+  - 利用 LongAdder 原理实现了高并发时的 size 计算，相比锁和 CAS 效率更高
+  - 定义了一些特殊节点如：ForwardingNodes(转移节点)、ReservationNodes(瞬态节点)，用于大并发下进行扩容操作
+  - 通过精妙的设计可以多个线程一起参与扩容过程，减少时间消耗
