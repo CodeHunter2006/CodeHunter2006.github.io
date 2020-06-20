@@ -22,7 +22,7 @@ tags: Vue Javascript
   - Vue 对象由基本的 Dom 对象和 Vue Wrapper 组成。通常 Javascript 数组用`xxxArray.length = 0;`置空，但是如果`xxxArray`是一个 Vue 对象`.length = 0`只能将 Dom 对象部分置空，而其 Wrapper 部分并没有被置空，并且监听它变化的组件也无法获知变化。在这个数组被填充内容并错误的"置空"后，Dom 对象和 Vue Wrapper 就产生了差异。
   - Element 的 Table 组件显示时，会根据要显示的内容进行宽度计算、排版，这时，由于上面数组长度的不一致性，导致在某个算法中进行了递归循环渲染，进而导致卡死。
 - 解决方案
-  - 对 Vue 对象操作时，不要自己直接修改 Dom 属性，要利用 Vue 提供的重写过的函数操作。例如对数组置空，可以用`xxxArray.splice(0, xxxArray.length);`，因为 Vue 重写了 Array 的 splice 函数；也可以用`xxxArray = [];`，因为 Vue 重写了 Array 的 set 函数。
+  - 对 Vue 对象操作时，不要自己直接修改 Dom 属性，要利用 Vue 提供的重写过的函数操作。例如对数组置空，可以用`xxxArray.splice(0, xxxArray.length);`，因为 Vue 重写了 Array 的 splice 函数；也可以用`xxxArray = [];`，因为 Vue 重写了 Array 的 set 函数。其中`splice`性能更好，可以继续利用原有数组空间。
   - 某些情况下，可能会写出造成递归循环的错误逻辑代码。例如：A 监听 B、B 监听 C，这时在 A 监听 B 的代码中有修改 C 的代码，就可能造成循环。在写代码时要注意，或分析问题时要考虑这种情况。
 
 PS: 网上有一些文章，给 Element 的 Table 设置 width 属性来避免`ResizeObserver...`错误，这种方法虽然可以避免计算宽度从而解决问题，但是没有抓住实质，并且浪费了组件本身自动调节宽度的功能。

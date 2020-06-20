@@ -155,7 +155,7 @@ du . -h --max-depth=3|grep log
 
 ## touch
 
-更新文件时间
+更新文件时间，如果不存在则创建文件。
 
 `touch xxx`
 更新 xxx 的修改时间为当前时间
