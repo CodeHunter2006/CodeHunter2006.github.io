@@ -2,7 +2,7 @@
 layout: post
 title: "《囚徒健身》笔记"
 date: 2020-06-20 23:00:00 +0800
-tags: Healthy
+tags: Healthy book
 ---
 
 ![囚徒健身](/assets/images/2020-06-20-Convict_Conditioning_1.jpg)
