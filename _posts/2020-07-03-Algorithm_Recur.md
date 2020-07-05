@@ -7,7 +7,7 @@ tags: Algorithm Leetcode
 
 ## 剑指 Offer 62. 圆圈中最后剩下的数字
 
-[题目](https://leetcode-cn.com/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/)、官方解答[数学 + 递归](https://leetcode-cn.com/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/solution/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-by-lee/)
+[题目](https://leetcode-cn.com/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/)、官方解答[数学 + 递归](https://leetcode-cn.com/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/solution/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-by-lee/)、[百度百科:约瑟夫环问题](https://baike.baidu.com/item/%E7%BA%A6%E7%91%9F%E5%A4%AB%E9%97%AE%E9%A2%98/3857719?fr=aladdin)
 
 - 直观思路
   以输入的参数构建一个链表结构，按照题目步骤要求逐个删除并打印节点
