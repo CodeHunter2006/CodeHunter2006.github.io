@@ -2,7 +2,7 @@
 layout: post
 title: "十个网球健康饮食理论"
 date: 2019-02-13 22:00:00 +0800
-tags: Healty
+tags: Healthy
 ---
 
 ![王陇德](/assets/images/2019-02-13-Healthy_ten_tennis_theory_1.jpeg)
