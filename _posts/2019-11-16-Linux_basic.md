@@ -10,7 +10,7 @@ tags: Linux
 
 # Kernel, Shell, Bash
 
-通常我们说的 Linux 其实就是"Linux Kernel(内核)"的简称，它提供了 Linux 最核心的功能。而`Shell`直译为外壳，它基于 Linux Kernel，为用户提供操作 Linux 的各种命令接口或者为程序提供函数接口。`Bash`是 Linux 自带的一个命令行工具软件，提供命令行界面来执行`Shell`命令或其它可可执行文件。
+通常我们说的 Linux 其实就是"Linux Kernel(内核)"的简称，它提供了 Linux 最核心的功能。而`Shell`直译为外壳，它基于 Linux Kernel，为用户提供操作 Linux 的各种命令接口或者为程序提供函数接口。`Bash`是 Linux 自带的一个终端(terminal)命令行工具软件，提供命令行界面来执行`Shell`命令或其它可可执行文件。
 
 # 文件
 
@@ -49,6 +49,7 @@ cron 是 Linux 自带的 service 提供定时执行命令的功能，类似 Wind
 ```
 
 - cron 可执行文件位于`/usr/sbin/crond`
+- 不同的用户配置不同，root 用户用`sudo crontab -e`进入配置
 
 - 可以用下面语句对 cron 进行服务操作
   /sbin/service crond start //启动服务
