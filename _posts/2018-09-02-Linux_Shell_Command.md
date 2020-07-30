@@ -405,6 +405,9 @@ Globally search a Regular Expression and Print
 - `-l` 只列出匹配的文件，不显示具体行
 - `--color=auto` 搜索到的文字高亮显示
 
+`grep -e '(xxx|yyy)'`
+查询的两个内容为`或`的关系
+
 正则表达式
 
 - 字符匹配：
