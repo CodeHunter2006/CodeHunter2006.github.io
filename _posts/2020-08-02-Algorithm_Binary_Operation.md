@@ -110,3 +110,24 @@ func singleNumber(nums []int) int {
     return res
 }
 ```
+
+- 改进算法：(有限状态自动机)
+  1. 按照上面的位变化可以看出，每个位实际上是在三个数字间变化：0->1->2->0...
+  2. 每当新的值是 1 时，原有状态就跳转到下一状态；而新的值是 0 时保持原状态不变化
+  3. 由于二进制只有两个状态 0 1，无法表示上面的三个状态，所以考虑用两个二进制位来表示三个状态
+  4. 其中一个叫低位 low，一个叫高位 high，那么上面三个状态变化表示为：00->01->10->00...
+  5. 要计算 low 的当前值，需要结合新值 num、高位值 high，按照 & ^ 的逻辑，可表示为公式`low = low ^ num & ~high`
+  6. 经分析，计算 high 的公式和 low 的公式一致`high = high ^ num & ~low`
+  7. 因为我们要对所有位同时独立计算，所以用 32 位整型 lows 和 highs 表示多个位
+  8. 因为答案只有一个数，对应的位状态只会是 1，所以最后只需要返回 lows 就可以了
+
+```Go
+func singleNumber(nums []int) int {
+    lows, highs := 0, 0
+    for _, n := range nums {
+        lows = lows ^ n & ^highs
+        highs = highs ^ n & ^lows
+    }
+    return lows
+}
+```
