@@ -127,6 +127,13 @@ select {
 }
 ```
 
+## unsafe
+
+底层指针相关的操作
+
+`unsafe.Sizeof(x)`
+传入任意变量，返回该变量对应类型所占字节数
+
 ## golang.org/x/text
 
 实现了各种文本编码、字符集相关操作
