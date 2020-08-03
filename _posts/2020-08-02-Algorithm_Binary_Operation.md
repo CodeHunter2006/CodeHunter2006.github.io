@@ -52,7 +52,7 @@ func singleNumbers(nums []int) []int {
 
 - 改进点：
   1. 利用`lowbit(x)`优化
-     `lowbit(x)`函数的功能是返回某个二进制数最右边的一个 1 所在的位置对应的数，公式为`lowbit(x) = x & -x = x & (-x+1)`
+     `lowbit(x)`函数的功能是返回某个二进制数最右边的一个 1 (可以算是"特征位"吧)所在的位置对应的数，公式为`lowbit(x) = x & -x = x & (-x+1)`
      自己简单用二进制例子推导一下(如 0010 & 1110 = 0010)，会发现这就是补码的特性，可以代替上面查找第一个 1 所在位置的算法。
   2. 在特定位置判断时，可以直接使用`!= 0`进行比较，效率高一点点
   3. 在运算过程中用变量替代 slice，效率又能高一点点
@@ -75,5 +75,38 @@ func singleNumbers(nums []int) []int {
     }
 
     return []int{a, b}
+}
+```
+
+## 剑指 Offer 56 - II. 数组中数字出现的次数 II
+
+[题目](https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-ii-lcof/)、[官方解答](https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-ii-lcof/solution/mian-shi-ti-56-ii-shu-zu-zhong-shu-zi-chu-xian-d-4/)
+
+- 直观思路
+  利用 map 统计数字出现的次数，将出现三次的都剔除掉
+- 改进思路
+  本题如果限定和上题一样的条件`时间复杂度O(n)，空间复杂度O(1)`，那就不能用 map。可以利用每个 bit 会出现三次的特点，对所有位置的 bit 进行统计。由于 bit 数量是固定的，所以空间复杂度是`O(1)`
+
+```Go
+func singleNumber(nums []int) int {
+    const SIZE = 32
+    bitSli := make([]int, SIZE, SIZE)
+
+    for _, n := range nums {
+        for i := 0; i < SIZE; i++ {
+            if (n & (1 << i)) != 0 {
+                bitSli[i]++
+            }
+        }
+    }
+
+    res := 0
+    for i := range bitSli {
+        if bitSli[i] % 3 != 0 {
+            res |= 1 << i
+        }
+    }
+
+    return res
 }
 ```
