@@ -5,7 +5,7 @@ date: 2020-06-05 22:00:00 +0800
 tags: Server
 ---
 
-![Fitness](/assets/images/2020-06-05-Network_Protocol_1.jpeg)
+![network](/assets/images/2020-06-05-Network_Protocol_1.jpeg)
 
 # 网络分层模型
 
@@ -29,7 +29,46 @@ tags: Server
 
 # HTTP(HyperText Transfer Protocol)
 
-超文本传输协议
+超文本传输协议。
+一种无状态的，以请求/应答方式运行的协议，它使用可扩展的语义和自描述消息格式，与基于网络的超文本信息系统灵活的互动。
+
+## HTTP 报文格式
+
+![HTTP](/assets/images/2020-06-05-Network_Protocol_10.png)
+HTTP 协议的请求报文和响应报文的结构基本相同
+
+- 三大部分组成
+  - 起始行(start line): 描述请求或响应的基本信息
+    `GET /index.html HTTP/1.1`
+  - 头部字段集合(header): 使用 key-value 形式更详细地说明报文
+    `Connection:keep-alive`
+  - 消息正文(entity): 实际传输的数据，不一定是纯文本，可以是图片、视频等二进制数据
+    `<html>...`
+
+* 请求行报文格式：
+  `METHOD[空格]URI[空格]VERSION[换行]`
+  - 请求方法：GET/HEAD/PUT/POST，表示对资源的操作
+  - 请求目标：通常是一个 URI，标记了请求方法要操作的资源
+  - 版本号：表示报文使用的 HTTP 协议版本
+
+- 响应行报文格式：
+  `VERSION[空格]STATUS CODE[空格]REASON[换行]`
+  - 版本号：表示报文使用的 HTTP 协议版本
+  - 状态码：一个三位数，用数码的形式表示处理结果
+  - 原因：作为状态码的补充，帮助人理解原因
+
+* HTTP 头字段
+  头字段是 key-value 的形式，key 和 value 间用':'分割，最后用 CRLF 表示字段结束。头字段除了标准的字段如 Host、Connection 等，还可以添加任意自定义头，这样可以扩展出无限的可能性。
+  - 头字段注意事项：
+    - 字段名不区分大小写，名称中不能有空格，可以使用连字符'-'，不可以使用下划线'\_'，字段名后面要紧接':'不能有空格，而':'后的字段值前可以加多个空格
+    - 字段的顺序没有意义，排列顺序不影响语义
+    - 字段原则上不能重复，除非这个字段本身的语义允许，例如 Set-Cookie
+
+- 常用头字段
+  HTTP 协议的头字段基本分为四大类
+  - 请求字段：请求头中的字段，如 Host(标识链接是跟哪个服务建立的)，Referer(当前请求来源，可用于防盗图)
+  - 响应字段：响应头中的字段，如 Server(服务器类型，如 Nginx、Apache)
+  - 通用字段：在请求头和响应头都可以出现，如 Content-type(当前报文的数据格式，如 Json、Html)，Connection
 
 ## 一个 HTTP 请求流程
 
