@@ -27,6 +27,33 @@ tags: Linux
 `bg %###`
 在后台继续运行暂停的进程。如果要退出 terminal 时仍然运行后台进程，进程的输出要重定向，例如 xxx >>tmp.log
 
+## 硬件相关
+
+### fdisk
+
+管理磁盘，进行分区、格式化等操作
+
+`fdisk -l`
+列出外围设备的分区表情况
+
+### mount
+
+将磁盘分区挂载到 Linux 的一个文件夹下
+
+`mount -t vfat /dev/hdb5 /mnt/folder`
+将磁盘分区`/dev/hdb5`以`vfat`格式挂载到`/mnt/folder`文件夹
+
+- `-t` format 指定格式
+
+### df
+
+disk file system，查看磁盘和文件系统的信息，磁盘容量、挂载文件夹位置等
+
+`df -h`
+显示磁盘信息
+
+- `-h` human，以人类易读的方式显示磁盘容量
+
 ## 显示相关
 
 `history [n]`
