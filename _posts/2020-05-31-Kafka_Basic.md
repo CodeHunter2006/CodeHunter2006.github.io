@@ -31,7 +31,7 @@ MQ 类似 Queue，符合 FIFO(First In First Out)规则，通常用于生产者�
 - Producer(生产者)
   向 Topic 发送消息
 - Consumer(消费者)
-  从 Topick 取消息消费。分为 push 和 pull 两种消费模型
+  从 Topic 取消息消费。分为 push 和 pull 两种消费模型
   - push 模式，也叫"发布订阅模式"，Consumer 先订阅指定的 Topic，当有新消息时，Kafka 主动将消息 push 给消费者客户端。
   - pull 模式，由 Consumer 主动拉数据。
 - Broker(服务)
@@ -40,10 +40,11 @@ MQ 类似 Queue，符合 FIFO(First In First Out)规则，通常用于生产者�
 ![Kafka](/assets/images/2020-05-31-Kafka_Basic_3.jpeg)
 
 - Partition(分区)
-  为了实现扩展性，一个 Topic 可以分不到多个 Broker 上，每个 Broker 上对应这个 Topic 分配一个 Partition。每个 Partition 是一个有序队列，Partition 中的每条消息会分配一个 id(offset)。kafka 只能保证一个 Partition 中的消息顺序发给 Consumer，不保证一个 Topic(多个 Partition 间)的顺序。Kafka 集群会自动分散分配 Partition，一个 Broker 不会存储同一个 Topic 的多个 Partition，创建时会失败，这样可以更好的利用磁盘的吞吐量。
+  为了实现扩展性，一个 Topic 可以分布到多个 Broker 上，每个 Broker 上对应这个 Topic 分配一个 Partition。每个 Partition 是一个有序队列，Partition 中的每条消息会分配一个 id(offset)。kafka 只能保证一个 Partition 中的消息顺序发给 Consumer，不保证一个 Topic(多个 Partition 间)的顺序。Kafka 集群会自动分散分配 Partition，一个 Broker 不会存储同一个 Topic 的多个 Partition，创建时会失败，这样可以更好的利用磁盘的吞吐量。
   - Offset(偏移量)
-    在 Producer 发送一条消息到 Kafka 时，会产生一个 Offset，表示在一个 P artition 中的唯一偏移量，这个值在一个 Partition 中的自增的
+    在 Producer 发送一条消息到 Kafka 时，会产生一个 Offset，表示在一个 Partition 中的唯一偏移量，这个值在一个 Partition 中的自增的
   - 订阅的最小粒度是 Topic，不可以订阅 Partition。Consumer 在每个 Partition 上的当前 offset 存储在 Zookeeper 中。
+  - pull 的最小单位也是 Topic，一般根据range策略将 Partition 分配给 Consumer。Partition 按数字排序、Consumer 按字母顺序排序，然后整除分配。
   - Partition 中存储的每条数据包含：index(索引, offset)、event log(二进制内容)、timeIndex(时间索引)
   - Partition 中的数据存储在磁盘中，可以按照 offset(index)、时间段进行查询。
 - Replicated Partition(副本分区)
