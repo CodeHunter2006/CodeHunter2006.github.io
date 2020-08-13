@@ -28,6 +28,28 @@ Go 常用包的功能，及注意点
 `ioutil.ReadFile`
 简易读取文件
 
+`ioutil.ReadDir`
+读出文件夹中的子文件列表，列表按照名称排序，其中有可能包含文件夹元素
+
+## bufio
+
+可以对 IO 进行方便的遍历
+
+```Go
+    // 初始化
+		scanner := bufio.NewScanner(file)
+		for scanner.Scan() {
+      // 遍历每一行文本
+			line := scanner.Text()
+			log.Println(line)
+		}
+
+    // 遍历结束后，判断是否由于 error 导致了结束
+		if err := scanner.Err(); err != nil {
+			return err
+		}
+```
+
 ## log
 
 log 相关
@@ -87,6 +109,12 @@ var reRet []string = regexp.MustCompile(`pattern`).FindStringSubmatch(`string`)
 提供时间日期相关操作
 
 - 如果想在某个时间基础上减掉一段时间，可以用 Add 负数的方式。
+
+`t := time.Parse("2006-01-02 15:04:05", str)`
+将字符串按照模版字符串的格式解析为 time.Time 对象
+
+- 其中模板字符串比较特殊，必须是指定的常量或`"2006-01-02 15:04:05"`这个值的变式。
+- 这里精度只能到秒，毫秒、微秒、纳秒可以用简单的字符串转换完成解析。
 
 ### ticker
 
