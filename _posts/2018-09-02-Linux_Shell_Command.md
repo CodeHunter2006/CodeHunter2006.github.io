@@ -141,6 +141,9 @@ insmod
 - `-t` 按时间排序
 - `-v` 反向排序
 
+`ls xxx*`
+linux 很多命令输入文件名时都可以用通配符`*`，默认以字符串顺序排列
+
 ## ll
 
 相当于`ls -l`
@@ -418,6 +421,7 @@ Globally search a Regular Expression and Print
 在 xxx.xx 文件中查匹配`test.*`正则表达式的行，其中 xxx.xxx 文件名也可以使用通配符`*`
 
 - `-v` invert-match，查找没有出现目标文本的内容
+- `-h` 在结果中不添加文件名
 - `-o` --only-matching，只输出完全匹配模式的部分
 - `-A n` add，增加匹配行后 n 行的显示
 - `-B n` before，增加匹配行前 n 行的显示
@@ -431,9 +435,6 @@ Globally search a Regular Expression and Print
 - `-r` recursive，递归搜索自文件夹
 - `-l` 只列出匹配的文件，不显示具体行
 - `--color=auto` 搜索到的文字高亮显示
-
-`grep -e '(xxx|yyy)'`
-查询的两个内容为`或`的关系
 
 正则表达式
 
@@ -471,6 +472,9 @@ Globally search a Regular Expression and Print
 ## egrep
 
 相当于`grep -e`
+
+`egrep -e '(xxx|yyy)'`
+查询的两个内容为`或`的关系
 
 ## awk
 
@@ -514,6 +518,9 @@ xxx,id:456,xxx
 
 `tail -20f xxx.log`
 截取最后 20 行
+
+`tail -f xxx.log`
+对最后的 log 内容保持监控
 
 ## head
 
