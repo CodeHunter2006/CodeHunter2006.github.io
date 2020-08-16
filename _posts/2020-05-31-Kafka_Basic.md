@@ -44,7 +44,7 @@ MQ 类似 Queue，符合 FIFO(First In First Out)规则，通常用于生产者�
   - Offset(偏移量)
     在 Producer 发送一条消息到 Kafka 时，会产生一个 Offset，表示在一个 Partition 中的唯一偏移量，这个值在一个 Partition 中的自增的
   - 订阅的最小粒度是 Topic，不可以订阅 Partition。Consumer 在每个 Partition 上的当前 offset 存储在 Zookeeper 中。
-  - pull 的最小单位也是 Topic，一般根据range策略将 Partition 分配给 Consumer。Partition 按数字排序、Consumer 按字母顺序排序，然后整除分配。
+  - pull 的最小单位也是 Topic，一般根据 range 策略将 Partition 分配给 Consumer。Partition 按数字排序、Consumer 按字母顺序排序，然后整除分配。
   - Partition 中存储的每条数据包含：index(索引, offset)、event log(二进制内容)、timeIndex(时间索引)
   - Partition 中的数据存储在磁盘中，可以按照 offset(index)、时间段进行查询。
 - Replicated Partition(副本分区)
@@ -87,6 +87,7 @@ MQ 类似 Queue，符合 FIFO(First In First Out)规则，通常用于生产者�
 ## 处理速度
 
 - 每个 Broker 每秒可读取百万次
+- 每个 Broker 每秒写入可达数万条
 
 ## 容量
 
@@ -112,6 +113,9 @@ Producer 向 Kafka 发送消息后，Kafka 会以下面三种方式应答:
 - 0, 生产数据不需要 ACK。速度较快，数据可能丢失(例如 Broker 宕机)。属于 AT-MOST-ONECE
 - 1, Leader 写入磁盘后给响应，速度一般，可能数据重复。属于 AT-LEAST-ONECE
 - -1, Follwer 都写成功后给响应，速度慢，可能数据重复。属于 AT-LEAST-ONECE
+
+- 设置为 1，响应为 OK 的情况下，消息为什么会丢失？
+  当 Leader 写入后返回 OK 的响应，但是没来得及同步 Follwer 就挂掉了，这时消息就会丢失
 
 Kafka 向订阅的 Consumer 发送消息，符合 AT-LEAST-ONECE 机制。Consumer 应答后则认为收到了消息，否则会重试。
 
@@ -160,3 +164,12 @@ Consumer 启动参数需要填 Zookeeper，在 Zookeeper 会自动保存该 Cons
   Consumer 消费消息时缓冲时间设定过短，导致网络交互次数过多，严重影响吞吐率
 - 解决方案
   设定缓冲时间为 1 秒，即可解决
+
+### Producer 生产消息速度慢
+
+- 为了避免宕机时丢失消息，将写入缓冲区条数设置为 1 条，原本没有问题，但是当并发较大时，频繁写入磁盘导致 kafka 吞吐率太低。
+  - 优化方法：将写入数据缓冲区条数改大，发送者发送前记录 log 以便极端情况下恢复丢失数据
+
+* 生产者在大并发下每秒生产上万条数据，但是数据始终没有发到 kafka 里，数据积压造成丢失
+  - kafka 在多个 Partition 副本的情况下，设置了 ACK 应答模式为 -1，要所有 Partition 副本都写入成功后才返回成功响应，导致写入过慢。改为 1 后修复问题。
+  - Producer 处理过程中要留下 log，以便极端情况下可以分析 log，重发 kafka
