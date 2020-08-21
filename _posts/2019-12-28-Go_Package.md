@@ -7,6 +7,11 @@ tags: Go
 
 Go 常用包的功能，及注意点
 
+## errors
+
+`errors.New("this is an error")`
+新建一个 error 对象
+
 ## flag
 
 用于获取命令行参数，同时可以设置默认值
