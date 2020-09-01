@@ -504,6 +504,21 @@ xxx,id:456,xxx
 456
 ```
 
+## wc
+
+word, line, character, and byte count
+
+`wc -l filePath`
+统计文件的行数
+
+`cat tmp.log|wc -l`
+统计输入的文本的行数
+
+- `-l` line 统计输入的行数
+- `-c` character 统计字节数
+- `-m` multibyte characters 如果系统本地化支持多字节字符集，则统计字符数，否则退化为`-c`
+- `w` word 统计单词数
+
 ## head
 
 截取文件最前面一段
