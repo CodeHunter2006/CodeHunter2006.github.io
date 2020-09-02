@@ -312,8 +312,20 @@ df -h
 `du -s /usr/* |sort -nr`
 查看指定文件夹下各文件和文件夹容量高，并按从大到小排列，单位(KB)
 
-`top`
-查看 CPU 使用情况
+## top
+
+查看 CPU 使用情况，进入交互模式
+
+- `q` quit 退出
+- `s` 改变画面更新频率
+- `l` 关闭或开启第一部分第一行 top 信息的表示
+- `t` 关闭或开启第一部分第二行 Tasks 和第三行 Cpus 信息的表示
+- `m` 关闭或开启第一部分第四行 Mem 和 第五行 Swap 信息的表示
+- `N` 以 PID 的大小的顺序排列表示进程列表
+- `P` 以 CPU 占用率大小的顺序排列进程列表
+- `M` 以内存占用率大小的顺序排列进程列表
+- `h` 显示帮助
+- `n` 设置在进程列表所显示进程的数量
 
 - `-d num`设置刷新间隔，单位秒
 - `-n num`设置刷新采样 num 次后退出
@@ -423,6 +435,9 @@ Globally search a Regular Expression and Print
 `grep -e "test.*" xxx.xx`
 在 xxx.xx 文件中查匹配`test.*`正则表达式的行，其中 xxx.xxx 文件名也可以使用通配符`*`
 
+`grep -vFf tmp1.txt tmp2.txt`
+在 tmp2.txt 中查找 tmp1.txt 的每一行，输出没有找到的部分。
+
 - `-v` invert-match，查找没有出现目标文本的内容
 - `-h` 在结果中不添加文件名
 - `-o` --only-matching，只输出完全匹配模式的部分
@@ -437,6 +452,8 @@ Globally search a Regular Expression and Print
 - `-d` directory，以文件夹为目标进行搜索
 - `-r` recursive，递归搜索自文件夹
 - `-l` 只列出匹配的文件，不显示具体行
+- `-f` file pattern, 将文件中每行作为一个 pattern 用来做后续比较
+- `-F` fixed strings, 将 pattern 理解为固定字符串
 - `--color=auto` 搜索到的文字高亮显示
 
 正则表达式
