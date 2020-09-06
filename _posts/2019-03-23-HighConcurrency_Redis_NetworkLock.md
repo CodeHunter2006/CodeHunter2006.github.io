@@ -5,7 +5,7 @@ date: 2019-03-23 10:00:00 +0800
 tags: HighConcurrency Redis
 ---
 
-PS: Redis 官网推荐了一个 Go 实现的开源网络锁[redsync](https://github.com/go-redsync/redsync)，实现了所有网络锁要点、接口比较友好，本文可以作为实现思路的参考。
+PS: Redis 官网提出[Redlock 算法](http://www.redis.cn/topics/distlock.html)，并推荐了一个 Go 实现的开源网络锁[redsync](https://github.com/go-redsync/redsync)，实现了所有网络锁要点、接口比较友好，本文可以作为实现思路的参考。
 
 在网络集群中，有时需要多个网络节点争抢一个资源，这时为了保证线程安全，要进行网络锁。
 
