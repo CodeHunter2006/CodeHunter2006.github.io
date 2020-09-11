@@ -66,6 +66,8 @@ RGB 通道
 - adb.exe(连接 Android 用工具) 经常会后台启动并不会关闭，导致各种问题，比如文件夹无法删除。如果遇到相关问题，要先用任务管理器杀掉后再操作。
 - 在 windows 使用 mstsc 远程桌面情况下，会影响截图功能，导致报错，无法执行测试。使用 TeamView 类的非登录型的工具不受影响。
 - 最好不要用 VSCode 等自动格式化 IDE 进行编辑，可能破坏 Airtest 文件的格式，引起运行报错。
+- 使用 Windows Remote Desktop 时，主动发起远程控制的一方提前设定分辨率后，可以正常使用 Airtest。如果不提前设定分辨率，Airtest 会因为无法正确获得分辨率而发生识别错误。
+- 如果利用多级 Remote Desktop 进行操作，比如 A->B->C，在 C 运行 Airtest，然后断开 A->B，Airtest 会正常运行。当重新建立 A->连接时，会导致 C 的 Airtest 失败。
 
 # 参考资料：
 
