@@ -114,6 +114,9 @@ var reRet []string = regexp.MustCompile(`pattern`).FindStringSubmatch(`string`)
 `strings.Split(str, seperator string) []string`
 将字符串按照分隔符切割为多个子字符串组成的切片
 
+`strings.Builder`
+用于字符串拼接`builder.WriteString("test")`，在大量字符串拼接时性能远高于`+`，只在最后`builder.String()`时申请一次内存。
+
 ## time
 
 提供时间日期相关操作
