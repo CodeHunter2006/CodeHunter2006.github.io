@@ -13,15 +13,15 @@ tags: Go
 - [Uber Go Style Guide](https://github.com/uber-go/guide/blob/master/style.md)
 - [Go-advices](https://github.com/cristaloleg/go-advices)
 
-<br/>
 ### gofmt
-大部分的格式问题可以通过gofmt解决，gofmt自动格式化代码，保证所有的go代码一致的格式。
+
+大部分的格式问题可以通过 gofmt 解决，gofmt 自动格式化代码，保证所有的 go 代码一致的格式。
 
 正常情况下，采用 Sublime 或 VSCode 编写 go 代码时，插件已经调用 gofmt 对代码实现了格式化。
 
-<br/>
 ### 注释
-在编码阶段同步写好变量、函数、包注释，注释可以通过godoc导出生成文档。
+
+在编码阶段同步写好变量、函数、包注释，注释可以通过 godoc 导出生成文档。
 
 注释必须是完整的句子，以需要注释的内容作为开头，句点作为结尾。
 
@@ -49,8 +49,8 @@ package regexp
 func Compile(str string) (regexp *Regexp, err error) {
 ```
 
-<br/>
 ### 命名
+
 使用短命名，长名字并不会自动使得事物更易读，文档注释会比格外长的名字更有用。
 
 - 包名
@@ -107,9 +107,9 @@ mixedCaps 小写开头，不可导出
 
 ※"局部变量"不同意下划线形式，直接按照参数相同的格式即可。
 
-<br/>
 ### 控制结构
-* if
+
+- if
 
 if 接受初始化语句，约定如下方式建立局部变量
 
@@ -118,6 +118,8 @@ if err := file.Chmod(0664); err != nil {
     return err
 }
 ```
+
+- 如果参与 if 判断的变量本身是 bool 型，则无需跟 false 或 true 进行比较，直接使用变量或"取非!"就可以了
 
 - for
 
@@ -168,10 +170,10 @@ if err != nil {
 codeUsing(f, d)
 ```
 
-<br/>
 ### 函数（必须）
-* 函数采用命名的多值返回
-* 传入变量和返回变量以小写字母开头
+
+- 函数采用命名的多值返回
+- 传入变量和返回变量以小写字母开头
 
 ```
 func nextInt(b []byte, pos int) (value, nextPos int) {
@@ -179,11 +181,16 @@ func nextInt(b []byte, pos int) (value, nextPos int) {
 
 在 godoc 生成的文档中，带有返回值的函数声明更利于理解
 
-<br/>
 ### 错误处理
-* error作为函数的值返回,必须对error进行处理
-* 错误描述如果是英文必须为小写，不需要标点结尾
-* 采用独立的错误流进行处理
+
+- error 作为函数的值返回, 必须对 error 进行处理
+- 错误描述如果是英文必须为小写，不需要标点结尾
+- 采用独立的错误流进行处理
+
+- 如果失败原因只有一个，则返回 bool 型
+- 如果失败原因超过一个，则返回 error 型
+- 如果没有失败的情况，则可以不返回 bool 或 error
+- 如果重试几次可以避免失败，则不要立即返回 bool 或 error，应该在函数内部进行适当的重试
 
 不要采用这种方式
 
@@ -216,13 +223,19 @@ if err != nil {
 // use x
 ```
 
-<br/>
 ### panic
-* 尽量不要使用panic，除非你知道你在做什么
 
-<br/>
+- 尽量不要使用 panic，除非你知道你在做什么
+
+- 在程序开发阶段，坚持速错，让程序尽快 panic 崩溃
+- 对于完全意料之外的情况，也尽量使用 error 返回，避免使用 panic。但是程序难以避免还是会发生 panic
+- 程序部署后，也尽量不要尝试恢复，可以写 recover 处理尽快打印 log、通知报警，然后退出，不要发生被忽略的情况
+- 上面 recover 记录、退出后，由 supervisor 等守护进程重启，可以更好的释放进程内资源
+- 如果怕 panic 导致其他线程出问题，可以在 recover 时进行平滑退出处理，尽量完成现有业务动作，不再接收新任务动作
+
 ### import
-* 对import的包进行分组管理，而且标准库作为第一组
+
+- 对 import 的包进行分组管理，而且标准库作为第一组
 
 ```
 package main
@@ -242,9 +255,9 @@ import (
 
 `goimports`实现了自动格式化
 
-<br/>
 ### 缩写
-* 采用全部大写或者全部小写来表示缩写单词
+
+- 采用全部大写或者全部小写来表示缩写单词
 
 比如对于 url 这个单词，不要使用
 
@@ -258,17 +271,17 @@ UrlPony
 urlPony 或者 URLPony
 ```
 
-<br/>
 ### 参数传递
-* 对于少量数据，不要传递指针
-* 对于大量数据的struct可以考虑使用指针
-* 传入参数是map，slice，chan不要传递指针
+
+- 对于少量数据，不要传递指针
+- 对于大量数据的 struct 可以考虑使用指针
+- 传入参数是 map，slice，chan 不要传递指针
 
 因为 map，slice，chan 是引用类型，不需要传递指针的指针
 
-<br/>
 ### 接受者
-* 名称
+
+- 名称
 
 统一采用单字母'p'而不是 this，me 或者 self
 
