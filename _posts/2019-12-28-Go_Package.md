@@ -103,6 +103,25 @@ rand.Seed(time.Now().Unix())
 var reRet []string = regexp.MustCompile(`pattern`).FindStringSubmatch(`string`)
 ```
 
+## sync.Mutex
+
+互斥锁
+
+- Go 中的 Mutex 是不可重入的，不像 Java 中的
+- Mutex 是一个 Struct 对象，并且其中的私有成员变量有重要作用，所以 Mutex 对象使用中不能复制拷贝
+
+### 实现设计点
+
+- 基本的原子操作和判断是利用`atomic.CompareAndSwapInt32`
+- 锁定后唤醒，是利用`sync.runtime_SemacquireMutex`
+- 锁有几种状态：未加锁、已锁定、饥饿状态
+- "饥饿状态"使得 Lock 排队中的 goroutine 得以抢到锁，以避免"尾部延迟现象"
+- 新抢锁的 goroutine，如果满足下面四个条件，会尝试自旋优先抢锁
+  1. mutex 已经被 locked 了，处于正常模式下；
+  2. 当前 goroutine 为了获取该锁进入自旋的次数小于四次；
+  3. 当前机器 CPU 核数大于 1；
+  4. 当前机器上至少存在一个正在运行的处理器 P 并且处理的运行队列为空；
+
 ## sync.WaitGroup
 
 可以为多个 goroutine 设置统一起跑时机或统计统一结束时机。
