@@ -70,7 +70,12 @@ log 相关
 `log.Fatal()`
 输出 fatal 级别日志后，执行 os.Exit()
 
-## os.signal
+## os
+
+`os.MkdirAll(path, os.ModePerm)`
+创建一系列文件夹
+
+### os.signal
 
 可以设置监听哪些系统信号
 

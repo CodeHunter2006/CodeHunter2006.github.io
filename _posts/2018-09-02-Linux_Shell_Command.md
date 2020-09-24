@@ -533,6 +533,7 @@ Globally search a Regular Expression and Print
   - `[^a-zA-Z]` 反向选择，没有字母的
 - 次数匹配: 指定前面的字符出现次数
   - `*` 任意次
+  - `+` 1 ~ 多次
   - `.*` 任意字符出现任意次
   - `?` 0 次或 1 次
   - `\{m\}` 匹配其前面字符 m 次
