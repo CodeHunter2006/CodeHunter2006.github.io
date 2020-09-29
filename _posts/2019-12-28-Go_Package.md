@@ -7,10 +7,25 @@ tags: Go
 
 Go 常用包的功能，及注意点
 
+## context
+
+为多携程调用提供三种功能：传值、超时、取消。
+
+- 多个 context 对象可形成树形关联，当父 context 取消后，子 context 也会随之取消。
+- context 是线程安全的
+
+### WithCancel
+
+cancel 函数可以调用多次
+
 ## errors
 
 `errors.New("this is an error")`
 新建一个 error 对象
+
+## errorgroup
+
+相比 context 提供了捕获子携程返回的 error 的能力
 
 ## flag
 
