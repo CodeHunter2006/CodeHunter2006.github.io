@@ -16,7 +16,7 @@ Go 常用包的功能，及注意点
 
 ### WithCancel
 
-cancel 函数可以调用多次
+cancel 函数可以调用多次，不会发生 panic，只有第一次调用起作用
 
 ## errors
 
@@ -25,7 +25,50 @@ cancel 函数可以调用多次
 
 ## errorgroup
 
-相比 context 提供了捕获子携程返回的 error 的能力
+相比 context 提供了捕获子携程返回的 error 的能力，结合 context cancel 可以实现并发请求、发生错误后同时取消的功能。
+
+```Go
+func testErrorGroup() {
+	rand.Seed(time.Now().Unix())
+	const threadNum = 5
+	ctx, cancel := context.WithCancel(context.Background())
+	group, errCtx := errgroup.WithContext(ctx)
+
+	for i := 0; i < threadNum; i++ {
+		index := i // 避免闭包中引用同一个 i
+
+		group.Go(func() error {
+			if index < threadNum-1 {
+				for j := 0; j < 10; j++ {
+					log.Printf("%v is running %v", index, j)
+					time.Sleep(time.Microsecond*time.Duration(rand.Int()%1000) + time.Second)
+
+					select {
+					case <-errCtx.Done(): // 检测到已 cancel 后退出
+						log.Printf("%v return with error: %v", index, errCtx.Err())
+						return fmt.Errorf("%v error: %v", index, errCtx.Err())
+					default:
+					}
+				}
+				log.Printf("%v end", index)
+			} else {
+				time.Sleep(time.Microsecond*time.Duration(rand.Int()%1000) + time.Second*3)
+				cancel() // 第一个发生错误的位置执行 cancel 动作
+				log.Printf("%v cancel", index)
+				return fmt.Errorf("%v cancel error", index)
+			}
+			return nil
+		})
+	}
+
+	err := group.Wait()
+	if err == nil {
+		log.Println("all done!")
+	} else {
+		log.Printf("found error: %v", err)  // 输出："found error: 4 cancel error"
+	}
+}
+```
 
 ## flag
 
