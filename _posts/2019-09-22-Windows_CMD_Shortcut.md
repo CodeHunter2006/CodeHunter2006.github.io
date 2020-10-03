@@ -16,6 +16,9 @@ file compare 比较两个文件的差异
 `CertUtil -hashfile file_path MD5`
 生成文件的 MD5，还有其他 hash 算法可以使用
 
+`echo Exit Code is %errorlevel%`
+查看上一个运行的进程退出时的 exitCode
+
 # Shortcut
 
 `Ctrl+Win+Left/Right`
