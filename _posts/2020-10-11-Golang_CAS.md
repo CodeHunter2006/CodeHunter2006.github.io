@@ -51,7 +51,7 @@ func main() {
   系统底层进行 CAS 操作时，会检查当前系统是否为多核，如果是多核，则给"总线"加锁，只有一个线程可以加锁成功，再执行 CAS 操作。
 
 - ABA 问题
-  利用 CAS 做乐观锁可能发生 ABA 问题，这时需要增加一个版本号，在 CAS 时只有版本号检查通过才算成功
+  利用 CAS 做乐观锁可能发生 ABA 问题。如果某线程load变量值为A，然后该值被另一条线程改为B又改为A，则最初的线程CAS时无法判断是否被修改过，在某些情况下会引起问题。这时需增加一个版本号，在 CAS 时只有版本号检查通过才算成功
   - 乐观锁实现要点：对象指针、版本号形成一个 pair，对 pair 进行原子操作
   - 也利用 unsafe.Pointer 避免 ABA 问题`func CompareAndSwapPointer(addr *unsafe.Pointer, old, new unsafe.Pointer) (swapped bool)`
   - 如果只是对某个变量 +-1，这种 ABA 其实没什么问题
