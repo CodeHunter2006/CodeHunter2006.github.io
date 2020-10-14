@@ -81,6 +81,8 @@ func testErrorGroup() {
 `%+v` 格式符表示将数据结构打印出来
 `%[2]v%[2]v%[1]v` 可以通过这种形式选定后边的第几个参数，避免重复传入相同参数
 
+- 对于指针类型，如果用`%v`只能打出指针地址。如果想打印完整结构体，可以自定义 method`func (p *XXX) String() string{ ... }`
+
 ## io
 
 `func MultiWriter(writers ...Writer) Writer`
