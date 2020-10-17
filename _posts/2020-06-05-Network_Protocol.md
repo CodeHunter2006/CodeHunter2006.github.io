@@ -101,7 +101,7 @@ HTTP 协议的请求报文和响应报文的结构基本相同
 由于 HTTP 是明文文本传输，存在较大安全隐患。比如被读取密码、被篡改请求、被篡改 Response。
 HTTPS 在 HTTP 的基础上通过传输加密和身份认证保证了传输过程的安全性。
 
-## SSL/TSL(Secure Sockets Layer/Transport Layer Security)
+## SSL/TLS(Secure Sockets Layer/Transport Layer Security)
 
 SSL 由 Netscape 公司 1994 年发明并于 1999 年改名为 TSL，是信息安全领域的权威标准。
 
