@@ -18,6 +18,12 @@ Go 常用包的功能，及注意点
 
 cancel 函数可以调用多次，不会发生 panic，只有第一次调用起作用
 
+## encoding/json
+
+对 struct 进行 marshal 和 unmarshal 操作，实现原理利用了反射，所以性能较差，在高并发下可用其他库替代。
+
+- struct 内嵌 interface 只能 marshal 无法 unmarshal，由于字符串无法反向推导类型
+
 ## errors
 
 `errors.New("this is an error")`
