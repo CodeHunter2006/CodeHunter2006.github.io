@@ -65,7 +65,25 @@ type Conn struct {
 
 	done int32
 }
+
+type DBStats struct {
+    MaxOpenConnections int // Maximum number of open connections to the database; added in Go 1.11
+
+    // Pool Status
+    OpenConnections int // The number of established connections both in use and idle.
+    InUse           int // The number of connections currently in use; added in Go 1.11
+    Idle            int // The number of idle connections; added in Go 1.11
+
+    // Counters
+    WaitCount         int64         // The total number of connections waited for; added in Go 1.11
+    WaitDuration      time.Duration // The total time blocked waiting for a new connection; added in Go 1.11
+    MaxIdleClosed     int64         // The total number of connections closed due to SetMaxIdleConns; added in Go 1.11
+    MaxIdleTimeClosed int64         // The total number of connections closed due to SetConnMaxIdleTime; added in Go 1.15
+    MaxLifetimeClosed int64         // The total number of connections closed due to SetConnMaxLifetime; added in Go 1.11
+}
 ```
+
+![sql.DB](/assets/images/2020-10-23-Connection_Pool_2.png)
 
 - `func (db *DB) SetMaxOpenConns(n int)`
   最大连接数。当请求不断增加时，不断创建连接，当连接数达到最大连接数后，新的获取连接请求将被阻塞。
@@ -84,13 +102,19 @@ type Conn struct {
 
 # 连接池的一些设计点
 
+- 连接池是并发安全的，但连接不是
 - 连接池的连接，通常使用之后要放回池中。如果发生网络错误，则不放回，而直接关闭，这样连接池会创建新连接。
 - 每个连接要记录一个最新有效时间，超过了心跳间隔要自动 ping 一下以保持连接的健康状态，下面三点表示有效：
   1. 连接刚刚建立
   2. 连接刚正常使用过，返回的结果正确，没有网络异常
   3. 连接刚经过 ping 操作，收到了 pang
+- 当程序退出时，要关闭连接池，连接资源要妥善关闭，例如数据库的事务状态
 - `DB.openerCh`表示要打开的新连接的队列，使用 channel 可以减少锁的使用
 - `DB.cleanerCh`表示要清理的连接队列
+- 可以通过`DBStats`查看连接池的统计数据，从而进行连接数设置调优，例如：
+  - `DBStats.Idle`总是很大，说明连接数过大
+  - `DBStats.WaitCount`总是较大，说明连接数不足，排队等待连接过多，处理延迟较大
+- 由于数据库连接可能在服务端被关闭，可以获取服务端 wait_timeout 参数，然后把`SetConnMaxLifetime`设置为该数值-10s 左右
 
 # 连接池问题/案例
 
