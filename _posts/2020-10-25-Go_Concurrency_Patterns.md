@@ -20,6 +20,8 @@ tags: Golang DesignPattern
 - **source/producer** 最上游的数据来源
 - **sink/consumer** 最下游的数据消费者
 
+在 Go 中，由于 goroutine 和 channel 运行效率高、资源占用小，也可以方便的利用 Pipeline 进行程序设计。
+
 ## 基本示例
 
 由三个 stage 组成的 pipeline，实现"取平方"功能
@@ -74,4 +76,24 @@ func sq(done <-chan struct{}, in <-chan int) <-chan int {
 }
 ```
 
-##
+## Bounded parallelism
+
+在一个三个 stage 组成的 pipeline 中，可以通过控制中间处理 stage 的实例数，来限制内存资源占用边界。
+
+```Go
+	// Start a fixed number of goroutines to read and digest files.
+	c := make(chan result)
+	var wg sync.WaitGroup
+	const numDigesters = 20
+	wg.Add(numDigesters)
+	for i := 0; i < numDigesters; i++ {
+		go func() {
+			digester(done, paths, c)
+			wg.Done()
+		}()
+	}
+	go func() {
+		wg.Wait()
+		close(c)
+	}()
+```

@@ -11,7 +11,7 @@ Go 常用包的功能，及注意点
 
 为多携程调用提供三种功能：传值、超时、取消。
 
-- 多个 context 对象可形成树形关联，当父 context 取消后，子 context 也会随之取消。
+- 多个 context 对象可形成树形关联，当父 context 取消后，子 context 也会随之取消；子 context 取消后，父 context 不受影响
 - context 是线程安全的
 
 ### WithCancel
