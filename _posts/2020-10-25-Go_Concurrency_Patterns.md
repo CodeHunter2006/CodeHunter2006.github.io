@@ -1,0 +1,77 @@
+---
+layout: post
+title: "Go Concurrency Patterns"
+date: 2020-10-25 22:20:00 +0800
+tags: Golang DesignPattern
+---
+
+本文参考下面文章，总结 Go 中的一些 goroutine 和 channel 的使用模式。
+
+- [Go Concurrency Patterns: Pipelines and cancellation](https://blog.golang.org/pipelines)
+
+## Pipeline and Filter 模式关键概念
+
+将输入数据经过一系列处理，输出最终结果，就像是污水经过一系列管道最后流出自来水。其中处理过程的基础组件是过滤器(Filter 也叫 stage)，可以通过各种 stage 的顺序组合变换出不同的结果。通常用于可以并行执行的计算过程。
+
+- **stage/filter** 每一节"水管"就是一个 stage，是基本组件单元，对输入进行一个运算处理
+- **pipeline** 某种 stage 的组合形成一个流水线，实现特定功能
+- **inbound** 入口，上游的数据进入 stage 时从入口取出
+- **outbound** 出口，流向下游的数据放入出口
+- **source/producer** 最上游的数据来源
+- **sink/consumer** 最下游的数据消费者
+
+## 基本示例
+
+由三个 stage 组成的 pipeline，实现"取平方"功能
+
+## Fan-out/Fan-in
+
+利用 goroutine 和 channel 可以实现数据的扇入、扇出。
+
+```Go
+// fan-in merge
+func merge(cs ...<-chan int) <-chan int {
+    var wg sync.WaitGroup
+    out := make(chan int)
+
+    output := func(c <-chan int) {
+        for n := range c {
+            out <- n
+        }
+        wg.Done()
+    }
+    wg.Add(len(cs))
+    for _, c := range cs {
+        go output(c)
+    }
+
+    go func() {
+        wg.Wait()
+        close(out)
+    }()
+    return out
+}
+```
+
+## Explicit cancellation
+
+有些情况下不需要读取所有的 inbound，可以提前获得结果并结束处理，比如中间发生了错误、已经计算出了正确值等，这种情况下可以增加一个 channel 作为结束信号。
+
+```Go
+func sq(done <-chan struct{}, in <-chan int) <-chan int {
+    out := make(chan int)
+    go func() {
+        defer close(out)
+        for n := range in {
+            select {
+            case out <- n * n:
+            case <-done:
+                return
+            }
+        }
+    }()
+    return out
+}
+```
+
+##
