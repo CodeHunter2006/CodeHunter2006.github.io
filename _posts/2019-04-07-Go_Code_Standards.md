@@ -215,7 +215,7 @@ func nextInt(b []byte, pos int) (value, nextPos int) {
 
 不要采用这种方式
 
-```
+```Go
 if err != nil {
 	// error handling
 } else {
@@ -225,7 +225,7 @@ if err != nil {
 
 而要采用下面的方式
 
-```
+```Go
 if err != nil {
 	// error handling
 	return // or continue, etc.
@@ -235,7 +235,7 @@ if err != nil {
 
 如果返回值需要初始化，则采用下面的方式
 
-```
+```Go
 x, err := f()
 if err != nil {
     // error handling

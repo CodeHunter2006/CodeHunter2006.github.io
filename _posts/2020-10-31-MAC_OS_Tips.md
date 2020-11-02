@@ -15,5 +15,6 @@ tags: Mac
   3. 在`<dict></dict>`之间加入参数`<key>LSUIElement</key><string>1</string>`
   4. 重启 App，dock 中就不再显示了
 
+* 修改后可能影响某些功能
 * 如果想恢复显示，只需要删掉增加的参数重启即可
 * 如果想正常显示，需要在 Launchpad 中点击。可以把图标快捷方式拉到 dock，以便快速点击显示

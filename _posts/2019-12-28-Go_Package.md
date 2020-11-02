@@ -25,6 +25,21 @@ cancel 函数可以调用多次，不会发生 panic，只有第一次调用起�
 - struct 内嵌 interface 只能 marshal 无法 unmarshal，由于字符串无法反向推导类型
 - 对 interface 可以进行 marshal，会根据 interface 中保存的实际结构体类型进行 marshal
 
+- unmarshal 时，可以传入几种可识别的类型，比如 struct、slice、map，根据不同的类型结果不同。
+  - struct 将按照其中的导出成员变量进行解析
+  - slice 将被解析为多个字符串，每个字符串是一个 json 对象
+  - map 将被解析为`map[string]interface{}`结构，其中`interface{}`可能是一个 map
+
+在 unmarshal 时，传入的参数必须是对应类型的指针，并且保证对象已构造。但是 slice 或 map 的 make 并不是必须的，只要对象自动创建了，不需要 make 初始化。
+
+```Go
+var out map[string]interface{}
+err = json.Unmarshal(str, &out)
+if err != nil {
+	log.Panicln(err)
+}
+```
+
 ## errors
 
 `errors.New("this is an error")`
@@ -276,7 +291,9 @@ select {
 
 ## unsafe
 
-底层指针相关的操作
+底层指针相关的操作，可以调用 C 语言库函数，就是所谓的 CGo 机制
+
+- CGo 只能调用 C 的接口，无法调用 C++。由于 C++标准太多太复杂，无法支持。可以通过 C 封装 C++的方法实现间接调用。
 
 `unsafe.Sizeof(x)`
 传入任意变量，返回该变量对应类型所占字节数
