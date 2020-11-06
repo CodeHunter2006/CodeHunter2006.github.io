@@ -100,7 +100,8 @@ func testErrorGroup() {
 
 ## fmt
 
-`%+v` 格式符表示将数据结构打印出来
+`%+v` 格式符表示将数据结构的字段名打印出来
+`%#v` 将尽量完整的 Go 语法信息打印出来
 `%[2]v%[2]v%[1]v` 可以通过这种形式选定后边的第几个参数，避免重复传入相同参数
 
 - 对于指针类型，如果用`%v`只能打出指针地址。如果想打印完整结构体，可以自定义 method`func (p *XXX) String() string{ ... }`
@@ -157,9 +158,22 @@ log 相关
 `os.MkdirAll(path, os.ModePerm)`
 创建一系列文件夹
 
+`os.Getenv("HOME")`
+获取环境变量，返回字符串
+
 ### os.signal
 
 可以设置监听哪些系统信号
+
+```Go
+signals := make(chan os.Signal, 1)
+signal.Notify(signals, os.Kill, syscall.SIGQUIT, syscall.SIGTERM, syscall.SIGINT)
+select {
+	case sig := <-signals:
+		fmt.Println("get sys signal", sig)
+		// end code
+}
+```
 
 ## path
 
