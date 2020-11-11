@@ -214,6 +214,19 @@ rand.Seed(time.Now().Unix())
 var reRet []string = regexp.MustCompile(`pattern`).FindStringSubmatch(`string`)
 ```
 
+## runtime
+
+运行时调用相关
+
+`runtime.NumCPU()`
+返回当前硬件的 CPU 核数
+
+`runtime.GOMAXPROCS(int)`
+设置当前可同时运行的最大线程数(GPM 中 P 的数量)
+
+`var numCPU = runtime.GOMAXPROCS(0)`
+返回用户指定的最大 P 数量。如果没有设置，默认值为 CPU 核数
+
 ## sync.Mutex
 
 互斥锁

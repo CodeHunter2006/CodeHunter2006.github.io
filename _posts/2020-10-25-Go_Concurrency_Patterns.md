@@ -5,6 +5,8 @@ date: 2020-10-25 22:20:00 +0800
 tags: Golang DesignPattern
 ---
 
+`Do not communicate by sharing memory; instead, share memory by communicating.`
+并发编程的问题点总是和共享变量的方式有着重要而微妙的关系，Go+Pipeline 模式可以很好的处理并发设计。
 本文参考下面文章，总结 Go 中的一些 goroutine 和 channel 的使用模式。
 
 - [Go Concurrency Patterns: Pipelines and cancellation](https://blog.golang.org/pipelines)
