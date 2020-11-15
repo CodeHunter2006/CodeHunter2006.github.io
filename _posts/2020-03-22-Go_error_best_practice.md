@@ -43,3 +43,23 @@ tags: Go
   - recover 只能作用于当前的携程调用栈发生 panic，所以无法阻止子携程 panic 导致的程序退出
   - 和组件一样的问题，你不知道你调用的组件是否发起了某个协程而该协程可能会 panic，所以即使你对组件调用函数进行了 recover 防御，还是难以阻止 panic
 - **ErrorGroup**如果子携程需要返回错误，可以通过封装了 Context 的 ErrorGroup 对象返回错误信息
+
+- **将 panic 封装为 error:**
+
+```Go
+// Compile returns a parsed representation of the regular expression.
+func Compile(str string) (regexp *Regexp, err error) {
+    regexp = new(Regexp)
+    // doParse will panic if there is a parse error.
+    defer func() {
+        if e := recover(); e != nil {
+            regexp = nil    // Clear return value.
+            err = e.(Error) // Will re-panic if not a parse error.
+        }
+    }()
+    return regexp.doParse(str), nil
+}
+```
+
+- 上面的类型强转涉及的类型最好在本包中，否则可能引起 Panic
+- 可以尝试强转败，就通过 fmt.Errorf("%v", err) 返回新 error，这样意料之外的类型也不会引起再次 Panic 了

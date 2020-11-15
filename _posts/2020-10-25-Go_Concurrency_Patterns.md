@@ -10,6 +10,7 @@ tags: Golang DesignPattern
 本文参考下面文章，总结 Go 中的一些 goroutine 和 channel 的使用模式。
 
 - [Go Concurrency Patterns: Pipelines and cancellation](https://blog.golang.org/pipelines)
+- [Effective Go](https://docs.studygolang.com/doc/effective_go.html)
 
 ## Pipeline and Filter 模式关键概念
 
@@ -98,4 +99,43 @@ func sq(done <-chan struct{}, in <-chan int) <-chan int {
 		wg.Wait()
 		close(c)
 	}()
+```
+
+## A leaky buffer
+
+一个简单的漏桶式缓冲区。
+
+```Go
+var freeList = make(chan *Buffer, 100)
+var serverChan = make(chan *Buffer)
+
+func client() {
+    for {
+        var b *Buffer
+        // Grab a buffer if available; allocate if not.
+        select {
+        case b = <-freeList:
+            // Got one; nothing more to do.
+        default:
+            // None free, so allocate a new one.
+            b = new(Buffer)
+        }
+        load(b)              // Read next message from the net.
+        serverChan <- b      // Send to server.
+    }
+}
+
+func server() {
+    for {
+        b := <-serverChan    // Wait for work.
+        process(b)
+        // Reuse buffer if there's room.
+        select {
+        case freeList <- b:
+            // Buffer on free list; nothing more to do.
+        default:
+            // Free list full, just carry on.
+        }
+    }
+}s
 ```
