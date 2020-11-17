@@ -66,6 +66,29 @@ xxx.com/xxx v0.1.1 h1:xxxxxxx
 
 域名/模块路径(或 go.mod 文件路径) [空格] 版本号 [空格] 对模块 SHA-256 生成的 Hash 值
 
+# 文件存储
+
+在使用模块的时候，GOPATH 是无意义的，不过它还是会把下载的依赖储存在 GOPATH/src/mod 中，也会把 go install 的结果放在 GOPATH/bin（如果 GOBIN 不存在的话）
+
+# 命令
+
+- `go mod download`
+  下载模块到本地缓存，缓存路径是`$GOPATH/pkg/mod/cache`
+- `go mod edit`
+  是提供了命令版编辑 go.mod 的功能，例如`go mod edit -fmt go.mod` 会格式化 go.mod
+- `go mod graph`
+  把模块之间的依赖图显示出来
+- `go mod init`
+  初始化模块（例如把原本 dep 管理的依赖关系转换过来）
+- `go mod tidy`
+  增加缺失的包，移除没用的包
+- `go mod vendor`
+  把依赖拷贝到`vendor/`目录下
+- `go mod verify`
+  确认依赖关系
+- `go mod why`
+  解释为什么需要包和模块
+
 # 其他问题
 
 ## 如何用 Go Modules 替代 GOPATH ?
