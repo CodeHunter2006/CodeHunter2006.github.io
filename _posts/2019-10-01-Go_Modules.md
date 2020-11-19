@@ -107,11 +107,12 @@ TODO 待补充
 
 ## 常见问题
 
+- go mod init 在没有接 module 名字的时候是执行不了的，会报错 go: cannot determine module path for source directory。可以这样执行：`$ go mod init github.com/jiajunhuang/hello`
 - 如果遇到编译问题，可以执行`go clean -modcache`清空缓存的模块，重新下载。
 - `go get xxx.com/xxx/xxx@version`，get 命令增加了版本选项，默认会查找名为`latest`的 tag，然后查找 master 的最新 commit。也可以执行版本号(形为`vx.x.x`的 tag)或者 Hash。
 - `go get -u all`更新所有模块及其单元测试，不会更新主版本号。
 - 使用了 Go Modules 之后，import 包时的路径对大小写敏感，如果之前大小写不规范可能报找不到包的错误。
-- Go Modules 目前和 GitLab 有些兼容问题，可能引发问题。
 - 使用 Go Proxy 之前，如果没有梯子，可以安装`github.com/gpmgo/gopm`，用`gopm get -g xxx`代替`go get xxx`
 - 另外，如果没有梯子，`https://github.com/golang`是`https://golang.org`的镜像，可以手动下载
 - Go Modules 下编译动态库(.so)会有问题，目前 Go 的项目是以源码依赖编译为主的，在硬盘、内存没有因为可执行文件体积过大而产生问题前，不需要考虑动态库。
+- 私有包如果不想发布到网上，需要手动添加 require ，然后 replace 进行替换，将私有包指向本地 module 所在的绝对或相对路径。一般用相对路径更通用。
