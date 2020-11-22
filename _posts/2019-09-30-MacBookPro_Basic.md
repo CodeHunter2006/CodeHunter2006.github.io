@@ -211,6 +211,10 @@ export CLICOLOR=1
 | alt+right     | 跳到下一个单词           |
 | ctrl+w        | 删除当前至开头的一个单词 |
 
+### 在命令行打开 finder
+
+`open ./`
+
 # 文件夹结构
 
 `/private/etc/hosts`

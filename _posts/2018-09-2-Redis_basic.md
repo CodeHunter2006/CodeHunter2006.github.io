@@ -5,6 +5,7 @@ date: 2018-09-02 8:11:00 +0800
 tags: Redis
 ---
 
+Redis:REmote DIctionary Server
 之前用的都是 SQL 关系型数据库，随着网络应用并发速度的要求提高，Redis 这种缓存数据库使用越来越多，有必要提前学习掌握相关知识以便实际中应用。
 
 ### Redis 基本特性

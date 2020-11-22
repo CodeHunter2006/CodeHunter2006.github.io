@@ -602,6 +602,9 @@ word, line, character, and byte count
 
 - `-n count` 设定显示行数
 
+`head -c 2000 xxx.log`
+截取前 2000 行
+
 ## tail
 
 截取文件最后一段
@@ -609,18 +612,18 @@ word, line, character, and byte count
 `tail 200 xxx.log`
 从 200 行向后截取
 
-`tail -20f xxx.log`
-截取最后 20 行
+- `tail -20f xxx.log`
+  截取最后 20 行
 
-`tail -f xxx.log`
-对最后的 log 内容保持监控
+- `tail -f xxx.log`
+  对最后的 log 内容保持监控
 
-## head
+## sed
 
-截取文件前半截
+stream editor，
 
-`head -c 2000 xxx.log`
-截取前 2000 行
+- `sed -n '100,200p' filename`
+  截取文件第 100 行到 200 行
 
 ## tailf
 
