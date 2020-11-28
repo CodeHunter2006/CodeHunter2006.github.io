@@ -53,6 +53,8 @@ struct sdshdr{
 
 # Zip List(压缩表)
 
-# Geo Hash
+# Geo Hash(Geography Hash)
+
+在[Redis GeoHash Data Structure](/2020/11/28/Redis_GeoHash/)中有详细说明。
 
 # Hyper Log Log
