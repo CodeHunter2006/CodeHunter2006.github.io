@@ -48,13 +48,15 @@ Redis GeoHash 的底层是用 zset 实现的，其中 value 是 location 名，�
 - Base32 组码
   ![Base32](/assets/images/2020-11-28-Redis_GeoHash_4.png)
 
-如图，是 Base32 的编码表，可以用一个字符(0-9、b-z、去掉 a,i,l,o)表示 0 ～ 31 之间一个值。
+如图，是 Base32 的编码表，可以用一个字符(0-9、b-z、去掉 a,i,l,o)表示 0 ～ 31 之间一个值。Base32 编码的目的是用一个字符表示 32 位数据(32=2^5)，同时具有较好的可读性，编码中去掉和'0'相近的'a/o'以及和'1'相近的'l/i'。
 例如"11100 11101 00100 01111"这个 GEO 码，把每 5 个 01 值分为一组转刚好转为一个 Base32 码(2^5)，对应为 28、29、4、15，结果为"wx4g"。反向即可转为 GEO 码。
 
 - GeoHash Base32 编码长度与精度
   ![Base32](/assets/images/2020-11-28-Redis_GeoHash_5.png)
   当 geohash base32 编码长度为 8 时，精度在 19 米左右，而当编码长度为 9 时，精度在 2 米左右，编码长度需要根据数据情况进行选择。
 
-- `http://geohash.org/<geohash-string>`可以直接查询 GEO 码，例如[http://geohash.org/sqdtr74hyu0](http://geohash.org/sqdtr74hyu0)
+- GeoHash 只适合对点进行快速索引，而线、面、线段、多边形的空间索引最好用 R 树实现。MongoDB 中的 GeoJSON 对象以及 MySql InnoDB 中的空间索引，都是利用 R 树实现的。
+
+- `http://geohash.org/<geohash-string>`可以直接查询 GEO 码对应的经纬坐标，例如[http://geohash.org/sqdtr74hyu0](http://geohash.org/sqdtr74hyu0)
 
 - 参考链接：[GeoHash 核心原理解析](https://www.cnblogs.com/LBSer/p/3310455.html)、[Redis GEO & 实现原理深度分析](https://blog.csdn.net/weixin_34415923/article/details/88004243)

@@ -49,12 +49,14 @@ struct sdshdr{
 
 # Skip List(跳跃表)
 
+参考：[算法学习，极限数据结构之——跳跃表(Skip List)](/2019/07/07/Algorithm_Skiplist/)
+
 # Int Set(整数集合)
 
 # Zip List(压缩表)
 
 # Geo Hash(Geography Hash)
 
-在[Redis GeoHash Data Structure](/2020/11/28/Redis_GeoHash/)中有详细说明。
+参考：[Redis GeoHash Data Structure](/2020/11/28/Redis_GeoHash/)
 
 # Hyper Log Log
