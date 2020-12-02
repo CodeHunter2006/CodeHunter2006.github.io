@@ -14,7 +14,7 @@ tags: Redis
 
 Redis 是用 C 语言写的，而 C 语言默认的字符串(以'\0'结尾)的安全性、效率都较低，所以 Redis 中新增了 SDS 作为默认字符串类型。
 
-```C++
+```C
 struct sdshdr{
      // 记录buf数组中已使用字节的数量
      // 等于 SDS 保存字符串的长度
@@ -45,7 +45,87 @@ struct sdshdr{
 
 # Link List(链表)
 
-# Dictionary(HashMap)
+Redis 中实现了双向链表，数据结构：
+
+```C
+typedef struct listNode{
+       // 前置节点
+       struct listNode *prev;
+       // 后置节点
+       struct listNode *next;
+       // 节点的值
+       void *value;
+}listNode
+
+typedef struct list{
+     // 表头节点
+     listNode *head;
+     // 表尾节点
+     listNode *tail;
+     // 链表所包含的节点数量
+     unsigned long len;
+     // 节点值复制函数
+     void (*free) (void *ptr);
+     // 节点值释放函数
+     void (*free) (void *ptr);
+     // 节点值对比函数
+     int (*match) (void *ptr,void *key);
+}list;
+```
+
+- Redis 链表特性：
+  1. 双端：链表具有前置节点和后置节点的引用，获取这两个节点时间复杂度都为 O(1)。
+  2. 无环：表头节点的 prev 指针和表尾节点的 next 指针都指向 NULL,对链表的访问都是以 NULL 结束。
+  3. 带链表长度计数器：通过 len 属性获取链表长度的时间复杂度为 O(1)。
+  4. 多态：链表节点使用`void*`指针来保存节点值，可以保存各种不同类型的值。
+
+# Dictionary(HashTable)
+
+Redis 中实现了哈希表，数据结构：
+
+```C
+typedef struct dictht{
+     // 哈希表数组
+     dictEntry **table;
+     // 哈希表大小
+     unsigned long size;
+     // 哈希表大小掩码，用于计算索引值
+     // 总是等于 size-1
+     unsigned long sizemask;
+     // 该哈希表已有节点的数量
+     unsigned long used;
+}dictht
+
+typedef struct dictEntry{
+     //键
+     void *key;
+     //值
+     union{
+          void *val;
+          uint64_tu64;
+          int64_ts64;
+     }v;
+
+     //指向下一个哈希表节点，形成链表
+     struct dictEntry *next;
+}dictEntry
+```
+
+- Redis HashTable 特性：
+  1. 哈希算法：
+     1. 使用字典设置的哈希函数，计算键 key 的哈希值`hash = dict->type->hashFunction(key);`
+     2. 使用哈希表的 sizemask 属性和第一步得到的哈希值，计算索引值`index = hash & dict->ht[x].sizemask;`
+  2. 解决哈希冲突："开链法"，同一个 Hash 值的元素用以链表形式连接
+  3. 扩容和收缩：
+     当哈希表保存的键值对太多或者太少时，就要通过 rerehash(重新散列）来对哈希表进行相应的扩展或者收缩。具体步骤：
+     1. 如果执行扩展操作，会基于原哈希表创建一个大小等于 `ht[0].used*2n` 的哈希表（也就是每次扩展都是根据原哈希表已使用的空间扩大一倍创建另一个哈希表）。相反如果执行的是收缩操作，每次收缩是根据已使用空间缩小一倍创建一个新的哈希表。
+     2. 重新利用上面的哈希算法，计算索引值，然后将键值对放到新的哈希表位置上。
+     3. 所有键值对都迁徙完毕后，释放原哈希表的内存空间。
+  4. 触发扩容的条件:(负载因子 = 哈希表已保存节点数量 / 哈希表大小)
+     1. 服务器目前没有执行 BGSAVE 命令或者 BGREWRITEAOF 命令，并且负载因子大于等于 1。
+     2. 服务器目前正在执行 BGSAVE 命令或者 BGREWRITEAOF 命令，并且负载因子大于等于 5。
+  5. 渐近式 rehash
+     扩容和收缩操作不是一次性、集中式完成的，而是分多次、渐进式完成的。如果保存在 Redis 中的键值对只有几个几十个，那么 rehash 操作可以瞬间完成，但是如果键值对有几百万，几千万甚至几亿，那么要一次性的进行 rehash，势必会造成 Redis 一段时间内不能进行别的操作。所以 Redis 采用渐进式 rehash,这样在进行渐进式 rehash 期间，字典的删除查找更新等操作可能会在两个哈希表上进行，第一个哈希表没有找到，就会去第二个哈希表上进行查找。但是进行 增加操作，一定是在新的哈希表上进行的。
 
 # Skip List(跳跃表)
 
