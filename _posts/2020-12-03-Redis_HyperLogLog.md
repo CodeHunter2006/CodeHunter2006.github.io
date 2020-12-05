@@ -28,12 +28,12 @@ HyperLogLog 算法是"大数据的基石"之一，可以做基数概要估算，
 
 如果只做一次`伯努利试验`，上面从`k_max`反推到`n`存在较大的误差，有可能第一次就抛掷很多次才看到正面。如果增加`伯努利试验`的次数，当`n`足够大时候可以减少误差。还可以将多次试验作为一`轮`，测试多轮后取`k_max`的平均值，再计算`n`值，这就是**LogLog**算法:
 
-$DV_{ll} = const \cdot m \cdot 2^{\bar R}$
+$$DV_{ll} = const \cdot m \cdot 2^{\bar R}$$
 
-- $DV_{ll}$对应`n`
+- $$DV_{ll}$$对应`n`
 - `const`是修正因子，根据不同的`n`取值不同
 - `m`是`伯努利试验`的轮数，每轮包含多次试验
-- $\bar R$表示`k_max`的平均数`(k_max_1 + ... + k_max_m)/m`
+- $$\bar R$$表示`k_max`的平均数`(k_max_1 + ... + k_max_m)/m`
 
 ## HyperLogLog
 
@@ -45,12 +45,12 @@ $$
 
 - Mean Value(平均数)
   各元素 x 求和后除以元素数量
-  $\bar M_n = \frac{\displaystyle \sum_{i=1}^nx_i}{n}$
+  $$\bar M_n = \frac{\displaystyle \sum_{i=1}^nx_i}{n}$$
 - Harmonic Mean(调和平均数)
   x 的倒数，的平均数，再取倒数
-  $\bar H_n = \frac{1}{\frac{1}{n} \displaystyle \sum_{i=1}^n \frac{1}{x_i}} = \frac{n}{\displaystyle \sum_{i=1}^n \frac{1}{x_i}}$
+  $$\bar H_n = \frac{1}{\frac{1}{n} \displaystyle \sum_{i=1}^n \frac{1}{x_i}} = \frac{n}{\displaystyle \sum_{i=1}^n \frac{1}{x_i}}$$
 - 与平均数相比，调和平均数将较大的值的影响减小了(小于 1 的值放大了)
-- 标准差(Standard Deviation)公式为$SD=\frac{1.04}{\sqrt m}$，所以 m 越大偏差越小
+- 标准差(Standard Deviation)公式为$$SD=\frac{1.04}{\sqrt m}$$，所以 m 越大偏差越小
 
 # Redis 对 HyperLogLog 的实现
 
