@@ -11,28 +11,34 @@ $$\Huge LaTex \quad Syntax$$
 
 - 空格会被忽略，添加空格有助于读者理解，需要显示时用`\quad`
 - 特殊标识或对象以`\`开头
-
+- 多个变量放在一组: `{放在}_{一组}`, ${放在}_{一组}$
 - 行内函数`$f(x)$`, 行内函数$f(x)$
+- 跨行函数`$$f(x)$$`
+  跨行
+
+  $$
+  f(x)
+  $$
+
+  函数
 
 - multiple lines
-
-```
-b =
-\begin{cases}
-    b_1, & \text{if}\ b_1 > 0  \\
-    b_2, & \text{if}\ b_2 > 0  \\
-    \frac{b_1 + b_2}{2} & \text{otherwise}
-\end{cases}
-```
-
-$$
-b =
-\begin{cases}
-    b_1, & \text{if}\ b_1 > 0  \\
-    b_2, & \text{if}\ b_2 > 0  \\
-    \frac{b_1 + b_2}{2} & \text{otherwise}
-\end{cases}
-$$
+  ```
+  b =
+  \begin{cases}
+      b_1, & \text{if}\ b_1 > 0  \\
+      b_2, & \text{if}\ b_2 > 0  \\
+      \frac{b_1 + b_2}{2} & \text{otherwise}
+  \end{cases}
+  ```
+  $$
+  b =
+  \begin{cases}
+      b_1, & \text{if}\ b_1 > 0  \\
+      b_2, & \text{if}\ b_2 > 0  \\
+      \frac{b_1 + b_2}{2} & \text{otherwise}
+  \end{cases}
+  $$
 
 ## 示例
 
@@ -62,6 +68,9 @@ $$
 | `\langle x, y \rangle`              | $$\langle x, y \rangle$$              | angle                     |
 | `\underset{a}{max}`                 | $$\underset{a}{max}$$                 | under set                 |
 | `\bar{\gamma}`                      | $$\bar{\gamma}$$                      | bar                       |
+| `A \cdot B`                         | $$A \cdot B$$                         | center dot                |
+| `A \cdots B`                        | $$A \cdots B$$                        | center dots               |
+| `\infty`                            | $$\infty$$                            | infinity                  |
 
 ## 设置字体大小：
 
