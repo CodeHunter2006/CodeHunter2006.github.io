@@ -33,6 +33,28 @@ redis 127.0.0.1:6379> GET name
 "value"
 ```
 
+### Bitmap (位图)
+
+- 特性
+
+本质就是很大的(最大 512MB) byte 数组，可以操纵指定位置的 bit 值
+
+- 场景
+
+  - 用来实现 BloomFilter
+  - 用位来记录用户在线状态
+
+- 示例
+
+```
+redis> SETBIT mykey 7 1
+(integer) 0
+redis> GETBIT mykey 0
+(integer) 0
+redis> GETBIT mykey 7
+(integer) 1
+```
+
 ### Hash(字典)
 
 - 特性
