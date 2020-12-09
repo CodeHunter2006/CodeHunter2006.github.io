@@ -191,7 +191,9 @@ typedef struct intset{
 | content               | 不定   | 存储的内容                                                                                                                                          |
 
 - 从上面可以看出，Redis 为了节省内存，已做到极致
-- 向中间插入元素时，如果 previous_entry_length 本身的长度发生变化，会引发连锁更新，时间复杂度为 O(n)，但好在元素不多，所以不会造成性能问题
+
+- 一种引起连锁反应的情况：
+  ZipList 中的每个元素容量都在`[250,253]`范围内，这样它们的 previous_entry_length 都占 1 字节。当最前面插入元素时，如果元素容量大于 254，则当前元素的 previous_entry_length 无法用 1 字节表示，要改为 5 字节，那么本元素的总容量就会`>=254`，这样会引发连锁更新，时间复杂度为 O(n)，但好在元素不多，所以不会造成性能问题
 
 # Geo Hash(Geography Hash)
 
