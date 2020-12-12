@@ -44,7 +44,7 @@ typedef struct redisObject{
 | REDIS_SET    | REDIS_ENCODING_INTSET     | 有序整型数数组                                 | 所有元素都是整数，同时元素数量不超过 512           |
 | REDIS_SET    | REDIS_ENCODING_HT         | HashTable                                      | -                                                  |
 | REDIS_ZSET   | REDIS_ENCODING_ZIPLIST    | 压缩列表实现 zset                              | 元素个数 < 128 同时元素长度 < 64 字节              |
-| REDIS_ZSET   | REDIS_ENCODING_SKIPLIST   | SkipList                                       |                                                    |
+| REDIS_ZSET   | REDIS_ENCODING_SKIPLIST   | SkipList                                       | -                                                  |
 
 - embstr 与 raw 都使用 redisObject 和 sds 保存数据，区别在于，embstr 的使用只分配一次内存空间（因此 redisObject 和 sds 是连续的），而 raw 需要分配两次内存空间（分别为 redisObject 和 sds 分配空间）。因此与 raw 相比，embstr 的好处在于创建时少分配一次空间，删除时少释放一次空间，以及对象的所有数据连在一起，寻找方便。而 embstr 的坏处也很明显，如果字符串的长度增加需要重新分配内存时，整个 redisObject 和 sds 都需要重新分配空间，因此 redis 中的 embstr 实现为只读。
 - Redis 中对于浮点数类型也是作为字符串保存的，在需要的时候再将其转换成浮点数类型。
@@ -76,12 +76,12 @@ typedef struct zset{
 
 用`type key`可以查看一个 key 的底层类型，有些类型本身没有创建新类型，只是封装了一层。
 
-| 外部类型    | 内部类型 | 封装说明                                                      |
-| ----------- | -------- | ------------------------------------------------------------- |
-| Bitmap      | string   | 以 raw 类型编码, 利用位操作, 最大支持 512MB                   |
-| GeoHash     | zset     | 以 GEO 码做 score, value 存储精确的经纬度                     |
-| Stream      | list     | 每个元素保存一个 msg_id 并保持递增, 为每个 group 记录一个 idx |
-| HyperLogLog | string   | 以 raw 类型编码, 连续 16384 个 6bit 的串成的位图，共 12KB     |
+| 外部类型    | 内部类型 | 封装说明                                                                                |
+| ----------- | -------- | --------------------------------------------------------------------------------------- |
+| Bitmap      | string   | 以 raw 类型编码, 利用位操作, 最大支持 512MB                                             |
+| GeoHash     | zset     | 以 GEO 码做 score, value 存储精确的经纬度                                               |
+| Stream      | list     | 每个元素保存一个 msg_id 并保持递增, 为每个 group 记录一个 idx                           |
+| HyperLogLog | string   | 以 raw 类型编码, 连续 16384 个 6bit 的串成的位图，共 12KB，在基数较小时采用**稀疏存储** |
 
 # 内存管理
 
