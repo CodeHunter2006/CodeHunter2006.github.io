@@ -14,6 +14,18 @@ Go 常用包的功能，及注意点
 - 多个 context 对象可形成树形关联，当父 context 取消后，子 context 也会随之取消；子 context 取消后，父 context 不受影响
 - context 是线程安全的
 
+## container/heap
+
+提供(最小)堆相关函数和接口，可以延伸实现优先级队列功能。需要自己实现接口，以满足一个可排序的容器，然后结合函数使用。
+
+```Go
+type Interface interface {
+    sort.Interface
+    Push(x interface{}) // add x as element Len()
+    Pop() interface{}   // remove and return element Len() - 1.
+}
+```
+
 ### WithCancel
 
 cancel 函数可以调用多次，不会发生 panic，只有第一次调用起作用
@@ -226,6 +238,22 @@ var reRet []string = regexp.MustCompile(`pattern`).FindStringSubmatch(`string`)
 
 `var numCPU = runtime.GOMAXPROCS(0)`
 返回用户指定的最大 P 数量。如果没有设置，默认值为 CPU 核数
+
+## sort
+
+提供排序相关接口
+
+```Go
+type Interface interface {
+    // Len is the number of elements in the collection.
+    Len() int
+    // Less reports whether the element with
+    // index i should sort before the element with index j.
+    Less(i, j int) bool
+    // Swap swaps the elements with indexes i and j.
+    Swap(i, j int)
+}
+```
 
 ## sync.Mutex
 
