@@ -22,6 +22,23 @@ tags: Algorithm Leetcode
 
 ["31. Next Permutation"]()
 
+# stack
+
+### "32. Longest Valid Parentheses"
+
+- 思路 1：stack 背影法
+  在 stack 中保存有效和无效位置，默认填-1。如果中间持续是有效位置，那么到有效匹配后，就可以看一下之前的背影最远到哪里，记录这个最大值。
+
+["32. Longest Valid Parentheses" Stack]()
+
+- 思路 2: 双向遍历
+  - 第一遍从左向右，用 left、right 分别记录左右括号数量，如果`left == right`则记录最大值
+  - 为了方式忽略`(()`，从右向左再遍历一遍，取两次遍历最大值为最终结果
+- 关键点：
+  - 遍历过程中，如果应该后出现的符号过多(比如从左到右时`)`过多)，则要重置计数
+
+["32. Longest Valid Parentheses" Brute Force]()
+
 # HashTable
 
 ### "49. Group Anagrams"
