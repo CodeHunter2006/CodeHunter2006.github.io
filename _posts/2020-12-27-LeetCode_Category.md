@@ -47,3 +47,12 @@ tags: Algorithm Leetcode
   利用 Anagram(异位词)特性，统计每个词的字母出现次数，生成一个"指纹"，然后通过 HashMap 收集相同指纹的词
 
 ["49. Group Anagrams"]()
+
+# Binary Search
+
+### "33. Search in Rotated Sorted Array"
+
+- 思路：
+  这道题是在二分查找的基础上，增加一层排除法逻辑，使得每次都能缩小一半查找范围。
+
+["33. Search in Rotated Sorted Array"]()
