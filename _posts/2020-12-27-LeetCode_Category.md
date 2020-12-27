@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "LeetCode Category"
-date: 2020-12-27 09:00:00 +0800
+date: 2020-12-27 08:00:00 +0800
 tags: Algorithm Leetcode
 ---
 
