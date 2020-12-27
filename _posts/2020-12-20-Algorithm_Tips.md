@@ -2,7 +2,7 @@
 layout: post
 title: "Algorithm Tips"
 date: 2020-12-20 21:00:00 +0800
-tags: Algorithm
+tags: Algorithm Leetcode
 ---
 
 ![Algorithm_Tips](/assets/images/2020-12-20-Algorithm_Tips_1.png)
