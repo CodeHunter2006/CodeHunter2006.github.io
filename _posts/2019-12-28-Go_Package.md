@@ -255,6 +255,9 @@ type Interface interface {
 }
 ```
 
+- `SearchInts(a []int, x int) int`
+  在有序数组中，用二分查找法，找到目标第一次出现的下标。如果没有找到，则返回将插入的位置下标，即下一个元素第一次出现的下标。
+
 ## sync.Mutex
 
 互斥锁

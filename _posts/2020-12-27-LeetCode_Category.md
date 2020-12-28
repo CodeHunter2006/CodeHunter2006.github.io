@@ -56,3 +56,11 @@ tags: Algorithm Leetcode
   这道题是在二分查找的基础上，增加一层排除法逻辑，使得每次都能缩小一半查找范围。
 
 ["33. Search in Rotated Sorted Array"]()
+
+### "34. Find First and Last Position of Element in Sorted Array"
+
+- 思路：
+  这道题是在二分查找的基础上，进一步利用算法细节特性："二分查找的结果是元素第一次出现的下标"。
+  所以只需要再查询`按排序下一个元素出现的位置-1`就可以得到末尾位置
+
+["34. Find First and Last Position of Element in Sorted Array" Golang]()

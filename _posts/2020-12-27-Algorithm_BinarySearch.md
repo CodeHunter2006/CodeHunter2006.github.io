@@ -34,3 +34,18 @@ func search(nums []int, target int) (ret int) {
     return -1
 }
 ```
+
+### "34. Find First and Last Position of Element in Sorted Array" Golang
+
+- 可以利用`sort.SearchInts(a []int, x int) int`，用二分查找找到元素第一次出现的下标，如果没有找到则返回元素插入操作的下标
+
+```Go
+func searchRange(nums []int, target int) []int {
+    l := sort.SearchInts(nums, target)
+    if l == len(nums) || nums[l] != target {
+        return []int{-1, -1}
+    }
+    r := sort.SearchInts(nums, target + 1) - 1
+    return []int{l, r}
+}
+```
