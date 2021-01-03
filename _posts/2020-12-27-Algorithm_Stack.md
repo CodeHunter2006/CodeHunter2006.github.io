@@ -37,3 +37,34 @@ func longestValidParentheses(s string) int {
     return maxLen
 }
 ```
+
+### "84. Largest Rectangle in Histogram" Golang
+
+```Go
+func largestRectangleArea(heights []int) (ret int) {
+    stack := []int{-1}
+
+    max := func(val int) {
+        if val > ret {
+            ret = val
+        }
+    }
+
+    for i := 0; i < len(heights); i++ {
+        for stack[len(stack)-1] != -1 && heights[stack[len(stack)-1]] >= heights[i] {
+            top := stack[len(stack)-1]
+            stack = stack[:len(stack)-1]
+            max(heights[top] * (i - 1 - stack[len(stack)-1]) )
+        }
+        stack = append(stack, i)
+    }
+
+    for stack[len(stack)-1] != -1 {
+        top := stack[len(stack)-1]
+        stack = stack[:len(stack)-1]
+        max(heights[top] * (len(heights) - 1 - stack[len(stack)-1]))
+    }
+
+    return ret
+}
+```
