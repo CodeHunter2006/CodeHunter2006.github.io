@@ -31,3 +31,24 @@ func nextPermutation(nums []int)  {
     }
 }
 ```
+
+### "169. Majority Element" Golang
+
+```Go
+func majorityElement(nums []int) int {
+    cur, count := 0, 0
+
+    for _, n := range nums {
+        if n == cur {
+            count++
+        } else if count > 1 {
+            count--
+        } else {
+            cur = n
+            count = 1
+        }
+    }
+
+    return cur
+}
+```

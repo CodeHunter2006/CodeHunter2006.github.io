@@ -32,3 +32,38 @@ func detectCycle(head *ListNode) *ListNode {
     return fast
 }
 ```
+
+### "239. Sliding Window Maximum" Golang
+
+```Go
+func maxSlidingWindow(nums []int, k int) []int {
+    l := list.New()
+
+    push := func(i int) {
+        for l.Len() > 0 && nums[l.Back().Value.(int)] <= nums[i] {
+            l.Remove(l.Back())
+        }
+        l.PushBack(i)
+    }
+
+    pop := func(i int) {
+        for l.Len() > 0 && l.Front().Value.(int) <= i-k {
+            l.Remove(l.Front())
+        }
+    }
+
+    for i := 0; i < k; i++ {
+        push(i)
+    }
+    ret := make([]int, 1, len(nums)-k+1)
+    ret[0] = nums[l.Front().Value.(int)]
+
+    for i := k; i < len(nums); i++ {
+        push(i)
+        pop(i)
+        ret = append(ret, nums[l.Front().Value.(int)])
+    }
+
+    return ret
+}
+```
