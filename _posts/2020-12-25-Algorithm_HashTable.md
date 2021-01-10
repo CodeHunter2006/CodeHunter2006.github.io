@@ -31,3 +31,21 @@ func groupAnagrams(strs []string) [][]string {
     return ret
 }
 ```
+
+### "560. Subarray Sum Equals K" Golang
+
+```Go
+func subarraySum(nums []int, k int) (ret int) {
+    m, sum := map[int]int{0:1}, 0
+
+    for _, n := range nums {
+        sum += n
+        if count, exists := m[sum-k]; exists {
+            ret += count
+        }
+        m[sum]++
+    }
+
+    return ret
+}
+```

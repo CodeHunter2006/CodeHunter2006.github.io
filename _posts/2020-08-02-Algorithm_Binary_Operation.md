@@ -5,7 +5,7 @@ date: 2020-08-02 23:00:00 +0800
 tags: Algorithm Leetcode
 ---
 
-## 剑指 Offer 56 - I. 数组中数字出现的次数
+### 剑指 Offer 56 - I. 数组中数字出现的次数
 
 [题目](https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-lcof/)、官方解答[异或运算](https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-lcof/solution/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-by-leetcode/)
 
@@ -78,7 +78,7 @@ func singleNumbers(nums []int) []int {
 }
 ```
 
-## 剑指 Offer 56 - II. 数组中数字出现的次数 II
+### 剑指 Offer 56 - II. 数组中数字出现的次数 II
 
 [题目](https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-ii-lcof/)、[官方解答](https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-ii-lcof/solution/mian-shi-ti-56-ii-shu-zu-zhong-shu-zi-chu-xian-d-4/)
 
@@ -129,5 +129,18 @@ func singleNumber(nums []int) int {
         highs = highs ^ n & ^lows
     }
     return lows
+}
+```
+
+### "461. Hamming Distance" Golang
+
+```Golang
+func hammingDistance(x int, y int) (count int) {
+    x = x ^ y
+    for x != 0 {
+        count++
+        x = x&(x-1)
+    }
+    return
 }
 ```

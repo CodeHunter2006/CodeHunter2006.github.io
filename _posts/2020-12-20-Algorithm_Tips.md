@@ -22,4 +22,9 @@ tags: Algorithm Leetcode
 
 # Golang Tips
 
-- 可以用`fmt`输出调试，无法用`log`输出
+- LeetCode 可以用`fmt`输出调试，无法用`log`输出
+- Golang 中缺少一些常用的常量定义，可以自己用位操作实现
+  - `const UINT_MIN uint = 0` // 所有位都是 0
+  - `const UINT_MAX = ^uint(0)` // 所有位都是 1
+  - `const INT_MAX = int(^uint(0) >> 1)` // 第一位是 0，其余都是 1
+  - `const INT_MIN = ^INT_MAX` // 第一位是 1，其余都是 0

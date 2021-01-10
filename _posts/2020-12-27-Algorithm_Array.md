@@ -52,3 +52,72 @@ func majorityElement(nums []int) int {
     return cur
 }
 ```
+
+### "912. Sort an Array" QuickSort C++
+
+```C++
+// 三数取中法优化函数，效果较好
+template<typename T1>
+    void selectPivotOfThree(vector<T1> &nums, int lo, int hi) {
+        int m = (lo + hi) >> 1;
+        if (nums[m] > nums[hi])
+            swap(nums[m], nums[hi]);
+        if (nums[lo] > nums[hi])
+            swap(nums[lo], nums[hi]);
+        if (nums[m] > nums[lo])
+            swap(nums[lo], nums[m]);
+    }
+
+    // 随机取数法，
+    template<typename T1>
+    void selectPivotByRand(vector<T1> &nums, int lo, int hi) {
+        int idx = lo + (rand() % (hi - lo + 1));
+        swap(nums[lo], nums[idx]);
+    }
+
+    template<typename T1>
+    void quickSort(vector<T1> &nums, int lo, int hi) {
+        if (lo >= hi) return;  // 注意这里要及时退出
+        //selectPivotOfThree<T1>(nums, lo, hi);
+        selectPivotByRand(nums, lo, hi);
+        T1 pivot = nums[lo];
+        int l = lo, r = hi;
+        while (l < r) {
+            while (l < r && nums[r] >= pivot)
+                r--;
+            swap(nums[l], nums[r]);
+            while (l < r && nums[l] <= pivot)
+                l++;
+            swap(nums[l], nums[r]);
+        }
+        quickSort(nums, lo, l);   // 注意这里不能是l-1
+        quickSort(nums, l + 1, hi);
+    }
+	vector<int> sortArray(vector<int>& nums) {
+		quickSort<int>(nums, 0, nums.size() - 1);
+		return nums;
+	}
+```
+
+### "912. Sort an Array" QuickSort Golang
+
+```Golang
+func quick(nums []int) {
+    if len(nums) <= 1 {
+        return
+    }
+    pivot, l, r := nums[0], 0, len(nums)-1
+    for l < r {
+        for l < r && nums[r] >= pivot {
+            r--
+        }
+        nums[l], nums[r] = nums[r], nums[l]
+        for l < r && nums[l] <= pivot {
+            l++
+        }
+        nums[l], nums[r] = nums[r], nums[l]
+    }
+    quick(nums[:l])
+    quick(nums[l+1:])
+}
+```
