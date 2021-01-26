@@ -460,6 +460,13 @@ iptables -nv -L
 
 `pkill procname`
 
+## 变量操作
+
+### set
+
+`set -e`
+一旦脚本中发生返回值非 0 的情况，立刻停止脚本执行
+
 `export VALUE_NAME="value"`
 设置环境变量
 

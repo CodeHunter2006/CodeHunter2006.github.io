@@ -26,6 +26,18 @@ type Interface interface {
 }
 ```
 
+- **注意**
+  对 Heap 的操作一定要通过`heap.XXX`函数执行
+
+## container/list
+
+提供链表数据结构
+
+```Go
+// 可以利用 Remove + Front/Back 实现 Pop 功能
+l.Remove(l.Front()).(int)
+```
+
 ### WithCancel
 
 cancel 函数可以调用多次，不会发生 panic，只有第一次调用起作用
@@ -238,6 +250,14 @@ var reRet []string = regexp.MustCompile(`pattern`).FindStringSubmatch(`string`)
 
 `var numCPU = runtime.GOMAXPROCS(0)`
 返回用户指定的最大 P 数量。如果没有设置，默认值为 CPU 核数
+
+### runtime/trace
+
+to generate traces for the Go execution tracer
+The execution trace captures a wide range of execution events such as goroutine creation/blocking/unblocking, syscall enter/exit/block, GC-related events, changes of heap size, processor start/stop, etc. A precise nanosecond-precision timestamp and a stack trace is captured for most events. The generated trace can be interpreted using `go tool trace`.
+
+- `func Start(w io.Writer) error`
+  开始将 trace 信息写入文件
 
 ## sort
 
