@@ -145,6 +145,26 @@ Producer 启动参数要有 Kafka 集群节点
 Consumer 启动参数需要填 Zookeeper，在 Zookeeper 会自动保存该 Consumer 的消费到的 offset
 `./kafka-console-consumer.sh --zookeeper node01:2181,node02:2181,node03:2181 --topic test1`
 
+## 查看所有 topic
+
+`./kafka-topics.sh --zookeeper 192.168.40.148:2181 --list`
+
+## 查看 kafka 指定 topic 的详情
+
+`./kafka-topics.sh --zookeeper 192.168.40.148:2181 --topic testtopic --describe`
+
+## 查询 topic 内容
+
+`./kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic topicName --from-beginning`
+
+## 查看消费者 consumer group 列表
+
+`./kafka-consumer-groups.sh --bootstrap-server 192.168.40.148:9092 --list`
+
+## 查看消费者 consumer group 详情
+
+`./kafka-consumer-groups.sh --bootstrap-server 192.168.40.148:9092 --group logstash-xdoctorx --describe`
+
 # 常见问题
 
 ### Consumer 重复收到消息

@@ -204,7 +204,7 @@ locate -r xxx 正则查找
 `sudo updatedb`
 更新 locate 数据库
 
-### cat
+## cat
 
 concatenate 将文本连接并输出到标准输出
 
@@ -217,6 +217,19 @@ concatenate 将文本连接并输出到标准输出
 
 `zcat xxx.gz`
 将压缩包解压后输出文本
+
+## more
+
+more 功能类似 cat, cat 命令是整个文件的内容从上到下显示在屏幕上。more 会以一页一页的显示方便使用者逐页阅读，而最基本的指令就是按空白键（space）就往下一页显示，按 b 键就会往回(back)一页显示，而且还有搜寻字串的功能。more 命令从前向后读取文件，因此在启动时就加载整个文件。
+
+## less
+
+以较小的缓存区读取文件，不需要全部扫描文件后再打开问文件，适合查看容量较大的 log。less 的最小操作单位和 grep 一样，以行为单位。
+
+- 操作类似 vim
+
+`less xxx/xxx`
+打开文件查看
 
 连续执行命令
 xxx;xxx
@@ -280,12 +293,38 @@ link 创建一个文件或文件夹的链接，这样可以在修改一处时影
 
 - `-A`/`-e` (All)显示全部用户的进程，默认只显示当前用户
 - `-f` (full)显示全部字段信息
+- `a` 显示现行终端机下的所有程序，包括其他用户的程序
+- `u` 以用户为主的格式来显示程序状况。
+- `x` 显示所有程序，不以终端机来区分
+- `c` 列出程序时，显示每个程序真正的指令名称，而不包含路径、参数或常驻服务的标示
 
 `ps -ef|grep xxxx`
 查看特定进程
 
 `ps aux`
 查看进程内存使用情况
+
+- Header 意义
+  - USER 进程的 Owner
+  - PID (process id)进程 id
+  - PPID (parent process id)父进程 id
+  - %CPU 占用 CPU 百分比
+  - %MEM 占用内存百分比
+  - NI 进程的 NICE 值，数值大，表示较少占用 CPU 时间
+  - VSZ (Virtual Memory Size)进程使用的虚拟內存量(KB)，表示进程能访问的内存，包括 swap、动态库、已分配实际内存(包括未使用)
+  - RSS (Resident Set Size)进程使用的常驻内存容量(KB)，表示进程占用的物理内存，包括 栈、堆、已加载到物理内存的动态库，不包含 swap
+  - TTY (Teletypewriter)该进程在哪个终端上运行，如果终端无关则显示`?`，如果显示`pts/0`表示由网络连接启动
+  - STAT (state)进程状态，可能显示两位，后面表示附加子状态。
+    - I (Idle) 已 sleep 超过 20 秒
+    - R (Runnable) 可运行
+    - S (Sleeping) sleep 小于 20 秒
+    - T (sToped) 已停止的进程
+    - Z (Zombie) 僵尸进程，等待父进程回收 exit 值
+    - s (session leader)
+  - WCHAN (Wait Channel)进程正在阻塞等待的内存地址 event，如果正在运行(无阻塞)则显示`-`
+  - START 进程启动时间
+  - TIME 进程实际使用 CPU 时间
+  - COMMAND 命令和参数
 
 查看进程端口使用情况
 netstat -ntlp
@@ -316,7 +355,7 @@ df -h
 
 ## top
 
-查看 CPU 使用情况，进入交互模式
+查看排序后的进程使用情况，进入交互模式
 
 交互模式命令：
 
@@ -641,13 +680,6 @@ stream editor，
 
 `tailf -20 xxx.log`
 从最后 20 行开始观察文件
-
-## less
-
-以较小的缓存区读取文件，不需要全部扫描文件后再打开问文件，适合查看容量较大的 log。less 的最小操作单位和 grep 一样，以行为单位。
-
-`less xxx/xxx`
-打开文件查看
 
 ## diff
 

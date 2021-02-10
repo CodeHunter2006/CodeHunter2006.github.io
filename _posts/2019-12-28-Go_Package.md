@@ -71,7 +71,7 @@ if err != nil {
 
 ## errorgroup
 
-相比 context 提供了捕获子携程返回的 error 的能力，结合 context cancel 可以实现并发请求、发生错误后同时取消的功能。
+errorgroup 综合了 waitGroup 和 context 的能力，可以同时等待多个协程、返回错误、协程 cancel
 
 ```Go
 func testErrorGroup() {

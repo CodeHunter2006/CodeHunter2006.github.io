@@ -127,6 +127,17 @@ cron 是 Linux 自带的 service 提供定时执行命令的功能，类似 Wind
   - I/O 状态信息：包括显示的 I/O 请求，分配给进程的 I/O 设备和正在被进程使用的文件列表。
   - 记账信息：可能包括处理器时间总和，使用的时钟总数，时间限制，记账号等。
 
+# Session
+
+通常一个进程是属于一个**进程组**的，而每个进程组一定有个开端进程，这个进程就是**session leader**(简称 SL)。
+通常用 terminal 连接时会启动一个**session**并设置当前进程为**session leader**。
+SL 可以启动新的进程，都归属于同一个 session。
+
+- 进程以前台(阻塞)方式启动一个子进程时，signal 会发送给子进程
+- session leader 如果退出，会向所有同 session 内的进程发 SIGHUP 信号，默认动作是关闭。所以 session leader 退出通常会导致所有子进程退出。
+- 在 terminal 利用**nohup**启动子进程时，nohup 进程会重定向 stdin、stdout、stderr，并且会屏蔽掉 SIGHUP 信号，这样就可以保护子进程不被 terminal 退出影响了。
+- nohup 默认是在前台执行，所以通常要在命令末尾加`&`符号，以便后台执行
+
 ## 内核态、用户态
 
 在 Linux 操作系统中，一个进程的内存空间被分为两部分：内核堆栈、用户堆栈，对应的进程有两个权限状态：内核态、用户态。
