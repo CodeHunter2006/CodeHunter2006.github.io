@@ -53,6 +53,28 @@ func majorityElement(nums []int) int {
 }
 ```
 
+### "448. Find All Numbers Disappeared in an Array"
+
+```Go
+func findDisappearedNumbers(nums []int) (ret []int) {
+    for i := 0; i < len(nums); i++ {
+        cur := nums[i]
+        if cur < 0 {
+            cur *= -1
+        }
+        if nums[cur-1] > 0 {
+            nums[cur-1] *= -1
+        }
+    }
+    for i := 0; i < len(nums); i++ {
+        if nums[i] > 0 {
+            ret = append(ret, i+1)
+        }
+    }
+    return ret
+}
+```
+
 ### "912. Sort an Array" QuickSort C++
 
 ```C++

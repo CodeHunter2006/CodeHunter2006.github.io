@@ -101,13 +101,33 @@ tags: Algorithm Leetcode
 
 ### "84. Largest Rectangle in Histogram"
 
-- 这道题的 stack 解题思路（时间复杂度 O(n)）很重要，在很多其他题中都会用到。
+- 这道题的**单调栈**解题思路（时间复杂度 O(n)）很重要，在很多其他题中都会用到。
 - 基本原理：
   1. 从左向右遍历，并不断将高度值的下标 push 入 stack。
   2. 当某一位置 height 值缩小时，那么之后就很难计算前面的面积了，所以就要把前面比当前值高的 stack 出栈，并计算前面的面积。
   3. 注意，计算面积时，宽度要当前下标和前面的"背影"相减，所以栈底是-1。
 
 ["84. Largest Rectangle in Histogram" Golang]()
+
+### "123. Best Time to Buy and Sell Stock III"
+
+- 考点：
+  - DP
+  - 临界条件逻辑
+- 思路：
+  - 对于任意一个结束日 i，有 5 个**利润状态值**需要从 i-1 的状态推导，这五个状态值及其动态转移方程为：
+    - 假设前一日的结果标记为`'`，买卖产生的利润为`price[i]-price'`
+    1. 无操作利润，始终为 0，无需状态迁移
+    2. buy1 当日第一次买入，max(buy1', -price[i])
+    3. sell1 当日第一次卖出，max(sell1', buy1' + price[i])
+    4. buy2 当日第二次买入，max(buy2', sell1' - price[i])
+    5. sell2 当日第二次卖出，max(sell2', buy2' + price[i])
+  - 如果新一日价格更低，则`-price[i] > -price'`，所以上面 buy1 的公式符合逻辑
+  - 对于临界条件，如果同一天做完上述四个动作，则 sell1、sell2 的利润都为 0。我们可以直接利用当天的数据作为迭代初始数据而不会影响结果
+  - 又根据上面推导，如果只进行一次交易，sell2 的值和 sell1 一致，所以我们最后直接返回 sell2 就可以
+  - 只要根据第一天数据设置初始值，后面继续迭代就能推导出最后结果
+
+["123. Best Time to Buy and Sell Stock III" Golang]()
 
 ### "139. Word Break"
 
@@ -258,6 +278,20 @@ tags: Algorithm Leetcode
 
 ["416. Partition Equal Subset Sum" Golang]()
 
+### "448. Find All Numbers Disappeared in an Array"
+
+- 考点：
+  - array 操作
+  - 约束条件：无额外空间占用
+  - inplace 思想
+- 思路：
+  - 题目保证数字只会出现在给定范围并保证正整数，所以可以利用高位做特殊标记，比如利用负数做是否存在的标记
+  - 第一遍遍历，把出现过的数字对应的下标元素置为负数，那么剩下未标记为负数的位置对应的值就未出现过
+  - 对应的，访问每个元素时，要注意把负数恢复为正数，然后再取对应下标
+  - 第二遍遍历，将仍然为正数的下标对应的数值记录，作为结果返回
+
+["448. Find All Numbers Disappeared in an Array" Golang]()
+
 ### "461. Hamming Distance"
 
 - **汉明距离**广泛用于多个领域，在编码理论中用于错误检测，在信息论中量化字符串之间的差异。两个整数之间的汉明距离是对应位置上数字不同的位数。
@@ -322,6 +356,9 @@ tags: Algorithm Leetcode
   1. 将待排数组分为两部分，设定一个中值，要求遍历过程中左边小于中值、右边大于中值
   2. 设定两个指针，通过交替遍历向中心靠拢，使左右符合要求
   3. 递归左边、右边，最终达到整体有序
+- pivot 取值改进思路：
+  - 三数取中法(效果最好)
+  - 随机取值法
 
 ["912. Sort an Array" QuickSort C++]()
 
