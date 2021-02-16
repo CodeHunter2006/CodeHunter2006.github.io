@@ -53,3 +53,10 @@ tags: Algorithm Leetcode
   - `const UINT_MAX = ^uint(0)` // 所有位都是 1
   - `const INT_MAX = int(^uint(0) >> 1)` // 第一位是 0，其余都是 1
   - `const INT_MIN = ^INT_MAX` // 第一位是 1，其余都是 0
+- 可以自己实现常用的 swap 函数
+
+  ```Go
+  func swap(a, b *[]int)  {
+  	*a, *b = *b, *a
+  }
+  ```
