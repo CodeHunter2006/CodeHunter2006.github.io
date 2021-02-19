@@ -20,8 +20,7 @@ func isEscapePossible(blocked [][]int, source []int, target []int) bool {
 
 type Point [2]int
 func bfs(source Point, target Point, block map[Point]struct{}) (ret bool) {
-    // 因为 jekyll 格式问题暂时注掉
-    // dir := [][]int{ {-1, 0}, {1, 0}, {0, -1}, {0, 1} }
+    dir := [][]int{ {-1, 0}, {1, 0}, {0, -1}, {0, 1} }
     visited := map[Point]struct{}{source:struct{}{}}
     l := list.New()
     l.PushBack(source)

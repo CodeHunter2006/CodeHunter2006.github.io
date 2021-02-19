@@ -301,6 +301,10 @@ type Interface interface {
 
 可以为多个 goroutine 设置统一起跑时机或统计统一结束时机。
 
+## sync.Map
+
+实现了线程安全的 Map
+
 ## strings
 
 字符串操作函数

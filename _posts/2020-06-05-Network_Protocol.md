@@ -95,6 +95,22 @@ HTTP 协议的请求报文和响应报文的结构基本相同
 - 5xx 服务器错误
   - 500 服务器内部通用错误；
 
+## 1.0 1.1 2.0
+
+- HTTP1.0
+  每个请求都是一个短连接，如果一个网页有多个关联资源，则需要多次重新建立连接
+- HTTP1.1
+  访问网页时保持一个长连接，多个资源下载不需要重新建立连接，不过多个资源之间的下载是顺序处理
+- HTTP2.0
+  - 二进制格式(Binary Format)
+    HTTP1.X 是文本通信，文本解析较复杂，为了做到健壮性要考虑很多场景。HTTP2.0 采用二进制传输，实现方便、健壮性好。
+  - 多路复用(MultiPlexing)
+    一个连接可以由多个请求共享，通过 request id 区分，多个请求并行进行。
+  - header 压缩
+    通讯双方各自 cache 一份 header fields 表，既避免了重复 header 的传输，又减小了需要传输的大小
+  - 服务端推送(server push)
+    server 端可以主动向客户端 push 消息或文件
+
 # HTTPS(Hyper Text Transfer Protocol over SecureSocket Layer)
 
 ![HTTPS](/assets/images/2020-06-05-Network_Protocol_8.png)
