@@ -364,6 +364,11 @@ tags: Algorithm Leetcode
 
 ["912. Sort an Array" QuickSort Golang]()
 
+### "1004. Max Consecutive Ones III"
+
+- 思路：
+  关键字`contiguous`，所以考虑用 sliding window
+
 ### "1036. Escape a Large Maze"
 
 - 考点：bfs 稀疏矩阵 极限思想 几何
