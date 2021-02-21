@@ -43,3 +43,41 @@ func maxSlidingWindow(nums []int, k int) []int {
     return res
 }
 ```
+
+### "1438. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit" SlidingWindow+MonotoneQueue Golang
+
+```Go
+func longestSubarray(nums []int, limit int) (ret int) {
+    left := 0
+    var minQue, maxQue []int
+    for right, v := range nums {
+        for len(minQue) > 0 && minQue[len(minQue)-1] > v {
+            minQue = minQue[:len(minQue)-1]
+        }
+        minQue = append(minQue, v)
+        for len(maxQue) > 0 && maxQue[len(maxQue)-1] < v {
+            maxQue = maxQue[:len(maxQue)-1]
+        }
+        maxQue = append(maxQue, v)
+        for len(maxQue) > 0 && len(minQue) > 0 &&
+        (maxQue[0] - minQue[0] > limit) {
+            if nums[left] == maxQue[0] {
+                maxQue = maxQue[1:]
+            }
+            if nums[left] == minQue[0] {
+                minQue = minQue[1:]
+            }
+            left++
+        }
+        ret = max(ret, right-left+1)
+    }
+    return ret
+}
+
+func max(a, b int) int {
+    if a > b {
+        return a
+    }
+    return b
+}
+```

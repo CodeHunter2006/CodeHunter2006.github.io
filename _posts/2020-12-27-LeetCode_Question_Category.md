@@ -69,10 +69,18 @@ tags: Algorithm Leetcode
 
 ### "42. Trapping Rain Water"
 
-- 思路：
+- 思路 1:两遍遍历
   假设每一个下标对应一个水柱，则水柱的高度由此位置最左和最右 bar 的高度综合决定。
+
   1. 从左向右遍历一遍，记录每个下标对应的左边最高的 bar 高度
   2. 从右向左遍历一遍，一边遍历一边计算累加当前位置的水柱高度，`水柱高度 = min(left, right) * height`
+
+  - 时间复杂度 O(n)，空间复杂度 O(n)
+
+- 思路 2:双指针
+  按思路 1 计算每个水柱时，高度取决于较低的那个边。所以可以单独对高度较低的边进行遍历，这样只需要遍历一遍，并且无需额外空间
+
+["42. Trapping Rain Water" Golang]()
 
 ### "64. Minimum Path Sum"
 
@@ -406,6 +414,26 @@ tags: Algorithm Leetcode
   - 只需要对"相同"的元素累加统计即可
   - 由于每个分量值`<9`，可以用一个排过序的两位数表示
   - 可以利用一个 100 个元素的 bucket 统计，这样就无需排序一次遍历就统计出来
+
+### "1438. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit"
+
+- 解法 1:
+  利用 C++ STL 的 multiset 实现。在遍历过程中维护最大、最小值及中间元素。如果是其他语言，如 Golang 需要手写 Treap 结构。
+
+  - 时间复杂度 O(nlogn)，每次维护 tree 需要 logn，空间复杂度 O(n)
+
+- 解法 2: 滑窗+单调队列
+  - 思路：
+    - `continuous`、`subarray`表示用连续的元素统计结果，考虑用 SlidingWindow。
+    - 在窗口移动过程中要记录 max、min 两个值，用来判断当前元素是否超范围
+    - 在窗口 left 端移动时，要调整 max、min 值
+    - 上面保持 max、min 值，同时要保持元素的先后顺序关系，考虑用两个 MonotoneQue 来实现
+  - 流程：
+    1. for 循环所有下标，作为 right 值，保持 minQue 和 maxQue 最新状态
+    2. 如果当前范围不匹配 limit 则将窗口移动，同时判断是否有元素出队列
+    3. 记录 right - left 最大值，直到循环结束
+
+["1438. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit" SlidingWindow+MonotoneQueue Golang]()
 
 ### "1463. Cherry Pickup II"
 

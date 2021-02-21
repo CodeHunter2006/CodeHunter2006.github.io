@@ -8,6 +8,28 @@ tags: Algorithm Leetcode
 ![Algorithm_Tips](/assets/images/2020-12-20-Algorithm_Tips_1.png)
 记录常用算法技巧
 
+# 数据结构
+
+## Queue(队列)
+
+符合 FIFO(先入先出)，一般从队尾入队，队首出队
+
+### DQueue(double queue，双向队列、双端队列)
+
+dq 可以同时提供两个 queue，一个 queue 的队首是另一个的队尾
+
+- C++ STL 的 deque 实现比较好，底层用多段数组实现
+- 也可以用 linkList 代替，只要使用 linkList 操作接口子集就可以
+- 用 C++的 vector 或 Go 的 slice 也可以实现，但是队首出队后空间会被浪费
+
+#### dq 应用：Monotone Queue(单调队列)
+
+单调队列用 dq 实现，队列中的元素始终保持有序，队首始终保持最值。
+队首元素按顺序出队、队尾元素可以在遍历过程中入队或出队来维护队列元素值有序。
+
+示例：
+["1438. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit" SlidingWindow+MonotoneQueue Golang]()
+
 # Tips
 
 ### **剪枝**
@@ -58,5 +80,15 @@ tags: Algorithm Leetcode
   ```Go
   func swap(a, b *[]int)  {
   	*a, *b = *b, *a
+  }
+  ```
+
+- 自己实现 max/min 函数
+  ```Go
+  func max(a, b int) int {
+    if a > b {  // 注意这里不用 >= 符号，没有必要
+       return a
+    }
+    return b
   }
   ```

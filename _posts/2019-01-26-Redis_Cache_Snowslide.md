@@ -28,7 +28,7 @@ tags: Redis Cache
 
 ### 数据的持久化
 
-#### RDB 模式(point-in-time，默认持久化方式)
+#### RDB 模式(Redis DataBase，默认持久化方式)
 
 以快照的方式把数据写入文件，几十 G 可以保存为几 KB 的快照。
 
