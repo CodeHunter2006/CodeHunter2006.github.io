@@ -101,6 +101,10 @@ M 是真正的执行线程，P 在执行时会唤醒一个 M，然后拿所属�
 - **Hand Off**机制
   当本线程因为系统调用阻塞时，线程释放绑定的 P，把 P 转移给其他空闲的线程执行
 
+- 如何解决网络阻塞造成的用户态内核态切换？
+  Go 的 **netpoll** 包实现了这个功能。利用 **epoll**，在 send 和 receive 时利用非阻塞进行**前置检查**，
+  如果发现没有数据，则通过 **CAS** 机制设置一个 epoll 等待，将 goroutine 挂起，然后执行其他 goroutine。
+
 # 一些设计点
 
 - 当 goroutine 较多时，Runtime 会创建很多线程 M。当这些 G 执行完毕后，线程仍然不会释放，等待以后的执行。
@@ -125,7 +129,7 @@ M 是真正的执行线程，P 在执行时会唤醒一个 M，然后拿所属�
 # 其他
 
 - 可以利用 trace 工具用可视化的方式查看 G P M 的执行 trace，其中的 G 是有内部编号的。
-- 在启动时利用命令`GODEBUG=schedtrace=1000 ./xxx`可以打印 trace 信息到 console，其中`1000`表示快照间隔毫秒数
+- 在启动时利用命令`GODEBUG=schedtrace=1000 ./xxx`可以打印 goroutine trace 信息到 console，其中`1000`表示快照间隔毫秒数
 
 <br/>
 PS:<br/>
