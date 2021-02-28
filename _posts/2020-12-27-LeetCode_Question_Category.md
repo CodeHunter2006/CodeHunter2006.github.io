@@ -266,6 +266,17 @@ tags: Algorithm Leetcode
 ["377. Combination Sum IV" DFS C++]()
 ["377. Combination Sum IV" DP Golang]()
 
+### "395. Longest Substring with At Least K Repeating Characters"
+
+- 考点：滑窗、常数内尝试
+- 思路：
+  - 从"子数组连续"这个特性，想到用 SlidingWindow
+  - 控制窗内元素种类是个难点。由于字母集合总数有限，干脆尝试 1 ～ 26，共 26 次，不影响时间复杂度
+  - 在滑窗过程中记录几个关键参数：每种字母个数、已包含字母种类、当前未达到 k 个的字母种类数
+  - 在新增、删除元素时，维护好"当前未达到 k 个字母种类数"，然后当条件符合时更新最大长度结果
+
+["395. Longest Substring with At Least K Repeating Characters" SlidingWindow Golang]()
+
 ### "406. Queue Reconstruction by Height"
 
 - 插入法思路：
@@ -414,6 +425,16 @@ tags: Algorithm Leetcode
   - 只需要对"相同"的元素累加统计即可
   - 由于每个分量值`<9`，可以用一个排过序的两位数表示
   - 可以利用一个 100 个元素的 bucket 统计，这样就无需排序一次遍历就统计出来
+
+### "1178. Number of Valid Words for Each Puzzle"
+
+- 考点：
+  - 本题重点是元素数量巨大：`1 <= words.length <= 10^5`、`1 <= puzzles.length <= 10^4`，所以需要多处优化
+  - 分治，分两个阶段操作得到结果
+  - 二进制压缩保存特征值
+  - 极端数量下根据特征合并同类项，降低整体时间复杂度
+  - bitcount 算法
+- 思路：
 
 ### "1438. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit"
 

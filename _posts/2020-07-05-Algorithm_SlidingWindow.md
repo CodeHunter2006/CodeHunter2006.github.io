@@ -81,3 +81,44 @@ func max(a, b int) int {
     return b
 }
 ```
+
+### "395. Longest Substring with At Least K Repeating Characters" Golang
+
+```Go
+func longestSubstring(s string, k int) (ret int) {
+    for n := 1; n <= 26; n++ {
+        // 窗口内字母种类、窗口内小于k个的字母种类、左边
+        var setSize, lessK, l int
+        var record [26]int  // 窗内字母数量统计
+        for r, c := range s {
+            index := c-'a'
+            if record[index] == 0 {
+                setSize++
+                lessK++
+            }
+            record[index]++
+            if record[index] == k {
+                lessK--
+            }
+
+            for setSize > n {
+                idx := s[l]-'a'
+                if record[idx] == k {
+                    lessK++
+                }
+                record[idx]--
+                if record[idx] == 0 {
+                    setSize--
+                    lessK--
+                }
+                l++
+            }
+
+            if lessK == 0 {
+                ret = max(ret, r-l+1)
+            }
+        }
+    }
+    return ret
+}
+```

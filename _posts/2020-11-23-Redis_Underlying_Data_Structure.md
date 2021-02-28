@@ -135,6 +135,41 @@ typedef struct dictEntry{
 
 参考：[算法学习，极限数据结构之——跳跃表(Skip List)](/2019/07/07/Algorithm_Skiplist/)
 
+- 与红黑树相比 skiplist 有什么特性，为什么 Redis 要采用 skiplist? Redis 作者回答：
+  - 1. range 操作效率更高
+       Redis 经常要做`ZRANGE/ZREVRANGE`操作，skiplist 只要遍历就可以取得结果。而红黑树要进行中序遍历(比如利用栈操作)，在这种情况下，
+       skiplist 对**缓存局部性(cache locality)**应用较好，性能比红黑树要好。
+  - 2. 元素变更的性能更好
+       skiplist 删除或插入一个元素时，只需要变更几个链表指针，而红黑树需要大量平衡操作。而 Redis 的瓶颈往往在内存操作上，所以内存操作次数越少越好。
+  - 3. 节点对内存占用更少
+       红黑树的每个元素节点至少有左右两个孩子指针，所以指针数为 2n;而 skiplist 中间元素占 2 个指针(右、下两个方向)最底层元素只有一个向后的指针，
+       综合下来指针数为 1.33n，空间性能更好
+  - 4. 代码简单更易维护(修改、调试)
+       比如有人给我提了一个 ZRANK 的 patch，只用几行代码就实现了，现在这个代码已经在 master 里了。如果是复杂的红黑树，工作量将大得多。
+
+```
+There are a few reasons:
+
+1. They are not very memory intensive. It's up to you basically.
+Changing parameters about the probability of a node to have a given number of levels will make then less memory intensive than btrees.
+
+2. A sorted set is often target of many ZRANGE or ZREVRANGE operations, that is, traversing the skip list as a linked list.
+With this operation the cache locality of skip lists is at least as good as with other kind of balanced trees.
+
+3. They are simpler to implement, debug, and so forth.
+For instance thanks to the skip list simplicity I received a patch (already in Redis master) with augmented skip lists
+implementing ZRANK in O(log(N)). It required little changes to the code.
+
+About the Append Only durability & speed, I don't think it is a good idea to optimize Redis at cost of more code
+and more complexity for a use case that IMHO should be rare for the Redis target (fsync() at every command).
+Almost no one is using this feature even with ACID SQL databases, as the performance hint is big anyway.
+
+About threads: our experience shows that Redis is mostly I/O bound. I'm using threads to serve things from Virtual Memory.
+The long term solution to exploit all the cores, assuming your link is so fast that you can saturate a single core,
+is running multiple instances of Redis (no locks, almost fully scalable linearly with number of cores),
+and using the "Redis Cluster" solution that I plan to develop in the future.
+```
+
 # Int Set(整数集合)
 
 整数集合（intset）是 Redis 用于保存整数值的集合抽象数据类型，它可以保存类型为 int16_t、int32_t 或者 int64_t 的整数值，并且保证集合中不会出现重复元素。

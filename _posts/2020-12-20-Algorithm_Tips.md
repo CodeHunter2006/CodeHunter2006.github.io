@@ -30,7 +30,7 @@ dq 可以同时提供两个 queue，一个 queue 的队首是另一个的队尾
 示例：
 ["1438. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit" SlidingWindow+MonotoneQueue Golang]()
 
-# Tips
+# Skill
 
 ### **剪枝**
 
@@ -52,6 +52,15 @@ dq 可以同时提供两个 queue，一个 queue 的队首是另一个的队尾
     2. 不需要考虑映射关系，直接在原地操作即可
   - 坏处：
     1. 如果原数据和新数据边界不好划定，容易出错
+
+### 常数内尝试
+
+有时可以利用题目条件中某个参数数量有限，可以穷举所有该参数也不会影响时间复杂度，这时可用这种思路解决。
+
+- 示例：穷举所有不同字母数量。
+  ["395. Longest Substring with At Least K Repeating Characters" SlidingWindow Golang]()
+
+# Little Tips
 
 ### 数组中间元素下标
 
