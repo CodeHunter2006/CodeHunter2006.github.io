@@ -138,6 +138,9 @@ dq 可以同时提供两个 queue，一个 queue 的队首是另一个的队尾
   }
   ```
 
+- 自己实现 set
+  一般用 map[int]struct{} 可以实现 set，但有时为了快速判断是否存在节省代码，可以用 map[int]bool
+
 # C++ Tips
 
 ## C++语言特性
