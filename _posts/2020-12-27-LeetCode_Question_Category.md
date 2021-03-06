@@ -8,7 +8,14 @@ tags: Algorithm Leetcode
 ![LeetCode](/assets/images/2020-12-27-LeetCode_Category_1.jpg)
 记录 LeetCode 题型分类及解题思路
 
-# Array
+### "11. Container With Most Water"
+
+- 解法 1(推荐)：
+
+  - 高度、距离都是影响水量的值，其中高度的权重更大，所以在循环缩小距离时保持较高的高度让高度较小的一方遍历。
+
+- 解法 2：
+  - 利用动态规划法，分别计算当前位置左边最大高度、右边最大高度，算法较易理解，但是需要占用额外空间。
 
 ### "31. Next Permutation"
 
@@ -20,9 +27,7 @@ tags: Algorithm Leetcode
   3. 交换这两个位置。
   4. 将发生递减位置右边所有位置反转，呈现正序排列。
 
-["31. Next Permutation"]()
-
-# stack
+["31. Next Permutation" Array]()
 
 ### "32. Longest Valid Parentheses"
 
@@ -39,23 +44,19 @@ tags: Algorithm Leetcode
 
 ["32. Longest Valid Parentheses" Brute Force]()
 
-# HashTable
-
 ### "49. Group Anagrams"
 
 - 思路：
   利用 Anagram(异位词)特性，统计每个词的字母出现次数，生成一个"指纹"，然后通过 HashMap 收集相同指纹的词
 
-["49. Group Anagrams"]()
-
-# Binary Search
+["49. Group Anagrams" HashTable]()
 
 ### "33. Search in Rotated Sorted Array"
 
 - 思路：
   这道题是在二分查找的基础上，增加一层排除法逻辑，使得每次都能缩小一半查找范围。
 
-["33. Search in Rotated Sorted Array"]()
+["33. Search in Rotated Sorted Array" Binary Search]()
 
 ### "34. Find First and Last Position of Element in Sorted Array"
 
@@ -64,8 +65,6 @@ tags: Algorithm Leetcode
   所以只需要再查询`按排序下一个元素出现的位置-1`就可以得到末尾位置
 
 ["34. Find First and Last Position of Element in Sorted Array" Golang]()
-
-# Brute Force
 
 ### "42. Trapping Rain Water"
 
@@ -80,7 +79,7 @@ tags: Algorithm Leetcode
 - 思路 2:双指针
   按思路 1 计算每个水柱时，高度取决于较低的那个边。所以可以单独对高度较低的边进行遍历，这样只需要遍历一遍，并且无需额外空间
 
-["42. Trapping Rain Water" Golang]()
+["42. Trapping Rain Water" TwoPointers Golang]()
 
 ### "64. Minimum Path Sum"
 
@@ -240,6 +239,22 @@ tags: Algorithm Leetcode
 - 解法: "搜索空间缩减法 Search Space Reduction"
   利用双向有序的特性，操纵一个指针的两个位置，其中一个位置的起始位置偏大，另一个起始位置偏小，比如左下角(横向偏小，纵向偏大)。然后向上、向右移动指针，直到找到答案或超出边界。整个过程都保证了未来可探索到结果，但可探索空间在不断缩小。
 
+### "300. Longest Increasing Subsequence"
+
+- 考点：
+  - DP、LIS(最长上升子序列)
+- 思路：
+  - 原数组不能排序，否则无法取得最终结果
+  - 设`dp[i]`表示第 i 个位置的元素与前面形成的最长子序列长度，那么`dp[i]`可以由前面遍历推算出
+- 解法：
+  - 有状态转移方程`dp[i]=max(dp[j])+1`，`0≤j<i && num[j]<num[i]`
+  - `dp[i]`初始值设为 0，最后结果要`+1`，表示自身也算 1 的长度
+- 时间复杂度：O(n^2)
+
+["300. Longest Increasing Subsequence" DP Golang]()
+
+["300. Longest Increasing Subsequence" DP C++]()
+
 ### "322. Coin Change"
 
 - 考点：
@@ -251,6 +266,31 @@ tags: Algorithm Leetcode
   每次递归负责返回本层被选择和不选择两个结果
 
 ["337. House Robber III" Golang]()
+
+### "338. Counting Bits"
+
+- 解法 1: bit
+
+  - 利用`onesCount`算法，计算 0~n 每一个数的结果
+  - 时间复杂度：`O(n*32)`，假设 32 位整型
+
+- 解法 2: bit + dp
+  - 已知用`n&(n-1)`算法可以求得 n 去掉最后一个 1 的值
+  - 有基本规律`0 <= n&(n-1) < n`，所以任意 n 一定能用 n-1 推导出来，这正好符合动态规划特征
+  - 所以有动态转移公式`bits[x]=bits[x&(x−1)]+1`
+  - 时间复杂度：`O(n)`
+
+["338. Counting Bits" DP Golang]()
+
+### "354. Russian Doll Envelopes"
+
+- 解法 1: 二维元素一维化处理 + dp
+  - 思路：
+    - 这道题和`300. Longest Increasing Subsequence`看起来类似，就是判断每个元素有多少元素能装进去形成单调序列
+    - 但是这道题是二维的，可以先对其中一维(如宽度)进行排序，然后剩下一维可以参照**LIS**算法实现
+    - 注意在第一维有序基础上，第二维(如高度)要逆序，即(宽度相同的情况下)后面的保证无法装下前面的，这样避免第二维间的**后效性**
+
+["354. Russian Doll Envelopes" DP Golang]()
 
 ### "377. Combination Sum IV"
 
@@ -429,12 +469,18 @@ tags: Algorithm Leetcode
 ### "1178. Number of Valid Words for Each Puzzle"
 
 - 考点：
-  - 本题重点是元素数量巨大：`1 <= words.length <= 10^5`、`1 <= puzzles.length <= 10^4`，所以需要多处优化
+  - 本题重点是元素数量巨大：`1 <= words.length <= 10^5`、`1 <= puzzles.length <= 10^4`，
+    所以无法对所有 word 和 puzzle 两两比较，需要多处优化
   - 分治，分两个阶段操作得到结果
   - 二进制压缩保存特征值
   - 极端数量下根据特征合并同类项，降低整体时间复杂度
   - bitcount 算法
+  - bitSubset 算法
 - 思路：
+  - 首先对 word 遍历，提取特征值为 bitmap，如果 bitcount 符合要求则累加到 map 中
+  - 由于数量太大，而 puzzle 元素数较小(<=7)，所以直接对 puzzle 的二进制子集进行遍历
+
+["1178. Number of Valid Words for Each Puzzle" BinaryOperation Golang]()
 
 ### "1438. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit"
 

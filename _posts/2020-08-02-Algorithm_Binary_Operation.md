@@ -5,6 +5,54 @@ date: 2020-08-02 23:00:00 +0800
 tags: Algorithm Leetcode
 ---
 
+# 常用算法
+
+## 去掉二进制末尾的 1
+
+用下面方法可以将任意整型去掉末尾的 1，比如`0b1010 -> 0b1000`
+
+```Go
+ret := x & (x-1)
+```
+
+## OnesCount
+
+计算一个二进制数中位置为 1 的数量。
+可以用遍历每个位的方法，但是需要对每个位进行判断。但是更简单的是利用`x &= x - 1`的方式去掉最后一个 1，然后迭代取得结果。
+一般语言都会内置该函数，比如 Go 中`bits.OnesCount`
+
+```Go
+func onesCount(x int) (ones int) {
+    for ; x > 0; x &= x - 1 {
+        ones++
+    }
+    return
+}
+```
+
+## 枚举二进制子集
+
+用下面算法，可以输出某个二进制数的全部子集，所谓子集，就是把部分原本 1 的位置为 0。
+比如`101`的子集是：`101`、`100`、`001`、`0`
+
+- 子集包含原二进制数和 0
+
+```Go
+func getSubset(input uint32) (ret []uint32) {
+    subset := input
+    for {
+        ret = append(ret, subset)
+        subset = (subset-1)&input
+        if subset == input {
+            break
+        }
+    }
+    return ret
+}
+```
+
+# 题目
+
 ### 剑指 Offer 56 - I. 数组中数字出现的次数
 
 [题目](https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-lcof/)、官方解答[异或运算](https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-lcof/solution/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-by-leetcode/)
@@ -142,5 +190,42 @@ func hammingDistance(x int, y int) (count int) {
         x = x&(x-1)
     }
     return
+}
+```
+
+### "1178. Number of Valid Words for Each Puzzle"
+
+```Golang
+func findNumOfValidWords(words []string, puzzles []string) []int {
+    const PUZZLE_LENGTH = 7
+    cntMap := make(map[uint32]int)
+    for _, w := range words {
+        var bitmap uint32
+        for _, c := range w {
+            bitmap |= 1 << (c-'a')
+        }
+        if bits.OnesCount32(bitmap) <= PUZZLE_LENGTH {
+            cntMap[bitmap]++
+        }
+    }
+
+    ret := make([]int, len(puzzles))
+    for i, p := range puzzles {
+        var first uint32 = 1 << (p[0]-'a')
+        var bitmap uint32
+        for _, c := range p[1:] {
+            bitmap |= 1 << (c-'a')
+        }
+
+        subSet := bitmap
+        for {
+            ret[i] += cntMap[subSet|first]
+            subSet = (subSet-1)&bitmap
+            if subSet == bitmap {
+                break
+            }
+        }
+    }
+    return ret
 }
 ```

@@ -50,10 +50,17 @@ tags: Algorithm Leetcode
   - 有时要用二维数组`dp[i][j]`来存储中间值，最终可以只用一维数组，这时不要过早优化，完成之后再优化
 
 - 获得 DP 算法的步骤：
+
   1. 发现迭代规律，从最简单开始构造 dp 数据结构(map/vector)（通常 dp array 需要比实际数量+1，为了 padding 补齐初始值），选定维度和方向(从简单问题逐步复杂的方向)。
   2. 设定一个状态转移方程，dp[i] = dp[i-1]...，先设定初始值，然后从 1(或 n-2)开始循环后面的元素。
   3. 最后演化出最终结果。*对于连续的最长值的动态规划的关键是识别打断连续时，之前的记录应该怎么起作用。*有时转移方程熟练之后可以发现并不需要存储大量内容就可以进行迭代。
-  - DP 一般可以由 dfs 转化而来，dfs 是从上到下的，而 dp 是从下到上（子问题结果逐步演化为最终结果）的，演化过程一般是：recur => recur + memory => dp array => dp。例：`740. Delete and Earn`、`72. Edit Distance`、`975. Odd Even Jump`
+
+- DP 一般可以由 dfs 转化而来，
+  dfs 是从上到下的，而 dp 是从下到上（子问题结果逐步演化为最终结果）的，
+  演化过程一般是：recur => recur + memory => dp array => dp。
+  例：`740. Delete and Earn`、`72. Edit Distance`、`975. Odd Even Jump`
+  - recur + memory
+    可以将已计算的结果保存、重用。如果能控制 memory 中元素的"生长方向"则可以转换为"dp array"，也就是找到**状态转移方程**
 
 ### 思考： DP 和 DFS、BFS 的关系
 
@@ -147,6 +154,13 @@ func BinaryDivide(cnt, vol, pri int) (ret [][]int) {
 
 ## 最大最小值
 
+### LIS(Longest Increasing Subsequence)最大上升子序列
+
+如：`300. Longest Increasing Subsequence`
+
+- 每一步由过去所有 dp 结果遍历统计出
+- 时间复杂度 O(n^2)
+
 ### 编辑距离问题(最小值)
 
 例如`72. Edit Distance`
@@ -155,7 +169,13 @@ func BinaryDivide(cnt, vol, pri int) (ret [][]int) {
 
 ## 判断存在性
 
-## 动态规划的路径打印
+# 综合类型
+
+## dp + bit
+
+`338. Counting Bits`
+
+# 动态规划的路径打印
 
 # 示例
 
@@ -195,7 +215,92 @@ func wordBreak(s string, wordDict []string) bool {
 }
 ```
 
-### "377. Combination Sum IV" Golang DP
+### "300. Longest Increasing Subsequence"
+
+```Go
+func lengthOfLIS(nums []int) int {
+    dp := make([]int, len(nums))
+    for i := 0; i < len(nums); i++ {
+        for j := 0; j < i; j++ {
+            if nums[i] > nums[j] {
+                dp[i] = max(dp[i], dp[j]+1)
+            }
+        }
+    }
+    return max(dp...)+1
+}
+
+func max(arr ...int) int {
+    ret := ^int(^uint(0)>>1)
+    for _, v := range arr {
+        if v > ret {
+            ret = v
+        }
+    }
+    return ret
+}
+```
+
+```C++
+int lengthOfLIS(vector<int>& nums) {
+	vector<int> dp;
+    for (auto i : nums) {
+        auto it = lower_bound(dp.begin(), dp.end(), i);
+        if (it == dp.end()) dp.push_back(i);
+        else *it = i;
+    }
+    return dp.size();
+}
+```
+
+### "338. Counting Bits" Golang
+
+```Go
+func countBits(num int) []int {
+    dp := make([]int, num+1)
+    for i := 1; i <= num; i++ {
+        dp[i] = dp[i&(i-1)]+1
+    }
+    return dp
+}
+```
+
+### "354. Russian Doll Envelopes" Golang
+
+```Go
+func maxEnvelopes(envelopes [][]int) int {
+    if len(envelopes) == 0 {
+        return 0
+    }
+
+    sort.Slice(envelopes, func(a, b int) bool {
+        return envelopes[a][0] < envelopes[b][0] || (envelopes[a][0] == envelopes[b][0] && envelopes[a][1] > envelopes[b][1])
+    })
+
+    dp := make([]int, len(envelopes))
+    for i := 0; i < len(envelopes); i++ {
+        for j := 0; j < i; j++ {
+            if envelopes[i][1] > envelopes[j][1] {
+                dp[i] = max(dp[i], dp[j]+1)
+            }
+        }
+    }
+
+    return max(dp...)+1
+}
+
+func max(arr ...int) int {
+    ret := ^int(^uint(0)>>1)    // set to MIN_INT
+    for _, v := range arr {
+        if v > ret {
+            ret = v
+        }
+    }
+    return ret
+}
+```
+
+### "377. Combination Sum IV" Golang
 
 ```Go
 func combinationSum4(nums []int, target int) int {
