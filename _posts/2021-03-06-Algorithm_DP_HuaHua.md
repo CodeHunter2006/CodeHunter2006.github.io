@@ -37,6 +37,7 @@ tags: Algorithm Leetcode
 | 2.2(2) | O(nm)     | O(kmn)      | O(1)       | O(kmn)  | O(kmn)->O(mn) | 688, Floyd-Warshall, 576, 741 |
 
 - 列名
+
   - Case 模式，1 表示输入为 1 维，2 表示输入为 2 维，`(x)`表示难易度(数字越大越难)
   - Input 输入规模
   - Subproblems 子问题数
@@ -44,6 +45,9 @@ tags: Algorithm Leetcode
   - Time 时间复杂度
   - Space 空间复杂度，`->`表示可以优化
   - Problem IDS 在 LeetCode 中的序号，`()`表示非常相似的题
+
+- 规律
+  - 对于`Depends on O(1)`的，通常 Space 可以降维
 
 ## 模板
 
@@ -154,4 +158,50 @@ dp[i][j] = max(dp[i][k-1] + dp[k+1][j] + C)
 LC 664. Strange Printer
 dp[i][j] := min steps to print A[i->j]
 dp[i][j] = min(dp[i][k] + dp[k+1][j-1])
+```
+
+### 2.1
+
+```
+Input O(mn)
+dp[i][j] := sol of (A[0->i][0->j])
+each subproblem depends on O(1) subproblems
+Time O(mn)
+Space O(mn)
+```
+
+```py
+Template
+
+dp = new int[n][m]      # init a 2D array
+for i = 1 to n:         # row top->bottom
+    for j = 1 to m:     # col left->right
+        dp[i][j] = f(dp[i-1][j], dp[i][j-1])
+return dp[n][m] / max(dp[n])
+```
+
+### 2.2
+
+```
+Input O(mn)
+dp[k][i][j] = sol of (A[0->i][0->j]) after k steps
+each subproblem depends on O(1) subproblems
+Time: O(kmn)
+Space: O(kmn) -> O(mn)
+```
+
+```py
+LC 688. Knight Probability in Chessboard
+dp[k][i][j] = sum(dp[k][i+di][j+dj])
+```
+
+```py
+Template
+
+dp = new int[K][n][m]       # init a 3D array
+for k = 1 to K:             # steps / problem size
+    for i = 1 to n:
+        for j = 1 to m:
+            dp[k][i][j] = f(dp[k-1][i+di][j+dj])
+return dp[K][n][m] / g(dp[K])
 ```

@@ -193,6 +193,78 @@ for (int i = 0; i < nums.size(); ++i) {
 return res;
 ```
 
+### "131. Palindrome Partitioning" Golang
+
+```Go
+func partition(s string) [][]string {
+    N := len(s)
+    dp := make([][]bool, N)
+    for i := range dp {
+        dp[i] = make([]bool, N)
+        for j := range dp[i] {
+            dp[i][j] = true
+        }
+    }
+    for i := N-1; i >=0; i-- {
+        for j := i+1; j < N; j++ {
+            dp[i][j] = s[i]==s[j] && dp[i+1][j-1]
+        }
+    }
+
+    var ret [][]string
+    var splits []string
+    var dfs func(int)
+    dfs = func(i int) {
+        if i == N {
+            ret = append(ret, append([]string(nil), splits...))
+        }
+        for j := i; j < N; j++ {
+            if dp[i][j] {
+                splits = append(splits, s[i:j+1])
+                dfs(j+1)
+                splits = splits[:len(splits)-1]
+            }
+        }
+    }
+    dfs(0)
+    return ret
+}
+```
+
+### "132. Palindrome Partitioning II" Golang
+
+```Go
+func minCut(s string) int {
+    N := len(s)
+    dp1 := make([][]bool, N)
+    for i := range dp1 {
+        dp1[i] = make([]bool, N)
+        for j := range dp1[i] {
+            dp1[i][j] = true
+        }
+    }
+    for i := N-1; i >= 0; i-- {
+        for j := i+1; j < N; j++ {
+            dp1[i][j] = s[i]==s[j] && dp1[i+1][j-1]
+        }
+    }
+
+    dp2 := make([]int, N)
+    for i := range dp2 {
+        if dp1[0][i] {
+            continue
+        }
+        dp2[i] = math.MaxInt64
+        for j := 0; j < i; j++ {
+            if dp1[j+1][i] && dp2[j]+1 < dp2[i] {
+                dp2[i] = dp2[j]+1
+            }
+        }
+    }
+    return dp2[N-1]
+}
+```
+
 ### "139. Word Break"
 
 ```Go

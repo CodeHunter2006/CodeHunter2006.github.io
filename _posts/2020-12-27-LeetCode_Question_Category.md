@@ -136,6 +136,26 @@ tags: Algorithm Leetcode
 
 ["123. Best Time to Buy and Sell Stock III" Golang]()
 
+### "131. Palindrome Partitioning"
+
+- 解法：backtracking + dp
+  - 设 dp[i][j] 为 "i~j 是否为回文子串"，先用 dp 的方法预处理，求出所有连续字串是否为回文字串
+  - 用回溯的方法尝试从 i~j 进行分割，然后 dfs 剩下的字符串
+- 思路：
+  - dp 的初始状态是所有值均为 true，然后逐步计算出结果，`dp[i][j] = s[i]==s[j] && dp[i+1][j-1]`
+  - dp 的 i、j 两层循环方向很重要，为了符合`i<j`的语义，要控制好遍历方向
+  - backtracking 时要注意做好数组的复制，避免回溯删除动作影响了最终结果
+
+["131. Palindrome Partitioning" Golang]()
+
+### "132. Palindrome Partitioning II"
+
+- 解法：两次 dp
+  - 参照`131`可以生成一个辅助 dp1，可以快速求得 dp1[i][j]是否符合回文
+  - dp2[j] 表示到 j 为止最少的分割次数，设 i 为一个分割点(0 <= i <= j)使得 i+1~j 是回文，即`dp1[i+1][j] == true`，`dp2[j] = min(dp2[j], dp2[i]+1)`
+
+["132. Palindrome Partitioning II" Golang]()
+
 ### "139. Word Break"
 
 - 思路：dp
@@ -394,6 +414,14 @@ tags: Algorithm Leetcode
 
 ["560. Subarray Sum Equals K" Golang]()
 
+### "688. Knight Probability in Chessboard"
+
+- 解法：dp
+  与之前的"935. Knight Dialer"原理相同，但是增加了两点复杂度：
+  1. 可落子的区域变大，可能性更多，需要用两个大的棋盘来演化，并且统计数值会非常大。
+  2. 答案要求计算概率而不是统计数值，由于统计数值过大，中间计算过程就会溢出(超出 double 型)，
+     所以棋盘要存储每一位置的概率(double)，并且每次引用上一次演化结果时要"/8.0"(上一次位置到当前位置有 8 种可能结果)而不是累计到最后"/pow(8.0, K)"。
+
 ### "765. Couples Holding Hands"
 
 - 考点：
@@ -435,6 +463,12 @@ tags: Algorithm Leetcode
 ["912. Sort an Array" QuickSort C++]()
 
 ["912. Sort an Array" QuickSort Golang]()
+
+### 935. Knight Dialer"
+
+- 解法：
+  此题看似有数学规律，实际只能靠基本演化逻辑，通过动态规划推导出最后结果。
+  每次演化都要从之前的某个位置过来，所以只需要两组位置计数不断演化即可。
 
 ### "1004. Max Consecutive Ones III"
 

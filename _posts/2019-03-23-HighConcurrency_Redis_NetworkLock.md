@@ -5,7 +5,9 @@ date: 2019-03-23 10:00:00 +0800
 tags: HighConcurrency Redis
 ---
 
-PS: Redis 官网提出[Redlock 算法](http://www.redis.cn/topics/distlock.html)，并推荐了一个 Go 实现的开源网络锁[redsync](https://github.com/go-redsync/redsync)，实现了所有网络锁要点、接口比较友好，本文可以作为实现思路的参考。
+PS: Redis 官网提出[Redlock 算法](http://www.redis.cn/topics/distlock.html)，
+并推荐了一个 Go 实现的开源网络锁[redsync](https://github.com/go-redsync/redsync)，
+实现了所有网络锁要点、接口比较友好，本文可以作为实现思路的参考。
 
 在网络集群中，有时需要多个网络节点争抢一个资源，这时为了保证线程安全，要进行网络锁。
 
@@ -137,3 +139,17 @@ func TestNetLock(t *testing.T) {
 # 扩展功能
 
 - 通常网络锁有"推迟"功能，可以继续占用当前锁，实现逻辑同样是用 lua 脚本，检查锁存在后更新 TTL
+
+# 分布式问题
+
+Redis 的主从结构或集群，是在 CAP 中去了 AP。如果极端情况下，主设置了新值但没来得及同步给从就挂了，
+这种情况就可能发生锁丢失的情况，可能导致多个进程都可以抢到锁，产生严重问题。
+
+- 方案：
+  设置一次 Key 要多个 Redis 实例同时操作，在 redlock 中有个变量**quorum(法定人数)**表示至少有多少个 redis 连接返回了`SetNX`成功后，
+  如果成功数大于 quorum 则判定为成功，否则执行回滚操作。quorum 数量为`(实例数/2)+1`
+- 缺点：
+  由于需要多个实例操作，所以性能受影响，每秒只能锁百次，这个逻辑类似 zookeeper 的网络锁。
+  另外，即便是多节点，redlock 算法还是可能发生问题，并不是完全安全的分布式锁。[讨论连接《Is Redlock safe?》](http://antirez.com/news/101)
+
+redlock 算法对于单节点、有主从的情况下，出错概率是极低的，对于大多数场景是可用的。
