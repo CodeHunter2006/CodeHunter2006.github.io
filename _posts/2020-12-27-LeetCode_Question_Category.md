@@ -275,6 +275,23 @@ tags: Algorithm Leetcode
 
 ["300. Longest Increasing Subsequence" DP C++]()
 
+### "312. Burst Balloons"
+
+- 考点：范围 DP
+- 思路：
+  - 把戳破气球反向理解为从两边为 1 的数组中增加气球，`增加新气球时分数 = 新增气球*左边区域最高分*右边区域分数`
+  - 每个尝试新增气球被认为是一段区间内第一次插入的气球
+  - 先从范围为 1 的区间开始计算，逐步扩大范围，相当于除第一次插入外，其他都已经计算出结果
+- 步骤：
+  - 在数组左右两遍增加一个值为 1 的元素，以便 dp 使用
+  - 初始化 `dp[i][j]`表示 `[i,j]` 可以取得的最大分数
+  - 第一层循环 l,1->n 表示每次处理的判断范围
+  - 第二层循环 i,1->n 遍历所有位置，j = i+l-1
+  - 第三层循环 k,i->j 遍历范围内所有位置，作为分割点
+  - `dp[i][j] = max(dp[i][j], dp[i][k-1] + vals[i-1]*vals[k]*vals[j+1] + dp[k+1][j])`s
+
+["312. Burst Balloons" Golang]()
+
 ### "322. Coin Change"
 
 - 考点：
@@ -413,6 +430,17 @@ tags: Algorithm Leetcode
   - 起始处，要有`map[0]=1`，以便统计独立元素直接匹配的情况
 
 ["560. Subarray Sum Equals K" Golang]()
+
+### "664. Strange Printer"
+
+- 解法 1: 范围 DP + DFS + mem
+- 思路：
+  - dp[i][j] 表示 i~j 范围最小打印的次数
+  - 对所有范围递归求解，每个范围尝试每个点为分割点
+  - 如果分割点和末尾字符一致，则末尾字符可以少打印一次，`dp[i][j] = min(dp[i][j], dfs(s, i, k) + dfs(s, k+1, j-1))`
+  - 在递归开始要先对当前 dp 赋一个保底值
+
+["664. Strange Printer" DP]()
 
 ### "688. Knight Probability in Chessboard"
 

@@ -325,6 +325,32 @@ int lengthOfLIS(vector<int>& nums) {
 }
 ```
 
+### "312. Burst Balloons"
+
+```Go
+func maxCoins(nums []int) int {
+    N := len(nums)
+    vals := make([]int, N+2)
+    vals[0], vals[N+1] = 1, 1
+    for i := range nums {
+        vals[i+1] = nums[i]
+    }
+    dp := make([][]int, N+2)
+    for d := range dp {
+        dp[d] = make([]int, N+2)
+    }
+    for l := 1; l <= N; l++ {
+        for i := 1; i+l < N+2; i++ {
+            j := i + l - 1
+            for k := i; k <= j; k++ {
+                dp[i][j] = max(dp[i][j], dp[i][k-1] + vals[i-1]*vals[k]*vals[j+1] + dp[k+1][j])
+            }
+        }
+    }
+    return dp[1][N]
+}
+```
+
 ### "338. Counting Bits" Golang
 
 ```Go
@@ -448,6 +474,36 @@ func change(amount int, coins []int) int {
         }
     }
     return dp[amount]
+}
+```
+
+### "664. Strange Printer" Golang
+
+```Go
+func strangePrinter(s string) int {
+    N := len(s)
+    dp := make([][]int, N)
+    for i := range dp {
+        dp[i] = make([]int, N)
+    }
+    var dfs func(string, int, int) int
+    dfs = func(s string, i, j int) int {
+        if i > j {
+            return 0
+        } else if dp[i][j] > 0 {
+            return dp[i][j]
+        }
+
+        dp[i][j] = 1 + dfs(s, i, j-1)
+        for k := i; k < j; k++ {
+            if s[k] == s[j] {
+                // k 和 j 位置的打印次数算在前面，后面可以少算这两个字符
+                dp[i][j] = min(dp[i][j], dfs(s, i, k) + dfs(s, k+1, j-1))
+            }
+        }
+        return dp[i][j]
+    }
+    return dfs(s, 0, N-1)
 }
 ```
 
