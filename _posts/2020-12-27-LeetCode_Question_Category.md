@@ -93,6 +93,17 @@ tags: Algorithm Leetcode
   2. 初始化第 0 行和第 0 列，然后遍历计算 dp[i][j]。转移公式是：dp[i][j] = min(dp[i-1][j]+1, min(dp[i][j-1]+1, dp[i-1][j-1] + (word1[i] == word2[j]? 0, 1)))。
   3. 最后返回 dp[m][n]。
 
+["72. Edit Distance" DP Golang]()
+
+### "73. Set Matrix Zeroes"
+
+- 考点：
+  - "in place"思想
+  - 二进制压缩，用单独标记记录第一行和第一列
+  - 利用逆序处理，利用第一行的标记作用
+
+["73. Set Matrix Zeroes" Array C++]()
+
 ### "78. Subsets"
 
 - 迭代法：

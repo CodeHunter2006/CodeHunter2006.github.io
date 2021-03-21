@@ -179,6 +179,33 @@ func BinaryDivide(cnt, vol, pri int) (ret [][]int) {
 
 # 示例
 
+### "72. Edit Distance"
+
+```Golang
+func minDistance(word1 string, word2 string) int {
+    M, N := len(word1), len(word2)
+    dp := make([][]int, M+1)
+    for i := range dp {
+        dp[i] = make([]int, N+1)
+        dp[i][0] = i
+    }
+    for j := range dp[0] {
+        dp[0][j] = j
+    }
+    for i := 1; i <= M; i++ {
+        for j := 1; j <= N; j++ {
+            dp[i][j] = dp[i-1][j-1]+1
+            if word1[i-1] == word2[j-1] {
+                dp[i][j] = dp[i-1][j-1]
+            }
+            dp[i][j] = min(dp[i][j], dp[i-1][j]+1)
+            dp[i][j] = min(dp[i][j], dp[i][j-1]+1)
+        }
+    }
+    return dp[M][N]
+}
+```
+
 ### "78. Subsets" C++
 
 ```C++

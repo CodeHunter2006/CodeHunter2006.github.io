@@ -32,6 +32,34 @@ func nextPermutation(nums []int)  {
 }
 ```
 
+### "73. Set Matrix Zeroes"
+
+```C++
+void setZeroes(vector<vector<int>>& matrix) {
+    if (matrix.empty() || matrix[0].empty()) return;
+    const int M = matrix.size();
+    const int N = matrix[0].size();
+    bool isCol = false;
+    for (int x = 0; x < M; ++x) {
+        if (matrix[x][0] == 0)	// 记录未来1列是否置0
+            isCol = true;
+        for (int y = 1; y < N; ++y) {	// 从第2列遍历，把第1列作为标志位列
+            if (matrix[x][y] == 0)
+                matrix[0][y] = matrix[x][0] = 0;
+        }
+    }
+    for (int x = M-1; x >= 0; --x) {	// 倒叙行遍历，利用第一行的标记功能
+        for (int y = 1; y < N; ++y) {
+            if (matrix[0][y] == 0 || matrix[x][0] == 0)
+                matrix[x][y] = 0;
+        }
+        if (isCol) {
+            matrix[x][0] = 0;
+        }
+    }
+}
+```
+
 ### "169. Majority Element" Golang
 
 ```Go
