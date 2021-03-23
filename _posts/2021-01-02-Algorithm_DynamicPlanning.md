@@ -449,11 +449,6 @@ func combinationSum4(nums []int, target int) int {
 
 ```Go
 func canPartition(nums []int) bool {
-    n := len(nums)
-    if n < 2 {
-        return false
-    }
-
     sum, max := 0, 0
     for _, v := range nums {
         sum += v
@@ -465,7 +460,7 @@ func canPartition(nums []int) bool {
         return false
     }
 
-    target := sum / 2
+    target := sum>>1
     if max > target {
         return false
     }

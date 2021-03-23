@@ -503,11 +503,23 @@ tags: Algorithm Leetcode
 
 ["912. Sort an Array" QuickSort Golang]()
 
-### 935. Knight Dialer"
+### "935. Knight Dialer"
 
 - 解法：
   此题看似有数学规律，实际只能靠基本演化逻辑，通过动态规划推导出最后结果。
   每次演化都要从之前的某个位置过来，所以只需要两组位置计数不断演化即可。
+
+### "974. Subarray Sums Divisible by K"
+
+- 考点：
+  - 连续整数组成的子序列，可以利用 sum(i,j)来快速表达
+  - Math: 同余定理，`(a-b)%m == 0 <=> a%m == b%m == k`，如果两数之差可以被 m 整除，那么两数分别对 m 取余的值相同
+  - 利用 HashTable 对已存在元素累加
+- 思路：
+  - 设 P[i] 是前面 i 个数累加和，`sum(i,j) == P[j]-P[i-1]`
+  - 根据同余定理`sum(i,j)%K == 0 <=> P[j]%K == P[i-1]%K`
+
+["974. Subarray Sums Divisible by K" HashTable Golang]()
 
 ### "1004. Max Consecutive Ones III"
 

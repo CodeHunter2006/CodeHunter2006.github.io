@@ -49,3 +49,18 @@ func subarraySum(nums []int, k int) (ret int) {
     return ret
 }
 ```
+
+### "974. Subarray Sums Divisible by K"
+
+```Go
+func subarraysDivByK(A []int, K int) int {
+    mem, sum, count := map[int]int{0:1}, 0, 0
+    for _, a := range A {
+        sum += a
+        module := (sum%K+K)%K
+        count += mem[module]
+        mem[module]++
+    }
+    return count
+}
+```
