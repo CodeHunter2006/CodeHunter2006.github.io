@@ -666,10 +666,17 @@ word, line, character, and byte count
 
 ## sed
 
-stream editor，
+stream editor，用脚本编辑文本文件。
 
 - `sed -n '100,200p' filename`
   截取文件第 100 行到 200 行
+
+```sh
+sed -i "" "s/要查找的文本/替换后的文本/g" `grep -rl --include='*.go' "要查找的文本" /指定根目录`
+```
+
+- 批量替换指定文件夹下的所有文件内容，递归所有子文件夹
+  - `-i`后的第一个字符串可以指定备份文件的名称，如果不想备份，可以指定为`""`
 
 ## tailf
 

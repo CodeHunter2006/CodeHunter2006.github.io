@@ -39,15 +39,26 @@ tags: Algorithm Leetcode
 - 在逻辑较为复杂时，可以先将逻辑嵌套写出来，然后再进行精简。一上来就精简可能会造成逻辑复杂，导致 case miss。
 - 在 leetcode 中，可以通过 cout 输出 log。
 - 看到题目中规模 n 的范围是 500~1000 数量级，说明题目不能用搜索可能性空间的 dfs 解法而要用 DP 来做，因为 500 对于 O(n2)<bf>来说太小了不够测，而对 O(nn)<dfs>来说足够超时了。
-- 在 leetcode 中，认为红黑树的创建、遍历过程为 O(nlogn\*) ≈ O(n)，红黑树被广泛应用于 set、map 系列中。
+- 在 leetcode 中，认为红黑树的创建、遍历过程为`O(nlogn*) ≈ O(n)`，红黑树被广泛应用于 set、map 系列中。
 - 在 double 型运算中，通常用 eps = 1e-6(10^-6)为期望(expects)测精度。
 - leetcode 中经常要对 1000000007 取模，可以简写为 const int MOD = 1e9+7。
 
 # 数据结构
 
+## Stack(栈)
+
+符合 FILO(先进后出)，从栈顶入从栈顶出
+
+### Stack 应用：Monotone Stack(单调栈)
+
+可以在遍历过程中保存到目前为止的一系列有序极值
+
+示例：
+[`456. 132 Pattern`]()
+
 ## Queue(队列)
 
-符合 FIFO(先入先出)，一般从队尾入队，队首出队
+符合 FIFO(先进先出)，一般从队尾入队，队首出队
 
 ### DQueue(double queue，双向队列、双端队列)
 
@@ -57,7 +68,7 @@ dq 可以同时提供两个 queue，一个 queue 的队首是另一个的队尾
 - 也可以用 linkList 代替，只要使用 linkList 操作接口子集就可以
 - 用 C++的 vector 或 Go 的 slice 也可以实现，但是队首出队后空间会被浪费
 
-#### dq 应用：Monotone Queue(单调队列)
+#### DQueue 应用：Monotone Queue(单调队列)
 
 单调队列用 dq 实现，队列中的元素始终保持有序，队首始终保持最值。
 队首元素按顺序出队、队尾元素可以在遍历过程中入队或出队来维护队列元素值有序。

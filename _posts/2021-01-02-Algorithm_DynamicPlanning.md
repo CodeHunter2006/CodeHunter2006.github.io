@@ -449,36 +449,24 @@ func combinationSum4(nums []int, target int) int {
 
 ```Go
 func canPartition(nums []int) bool {
-    sum, max := 0, 0
-    for _, v := range nums {
-        sum += v
-        if v > max {
-            max = v
-        }
+    sum := 0
+    for _, n := range nums {
+        sum += n
     }
     if sum & 1 == 1 {
         return false
     }
-
-    target := sum>>1
-    if max > target {
-        return false
-    }
-
-    // dp[i][j] 表示考虑第i个元素时，是否可以达到j这个总数
-    // dp[i][j] = 不取i | 取i = dp[i-1][j] | dp[i-1][j-v]
-    // 将dp精简为一维数组dp[j]，0 <= j <= target，其中 0 表示"什么都不取"所以一定为 true
-    dp := make([]bool, target+1)
+    tar := sum>>1
+    dp := make([]bool, tar+1)
     dp[0] = true
-    for i := 0; i < len(nums); i++ {
-        for j := target; j >= 0; j-- {
-            if j - nums[i] >= 0 {
-                dp[j] = dp[j] || dp[j-nums[i]]
-            }
+
+    for _, n := range nums {
+        for i := tar; i > 0 && (i-n) >= 0; i-- {
+            dp[i] = dp[i] || dp[i-n]
         }
     }
 
-    return dp[target]
+    return dp[tar]
 }
 ```
 
