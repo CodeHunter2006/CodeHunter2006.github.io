@@ -45,11 +45,34 @@ tags: Algorithm Leetcode
 
 # 数据结构
 
+## Array(数组)
+
+## LinkedList(链表)
+
+单向链表、双向链表、环状链表(Ring)
+
+### 算法：快慢指针法
+
+用于判断链表中是否存在回路，以及交叉点的位置。
+
+对于一个有向单链表或类似的可形成环装的结构，为了判断是否存在回路(loop)，
+可以分别用快、慢指针遍历，快指针每次走两步、慢指针每次走一步，如果快指针与慢指针在某个位置重叠了，
+说明存在回路。例:"457. Circular Array Loop"、"141. Linked List Cycle"。
+对于需要快速跳转到单链表结尾判断长度，并从中间开始操作的情况，也可以使用快慢指针法。例："234. Palindrome Linked List"。
+
+### 技巧：添加辅助头节点
+
+遍历处理链表时往往头节点的处理非常复杂，
+可以 new 一个辅助 dummyHead 节点，设置合适的 Val 值，将 Next 设置为原 head，这样就可以无差别遍历了。
+
+示例：
+[`82. Remove Duplicates from Sorted List II` Golang]()
+
 ## Stack(栈)
 
 符合 FILO(先进后出)，从栈顶入从栈顶出
 
-### Stack 应用：Monotone Stack(单调栈)
+### 算法：Monotone Stack(单调栈)
 
 可以在遍历过程中保存到目前为止的一系列有序极值
 
@@ -68,7 +91,7 @@ dq 可以同时提供两个 queue，一个 queue 的队首是另一个的队尾
 - 也可以用 linkList 代替，只要使用 linkList 操作接口子集就可以
 - 用 C++的 vector 或 Go 的 slice 也可以实现，但是队首出队后空间会被浪费
 
-#### DQueue 应用：Monotone Queue(单调队列)
+#### 算法：Monotone Queue(单调队列)
 
 单调队列用 dq 实现，队列中的元素始终保持有序，队首始终保持最值。
 队首元素按顺序出队、队尾元素可以在遍历过程中入队或出队来维护队列元素值有序。

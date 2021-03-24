@@ -117,6 +117,15 @@ tags: Algorithm Leetcode
 
 ["78. Subsets" Golang]()
 
+### "82. Remove Duplicates from Sorted List II"
+
+- 思路：
+  - 先创建一个 dummyHead，Val 值为`-101`
+  - preTail 指向前面的最后一个元素
+  - 一旦判断当前元素存在重复，则 for 循环跳过所有相同值元素
+
+["82. Remove Duplicates from Sorted List II" Golang]()
+
 ### "84. Largest Rectangle in Histogram"
 
 - 这道题的**单调栈**解题思路（时间复杂度 O(n)）很重要，在很多其他题中都会用到。

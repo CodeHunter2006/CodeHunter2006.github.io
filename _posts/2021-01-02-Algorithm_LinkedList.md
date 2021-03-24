@@ -7,6 +7,27 @@ tags: Algorithm Leetcode
 
 记录 Linked List 的算法实现
 
+### "82. Remove Duplicates from Sorted List II"
+
+```Go
+func deleteDuplicates(head *ListNode) *ListNode {
+    dummyHead := &ListNode{ Val: -101, Next: head }
+    for preTail, cur := dummyHead, head; cur != nil; {
+        if cur.Next != nil && cur.Val == cur.Next.Val {
+            curVal := cur.Val
+            for cur != nil && cur.Val == curVal {
+                cur = cur.Next
+            }
+            preTail.Next = cur
+        } else {
+            preTail = cur
+            cur = cur.Next
+        }
+    }
+    return dummyHead.Next
+}
+```
+
 ### "142. Linked List Cycle II" Golang
 
 ```Go
