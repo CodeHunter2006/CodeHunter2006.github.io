@@ -81,6 +81,11 @@ tags: Algorithm Leetcode
 
 ["42. Trapping Rain Water" TwoPointers Golang]()
 
+### "61. Rotate List"
+
+- 难点：
+  - 题目最后列出限制条件`0 <= k <= 2 * 10^9`，所以要先遍历一遍计算总结点数 n，然后用用总节点数取模计算出跳转数
+
 ### "64. Minimum Path Sum"
 
 - 思路：这道题有较好的 DP 解决方案，所以用 DFS 时性能相比较差就会超时。解决思路：从右下角开始动态规划，计算每个下一个位置可能的最小值。利用原空间就可以完整 DP 过程。
