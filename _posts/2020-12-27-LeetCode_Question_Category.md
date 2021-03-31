@@ -644,6 +644,11 @@ tags: Algorithm Leetcode
 - 思路：
   关键字`contiguous`，所以考虑用 sliding window
 
+### "1006. Clumsy Factorial"
+
+- 思路：
+  利用 stack 进行无括号的四则运算，乘除直接计算、加减入栈，最后累加栈中所有元素
+
 ### "1036. Escape a Large Maze"
 
 - 考点：bfs 稀疏矩阵 极限思想 几何
