@@ -7,6 +7,45 @@ tags: Algorithm Leetcode
 
 记录 Array 的算法实现
 
+# BinarySearch(二分查找)
+
+```C++
+int searchInsert(vector<int>& nums, int target) {
+    int n = nums.size();
+    int left = 0, right = n - 1, ans = n;
+    while (left <= right) {
+        int mid = ((right - left) >> 1) + left;
+        if (target <= nums[mid]) {
+            ans = mid;
+            right = mid - 1;
+        } else {
+            left = mid + 1;
+        }
+    }
+    return ans;
+}
+```
+
+## LowerBound
+
+sort.Search Go 官方实现
+
+```Go
+func Search(n int, f func(int) bool) int {
+	i, j := 0, n
+	for i < j {
+		h := int(uint(i+j) >> 1) // avoid overflow when computing h
+		// i ≤ h < j
+		if !f(h) {
+			i = h + 1 // preserves f(i-1) == false
+		} else {
+			j = h // preserves f(j) == true
+		}
+	}
+	return i
+}
+```
+
 ### "31. Next Permutation" Golang
 
 ```Go
@@ -57,6 +96,16 @@ void setZeroes(vector<vector<int>>& matrix) {
             matrix[x][0] = 0;
         }
     }
+}
+```
+
+### "74. Search a 2D Matrix" LowerBound
+
+```Go
+func searchMatrix(matrix [][]int, target int) bool {
+    m, n := len(matrix), len(matrix[0])
+    i := sort.Search(m*n, func(i int) bool {return matrix[i/n][i%n] >= target})
+    return i<m*n && matrix[i/n][i%n] == target
 }
 ```
 

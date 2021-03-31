@@ -44,6 +44,8 @@ tags: Algorithm Leetcode
 
 ["32. Longest Valid Parentheses" Brute Force]()
 
+### "35. Search Insert Position"
+
 ### "49. Group Anagrams"
 
 - 思路：
@@ -108,6 +110,25 @@ tags: Algorithm Leetcode
   - 利用逆序处理，利用第一行的标记作用
 
 ["73. Set Matrix Zeroes" Array C++]()
+
+### "74. Search a 2D Matrix"
+
+- 解法 1: 逐步贴近法
+  - 利用横纵分别有序的特性，以某个角(如左下)开始遍历，先向上遍历找到刚好小于等于目标值的位置，
+    然后向右遍历找到目标
+- 时间复杂度: O(m+n)
+
+- 解法 2: 两次二分查找
+  - 先纵向二分查找，先找到刚好小于等于目标值的位置
+  - 再横向二分查找，找到目标
+- 时间复杂度：O(logm+logn)
+
+- 解法 3: 拼接二维数组为一维，一次二分查找
+  - 由于每行一定上一行，可以将每行首位拼接，组成一个有序数组
+  - 利用一个一维坐标进行二分查找
+- 时间复杂度：O(log(m+n))
+
+["74. Search a 2D Matrix" Array Golang]()
 
 ### "78. Subsets"
 

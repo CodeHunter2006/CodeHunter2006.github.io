@@ -266,6 +266,8 @@ The execution trace captures a wide range of execution events such as goroutine 
 提供排序相关接口
 
 ```Go
+func Sort(data Interface)	// 快排
+func Stable(data Interface)	// 稳定排序
 type Interface interface {
     // Len is the number of elements in the collection.
     Len() int
@@ -280,6 +282,28 @@ type Interface interface {
 - `SearchInts(a []int, x int) int`
   在有序数组中，用二分查找法，找到目标第一次出现的下标。如果没有找到，则返回将插入的位置下标，即下一个元素第一次出现的下标。
 
+### sort.Ints
+
+`func Ints(x []int)`
+对[]int 进行排序
+
+### sort.Reverse
+
+`func Reverse(data Interface) Interface`
+适配 `sort.Interface.Less` 为反向处理(`<` 变 `>`)
+
+```Go
+s := []int{5, 2, 6, 3, 1, 4} // unsorted
+sort.Sort(sort.Reverse(sort.IntSlice(s)))
+fmt.Println(s)	// output: 6 5 4 3 2 1
+```
+
+### sort.Search
+
+`func Search(n int, f func(int) bool) int`
+LowerBound 算法，在有序数组中查找`[0,n)`范围内满足`f`的最小下标，如果没有满足条件的，则返回 n。
+利用闭包实现`f`
+
 ## sync.Mutex
 
 互斥锁
@@ -292,6 +316,7 @@ type Interface interface {
 - 基本的原子操作和判断是利用`atomic.CompareAndSwapInt32`
 - 锁定后唤醒，是利用`sync.runtime_SemacquireMutex`
 - 锁有几种状态：未加锁、已锁定、饥饿状态
+- "饥饿状态"激发条件：队首元素等待时间超过 1ms。激发后，新的 lock 请求会被自动排到队尾，不进行自旋等待。
 - "饥饿状态"使得 Lock 排队中的 goroutine 得以抢到锁，以避免"尾部延迟现象"
 - 新抢锁的 goroutine，如果满足下面四个条件，会尝试自旋优先抢锁
   1. mutex 已经被 locked 了，处于正常模式下；

@@ -47,6 +47,32 @@ tags: Algorithm Leetcode
 
 ## Array(数组)
 
+### 算法：BinarySearch(二分查找)
+
+利用数组的有序(默认升序)特性，在`O(logn)`时间复杂度内找到答案。二分查找的要点是每次修改范围时边界条件和变更值一致，具体的说是考虑`=`的情况。
+
+#### LowerBound
+
+`lower_bound(begin, end, num)`
+从数组的 begin 位置到 end-1 位置二分查找第一个**大于或等于** num 的数字，找到返回该数字的地址，不存在则返回 end。
+
+- 在 C++中，可以用`lower_bound`实现
+
+```C++
+lower_bound(a + 1, a + 1 + n, x, cmp);
+bool cmp(const int& a,const int& b){return a > b;}
+```
+
+- 在 Go 中，可以用`sort.Search`实现
+
+示例：
+["74. Search a 2D Matrix" Array Golang]()
+
+#### UpperBound
+
+`upper_bound(begin, end, num)`
+相比 LowerBound 算法使用较少，从数组的 begin 位置到 end-1 位置二分查找第一个**大于** num 的数字，找到返回该数字的地址，不存在则返回 end。
+
 ## LinkedList(链表)
 
 单向链表、双向链表、环状链表(Ring)
