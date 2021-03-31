@@ -109,6 +109,28 @@ func searchMatrix(matrix [][]int, target int) bool {
 }
 ```
 
+### "90. Subsets II" bit mask
+
+```Go
+func subsetsWithDup(nums []int) (ret [][]int) {
+    sort.Ints(nums)
+outer:
+    for n, mask := len(nums), 0; mask < 1<<n; mask++ {
+        t := make([]int, 0, bits.OnesCount(uint(mask)))
+        for i, v := range nums {
+            if (mask>>i)&1 > 0 {
+                if i > 0 && (mask>>(i-1))&1 == 0 && v == nums[i-1] {
+                    continue outer
+                }
+                t = append(t, v)
+            }
+        }
+        ret = append(ret, t)
+    }
+    return ret
+}
+```
+
 ### "169. Majority Element" Golang
 
 ```Go
