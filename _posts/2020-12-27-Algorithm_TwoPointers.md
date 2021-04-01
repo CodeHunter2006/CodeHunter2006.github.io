@@ -18,19 +18,19 @@ func max(a, b int) int {
 }
 
 func trap(height []int) (ret int) {
-    for l, r, lMax, rMax := 0, len(height)-1, 0, 0; l <= r; {
-        for l <= r && lMax <= rMax {
-            ret += max(lMax - height[l], 0)
-            lMax = max(lMax, height[l])
+    sum := 0
+    for lMax, rMax, l, r := 0, 0, 0, len(height)-1; l < r; {
+        lMax = max(lMax, height[l])
+        rMax = max(rMax, height[r])
+        if height[l] < height[r] {
+            sum += lMax - height[l]
             l++
-        }
-        for l <= r && rMax <= lMax {
-            ret += max(rMax - height[r], 0)
-            rMax = max(rMax, height[r])
+        } else {
+            sum += rMax - height[r]
             r--
         }
     }
-    return ret
+    return sum
 }
 ```
 
