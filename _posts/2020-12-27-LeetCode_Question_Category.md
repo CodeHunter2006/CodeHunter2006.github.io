@@ -680,6 +680,17 @@ tags: Algorithm Leetcode
   - 由于保证存在答案，只需要让元素自己隔离就可以，不用考虑其他元素
   - 在奇偶转换时，输出数组的前后位置也会自动隔离元素，所以不用担心出问题
 
+### "1143. Longest Common Subsequence"
+
+- 解法：DP
+  - 这是一个二维 DP，类似"edit distance"，分别以两个字符串长度作为 dp 方向
+  - 设`dp[i][j]`表示`text1[0..i]`和`text2[0..j]`的最长公共子序列
+  - 边界条件: `i/j == 0`时，由于一方没有字符串，所以最长公共子序列长度必然为 0
+  - 当`text1[i] == text2[j]`时，`dp[i][j] = dp[i-1][j-1] + 1`，表示存在相同字符，长度增 1
+  - 当`text1[i] != text2[j]`时，`dp[i][j] = max(dp[i-1][j], dp[i][j-1])`，表示延续历史最大长度
+
+["1143. Longest Common Subsequence" DP Golang]()
+
 ### "1128. Number of Equivalent Domino Pairs"
 
 - 思路：

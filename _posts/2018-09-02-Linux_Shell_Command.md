@@ -326,11 +326,8 @@ link 创建一个文件或文件夹的链接，这样可以在修改一处时影
   - TIME 进程实际使用 CPU 时间
   - COMMAND 命令和参数
 
-查看进程端口使用情况
-netstat -ntlp
-
-`lsof -i:8090`
-查看占用特定端口的进程
+`netstat -ntlp`
+查看进程端口使用情况，只显示端口号和进程 Id，需要结合`ps aux`命令查找进程名
 
 查看<设定>最大连接数
 ulimit -n <newValue>

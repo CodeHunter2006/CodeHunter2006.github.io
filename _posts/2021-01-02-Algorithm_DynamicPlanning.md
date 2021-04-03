@@ -220,6 +220,27 @@ for (int i = 0; i < nums.size(); ++i) {
 return res;
 ```
 
+### "123. Best Time to Buy and Sell Stock III" Golang
+
+```Go
+func maxProfit(prices []int) int {
+    buy1, sell1, buy2, sell2 := -prices[0], 0, -prices[0], 0
+    for i := 1; i < len(prices); i++ {
+        buy1 = max(buy1, -prices[i])
+        sell1 = max(sell1, buy1 + prices[i])
+        buy2 = max(buy2, sell1 - prices[i])
+        sell2 = max(sell2, buy2 + prices[i])
+    }
+    return sell2
+}
+func max(a, b int) int {
+    if a >= b {
+        return a
+    }
+    return b
+}
+```
+
 ### "131. Palindrome Partitioning" Golang
 
 ```Go
@@ -548,23 +569,24 @@ func min(a, b int) int {
 }
 ```
 
-### "123. Best Time to Buy and Sell Stock III" Golang
+### "1143. Longest Common Subsequence"
 
 ```Go
-func maxProfit(prices []int) int {
-    buy1, sell1, buy2, sell2 := -prices[0], 0, -prices[0], 0
-    for i := 1; i < len(prices); i++ {
-        buy1 = max(buy1, -prices[i])
-        sell1 = max(sell1, buy1 + prices[i])
-        buy2 = max(buy2, sell1 - prices[i])
-        sell2 = max(sell2, buy2 + prices[i])
+func longestCommonSubsequence(text1 string, text2 string) int {
+    m, n := len(text1), len(text2)
+    dp := make([][]int, m+1)
+    for i := range dp {
+        dp[i] = make([]int, n+1)
     }
-    return sell2
-}
-func max(a, b int) int {
-    if a >= b {
-        return a
+    for i, v1 := range text1 {
+        for j, v2 := range text2 {
+            if v1 == v2 {
+                dp[i+1][j+1] = dp[i][j]+1
+            } else {
+                dp[i+1][j+1] = max(dp[i][j+1], dp[i+1][j])
+            }
+        }
     }
-    return b
+    return dp[m][n]
 }
 ```
