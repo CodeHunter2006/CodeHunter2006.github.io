@@ -162,6 +162,12 @@ tags: Algorithm Leetcode
 
 ["84. Largest Rectangle in Histogram" Golang]()
 
+### "88. Merge Sorted Array"
+
+- 思路：归并排序
+  - 利用原有数组容量和顺序特性，从大到小进行归并排序
+  - 时间复杂度 O(n)，空间复杂度 O(1)
+
 ### "90. Subsets II"
 
 - 解法 1: backtracking + memory
@@ -546,6 +552,15 @@ tags: Algorithm Leetcode
   - 用 DSU 把乱坐的人关联起来，最终形成多个乱坐的集合
   - 遍历每个乱坐集合的总数，并统计最终移动的最小次数
   - 进一步，可以简化最终结果为`总组数-集合数(包括乱坐和没乱坐的)`
+
+### "781. Rabbits in Forest"
+
+- 解法：HashTable
+  - 思路：
+    - 利用 HashMap 记录`map[单色兔子总数]已知兔子数量`
+    - 每个兔子报数`对应的该颜色兔子数量 = 报数数 + 1`
+    - 如果相同数量可以凑整，则`总数 += 完成凑整的兔子数量`
+    - 最后统计所有未能凑整的兔子对应的数量和
 
 ### "818. Race Car"
 
