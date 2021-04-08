@@ -57,13 +57,19 @@ tags: Algorithm Leetcode
 
 - 思路：
   这道题是在二分查找的基础上，增加一层排除法逻辑，使得每次都能缩小一半查找范围。
+- 步骤：
+  - 最外层 for 循环，条件是`l<r`
+  - for 内第一层 if 如果左右其中一部分是有序的，则认为另一部分无序，根据有序的继续判断
+  - 第二层 if 如果 targe 在范围内，则继续缩小范围，否则丢弃当前范围
+- 要点：
+  - 二分查找时，要根据判断条件的`=`情况，缩小范围。如果匹配`=`则原有边界要保持，如`if tar<=nums[mid] {r = mid}`
 
 ["33. Search in Rotated Sorted Array" Binary Search]()
 
 ### "34. Find First and Last Position of Element in Sorted Array"
 
-- 思路：
-  这道题是在二分查找的基础上，进一步利用算法细节特性："二分查找的结果是元素第一次出现的下标"。
+- 思路：lowerbound
+  这道题是在二分查找的基础上，进一步利用算法细节特性："二分查找的结果是重复元素第一次出现的下标"。
   所以只需要再查询`按排序下一个元素出现的位置-1`就可以得到末尾位置
 
 ["34. Find First and Last Position of Element in Sorted Array" Golang]()
@@ -142,6 +148,13 @@ tags: Algorithm Leetcode
   设置一个集合切片，每一个元素可以选取或不选取
 
 ["78. Subsets" Golang]()
+
+### "81. Search in Rotated Sorted Array II"
+
+- 解法：二分查找
+  - 思路：
+    这道题和`33. Search in Rotated Sorted Array`思路一致，只是会有重复元素导致无法判断哪一边。
+    可以在`nums[l]==nums[mid]==nums[r]`的时候，两边同时缩小范围`l++;r--`解决
 
 ### "82. Remove Duplicates from Sorted List II"
 
@@ -279,6 +292,21 @@ tags: Algorithm Leetcode
 - 思路：
   由于存在负数元素，之前计算的最大值可能会一下反转为最小值；相反，之前计算的最小负值可能一下变成最大值。
   所以在采用动态规划法时，要保留最大、最小两个值，然后向后演进。
+
+### "153. Find Minimum in Rotated Sorted Array"
+
+- 解法：BinarySearch
+  - 思路：
+    - `Rotated Sorted Array`的特点是，如果取 mid 位置，则一边是升序而另一边是降序，假设为`[2,3,1]`
+    - 通过不断排除`升序子区域的右边`和`降序子区域的左边`就可以找到最小值
+  - 要点：
+    - 由于存在"最大值突变最小值"的转换点，所以丢弃左边区域时要`l = mid+1`，这样最终 l 就是结果了
+
+### "154. Find Minimum in Rotated Sorted Array II"
+
+- 解法：BinarySearch
+  - 思路：
+    类似"81. Search in Rotated Sorted Array II"，在无法判断哪边有序时，左右范围都缩小一下
 
 ### "155. Min Stack"
 
