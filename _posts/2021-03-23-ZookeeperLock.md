@@ -16,4 +16,13 @@ tags: Algorithm HighConcurrency Server Zookeeper
 
 - Zookeeper 实现的是**公平锁**，有"先来后到"，实际上是实现了分布式网络队列
 
-- 与 Redis 的 redlock 相比，Zookeeper 的并发性能差一些(硬盘写入、分布式节点确认)，但是稳定性更好
+# 与 redlock 对比
+
+redlock 算法属于类 CAS 自旋锁，存在轮询问题。
+
+- 在多台 Client 访问多台 Redis 实例时，有两种情况可能出问题：
+
+  1. 在并发情况下，可能多个 Client 获得一部分锁，之后反复随机重试，多次通信浪费时间
+  2. 在过半数实例锁认证成功情况下，其中两台在主从同步之前就挂掉，会导致锁被新的请求拿到，同时拿到锁导致严重问题
+
+- 与 Redis 的 redlock 相比，Zookeeper 锁的并发性能差一些(硬盘写入、分布式节点确认)，但是 Zookeeper 集群稳定性更好
