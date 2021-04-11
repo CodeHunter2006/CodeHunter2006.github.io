@@ -63,14 +63,17 @@ Redis3.0 版之后，提供了 Cluster 功能，可以进行水平扩展。Redis
 
 - 所有节点彼此互联，内部以二进制协议优化传输速度和带宽
 - 当集群中超过半数节点检测失败时才集群 fail
-- 客户端不需要中间代理层，只需要连接任何一个可用节点即可
+- 客户端不需要中间代理层，只需要连接任何一个可用节点即可，如果对应的 Key 不在直接连接的结点，该请求会被转发到对应的结点执行
 - Redis-Cluster 把所有物理节点映射到[0~16383]个 slot(Hash 槽)上(不一定是平均分配)，由 Cluster 负责维护
-- Redis-Cluster 预分配好 16384 个哈希槽，当需要在 Redis 集群中放置一个 Key-Value 时，会先对这个 Key 使用 CRC16 计算出一个数，然后对 16384 取余计算出哈希槽位置，然后将这个 Key-Value 放置到对应的节点上
+- Redis-Cluster 预分配好 16384 个哈希槽，当需要在 Redis 集群中放置一个 Key-Value 时，
+  会先对这个 Key 使用 CRC16 计算出一个数，然后对 16384 取余计算出哈希槽位置，然后将这个 Key-Value 放置到对应的节点上
 
 ### 集群容错
 
-- 如果某个 Master 无法访问，则开始投票，投票过程是由集群中所有 Master 参与，如果半数以上 Master 节点与某 Master 节点通信超时(cluster-node-timeout)，认为当前 Master 节点挂掉。该 Master 的某个 Slave 将被选举成为 Master
-- 如果任意 Master 挂掉而没有 Slave，则集群进入 fail 状态（因为 Hash-Slot 已经不完整了）；如果集群中超过半数以上 Master 挂掉，无论是否有 Slave，集群都进入 fail 状态
+- 如果某个 Master 无法访问，则开始投票，投票过程是由集群中所有 Master 参与，
+  如果半数以上 Master 节点与某 Master 节点通信超时(cluster-node-timeout)，认为当前 Master 节点挂掉。该 Master 的某个 Slave 将被选举成为 Master
+- 如果任意 Master 挂掉而没有 Slave，则集群进入 fail 状态（因为 Hash-Slot 已经不完整了）；
+  如果集群中超过半数以上 Master 挂掉，无论是否有 Slave，集群都进入 fail 状态
 
 ### 集群节点分配
 
