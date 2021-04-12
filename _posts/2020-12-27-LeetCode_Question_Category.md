@@ -337,6 +337,20 @@ tags: Algorithm Leetcode
 
 ["169. Majority Element]()
 
+### "179. Largest Number"
+
+- 思路：
+  - 可以对 nums 中的元素进行排序，排序方法两两前后组合一下，判断顺序，此顺序具有传递性，所以只需要快排就可以
+  - 一般可以利用语言中的快排算法直接实现，在 Go 中可以利用`sort.Slice(interface{}, func (a, b int) bool)`;
+    字符串转换同样利用现有函数，在 Go 中可以用`strconv.Itoa(int)`
+  - 比较的关键是设计两个系数，比如把`a`置于前面时对应的数值是`factorA * a + b`，factorA 起始值为 10 并循环增大到超过`b`；
+    b 的系数取法类比 a
+    由于题目条件`0 <= nums[i] <= 10^9`，所以数值可能超过 int32，因此要利用 int64 为比较值
+  - 排序完毕要检查`nums[0]`，如果`0`说明整个数字以 0 开头，则结果无需字符串拼接，直接返回"0"
+  - 最后返回结果要拼接字符串，注意避免字符串连续`+`导致内存频繁申请；在 Go 中可以利用`string([]byte{})`
+
+["179. Largest Number" Array]()
+
 ### "229. Majority Element II"
 
 - 思路：

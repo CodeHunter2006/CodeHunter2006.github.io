@@ -152,6 +152,32 @@ func majorityElement(nums []int) int {
 }
 ```
 
+### "179. Largest Number"
+
+```Go
+func largestNumber(nums []int) string {
+    sort.Slice(nums, func(a, b int) bool {
+        var factorA, factorB int64 = 10, 10
+        for factorA <= nums[b] {
+            factorA *= 10
+        }
+        for factorB <= nums[a] {
+            factorB *= 10
+        }
+        return factorA*nums[a]+nums[b] > factorB*nums[b]+nums[a]
+    })
+    if nums[0] == 0 {
+        return "0"
+    }
+
+    ret := []byte{}
+    for _, v := range nums {
+        ret = append(ret, strconv.Itoa(v)...)
+    }
+    return string(ret)
+}
+```
+
 ### "448. Find All Numbers Disappeared in an Array"
 
 ```Go
