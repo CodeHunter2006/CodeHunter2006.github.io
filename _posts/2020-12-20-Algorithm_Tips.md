@@ -42,6 +42,7 @@ tags: Algorithm Leetcode
 - 在 leetcode 中，认为红黑树的创建、遍历过程为`O(nlogn*) ≈ O(n)`，红黑树被广泛应用于 set、map 系列中。
 - 在 double 型运算中，通常用 eps = 1e-6(10^-6)为期望(expects)测精度。
 - leetcode 中经常要对 1000000007 取模，可以简写为 const int MOD = 1e9+7。
+- 要谨慎使用全局变量，如果函数会被调用多次，未重置的全局变量会导致提交失败
 
 # 数据结构
 
