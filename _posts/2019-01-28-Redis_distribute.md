@@ -59,7 +59,7 @@ tags: Redis Distribute HighConcurrency
 ![Cluster](/assets/images/2019-01-28-Redis_distribute_3.png)
 Redis3.0 版之后，提供了 Cluster 功能，可以进行水平扩展。Redis 的分布式模式较为先进，是无中心模式，每个节点都与其他节点连接、保存数据(属于自己的一部分)、保存整个集群的状态。
 
-### Redis 集群特点
+## Redis 集群特点
 
 - 所有节点彼此互联，内部以二进制协议优化传输速度和带宽
 - 当集群中超过半数节点检测失败时才集群 fail
@@ -68,20 +68,30 @@ Redis3.0 版之后，提供了 Cluster 功能，可以进行水平扩展。Redis
 - Redis-Cluster 预分配好 16384 个哈希槽，当需要在 Redis 集群中放置一个 Key-Value 时，
   会先对这个 Key 使用 CRC16 计算出一个数，然后对 16384 取余计算出哈希槽位置，然后将这个 Key-Value 放置到对应的节点上
 
-### 集群容错
+## 集群容错
 
 - 如果某个 Master 无法访问，则开始投票，投票过程是由集群中所有 Master 参与，
   如果半数以上 Master 节点与某 Master 节点通信超时(cluster-node-timeout)，认为当前 Master 节点挂掉。该 Master 的某个 Slave 将被选举成为 Master
 - 如果任意 Master 挂掉而没有 Slave，则集群进入 fail 状态（因为 Hash-Slot 已经不完整了）；
   如果集群中超过半数以上 Master 挂掉，无论是否有 Slave，集群都进入 fail 状态
 
-### 集群节点分配
+## 集群节点分配
 
 起始三个节点的话，Hash-Slot 是平均分配的。当增加第四个节点时，会从每一个节点前面拿取一部分 Slot 到新节点。
 
-### 集群创建
+## 集群创建
 
 Redis 官方提供了 redis-trib.rb 工具用于集群创建。至少需要 3 个 Master+3 个 Slave 共 6 个节点才能建立集群。
+
+## HashTag
+
+集群模式的一个缺点是不同的 Key 分布在不同的主机，如果某个事务是由几个 Key 配合的就难以实现。
+
+Redis Hash Tag 提供了一个解决方案：在 Key 中加入`{xxx}`这样的形式，就可以先用 tag 做一次 Hash 决定主机，然后再执行剩下的 Hash。
+这样就能保证 tag 相同的 Key 存储在同一个主机
+
+- RedisHashTag 的基本规则是识别第一次出现的`{xxx}`为 tag，比如`000,{111},{222},{333}`，这里`111`被识别为 tag
+- 注意使用 tag 时，tag 不能影响第一次 hash 的离散度，比如`{type1:func1}:userId:123`和`type1:func1:{userId:123}`，后者就有更好的离散度，避免 HashSlide
 
 # 分片模式
 
