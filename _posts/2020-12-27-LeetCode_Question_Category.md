@@ -351,6 +351,47 @@ tags: Algorithm Leetcode
 
 ["179. Largest Number" Array]()
 
+### "198. House Robber"
+
+- 解法：DP
+  - 思路：
+    - 推演前 4 个房间的过程就可以推出 DP 转移方程
+    - 设 dp[i] 为到第 i 个房间为止可抢的最大数额
+    - dp[0] 第一间房，数额只能是 nums[0]
+    - dp[1] 第二间房，有两种情况：如果抢前面不抢当前，是`dp[0] <=> nums[0]`；
+      如果抢当前不抢前面，是`dp[-1]+nums[1]`这里`dp[-1]`表示更往前的结果是不存在的所以`==0`。
+      两种情况综合`dp[1] = max(nums[0], nums[1])`
+    - dp[2] 第三间房，同样两种情况：如果抢前面不抢当前，是`dp[1]`;
+      如果抢当前不抢前面，是`dp[0]+nums[2]`;
+      可推导出转移方程：`dp[i] = max(dp[i-1], dp[i-2]+nums[i])`
+    - 由于只需要历史的两步，所以可以进一步缩减为固定变量演进
+
+["198. House Robber" DP Golang]()
+
+### "208. Implement Trie (Prefix Tree)"
+
+- 解法：基本的 TrieTree 实现
+
+["208. Implement Trie (Prefix Tree)" TrieTree Golang]()
+
+### "212. Word Search II"
+
+分析：因为有很多个单词，每个单词都用 DFS 去 board 里找肯定会超时。
+解法：1 实现 TrieNode，根据输入的字符串数组创建一个 TrieTree。
+2 遍历 board 每一点，调用递归函数，判断当前点能否找到 TrieTree 中的单词。
+注意点：1 输出单词后马上赋空值，避免重复输出。
+2 初始节点是 root，当前 board 值应该抵消一个 child 而不是 root。
+
+### "213. House Robber II"
+
+- 解法：DP + 环状 array 技巧
+  - 思路：
+    - 基本 DP 思想是基于"198. House Robber"，一定要先搞懂
+    - 由于本题环状结构的特殊性，处理边界条件非常麻烦...
+    - 干脆将数组分为两部分："不包含第一个房间"、"不包含最后一个房间"，然后分别计算再取结果的最大值即可
+
+["213. House Robber II" DP Golang]()
+
 ### "229. Majority Element II"
 
 - 思路：
@@ -584,6 +625,10 @@ tags: Algorithm Leetcode
   - 在递归开始要先对当前 dp 赋一个保底值
 
 ["664. Strange Printer" DP]()
+
+### "677. Map Sum Pairs"
+
+- 解法：TrieTree
 
 ### "688. Knight Probability in Chessboard"
 

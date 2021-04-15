@@ -78,6 +78,8 @@ bool cmp(const int& a,const int& b){return a > b;}
 `upper_bound(begin, end, num)`
 相比 LowerBound 算法使用较少，从数组的 begin 位置到 end-1 位置二分查找第一个**大于** num 的数字，找到返回该数字的地址，不存在则返回 end。
 
+## Heap(堆)
+
 ## LinkedList(链表)
 
 单向链表、双向链表、环状链表(Ring)
@@ -137,6 +139,34 @@ dq 可以同时提供两个 queue，一个 queue 的队首是另一个的队尾
 
 示例：
 ["1438. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit" SlidingWindow+MonotoneQueue Golang]()
+
+## Tree(树)
+
+### BST(Binary Search Tree 二叉搜索树)
+
+### TrieTree(Prefix Tree 前缀树)
+
+特里树/前缀树，读作"try tree"，用于在已知字典中快速查找目标字符串是否存在或者是否匹配前缀，广泛用于动态搜索框、高性能字符串查找。
+
+- 数据结构关键：
+  - 树中结点的成员：`isEnd`标志是否找到目标字符串、`childs`以 HashMap 的方式映射到下一层结点，map 的 key 就是本层可以匹配到的元素
+  - 整个树从跟结点开始
+  - 树需要先构造再使用
+  - 提供"查找元素"、"匹配前缀"两种功能
+- 优化：
+  - 如果每个位置的元素范围较小，比如"所有数字/小写字母"，那么可以利用数组代替 HashMap，提高效率
+
+实例：
+["208. Implement Trie (Prefix Tree)" TrieTree Golang]()
+["212. Word Search II" TrieTree Golang]()
+
+### IndexTree(索引树)
+
+### SegmentTree(线段树)
+
+## UninFind(并查集)
+
+##
 
 # Skill
 

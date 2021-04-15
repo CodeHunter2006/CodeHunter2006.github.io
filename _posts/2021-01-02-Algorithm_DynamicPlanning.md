@@ -335,6 +335,47 @@ func wordBreak(s string, wordDict []string) bool {
 }
 ```
 
+### "198. House Robber"
+
+```Go
+func rob(nums []int) int {
+    if len(nums) == 1 {
+        return nums[0]
+    }
+    first := nums[0]
+    second := max(first, nums[1])
+    for i := 2; i < len(nums); i++ {
+    // 推演过程：
+    //    do := first + nums[i] // 抢劫当前
+    //    notDo := max(first, second)   // 不抢劫当前
+    //    first, second = notDo, do
+        first, second = max(first, second), first + nums[i]
+    }
+    return max(first, second)
+}
+```
+
+### "213. House Robber II"
+
+```Go
+func rob(nums []int) int {
+    if len(nums) == 1 {
+        return nums[0]
+    }
+    return max(subRob(nums[:len(nums)-1]), subRob(nums[1:]))
+}
+func subRob(nums []int) int {
+    if len(nums) == 1 {
+        return nums[0]
+    }
+    first, second := nums[0], max(nums[0], nums[1])
+    for i := 2; i < len(nums); i++ {
+        first, second = second, max(second, first+nums[i])
+    }
+    return max(first, second)
+}
+```
+
 ### "300. Longest Increasing Subsequence"
 
 ```Go
