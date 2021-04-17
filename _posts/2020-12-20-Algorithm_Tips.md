@@ -73,6 +73,13 @@ bool cmp(const int& a,const int& b){return a > b;}
 示例：
 ["74. Search a 2D Matrix" Array Golang]()
 
+### 环状 array 技巧
+
+- 通常 array 的特点是可以随机向后 n 步跳转，增加环状条件后，跳转的目标位置可以通过取余计算得到
+- 如果 array 的边界处理非常复杂，可以将数组复制成多个有限长度的数组，其长度也可以是原数组的两倍，
+  然后分别在不考虑边界条件的情况下求解，最后综合各个数组综合取得结果
+  示例："213. House Robber II"
+
 #### UpperBound
 
 `upper_bound(begin, end, num)`
@@ -144,6 +151,36 @@ dq 可以同时提供两个 queue，一个 queue 的队首是另一个的队尾
 
 ### BST(Binary Search Tree 二叉搜索树)
 
+### Balanced BinaryTree(平衡二叉树)
+
+BST 的缺点是没有平衡能力，即相同的存储元素集合，由于插入顺序不同会形成不同的树结构，
+比如一直从小到大插入，会形成一个"偏树"，层级很高而元素数量很少。这种情况下 CRUD 性能会从 O(logn)下降为 O(n)。
+
+为了应对这种问题，提出了**平衡二叉树**也叫 AVL-Tree。可以在每次插入和删除时进行平衡旋转操作，从而降低高度，提高效率。
+
+- AVL-Tree 相对较复杂，所以这里就不列出旋转逻辑了。
+
+### Treap(Tree Heap 树堆)
+
+Treap 是一个二叉搜索树，同时保持堆的结构，在插入时通过随机值实现了自动随机平衡功能。
+
+- Treap 查询过程和普通的 BST 是一样的，差别是在插入、删除后进行堆维护旋转
+- 插入过程：
+
+  1. 插入新元素时，除了元素本身的值，结点上要加一个随机优先级 priority
+  2. 插入先按照一般的 BST 插入，然后根据 priority 进行堆维护旋转
+  3. 假设维护一个最小堆，如果当前结点是父结点的左子结点同时 priority 小于父结点，那么就进行右旋；反之左旋
+  4. 一路旋转直到满足最小堆的条件不再旋转，由于旋转不破坏 BST 的顺序性，所以最终结果仍然是 BST
+
+- 由于每次插入 priority 都是随机的，可以很好的打破 value 本身的顺序导致深度过高问题，利用概率实现了平衡
+- Treap 的 CRUD 期望时间复杂度均为 O(logn)，性能非常好
+- 通过随机实现自动平衡，所以相比 AVL-Tree，旋转要更容易(只需左/右旋转)，代码更容易实现
+
+实例：
+["213. House Robber II" OrderedMap Treap Golang]()
+
+### Red Black Tree (红黑树)
+
 ### TrieTree(Prefix Tree 前缀树)
 
 特里树/前缀树，读作"try tree"，用于在已知字典中快速查找目标字符串是否存在或者是否匹配前缀，广泛用于动态搜索框、高性能字符串查找。
@@ -167,6 +204,26 @@ dq 可以同时提供两个 queue，一个 queue 的队首是另一个的队尾
 ## UninFind(并查集)
 
 ##
+
+# 通用算法
+
+## brute force 暴风 bf
+
+强行向前推进，最简单的算法。
+例："121. Best Time to Buy and Sell Stock"
+
+## recur
+
+递归调用函数
+
+## bucket
+
+核心思想是元素集合的整体范围可以分割为有限数量的"桶"，每个桶覆盖较小范围，然后通过遍历元素，利用有限的桶进行匹配、累加，
+以便降低遍历范围从而降低复杂度。
+
+- bucket 的算法可以用不同的数据结构实现
+  - vector 实现，如"923. 3Sum With Multiplicity"、"740. Delete and Earn"
+  - hashtable 实现，如"220. Contains Duplicate III"
 
 # Skill
 

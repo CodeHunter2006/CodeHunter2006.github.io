@@ -14,7 +14,9 @@ tags: Algorithm Leetcode
   - 找到元素后可以通过迭代器快速找到前/后元素
 
 - 可以通过多种方式实现 Ordered Map:
-  - BST(Binary Search Tree) (实现相对简单、性能可以)
+  - BST(Binary Search Tree) (实现简单、由于没有平衡能力性能差)
+  - AVL-Tree(平衡二叉树) (实现相对简单、性能可以)
+  - Treap(堆树) (实现相对简单、性能可以)
   - Red Black Tree (实现复杂、性能较好)
   - Skip List (实现相对简单、性能可以)
 
@@ -43,7 +45,7 @@ public:
 ```
 
 ```Go
-// BST
+// Treap
 import "math/rand"
 
 type node struct {

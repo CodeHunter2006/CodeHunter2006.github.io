@@ -392,6 +392,32 @@ tags: Algorithm Leetcode
 
 ["213. House Robber II" DP Golang]()
 
+### "220. Contains Duplicate III"
+
+- 解法 1: SlidingWindow + OrderedMap
+  - 这种解法难度对于 C++属于"normal"，可以直接利用`set<int>`的高性能红黑树；对于 Golang 属于"hard"，需要手动实现 Treap 或 Skiplist
+  - 思路：
+    - 以 SlidingWindows 保持对下标范围的控制，始终保持窗口内元素下标合法
+    - 以 OrderedMap 作为 value 的存储，可以快速判断顺序前后两个元素是否符合条件
+  - 时间复杂度：O(nlog(min(n,k)))；空间复杂度：O(min(n,k))
+
+["213. House Robber II" OrderedMap RedBlackTree C++]()
+["213. House Robber II" OrderedMap Treap Golang]()
+
+- 解法 2(推荐): SlidingWindow + Bucket + HashMap
+  - 由于比较综合，这个解法属于"hard"
+  - 思路：
+    - 已知 k 为有效下标范围、t 为有效值范围
+    - 设 x 为当前遍历元素、y 为下标有效范围内另一元素，如果 y 在范围`[x-t, x+t]`则认为命中
+    - 我们设每个桶容量为`t+1`这样保证桶内元素一定命中
+    - 如果没有直接命中，也要检查一下旁边的两个桶，判断是否可能命中，这样范围仍然是常数的
+  - 要点：
+    - 由于本题范围较大，需要用 Hash 存储桶，所以设定一个函数`getID(x, w int) int`，
+      传入`x`值和桶容量`w`，通过`x/w`计算得出桶的下标。
+    - `getID`函数的负数处理比较特殊，为了避免`+0和-0`被重复计算，需要在负值时返回`(x+1)/w - 1`
+
+["213. House Robber II" Bucket Golang]()
+
 ### "229. Majority Element II"
 
 - 思路：
