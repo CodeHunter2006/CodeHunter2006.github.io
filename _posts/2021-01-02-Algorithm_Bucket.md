@@ -46,3 +46,19 @@ func abs(x int) int {
     return -x
 }
 ```
+
+### "740. Delete and Earn"
+
+```Go
+func deleteAndEarn(nums []int) int {
+    var bucket [1e4+1]int
+    for _, n := range nums {
+        bucket[n] += n
+    }
+    first, second := bucket[0], max(bucket[0], bucket[1])
+    for i := 2; i < len(bucket); i++ {
+        first, second = second, max(first+bucket[i], max(first, second))
+    }
+    return max(first, second)
+}
+```
