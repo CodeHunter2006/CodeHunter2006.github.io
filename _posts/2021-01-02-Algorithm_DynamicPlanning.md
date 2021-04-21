@@ -220,6 +220,43 @@ for (int i = 0; i < nums.size(); ++i) {
 return res;
 ```
 
+### "91. Decode Ways"
+
+```Go
+func numDecodings(s string) int {
+    N := len(s)
+    dp := make([]int, N+1)
+    dp[0] = 1
+    for i := 1; i <= N; i++ {
+        if s[i-1] != '0' {
+            dp[i] += dp[i-1]
+        }
+        if i > 1 && s[i-2] != '0' && ((s[i-2]-'0')*10+(s[i-1]-'0'))<=26 {
+            dp[i] += dp[i-2]
+        }
+    }
+    return dp[N]
+}
+```
+
+```Go
+func numDecodings(s string) int {
+    N := len(s)
+    dp1, dp2, dp3 := 0, 1, 0
+    for i := 1; i <= N; i++ {
+        dp3 = 0
+        if s[i-1] != '0' {
+            dp3 += dp2
+        }
+        if i > 1 && s[i-2] != '0' && ((s[i-2]-'0')*10+(s[i-1]-'0'))<=26 {
+            dp3 += dp1
+        }
+        dp1, dp2 = dp2, dp3
+    }
+    return dp3
+}
+```
+
 ### "123. Best Time to Buy and Sell Stock III" Golang
 
 ```Go

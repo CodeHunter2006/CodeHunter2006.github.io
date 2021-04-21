@@ -7,6 +7,36 @@ tags: Algorithm Leetcode
 
 记录 SFS 的算法实现
 
+### "91. Decode Ways"
+
+```Go
+func numDecodings(s string) (ret int) {
+    m := map[string]bool{}
+    for i := 1; i <= 26; i++ {
+        m[strconv.Itoa(i)] = true
+    }
+    mem := map[int]int{}
+    var recur func(string, int) int
+    recur = func(s string, idx int) (ret int) {
+        if idx == len(s) {
+            return 1
+        }
+        if val, ok := mem[idx]; ok{
+            return val
+        }
+        if m[string(s[idx])] {
+            ret += recur(s, idx+1)
+        }
+        if idx+1 < len(s) && m[string(s[idx:idx+2])] {
+            ret += recur(s, idx+2)
+        }
+        mem[idx] = ret
+        return ret
+    }
+    return recur(s, 0)
+}
+```
+
 ### "377. Combination Sum IV" C++ DFS
 
 ```C++

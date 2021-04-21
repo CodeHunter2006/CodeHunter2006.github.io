@@ -211,6 +211,30 @@ tags: Algorithm Leetcode
     - 以 backtracking 为基本思路，结合上面`[1,2,2]`模式的识别跳过不必要的处理
     - 注意 Go 中 append 时为了避免各递归函数相互影响，要构造新的 slice
 
+### "91. Decode Ways"
+
+- 解法 1: DFS + Memory
+  - 思路：
+    - 每个位置可以取自己，也可以取自己和后面一个字符，用 DFS 即可
+    - 每次如果可以取，那一定符合`0< x <= 26`的条件，把条件字符串放入 set 可以快速判断
+    - 递归函数返回其对应的结果数，由调用者负责将两种情况相加
+    - 如果没有 Memory 会超时，所以需要加上
+
+["91. Decode Ways" DFS Golang]()
+
+- 解法 2: DP
+  - 思路：
+    - 从前到后逐步解码，只有前面解码成功后面的解码才成功
+    - 设`dp[i]`表示第 i 个元素，有两种情况：
+      如果当前值有效`s[i] != '0'`，则继续累加前面数字；
+      如果当前前面有效且和前面可拼接为 26 以内的数，则继续累加更前面数字；
+  - 要点：
+    - `dp[0]==1`，空字符串可以编码为空，也是一种编码结果
+    - 由于`dp[0]`要占一个位置，所以 i 要顺延一位，对应 i(从 1 遍历) 的字符为`s[i-1]`
+    - 实现后发现只需要关注三个 dp 值即可，所以可以优化为 O(1)空间复杂度
+
+["91. Decode Ways" DP Golang]()
+
 ### "123. Best Time to Buy and Sell Stock III"
 
 - 考点：
@@ -376,11 +400,14 @@ tags: Algorithm Leetcode
 
 ### "212. Word Search II"
 
-分析：因为有很多个单词，每个单词都用 DFS 去 board 里找肯定会超时。
-解法：1 实现 TrieNode，根据输入的字符串数组创建一个 TrieTree。
-2 遍历 board 每一点，调用递归函数，判断当前点能否找到 TrieTree 中的单词。
-注意点：1 输出单词后马上赋空值，避免重复输出。
-2 初始节点是 root，当前 board 值应该抵消一个 child 而不是 root。
+- 解法：TrieTree + Backtracking
+  - 思路：
+    - 因为单词数量很大`3*10^4`，所以如果都用 DFS 去尝试肯定会超时
+    - 可以利用 TrieTree，先把所有单词记录为 TrieTree 字典
+    - 然后再利用 Backtracking 在 board 中进行检索
+  - 技巧：
+    - 整个过程的关键是 TrieTree 的结点，所以无需封装，直接暴露操作就可以
+    - 由于 TrieTree 的结点一般只标记是否找到，不便与本题，所以可以增加一个`word string`记录完整字符串，以便存入结果
 
 ### "213. House Robber II"
 
