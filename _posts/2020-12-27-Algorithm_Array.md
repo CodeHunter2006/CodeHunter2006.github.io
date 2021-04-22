@@ -200,6 +200,39 @@ func findDisappearedNumbers(nums []int) (ret []int) {
 }
 ```
 
+### "363. Max Sum of Rectangle No Larger Than K"
+
+```Go
+func maxSumSubmatrix(matrix [][]int, k int) (ret int) {
+    M, N := len(matrix), len(matrix[0])
+    dp := make([][]int, M+1)
+    for i := 0; i <= M; i++ {
+        dp[i] = make([]int, N+1)
+    }
+    for i := 1; i <= M; i++ {
+        for j:=1; j <= N; j++ {
+            dp[i][j] = dp[i-1][j]+dp[i][j-1]-dp[i-1][j-1]+matrix[i-1][j-1]
+        }
+    }
+    ret = math.MinInt32
+    for x1 := 0; x1 < M; x1++ {
+        for y1 := 0; y1 < N; y1++ {
+            for x2 := x1+1; x2 <= M; x2++ {
+                for y2 := y1+1; y2 <= N; y2++ {
+                    tmp := dp[x2][y2]-dp[x1][y2]-dp[x2][y1]+dp[x1][y1]
+                    if tmp == k {
+                        return k
+                    } else if tmp <= k && tmp > ret {
+                        ret = tmp
+                    }
+                }
+            }
+        }
+    }
+    return ret
+}
+```
+
 ### "912. Sort an Array" QuickSort C++
 
 ```C++

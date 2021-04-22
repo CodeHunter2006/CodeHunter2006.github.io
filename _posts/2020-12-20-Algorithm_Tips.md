@@ -53,6 +53,10 @@ tags: Algorithm Leetcode
 
 ## Array(数组)
 
+### 多维数组
+
+一般可以用二维数组表示地图或者用多维数组表示更复杂的映射关系。
+
 ### 算法：BinarySearch(二分查找)
 
 利用数组的有序(默认升序)特性，在`O(logn)`时间复杂度内找到答案。
@@ -84,6 +88,15 @@ bool cmp(const int& a,const int& b){return a > b;}
 - 如果 array 的边界处理非常复杂，可以将数组复制成多个有限长度的数组，其长度也可以是原数组的两倍，
   然后分别在不考虑边界条件的情况下求解，最后综合各个数组综合取得结果
   示例："213. House Robber II"
+
+### 前缀和压缩
+
+可以利用前缀和 dp 结果做一维压缩，通过任意两点可以计算中间的和。
+示例：
+
+进一步，可以在二维数组中对一维再压缩一次，通过两个点快速计算矩形内元素和。
+示例：
+["363. Max Sum of Rectangle No Larger Than K" Array]()
 
 #### UpperBound
 

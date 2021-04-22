@@ -559,6 +559,20 @@ tags: Algorithm Leetcode
 
 ["354. Russian Doll Envelopes" DP Golang]()
 
+### "363. Max Sum of Rectangle No Larger Than K"
+
+- 解法 1: 二维压缩 + 暴力计算
+  - 思路：
+    - 先利用"前缀和"对每一行压缩
+    - 利用相同方法，再对每一列压缩
+    - 之后可以利用二维两个坐标点确定一个矩形范围，遍历所有矩形计算出结果
+  - 要点：
+    - 注意最后计算范围结果时，要将重复减去的范围值加回来
+
+["363. Max Sum of Rectangle No Larger Than K" Array]()
+
+- 解法 2:
+
 ### "377. Combination Sum IV"
 
 - 方法 1：
