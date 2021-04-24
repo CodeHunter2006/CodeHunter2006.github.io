@@ -38,7 +38,7 @@ tags: Redis Distribute
 - 客户端
   如：Predis
 - 代理
-  如：Twemproxy
+  如：Twemproxy、Codis
 - 查询路由(Query routing)
   如：Cluster 模式
 
@@ -135,7 +135,7 @@ tags: Redis Distribute
   - 运维复杂，迁移槽位需要人工干预
   - 只能使用 0 号数据库
   - 不支持批量(pipline 管道)操作
-  - 分布式逻辑和存储模块耦合
+  - 分布式逻辑和存储耦合(无法使用 key 聚合操作)
 
 * cluster 前面可以增加一个代理，比如 codis，支持 pipline 等功能
 
