@@ -81,3 +81,31 @@ func search(nums []int, target int) bool {
     return false
 }
 ```
+
+### "300. Longest Increasing Subsequence"
+
+```Go
+func lengthOfLIS(nums []int) (ret int) {
+    var dp []int
+    for _, n := range nums {
+        if idx := sort.SearchInts(dp, n); idx == len(dp) {
+            dp = append(dp, n)
+        } else {
+            dp[idx] = n
+        }
+    }
+    return len(dp)
+}
+```
+
+```C++
+int lengthOfLIS(vector<int>& nums) {
+	vector<int> dp;
+    for (auto i : nums) {
+        auto it = lower_bound(dp.begin(), dp.end(), i);
+        if (it == dp.end()) dp.push_back(i);
+        else *it = i;
+    }
+    return dp.size();
+}
+```

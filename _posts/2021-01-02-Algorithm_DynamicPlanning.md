@@ -177,6 +177,10 @@ func BinaryDivide(cnt, vol, pri int) (ret [][]int) {
 
 # 动态规划的路径打印
 
+## 记录关键值，最后反推
+
+如："368. Largest Divisible Subset"
+
 # 示例
 
 ### "72. Edit Distance"
@@ -416,38 +420,17 @@ func subRob(nums []int) int {
 ### "300. Longest Increasing Subsequence"
 
 ```Go
-func lengthOfLIS(nums []int) int {
-    dp := make([]int, len(nums))
+func lengthOfLIS(nums []int) (ret int) {
+    dp, ret := make([]int, len(nums)), 0
     for i := 0; i < len(nums); i++ {
         for j := 0; j < i; j++ {
             if nums[i] > nums[j] {
                 dp[i] = max(dp[i], dp[j]+1)
+                ret = max(ret, dp[i])
             }
         }
     }
-    return max(dp...)+1
-}
-
-func max(arr ...int) int {
-    ret := ^int(^uint(0)>>1)
-    for _, v := range arr {
-        if v > ret {
-            ret = v
-        }
-    }
-    return ret
-}
-```
-
-```C++
-int lengthOfLIS(vector<int>& nums) {
-	vector<int> dp;
-    for (auto i : nums) {
-        auto it = lower_bound(dp.begin(), dp.end(), i);
-        if (it == dp.end()) dp.push_back(i);
-        else *it = i;
-    }
-    return dp.size();
+    return ret+1
 }
 ```
 
@@ -518,6 +501,42 @@ func max(arr ...int) int {
     for _, v := range arr {
         if v > ret {
             ret = v
+        }
+    }
+    return ret
+}
+```
+
+### "368. Largest Divisible Subset"
+
+```Go
+func largestDivisibleSubset(nums []int) (ret []int) {
+    sort.Ints(nums)
+    dp := make([]int, len(nums))
+    for i := range dp {
+        dp[i] = 1
+    }
+
+    maxVal, maxLen := 1, 1
+    for i, n := range nums {
+        for j, v := range nums[:i] {
+            if n%v == 0 && dp[i] < dp[j]+1 {
+                dp[i] = dp[j]+1
+            }
+        }
+        if dp[i] > maxLen {
+            maxLen, maxVal = dp[i], nums[i]
+        }
+    }
+
+    if maxLen == 1 {
+        return []int{nums[0]}
+    }
+
+    for i := len(nums)-1; i >= 0; i-- {
+        if dp[i] == maxLen && maxVal%nums[i] == 0 {
+            ret = append(ret, nums[i])
+            maxLen, maxVal = maxLen-1, nums[i]
         }
     }
     return ret

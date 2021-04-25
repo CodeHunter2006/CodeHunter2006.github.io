@@ -491,19 +491,35 @@ tags: Algorithm Leetcode
 
 ### "300. Longest Increasing Subsequence"
 
+**LIS**是动态规划的常见问题
+
 - 考点：
-  - DP、LIS(最长上升子序列)
-- 思路：
-  - 原数组不能排序，否则无法取得最终结果
-  - 设`dp[i]`表示第 i 个位置的元素与前面形成的最长子序列长度，那么`dp[i]`可以由前面遍历推算出
-- 解法：
-  - 有状态转移方程`dp[i]=max(dp[j])+1`，`0≤j<i && num[j]<num[i]`
-  - `dp[i]`初始值设为 0，最后结果要`+1`，表示自身也算 1 的长度
-- 时间复杂度：O(n^2)
+
+  - 一维数组二维 DP、LIS(最长上升子序列)
+
+- 解法 1：
+  - 思路：
+    - 原数组不能排序，否则无法取得最终结果
+    - 设`dp[i]`表示第 i 个位置的元素与前面形成的最长子序列长度，那么`dp[i]`可以由前面遍历推算出
+    - 有状态转移方程`dp[i]=max(dp[j])+1`，`0≤j<i && num[j]<num[i]`
+    - `dp[i]`初始值设为 0，最后结果要`+1`，表示自身也算 1 的长度
+  - 时间复杂度：O(n^2)
 
 ["300. Longest Increasing Subsequence" DP Golang]()
 
-["300. Longest Increasing Subsequence" DP C++]()
+- 解法 2: DP + Lowerbound
+  - 思路：
+    - 贪心思维：在已有最长子序列基础上用尽可能小的新元素替换旧元素，使得未来上升时长度可以更长
+    - 维护一个数组`d[i]`表示长度为 i 的最长上升子序列末尾元素的最小值，
+      len 记录最长上升元素数、起始 len 为 1、`d[1]==nums[0]`
+  - 步骤：
+    - 遍历 nums，更新 d，如果`nums[i] > d[len]`，则`d[len+1]==nums[i]`;
+      否则在`1~len`中找到`d[i-1] < nums[j] < d[i]`并更新`d[i]=nums[j]`
+    - 由于 d 本身的有序性，可以利用`Lowerbound`算法查找
+  - 时间复杂度: O(nlogn)
+
+["300. Longest Increasing Subsequence" BinarySearch Golang]()
+["300. Longest Increasing Subsequence" BinarySearch C++]()
 
 ### "312. Burst Balloons"
 
@@ -586,6 +602,17 @@ tags: Algorithm Leetcode
 
 ["377. Combination Sum IV" DFS C++]()
 ["377. Combination Sum IV" DP Golang]()
+
+### "368. Largest Divisible Subset"
+
+- 解法：DP + LIS + 反推 DP 结果
+  - 思路：
+    - 本题的基本思路参照`300. Longest Increasing Subsequence`，必须先掌握 LIS 算法
+    - 由于题目对结果顺序没有要求，所以先对原数组排序，以便进行 DP 处理
+    - `dp[i]`表示到`nums[i]`为止的最大长度，利用整除的数学特性逐步迭代
+    - 在迭代过程中要记录最大长度和对应的最大值，以便最后反推，计算出最终结果
+
+["368. Largest Divisible Subset" DP Golang]()
 
 ### "395. Longest Substring with At Least K Repeating Characters"
 
