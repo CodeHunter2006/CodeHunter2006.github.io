@@ -2,7 +2,7 @@
 layout: post
 title: "Go Concurrency Patterns"
 date: 2020-10-25 22:20:00 +0800
-tags: Golang DesignPattern
+tags: Go DesignPattern
 ---
 
 `Do not communicate by sharing memory; instead, share memory by communicating.`

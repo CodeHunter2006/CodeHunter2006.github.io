@@ -866,6 +866,19 @@ tags: Algorithm Leetcode
 - 思路：
   利用 stack 进行无括号的四则运算，乘除直接计算、加减入栈，最后累加栈中所有元素
 
+### "1011. Capacity To Ship Packages Within D Days"
+
+- 解法：BinarySearch
+  - 思路：
+    - 初看题目，以为是背包问题。但是题目要求货物按顺序放置，所以无法背包。
+    - 题目可以转化为二分查找，在范围内尝试船的容量
+    - 二分查找的最小值是最大物品重量、最大值是全部物品重量和
+  - 要点：
+    - Go 可以利用`sort.Search(int, func(int) bool)`实现 LowerBound 二分查找
+    - 注意货物不能切割，所以如果当前放不下就要放到第二天
+
+["1011. Capacity To Ship Packages Within D Days" BinarySearch Golang]()
+
 ### "1036. Escape a Large Maze"
 
 - 考点：bfs 稀疏矩阵 极限思想 几何

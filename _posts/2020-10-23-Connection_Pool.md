@@ -2,7 +2,7 @@
 layout: post
 title: "Connection Pool 连接池"
 date: 2020-10-23 22:20:00 +0800
-tags: Server Golang Pool
+tags: Server Go Pool
 ---
 
 ![连接池](/assets/images/2020-10-23-Connection_Pool_1.png)
