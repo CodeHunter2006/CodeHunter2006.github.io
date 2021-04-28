@@ -136,6 +136,8 @@ tags: Redis Distribute
   - 只能使用 0 号数据库
   - 不支持批量(pipline 管道)操作
   - 分布式逻辑和存储耦合(无法使用 key 聚合操作)
+    - 比如 transaction 涉及多个结点上的 key，那么命令入队时会返回错误
+    - 比如多个 set 取交集，同样会返回错误
 
 * cluster 前面可以增加一个代理，比如 codis，支持 pipline 等功能
 

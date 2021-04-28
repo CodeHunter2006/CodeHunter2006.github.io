@@ -52,6 +52,8 @@ type _panic struct {
 - 如果一直没有 recover，那么 panic 会一直向最上层调用栈传递，直到最后执行 fatalpanic 终止程序
 - 在执行 recover 后会将 panic 的 recovered 标记为 true，之后会继续执行完所有当前 goroutine 的 defer，然后返回上层调用栈，之后正常继续执行
 
+- recover 只在 defer 执行中有效果。在正常顺序执行流程中执行 recover，什么都不做。
+
 # 常见用法
 
 - 打开资源时，如果判断没有 error，则立即`defer xxx.Close()`以确保资源释放。类似的还有 Lock 等。

@@ -30,3 +30,22 @@ func nthUglyNumber(n int) int {
     return dp[n]
 }
 ```
+
+### "633. Sum of Square Numbers"
+
+```Go
+func judgeSquareSum(c int) bool {
+    l, r := 0, int(math.Sqrt(float64(c)))
+    for l <= r {
+        tmp := l*l + r*r
+        if tmp == c {
+            return true
+        } else if tmp > c {
+            r--
+        } else {
+            l++
+        }
+    }
+    return false
+}
+```

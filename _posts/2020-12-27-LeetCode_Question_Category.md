@@ -709,6 +709,16 @@ tags: Algorithm Leetcode
 
 ["560. Subarray Sum Equals K" Golang]()
 
+### "633. Sum of Square Numbers"
+
+- 解法：math 分析 + 双指针
+  - 思路：
+    - `a^2+b^2==c`考虑用双指针法从左右逼近 a 和 b。
+    - a、b 的范围中 a==0，`b^2`的最大值不会超过 c，所以`b <= sqrt(c)`
+    - 由于`b^2`足够大，`a^2 <= (b^2-(b-1)^2)`，所以`right`只需单向运动，无需反复运动，`left`也是
+
+["633. Sum of Square Numbers" Math Golang]()
+
 ### "664. Strange Printer"
 
 - 解法 1: 范围 DP + DFS + mem
