@@ -275,6 +275,20 @@ tags: Algorithm Leetcode
 
 ["132. Palindrome Partitioning II" Golang]()
 
+### "136. Single Number"
+
+- 解法：按位状态机
+  - 题目要求`O(1)`空间复杂度，所以需要利用异或运算按位统计出结果
+
+["136. Single Number" BinaryOperation Go]()
+
+### "137. Single Number II"
+
+- 解法：按位状态机
+  - 基于"136"的解法，利用数字电路(与、或、非、异或)推导，利用两个变量保存运算过程值
+
+["137. Single Number II" BinaryOperation Go]()
+
 ### "139. Word Break"
 
 - 思路：dp
@@ -624,6 +638,13 @@ tags: Algorithm Leetcode
   - 在新增、删除元素时，维护好"当前未达到 k 个字母种类数"，然后当条件符合时更新最大长度结果
 
 ["395. Longest Substring with At Least K Repeating Characters" SlidingWindow Golang]()
+
+### "403. Frog Jump"
+
+- 解法：DP
+  - 思路：用二维 map 或二维数组都可以
+    - 记录青蛙能到达的下一个位置和本次跳跃步数，直到得出结果
+  - 时间复杂度 O(n^2)，空间复杂度 O(n^2)
 
 ### "406. Queue Reconstruction by Height"
 
