@@ -603,6 +603,17 @@ tags: Algorithm Leetcode
 
 - 解法 2:
 
+### "368. Largest Divisible Subset"
+
+- 解法：DP + LIS + 反推 DP 结果
+  - 思路：
+    - 本题的基本思路参照`300. Longest Increasing Subsequence`，必须先掌握 LIS 算法
+    - 由于题目对结果顺序没有要求，所以先对原数组排序，以便进行 DP 处理
+    - `dp[i]`表示到`nums[i]`为止的最大长度，利用整除的数学特性逐步迭代
+    - 在迭代过程中要记录最大长度和对应的最大值，以便最后反推，计算出最终结果
+
+["368. Largest Divisible Subset" DP Golang]()
+
 ### "377. Combination Sum IV"
 
 - 方法 1：
@@ -617,16 +628,13 @@ tags: Algorithm Leetcode
 ["377. Combination Sum IV" DFS C++]()
 ["377. Combination Sum IV" DP Golang]()
 
-### "368. Largest Divisible Subset"
+### "382. Linked List Random Node"
 
-- 解法：DP + LIS + 反推 DP 结果
+- 解法：ReservoirSampling
   - 思路：
-    - 本题的基本思路参照`300. Longest Increasing Subsequence`，必须先掌握 LIS 算法
-    - 由于题目对结果顺序没有要求，所以先对原数组排序，以便进行 DP 处理
-    - `dp[i]`表示到`nums[i]`为止的最大长度，利用整除的数学特性逐步迭代
-    - 在迭代过程中要记录最大长度和对应的最大值，以便最后反推，计算出最终结果
+    - 每次采样，对所有元素遍历一遍，利用 ReservoirSampling 取得结果值
 
-["368. Largest Divisible Subset" DP Golang]()
+["382. Linked List Random Node" Random]()
 
 ### "395. Longest Substring with At Least K Repeating Characters"
 
@@ -638,6 +646,15 @@ tags: Algorithm Leetcode
   - 在新增、删除元素时，维护好"当前未达到 k 个字母种类数"，然后当条件符合时更新最大长度结果
 
 ["395. Longest Substring with At Least K Repeating Characters" SlidingWindow Golang]()
+
+### "398. Random Pick Index"
+
+- 解法：ReservoirSampling
+  - 思路：
+    - 类似"382. Linked List Random Node"，需要对所有元素遍历一遍才可以保证概率相同
+    - 只有指定的元素才参与随机，所以增加一个判断条件
+
+["398. Random Pick Index" Random]()
 
 ### "403. Frog Jump"
 
@@ -697,6 +714,32 @@ tags: Algorithm Leetcode
 
 ["461. Hamming Distance" Golang]()
 
+### "470. Implement Rand10() Using Rand7()"
+
+- 解法 1: 暴力采样，100 次采样时**不通过**
+
+  - 思路：
+    - 用 10 个`[1,7]`采样结果相加得到`[10,70]`，然后`/10`取得结果
+  - 特点：
+    - 时间复杂度固定 O(7n)->O(n)，但是不符合性能要求
+
+["470. Implement Rand10() Using Rand7()" Random]()
+
+- 解法 2: 拒绝采样，1000 次采样时**不通过**
+
+  - 思路：
+    - 采样两次求和，如果范围在`[2,11]`，则返回`[2,11]-1`，否则循环找到合适随机值
+  - 特点：
+    - 至少采样两次，并且大概有`1/3`概率丢弃，所以每次采样期望次数为`2/(2/3) = 3`，时间复杂度 O(3n)，还是不能符合性能要求
+
+- 解法 3:
+  - 思路：
+    - 利用`[1,7]`找到最快接近`[1,10]`的方法，用`6*7 = 42`的方法，只需要两次`rand7()`采样就能找到最接近 40(10 的整数倍)目标
+    - 用`[1,7]-1`作为`[0,6]`，可以模拟一个 42 格的矩阵，其中`[0,40]`是有效值，期望采样次数为`2.45`
+      ![470. Implement Rand10() Using Rand7()](/assets/images/2020-12-27-LeetCode_Question_Category_470.png)
+
+["470. Implement Rand10() Using Rand7()" Random]()
+
 ### "474. Ones and Zeroes"
 
 - 考点：
@@ -720,6 +763,13 @@ tags: Algorithm Leetcode
   - 标准完全背包算法
 
 ["518. Coin Change 2" Golang]()
+
+### "554. Brick Wall"
+
+- 解法：HashMap
+  - 思路：
+    - 利用 HashMap 统计所有砖缝位置出现次数，去掉最左右两边的缝
+    - 返回`行数 - 某缝位置最大次数`
 
 ### "560. Subarray Sum Equals K"
 

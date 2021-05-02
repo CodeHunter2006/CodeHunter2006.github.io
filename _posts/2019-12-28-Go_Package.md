@@ -227,10 +227,15 @@ Parse 函数可以从字符串解析出 url.URL 的对象指针，url.URL 包含
   - pool 包在 init 中注册一个 poolCleanup 函数用于清除所 pool 里的缓存对象，每次 GC 之前会被调用
 - Get 方法返回时是返回池中任意一个对象，没有顺序；如果池中没有对象，会调用指定的 New 方法生成一个；如果没有指定 New 方法，那么返回 nil
 
-## rand
+## math/rand
 
-使用前要先做一个种子，否则其实不随机。
-rand.Seed(time.Now().Unix())
+用于生成随机数，注意和"crypto/rand"包名相同
+
+- 使用前要先做一个种子，否则其实不随机。
+  `rand.Seed(time.Now().Unix())`
+
+`func Float32() float32`
+a pseudo-random number in [0.0,1.0)
 
 ## regexp
 
