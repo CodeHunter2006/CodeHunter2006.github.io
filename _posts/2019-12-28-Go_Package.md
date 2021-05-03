@@ -234,11 +234,11 @@ Parse 函数可以从字符串解析出 url.URL 的对象指针，url.URL 包含
 - 使用前要先做一个种子，否则其实不随机。
   `rand.Seed(time.Now().Unix())`
 
-`func Float32() float32`
+`func Float32() float32`/`func Float64() float64`
 return a pseudo-random number in [0.0,1.0)
 
-`func Intn(n int) int`
-return a pseudo-random number in [0.0,1.0)
+`func Intn(n int) int`/`func Int31n(n int32) int32`
+return a non-negative pseudo-random number in [0,n)
 
 ## regexp
 

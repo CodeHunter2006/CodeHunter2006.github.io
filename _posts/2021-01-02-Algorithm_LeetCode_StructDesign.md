@@ -57,3 +57,52 @@ func (this *LRUCache) Put(key int, value int)  {
     }
 }
 ```
+
+### "380. Insert Delete GetRandom O(1)"
+
+```Go
+type RandomizedSet struct {
+    m map[int]int
+    b []int
+}
+
+func Constructor() RandomizedSet {
+    return RandomizedSet{
+        m : make(map[int]int),
+    }
+}
+
+func (this *RandomizedSet) Insert(val int) bool {
+    if _, ok := this.m[val]; ok {
+        return false
+    }
+    this.m[val] = len(this.b)
+    this.b = append(this.b, val)
+    return true
+}
+
+func (this *RandomizedSet) Remove(val int) bool {
+    idx, ok := this.m[val]
+    if !ok {
+        return false
+    }
+
+    lastVal := this.b[len(this.b)-1]
+    this.m[lastVal] = idx
+    this.b[idx] = lastVal
+
+    delete(this.m, val)
+    this.b = this.b[:len(this.b)-1]
+    return true
+}
+
+func (this *RandomizedSet) GetRandom() int {
+    return this.b[rand.Intn(len(this.b))]
+}
+```
+
+### "381. Insert Delete GetRandom O(1) - Duplicates allowed"
+
+```Go
+
+```

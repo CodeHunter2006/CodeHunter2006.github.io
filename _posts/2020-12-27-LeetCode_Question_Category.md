@@ -637,6 +637,14 @@ tags: Algorithm Leetcode
 ["377. Combination Sum IV" DFS C++]()
 ["377. Combination Sum IV" DP Golang]()
 
+### "380. Insert Delete GetRandom O(1)"
+
+["380. Insert Delete GetRandom O(1)" StructDesign]()
+
+### "381. Insert Delete GetRandom O(1) - Duplicates allowed"
+
+["381. Insert Delete GetRandom O(1) - Duplicates allowed" StructDesign]()
+
 ### "382. Linked List Random Node"
 
 - 解法：ReservoirSampling
@@ -732,20 +740,20 @@ tags: Algorithm Leetcode
   - 特点：
     - 时间复杂度固定 O(7n)->O(n)，但是不符合性能要求
 
-["470. Implement Rand10() Using Rand7()" Random]()
-
 - 解法 2: 拒绝采样，1000 次采样时**不通过**
 
   - 思路：
     - 采样两次求和，如果范围在`[2,11]`，则返回`[2,11]-1`，否则循环找到合适随机值
   - 特点：
-    - 至少采样两次，并且大概有`1/3`概率丢弃，所以每次采样期望次数为`2/(2/3) = 3`，时间复杂度 O(3n)，还是不能符合性能要求
+    - 至少采样两次，并且有`3/7`概率丢弃，所以每次采样期望次数为`2*(4/7+(4/7)^2+...)≈6`，时间复杂度 O(6n)，还是不能符合性能要求
 
 - 解法 3:
   - 思路：
-    - 利用`[1,7]`找到最快接近`[1,10]`的方法，用`6*7 = 42`的方法，只需要两次`rand7()`采样就能找到最接近 40(10 的整数倍)目标
-    - 用`[1,7]-1`作为`[0,6]`，可以模拟一个 42 格的矩阵，其中`[0,40]`是有效值，期望采样次数为`2.45`
+    - 利用`[1,7]`找到最快接近`[1,10]`的方法，用`7*7 = 49`的方法，只需要两次`rand7()`采样就能找到最接近 40(10 的整数倍)目标
+    - 保留 40 以内的有效值，期望采样次数为`2*(4/5+(4/5)^2...)≈2.4`，时间复杂度 O(2.4n)，符合性能要求
       ![470. Implement Rand10() Using Rand7()](/assets/images/2020-12-27-LeetCode_Question_Category_470.png)
+  - 优化思路：
+    - 上面`[41,49]`的随机值被抛弃了，实际上可以临时保留，下次凑够 10 的整数倍时还可以使用，这样用少量空间存储随机值，可以减少随机函数调用次数
 
 ["470. Implement Rand10() Using Rand7()" Random]()
 
@@ -755,6 +763,14 @@ tags: Algorithm Leetcode
   - 零一背包+二维逆序推演
 - 技巧：
   - 本题只求最大值，所以不用精确推算结果，在保证无**后效性**的同时，始终保持数组靠后为最大值即可
+
+### "478. Generate Random Point in a Circle"
+
+- 解法：RejectSampling
+  - 思路：
+    - 利用随机函数生成`[0,1)`之间的数，进而生成 x y 两个值，在`2r*2r`的正方形内，如果在圆内则采用，否则循环重试
+
+["478. Generate Random Point in a Circle" Random]()
 
 ### "494. Target Sum"
 
@@ -772,6 +788,17 @@ tags: Algorithm Leetcode
   - 标准完全背包算法
 
 ["518. Coin Change 2" Golang]()
+
+### "528. Random Pick with Weight"
+
+- 考点：
+  - 带权重的随机选择
+- 解法：preSum + 二分查找
+  - 利用 pre sum 计算随机用数组
+  - 利用二分查找模板实现快速查找
+  - 对最后的结果修正一下`return l+1`，保证 l 最小值为 0
+
+["528. Random Pick with Weight" Random]()
 
 ### "554. Brick Wall"
 
