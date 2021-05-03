@@ -7,6 +7,22 @@ tags: Algorithm Leetcode
 
 记录 Math 的算法实现
 
+### "7. Reverse Integer"
+
+```Go
+func reverse(x int) (ret int) {
+    for x != 0 {
+        if ret < math.MinInt32/10 || ret > math.MaxInt32/10 {
+            return 0
+        }
+        single := x%10
+        x /= 10
+        ret = ret*10 + single
+    }
+    return ret
+}
+```
+
 ### "264. Ugly Number II" Math+DP
 
 ```Go

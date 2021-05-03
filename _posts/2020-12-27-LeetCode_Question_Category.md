@@ -8,6 +8,15 @@ tags: Algorithm Leetcode
 ![LeetCode](/assets/images/2020-12-27-LeetCode_Category_1.jpg)
 记录 LeetCode 题型分类及解题思路
 
+### "7. Reverse Integer"
+
+- 解法：math
+  - 基本方法是通过`%`、`/10`循环取得结果
+  - 难点是如果超出 Int32 范围需返回 0，并且要求不允许使用 int64 类型，这样无法对最终结果做范围判断
+  - 可以利用`ret*10`处理前对`math.MinInt32/10`和`math.MaxInt32/10`做判断，预判最终结果
+
+["7. Reverse Integer" math]()
+
 ### "11. Container With Most Water"
 
 - 解法 1(推荐)：

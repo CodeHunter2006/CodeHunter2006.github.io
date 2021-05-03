@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Zookeeper 分布设计方案"
+title: "Zookeeper 分布式设计方案"
 date: 2021-04-09 22:00:00 +0800
 tags: Algorithm HighConcurrency Server Zookeeper
 ---
