@@ -104,5 +104,57 @@ func (this *RandomizedSet) GetRandom() int {
 ### "381. Insert Delete GetRandom O(1) - Duplicates allowed"
 
 ```Go
+import "math/rand"
 
+type RandomizedCollection struct {
+    m map[int]map[int]struct{}
+    b []int
+}
+
+func Constructor() RandomizedCollection {
+    return RandomizedCollection{
+        m : make(map[int]map[int]struct{}),
+    }
+}
+
+func (this *RandomizedCollection) Insert(val int) bool {
+    _, ok := this.m[val]
+    if !ok {
+        this.m[val] = make(map[int]struct{})
+    }
+    this.m[val][len(this.b)] = struct{}{}
+    this.b = append(this.b, val)
+    return !ok
+}
+
+func (this *RandomizedCollection) Remove(val int) bool {
+    set, ok := this.m[val]
+    if !ok {
+        return false
+    }
+    var tarDelIdx int
+    for k := range set {
+        tarDelIdx = k
+        break
+    }
+    lastVal := this.b[len(this.b)-1]
+
+    delete(this.m[lastVal], len(this.b)-1)
+    delete(set, tarDelIdx)
+    this.b = this.b[:len(this.b)-1]
+
+    if tarDelIdx != len(this.b) {
+        this.m[lastVal][tarDelIdx] = struct{}{}
+        this.b[tarDelIdx] = lastVal
+    }
+
+    if len(set) == 0 {
+        delete(this.m, val)
+    }
+    return true
+}
+
+func (this *RandomizedCollection) GetRandom() int {
+    return this.b[rand.Intn(len(this.b))]
+}
 ```

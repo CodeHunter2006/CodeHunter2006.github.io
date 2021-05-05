@@ -639,7 +639,19 @@ tags: Algorithm Leetcode
 
 ### "380. Insert Delete GetRandom O(1)"
 
+- 解法：HashTable + Array 实现 O(1) 数据结构
+  - 思路：
+    - 元素放在 Array 中，以便方便的随机选取
+    - 利用 HashMap 实现 O(1)查询，key 保存元素值，value 保存元素在 Array 中的下标
+
 ["380. Insert Delete GetRandom O(1)" StructDesign]()
+
+- 解法：二维 HashMap + Array 实现可重复 O(1) 数据结构
+  - 要点：
+    - remove 函数的实现较为复杂，基本思路是：记录最后一个元素值、删除当前元素、删除最后一个元素旧下标、新增最后一个元素新下标、删除多余内容
+    - 如果删除的当前元素正好是最后一个值，则要特殊处理，避免再添加进来
+
+["381. Insert Delete GetRandom O(1) - Duplicates allowed" StructDesign]()
 
 ### "381. Insert Delete GetRandom O(1) - Duplicates allowed"
 
@@ -780,6 +792,20 @@ tags: Algorithm Leetcode
   - 尝试 1、2、3 个元素的组合，可发现状态转移公式
   - 利用`sum <= 1000`的特性，用`+1000`的方式规避负数下标出现
 
+### "497. Random Point in Non-overlapping Rectangles"
+
+- 解法：preSum + BinarySearch + Random
+  - 思路：
+    - 按照["528. Random Pick with Weight" Random]()的思路实现
+    - 不同点是计算单元是一个矩形面上的点
+    - 最后需要根据命中矩形同时根据偏移量求出坐标
+  - 要点：
+    - 要精确统计每个面上的点，包括边上的点，用公式：`count := (x2 - x1 + 1) * (y2 - y1 + 1)`
+    - 计算命令矩形下标时，[二分查找模板](/2021/05/05/2021-05-05-BinarySearch/)中的`isLeft(m)`比较难匹配，改为`isRight(m)`匹配。
+      注意点的统计是从`0`开始的，所以如果一个`2*2`的矩形，上面的点是`0 1 2 3`，所以`4`已经是`右边区域了`
+
+["497. Random Point in Non-overlapping Rectangles" Random]()
+
 ### "518. Coin Change 2"
 
 - 考点：
@@ -795,8 +821,7 @@ tags: Algorithm Leetcode
   - 带权重的随机选择
 - 解法：preSum + 二分查找
   - 利用 pre sum 计算随机用数组
-  - 利用二分查找模板实现快速查找
-  - 对最后的结果修正一下`return l+1`，保证 l 最小值为 0
+  - 利用二分查找模板实现快速查找，用`isRight(m)`更容易实现
 
 ["528. Random Pick with Weight" Random]()
 

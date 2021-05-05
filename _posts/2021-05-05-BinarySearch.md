@@ -74,3 +74,6 @@ return l or r
 2. 确定返回**l**还是**r**
 3. 套用上面的算法模板
 4. 根据实际情况调整最后的结果
+
+- 有些情况下`isLeft(m)`不容易实现，可以变通为`isRight(m)`，只要保证左右区域和 l r 指针的关系即可。
+  如：["497. Random Point in Non-overlapping Rectangles" Random]()

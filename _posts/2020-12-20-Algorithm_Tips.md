@@ -100,9 +100,8 @@ bool cmp(const int& a,const int& b){return a > b;}
 进一步，可以在二维数组中对一维再压缩一次，通过两个点快速计算矩形内元素和。
 示例：
 ["363. Max Sum of Rectangle No Larger Than K" Array]()
+["497. Random Point in Non-overlapping Rectangles" Random]()
 ["528. Random Pick with Weight" Random]()
-
-#### UpperBound
 
 `upper_bound(begin, end, num)`
 相比 LowerBound 算法使用较少，从数组的 begin 位置到 end-1 位置二分查找第一个**大于** num 的数字，找到返回该数字的地址，不存在则返回 end。

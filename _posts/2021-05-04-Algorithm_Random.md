@@ -121,7 +121,49 @@ func (this *Solution) RandPoint() (ret []float64) {
 ### "497. Random Point in Non-overlapping Rectangles"
 
 ```Go
+import "math/rand"
 
+type Solution struct {
+    preSum []int
+    rects [][]int
+}
+
+func Constructor(rects [][]int) Solution {
+    rand.Seed(time.Now().Unix())
+
+    preSum := make([]int, len(rects))
+    sum := 0
+    for i, rect := range rects {
+        sum += (rect[2]-rect[0]+1)*(rect[3]-rect[1]+1)
+        preSum[i] = sum
+    }
+    return Solution{
+        preSum: preSum,
+        rects: rects,
+    }
+}
+
+func (this *Solution) Pick() []int {
+    tarPoint := rand.Intn(this.preSum[len(this.preSum)-1])
+    l, r := -1, len(this.preSum)
+    for l + 1 < r {
+        mid := (l+r)>>1
+        if this.preSum[mid] > tarPoint {
+            r = mid
+        } else {
+            l = mid
+        }
+    }
+
+    diff := tarPoint
+    if l >= 0 {
+        diff = tarPoint-this.preSum[l]
+    }
+    tarRect := this.rects[r]
+    xdiff, ydiff := diff%(tarRect[2]-tarRect[0]+1), diff/(tarRect[2]-tarRect[0]+1)
+
+    return []int{xdiff+this.rects[r][0], ydiff+this.rects[r][1]}
+}
 ```
 
 ### "528. Random Pick with Weight"
@@ -150,14 +192,14 @@ func Constructor(w []int) Solution {
 func (this *Solution) PickIndex() int {
     target := rand.Intn(this.preSum[len(this.preSum)-1])
     l, r := -1, len(this.preSum)
-    for l + 1 != r {
+    for l + 1 < r {
         mid := (l+r)>>1
-        if this.preSum[mid] <= target {
-            l = mid
-        } else {
+        if this.preSum[mid] > target {
             r = mid
+        } else {
+            l = mid
         }
     }
-    return l+1
+    return r
 }
 ```
