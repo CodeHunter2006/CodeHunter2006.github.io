@@ -5,6 +5,7 @@ date: 2021-05-05 09:00:00 +0800
 tags: Algorithm
 ---
 
+![BinarySearch](/assets/images/2021-05-05-BinarySearch_1.gif)
 "Although the basic idea of binary search is comparatively straightforward, the details can be surprisingly **tricky**."
 -- Donald Knuth
 
