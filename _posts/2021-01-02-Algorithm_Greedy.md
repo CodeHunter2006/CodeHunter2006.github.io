@@ -7,6 +7,40 @@ tags: Algorithm Leetcode
 
 记录 Greedy 的算法实现
 
+### "321. Create Maximum Number"
+
+```C++
+vector<int> maxNumber(vector<int>& nums1, vector<int>& nums2, int k) {
+    const int n1 = nums1.size(), n2 = nums2.size();
+    vector<int> best;
+    for (int k1 = max(k - n2, 0); k1 <= min(k, n1); ++k1)
+        best = max(best, maxNumber(maxNumber(nums1, k1),
+                                   maxNumber(nums2, k-k1)));
+    return best;
+}
+vector<int> maxNumber(vector<int> nums, int k) {
+    int drop = nums.size() - k;
+    vector<int> out;
+    for (int num : nums) {
+        while (drop && out.size() && out.back() < num) {
+            out.pop_back();
+            drop--;
+        }
+        out.push_back(num);
+    }
+    out.resize(k);
+    return out;
+}
+vector<int> maxNumber(vector<int> nums1, vector<int> nums2) {
+    vector<int> out;
+    auto i1 = nums1.begin(), end1 = nums1.end();
+    auto i2 = nums2.begin(), end2 = nums2.end();
+    while (i1 != end1 || i2 != end2)
+        out.push_back(lexicographical_compare(i1, end1, i2, end2) ? *i2++ : *i1++);
+    return out;
+}
+```
+
 ### "406. Queue Reconstruction by Height" C++
 
 ```C++

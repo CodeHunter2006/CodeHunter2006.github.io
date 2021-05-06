@@ -189,6 +189,15 @@ dq 兼有 stack 和 queue 的功能，在 front 端可以进行时间或范围�
 
 ## Tree(树)
 
+Tree 的结构特点决定了非常适合用 DFS 算法进行遍历，注意未必只遍历一次，可以以不同的方式遍历多次获得答案。
+
+### Binary Tree（二叉树）
+
+以二叉树为基础衍生出：完全二叉树(每一级孩子最多为 2k 个)、搜索二叉树(Binary Search Tree 查找树)、自平衡二叉查找树（AVL Tree）、红黑树（BlackRedTree）等，
+所以对二叉树的结构要非常熟悉。
+二叉树的基本操作是插入、遍历，其中遍历有 pre-order(先根遍历)、in-order(中根遍历)和 post-order(后根遍历)。
+只要有两种遍历顺序，就可以确定一个二叉树的结构。搜索二叉树中序遍历正好是有序数组，所以搜索二叉树可以用来排序，时间复杂度为 O(logn)。
+
 ### BST(Binary Search Tree 二叉搜索树)
 
 - 特性：
@@ -227,8 +236,6 @@ Treap 是一个二叉搜索树，同时保持堆的结构，在插入时通过�
 实例：
 ["213. House Robber II" OrderedMap Treap Golang]()
 
-### Red Black Tree (红黑树)
-
 ### TrieTree(Prefix Tree 前缀树)
 
 特里树/前缀树，读作"try tree"，用于在已知字典中快速查找目标字符串是否存在或者是否匹配前缀，广泛用于动态搜索框、高性能字符串查找。
@@ -245,9 +252,55 @@ Treap 是一个二叉搜索树，同时保持堆的结构，在插入时通过�
 ["208. Implement Trie (Prefix Tree)" TrieTree Golang]()
 ["212. Word Search II" TrieTree Golang]()
 
-### IndexTree(索引树)
+### BinaryIndexTree(索引树)
+
+BIT (树状数组 Binary Indexed Tree/Fenwick Tree)。
+提供`getSum(i)`和`update(i,val)`函数，可以获取目标数组第 i 位置(包括)往前所有元素的和(可以求和也可以求范围内最大或对小值)，可以动态更新某位置的值。
+
+`getSum`和`update`的时间复杂度都是 O(logn)。
+如果用一般的遍历方法求 sum，时间复杂度是 O(n)，更新一个值的时间复杂度是 O(1)；
+如果我们用 dp sum 的方式来实现 sum 的快速查询，那么查询的时间复杂度是 O(1)，但更新一个值的时间复杂度是 O(n)相比较 O(logn)较差。
+
+使用 BIT 适用于查询和更新频繁度相当的情况，可以降低总的时间复杂度。
+具体实现方法参照：
+["307. Range Sum Query - Mutable" Binary Indexed Tree C++]()。
+
+- 注意点：
+  1. 有一种叫 Segment Tree 的类似结构，功能与 BIT 相同但是代码更复杂，不易使用。
+  2. 在实现 BIT 时，一般创建的数组容量比原数组最大值+1，这样便于查询更新时直接用原数组下标操作，并且也能节省很多代码。
+     但是在查询和更新前注意下标值+1。
+  3. BIT 要求输入的位置范围为 0~n。有时，输入数组并不是紧凑在一定范围，非常稀疏，或者可能出现负数。
+     这种情况下，可以利用一个 convert 转换，将原数组排序后，每个元素存入 BIT 的下标为排序后的顺序号(下标+1)，这样就可以连续而保持正整数了。
+     如：{7, -90, 100, 1} => {3, 1, 4 ,2 }。
+     转换函数参考：["315. Count of Smaller Numbers After Self" Binary Indexed Tree C++]()。
+
+BIT 应用案例：
+["493. Reverse Pairs" Binary Indexed Tree C++]()、["315. Count of Smaller Numbers After Self" Binary Indexed Tree C++]()
 
 ### SegmentTree(线段树)
+
+Segment Tree 的功能与 BIT 类似，代码更为复杂，但是逻辑较为直观。
+Segment Tree 是一个二叉平衡树，所以更新和查找性能较好。
+每个叶子节点(segment)代表真正的值，非叶子节点是其子节点范围内合并的值。
+
+Segment Tree 和 BIT 都是在开始时确定规模，然后基本结构不再改变，只是逐个更新和求和计算。
+
+- 各函数时间复杂度：
+  - build(start, end, vals) -> O(n);
+  - update(index, value) -> O(logn);
+  - rangeQuery(start, end) -> O(logn + k); k 是与规模有关的一个值，通常不会太大。
+
+具体代码参照：
+["307. Range Sum Query - Mutable" Segment Tree C++]()
+
+### Red Black Tree (红黑树)
+
+红黑树广泛应用于 map、set、multimap、multiset、priority_queue 系列中，
+红黑树是一种平衡二叉树元素是有序的，与一般的 AVL 树（自平衡二叉查找树）的优势在于具有极高的统计性能，
+可以始终保持 insert、get、erase 的时间复杂度都为`O(logn*)`，在 n 的数量足够大时，可以认为时间复杂度为 O(1)（log 曲线趋平），
+所以有些需要达到 O(1)、O(n)等极限性能的情况可以利用这种数据结构。
+
+如："432. All O`one Data Structure"
 
 ## DSU（Disjoint Set Union 并查集 ）
 
@@ -262,6 +315,14 @@ Treap 是一个二叉搜索树，同时保持堆的结构，在插入时通过�
 例："924. Minimize Malware Spread"、"684. Redundant Connection"、"947. Most Stones Removed with Same Row or Column"、"721. Accounts Merge"
 
 ## HashTable
+
+Hashtable（哈希表），被广泛应用于 unordered_map、unordered_set、unordered_multimap、unordered_multiset 中，
+insert、get、erase 的时间复杂度都为 O(1)，适合要求极限性能的情况，但是元素是无序的。
+
+缺点是空间使用较多，要预留很多 bucket。
+
+示例：
+"128. Longest Consecutive Sequence"
 
 ### 结合 Array 实现 O(1)容器
 
@@ -278,9 +339,11 @@ OrderedMap CRUD 各项操作的时间复杂度是 O(logn)，适用于在遍历�
 
 ## Graph(图)
 
-如果树进一步扩展，允许有向上回溯的指针，则可以形成一个网络结构，也叫 Graph(图)。
+图是指多个节点相关联的数据结构，可以分为有向图和无向图。
+树是一种特殊的图，它相当于图中元素全部可以直接或间接联系在一起，但是不存在环状结构。
+图的存储可以有多种形式，比如用边的数组存储、用 hashtable 存储边、用矩阵存储。
+如果是树的话，还可以用树形结构的节点对象存储。
 
-图往往以二维数组(矩阵)表示，
 如：["277. Find the Celebrity"Graph C++]()
 
 ### Topological Order(拓扑排序)
