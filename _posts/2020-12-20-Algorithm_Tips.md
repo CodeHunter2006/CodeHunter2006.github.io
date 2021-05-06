@@ -49,6 +49,8 @@ tags: Algorithm Leetcode
 - leetcode 中经常要对 1000000007 取模，可以简写为 const int MOD = 1e9+7。
 - 要谨慎使用全局变量，如果函数会被调用多次，未重置的全局变量会导致提交失败
 - 需要用到`rand()`函数时，leetcode 会对该函数做延迟处理，调用过多时即使时间复杂度接近(比如 O(4n)->O(n))，算法也会超时
+- 图形类的，可以用手画一画演化过程，寻找规律。例："48. Rotate Image"
+- 关于迷宫题，看清楚题目，是全部踩一遍还是最短路径。
 
 # 数据结构
 
@@ -67,6 +69,8 @@ tags: Algorithm Leetcode
 - 二分查找的要点:
   - 每次通过`nums[mid]`和`target`的关系丢弃另一半不需要考虑的区域，缩小边界范围
   - 每次修改范围时边界条件和变更值一致，具体的说是考虑`=`的情况。
+
+例：["33. Search in Rotated Sorted Array"]()
 
 #### LowerBound
 
@@ -126,8 +130,13 @@ bool cmp(const int& a,const int& b){return a > b;}
 
 对于一个有向单链表或类似的可形成环装的结构，为了判断是否存在回路(loop)，
 可以分别用快、慢指针遍历，快指针每次走两步、慢指针每次走一步，如果快指针与慢指针在某个位置重叠了，
-说明存在回路。例:"457. Circular Array Loop"、"141. Linked List Cycle"。
-对于需要快速跳转到单链表结尾判断长度，并从中间开始操作的情况，也可以使用快慢指针法。例："234. Palindrome Linked List"。
+说明存在回路。
+
+例:"457. Circular Array Loop"、"141. Linked List Cycle"。
+
+对于需要快速跳转到单链表结尾判断长度，并从中间开始操作的情况，也可以使用快慢指针法。
+
+例："234. Palindrome Linked List"。
 
 ### 技巧：添加辅助头节点
 
@@ -148,17 +157,27 @@ bool cmp(const int& a,const int& b){return a > b;}
 示例：
 [`456. 132 Pattern`]()
 
+### stack 背影法
+
+有些时候利用 stack 追溯过去元素时，要看到之前的有效范围，这时在无用元素 pop 后，可以看到的 top 就是前面的"背影"。
+
+例："84. Largest Rectangle in Histogram"、"32. Longest Valid Parentheses"
+
 ## Queue(队列)
 
 符合 FIFO(先进先出)，一般从队尾入队，队首出队
 
 ### DQueue(double queue，双向队列、双端队列)
 
-dq 可以同时提供两个 queue，一个 queue 的队首是另一个的队尾
+dq 可以同时提供两个 queue，一个 queue 的队首是另一个的队尾。
+dq 兼有 stack 和 queue 的功能，在 front 端可以进行时间或范围的检查并弹出，在 back 端可以对可忽略值进行弹出。
 
 - C++ STL 的 deque 实现比较好，底层用多段数组实现
 - 也可以用 linkList 代替，只要使用 linkList 操作接口子集就可以
 - 用 C++的 vector 或 Go 的 slice 也可以实现，但是队首出队后空间会被浪费
+
+示例：
+例："239. Sliding Window Maximum"、"918. Maximum Sum Circular Subarray"
 
 #### 算法：Monotone Queue(单调队列)
 
@@ -203,7 +222,7 @@ Treap 是一个二叉搜索树，同时保持堆的结构，在插入时通过�
 
 - 由于每次插入 priority 都是随机的，可以很好的打破 value 本身的顺序导致深度过高问题，利用概率实现了平衡
 - Treap 的 CRUD 期望时间复杂度均为 O(logn)，性能非常好
-- 通过随机实现自动平衡，所以相比 AVL-Tree，旋转要更容易(只需左/右旋转)，代码更容易实现
+- 通过随机实现自动平衡，所以相比 AVL-Tree，旋转要更容易(只需左/右旋转)，代码更容易实现，适合 Golang
 
 实例：
 ["213. House Robber II" OrderedMap Treap Golang]()
@@ -230,7 +249,17 @@ Treap 是一个二叉搜索树，同时保持堆的结构，在插入时通过�
 
 ### SegmentTree(线段树)
 
-## UninFind(并查集)
+## DSU（Disjoint Set Union 并查集 ）
+
+并查集也叫 UninFind，提供 find(查找)和 union(合并)函数，适合于将大量元素(例如无向图的节点)分为不同的集合、动态合并集合，最终根据集合关系、集合容量得到答案。
+
+- DSU 的性能非常高，增加了 rank 优化后查询时间复杂度可以达到 O(1)。
+
+- DSU 使用的注意点：
+  1. 要把所有初始数据遍历输入到 DSU 中，再判断结果，中间结果是不完整的(有些关联还没有建立)。
+  2. 注意 DSU 中有很多孤立节点，输出结果要考虑到这些孤立节点是否计数。
+
+例："924. Minimize Malware Spread"、"684. Redundant Connection"、"947. Most Stones Removed with Same Row or Column"、"721. Accounts Merge"
 
 ## HashTable
 
@@ -239,20 +268,128 @@ Treap 是一个二叉搜索树，同时保持堆的结构，在插入时通过�
 ["380. Insert Delete GetRandom O(1)" StructDesign]()
 ["381. Insert Delete GetRandom O(1) - Duplicates allowed" StructDesign]()
 
+## Ordered Map(有序 Map)
+
+有序 Map 的实现方式可以有多种，效率较高的有：AVL-Tree、Treap(Golang)、Skiplist(Redis)、RedBlackTree(C++ STL)
+
+OrderedMap CRUD 各项操作的时间复杂度是 O(logn)，适用于在遍历过程中要不断保持顺序的情况。
+
+如：["253. Meeting Rooms II"]()
+
+## Graph(图)
+
+如果树进一步扩展，允许有向上回溯的指针，则可以形成一个网络结构，也叫 Graph(图)。
+
+图往往以二维数组(矩阵)表示，
+如：["277. Find the Celebrity"Graph C++]()
+
+### Topological Order(拓扑排序)
+
+如果数据关系可以形成一个**有向无环图**，那么可以用拓扑排序形成一个唯一顺序序列，BFS 是比较常用的方法。
+
+- 排序方法：
+  1. 选择一个入度为 0 的顶点，输出它，并在图中删除。
+  2. 删除这个定点对应的边。
+  3. 不断循环 1、2，直到结束。
+  4. 如果输出的顶点数小于总顶点数，则说明有**回路**; 否则，输出的序列就是拓扑排序结果。
+
+例：
+["269. Alien Dictionary"]()
+["310. Minimum Height Trees" Graph C++]()
+
+### Dijkstra(狄杰斯特拉)
+
+dijkstra 求得图中起始点到各个可达点的最短距离，并且它检索到某点第一次时就是到那点的最短距离。
+利用优先级队列存储当前探索的点的序号和当前检索到这点的距离，按照距离最短进行优先级排序。
+
+- 步骤：
+  1. 最初优先级队列中推入起始点，然后将当前点的下一可达位置及距离推入队列。
+  2. 中途通过一个数组存储起始点到所有点的距离，默认为 INT_MAX。
+  3. 最后该数组就是目标数组，如果还有 INT_MAX 值，说明这点不可达。
+
+示例：["743. Network Delay Time"]()
+
+### Euler tour(欧拉路径)
+
+欧拉路径是指有限有向图中，经过所有节点，但每个节点只被访问一次的路径。
+
+- 欧拉路径要在欧拉图可以找到，满足欧拉图的条件：
+
+  1. 图是连通的，图上任意两点总有路径相连。
+  2. 下面满足两者之一就可以：
+
+  - 2.1 有且只有一个点的入度比出度少 1（作为欧拉路径的起点），有且只有一个点的入度比出度多 1（作为终点），且其余点入度=出度。
+  - 2.2 所有点入度=出度。
+
+- 如果已知图存在欧拉路径，如何找到欧拉路径？有两个方法：
+  1. Fleury(佛罗莱)算法。
+  2. Hierholzer 算法。
+- Hierholzer 算法：
+  1. 在满足条件的欧拉图的基础上，从出发点开始出发。
+  2. 向任意一个点出发，把当前路径删除，将起点插入结果数组头部，把目标点定为新的起点。
+  3. 不断重复 2 操作，直到结束，那么输出数组就是欧拉路径了。
+
+示例：
+["332. Reconstruct Itinerary" Graph C++]()
+
 # 通用算法
 
-## brute force 暴风 bf
+## Brute Force(暴风 bf)
 
 强行向前推进，最简单的算法。
+
 例："121. Best Time to Buy and Sell Stock"
 
-## recur
+## DC(divide and conquer 分治法)
 
-递归调用函数
+将复杂问题分解为不同子问题，然后再顺序或嵌套解决。
 
-## bucket
+例：["229. Majority Element II"]()、["857. Minimum Cost to Hire K Workers"]()
 
-核心思想是元素集合的整体范围可以分割为有限数量的"桶"，每个桶覆盖较小范围，然后通过遍历元素，利用有限的桶进行匹配、累加，
+## DP(Dynamic Planning)
+
+参考：
+[Algorithm Dynamic Planning](/2021/01/02/Algorithm_DynamicPlanning/)
+[花花酱 DP Note](/2021/03/06/Algorithm_DP_HuaHua/)
+
+## Sliding Window(滑动窗口)
+
+窗口横向长度可以动态改变，不断保持窗口内符合条件。适合子数组类题型或特定长度的字符串匹配。
+
+例：["76. Minimum Window Substring"]()
+
+Window 不一定只向后运动，Window 的右边框还可能向左运动，只要保持整体向后运动就可以。
+
+如：["727. Minimum Window Subsequence"]()
+
+## DFS(depth first search 深度优先遍历)
+
+深度优先遍历也叫**search**(搜索可能性空间)，可以用函数递归(recur)和栈(stack)实现，算法复杂度 O(n^n)或 O(n^2)。
+如果需要把所有可能性遍历到，选 dfs 较好，递归代码较简单。
+
+由于算法复杂度过高，规模较大时往往可以通过记录中间结果的方法避免重复计算(这个过程叫 **memo**，也叫剪枝)，
+中间结果一般存储三个状态：默认值、有效（或具体有效值）、无效（无法找到答案）。
+在递归时，往往有这样两个选项，“加上当前位置、递归”、“不加当前位置、递归”，
+这时候“加上当前位置”要放在前面执行，这样可以尽早探索出无效路径，避免大量无用探索。
+例：["22. Generate Parentheses"]()、["386. Lexicographical Numbers"]()、["547. Friend Circles"]()
+
+### Backtracking(回溯)
+
+是 DFS 的一个分支，用于探索某个迷宫，在过程中需要记录、恢复现场，然后尝试下一个方向。
+例：["52. N-Queens II"]()
+
+## BFS(breadth first search 广度优先遍历)
+
+dfs 逻辑容易实现但是有些情况可能会性能很差无法通过性能测试 Case，这时要考虑用 BFS。
+可以用 queue、set 等进行演化。bfs 相比 dfs 可以提高性能的条件是，**只要找到一个**可能或最短的答案就可以，而不是要遍历整个可能性空间。
+如果目标方向是固定的，dfs 可以通过 visited 记录少走重复路线，dfs 实现较简单；但是如果方向是不固定的，dfs 很容易走入浪费时间的搜索空间，用 bfs 就更好。
+bfs 也可以加入 visited 提高性能，一般用 bucket 或 hashtable 实现。
+
+例：["127. Word Ladder"]()、["286. Walls and Gates"]()、["490. The Maze"]()
+
+## Bucket
+
+核心思想是元素集合的整体范围可以分割为**有限数量**的"桶"，每个桶覆盖**较小范围**，然后通过遍历元素，利用有限的桶进行匹配、累加，
 以便降低遍历范围从而降低复杂度。
 
 - bucket 的算法可以用不同的数据结构实现
@@ -312,6 +449,39 @@ Treap 是一个二叉搜索树，同时保持堆的结构，在插入时通过�
 ["528. Random Pick with Weight" Random]()
 ["497. Random Point in Non-overlapping Rectangles" Random]()
 
+### Fisher-Yates Algorithm(Fisher-Yates Shuffle 洗牌)
+
+Fisher-Yates 是最优洗牌算法，利用数组的原位置进行洗牌，并保证每个元素在每个位置的概率相同。只遍历一遍，时间复杂度 O(n)
+
+- 步骤：
+  1. 遍历每个元素位置
+  2. 每个位置时随机取一个目前剩下元素数量的随机整数，随机数作为元素下标，与当前位置的元素相交换
+  3. 遍历完毕、洗牌结束
+
+示例：
+["384. Shuffle an Array" Random Golang]()
+
+## KNN algorithm（Kth Nearest Neighbor）
+
+KNN 是一种最典型的分类算法，
+
+- 一般步骤：
+  1. 数据标准化处理，各个维度的数据转为同一数量级（两种常用方法：线性归一化 Min-Max scaling、0 均值标准化 Z-score standardization）。
+  2. 通过新值与样本的距离（欧氏距离/曼哈顿距离/余弦定理）取得最近的 K 个邻居。
+  3. 由 K 个邻居的类型投票决定，K 的取值最好为 3~10 之间的奇数。
+  4. 通过实验观察，调整 K 的值到最优。
+
+例："973. K Closest Points to Origin"
+
+### Minimax
+
+Minimax（极大极小值搜索 Game Theory）,对弈双方都希望让自己 max 而让对方 min，
+假设双方都能够预测全部未来，那么最终博弈结果一般是某方赢或平局。
+
+按照游戏规则，利用 DFS 的方式搜索整个可能性空间，逐步演化出最终的结果。
+
+例："913. Cat and Mouse"
+
 # Skill
 
 ### **剪枝**
@@ -335,12 +505,93 @@ Treap 是一个二叉搜索树，同时保持堆的结构，在插入时通过�
   - 坏处：
     1. 如果原数据和新数据边界不好划定，容易出错
 
+对于存储容量较大的迷宫题，为了节省容量，可以利用原有二维数组元素的高位存储中间值，通过二进制操作在原位置保存更多信息并读取原值。
+
+如："289. Game of Life"。
+
+对于给定容量非常有限(空间复杂度 O(1))的情况，也可以用这种思路。虽然没有用位操作，但是利用负数存储原有正数值和访问过的叠加状态。
+
+如："41. First Missing Positive"
+
 ### 常数内尝试
 
 有时可以利用题目条件中某个参数数量有限，可以穷举所有该参数也不会影响时间复杂度，这时可用这种思路解决。
 
 - 示例：穷举所有不同字母数量。
   ["395. Longest Substring with At Least K Repeating Characters" SlidingWindow Golang]()
+
+### 固定方向检测
+
+比如 8 方向、4 方向、2 方向等，可以将对应方向的执行参数写入数组，然后循环执行，通过计数对数组容量取余来切换方向。
+
+例：["<Google>489. Robot Room Cleaner"]()
+
+### 未知方向结果记录(左右或上下左右)
+
+未知方向结果记录(左右或上下左右)，可以用 map 记录结果，也可以使用多个 vector 记录不同方向。
+
+使用 vector 性能会更高，
+
+如："314. Binary Tree Vertical Order Traversal"。
+
+使用 map 会更方便，
+
+如："<Google>489. Robot Room Cleaner"。
+
+### P(Polynomial) 问题
+
+如果计算的数列、数值符合某种公式(P 问题)，可以先推导出等价公式，然后用暴力方法计算结果，注意计算是要保证被除数能够被整除。
+
+如："621. Task Scheduler"、"829. Consecutive Numbers Sum"
+
+### 自然数 bucket
+
+如果处理的数组是不重复自然数或整数，并且取值范围也是 N 以内，
+那么可以用该自然数和数组下标的对应关系进行 swap 处理（时间复杂度 O(n)），排序、查重等计算。
+
+如："41. First Missing Positive"
+
+### 每 3 个元素之间有关系时
+
+可以使用 hashmap 快速找到关联元素例。
+
+如："1. Two Sum"、"446. Arithmetic Slices II - Subsequence"(阿里巴巴)、"560. Subarray Sum Equals K"。
+
+### (C++)nth_element 函数
+
+对于只需前 K 个元素排序、后边元素比前 K 个都大、可乱序的情况，非常适合 nth_element 函数(时间复杂度 O(n))。
+
+例如："324. Wiggle Sort II"、"973. K Closest Points to Origin"。
+
+### bitmap
+
+如果要检查的元素集很有限，可以利用二进制操作生成 uint32 bitmap 进行存储，然后用 unordered_map 存储，这样节省容量、运算效率高。
+
+例："187. Repeated DNA Sequences"
+
+### 多个属性用 map 或 set 排序
+
+如果多个属性用 map 或 set 排序，实现比较函数比较麻烦，可以将不同属性使用不同位的数值，优先级高的在高位。
+
+如：["460. LFU Cache" Design Golang]()
+
+### 排序和函数调用的时间顺序有关
+
+有些情况，排序和函数调用的时间顺序有关，可以用一个变量做持续自增运算，适时的使用。如："460. LFU Cache"
+
+### 嵌套表达式 Parse 类的题
+
+逻辑简单有效的方式就是通过一个引用类型的 pos 顺序向前或向后一直 parse，通过递归函数解决嵌套问题，
+通过不同类型处理函数分治局部类型，局部作用域变量通过 map 存储。
+
+例："394. Decode String"、"726. Number of Atoms"、"736. Parse Lisp Expression"
+
+### “并发资源占用”问题
+
+用有序 map 进行时间轴模拟最 concise。
+如果没有 map，可以分别将开始和结束时间点存入数组，然后排序，再按照顺序遍历。
+
+如："253. Meeting Rooms II"
 
 # Little Tips
 

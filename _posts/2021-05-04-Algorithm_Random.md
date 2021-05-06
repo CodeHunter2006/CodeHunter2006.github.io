@@ -31,6 +31,41 @@ func (this *Solution) GetRandom() (ret int) {
 }
 ```
 
+### "384. Shuffle an Array"
+
+```Go
+import "math/rand"
+
+type Solution struct {
+    nums []int
+    arr []int
+}
+
+func Constructor(nums []int) Solution {
+    rand.Seed(time.Now().Unix())
+
+    arr := make([]int, len(nums))
+    copy(arr, nums)
+
+    return Solution{
+        nums: nums,
+        arr: arr,
+    }
+}
+
+func (this *Solution) Reset() []int {
+    return this.nums
+}
+
+func (this *Solution) Shuffle() []int {
+    for i := 0; i < len(this.arr); i++ {
+        j := rand.Intn(len(this.arr)-i)
+        this.arr[i], this.arr[j] = this.arr[j], this.arr[i]
+    }
+    return this.arr
+}
+```
+
 ### "398. Random Pick Index"
 
 ```Go

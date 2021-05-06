@@ -566,6 +566,24 @@ tags: Algorithm Leetcode
 - 考点：
   - DP、完全背包
 
+### "324. Wiggle Sort II"
+
+- 解法：
+  1. 利用**nth_element**函数在 O(n)时间内，在中间位置左边排序，保证左边比右边小，并返回中间位置的值。
+  2. 将左边有序的较小数的奇数下标位置替换为右边特定位置的较大数(注意循环结束条件是`j <= k`，判断条件是 j 与 mid 的关系)。
+  3. 使用`(1+2*(i)) % (n|1)`对所有奇数位置比较和替换，后面的`(n|1)`来保证不论 n 是奇偶，取模后都是奇数位置。
+  4. 使用宏函数，避免过多重复代码。
+
+["324. Wiggle Sort II" Sort C++]()
+
+### "332. Reconstruct Itinerary"
+
+- 解法：欧拉路径 Hierholzer Algorithm
+  - 思路：
+    - 当前问题正好是每张票用一次并全部用掉，符合欧拉路径
+
+["332. Reconstruct Itinerary" Graph C++]()
+
 ### "337. House Robber III"
 
 - 解法：tree+recur+dp
@@ -675,6 +693,15 @@ tags: Algorithm Leetcode
   - 在新增、删除元素时，维护好"当前未达到 k 个字母种类数"，然后当条件符合时更新最大长度结果
 
 ["395. Longest Substring with At Least K Repeating Characters" SlidingWindow Golang]()
+
+### "384. Shuffle an Array"
+
+- 解法：Fisher-Yates Shuffle
+  - 要点：
+    - 要保留初始的数组以便`reset`返回
+    - 要保留被随机后的数组，以便下次继续对其随机处理，否则由于随机种子被重置，无法真正实现随机，Case 会不过
+
+["384. Shuffle an Array" Random Golang]()
 
 ### "398. Random Pick Index"
 
@@ -979,6 +1006,22 @@ tags: Algorithm Leetcode
 ["912. Sort an Array" QuickSort C++]()
 
 ["912. Sort an Array" QuickSort Golang]()
+
+### "913. Cat and Mouse"
+
+- 解法：Minimax
+
+["913. Cat and Mouse" Minimax C++]()
+
+### "918. Maximum Sum Circular Subarray"
+
+下面这种解法时间和空间性能都较差，但是易于理解，以后再考虑学习性能较好的解法。
+
+1. 把循环数组想象两个重复的数组拼接在一起，按照单个数组的解法，计算一个 `2*N+1` 长度的前 N 项和数组。
+2. 利用一个 deque 存储可用于被减的前面的下标，初值插入 0。
+3. 从 1~2N 开始遍历，首先去除间隔距离过远的下标，然后计算当前值与 dq 最前面的下标对应的值相减结果。
+4. 将当前下标插入后边前，先将队尾所有值小于当前的弹出。
+5. 总体思路是保持 deque 中有合适的比较值的下标，要么下标合适、要么值要够小(被后边减时结果会更大)。
 
 ### "935. Knight Dialer"
 

@@ -158,3 +158,79 @@ func (this *RandomizedCollection) GetRandom() int {
     return this.b[rand.Intn(len(this.b))]
 }
 ```
+
+```Go
+type VFE struct {
+    v int   // value
+    f int   // frequency
+    e *list.Element // point in list in one frequency
+}
+
+type LFUCache struct {
+    capacity int
+    minFreq int
+    k2vfe map[int]*VFE
+    f2l map[int]*list.List
+}
+
+func Constructor(capacity int) LFUCache {
+    res := LFUCache {
+        capacity : capacity,
+        minFreq : 0,
+        k2vfe : make(map[int]*VFE),
+        f2l : make(map[int]*list.List),
+    }
+    return res
+}
+
+func (this *LFUCache) add2List(freq, key int) *list.Element {
+    if _, exists := this.f2l[freq]; !exists {
+        this.f2l[freq] = list.New()
+    }
+
+    return this.f2l[freq].PushBack(key)
+}
+
+func (this *LFUCache) Get(key int) int {
+    if vfe, exist := this.k2vfe[key]; exist {
+        this.f2l[vfe.f].Remove(vfe.e)
+        vfe.f++
+        vfe.e = this.add2List(vfe.f, key)
+
+        if this.f2l[this.minFreq].Len() == 0 {
+            this.minFreq++
+        }
+        return vfe.v
+    }
+    return -1
+}
+
+func (this *LFUCache) Put(key int, value int)  {
+    if this.capacity == 0 {
+        return
+    }
+    if vfe, exist := this.k2vfe[key]; exist {
+        this.f2l[vfe.f].Remove(vfe.e)
+        if vfe.f == this.minFreq && this.f2l[vfe.f].Len() == 0 {
+            this.minFreq++
+        }
+        vfe.f++
+        vfe.v = value
+        vfe.e = this.add2List(vfe.f, key)
+        return
+    }
+
+    if len(this.k2vfe) >= this.capacity {
+        rmKey := this.f2l[this.minFreq].Front().Value.(int)
+        delete(this.k2vfe, rmKey)
+        this.f2l[this.minFreq].Remove(this.f2l[this.minFreq].Front())
+    }
+
+    this.k2vfe[key] = &VFE {
+        v : value,
+        f : 1,
+        e : this.add2List(1, key),
+    }
+    this.minFreq = 1
+}
+```
