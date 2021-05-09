@@ -32,7 +32,7 @@ tags: Algorithm
 
 ```Go
 l, r := -1, N
-for l + 1 != r {
+for l+1 < r {
     m := (l+r)>>1
     if isLeft(m) {
         l = m

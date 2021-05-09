@@ -309,13 +309,26 @@ fmt.Println(s)	// output: 6 5 4 3 2 1
 ### sort.Search
 
 `func Search(n int, f func(int) bool) int`
-LowerBound 算法，在有序数组中查找`[0,n)`范围内满足`f`的最小下标，如果没有满足条件的，则返回 n。
-利用闭包实现`f`
+LowerBound 算法，在有序数组中查找`[0,n)`范围内满足`f`的最小下标，如果没有满足条件的，则返回 -1
+
+- 利用闭包实现`f`
+- 如果二分查找范围是`[x, x+n)`，则可以`Search(n,...)`，然后在`f`函数进入后`index+x`修正范围
 
 ### sort.Slice
 
 `func Slice(x interface{}, less func(i, j int) bool)`
 利用闭包对任意类型的 Slice 排序。该函数底层利用反射实现
+
+### sort.Reverse
+
+将接口的 less 函数结果取反，以便反转最终排序结果达到反向排序(从大到小)的目的
+
+`func Reverse(data Interface) Interface`
+
+```Go
+s := []int{5, 2, 6, 3, 1, 4} // unsorted
+sort.Sort(sort.Reverse(sort.IntSlice(s)))
+```
 
 ## sync.Mutex
 

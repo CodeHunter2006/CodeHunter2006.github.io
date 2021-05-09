@@ -136,3 +136,41 @@ func shipWithinDays(weights []int, D int) int {
     })
 }
 ```
+
+### "1723. Find Minimum Time to Finish All Jobs"
+
+```Go
+func minimumTimeRequired(jobs []int, k int) int {
+    sort.Sort(sort.Reverse(sort.IntSlice(jobs)))
+    l, r := jobs[0], 0
+    for _, v := range jobs {
+        r += v
+    }
+
+    return l + sort.Search(r-l, func(limit int) bool {
+        limit += l
+        sum := make([]int, k)
+
+        var backtrack func(int) bool
+        backtrack = func(idx int) bool {
+            if idx == len(jobs) {
+                return true
+            }
+            for i := range sum {
+                if sum[i] + jobs[idx] <= limit {
+                    sum[i] += jobs[idx]
+                    if backtrack(idx+1) {
+                        return true
+                    }
+                    sum[i] -= jobs[idx]
+                }
+                if sum[i]+jobs[idx]==limit || sum[i]==0 {
+                    return false
+                }
+            }
+            return false
+        }
+        return backtrack(0)
+    })
+}
+```

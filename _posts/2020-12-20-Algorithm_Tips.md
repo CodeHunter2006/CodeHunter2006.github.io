@@ -21,6 +21,7 @@ tags: Algorithm Leetcode
       等价于 O(n)
     - 对数的(logn)
       比如 二分查找
+      - 这里的$logn$实际上是$log_2n$(以 2 为底 n 的对数)
 
 # 做题流程
 
@@ -36,8 +37,9 @@ tags: Algorithm Leetcode
   - O(n^n), 40
   - O(n^3), 500
   - O(n^2), 1000
-  - O(n), 1e5
-  - O(logn), ...
+  - O(n), 1e7
+  - O(logn), infinit
+  - O(mlogn), 1e5, 1e9
 - 除非是题目留下的题目类本身的构造函数，不要自己去重新写构造函数，可能会有问题。
 - leetcode 运行时报错，一般都是数组越界。有时也是空指针问题。
 - leetcode 运行 Go 代码时，报"Runtime error"，一般是有死循环了。
