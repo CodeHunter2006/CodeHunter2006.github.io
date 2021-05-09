@@ -6,7 +6,7 @@ tags: Java Algorithm
 ---
 
 ![Java](/assets/images/2021-05-09-Java_LongAdder_1.png)
-jdk 新增了原子操作类 LongAdder 对标 AtomicLong，加强了多 CPU 并发下的效率，在这里记录一下。
+jdk8 新增了原子操作类 LongAdder，它对标 AtomicLong，提高了多 CPU 并发下的效率，在这里记录一下。
 
 # 特点
 
