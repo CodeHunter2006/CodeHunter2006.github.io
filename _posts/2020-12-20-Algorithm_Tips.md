@@ -92,6 +92,11 @@ bool cmp(const int& a,const int& b){return a > b;}
 示例：
 ["74. Search a 2D Matrix" Array Golang]()
 
+#### UpperBound
+
+`upper_bound(begin, end, num)`
+相比 LowerBound 算法使用较少，从数组的 begin 位置到 end-1 位置二分查找第一个**大于** num 的数字，找到返回该数字的地址，不存在则返回 end。
+
 ### 环状 array 技巧
 
 - 通常 array 的特点是可以随机向后 n 步跳转，增加环状条件后，跳转的目标位置可以通过取余计算得到
@@ -110,8 +115,8 @@ bool cmp(const int& a,const int& b){return a > b;}
 ["497. Random Point in Non-overlapping Rectangles" Random]()
 ["528. Random Pick with Weight" Random]()
 
-`upper_bound(begin, end, num)`
-相比 LowerBound 算法使用较少，从数组的 begin 位置到 end-1 位置二分查找第一个**大于** num 的数字，找到返回该数字的地址，不存在则返回 end。
+- preSum 还可以用于**二进制异或运算**
+  示例：["1310. XOR Queries of a Subarray" BinaryOperation]()
 
 ## Heap(堆)
 

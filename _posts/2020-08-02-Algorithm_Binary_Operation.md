@@ -7,6 +7,31 @@ tags: Algorithm Leetcode
 
 # 常用算法
 
+## XOR
+
+- 利用异或运算交换变量
+
+```Go
+func xorSwap() {
+    a, b := 1, 2
+    a ^= b  // 将"1^2"的结果保存到a
+    b ^= a  // 利用"2"将"1^2"中的"1"取出，保存到b
+    a ^= b  // 利用"1"将"1^2"中的"2"取出，保存到a
+}
+
+func mathSwap() {
+    a, b := 1, 2
+    a = a + b
+    b = a - b
+    a = a - b
+}
+```
+
+- 如示例，`异或`运算同时具有算数`+-`能力，可以利用其做交换操作
+- `^`异或运算，可以将两个元素的"混合"状态记录下来，相当于算数中的"求和"
+- 异或具有和`+-`相同的交换性`a^b == b^a`、结合性`x = a^b; x^c == a^b^c`
+- 异或具有特殊的"自反"性，相当于`+`之后执行`-`，`a^b^b == a`
+
 ## 去掉二进制末尾的 1
 
 用下面方法可以将任意整型去掉末尾的 1，比如`0b1010 -> 0b1000`
@@ -323,6 +348,59 @@ func findNumOfValidWords(words []string, puzzles []string) []int {
                 break
             }
         }
+    }
+    return ret
+}
+```
+
+### "1310. XOR Queries of a Subarray"
+
+```Go
+func xorQueries(arr []int, queries [][]int) (ret []int) {
+    preSum := make([]int, len(arr)+1)
+    for i, v := range arr {
+        preSum[i+1] = preSum[i] ^ v
+    }
+    ret = make([]int, len(queries))
+    for i, q := range queries {
+        ret[i] = preSum[q[1]+1] ^ preSum[q[0]]
+    }
+    return ret
+}
+```
+
+### "1720. Decode XORed Array"
+
+```Go
+func decode(encoded []int, first int) []int {
+    ret := make([]int, len(encoded)+1)
+    ret[0] = first
+    for i := 0; i < len(encoded); i++ {
+        ret[i+1] = ret[i] ^ encoded[i]
+    }
+    return ret
+}
+```
+
+### "1734. Decode XORed Permutation"
+
+```Go
+func decode(encoded []int) []int {
+    N := len(encoded)+1
+    all, other := 0, 0
+    for i := 1; i <= N; i++ {
+        all ^= i
+    }
+    for i, v := range encoded {
+        if i & 1 == 1 {
+            other ^= v
+        }
+    }
+
+    ret := make([]int, N)
+    ret[0] = all ^ other // first
+    for i := 1; i < N; i++ {
+        ret[i] = ret[i-1] ^ encoded[i-1]
     }
     return ret
 }

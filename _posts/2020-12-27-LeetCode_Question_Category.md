@@ -1165,6 +1165,15 @@ tags: Algorithm Leetcode
 
 ["1438. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit" SlidingWindow+MonotoneQueue Golang]()
 
+### "1310. XOR Queries of a Subarray"
+
+- 解法：preSum + XOR
+  - 思路：
+    - 先求出异或的 preSum 数组
+    - 然后利用 preSum 求出任意范围内的异或结果
+
+["1310. XOR Queries of a Subarray" BinaryOperation]()
+
 ### "1463. Cherry Pickup II"
 
 - 考点：
@@ -1184,6 +1193,16 @@ tags: Algorithm Leetcode
     - 在某个 days 下，是否符合条件可以简单遍历统计实现
   - 时间复杂度 O(mlogn)
 
+### "1720. Decode XORed Array"
+
+- 解法：异或特性
+  - 思路：
+    - 异或运算具有自反性，`a^b^a == b`
+    - 由于我们知道了`first`，可以利用其特性求出`ret[1] = first^encoded[0]`
+    - 再用新求出的值迭代取得所有结果`ret[i+1] = ret[i] ^ encoded[i]`
+
+["1720. Decode XORed Array"BinaryOperation Go]()
+
 ### "1723. Find Minimum Time to Finish All Jobs"
 
 - 解法：BinarySearch
@@ -1199,3 +1218,16 @@ tags: Algorithm Leetcode
       - 如果当前人是空的，而之后的人也一定是空的，这时如果失败了，说明后边的人也会失败，所以返回 false
 
 ["1723. Find Minimum Time to Finish All Jobs" BinarySearch]()
+
+### "1734. Decode XORed Permutation"
+
+- 解法：异或特性+逻辑
+  - 思路：
+    - 这道题是基于"1720. Decode XORed Array"的算法，只要求出`first`就可以推出结果
+    - 题目条件**数组元素是最前面的 n 个正整数，n 必定是奇数**，我们假设为`A B C D E`
+    - 设`AB`表示`A^B`，根据异或的结合律，我们可以求出一个"蕴含"了所有元素的值`ABCDE`
+    - 根据已知的 encoded 数组`AB BC CD DE`，我们只要从中取出`BC DE`然后求得`BCDE`
+    - 再根据异或的"自反"性`A = ABCDE ^ BCDE`，求得`first`
+    - 然后根据"1720. Decode XORed Array"的算法求得结果即可
+
+["1734. Decode XORed Permutation"BinaryOperation Go]()
