@@ -12,7 +12,7 @@ tags: Algorithm Leetcode
 ```Go
 func intToRoman(num int) string {
     ret := []byte{}
-    romans := [][]byte{{'I','V'},{'X','L'},{'C','D'},{'M','?'}}
+    romans := [][]byte{ {'I','V'},{'X','L'},{'C','D'},{'M','?'} }
     for i,j := 1000, 3; j >= 0; i,j = i/10,j-1 {
         cur := num/i
         num = num%i
