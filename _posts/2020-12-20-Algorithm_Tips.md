@@ -664,6 +664,12 @@ Minimax（极大极小值搜索 Game Theory）,对弈双方都希望让自己 ma
 
 如："253. Meeting Rooms II"
 
+### 设定 DP 演化边界条件
+
+某些情况下，题目设定的参数规模之间是冲突的，这时要选取对结果有影响的最小范围进行迭代
+
+如："1269. Number of Ways to Stay in the Same Place After Some Steps"
+
 # Little Tips
 
 ### 数组中间元素下标

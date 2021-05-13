@@ -2,7 +2,7 @@
 layout: post
 title: "Redis HyperLogLog Data Structure"
 date: 2020-12-03 22:00:00 +0800
-tags: Redis Algorithm
+tags: Redis Algorithm BigData
 ---
 
 ![Peano](/assets/images/2020-12-03-Redis_HyperLogLog_1.png)

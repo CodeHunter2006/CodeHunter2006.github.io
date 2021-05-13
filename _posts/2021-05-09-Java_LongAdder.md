@@ -2,7 +2,7 @@
 layout: post
 title: "Java LongAdder"
 date: 2021-05-09 20:00:00 +0800
-tags: Java Algorithm
+tags: Java Algorithm HighConcurrency
 ---
 
 ![Java](/assets/images/2021-05-09-Java_LongAdder_1.png)

@@ -1145,6 +1145,25 @@ tags: Algorithm Leetcode
 
 ["1178. Number of Valid Words for Each Puzzle" BinaryOperation Golang]()
 
+### "1269. Number of Ways to Stay in the Same Place After Some Steps"
+
+- 解法：DP + 规模边界条件
+  - 思路：
+    - 按照 DP 演化思路，有两个数组分别表示两步，逐步演化
+  - 要点：
+    - 按基本思路写完会超时，原因是`arrLen <= 10^6`每步演化的数组过大，
+      而`steps <= 500`步数很小，`arrLen >= 251`之后的不会影响结果了，
+      所以只要在演化前对`arrLen`进行一次范围修正即可
+
+### "1310. XOR Queries of a Subarray"
+
+- 解法：preSum + XOR
+  - 思路：
+    - 先求出异或的 preSum 数组
+    - 然后利用 preSum 求出任意范围内的异或结果
+
+["1310. XOR Queries of a Subarray" BinaryOperation]()
+
 ### "1438. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit"
 
 - 解法 1:
@@ -1164,15 +1183,6 @@ tags: Algorithm Leetcode
     3. 记录 right - left 最大值，直到循环结束
 
 ["1438. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit" SlidingWindow+MonotoneQueue Golang]()
-
-### "1310. XOR Queries of a Subarray"
-
-- 解法：preSum + XOR
-  - 思路：
-    - 先求出异或的 preSum 数组
-    - 然后利用 preSum 求出任意范围内的异或结果
-
-["1310. XOR Queries of a Subarray" BinaryOperation]()
 
 ### "1463. Cherry Pickup II"
 

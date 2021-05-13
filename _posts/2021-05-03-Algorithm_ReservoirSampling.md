@@ -2,7 +2,7 @@
 layout: post
 title: "Algorithm Reservoir Sampling(蓄水池抽样)"
 date: 2021-05-03 09:00:00 +0800
-tags: Algorithm
+tags: Algorithm LeetCode BigData
 ---
 
 ![Reservoir Sampling](/assets/images/2021-05-03-Algorithm_ReservoirSampling_1.png)
