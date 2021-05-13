@@ -26,6 +26,15 @@ tags: Algorithm Leetcode
 - 解法 2：
   - 利用动态规划法，分别计算当前位置左边最大高度、右边最大高度，算法较易理解，但是需要占用额外空间。
 
+### "12. Integer to Roman"
+
+- 解法：DC
+  - 思路：
+    - 根据当前 10 进制尾数选择字符
+    - 根据不同情况拼接字符
+
+["12. Integer to Roman" DivideAndConquer Golang]()
+
 ### "31. Next Permutation"
 
 - 原理：
