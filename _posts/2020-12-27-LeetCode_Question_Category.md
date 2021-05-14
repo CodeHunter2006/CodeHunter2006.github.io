@@ -574,6 +574,8 @@ tags: Algorithm Leetcode
 - 解法：BIT
   - 思路：
     - 标准 BIT 的应用场景，频繁对数组更新、求和
+  - 注意：
+    - 每次 update 时不是 delta 而是 value，需要求一下 diff 值
 
 ["307. Range Sum Query - Mutable" BinaryIndexedTree C++]()
 
@@ -1227,6 +1229,8 @@ tags: Algorithm Leetcode
     - 利用 BIT 当成 bucket，记录每个元素出现的次数，然后取当前元素前后区间内元素出现次数总和综合统计
   - 要点：
     - 原本 BIT 的容量是用于存放下标的，本题是存放值，所以范围要+1，再加上模板的+1，最重要+2
+
+["1649. Create Sorted Array through Instructions" BinaryIndexedTree Golang]()
 
 ### "1720. Decode XORed Array"
 

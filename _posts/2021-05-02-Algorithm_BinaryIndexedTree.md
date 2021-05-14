@@ -49,6 +49,11 @@ BIT 的实现方式类似 Heap，是在一个数组基础上实现类树状结�
 
 - **任何能用 BIT 解决的一定能用 SegmentTree 解决**，但是由于 BIT 实现简单，所以优先用 BIT
 
+- 小幅优化：
+  - 在初始化时可以遍历添加元素，时间复杂度 O(nlogn)，也可以用下面算法优化为 O(n)
+    1. 把所有元素拷贝至`bit[1,n]`的下标内
+    2. 对所有元素循环处理，设当前下标为`i`令`j = i + (i & -i)`，`bit[j] += bit[i]`
+
 具体 BIT 实现参考：
 "307. Range Sum Query - Mutable"
 
@@ -104,6 +109,15 @@ type NumArray struct {
     originNums []int
 }
 
+func (p *NumArray) init() {
+    for i := 1; i < len(p.nums); i++ {
+        j := i + (i & -i)
+        if j < len(p.nums) {
+            p.nums[j] += p.nums[i]
+        }
+    }
+}
+
 func (p *NumArray) update(index, delta int) {
     index++
     for index < len(p.nums) {
@@ -122,10 +136,9 @@ func (p *NumArray) preSum(index int) (ret int) {
 }
 
 func Constructor(nums []int) (ret NumArray) {
-    ret.nums, ret.originNums = make([]int, len(nums)+1), nums
-    for i, v := range nums {
-        (&ret).update(i, v)
-    }
+    ret.nums, ret.originNums = make([]int, 1, len(nums)+1), nums
+    ret.nums = append(ret.nums, nums...)
+    ret.init()
     return ret
 }
 
