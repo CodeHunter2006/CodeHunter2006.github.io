@@ -569,6 +569,14 @@ tags: Algorithm Leetcode
 ["300. Longest Increasing Subsequence" BinarySearch Golang]()
 ["300. Longest Increasing Subsequence" BinarySearch C++]()
 
+### "307. Range Sum Query - Mutable"
+
+- 解法：BIT
+  - 思路：
+    - 标准 BIT 的应用场景，频繁对数组更新、求和
+
+["307. Range Sum Query - Mutable" BinaryIndexedTree C++]()
+
 ### "312. Burst Balloons"
 
 - 考点：范围 DP
@@ -1211,6 +1219,14 @@ tags: Algorithm Leetcode
     - days 范围较大，但是具有顺序性，即一旦某个 days 满足条件，那>=它的都满足，所以可以利用二分查找
     - 在某个 days 下，是否符合条件可以简单遍历统计实现
   - 时间复杂度 O(mlogn)
+
+### "1649. Create Sorted Array through Instructions"
+
+- 解法：BIT + bucket
+  - 思路：
+    - 利用 BIT 当成 bucket，记录每个元素出现的次数，然后取当前元素前后区间内元素出现次数总和综合统计
+  - 要点：
+    - 原本 BIT 的容量是用于存放下标的，本题是存放值，所以范围要+1，再加上模板的+1，最重要+2
 
 ### "1720. Decode XORed Array"
 
