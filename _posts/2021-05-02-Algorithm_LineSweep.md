@@ -7,6 +7,26 @@ tags: Algorithm Leetcode
 
 记录 Line Sweep 的算法实现
 
+### "1288. Remove Covered Intervals"
+
+```Go
+func removeCoveredIntervals(intervals [][]int) (count int) {
+    sort.Slice(intervals, func(a, b int) bool {
+        if intervals[a][0] == intervals[b][0] {
+            return intervals[a][1] > intervals[b][1]
+        }
+        return intervals[a][0] < intervals[b][0]
+    })
+    for i, end := 0, math.MinInt32; i < len(intervals); i++ {
+        if intervals[i][1] > end {
+            count++
+            end = intervals[i][1]
+        }
+    }
+    return count
+}
+```
+
 ### "850. Rectangle Area II"
 
 ```C++

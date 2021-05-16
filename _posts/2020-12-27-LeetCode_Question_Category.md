@@ -525,6 +525,13 @@ tags: Algorithm Leetcode
 - 解法: "搜索空间缩减法 Search Space Reduction"
   利用双向有序的特性，操纵一个指针的两个位置，其中一个位置的起始位置偏大，另一个起始位置偏小，比如左下角(横向偏小，纵向偏大)。然后向上、向右移动指针，直到找到答案或超出边界。整个过程都保证了未来可探索到结果，但可探索空间在不断缩小。
 
+### "250. Count Univalue Subtrees"
+
+- 解法，自创"探针法"
+  - 思路：
+    递归调用、后根遍历，每个节点向孩子传递一个整型引用(探针)，孩子值与父值不同或者孩子值与子孙不同，探针引用都要增 1，
+    注意左右孩子分别建立探针，不要相互影响。
+
 ### "264. Ugly Number II"
 
 - 解法：Math+DP
@@ -773,6 +780,29 @@ tags: Algorithm Leetcode
   - 通过上述演化，可以演化为一个简易的零一背包问题(只需要保存 bool 型，无需计算价值)
 
 ["416. Partition Equal Subset Sum" Golang]()
+
+### "421. Maximum XOR of Two Numbers in an Array"
+
+- 解法：XOR + HashMap
+  - 思路：
+    - 题目用双重循环很容易实现，但是要求 O(n)时间复杂度，需要进一步设计
+    - 设最终找到的数为 x，那么 x 的高位二进制 1 越多结果越大，所以我们考虑按位从高到低找 1
+    - 根据 XOR 运算特点有`x = a^b <=> a = x^b`
+    - 假设`pre_k_x`为 x 的前 k 位，则同样有`pre_k_a = pre_k_x ^ pre_k_b`
+    - 我们对每一位尝试查找是否存在 1，然后查找过程类似"1. Two Sum"，利用 HashMap 实现快速查找
+  - 时间复杂度计算：O(nlogC)
+    其中 n 是元素数量、C 是元素值的范围，本题是`(2^31) - 1`，由于`logC = 31`，所以最终时间复杂度符合`O(n)`要求
+
+["421. Maximum XOR of Two Numbers in an Array"BinaryOperation Golang]()
+
+### "435. Non-overlapping Intervals"
+
+- 解法：Greedy
+  - 思路：
+    - 按照 end 时间将 interval 排序，我们想寻找尽量早结束的 interval 这样后面独立 interval 数量可能更多
+    - 排序后遍历，如果 interval 是独立的，则更新 end 值，否则 count++
+
+["435. Non-overlapping Intervals" Greedy Golang]()
 
 ### "448. Find All Numbers Disappeared in an Array"
 
@@ -1148,6 +1178,13 @@ tags: Algorithm Leetcode
   - 由于每个分量值`<9`，可以用一个排过序的两位数表示
   - 可以利用一个 100 个元素的 bucket 统计，这样就无需排序一次遍历就统计出来
 
+### "1229. Meeting Scheduler"
+
+- 解法：BF
+  - 思路：
+    - 这道题需要用到自动有序数据结构，并且最好容易得到前后元素，C++的 set(红黑树)就满足条件
+    - 每次向前、后中较近的 interval 合并
+
 ### "1178. Number of Valid Words for Each Puzzle"
 
 - 考点：
@@ -1173,6 +1210,16 @@ tags: Algorithm Leetcode
     - 按基本思路写完会超时，原因是`arrLen <= 10^6`每步演化的数组过大，
       而`steps <= 500`步数很小，`arrLen >= 251`之后的不会影响结果了，
       所以只要在演化前对`arrLen`进行一次范围修正即可
+
+### "1288. Remove Covered Intervals"
+
+- 解法：LineSweep
+  - 思路：
+    - 要保证两边都被覆盖的 interval 才删除
+    - 我们排序时保证按 start 顺序排序，然后按 end 逆序排序
+    - 之后遍历时候因为按 start 遍历，只要关注 end，一旦 end 被覆盖，说明 start 必然被覆盖
+
+["1288. Remove Covered Intervals" LineSweep Golang]()
 
 ### "1310. XOR Queries of a Subarray"
 

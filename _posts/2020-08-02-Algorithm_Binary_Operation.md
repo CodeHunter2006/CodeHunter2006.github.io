@@ -38,6 +38,7 @@ func mathSwap() {
 - `^`异或运算，可以将两个元素的"混合"状态记录下来，相当于算数中的"求和"
 - 异或具有和`+-`相同的交换性`a^b == b^a`、结合性`x = a^b; x^c == a^b^c`
 - 异或具有特殊的"自反"性，相当于`+`之后执行`-`，`a^b^b == a`
+- 异或有特性：`c = a^b => a = c^b`
 
 ## lowbit 找到最右边的 1
 
@@ -320,6 +321,33 @@ func singleNumber(nums []int) int {
         highs = highs ^ n & ^lows
     }
     return lows
+}
+```
+
+### "421. Maximum XOR of Two Numbers in an Array"
+
+```Go
+func findMaximumXOR(nums []int) (x int) {
+    const highBitIdx = 30
+    for k := highBitIdx; k >= 0; k-- {
+        preBit := make(map[int]bool, len(nums))
+        for _, v := range nums {
+            preBit[v>>k] = true
+        }
+
+        preKBitX, found := x | 1<<k, false
+        for _, v := range nums {
+            if preBit[v>>k ^ preKBitX>>k] {
+                found = true
+                break
+            }
+        }
+
+        if found {
+            x = preKBitX
+        }
+    }
+    return x
 }
 ```
 

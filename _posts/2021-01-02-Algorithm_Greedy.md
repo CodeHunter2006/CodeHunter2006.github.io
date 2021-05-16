@@ -78,3 +78,21 @@ func reconstructQueue(people [][]int) (ret [][]int) {
     return ret
 }
 ```
+
+### "435. Non-overlapping Intervals"
+
+```Go
+func eraseOverlapIntervals(intervals [][]int) (count int) {
+    sort.Slice(intervals, func(a, b int) bool {
+        return intervals[a][1] < intervals[b][1]
+    })
+    for i, end := 0, math.MinInt32; i < len(intervals); i++ {
+        if intervals[i][0] >= end {
+            end = intervals[i][1]
+        } else {
+            count++
+        }
+    }
+    return count
+}
+```
