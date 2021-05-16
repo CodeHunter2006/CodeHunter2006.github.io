@@ -7,23 +7,65 @@ tags: Algorithm Leetcode
 
 记录 Line Sweep 的算法实现
 
-### "1288. Remove Covered Intervals"
+### "218. The Skyline Problem"
 
 ```Go
-func removeCoveredIntervals(intervals [][]int) (count int) {
-    sort.Slice(intervals, func(a, b int) bool {
-        if intervals[a][0] == intervals[b][0] {
-            return intervals[a][1] > intervals[b][1]
+func getSkyline(buildings [][]int) (ret [][]int) {
+    arr := make([]*[2]int, 0, len(buildings)*2)  // (坐标, 高度)
+    for _, b := range buildings {
+        // 用负数表示开始高度，以便排序时开始比结束更靠前
+        arr = append(arr, &[2]int{b[0],-b[2]}, &[2]int{b[1],b[2]})
+    }
+    sort.Slice(arr, func(a, b int) bool {
+        if arr[a][0] == arr[b][0] {
+            return arr[a][1] < arr[b][1]    // 再按高度
         }
-        return intervals[a][0] < intervals[b][0]
+        return arr[a][0] < arr[b][0]    // 先按坐标
     })
-    for i, end := 0, math.MinInt32; i < len(intervals); i++ {
-        if intervals[i][1] > end {
-            count++
-            end = intervals[i][1]
+    h := new(myHeap)
+
+    maxHeight := 0
+    for _, cur := range arr {
+        if cur[1] < 0 {
+            if -cur[1] > maxHeight {
+                maxHeight = -cur[1]
+                ret = append(ret, []int{cur[0], maxHeight})
+            }
+            heap.Push(h, &[2]int{cur[0], -cur[1]})
+        } else {
+            for i := 0; i < h.Len(); i++ {
+                if (*h)[i][1] == cur[1] {
+                    heap.Remove(h, i)
+                    break
+                }
+            }
+            if h.Len() > 0 {
+                if (*h)[0][1] == maxHeight {
+                    continue
+                } else if (*h)[0][1] < maxHeight {
+                    maxHeight = (*h)[0][1]
+                }
+            } else {
+                maxHeight = 0
+            }
+            ret = append(ret, []int{cur[0], maxHeight})
         }
     }
-    return count
+
+    return ret
+}
+
+type myHeap []*[2]int   // (坐标, 高度)
+func (p *myHeap) Len() int { return len(*p) }
+func (p *myHeap) Less(a, b int) bool {
+    return (*p)[a][1] > (*p)[b][1]
+}
+func (p *myHeap) Swap(a, b int) { (*p)[a], (*p)[b] = (*p)[b], (*p)[a] }
+func (p *myHeap) Push(x interface{}) { (*p) = append((*p), x.(*[2]int)) }
+func (p *myHeap) Pop() interface{} {
+    tmp := (*p)[len(*p)-1]
+    (*p) = (*p)[:len(*p)-1]
+    return tmp
 }
 ```
 
@@ -67,5 +109,82 @@ int rectangleArea(vector<vector<int>>& rectangles) {
     }
     ans %= 1000000007;
     return ans;
+}
+```
+
+### "986. Interval List Intersections"
+
+```Go
+// version 1
+func intervalIntersection(firstList [][]int, secondList [][]int) (ret [][]int) {
+    type changePoint struct {
+        pos int
+        action bool // false end; true start
+    }
+    allActions := make([]*changePoint, 0, len(firstList)*2 + len(secondList)*2)
+    for _, v := range firstList {
+        allActions = append(allActions, &changePoint{v[0], true}, &changePoint{v[1], false})
+    }
+    for _, v := range secondList {
+        allActions = append(allActions, &changePoint{v[0], true}, &changePoint{v[1], false})
+    }
+
+    sort.Slice(allActions, func(a, b int) bool {
+        if allActions[a].pos == allActions[b].pos {
+            return allActions[a].action
+        }
+        return allActions[a].pos < allActions[b].pos
+    })
+
+    for i, count, lastStart := 0, 0, 0; i < len(allActions); i++ {
+        if allActions[i].action {
+            count++
+            lastStart = allActions[i].pos
+        } else {
+            if count > 1 {
+                ret = append(ret, []int{lastStart, allActions[i].pos})
+            }
+            count--
+        }
+    }
+    return ret
+}
+```
+
+```Go
+// version 2
+func intervalIntersection(firstList [][]int, secondList [][]int) (ret [][]int) {
+    for i, j := 0, 0; i < len(firstList) && j < len(secondList); {
+        low, high := max(firstList[i][0], secondList[j][0]), min(firstList[i][1], secondList[j][1])
+        if low <= high {
+            ret = append(ret, []int{low, high})
+        }
+        if firstList[i][1] < secondList[j][1] {
+            i++
+        } else {
+            j++
+        }
+    }
+    return ret
+}
+```
+
+### "1288. Remove Covered Intervals"
+
+```Go
+func removeCoveredIntervals(intervals [][]int) (count int) {
+    sort.Slice(intervals, func(a, b int) bool {
+        if intervals[a][0] == intervals[b][0] {
+            return intervals[a][1] > intervals[b][1]
+        }
+        return intervals[a][0] < intervals[b][0]
+    })
+    for i, end := 0, math.MinInt32; i < len(intervals); i++ {
+        if intervals[i][1] > end {
+            count++
+            end = intervals[i][1]
+        }
+    }
+    return count
 }
 ```

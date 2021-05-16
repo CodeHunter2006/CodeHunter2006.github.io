@@ -467,6 +467,17 @@ tags: Algorithm Leetcode
 
 ["213. House Robber II" DP Golang]()
 
+### "218. The Skyline Problem"
+
+- 解法：LineSweep
+  - 思路：
+    - 将坐标点拆解为 start 和 end，然后顺序遍历处理，遍历过程中维护一个 Heap
+    - 遍历过程中维护一个 maxHeight，如果当前是 start，则入堆；如果当前是 end，则删除一个同高度；
+  - 注意：
+    - 为了便于 start 和 end 排序，将 start 按负数处理
+
+["218. The Skyline Problem" LineSweep Golang]()
+
 ### "220. Contains Duplicate III"
 
 - 解法 1: SlidingWindow + OrderedMap
@@ -1105,6 +1116,24 @@ tags: Algorithm Leetcode
   - 根据同余定理`sum(i,j)%K == 0 <=> P[j]%K == P[i-1]%K`
 
 ["974. Subarray Sums Divisible by K" HashTable Golang]()
+
+### "986. Interval List Intersections"
+
+- 解法 1: LineSweep
+  - 思路：
+    - 影响区域重叠的只有 interval start end 两个位置点
+    - 可以将位置点拆分、排序，然后顺序遍历统计当前存在的线段数，如果 >1 则记录
+    - 注意排序时先处理相同坐标点的 end，这样能统计到更大的数
+
+["986. Interval List Intersections" LineSweep Golang version1]()
+
+- 解法 2: LineSweep + SlidingWindow
+  - 思路：
+    - 由于原始数据保证顺序、本数组不重叠，可以利用这个特性直接扫描
+    - 利用 max(start) 和 min(end) 函数尽量找到当前重叠区域
+    - 保持当前区域为可能产生交集的 Window，逐步移动两个数组的下标
+
+["986. Interval List Intersections" LineSweep Golang version2]()
 
 ### "1004. Max Consecutive Ones III"
 

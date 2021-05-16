@@ -204,6 +204,16 @@ dq 兼有 stack 和 queue 的功能，在 front 端可以进行时间或范围�
 示例：
 ["1438. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit" SlidingWindow+MonotoneQueue Golang]()
 
+### Priority Queue(PQ)
+
+PQ 是一种具有优先级排序的队列，在相同优先级下和 Queue 相同 FIFO；但是如果有不同优先级的元素，则优先级更高的元素先出队。
+
+- PQ 可以有多种实现方案，一般都是能够新增元素时自动有序的容器，如 Heap、平衡二叉树等
+
+## Heap(堆)
+
+Heap 是一种自动排序的容器，利用数组和有序二叉树的关系实现。
+
 ## Tree(树)
 
 Tree 的结构特点决定了非常适合用 DFS 算法进行遍历，注意未必只遍历一次，可以以不同的方式遍历多次获得答案。
@@ -578,6 +588,16 @@ Minimax（极大极小值搜索 Game Theory）,对弈双方都希望让自己 ma
 
 示例：
 "1288. Remove Covered Intervals"
+
+- 对于多个属性的情况，可以利用 PriorityQueue(Heap) 维护扫描线上的元素
+
+示例：
+["218. The Skyline Problem" LineSweep Golang]()
+
+- 一般 LineSweep 可以先出一个简易逻辑(代码多)，然后再进一步优化为核心逻辑(代码少)，一般优化只涉及存储优化，时间复杂度相同
+
+示例：
+["986. Interval List Intersections" LineSweep Golang]()
 
 ## Rolling Hash()
 

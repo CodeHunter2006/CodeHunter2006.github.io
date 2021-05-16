@@ -18,7 +18,7 @@ Go 常用包的功能，及注意点
 
 提供(最小)堆相关函数和接口，可以延伸实现优先级队列功能。需要自己实现接口，以满足一个可排序的容器，然后结合函数使用。
 
-- 最小元素的下标是 0
+- 最小元素的下标是 0，可以用来做`peak`处理
 
 ```Go
 type Interface interface {
@@ -30,6 +30,8 @@ type Interface interface {
 
 - **注意**
   对 Heap 的操作一定要通过`heap.XXX`函数执行
+
+- Heap 提供了`remove`函数，需要数组下标作为参数，可以通过堆查找实现`O(logn)`删除指定元素
 
 ## container/list
 
