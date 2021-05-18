@@ -417,6 +417,23 @@ func xorQueries(arr []int, queries [][]int) (ret []int) {
 }
 ```
 
+### "1442. Count Triplets That Can Form Two Arrays of Equal XOR"
+
+```Go
+func countTriplets(arr []int) (ans int) {
+    cnt, total := map[int]int{}, map[int]int{}
+    for k, s := 0, 0; k < len(arr); k++ {
+        if m, has := cnt[s^arr[k]]; has {
+            ans += m*k - total[s^arr[k]]
+        }
+        cnt[s]++
+        total[s] += k
+        s ^= arr[k]
+    }
+    return
+}
+```
+
 ### "1720. Decode XORed Array"
 
 ```Go

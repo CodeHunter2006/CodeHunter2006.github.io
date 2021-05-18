@@ -1140,6 +1140,17 @@ tags: Algorithm Leetcode
 
 ["986. Interval List Intersections" LineSweep Golang version2]()
 
+### "993. Cousins in Binary Tree"
+
+- 解法：
+  - 思路：DFS
+    - 利用二叉树的特征，在查找过程中限定各种边界条件来减少无用搜索
+    - 每次起始递归函数前都要初始化全局变量
+    - 如果已经找到了目标层，则不再向更深遍历
+    - 确保同层并且父结点不同
+
+["993. Cousins in Binary Tree" Tree Golang]()
+
 ### "1004. Max Consecutive Ones III"
 
 - 思路：
@@ -1283,6 +1294,24 @@ tags: Algorithm Leetcode
     3. 记录 right - left 最大值，直到循环结束
 
 ["1438. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit" SlidingWindow+MonotoneQueue Golang]()
+
+### "1442. Count Triplets That Can Form Two Arrays of Equal XOR"
+
+- 解法：XOR + preSum + HashTable + 推导优化
+  - 思路：
+    - 最直观的方法是求出 preSum 数组，然后分别遍历 i j k 三个坐标计算结果，时间复杂度 O(n^3)。
+      但是这种方法太初级，经过优化可以达到 O(n)时间复杂度：
+    - 设前 i 项的 preSum 值是 Si，preSum 的数组元素是 arri。根据 XOR 特性有：
+      `Si ^ Sj = arr(i) ^ ... ^ arr(j-1)`，那么`[i,j]`异或和为`S(i) ^ S(j+1)`，
+      题目中左右两段异或和 a b 可以表示为`a = S(i) ^ S(j)`、`b = S(j) ^ S(k+1)`，
+      如果`a == b`则有`S(i) ^ S(j) == S(j) ^ S(k+1)`根据 XOR 的交换律，得出`S(i) == S(k+1)`，
+      也就是前后有相同的 preSum 值，则找到了目标 tuple，中间的任何 j 都成立(遍历降低一维)。
+  - 设当前处理到 k 时，前面有 m 个 i(i1 i2 ... im)都满足`S(i) == S(k+1)`，则这时它们对结果的贡献数量为：
+    `(k-i1) + (k-i2) + ... + (k-im) = m*k - (i1+i2+...+im)`，
+    所以在遍历过程中我们要记录满足`S(i) == S(k+1)`的 i 出现次数**count**和下标 i 之和**total**，
+    可以利用 HashTable 记录这两个值
+
+["1442. Count Triplets That Can Form Two Arrays of Equal XOR" BinaryOperation]()
 
 ### "1463. Cherry Pickup II"
 
