@@ -77,6 +77,11 @@ if err != nil {
 
 errorgroup 综合了 waitGroup 和 context 的能力，可以同时等待多个协程、返回错误、协程 cancel
 
+- 优点：
+  - 结合了`sync.WaitGroup`，直接`group.Go(...)`启动携程，无需`wg.Add(1)`
+  - 如果绑定了 context，任意函数返回 error 会触发 cancel；如果不绑定 context 可以当成普通的 WaitGroup 使用
+  - `group.Wait()`可以自动收集第一个 error
+
 ```Go
 func testErrorGroup() {
 	rand.Seed(time.Now().Unix())
@@ -103,8 +108,7 @@ func testErrorGroup() {
 				log.Printf("%v end", index)
 			} else {
 				time.Sleep(time.Microsecond*time.Duration(rand.Int()%1000) + time.Second*3)
-				cancel() // 第一个发生错误的位置执行 cancel 动作
-				log.Printf("%v cancel", index)
+				// 返回 error 时，由于绑定了 context，会自动触发 cancel
 				return fmt.Errorf("%v cancel error", index)
 			}
 			return nil
@@ -302,6 +306,9 @@ type Interface interface {
 
 `func Reverse(data Interface) Interface`
 适配 `sort.Interface.Less` 为反向处理(`<` 变 `>`)
+
+`type IntSlice []int`
+为`[]int`附加`sort.Interface`，以便利用各种 Sort 中的函数
 
 ```Go
 s := []int{5, 2, 6, 3, 1, 4} // unsorted

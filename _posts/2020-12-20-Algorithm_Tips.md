@@ -127,6 +127,13 @@ bool cmp(const int& a,const int& b){return a > b;}
 - preSum 还可以用于**二进制异或运算**
   示例：["1310. XOR Queries of a Subarray" BinaryOperation]()
 
+- 计算二维 preSum 有两种算法：
+  1. 普通的 preSum 累加：先从左到右再从上到下累加
+  2. DP: 根据二维 preSum 的相邻关系有转移方程：`dp[i][j] = matrix[i-1][j-1]+dp[i-1][j]+dp[i][j-1]-dp[i-1][j-1]`，
+     注意这里 matrix 的长度比 preSum 小 1，所以下标要`-1`，即左边、上边都累加了左上的元素和，所以要减掉
+
+示例：["1738. Find Kth Largest XOR Coordinate Value" BinaryOperation]()
+
 ## Heap(堆)
 
 ## LinkedList(链表)

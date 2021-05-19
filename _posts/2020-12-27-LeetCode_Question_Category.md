@@ -1370,7 +1370,7 @@ tags: Algorithm Leetcode
 
 ### "1734. Decode XORed Permutation"
 
-- 解法：异或特性+逻辑
+- 解法：XOR + 逻辑
   - 思路：
     - 这道题是基于"1720. Decode XORed Array"的算法，只要求出`first`就可以推出结果
     - 题目条件**数组元素是最前面的 n 个正整数，n 必定是奇数**，我们假设为`A B C D E`
@@ -1380,3 +1380,18 @@ tags: Algorithm Leetcode
     - 然后根据"1720. Decode XORed Array"的算法求得结果即可
 
 ["1734. Decode XORed Permutation"BinaryOperation Go]()
+
+### "1738. Find Kth Largest XOR Coordinate Value"
+
+- 解法：XOR + preSum + nth_element
+  - 思路：
+    - XOR 的处理和`+`类似，可以适用于 preSum
+    - 利用二维 preSum 可以求得 sum 矩阵
+    - 然后遍历 sum 矩阵，将元素加入 array，通过排序取出目标值
+  - 改进：
+    - 二维 preSum 可以利用原 matrix 节省空间
+    - 二维 preSum 可以一次遍历就完成，节省循环次数
+    - 可以利用 DP 实现 preSum 一次遍历，转移方程：`dp[i][j] = dp[i-1][j]^dp[i][j-1]^dp[i-1][j-1]^matrix[i-1][j-1]`
+    - "查找第 K 大元素"可以利用 nth_elemet 实现，时间复杂度 O(n)
+
+["1738. Find Kth Largest XOR Coordinate Value" BinaryOperation]()
