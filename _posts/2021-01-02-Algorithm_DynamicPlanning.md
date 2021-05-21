@@ -167,6 +167,9 @@ func BinaryDivide(cnt, vol, pri int) (ret [][]int) {
 
 - 这类 DP 问题同样需要用二维数组迭代，迭代时要控制迭代方向，以便保证新一次迭代可由旧的已知结果导出
 
+类似题目：
+`1035. Uncrossed Lines`、`1143. Longest Common Subsequence`
+
 ## 判断存在性
 
 # 综合类型

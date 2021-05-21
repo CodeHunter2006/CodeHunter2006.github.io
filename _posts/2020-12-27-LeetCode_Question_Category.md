@@ -1174,6 +1174,12 @@ tags: Algorithm Leetcode
 
 ["1011. Capacity To Ship Packages Within D Days" BinarySearch Golang]()
 
+### "1035. Uncrossed Lines"
+
+- 解法：DP
+  - 思路：
+    - 经过逻辑推导，可以发现逻辑和"1143. Longest Common Subsequence"一样，求出最长公共子序列
+
 ### "1036. Escape a Large Maze"
 
 - 考点：bfs 稀疏矩阵 极限思想 几何
@@ -1331,6 +1337,16 @@ tags: Algorithm Leetcode
     - days 范围较大，但是具有顺序性，即一旦某个 days 满足条件，那>=它的都满足，所以可以利用二分查找
     - 在某个 days 下，是否符合条件可以简单遍历统计实现
   - 时间复杂度 O(mlogn)
+
+### "1584. Min Cost to Connect All Points"
+
+- 解法：MST Kruskal
+  - 思路：
+    - 由于本题是一个**全联通图**，即任意一点可以连到其他点，所以使用 Prim PQ 算法可能超时
+    - 用 Kruskal 可以勉强通过
+    - 用 Prim Naive 可以较短时间通过
+
+["1584. Min Cost to Connect All Points" MST Golang]()
 
 ### "1649. Create Sorted Array through Instructions"
 

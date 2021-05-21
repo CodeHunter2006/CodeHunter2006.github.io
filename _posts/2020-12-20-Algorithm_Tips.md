@@ -22,6 +22,10 @@ tags: Algorithm Leetcode
     - 对数的(logn)
       比如 二分查找
       - 这里的$logn$实际上是$log_2n$(以 2 为底 n 的对数)
+- **TLE**
+  Time Limit Exceeded，算法执行时间超过限制
+- **Pseudo Code**
+  伪代码，只表达核心逻辑，并不能编译运行的代码
 
 # 做题流程
 
@@ -428,6 +432,25 @@ dijkstra 求得图中起始点到各个可达点的最短距离，并且它检�
 
 示例：
 ["332. Reconstruct Itinerary" Graph C++]()
+
+### MST(Minimum-cost Spanning Tree 最小生成树)
+
+从一个边带权重的联通图，生成一个联通所有结点的总权重最小的树的算法。
+
+- 如果是稠密图(边数较多的图)
+  - 适合 Prim Naive 算法，O(V^2)
+- 如果是稀疏图(边数较少的图)
+  - 适合 Prim PQ / Kruskal UF 算法，O(ElogV)
+
+**Prim PQ**是最常用的方法，其他方法可以作为 follow-up
+
+**Kruskal UF**可以作为通用模板使用，因为其性能较高可以适应部分稠密图，rank 也可以作为 follow-up
+
+具体实现参考：
+[MST](/2021/05/22/2021-05-22-Algorithm_MST/)
+
+示例：
+["1584. Min Cost to Connect All Points" MST Golang]()
 
 # 通用算法
 

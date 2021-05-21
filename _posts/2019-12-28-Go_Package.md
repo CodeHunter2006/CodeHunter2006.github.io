@@ -16,7 +16,7 @@ Go 常用包的功能，及注意点
 
 ## container/heap
 
-提供(最小)堆相关函数和接口，可以延伸实现优先级队列功能。需要自己实现接口，以满足一个可排序的容器，然后结合函数使用。
+提供(**最小**)堆相关函数和接口，可以延伸实现优先级队列功能。需要自己实现接口，以满足一个可排序的容器，然后结合函数使用。
 
 - 最小元素的下标是 0，可以用来做`peak`处理
 
@@ -271,7 +271,10 @@ var reRet []string = regexp.MustCompile(`pattern`).FindStringSubmatch(`string`)
 ### runtime/trace
 
 to generate traces for the Go execution tracer
-The execution trace captures a wide range of execution events such as goroutine creation/blocking/unblocking, syscall enter/exit/block, GC-related events, changes of heap size, processor start/stop, etc. A precise nanosecond-precision timestamp and a stack trace is captured for most events. The generated trace can be interpreted using `go tool trace`.
+The execution trace captures a wide range of execution events such as goroutine creation/blocking/unblocking,
+syscall enter/exit/block, GC-related events, changes of heap size, processor start/stop, etc.
+A precise nanosecond-precision timestamp and a stack trace is captured for most events.
+The generated trace can be interpreted using `go tool trace`.
 
 - `func Start(w io.Writer) error`
   开始将 trace 信息写入文件
