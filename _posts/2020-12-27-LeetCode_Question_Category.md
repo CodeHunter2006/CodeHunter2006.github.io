@@ -1380,6 +1380,25 @@ tags: Algorithm Leetcode
 
 ["1649. Create Sorted Array through Instructions" BinaryIndexedTree Golang]()
 
+### "1707. Maximum XOR With an Element From Array"
+
+- 解法 1: XOR + TrieTree + DP
+
+  - 思路：
+    - 假设给定了集合 nums 不限制 mi，求 xi 的过程可以看作从左向右查看二进制位匹配的过程，
+      由于 XOR 运算，最好的结果是两位不同，可以把原始 nums 每个元素放入二进制树的 TrieTree，然后遍历取得最大值
+    - 上面的 TrieTree 的构建可以类似 DP 从小到大，也就是 nums 排序后逐步构建，这样只要对 queries 的 mi 排序，
+      就能逐步求得结果，注意要记录 queries 的元素下标以组成答案
+    - 特殊点：如果没有满足 mi 的 nums 元素，则结果为 -1
+  - 时间复杂度：`O(NlogN + QlogQ + (N+Q)*L)`
+    其中 N 是 nums 规模；Q 是 queries 规模；L 是元素的二进制长度 30 位
+  - 优化算法：
+    上面算法较耗时部分是左边两个排序导致的`nlogn`，能否不排序？
+    可以在 TrieTree 构建时，每个结点记录孩子结点的最小值，那么根结点会记录所有结点的最小值。
+    这样可以直接识别出返回值为-1 的 mi
+
+["1707. Maximum XOR With an Element From Array" TrieTree]()
+
 ### "1720. Decode XORed Array"
 
 - 解法：异或特性
