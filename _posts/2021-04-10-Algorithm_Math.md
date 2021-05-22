@@ -266,6 +266,18 @@ bool reachingPoints(int sx, int sy, int tx, int ty) {
 }
 ```
 
+### "810. Chalkboard XOR Game"
+
+```Go
+func xorGame(nums []int) bool {
+    var sum int
+    for i := range nums {
+        sum ^= nums[i]
+    }
+    return sum == 0 || len(nums) % 2 == 0
+}
+```
+
 ### "829. Consecutive Numbers Sum"
 
 ```C++
