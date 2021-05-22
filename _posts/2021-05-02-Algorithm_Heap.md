@@ -7,6 +7,37 @@ tags: Algorithm Leetcode
 
 记录 Heap 的算法实现
 
+# 数据结构
+
+![Binary Heap](/assets/images/2021-05-02-Algorithm_Heap_1.gif)
+一般我们说的 Heap 是指**Binary Heap**，即利用数组和二进制操作特性实现的二叉树结构，其中树顶(arr[0])可以是 Max 或 Min 值。
+
+- 基本结构：
+
+  - 假设为 Min Heap，那么最小元素放在数组第一个元素 arr[0]
+  - 对于数组中下标为`k`的元素，它的两个孩子分别在`2k+1`和`2k+2`; 它的父结点在`(k-1)/2`
+  - **Heapify(堆旋转)**是 Heap 最核心的函数，只关心父结点和两个子结点间的关系要满足目标关系，比如目标是 Min，那么两个孩子必须都小于父，否则就要**旋转交换**，
+    比如某孩子比父节点小，则孩子和父节点交换。如果发生了交换，那么发生变化的下标要继续向下**递归** heapify
+  - 实际上 Heapify 的执行是有`up`和`down`两个函数实现的，`up`负责叶子元素发生变化后向上传递变化；`down`负责父结点变化后向下传递变化。
+    - **注意边界条件**，`up`的主体是子结点，所以`cur>=1`;`down`的主体是父结点，所以`next<len`
+  - heap 提供的 API：`Init 初始化；Fix 中间某元素变化后修正；Push 增加元素；Pop 堆顶出堆；Peak 查看堆顶元素; Delete 删除某个元素`
+
+- 关于时间复杂度
+
+  - 对于一个完全二叉树，做 Heapify 操作时，乍看是`O(nlogn)`时间复杂度；
+    但最底层数量占 1/2，逐层向上处理时规模按 2 的倍数快速收缩，所以整个过程时间复杂度是`O(n)`
+  - 如果构建 Heap 时是**逐个元素构建**的，那么时间复杂度是`O(nlogn)`，所以如果可以的话最好**完整构建**效率更高
+  - Build`O(n)`
+  - Push/Pop`O(logn)`
+  - Delete`O(n)`
+
+- 利用 Heap 可以实现**Heap Sort**
+  1. 对一个数组二分之一往上进行 Heapify，确保成为 Heap
+  2. 循环将头部元素和尾部交换，然后缩短 Heap 长度，直到所有元素处理完
+  3. Sort 的结果和 Heap 的类型刚好相反，例如 MinHeap，经过 sort 处理的数组为从大到小
+
+# 题目
+
 ### "703. Kth Largest Element in a Stream"
 
 ```Go
@@ -57,6 +88,73 @@ func (this *KthLargest) Add(val int) int {
         heap.Pop(this.intHeap)
     }
     return this.intHeap.Top()
+}
+```
+
+```Go
+// 手写 Heap
+type KthLargest struct {
+    nums []int
+    k int
+}
+
+func (p *KthLargest) init() {
+    for i := len(p.nums)>>1; i >= 0; i-- {
+        p.down(i)
+    }
+}
+
+func (p *KthLargest) down(cur int) {
+    for next := cur<<1 + 1; next < len(p.nums); {
+        if next+1 < len(p.nums) && p.nums[next] > p.nums[next+1] {
+            next++
+        }
+
+        if p.nums[cur] > p.nums[next] {
+            p.nums[cur], p.nums[next] = p.nums[next], p.nums[cur]
+            cur, next = next, next<<1+1
+        } else {
+            break
+        }
+    }
+}
+
+func (p *KthLargest) up(cur int) {
+    for next := (cur-1)>>1; cur >= 1 && p.nums[next] > p.nums[cur]; {
+            p.nums[cur], p.nums[next] = p.nums[next], p.nums[cur]
+            cur, next = next, (next-1)>>1
+    }
+}
+
+func (p *KthLargest) push(x int) {
+    i := len(p.nums)
+    p.nums = append(p.nums, x)
+    p.up(i)
+}
+
+func (p *KthLargest) pop() {
+    n := len(p.nums)
+    p.nums[0] = p.nums[n-1]
+    p.nums = p.nums[:n-1]
+    p.down(0)
+    return
+}
+
+func Constructor(k int, nums []int) KthLargest {
+    tmp := KthLargest{
+        nums: nums,
+        k: k,
+    }
+    tmp.init()
+    return tmp
+}
+
+func (this *KthLargest) Add(val int) (ret int) {
+    this.push(val)
+    for len(this.nums) > this.k {
+        this.pop()
+    }
+    return this.nums[0]
 }
 ```
 

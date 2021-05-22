@@ -140,6 +140,16 @@ bool cmp(const int& a,const int& b){return a > b;}
 
 ## Heap(堆)
 
+一般说的堆都是**Binary Heap**，利用数组和二进制关系实现的二叉树结构。堆可以是最大堆或最小堆，由 compare 规则决定。
+由于具有二叉树的特性，Heap 可以在 O(logn)时间复杂度内完成一次最大值/最小值查找，实现也不困难。
+
+- 堆常用于**Priority Queue**的实现，是性能最好的 PQ
+
+具体实现参考：
+[Heap](/2021/05/02/2021-05-22-Algorithm_Heap/)
+
+示例：["703. Kth Largest Element in a Stream" Heap Golang]()
+
 ## LinkedList(链表)
 
 单向链表、双向链表、环状链表(Ring)
