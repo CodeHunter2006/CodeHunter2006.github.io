@@ -44,7 +44,7 @@ tags: Algorithm Leetcode
   - O(n^2), 1000
   - O(n), 1e7
   - O(logn), infinit
-    - 可以看出 logn 的性能基本接近一个较大的常数，是算法尽量追求的目标
+    - 可以看出 logn 的性能基本**接近常数**，是算法尽量追求的目标
   - O(mlogn), 1e5, 1e9
 - leetcode **运行时报错**，一般都是数组越界。有时也是空指针问题。
 - 在逻辑较为复杂时，可以先将逻辑嵌套写出来，然后再进行精简。一上来就精简可能会造成逻辑复杂，导致 case miss。
@@ -85,8 +85,15 @@ tags: Algorithm Leetcode
 - 二分查找的要点:
   - 每次通过`nums[mid]`和`target`的关系丢弃另一半不需要考虑的区域，缩小边界范围
   - 每次修改范围时边界条件和变更值一致，具体的说是考虑`=`的情况。
+  - 最后考虑返回的结果和 l、r 的关系
 
 例：["33. Search in Rotated Sorted Array"]()
+
+- 由于二分查找性能极好，经常在其他算法中可以用于**猜**数字，比如猜 SlidingWindow 的 Window 长度等
+
+示例：
+["1044. Longest Duplicate Substring" SlidingWindow RollingHash]()
+["1723. Find Minimum Time to Finish All Jobs" BinarySearch]()
 
 #### LowerBound
 
@@ -117,7 +124,7 @@ bool cmp(const int& a,const int& b){return a > b;}
   然后分别在不考虑边界条件的情况下求解，最后综合各个数组综合取得结果
   示例："213. House Robber II"
 
-### 前缀和压缩(preSum)
+### 前缀和压缩(prefix sum)
 
 可以利用前缀和 dp 结果做一维压缩，通过任意两点可以计算中间的和。
 示例：
@@ -137,6 +144,10 @@ bool cmp(const int& a,const int& b){return a > b;}
      注意这里 matrix 的长度比 preSum 小 1，所以下标要`-1`，即左边、上边都累加了左上的元素和，所以要减掉
 
 示例：["1738. Find Kth Largest XOR Coordinate Value" BinaryOperation]()
+
+- preSum 还可以用于**RollingHash**
+
+示例：["1316. Distinct Echo Substrings" SlidingWindow RollingHash]()
 
 ## Heap(堆)
 
@@ -350,18 +361,6 @@ Segment Tree 和 BIT 都是在开始时确定规模，然后基本结构不再�
 
 如："432. All O`one Data Structure"
 
-## DSU（Disjoint Set Union 并查集 ）
-
-并查集也叫 UninFind，提供 find(查找)和 union(合并)函数，适合于将大量元素(例如无向图的节点)分为不同的集合、动态合并集合，最终根据集合关系、集合容量得到答案。
-
-- DSU 的性能非常高，增加了 rank 优化后查询时间复杂度可以达到 O(1)。
-
-- DSU 使用的注意点：
-  1. 要把所有初始数据遍历输入到 DSU 中，再判断结果，中间结果是不完整的(有些关联还没有建立)。
-  2. 注意 DSU 中有很多孤立节点，输出结果要考虑到这些孤立节点是否计数。
-
-例："924. Minimize Malware Spread"、"684. Redundant Connection"、"947. Most Stones Removed with Same Row or Column"、"721. Accounts Merge"
-
 ## HashTable
 
 Hashtable（哈希表），被广泛应用于 unordered_map、unordered_set、unordered_multimap、unordered_multiset 中，
@@ -387,7 +386,7 @@ OrderedMap CRUD 各项操作的时间复杂度是 O(logn)，适用于在遍历�
 
 ## Graph(图)
 
-图是指多个节点相关联的数据结构，可以分为有向图和无向图。
+图是指多个节点相关联的数据结构，可以分为有向图和无向图。我们说的**图**默认是指**有向图**，无向图可以看作是边是双向的有向图。
 树是一种特殊的图，它相当于图中元素全部可以直接或间接联系在一起，但是不存在环状结构。
 图的存储可以有多种形式，比如用边的数组存储、用 hashtable 存储边、用矩阵存储。
 如果是树的话，还可以用树形结构的节点对象存储。
@@ -407,6 +406,18 @@ OrderedMap CRUD 各项操作的时间复杂度是 O(logn)，适用于在遍历�
 例：
 ["269. Alien Dictionary"]()
 ["310. Minimum Height Trees" Graph C++]()
+
+### DSU（Disjoint Set Union 并查集 ）
+
+并查集也叫 UninFind，提供 find(查找)和 union(合并)函数，适合于将大量元素(例如无向图的节点)分为不同的集合、动态合并集合，最终根据集合关系、集合容量得到答案。
+
+- DSU 的性能非常高，增加了 rank 优化后时间复杂度可以达到 O(1)。
+
+- DSU 使用的注意点：
+  1. 要把所有初始数据遍历输入到 DSU 中，再判断结果，中间结果是不完整的(有些关联还没有建立)。
+  2. 注意 DSU 中有很多孤立节点，输出结果要考虑到这些孤立节点是否计数。
+
+例："924. Minimize Malware Spread"、"684. Redundant Connection"、"947. Most Stones Removed with Same Row or Column"、"721. Accounts Merge"
 
 ### Dijkstra(狄杰斯特拉)
 
@@ -462,6 +473,35 @@ dijkstra 求得图中起始点到各个可达点的最短距离，并且它检�
 示例：
 ["1584. Min Cost to Connect All Points" MST Golang]()
 
+### SCC(Strong Connected Component 强连通分量)
+
+![SCC](/assets/images/2020-12-20-Algorithm_Tips_SCC_1.jpeg)
+
+- **强连通图**
+  如果在图中如果存在一条回路，使得所有结点至少被经过一次，这样的图称为强连通图。
+- **Strong Connected Component 强联通分量**
+  在强联通图的基础上，加上一些结点和边，使得当前的图不再强联通，称原来强连通的部分为强连通分量。单独的一个结点是一个独立的强联通分量。
+
+- 求强连通图的作用：
+
+  - 在图论问题求解前，可以将强联通分量合为一个点，以简化之后的计算
+  - 求强联通分量的过程可以分析出环、环的长度、关键连接结点(即去掉这些点后，图将被分割)
+
+- 一般用**Tarjan's Algorithm**分析，步骤：
+
+  1. DFS 遍历每一个点，在点上有两个属性：`DFN_i`(Depth First Node)表示遍历过程的结点序号(递增)；`LOW_i`表示该点向前可追溯的最小时间戳(遍历序号)。
+  2. 用 DFS 的算法遍历结点，保证结点只被遍历一次，设置`DFN_i`和`LOW_i`，在遍历过程中用栈记录每个结点
+  3. 如果下个结点的`DFN_next`小于当前`DFN_i`，找到环、开启回溯模式，则`LOW_i = DFN_next`，在回溯过程中也要更新`LOW_i`
+  4. 逐个出栈，直到找到`DFN_i == LOW_i`的结点，说明找到了强联通分量的起始点，将回溯的元素记为一个强连通分量
+  5. 继续遍历后面未涉及的点，直到结束
+
+- 时间复杂度：O(V+E)
+
+- 除了 Tarjan 算法外还有其他算法，但是 Tarjan 是最简单的并且性能也高。
+
+示例：
+["1192. Critical Connections in a Network" Graph]()
+
 # 通用算法
 
 ## Brute Force(暴风 bf)
@@ -491,6 +531,28 @@ dijkstra 求得图中起始点到各个可达点的最短距离，并且它检�
 Window 不一定只向后运动，Window 的右边框还可能向左运动，只要保持整体向后运动就可以。
 
 如：["727. Minimum Window Subsequence"]()
+
+### Rolling Hash
+
+Rolling Hash 是 Sliding Window 的一个变种，用**HashCode**的方式统计 Window 内的元素，可以在**O(n)**内判断 Window 内的**元素序列**是否重复出现。
+Rolling Hash 算法的真实名字是**Rabin-Karp algorithm**，主要用于**子字符串匹配**。
+
+- HashFunction 可以根据具体情况选择，对于字符串，可以用`x*(26^k)`作为 HashFunction。
+  这里选 26 是因为小写字母共 26 个，可以根据情况调整。
+
+- Window 移动时 HashCode 计算的基本步骤：设窗口长度为`k`、当前下标为`i`
+
+  1. 窗口右移：`hashCode *= 26`
+  2. 删除尾部元素: `hashCode -= nums[i-k]*(26^k)`
+  3. 添加新元素：`hashCode += nums[i]*(26^0)`
+
+- 要考虑**Collision(Hash 碰撞)**的情况，有两种方法：
+  1. 这时可以按顺序遍历比较一遍。只要碰撞次数足够低，算法性能就不会**退化**。
+  2. 设定一个较好的 HashFunction，避免碰撞发生。(算法题 Case 可能凑出来，实际使用无法依赖)
+
+示例：
+["1044. Longest Duplicate Substring" SlidingWindow RollingHash]()
+["1392. Longest Happy Prefix" SlidingWindow RollingHash]()
 
 ## DFS(depth first search 深度优先遍历)
 

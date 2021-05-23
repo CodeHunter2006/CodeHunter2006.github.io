@@ -81,3 +81,43 @@ vector<string> findItinerary(vector<vector<string>>& tickets) {
     return res_;
 }
 ```
+
+### "1192. Critical Connections in a Network"
+
+```Go
+func criticalConnections(n int, connections [][]int) (ret [][]int) {
+    seq := 0
+    dfn, low, graph := make([]int, n), make([]int, n), make([][]int, n)
+    for i := range dfn {
+        dfn[i] = -1
+    }
+    for _, c := range connections {
+        graph[c[0]] = append(graph[c[0]], c[1])
+        graph[c[1]] = append(graph[c[1]], c[0])
+    }
+
+    var dfs func(int, int)
+    dfs = func(cur, from int) {
+        seq++
+        dfn[cur], low[cur] = seq, seq
+        fmt.Println("in", cur, seq, seq)
+        for _, next := range graph[cur] {
+            if next == from {
+                continue    // 避免死循环
+            }
+            if dfn[next] == -1 {
+                dfs(next, cur)
+                if low[next] > dfn[cur] {
+                    ret = append(ret, []int{cur, next})
+                }
+            }
+            fmt.Println("low", cur, low[cur], low[next])
+            low[cur] = min(low[cur], low[next])
+        }
+    }
+
+    // 由于题目是联通图，所以只需要从任意一点出发
+    dfs(0, 0)
+    return ret
+}
+```

@@ -122,3 +122,81 @@ func longestSubstring(s string, k int) (ret int) {
     return ret
 }
 ```
+
+### "1044. Longest Duplicate Substring" RollingHash
+
+```Go
+func longestDupSubstring(s string) (ret string) {
+    find := func(k int) string {
+        if k == 0 {return ""}
+        m := make(map[int64][]int, len(s)-k+1)  // map[hashCode][]index
+        var hashCode int64
+        pow := Power(k)
+        for i := range s {
+            hashCode *= MOD
+            if i >= k {
+                hashCode -= int64(s[i-k]) * pow
+            }
+            hashCode += int64(s[i])
+            if i < k-1 {
+                continue
+            }
+            if sli, ok := m[hashCode]; ok {
+                for _, idx := range sli {
+                    if string(s[i-k+1:i+1]) == string(s[idx: idx+k]) {
+                        return string(s[i-k+1:i+1])
+                    }
+                }
+            }
+
+            m[hashCode] = append(m[hashCode], i-k+1)
+        }
+        return ""
+    }
+
+    l, r := 0, len(s)
+    for l+1 < r {
+        mid := (l+r)>>1
+        if ret = find(mid); ret != "" {
+            l = mid
+        } else {
+            r = mid
+        }
+    }
+
+    return find(l)
+}
+
+
+const MOD = 26
+func Power(y int) (ret int64) {
+    for ret = 1; y > 0; y-- {
+        ret *= MOD
+    }
+    return ret
+}
+```
+
+### "1316. Distinct Echo Substrings"
+
+### "1392. Longest Happy Prefix"
+
+```Go
+func longestPrefix(s string) (ret string) {
+    const MOD = 1e9+7
+    const BASE = 26
+    last := len(s)-1
+
+    var preHash, postHash, pow int64 = 0, 0, 1
+    for i := 0; i < last; i++ {
+        preHash = (preHash*BASE + int64(s[i]-'a'))%MOD
+        postHash = (postHash + int64(s[last-i]-'a') * pow)%MOD
+        pow = (pow*BASE)%MOD
+        if preHash == postHash {
+            ret = s[:i+1]
+        }
+    }
+
+    return ret
+}
+```

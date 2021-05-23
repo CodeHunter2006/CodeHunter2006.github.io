@@ -1215,6 +1215,19 @@ tags: Algorithm Leetcode
 
 ["1036. Escape a Large Maze" bfs Golang]()
 
+### "1044. Longest Duplicate Substring"
+
+- 解法：RollingHash + BinarySearch
+  - 思路：
+    - 由于计算规模较大`3*(10^4)`，所以无法用`O(n^3)`的三重循环暴力匹配
+    - 假定字串长度为 K，则题目转化为"是否有长度为 K 的重复字串"
+    - 利用 RollingHash 可以快速进行字符串字串匹配
+    - 假设某个 K 符合要求，那么根据字串字串的特点 K-1 也必然符合要求，可以利用 BinarySearch 查找这个边界长度 K
+    - 用完整比较的方法解决 Collision
+  - 时间复杂度：`O(nlogn)`
+
+["1044. Longest Duplicate Substring" SlidingWindow RollingHash]()
+
 ### "1054. Distant Barcodes"
 
 - 思路：
@@ -1243,6 +1256,18 @@ tags: Algorithm Leetcode
   - 当`text1[i] != text2[j]`时，`dp[i][j] = max(dp[i-1][j], dp[i][j-1])`，表示延续历史最大长度
 
 ["1143. Longest Common Subsequence" DP Golang]()
+
+### "1192. Critical Connections in a Network"
+
+- 解法：Tarjan
+  - 思路：
+    - 基于基本的 Tarjan 算法
+    - 利用回溯时，`LOW_next < DFN_i`的特性，确认环内点；`LOW_next == DFN_i`为环起始点；`LOW_next > DFN_i`为环起始点前面的点
+    - 然后记录入环点和入环前的点组成的边
+  - 注意：
+    - 本题是双向联通图，所以从任意一点开始 dfs 都可以得到全部结果
+
+["1192. Critical Connections in a Network" Graph]()
 
 ### "1128. Number of Equivalent Domino Pairs"
 
@@ -1302,6 +1327,19 @@ tags: Algorithm Leetcode
     - 然后利用 preSum 求出任意范围内的异或结果
 
 ["1310. XOR Queries of a Subarray" BinaryOperation]()
+
+### "1316. Distinct Echo Substrings"
+
+- 解法：RollingHash + PrefixSum
+
+### "1392. Longest Happy Prefix"
+
+- 解法：RollingHash
+  - 思路：
+    - 是否有 HappyPrefix 没有线性演化关系，无法用 BinarySearch
+    - 从前向后取 hashPre，同时从后向前取 hashAfter
+
+["1392. Longest Happy Prefix" SlidingWindow RollingHash]()
 
 ### "1438. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit"
 
