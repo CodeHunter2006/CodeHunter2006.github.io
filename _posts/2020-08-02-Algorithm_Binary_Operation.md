@@ -354,13 +354,11 @@ func findMaximumXOR(nums []int) (x int) {
 ### "461. Hamming Distance" Golang
 
 ```Golang
-func hammingDistance(x int, y int) (count int) {
-    x = x ^ y
-    for x != 0 {
-        count++
-        x = x&(x-1)
+func hammingDistance(x int, y int) (ret int) {
+    for x = x^y; x > 0; x = x & (x-1) {
+        ret++
     }
-    return
+    return ret
 }
 ```
 
