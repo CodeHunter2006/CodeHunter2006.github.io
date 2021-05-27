@@ -57,6 +57,7 @@ cancel 函数可以调用多次，不会发生 panic，只有第一次调用起�
   - struct 将按照其中的导出成员变量进行解析
   - slice 将被解析为多个字符串，每个字符串是一个 json 对象
   - map 将被解析为`map[string]interface{}`结构，其中`interface{}`可能是一个 map
+  - 也可以直接传入多维 map 结构，如`map[string]map[string]string`，可以自动解析
 
 在 unmarshal 时，传入的参数必须是对应类型的指针，并且保证对象已构造。但是 slice 或 map 的 make 并不是必须的，只要对象自动创建了，不需要 make 初始化。
 

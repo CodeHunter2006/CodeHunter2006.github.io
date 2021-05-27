@@ -35,6 +35,23 @@ func Unwrap(err error) error {
 }
 ```
 
+```Go
+package fmt
+
+type wrapError struct {
+	msg string
+	err error
+}
+
+func (e *wrapError) Error() string {
+	return e.msg
+}
+
+func (e *wrapError) Unwrap() error {
+	return e.err
+}
+```
+
 - 通过上面的代码，只要符合`Unwrap`接口，就可以不断 Unwrap 形成 error chain
 
 - 利用 `wraped := fmt.Errorf("test %w", err)`的`%w`就可以对原始 err 进行 wrapping

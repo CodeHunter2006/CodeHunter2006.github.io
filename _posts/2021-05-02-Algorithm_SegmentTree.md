@@ -7,9 +7,26 @@ tags: Algorithm Leetcode
 
 记录 Segment Tree 的算法实现
 
+# 数据结构
+
+ST(Segment Tree 线段树)的基本逻辑是：1. 所有叶子结点存储实际数字；2. 中间结点存储其孩子结点的和
+
+## 线段树，以结点指针实现
+
+## 线段树，以数组实现
+
+## ZKW(张昆伟)线段树，以数组实现
+
+zkw 线段树结构紧凑，适合作为竞赛时的模板。但是真实面试使用可能会因为过于复杂而难以解释。
+
+- zkw 线段树利用堆式存储，类似 BIT 的方式利用二进制特征快速找到孩子和父节点
+
+# 题目
+
 ### "307. Range Sum Query - Mutable"
 
 ```C++
+// normal ST
 class NumArray {
 private:
     class SegmentNode {
@@ -77,6 +94,34 @@ public:
         return sumRange(root_.get(), i, j);
     }
 };
+```
+
+```C++
+// zkwST
+class SegmentTree {
+    int n;
+    int[] st;
+
+    public SegmentTree(int[] nums) {
+        n = nums.length; st = new int[2 * n];
+        for (int i = n; i < n * 2; i++) st[i] = nums[i-n];
+        for (int i = n - 1; i > 0; i--) st[i] = st[2 * i] + st[2 * i + 1];
+    }
+
+    public void update(int i, int val) {
+        int diff = val - st[i + n];
+        for (i += n; i > 0; i /= 2) st[i] += diff;
+    }
+
+    public int sumRange(int i, int j) {
+        int res = 0;
+        for (i += n, j += n; i <= j; i /= 2, j /= 2) {
+            if (i % 2 == 1) res += st[i++]; // st[i]是右子结点
+            if (j % 2 == 0) res += st[j--]; // st[j]是左子结点
+        }
+        return res
+    }
+}
 ```
 
 ### "850. Rectangle Area II"
