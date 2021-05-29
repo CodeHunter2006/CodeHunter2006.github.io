@@ -365,6 +365,8 @@ Segment Tree 和 BIT 都是在开始时确定规模，然后基本结构不再�
 具体代码参照：
 ["307. Range Sum Query - Mutable" SegmentTree C++]()
 
+- 相比 BIT ST 除了 rangeSum 功能外，还可以实现 rangeMin/rangeMax
+
 ### Red Black Tree (红黑树)
 
 红黑树广泛应用于 map、set、multimap、multiset、priority_queue 系列中，

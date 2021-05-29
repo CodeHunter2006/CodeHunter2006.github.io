@@ -884,6 +884,19 @@ tags: Algorithm Leetcode
 - 技巧：
   - 本题只求最大值，所以不用精确推算结果，在保证无**后效性**的同时，始终保持数组靠后为最大值即可
 
+### "477. Total Hamming Distance"
+
+- 解法：
+  - 思路：
+    - 首先要明白"汉明距离"的概念，是两个二进制数间异或后 1 的数量
+    - 首先想到双循环，但是规模是`10^5`，`O(n^2)`无法满足要求
+    - 想到先统计所有值每个位置为 1 的出现次数，然后遍历每个元素在这些位上的情况，统计出结果
+    - 进一步优化，某个位置如果有 m 个元素为 1，则其他元素必然累加这个 m，可以对位做第一层循环、nums 做第二层循环
+  - 时间复杂度：
+    `O(n*L)`，其中`L==30`
+
+["477. Total Hamming Distance" BinaryOperation]()
+
 ### "478. Generate Random Point in a Circle"
 
 - 解法：RejectSampling
@@ -1245,6 +1258,14 @@ tags: Algorithm Leetcode
 - 技巧点：
   - 由于保证存在答案，只需要让元素自己隔离就可以，不用考虑其他元素
   - 在奇偶转换时，输出数组的前后位置也会自动隔离元素，所以不用担心出问题
+
+### "1074. Number of Submatrices That Sum to Target"
+
+- 解法：二维 preSum + hash + matrix 遍历
+  - 思路：
+    - 这道题的基本思路先要会："560. Subarray Sum Equals K"
+    - 在 matrix 中对每列进行 preSum 压缩成一维，然后用上面现成函数
+    - 注意对 matrix 的遍历至少要选取两行，所以时间复杂度是`O((m^2)*n)`
 
 ### "1143. Longest Common Subsequence"
 

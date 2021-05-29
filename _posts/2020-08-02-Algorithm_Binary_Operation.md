@@ -362,6 +362,21 @@ func hammingDistance(x int, y int) (ret int) {
 }
 ```
 
+### "477. Total Hamming Distance"
+
+```Go
+func totalHammingDistance(nums []int) (ret int) {
+    for i := 0; i < 30; i++ {
+        sum := 0
+        for _, n := range nums {
+            sum += n>>i & 1
+        }
+        ret += sum * (len(nums)-sum)
+    }
+    return ret
+}
+```
+
 ### "1178. Number of Valid Words for Each Puzzle"
 
 ```Golang
