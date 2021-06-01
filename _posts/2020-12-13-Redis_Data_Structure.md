@@ -109,6 +109,14 @@ typedef struct zset{
   5. volatile-ttl 移除即将过期的 key(minor TTL)
   6. noeviction 不移除任何 key，只是返回一个写错误，默认选项
 
+# "坑"场景
+
+- hash 乱序
+  - 现象：
+    试验时候，存储了数据，取出是有序的；实际使用时候，发现里面存的数据发生了乱序。
+  - 原因：
+    试验时候数据量小，底层用 ziplist 存储，所以有序；正式使用时采用 Hash 存储，导致乱序。
+
 <br>
 
 - 参考：[Redis 详解（五）------ redis 的五大数据类型实现原理](https://www.cnblogs.com/ysocean/p/9102811.html)
