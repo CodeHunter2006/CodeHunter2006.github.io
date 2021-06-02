@@ -196,6 +196,11 @@ bool cmp(const int& a,const int& b){return a > b;}
 示例：
 [`82. Remove Duplicates from Sorted List II` Golang]()
 
+### 链表相交点
+
+可以人为修改两个链表的遍历过程，从中发现相交特定，具体算法参考：
+"160. Intersection of Two Linked Lists"
+
 ## Stack(栈)
 
 符合 FILO(先进后出)，从栈顶入从栈顶出
@@ -383,8 +388,21 @@ insert、get、erase 的时间复杂度都为 O(1)，适合要求极限性能的
 
 缺点是空间使用较多，要预留很多 bucket。
 
+### Longest Consecutive Sequence (最长连续子串)
+
+求数组或字符串(字符数组)的某段连续字串，具有某种性质，规模往往超出`1e3`无法用`O(n^2)`解决。
+
+- 算法：preSum + HashMap
+  - 步骤：
+    1. 遍历计算 preSum，preSum 经过计算得出某种**特征值**，将特征值保存在 HashMap 中，同时记录**下标**
+    2. 如果特征值已存在，则说明到上次出现此特征值中间的子数组符合题目要求，计算两者**下标差**统计一次结果
+    3. 在特征值已存在的情况下就不要再更新特征值，这样可以统计到**最长**结果
+
 示例：
+"1. Two Sum"
 "128. Longest Consecutive Sequence"
+"523. Continuous Subarray Sum"
+"525. Contiguous Array"
 
 ### 结合 Array 实现 O(1)容器
 

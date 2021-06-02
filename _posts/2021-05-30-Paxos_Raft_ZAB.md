@@ -34,7 +34,7 @@ tags: Go
 - 分布式系统的**fault tolorence**的一般解决方案是**state machine replication(状态机复制)**，
   通过记录带序列号的状态变更 log 的方式同步各个结点的数据。
 - Paxos/Raft/ZAB 是目前业内公认的 state machine replication 解决方案的**consensus(共识算法)**
-- 共识算法并不能保证"最终一致性"，还需要 client 行为配合才能实现
+- 共识算法并**不能保证**"最终一致性"，还**需要 client 行为配合**才能实现
 
 # 强一致性共识算法的演化
 
@@ -104,9 +104,106 @@ Paxos 算法的发明者是 Lesile Lamport(他也是 Latex 的发明者)。
 - 解决方案：
   如果 Prosper 意识到了活锁，则分别执行 random timeout，其中某方会先发出新的编号，执行完毕后另一方才提新的编号即可。
 
-- Basic Paxos 的问题：
+- Basic Paxos 的**问题**：
   - 实现困难
   - 效率低(2 轮通信确认)
   - 活锁
 
 ## Multi Paxos
+
+所谓**Multi**是指一个角色可以"身兼数职"。
+
+- Multi Paxos 结构变更：
+  - 增加**Leader**角色，他是唯一的 Prosper，所有**写请求**都需经过此 Leader。
+    在 Leader"任期"内，发出的提案序号是**唯一且自增**的
+  - 减少步骤，将`Prepare+Promise`过程合并为**竞选 Leader**的过程，一般只需一次；
+    然后有数据需写入时，只需要执行`Accept+Accepted`过程，无需再竞选
+  - **角色合并**，系统内角色只有**Server**(系统外部是 Client)，
+    Server 可以身兼数职，在`Prosper/Acceptor/Leaner`角色间切换
+
+## Raft
+
+Raft 是简化版的 Multi Paxos，是业内普遍采用的协议之一。
+
+- 参考资料：
+
+  - [原理动画](http://thesecretlivesofdata.com/raft/)
+  - [场景测试](https://raft.github.io/)
+
+- Raft 将分布式共识算法划分成三个子问题：
+
+  - Leader Election
+  - Log Replication
+  - Safety(数据一致无错误)
+
+- Raft 定义的角色：
+
+  - Leader
+  - Follower
+  - Candidate(临时角色)
+
+```Go
+// Raft 结点的字段示例
+type RaftNode struct {
+  Toltal  uint32    // 结点总数，必须为奇数
+  NodeID  uint32    // 当前结点 ID
+
+  Role int        // 角色：0-Follower; 1-Leader; 2-Candidate
+  Term uint64     // 当前所处任期序号，只增不减
+
+  CurSeq  uint64    // 当前处理的提案序号，在当前任期内只增不减
+  CurState  int     // 当前提案状态
+  VoteCount uint32  // 投票计数，如果是自己发起的，则初始值为 1，过 Quorum 则算成功
+}
+```
+
+### 各种场景测试
+
+- 通常场景：
+
+  1. 所有角色都是 Follower，各自随机等待一段时间(基础时间+随机时间)，然后竞选 Leader
+  2. 如果竞选 Leader 发生冲突，则各结点随机休眠然后再选，直到选中唯一的 Leader，开启一个"任期" Term
+  3. 所有 Client 的**写请求**由 Leader 处理，Leader 发起提案(包含编号和内容)，过 Quorum 响应 OK 后，则算写入成功
+  4. Leader 持续向 Follower 发送心跳，重置 Follower 的"Term 超时计时器"，以保证维持自己的 Leader 地位。
+     同时，心跳本身也可以夹带提案和内容。
+
+- 有部分 Follower 失败：
+
+  1. Leader 发出新提案、少量 Follower 没有响应，由于达到 Quorum 所以写入成功
+  2. 少量 Follower 恢复连接后，发现自己 Term 相同但 CurSeq 落后，则自动更新数据
+
+- Leader 挂掉：
+
+  1. Leader 挂掉，不再发送心跳
+  2. 其他 Follower 触发"Term 超时定时器"，将自己角色置为 Candidate，开始选举
+  3. 选定新 Leader，Term++，然后由新 Leader 正常执行新提案
+  4. 旧 Leader 后来恢复连接，发现自己 Term 落后，自动转换角色为 Follower 并更新数据
+
+- 分区，Leader 在 Quorum 分区：
+
+  1. 假设有 5 个结点，其中两个被分区出去
+  2. 剩下的 3 个结点由于 Leader 提案可以达到 Quorum，所以正常运行
+  3. 两个被分区的结点由于没有收到心跳，转换角色为 Candidate 并选举，由于无法达到 Quorum 无法选举成功
+  4. 两个被分区的结点恢复与原网络连接后，发现 Term 相同而 CurSeq 落后，自动转换角色为 Follower 并更新数据
+
+- 分区，Leader 在非 Quorum 分区：
+  1. 假设有 5 个结点，其中两个被分区出去，其中包含 Leader
+  2. Leader 正要处理新提案，所以发出提案 Accept 请求，由于 VoteCount 最多为 2，无法达到 3/5(Quorum)，所以循环重试该提案
+  3. 处于另外分区的 3 个结点，由于没有 Leader 心跳，转换角色为 Candidate 并选举
+  4. 由于达到了 Quorum，所以选定新 Leader，Term++，然后执行新提案
+  5. 旧 Leader 所处分区网络恢复后，发现 Term 落后，自动转换角色为 Follower 并更新数据
+
+### 关于"Client 配合实现最终一致性"
+
+- 对于 Client 请求，有三种返回结果：
+  1. OK，写入成功
+  2. Error，系统出错或逻辑错误导致写入失败
+  3. Unknown，请求超时返回、结果未知、需要之后再确认
+
+最开始提到："最终一致性无法由分布式系统本身实现，在极端情况下，需要客户端配合才可以"，看下面时序：
+
+- 发生 Unknown 的时序：
+  1. 假设有 5 个结点，Client 向 Leader 发出写请求，此时三个 Follower 挂掉了
+  2. Leader 尝试多次提案，无法达到 Quorum，向客户端返回了**Unknown**
+  3. Leader 继续尝试，这时之前三个挂掉的 Follower 恢复了，达到 Quorum，写入成功
+  4. 过一会儿 Client 来查询，确认自己的请求已经正确完成

@@ -395,8 +395,11 @@ tags: Algorithm Leetcode
   3. 如果两个指针指向同一位置，则该位置就是链表交汇点
   4. 如果任意指针走到了尾部仍然没有交汇，则没有交汇点
 - 思路：
-  这种问题先简化思路，假设有两个链表，分别为:`A->C->D`和`B->C->D`，则 C 是交汇点。如果按照上面方法使跳转路径相交叠，则两个指针交汇前走的距离分别是：`AC+CD+BC`和`BC+CD+AB`，可以看到，这两个距离是完全相等的
+  这种问题先简化思路，假设有两个链表，分别为:`A->C->D`和`B->C->D`，则 C 是交汇点。
+  如果按照上面方法使跳转路径相交叠，则两个指针交汇前走的距离分别是：`AC+CD+BC`和`BC+CD+AB`，可以看到，这两个距离是完全相等的
 - 这个解法的优点是空间复杂度为 O(1)
+
+["160. Intersection of Two Linked Lists" LinkedList]()
 
 ### "169. Majority Element"
 
@@ -936,6 +939,23 @@ tags: Algorithm Leetcode
 
 ["518. Coin Change 2" Golang]()
 
+### "523. Continuous Subarray Sum"
+
+- 解法：prefix sum + math(同余定理) + HashMap
+  - 如果两个数 x y 对某个 k 取余结果相同，那么这两个数的差值是 k 的整数倍
+
+["523. Continuous Subarray Sum" Math]()
+
+### "525. Contiguous Array"
+
+- 解法：prefix sum + HashMap
+  - 思路：
+    - 利用 preFix 分别统计 1 和 0 的数量
+    - 遍历中计算 1 和 0 的数量差，并记录在 HashMap，同时记录下标
+    - 如果数量差再次出现，说明中间段的 1 和 0 增长相同，可记录一次结果
+  - 改进：
+    - 其实关键是 1 和 0 的数量差，所以只需要一个 preSum 值就可以，遇到 1 就`++`，遇到 0 就`--`
+
 ### "528. Random Pick with Weight"
 
 - 考点：
@@ -1149,7 +1169,7 @@ tags: Algorithm Leetcode
 
 - 考点：
   - 连续整数组成的子序列，可以利用 sum(i,j)来快速表达
-  - Math: 同余定理，`(a-b)%m == 0 <=> a%m == b%m == k`，如果两数之差可以被 m 整除，那么两数分别对 m 取余的值相同
+  - Math: **同余定理**，`(a-b)%m == 0 <=> a%m == b%m == k`，如果两数之差可以被 m 整除，那么两数分别对 m 取余的值相同
   - 利用 HashTable 对已存在元素累加
 - 思路：
   - 设 P[i] 是前面 i 个数累加和，`sum(i,j) == P[j]-P[i-1]`

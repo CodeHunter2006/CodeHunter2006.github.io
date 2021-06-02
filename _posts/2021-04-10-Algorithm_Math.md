@@ -204,6 +204,29 @@ int poorPigs(int buckets, int minutesToDie, int minutesToTest) {
 }
 ```
 
+### "523. Continuous Subarray Sum"
+
+```Go
+func checkSubarraySum(nums []int, k int) bool {
+    m,sum := make(map[int]int),0
+    for i,x := range nums {
+        sum += x
+        mod := sum%k
+        if mod == 0 && i != 0 {
+            return true
+        }
+        if tmp,ok := m[mod]; ok {
+            if tmp+1 != i {
+                return true
+            }
+        } else {
+            m[mod] = i
+        }
+    }
+    return false
+}
+```
+
 ### "633. Sum of Square Numbers"
 
 ```Go
