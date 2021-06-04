@@ -5,6 +5,8 @@ date: 2021-05-30 23:00:00 +0800
 tags: Go
 ---
 
+![Raft](/assets/images/2021-05-30-Paxos_Raft_ZAB_1.jpeg)
+
 # 基本概念
 
 根据**CAP Theorem**，分布式系统不能同时满足三点：Consistency(一致性)、Availability(可用性)、Partition Tolerance(分区容错性)
@@ -34,7 +36,7 @@ tags: Go
 - 分布式系统的**fault tolorence**的一般解决方案是**state machine replication(状态机复制)**，
   通过记录带序列号的状态变更 log 的方式同步各个结点的数据。
 - Paxos/Raft/ZAB 是目前业内公认的 state machine replication 解决方案的**consensus(共识算法)**
-- 共识算法并**不能保证**"最终一致性"，还**需要 client 行为配合**才能实现
+- **共识**算法并**不能保证**"最终**一致性**"，还**需要 client 行为配合**才能实现
 
 # 强一致性共识算法的演化
 
@@ -123,7 +125,7 @@ Paxos 算法的发明者是 Lesile Lamport(他也是 Latex 的发明者)。
 
 ## Raft
 
-Raft 是简化版的 Multi Paxos，是业内普遍采用的协议之一。
+Raft 是简化版的 Multi Paxos，是业内普遍采用的协议之一，比如 Etcd 就是基于 Raft 协议。
 
 - 参考资料：
 
@@ -198,7 +200,7 @@ type RaftNode struct {
 - 对于 Client 请求，有三种返回结果：
   1. OK，写入成功
   2. Error，系统出错或逻辑错误导致写入失败
-  3. Unknown，请求超时返回、结果未知、需要之后再确认
+  3. **Unknown**，请求超时返回、结果未知、需要之后再确认
 
 最开始提到："最终一致性无法由分布式系统本身实现，在极端情况下，需要客户端配合才可以"，看下面时序：
 
@@ -206,4 +208,12 @@ type RaftNode struct {
   1. 假设有 5 个结点，Client 向 Leader 发出写请求，此时三个 Follower 挂掉了
   2. Leader 尝试多次提案，无法达到 Quorum，向客户端返回了**Unknown**
   3. Leader 继续尝试，这时之前三个挂掉的 Follower 恢复了，达到 Quorum，写入成功
-  4. 过一会儿 Client 来查询，确认自己的请求已经正确完成
+  4. 过一会儿 Client 来查询，确认自己的请求已经正确完成。(具体客户端的行为**需要设计**，不一定是"过会儿再查询")
+
+## ZAB
+
+ZAB 是 Zookeeper 使用的协议，基本与 Raft 相同。
+
+- ZAB 与 Raft 的区别：
+  - 名称区别： ZAB 将 Leader 的一个周期称为 epoch(纪元)，而 Raft 称之为 Term(任期)
+  - 心跳方向：Raft 的 Leader 向 Follower 发送心跳以保持 Term，而 ZAB 则相反
