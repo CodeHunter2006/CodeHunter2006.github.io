@@ -887,6 +887,8 @@ tags: Algorithm Leetcode
 - 技巧：
   - 本题只求最大值，所以不用精确推算结果，在保证无**后效性**的同时，始终保持数组靠后为最大值即可
 
+["474. Ones and Zeroes" DynamicPlanning]()
+
 ### "477. Total Hamming Distance"
 
 - 解法：
@@ -1014,6 +1016,20 @@ tags: Algorithm Leetcode
   1. 可落子的区域变大，可能性更多，需要用两个大的棋盘来演化，并且统计数值会非常大。
   2. 答案要求计算概率而不是统计数值，由于统计数值过大，中间计算过程就会溢出(超出 double 型)，
      所以棋盘要存储每一位置的概率(double)，并且每次引用上一次演化结果时要"/8.0"(上一次位置到当前位置有 8 种可能结果)而不是累计到最后"/pow(8.0, K)"。
+
+### "718. Maximum Length of Repeated Subarray"
+
+- 解法 1：dp
+
+  - 思路：
+    - 类似"edit distance"，进行二维 DP
+  - 时间复杂度：`O(M*N)`
+
+- 解法 2：RollingHash + BinarySearch
+  - 思路：
+    - 由于重复子序列有递增特性，即如果有 3 个元素相同则必然有 2 个元素相同，所以可以利用二分查找猜子序列长度
+    - 可以利用 RollingHash 生成子序列指纹
+  - 时间复杂度：`O((N+M)*min(N,M))`
 
 ### "740. Delete and Earn"
 
@@ -1260,6 +1276,19 @@ tags: Algorithm Leetcode
   - 时间复杂度：`O(nlogn)`
 
 ["1044. Longest Duplicate Substring" SlidingWindow RollingHash]()
+
+### "1049. Last Stone Weight II"
+
+- 解法：0-1 背包 + 题目分析
+  - 思路：
+    - 题目参照"416. Partition Equal Subset Sum"，进行破题
+    - 只要有两块石头，那么两两就可以抵消，最终一定能剩下一块石头。
+      在抵消过程中，我们希望尽量能抵消更多重量。可以想象将石头分为两堆，这两堆之间相互抵消，最后留下一块，正好是两堆重量差。
+      所以这道题可以转化为 0-1 背包：如何找到一堆石头，总重量尽量接近全部重量的一半，这样最终抵消后剩下的最少。
+  - 要点：
+    - 本题的目标是找"最值"而不是"恰好放下"，所以应使用不一定能填满的 DP 模板
+
+["1049. Last Stone Weight II" DynamicPlanning Golang]()
 
 ### "1054. Distant Barcodes"
 

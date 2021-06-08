@@ -82,6 +82,16 @@ tags: Algorithm Leetcode
     2. 如果同层状态会影响"后面的"状态，则利用**倒序**消除这种影响
   - 无**后效性**的例子比如"用最少数量的硬币凑够目标值"，用过的硬币不影响以后再用。不过同样要保证演进方向，这是 dp 算法的基础。
 
+### 零一背包延伸——未必填满
+
+- 对于有些题目，不一定能找到把背包完全填满的结果，但可以找到最优解。
+  这时有两种方法取得最优解的最大容量：
+  1. 如果在遍历过程中只记录了可以到达的状态，需要在最后反向遍历查找最大容量
+  2. 可以直接在遍历过程中始终记录当前点可达到的最大值，这样直接取 DP 最后一个元素即可
+
+参考：
+"1049. Last Stone Weight II"
+
 ## 完全背包
 
 完全背包是把零一背包中"每个物品只有一个"的限制去掉，这样算法其实更容易了。
@@ -591,6 +601,27 @@ func canPartition(nums []int) bool {
 }
 ```
 
+### "474. Ones and Zeroes"
+
+```Go
+func findMaxForm(strs []string, m int, n int) int {
+    dp := make([][]int, m+1)
+    for i := range dp {
+        dp[i] = make([]int, n+1)
+    }
+    for _, s := range strs {
+        zeros := strings.Count(s, "0")
+        ones := len(s) - zeros
+        for i := m; i >= zeros; i-- {
+            for j := n; j >= ones; j-- {
+                dp[i][j] = max(dp[i][j], dp[i-zeros][j-ones] + 1)
+            }
+        }
+    }
+    return dp[m][n]
+}
+```
+
 ### "518. Coin Change 2" Golang
 
 ```Go
@@ -666,6 +697,49 @@ func min(a, b int) int {
         return a
     }
     return b
+}
+```
+
+### "1049. Last Stone Weight II"
+
+```Go
+// 最后遍历
+func lastStoneWeightII(stones []int) int {
+    sum := 0
+    for _, v := range stones {
+        sum += v
+    }
+    m := sum / 2
+    dp := make([]bool, m+1)
+    dp[0] = true
+    for _, weight := range stones {
+        for j := m; j >= weight; j-- {
+            dp[j] = dp[j] || dp[j-weight]
+        }
+    }
+    for j := m; ; j-- {
+        if dp[j] {
+            return sum - 2*j
+        }
+    }
+}
+```
+
+```Go
+// 记录最大值
+func lastStoneWeightII(stones []int) int {
+    sum := 0
+    for _, v := range stones {
+        sum += v
+    }
+    m := sum >> 1
+    dp := make([]int, m+1)
+    for _, weight := range stones {
+        for j := m; j >= weight; j-- {
+            dp[j] = max(dp[j], dp[j-weight]+weight)
+        }
+    }
+    return sum - dp[m]*2
 }
 ```
 

@@ -69,6 +69,9 @@ if err != nil {
 }
 ```
 
+- unmarshal 时，如果传入了`interface`(无论是`interface{}`还是特定类型的`interface`)，
+  如果 interface 已经指向了有效对象，则会 unarshal 成功；如果指向 nil，则会 panic。
+
 ## errors
 
 `errors.New("this is an error")`
@@ -398,6 +401,8 @@ t := time.Parse(timeLayout, str)
 
 - 其中模板字符串比较特殊，必须是指定的常量或`"2006-01-02 15:04:05.000000000"`这个值的变式
 - 时间的秒单位后，用`0`或`9`表示一个位置，精度可以到纳秒(9 个 0)。
+
+- 由于对象内部构造细节，无法直接比较，time 的比较要用专用函数`after/before`，相等也要用`func (t Time) Equal(u Time) bool`
 
 ### ticker
 

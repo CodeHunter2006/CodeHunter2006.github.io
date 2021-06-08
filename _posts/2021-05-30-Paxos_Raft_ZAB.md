@@ -181,14 +181,15 @@ type RaftNode struct {
   3. 选定新 Leader，Term++，然后由新 Leader 正常执行新提案
   4. 旧 Leader 后来恢复连接，发现自己 Term 落后，自动转换角色为 Follower 并更新数据
 
-- 分区，Leader 在 Quorum 分区：
+- 分区 1，Leader 在 Quorum 分区：
 
   1. 假设有 5 个结点，其中两个被分区出去
   2. 剩下的 3 个结点由于 Leader 提案可以达到 Quorum，所以正常运行
   3. 两个被分区的结点由于没有收到心跳，转换角色为 Candidate 并选举，由于无法达到 Quorum 无法选举成功
   4. 两个被分区的结点恢复与原网络连接后，发现 Term 相同而 CurSeq 落后，自动转换角色为 Follower 并更新数据
 
-- 分区，Leader 在非 Quorum 分区：
+- 分区 2，Leader 在非 Quorum 分区(脑裂)：
+  - **脑裂**是指整个网络被划分为两个区域，而这两个区域各自有有一个 Leader
   1. 假设有 5 个结点，其中两个被分区出去，其中包含 Leader
   2. Leader 正要处理新提案，所以发出提案 Accept 请求，由于 VoteCount 最多为 2，无法达到 3/5(Quorum)，所以循环重试该提案
   3. 处于另外分区的 3 个结点，由于没有 Leader 心跳，转换角色为 Candidate 并选举
