@@ -92,6 +92,13 @@ tags: Algorithm Leetcode
 参考：
 "1049. Last Stone Weight II"
 
+### 零一背包延伸——三维 DP
+
+在零一背包基础上可以增加一个约束条件，需要增加一维 DP 解决。
+
+参考：
+"879. Profitable Schemes"
+
 ## 完全背包
 
 完全背包是把零一背包中"每个物品只有一个"的限制去掉，这样算法其实更容易了。
@@ -430,6 +437,23 @@ func subRob(nums []int) int {
 }
 ```
 
+### 279. Perfect Squares
+
+```Go
+func numSquares(n int) int {
+    dp := make([]int, n+1)
+    for i := 1; i <= n; i++ {
+        minVal := math.MaxInt32
+        for j := 1; j*j <= i; j++ {
+            minVal = min(minVal, dp[i-j*j])
+        }
+        dp[i] = minVal+1
+    }
+
+    return dp[n]
+}
+```
+
 ### "300. Longest Increasing Subsequence"
 
 ```Go
@@ -697,6 +721,61 @@ func min(a, b int) int {
         return a
     }
     return b
+}
+```
+
+### "879. Profitable Schemes"
+
+```Go
+func profitableSchemes(n int, minProfit int, group []int, profit []int) (ret int) {
+    const MOD = 1e9 + 7
+    groupLen := len(group)  // 工作(物品)数量，用于主循环
+    dp := make([][][]int, groupLen+1)   // 工作、人数、最小获利
+    for i := range dp {
+        dp[i] = make([][]int, n+1)
+        for j := range dp[i] {
+            dp[i][j] = make([]int, minProfit+1)
+        }
+    }
+    dp[0][0][0] = 1
+    for i, num := range group { // 这里下标偏小，后面要+1
+        for j := 0; j <= n; j++ {
+            for k := 0; k <= minProfit; k++ {
+                if j < num {    // 人数不满足当前工作，延续前面的结果
+                    dp[i+1][j][k] = dp[i][j][k]
+                } else {        // 人数可以满足当前工作
+                    dp[i+1][j][k] = (dp[i][j][k] + dp[i][j-num][max(0, k-profit[i])]) % MOD
+                }
+            }
+        }
+    }
+
+    for _, d := range dp[groupLen] {  // 遍历累加全部物品、不同人数、满足 minProfit 的结果
+        ret = (ret + d[minProfit]) % MOD
+    }
+    return ret
+}
+```
+
+```Go
+// 代码简化
+func profitableSchemes(n int, minProfit int, group []int, profit []int) (ret int) {
+    const MOD = 1e9 + 7
+    dp := make([][]int, n+1)   // 人数、最小获利
+    for i := range dp {
+        dp[i] = make([]int, minProfit+1)
+        dp[i][0] = 1    // 赋予可能性
+    }
+    for i, num := range group { // 工作(物品)
+        for j := n; j >= 0; j-- {   // 逆序，避免后效
+            for k := minProfit; k >= 0 ; k-- {  // 逆序，避免后效
+                if j >= num {        // 人数可以满足当前工作
+                    dp[j][k] = (dp[j][k] + dp[j-num][max(0, k-profit[i])]) % MOD
+                }
+            }
+        }
+    }
+    return dp[n][minProfit]
 }
 ```
 
