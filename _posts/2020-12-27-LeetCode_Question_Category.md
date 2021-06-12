@@ -1489,6 +1489,14 @@ tags: Algorithm Leetcode
 
 ["1442. Count Triplets That Can Form Two Arrays of Equal XOR" BinaryOperation]()
 
+### "1449. Form Largest Integer With Digits That Add up to Target"
+
+- 解法：完全背包 + 字符串(itoa)
+  - 思路：
+    - cost 是物品体积、index 是物品值、target 是背包容量
+    - 两层循环，第一层是背包容量状态、第二层是物品
+    - 最后将结果生成字符串形式返回
+
 ### "1463. Cherry Pickup II"
 
 - 考点：
