@@ -82,6 +82,139 @@ vector<string> findItinerary(vector<vector<string>>& tickets) {
 }
 ```
 
+### "743. Network Delay Time"
+
+```Go
+// Dijkstra
+func networkDelayTime(times [][]int, n int, k int) int {
+    dist := make([]int, n)
+    for i := range dist {
+        dist[i] = math.MaxInt32
+    }
+    edges := make(map[int][][2]int)
+    for _, t := range times {
+        edges[t[0]] = append(edges[t[0]], [2]int{t[1], t[2]})
+    }
+
+    h := &myHeap{[2]int{k, 0}}
+    for h.Len() > 0 {
+        edge := heap.Pop(h).([2]int)
+        if dist[edge[0]-1] == math.MaxInt32 {
+            for _, w := range edges[edge[0]] {
+                heap.Push(h, [2]int{w[0], edge[1]+w[1]})
+            }
+        }
+        if dist[edge[0]-1] > edge[1] {
+            dist[edge[0]-1] = edge[1]
+        }
+    }
+
+    maxVal := 0
+    for _, d := range dist {
+        if d == math.MaxInt32 {
+            return -1
+        } else if d > maxVal {
+            maxVal = d
+        }
+    }
+
+    return maxVal
+}
+
+type myHeap [][2]int // [vertex,dist]
+func (p myHeap) Len() int {
+    return len(p)
+}
+func (p myHeap) Less(a, b int) bool {
+    return p[a][1] < p[b][1]
+}
+func (p *myHeap) Swap(a, b int) {
+    (*p)[a], (*p)[b] = (*p)[b], (*p)[a]
+}
+func (p *myHeap) Push(x interface{}) {
+    *p = append(*p, x.([2]int))
+}
+func (p *myHeap) Pop() interface{} {
+    n := len(*p)-1
+    tmp := (*p)[n]
+    (*p) = (*p)[:n]
+    return tmp
+}
+```
+
+```Go
+// Bellmen-Ford
+func networkDelayTime(times [][]int, n int, k int) int {
+    dp := make([]int, n)
+    for i := range dp {
+        dp[i] = math.MaxInt32
+    }
+    dp[k-1] = 0
+    for i := 1; i < n; i++ {
+        for _, t := range times {
+               dp[t[1]-1] = min(dp[t[1]-1], dp[t[0]-1]+t[2])
+        }
+    }
+
+    maxVal := 0
+    for _, v := range dp {
+        if v == math.MaxInt32 {
+            return -1   // 有不可达结点
+        } else if v < 0 {
+            return -1   // 存在负权边环
+        } else if v > maxVal {
+            maxVal = v
+        }
+    }
+
+    return maxVal
+}
+```
+
+```Go
+// Floyd-Warshall
+func networkDelayTime(times [][]int, n int, k int) int {
+    matrix := make([][]int, n)
+    for i := 0; i < n; i++ {
+        matrix[i] = make([]int, n)
+        for j := range matrix[i] {
+            matrix[i][j] = math.MaxInt32
+        }
+        matrix[i][i] = 0
+    }
+    for _, t := range times {
+        matrix[t[0]-1][t[1]-1] = t[2]
+    }
+
+    for k := 0; k < n; k++ {
+        for i := 0; i < n; i++ {
+            for j := 0; j < n; j++ {
+                if matrix[i][j] > matrix[i][k] + matrix[k][j] {
+                    matrix[i][j] = matrix[i][k] + matrix[k][j]
+                }
+            }
+        }
+    }
+
+    maxVal := 0
+    for i := 0; i < n; i++ {
+        if matrix[k-1][i] == math.MaxInt32 {
+            return -1
+        } else if matrix[k-1][i] > maxVal {
+            maxVal = matrix[k-1][i]
+        }
+    }
+
+    return maxVal
+}
+```
+
+### "787. Cheapest Flights Within K Stops"
+
+```Go
+// Bellmen-Ford
+```
+
 ### "1192. Critical Connections in a Network"
 
 ```Go
