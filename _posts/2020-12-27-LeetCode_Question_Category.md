@@ -682,7 +682,7 @@ tags: Algorithm Leetcode
   - 所以有动态转移公式`bits[x]=bits[x&(x−1)]+1`
   - 时间复杂度：`O(n)`
 
-["338. Counting Bits" DP Golang]()
+["338. Counting Bits" DynamicPlanning Golang]()
 
 ### "354. Russian Doll Envelopes"
 
@@ -718,6 +718,14 @@ tags: Algorithm Leetcode
     - 在迭代过程中要记录最大长度和对应的最大值，以便最后反推，计算出最终结果
 
 ["368. Largest Divisible Subset" DP Golang]()
+
+### "374. Guess Number Higher or Lower"
+
+- 解法：BinarySearch
+  - 要点：
+    - 最大值范围`(2^31)-1`，可以变形模板`r = n`，最后返回`r`
+
+["374. Guess Number Higher or Lower" BinarySearch]()
 
 ### "377. Combination Sum IV"
 
@@ -761,6 +769,15 @@ tags: Algorithm Leetcode
 
 ["382. Linked List Random Node" Random]()
 
+### "384. Shuffle an Array"
+
+- 解法：Fisher-Yates Shuffle
+  - 要点：
+    - 要保留初始的数组以便`reset`返回
+    - 要保留被随机后的数组，以便下次继续对其随机处理，否则由于随机种子被重置，无法真正实现随机，Case 会不过
+
+["384. Shuffle an Array" Random Golang]()
+
 ### "395. Longest Substring with At Least K Repeating Characters"
 
 - 考点：滑窗、常数内尝试
@@ -771,15 +788,6 @@ tags: Algorithm Leetcode
   - 在新增、删除元素时，维护好"当前未达到 k 个字母种类数"，然后当条件符合时更新最大长度结果
 
 ["395. Longest Substring with At Least K Repeating Characters" SlidingWindow Golang]()
-
-### "384. Shuffle an Array"
-
-- 解法：Fisher-Yates Shuffle
-  - 要点：
-    - 要保留初始的数组以便`reset`返回
-    - 要保留被随机后的数组，以便下次继续对其随机处理，否则由于随机种子被重置，无法真正实现随机，Case 会不过
-
-["384. Shuffle an Array" Random Golang]()
 
 ### "398. Random Pick Index"
 
@@ -1082,6 +1090,14 @@ tags: Algorithm Leetcode
     - 每个兔子报数`对应的该颜色兔子数量 = 报数数 + 1`
     - 如果相同数量可以凑整，则`总数 += 完成凑整的兔子数量`
     - 最后统计所有未能凑整的兔子对应的数量和
+
+### "787. Cheapest Flights Within K Stops"
+
+- 解法：Bellmen-Ford
+  - 思路：
+    - 可以利用 Dijkstra 实现，但是用 Bellmen-Ford 正好可以利用 K 个中转站的特性
+
+["787. Cheapest Flights Within K Stops" Graph]()
 
 ### "810. Chalkboard XOR Game"
 

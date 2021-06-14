@@ -110,6 +110,25 @@ int lengthOfLIS(vector<int>& nums) {
 }
 ```
 
+### "374. Guess Number Higher or Lower"
+
+```Go
+func guessNumber(r int) int {
+    l := 0
+    for l+1 < r {
+        mid := (l+r)>>1
+        if result := guess(mid); result == 0 {
+            return mid
+        } else if result == -1 {
+            r = mid
+        } else {
+            l = mid
+        }
+    }
+    return r
+}
+```
+
 ### "1011. Capacity To Ship Packages Within D Days"
 
 ```Go

@@ -151,9 +151,11 @@ func networkDelayTime(times [][]int, n int, k int) int {
     }
     dp[k-1] = 0
     for i := 1; i < n; i++ {
+        cur := append(dp[:0:0], dp...)  // perfect copy
         for _, t := range times {
-               dp[t[1]-1] = min(dp[t[1]-1], dp[t[0]-1]+t[2])
+               cur[t[1]-1] = min(cur[t[1]-1], dp[t[0]-1]+t[2])
         }
+        dp = cur
     }
 
     maxVal := 0
@@ -213,6 +215,26 @@ func networkDelayTime(times [][]int, n int, k int) int {
 
 ```Go
 // Bellmen-Ford
+func findCheapestPrice(n int, flights [][]int, src int, dst int, k int) int {
+    dp := make([]int, n)
+    for i := range dp {
+        dp[i] = math.MaxInt32
+    }
+    dp[src] = 0
+
+    for i := 0; i <= k; i++ {
+        cur := append(dp[:0:0], dp...)
+        for _, f := range flights {
+            cur[f[1]] = min(cur[f[1]], dp[f[0]]+f[2])
+        }
+        dp = cur
+    }
+
+    if dp[dst] == math.MaxInt32 {
+        return -1
+    }
+    return dp[dst]
+}
 ```
 
 ### "1192. Critical Connections in a Network"
