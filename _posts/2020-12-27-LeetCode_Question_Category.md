@@ -116,6 +116,15 @@ tags: Algorithm Leetcode
 
 - 思路：这道题有较好的 DP 解决方案，所以用 DFS 时性能相比较差就会超时。解决思路：从右下角开始动态规划，计算每个下一个位置可能的最小值。利用原空间就可以完整 DP 过程。
 
+### "65. Valid Number"
+
+- 解法：FSM 有限状态自动机
+  - 思路：
+    - 本题不需要计算结果，只需要求出最后是否有效，所以简化了思路
+    - 可以采用正则表达式，也可以利用二级 map 实现有限状态自动机
+
+["65. Valid Number" StructDesign]()
+
 ### "69. Sqrt(x)"
 
 - 二分查找法:
@@ -935,6 +944,16 @@ tags: Algorithm Leetcode
 
 ["478. Generate Random Point in a Circle" Random]()
 
+### "486. Predict the Winner"
+
+- 解法：Minimax(dfs+memo)
+  - 思路：
+    - 每次可以取左边或右边，那么对手要取剩下的，剩下的范围比之前更小，所以可以利用 memo 记录
+    - 用二维 memo 记录结果，每次 dfs 需要 left right 两个参数限定范围
+    - 计算过程中只要记录两者之差会更容易，如果最后需要值，只需要根据两者之差和所有元素和计算二元一次方程即可
+
+["486. Predict the Winner" Minimax]()
+
 ### "494. Target Sum"
 
 - 考点：
@@ -1372,6 +1391,17 @@ tags: Algorithm Leetcode
     - 在 matrix 中对每列进行 preSum 压缩成一维，然后用上面现成函数
     - 注意对 matrix 的遍历至少要选取两行，所以时间复杂度是`O((m^2)*n)`
 
+### "1140. Stone Game II"
+
+- 解法：Minimax
+  - 思路：
+    - 利用 dfs+memo 模板实现
+    - 利用 postfixSum 可以实现快速计算区间值
+    - 由于模板计算过程使用差值，最后结果需要解二元一次方程
+    - 由于本题是求尽量大的值，中间值可能为负，所以初始值要为`math.MinInt32`
+
+["1140. Stone Game II" Minimax]()
+
 ### "1143. Longest Common Subsequence"
 
 - 解法：DP
@@ -1467,6 +1497,13 @@ tags: Algorithm Leetcode
 
 ["1392. Longest Happy Prefix" SlidingWindow RollingHash]()
 
+### "1406. Stone Game III"
+
+- 解法：Minimax + postfixSum
+- 思路：
+  - 利用 Minimax 模板计算差值即可
+  - 注意本题在末端需要取得最后一个元素，所以 postfixSum 的容量要+1
+
 ### "1438. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit"
 
 - 解法 1:
@@ -1531,6 +1568,13 @@ tags: Algorithm Leetcode
     - days 范围较大，但是具有顺序性，即一旦某个 days 满足条件，那>=它的都满足，所以可以利用二分查找
     - 在某个 days 下，是否符合条件可以简单遍历统计实现
   - 时间复杂度 O(mlogn)
+
+### "1510. Stone Game IV"
+
+- 解法：Minimax
+  - 思路：
+    - 只要对手能符合条件，则不能必胜，因此需要对手必输的情况下，自己才能必胜
+    - 按 Minimax 模板即可
 
 ### "1584. Min Cost to Connect All Points"
 

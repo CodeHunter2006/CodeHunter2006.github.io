@@ -735,11 +735,23 @@ KNN 是一种最典型的分类算法，
 
 ## Minimax
 
-Minimax（极大极小值搜索 Game Theory）,对弈双方都希望让自己 max 而让对方 min，
-假设双方都能够预测全部未来，那么最终博弈结果一般是某方赢或平局。
+Minimax（极大极小值搜索，博弈论 Game Theory）,对弈双方都希望让自己 max 而让对方 min，
+假设双方都有全部信息、不能存在随机动作、能够预测全部未来，那么最终博弈结果一般是某方赢或平局。
 按照游戏规则，利用 DFS 的方式搜索整个可能性空间，逐步演化出最终的结果。
 
-例："913. Cat and Mouse"
+组合游戏的形式有两种，我们研究的范围是**ICG(Impartial Combinatorial Games)**，在游戏中两个玩家所能进行的移动是完全相同的。
+另一种形式 Partizan Combinatorial Games，是指两个玩家分别有不同的移动，比如象棋。
+
+Minimax 可以有两种解法：`DFS+memory`和`DP`。用 DFS 的方式更直观，可以按照模板，修改递推公式就可以；DP 需要考虑转移方程和迭代方向，总代码量会更少。
+
+例：
+"486. Predict the Winner"
+"877. Stone Game"
+"913. Cat and Mouse"
+"1025. Divisor Game"
+"1140. Stone Game II"
+"1406. Stone Game III"
+"1510. Stone Game IV"
 
 ## Line Sweep(扫描线)
 

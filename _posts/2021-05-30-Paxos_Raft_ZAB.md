@@ -216,5 +216,12 @@ type RaftNode struct {
 ZAB 是 Zookeeper 使用的协议，基本与 Raft 相同。
 
 - ZAB 与 Raft 的区别：
+
   - 名称区别： ZAB 将 Leader 的一个周期称为 epoch(纪元)，而 Raft 称之为 Term(任期)
   - 心跳方向：Raft 的 Leader 向 Follower 发送心跳以保持 Term，而 ZAB 则相反
+
+- ZK 集群配置要为一个实例设置 4 个端口个：
+  - client 访问
+  - leader 和 follwer 间通信
+  - 选举用端口
+  - 其他监听
