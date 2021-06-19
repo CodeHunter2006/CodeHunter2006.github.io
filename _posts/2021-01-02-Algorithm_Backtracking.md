@@ -29,3 +29,45 @@ func subsets(nums []int) (ret [][]int) {
     return
 }
 ```
+
+### "1239. Maximum Length of a Concatenated String with Unique Characters"
+
+```Go
+func maxLength(arr []string) int {
+    bitArr := make([]uint32, 0, len(arr))
+    bitCount := make([]int, 0, len(arr))
+
+outer:
+    for _, s := range arr {
+        bit, count := uint32(0), 0
+        for _, c := range s {
+            if tmp := uint32(1<<(c-'a')); bit & tmp > 0 {
+                continue outer
+            } else {
+                bit |= tmp
+                count++
+            }
+        }
+        bitArr = append(bitArr, bit)
+        bitCount = append(bitCount, count)
+    }
+    ret := 0
+    dfs(bitArr, bitCount, &ret, 0, 0, 0)
+    return ret
+}
+
+func dfs (bitArr []uint32, bitCount[]int, maxInt *int, pos int, bitSum uint32, count int) {
+    if pos >= len(bitArr) { return }
+    if (bitArr[pos] & bitSum) == 0 {
+        bitSum |= bitArr[pos]
+        count += bitCount[pos]
+        if count > *maxInt {
+            *maxInt = count
+        }
+        dfs(bitArr, bitCount, maxInt, pos+1, bitSum, count)
+        bitSum &^= bitArr[pos]
+        count -= bitCount[pos]
+    }
+    dfs(bitArr, bitCount, maxInt, pos+1, bitSum, count)
+}
+```

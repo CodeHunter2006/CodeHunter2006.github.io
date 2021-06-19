@@ -1455,6 +1455,17 @@ tags: Algorithm Leetcode
 
 ["1178. Number of Valid Words for Each Puzzle" BinaryOperation Golang]()
 
+### "1239. Maximum Length of a Concatenated String with Unique Characters"
+
+- 解法：Backtracking + bit
+  - 思路：
+    - 每个可选字符串字母数量不超过 26，考虑用二进制
+    - 先考虑用零一背包实现，由于是位的组合，需要用二维零一背包，
+      但是考虑样本空间太大，占用超量存储，所以考虑用 map
+    - 由于总规模较小，直接用 Backtracking 解决
+
+["1239. Maximum Length of a Concatenated String with Unique Characters" Backtracking]()
+
 ### "1269. Number of Ways to Stay in the Same Place After Some Steps"
 
 - 解法：DP + 规模边界条件

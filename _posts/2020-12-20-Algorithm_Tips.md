@@ -55,6 +55,9 @@ tags: Algorithm Leetcode
 - 图形类的，可以用手画一画演化过程，寻找规律。例："48. Rotate Image"
 - 关于迷宫题，看清楚题目，是全部踩一遍还是最短路径。
 - 一般 Contest 时需要直接 copy 数据结构模板，或者快速背写出来
+- 注意题目中的名词：
+  - **SubString(字串)**是连续的元素
+  - **SubSequence(子序列)**是非连续元素
 
 ### C++ 技巧
 

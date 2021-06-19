@@ -2,7 +2,7 @@
 layout: post
 title: "分布式强一致性共识算法 Paxos Raft ZAB"
 date: 2021-05-30 23:00:00 +0800
-tags: Go
+tags: Algorithm Distribute
 ---
 
 ![Raft](/assets/images/2021-05-30-Paxos_Raft_ZAB_1.jpeg)
@@ -12,7 +12,7 @@ tags: Go
 根据**CAP Theorem**，分布式系统不能同时满足三点：Consistency(一致性)、Availability(可用性)、Partition Tolerance(分区容错性)
 
 - CP
-  MongoDB、HBase、Redis
+  MongoDB、HBase、Redis、Zookeeper(ZAB)、Etcd(Raft)
 - AP
   CouchDB、Cassandra、DynamoDB、Riak
 - CA
@@ -37,6 +37,18 @@ tags: Go
   通过记录带序列号的状态变更 log 的方式同步各个结点的数据。
 - Paxos/Raft/ZAB 是目前业内公认的 state machine replication 解决方案的**consensus(共识算法)**
 - **共识**算法并**不能保证**"最终**一致性**"，还**需要 client 行为配合**才能实现
+
+# 分布式强一致性协议的目的
+
+- 可以实现**CP**
+
+  - 如果 Client 读写都在 Leader，则可以保证**C**。实际上处理也是转发到 Leader 执行的
+  - 如果发生了各种网络问题(宕机/分区/脑裂)，则经过一段时间(主机恢复/重新选举/网络恢复)，可以保证**P**
+  - 本质上 Follwer 都是 Leader 的备份
+
+- 缺点：
+  - 由于强一致性中 Leader 是核心结点，所以吞吐存在瓶颈，只适合保存最核心的数据。如 K8S 用 Etcd 存储集群的元数据。
+  - 如果 Leader 发生问题(断网/宕机)，那么在选举期间，整个系统无法对外提供服务。
 
 # 强一致性共识算法的演化
 
@@ -225,3 +237,9 @@ ZAB 是 Zookeeper 使用的协议，基本与 Raft 相同。
   - leader 和 follwer 间通信
   - 选举用端口
   - 其他监听
+
+# 其他
+
+- 关于结点数量
+  - 结点数量至少是 3 个，这样一个 Leader、两个 Follwer
+  - 结点过多 Leader 的同步压力过大，会造成系统整体性能瓶颈
