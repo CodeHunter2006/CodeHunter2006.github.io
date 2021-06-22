@@ -639,6 +639,9 @@ Rolling Hash 算法的真实名字是**Rabin-Karp algorithm**，主要用于**�
 ### Backtracking(回溯)
 
 是 DFS 的一个分支，用于探索某个迷宫，在过程中需要记录、恢复现场，然后尝试下一个方向。
+
+- 每一级先处理"选取自己"的情况，这样可以尽早获取答案，减少无效回溯。
+
 例：["52. N-Queens II"]()
 
 ## BFS(breadth first search 广度优先遍历)
