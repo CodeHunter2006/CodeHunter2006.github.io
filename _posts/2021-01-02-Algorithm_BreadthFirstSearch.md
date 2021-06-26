@@ -11,6 +11,7 @@ tags: Algorithm Leetcode
 
 ## `A*` (A star 启发式搜索)算法
 
+![A*](/assets/images/2021-01-02-Algorithm_BreadthFirstSearch_1.gif)
 `A*`算法是在 BFS 基础上增加一个优化参数(Cost 代价值)，这样可以减少无效遍历，更快逼近目标。
 
 - 算法思想：
@@ -31,8 +32,11 @@ tags: Algorithm Leetcode
   - 因为计算时无需开方效率较高，在`A*`中一般用曼哈顿距离
 
 - 关于时间复杂度：
+
   - 最大时间复杂度为`O(nlogn)`，其中 n 为网格数量
   - 在网格路径搜索中，启发式搜索算法要明显好于 BFS 和 Dijkstra，上面的时间复杂度只能做参考
+
+- 由于`A*`算法在实际应用中效率很高，所以常用于游戏地图中的**寻路**算法
 
 示例：
 "752. Open the Lock"
