@@ -1087,6 +1087,18 @@ tags: Algorithm Leetcode
 
 ["740. Delete and Earn" Bucket DP Golang]()
 
+### "752. Open the Lock"
+
+- 解法：BFS
+
+["740. Delete and Earn" BreadthFirstSearch BFS]()
+
+- 解法：`A*`
+  - 思路：
+    - 利用到目标点曼哈顿距离作为额外附加距离
+
+["740. Delete and Earn" BreadthFirstSearch `A*`]()
+
 ### "765. Couples Holding Hands"
 
 - 考点：
@@ -1100,6 +1112,12 @@ tags: Algorithm Leetcode
   - 用 DSU 把乱坐的人关联起来，最终形成多个乱坐的集合
   - 遍历每个乱坐集合的总数，并统计最终移动的最小次数
   - 进一步，可以简化最终结果为`总组数-集合数(包括乱坐和没乱坐的)`
+
+### "773. Sliding Puzzle"
+
+- 解法：BFS
+
+- 改进解法：`A*`
 
 ### "781. Rabbits in Forest"
 

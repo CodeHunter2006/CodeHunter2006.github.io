@@ -72,6 +72,9 @@ $$\Huge LaTex \quad Syntax$$
 | `A \cdots B`                        | $$A \cdots B$$                        | center dots               |
 | `\infty`                            | $$\infty$$                            | infinity                  |
 
+- absolute value `\left|x\right|`
+  $$\left|x\right|$$
+
 ## 设置字体大小：
 
 ```
