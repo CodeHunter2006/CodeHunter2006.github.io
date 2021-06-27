@@ -1237,6 +1237,28 @@ tags: Algorithm Leetcode
 
 ["879. Profitable Schemes" DynamicPlanning]()
 
+### "909. Snakes and Ladders"
+
+- 解法：BFS
+  - 思路：
+    - 每步可以有 6 个位置选择，按规则跳转
+  - 要点：
+    - 由于棋盘的蛇形排列，遍历下一位置需要特殊逻辑处理，可以先简化为最简单的行、列取值，
+      然后再根据规则进一步计算，这样逻辑复杂度会低很多，如下：
+      ```Go
+      getCoordVal := func(pos int) (int) {
+              x := (pos-1)/n
+              y := (pos-1)%n
+              if x&1 > 0 {
+                  y = n-1-y
+              }
+              x = n-1-x
+              return board[x][y]
+          }
+      ```
+  - 注意：
+    - 由于本题存在"回退"的路径，所以无法使用`A*`算法，否则第一个找到的最小步数未必是答案
+
 ### "912. Sort an Array"
 
 - 快排、归并、堆排序都能在 nlogn 时间复杂度内完成

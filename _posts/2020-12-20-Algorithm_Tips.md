@@ -653,6 +653,11 @@ bfs 也可以加入 visited 提高性能，一般用 bucket 或 hashtable 实现
 
 例：["127. Word Ladder"]()、["286. Walls and Gates"]()、["490. The Maze"]()
 
+### `A*` 启发式搜索算法
+
+参考:
+[BreadthFirstSeach `A*`](/2021/01/02/Algorithm_BreadthFirstSearch/#a-a-star-启发式搜索算法)
+
 ## Bucket
 
 核心思想是元素集合的整体范围可以分割为**有限数量**的"桶"，每个桶覆盖**较小范围**，然后通过遍历元素，利用有限的桶进行匹配、累加，
