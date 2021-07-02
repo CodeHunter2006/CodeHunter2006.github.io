@@ -68,6 +68,9 @@ tags: Algorithm Leetcode
   有些场景可以替代，但是有些场景演进方向不好控制，由于深度过深，很容易发生超出限时的问题
 - 能否用 BFS 替代 DP?
   DP 的每次迭代其实和 BFS 的每次迭代类似，有些场景下可以通用。但是某些场景演进是要控制方向的，比如"Edit Distance"，要从横、纵两个方向也就是深度、广度两个方向控制演进，只能用 DP 了
+- 如何从`DFS+二维Mem` 演化到 DP? 例如"312. Burst Balloons"
+  可以画一个二维 Mem 的矩阵，然后在矩阵中用 DFS 演化一下过程，找到规律后，就可以变更为二维 DP 了。
+  修改为 DP 后虽然时间复杂度相同，但是是避免了递归调用的性能损耗，整体性能可以明显提高
 
 ## 零一背包问题
 
@@ -186,6 +189,45 @@ func BinaryDivide(cnt, vol, pri int) (ret [][]int) {
 
 类似题目：
 `1035. Uncrossed Lines`、`1143. Longest Common Subsequence`
+
+### 区间 DP
+
+目标是找到整个区间内的最值，遍历区间内的某个点作为分割点，求的最值，以分割点分割的两个子区间又可以继续向下分割。
+区间 DP 可以用纯 DP 实现，但是用 DFS+Memory 模板更易理解记忆，性能差不太多。
+
+- DFS+Memory 模板：
+
+```Java
+public int maxCoins(int[] nums) {
+    int N = nums.length;
+    Integer[][] memo = new Integer[N][N];
+    return dfs(nums, 0, N-1, memo);
+}
+public int dfs(int[] nums, int start, int end, Integer[][] memo) {
+    if (start > end) return 0;
+    if (memo[start][end] != null) return memo[start][end];
+    int max = Integer.MIN_VALUE;
+    for (int i = start; i <= end; i++) {
+        int left = dfs(nums, start, i-1, memo);
+        int right = dfs(nums, i+1, end, memo);
+        int cur = get(nums, i) * get(nums, start-1) * get(nums, end+1);
+        max = Math.max(max, left + right + cur);
+    }
+    return memo[sstart][end] = max;
+}
+public int get(int[] nums, int i) {
+    if (i == -1 || i == nums.length) return 1;
+    return nums[i];
+}
+```
+
+- 基本流程结构和 Minimax 模板类似，关键点是由递归子结果求得当前结果，利用 memo 剪枝
+- 区间 DP 时，往往最两端需要添加虚拟元素，否则就需要像上面封装一个 get 函数。增加虚拟元素需要占用空间、封装 get 函数效率高一些。
+
+示例：
+"312. Burst Balloons"
+"1039. Minimum Score Triangulation of Polygon"
+"1547. Minimum Cost to Cut a Stick"
 
 ## 判断存在性
 
@@ -474,6 +516,42 @@ func lengthOfLIS(nums []int) (ret int) {
 ### "312. Burst Balloons"
 
 ```Go
+// DFS + Memory
+func maxCoins(nums []int) int {
+    n := len(nums)
+    getCoin := func(idx int) int {
+        if idx < 0 || idx == n {
+            return 1
+        }
+        return nums[idx]
+    }
+
+    memo := make([][]int, n)
+    for i := range memo {
+        memo[i] = make([]int, n)
+    }
+
+    var dfs func(l, r int) int
+    dfs = func(l, r int) int {
+        if l > r { return 0 }
+        if memo[l][r] != 0 { return memo[l][r] }
+        ret := int(math.MinInt32)
+        for k := l; k <= r; k++ {
+            left := dfs(l, k-1)
+            right := dfs(k+1, r)
+            cur := getCoin(k) * getCoin(l-1) * getCoin(r+1)
+            ret = max(ret, cur + left + right)
+        }
+        memo[l][r] = ret
+        return ret
+    }
+
+    return dfs(0, n-1)
+}
+```
+
+```Go
+// DP
 func maxCoins(nums []int) int {
     N := len(nums)
     vals := make([]int, N+2)
@@ -841,5 +919,42 @@ func longestCommonSubsequence(text1 string, text2 string) int {
         }
     }
     return dp[m][n]
+}
+```
+
+### "1547. Minimum Cost to Cut a Stick"
+
+```Go
+func minCost(n int, cuts []int) int {
+    N := len(cuts)
+    sort.Ints(cuts)
+    memo := make([][]int, N+1)
+    for i := range memo {
+        memo[i] = make([]int, N+1)
+    }
+
+    var dfs func(l, r int) int
+    dfs = func(l, r int) int {
+        if l >= r {
+            return 0
+        } else if memo[l][r] != 0 {
+            return memo[l][r]
+        }
+        rightPos, leftPos := n, 0
+        if l > 0 {
+            leftPos = cuts[l-1]
+        }
+        if r < N {
+            rightPos = cuts[r]
+        }
+        cost := rightPos - leftPos
+        memo[l][r] = math.MaxInt32
+        for i := l; i < r; i++ {
+            memo[l][r] = min(memo[l][r], dfs(l, i) + cost + dfs(i+1, r))
+        }
+        return memo[l][r]
+    }
+
+    return dfs(0, N)
 }
 ```

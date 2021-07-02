@@ -633,20 +633,32 @@ tags: Algorithm Leetcode
 
 ### "312. Burst Balloons"
 
-- 考点：范围 DP
-- 思路：
-  - 把戳破气球反向理解为从两边为 1 的数组中增加气球，`增加新气球时分数 = 新增气球*左边区域最高分*右边区域分数`
-  - 每个尝试新增气球被认为是一段区间内第一次插入的气球
-  - 先从范围为 1 的区间开始计算，逐步扩大范围，相当于除第一次插入外，其他都已经计算出结果
-- 步骤：
-  - 在数组左右两遍增加一个值为 1 的元素，以便 dp 使用
-  - 初始化 `dp[i][j]`表示 `[i,j]` 可以取得的最大分数
-  - 第一层循环 l,1->n 表示每次处理的判断范围
-  - 第二层循环 i,1->n 遍历所有位置，j = i+l-1
-  - 第三层循环 k,i->j 遍历范围内所有位置，作为分割点
-  - `dp[i][j] = max(dp[i][j], dp[i][k-1] + vals[i-1]*vals[k]*vals[j+1] + dp[k+1][j])`s
+- 解法(推荐)： DFS + Memory
 
-["312. Burst Balloons" Golang]()
+  - 思路：
+    - 用 memo[i][j]记录[i,j]区间内的最大值
+    - 假设打破气球的位置是 k，`i <= k <= j`，我们假设 k 是区间内最后一个打破的气球，这样容易计算
+    - 然后套用区间 DP 模板(DFS+Memory)实现
+  - 注意：
+    - 区间内位置 k 最后一个打破的分数，要用到区间外的元素`i-1`和`j+1`，所以需要区间边缘虚拟元素处理
+    - 区间内的分值由三部分相加得出：`[i,k-1] + k最后一个打破分数 + [k+1,j]`
+
+["312. Burst Balloons" DFS+Memory Golang]()
+
+- 解法：区间 DP
+  - 思路：
+    - 把戳破气球反向理解为从两边为 1 的数组中增加气球，`增加新气球时分数 = 新增气球*左边区域最高分*右边区域分数`
+    - 每个尝试新增气球被认为是一段区间内第一次插入的气球
+    - 先从范围为 1 的区间开始计算，逐步扩大范围，相当于除第一次插入外，其他都已经计算出结果
+  - 步骤：
+    - 在数组左右两遍增加一个值为 1 的元素，以便 dp 使用
+    - 初始化 `dp[i][j]`表示 `[i,j]` 可以取得的最大分数
+    - 第一层循环 l,1->n 表示每次处理的判断范围
+    - 第二层循环 i,1->n 遍历所有位置，j = i+l-1
+    - 第三层循环 k,i->j 遍历范围内所有位置，作为分割点
+    - `dp[i][j] = max(dp[i][j], dp[i][k-1] + vals[i-1]*vals[k]*vals[j+1] + dp[k+1][j])`s
+
+["312. Burst Balloons" DP Golang]()
 
 ### "322. Coin Change"
 
@@ -1379,6 +1391,11 @@ tags: Algorithm Leetcode
 
 ["1036. Escape a Large Maze" bfs Golang]()
 
+### "1039. Minimum Score Triangulation of Polygon"
+
+- 解法：DFS+Memo
+  - 思路：用区间 DP DFS+Memo 模板解决
+
 ### "1044. Longest Duplicate Substring"
 
 - 解法：RollingHash + BinarySearch
@@ -1627,6 +1644,16 @@ tags: Algorithm Leetcode
     - 只要对手能符合条件，则不能必胜，因此需要对手必输的情况下，自己才能必胜
     - 按 Minimax 模板即可
 
+### "1547. Minimum Cost to Cut a Stick"
+
+- 解法：区间 DP 模板 + 边界逻辑
+  - 思路：
+    - 可以直接用区间 DP 解决，但是效率较低。其实可以利用`cuts`数组长度较小的特性，只处理有效切割点。
+    - `dfs(int l, int r)`函数表示`[l,r)`左闭右开区间结果的计算
+    - 注意 cost 的计算需要根据当前是否为边界、curts 点来计算
+
+["1547. Minimum Cost to Cut a Stick" DynamicPlanning]()
+
 ### "1584. Min Cost to Connect All Points"
 
 - 解法：MST Kruskal
@@ -1719,3 +1746,10 @@ tags: Algorithm Leetcode
     - "查找第 K 大元素"可以利用 nth_elemet 实现，时间复杂度 O(n)
 
 ["1738. Find Kth Largest XOR Coordinate Value" BinaryOperation]()
+
+### "LCP 07. 传递信息"
+
+- 解法：DP
+  - 思路：
+    - 用一般的 DP 迭代演化即可
+    - 注意题目给定的 Graph 结构无需改造，直接在每轮迭代中利用边即可
