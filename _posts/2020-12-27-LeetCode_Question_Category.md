@@ -1747,6 +1747,14 @@ tags: Algorithm Leetcode
 
 ["1738. Find Kth Largest XOR Coordinate Value" BinaryOperation]()
 
+### "1833. Maximum Ice Cream Bars"
+
+- 解法：Bucket Sort
+  - 思路：
+    - 由于 cost 范围有限(1 ～ 1e5)，可以用 bucket 排序后统计结果
+
+["1738. Find Kth Largest XOR Coordinate Value" Sort]()
+
 ### "LCP 07. 传递信息"
 
 - 解法：DP

@@ -28,3 +28,21 @@ while (j <= k) {
         j++;
 }
 ```
+
+### "1833. Maximum Ice Cream Bars"
+
+```Go
+func maxIceCream(costs []int, coins int) (ans int) {
+    const MX int = 1e5
+    freq := [MX + 1]int{}
+    for _, c := range costs {
+        freq[c]++
+    }
+    for i := 1; i <= MX && coins >= i; i++ {
+        c := min(freq[i], coins/i)
+        ans += c
+        coins -= i * c
+    }
+    return
+}
+```
