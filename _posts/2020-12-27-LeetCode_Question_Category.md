@@ -1053,6 +1053,16 @@ tags: Algorithm Leetcode
 
 ["633. Sum of Square Numbers" Math Golang]()
 
+### "645. Set Mismatch"
+
+- 解法：In-Place 思想 + BucketSort
+  - 思路：
+    - 题目已经给了提示，先按 In-Place 思想找到重复元素，这时当前元素位置设置为 0，表示"空洞"
+    - 然后继续利用 In-Place 遍历，直到所有元素归位
+    - 最后顺序遍历一次，找到最终空洞位置
+
+["645. Set Mismatch" Sort]()
+
 ### "664. Strange Printer"
 
 - 解法 1: 范围 DP + DFS + mem

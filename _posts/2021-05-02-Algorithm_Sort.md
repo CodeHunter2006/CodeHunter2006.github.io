@@ -29,6 +29,32 @@ while (j <= k) {
 }
 ```
 
+### "645. Set Mismatch"
+
+```Go
+func findErrorNums(nums []int) (ret []int) {
+    for i := 0; i < len(nums); i++ {
+        for nums[i] != 0 && nums[i]-1 != i {
+            if nums[nums[i]-1] == nums[i] {
+                ret = append(ret, nums[i])
+                nums[i] = 0
+                break
+            }
+            nums[i], nums[nums[i]-1] = nums[nums[i]-1], nums[i]
+        }
+    }
+
+    for i, v := range nums {
+        if v == 0 {
+            ret = append(ret, i+1)
+            break
+        }
+    }
+
+    return ret
+}
+```
+
 ### "1833. Maximum Ice Cream Bars"
 
 ```Go
