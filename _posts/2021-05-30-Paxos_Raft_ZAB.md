@@ -176,7 +176,7 @@ type RaftNode struct {
 - 通常场景：
 
   1. 所有角色都是 Follower，各自随机等待一段时间(基础时间+随机时间)，然后竞选 Leader
-  2. 如果竞选 Leader 发生冲突，则各结点随机休眠然后再选，直到选中唯一的 Leader，开启一个"任期" Term
+  2. 如果竞选 Leader 发生冲突**Split Vote**，则各结点随机休眠然后再选，直到选中唯一的 Leader，开启一个"任期" Term
   3. 所有 Client 的**写请求**由 Leader 处理，Leader 发起提案(包含编号和内容)，过 Quorum 响应 OK 后，则算写入成功
   4. Leader 持续向 Follower 发送心跳，重置 Follower 的"Term 超时计时器"，以保证维持自己的 Leader 地位。
      同时，心跳本身也可以夹带提案和内容。

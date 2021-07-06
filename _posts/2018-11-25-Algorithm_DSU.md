@@ -1,17 +1,24 @@
 ---
 layout: post
-title:  "算法学习，极限数据结构之——并查集(DSU)"
-date:   2018-11-25 10:00:00 +0800
+title: "算法学习，极限数据结构之——并查集(DSU)"
+date: 2018-11-25 10:00:00 +0800
 tags: Algorithm
 ---
+
 ![DSU](/assets/images/2018-11-25-Algorithm_DSU_1.jpg)
+
 # 数据结构特性
-并查集，DSU(Disjoint Set Union)，对应的算法也叫Union Find。<br/>
+
+并查集，DSU(Disjoint Set Union)，对应的算法也叫 Union Find。<br/>
 该数据结构用于将有关联的元素合并为多个集合，使用非常简单、实现逻辑也不复杂。<br/>
-对数据进行紧密排列处理(将离散数据紧密排列后添加id)后空间复杂度O(n)，时间复杂度O(n)，性能非常好。
+对数据进行紧密排列处理(将离散数据紧密排列后添加 id)后空间复杂度 O(n)，时间复杂度 O(n)，性能非常好。
+
+- 有些情况下，元素并不是紧密排列的，而是比较稀疏的，比如[0~1e9]之内的 1000 个元素。
+  这时需要利用"Array+hashMap"的方式对元素进行"重排"，变为排列紧密的数据后，再利用 DSU 处理
 
 # 数据结构的实现
-``` C++
+
+```C++
 // C++版本
 class DSU{
     private:
@@ -28,7 +35,7 @@ class DSU{
         if (parent_[x] != x)
             parent_[x] = find(parent_[x]);
         return parent_[x];
-    }        
+    }
     int find(int x, int &outSize) {    // 可以查找当前集合总数
         if(parent_[x] != x) parent_[x] = find(parent_[x]);
         outSize = rank_[parent_[x]];
@@ -50,7 +57,7 @@ class DSU{
 };
 ```
 
-``` Golang
+```Golang
 // Go 版本
 type DSU struct {
     parents []int
@@ -62,12 +69,12 @@ func NewDSU(size int) (res *DSU) {
     if size <= 0 {
         return
     }
-    
+
     res = &DSU{
         parents : make([]int, size),
         ranks : make([]int, size),
     }
-    
+
     for i := 0; i < size; i++ {
         res.parents[i] = i
         res.ranks[i] = 1
@@ -80,7 +87,7 @@ func (p *DSU) Find(x int) (root int, err error) {
         err = errors.New("invalid index")
         return
     }
-    
+
     if p.parents[x] != x {
         p.parents[x], _ = p.Find(p.parents[x])
     }
@@ -93,21 +100,21 @@ func (p *DSU) Union(x ,y int) (res bool, err error) {
         err = errors.New("invalid index")
         return
     }
-    
+
     xRoot, _ := p.Find(x)
     yRoot, _ := p.Find(y)
-    
+
     if xRoot == yRoot {
         res = false
         return
     }
-    
+
     if p.ranks[xRoot] >= p.ranks[yRoot] {
         p.parents[yRoot] = xRoot
         p.ranks[xRoot] += p.ranks[yRoot]
     } else {
         p.parents[xRoot] = yRoot
-        p.ranks[yRoot] += p.ranks[xRoot]        
+        p.ranks[yRoot] += p.ranks[xRoot]
     }
     res = true
     return
@@ -115,12 +122,14 @@ func (p *DSU) Union(x ,y int) (res bool, err error) {
 ```
 
 # 应用示例
-此题目来自于leetcode"399. Evaluate Division"，该题目有两种解法，一种是DFS搜索除法关系链，一种是下面这种DSU解法。后者在时间复杂度上有明显优势，每一次查找是O(1)。
-``` Golang
+
+此题目来自于 leetcode"399. Evaluate Division"，该题目有两种解法，一种是 DFS 搜索除法关系链，一种是下面这种 DSU 解法。后者在时间复杂度上有明显优势，每一次查找是 O(1)。
+
+```Golang
 /*
 challenge:
-Equations are given in the format A / B = k, where A and B are variables represented as strings, 
-and k is a real number (floating point number). Given some queries, return the answers. 
+Equations are given in the format A / B = k, where A and B are variables represented as strings,
+and k is a real number (floating point number). Given some queries, return the answers.
 If the answer does not exist, return -1.0.
 
 Example:
@@ -128,18 +137,18 @@ Given a / b = 2.0, b / c = 3.0.
 queries are: a / c = ?, b / a = ?, a / e = ?, a / a = ?, x / x = ? .
 return [6.0, 0.5, -1.0, 1.0, -1.0 ].
 
-The input is: vector<pair<string, string>> equations, vector<double>& values, 
-vector<pair<string, string>> queries , where equations.size() == values.size(), 
+The input is: vector<pair<string, string>> equations, vector<double>& values,
+vector<pair<string, string>> queries , where equations.size() == values.size(),
 and the values are positive. This represents the equations. Return vector<double>.
 
 According to the example above:
 
 equations = [ ["a", "b"], ["b", "c"] ],
 values = [2.0, 3.0],
-queries = [ ["a", "c"], ["b", "a"], ["a", "e"], ["a", "a"], ["x", "x"] ]. 
- 
+queries = [ ["a", "c"], ["b", "a"], ["a", "e"], ["a", "a"], ["x", "x"] ].
 
-The input is always valid. You may assume that evaluating the queries will result in 
+
+The input is always valid. You may assume that evaluating the queries will result in
 no division by zero and there is no contradiction.
 */
 
@@ -148,7 +157,7 @@ type DSU struct {
     ratio map[string]float64    // node->(node value / parent value)
 }
 
-func (p *DSU) Union(divided, divisor string, value float64) { 
+func (p *DSU) Union(divided, divisor string, value float64) {
     for _, node := range []string{divided, divisor} {
         if _, exists := p.parent[node]; !exists {
             p.parent[node] = node
@@ -162,7 +171,7 @@ func (p *DSU) Union(divided, divisor string, value float64) {
 }
 
 func (p *DSU) Find(node string) (ancestor string, ratio float64) {
-    ancestor, exists := p.parent[node] 
+    ancestor, exists := p.parent[node]
     if !exists {
         return
     }
@@ -170,7 +179,7 @@ func (p *DSU) Find(node string) (ancestor string, ratio float64) {
         ratio = p.ratio[node]
         return
     }
-    
+
     father := p.parent[node]
     ancestor, fatherRatio := p.Find(father)
     p.parent[node] = ancestor
@@ -191,7 +200,7 @@ func calcEquation(equations [][]string, values []float64, queries [][]string) []
     for i := 0; i < len(equations); i++ {
         dsu.Union(equations[i][0], equations[i][1], values[i])
     }
-    
+
     res := make([]float64, 0, len(queries))
     for _, q := range queries {
         p1, r1 := dsu.Find(q[0])
@@ -206,4 +215,3 @@ func calcEquation(equations [][]string, values []float64, queries [][]string) []
     return res
 }
 ```
-

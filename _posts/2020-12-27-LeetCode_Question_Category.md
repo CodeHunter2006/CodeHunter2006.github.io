@@ -1703,6 +1703,14 @@ tags: Algorithm Leetcode
 
 ["1707. Maximum XOR With an Element From Array" TrieTree]()
 
+### "1711. Count Good Meals"
+
+- 解法：HashMap
+  - 思路：
+    - 类似"three sum"，遍历时利用 hashTable 结构快速判定是否有历史匹配元素
+    - 由于不同下标认为是不同元素，所以需要用`map[int]int`
+    - 遍历到每个元素，都遍历`1~2^22`，这些 2 的幂
+
 ### "1720. Decode XORed Array"
 
 - 解法：异或特性
