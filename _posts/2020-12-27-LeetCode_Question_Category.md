@@ -1312,6 +1312,16 @@ tags: Algorithm Leetcode
 4. 将当前下标插入后边前，先将队尾所有值小于当前的弹出。
 5. 总体思路是保持 deque 中有合适的比较值的下标，要么下标合适、要么值要够小(被后边减时结果会更大)。
 
+### "930. Binary Subarrays With Sum"
+
+- 解法：PrefixSum + HashMap
+  - 思路：
+    - 通过 PrefixSum 可以实现对任意字串的和的计算
+    - 然后利用"Tow sum"的方法滚动计算符合条件的字串
+    - 由于 0 不会影响 sum 结果，所以需要重复统计，需要用 HashMap 对重复 presum 元素进行累加
+
+["930. Binary Subarrays With Sum" HashTable]()
+
 ### "935. Knight Dialer"
 
 - 解法：

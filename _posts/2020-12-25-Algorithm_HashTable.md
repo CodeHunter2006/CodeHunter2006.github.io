@@ -50,6 +50,25 @@ func subarraySum(nums []int, k int) (ret int) {
 }
 ```
 
+### "930. Binary Subarrays With Sum"
+
+```Go
+func numSubarraysWithSum(nums []int, goal int) (ret int) {
+    n := len(nums)
+    preSum := make([]int, n+1)
+    for i, sum := 0, 0; i < n; i++ {
+        sum += nums[i]
+        preSum[i+1] = sum
+    }
+    m := make(map[int]int)
+    for _, v := range preSum {
+        ret += m[v-goal]
+        m[v]++
+    }
+    return ret
+}
+```
+
 ### "974. Subarray Sums Divisible by K"
 
 ```Go
