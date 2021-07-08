@@ -135,20 +135,30 @@ outer:
 
 ```Go
 func majorityElement(nums []int) int {
-    cur, count := 0, 0
-
+    tar, cnt := 0, 0
     for _, n := range nums {
-        if n == cur {
-            count++
-        } else if count > 1 {
-            count--
+        if n == tar {
+            cnt++
+        } else if cnt > 0 {
+            cnt--
         } else {
-            cur = n
-            count = 1
+            tar = n
+            cnt++
         }
     }
 
-    return cur
+    if cnt > 0 {
+        sum := 0
+        for _, n := range nums {
+            if n == tar {
+                sum++
+            }
+        }
+        if sum > len(nums)>>1 {
+            return tar
+        }
+    }
+    return -1
 }
 ```
 

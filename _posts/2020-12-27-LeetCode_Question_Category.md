@@ -419,7 +419,7 @@ tags: Algorithm Leetcode
   2. 如果不是这个数则计数减一，如果为零则重新计数。
   3. 最后如果计数大于 1，则遍历数组对找到的数计数，如果总数超过了 1/2，则找到了目标。
 
-["169. Majority Element]()
+["169. Majority Element" Array]()
 
 ### "179. Largest Number"
 
