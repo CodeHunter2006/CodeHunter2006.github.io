@@ -162,6 +162,55 @@ func majorityElement(nums []int) int {
 }
 ```
 
+### "229. Majority Element II"
+
+```Go
+func majorityElement(nums []int) (ret []int) {
+    a, b, aCnt, bCnt := 0, 0, 0, 0
+    n := len(nums)
+    for _, ele := range nums {
+        if ele == a {
+            aCnt++
+            continue
+        } else if ele == b {
+            bCnt++
+            continue
+        }
+
+        if aCnt == 0 {
+            a = ele
+            aCnt++
+            continue
+        } else if bCnt == 0 {
+            b = ele
+            bCnt++
+            continue
+        }
+
+        aCnt--
+        bCnt--
+    }
+
+    aCnt, bCnt = 0, 0
+    for _, ele := range nums {
+        if ele == a {
+            aCnt++
+        } else if ele == b {
+            bCnt++
+        }
+    }
+
+    if aCnt > n/3 {
+        ret = append(ret, a)
+    }
+    if bCnt > n/3 {
+        ret = append(ret, b)
+    }
+
+    return ret
+}
+```
+
 ### "179. Largest Number"
 
 ```Go

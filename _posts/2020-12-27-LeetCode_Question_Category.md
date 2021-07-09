@@ -528,6 +528,11 @@ tags: Algorithm Leetcode
 - 不同点：
   1. 统计的数成了两个
   2. 最后统计时，最终结果元素要超过统计结果的 1/3
+- 要点：
+  1. 遍历统计时，只要其中一个元素可以累加/初始化(count 0->1)，则 continue
+  2. 如果无法累加/初始化，则两个元素计数都要减
+
+["229. Majority Element II" Array Golang]()
 
 ### "238. Product of Array Except Self"
 
