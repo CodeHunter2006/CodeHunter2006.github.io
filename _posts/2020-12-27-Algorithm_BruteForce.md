@@ -44,3 +44,13 @@ func longestValidParentheses(s string) int {
     return maxLength
 }
 ```
+
+### "274. H-Index"
+
+```Go
+func hIndex(citations []int) (h int) {
+    sort.Ints(citations)
+    for i := len(citations)-1; i >= 0 && citations[i] > h; i,h = i-1,h+1 {}
+    return h
+}
+```

@@ -577,6 +577,29 @@ tags: Algorithm Leetcode
 
 ["264. Ugly Number II" Math Golang]()
 
+### "274. H-Index"
+
+- 解法 1：Sort + BruteForce
+  - 思路：
+    - 被引用的次数越多的文章，越容易实现要求
+    - 先按引用次数排序，然后倒序遍历，遇到不符合的就退出循环
+    - 由于引用次数这个数值本身较大容易满足，所以把文件个数作为最后返回的结果
+  - 错误思路：
+    - 由于排序后的数组对于`H-Index`满足具有二分查找特性，所以可能会想到用二分查找。
+      但是排序本身时间复杂度是`O(nlogn)`，所以总的时间复杂度是`O(nlogn + logn) == O(nlogn)`，
+      总效率没有优化，而且增加了算法复杂度
+
+["274. H-Index" BruteForce]()
+
+- 解法 2: CountSort + BruteForce
+  - 思路：
+    - 由于引用次数往往较大，而符合条件的文件数较小，结果为两者取其小
+    - 先确定最大数量为输入数组长度，利用 CountSort 统计某引用数量出现次数
+    - 遍历统计已满足的数量，找到最大数量
+  - 时间复杂度`O(n)`，空间复杂度`O(n)`
+
+["274. H-Index" Sort]()
+
 ### "279. Perfect Squares"
 
 - 解法 1：DP
@@ -1344,6 +1367,10 @@ tags: Algorithm Leetcode
   - 根据同余定理`sum(i,j)%K == 0 <=> P[j]%K == P[i-1]%K`
 
 ["974. Subarray Sums Divisible by K" HashTable Golang]()
+
+### "981. Time Based Key-Value Store"
+
+- 解法：HashMap + BinarySearch
 
 ### "986. Interval List Intersections"
 

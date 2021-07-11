@@ -186,6 +186,7 @@ du . -h --max-depth=3|grep log
 `find root_path -name "abc*"`
 在 root_path 下按名字查找文件，其中`*`为通配符
 
+- `-type d` 查找文件夹
 - `-newer xyz` 查找比 xyz 文件修改时间更新的文件
 
 ## touch
