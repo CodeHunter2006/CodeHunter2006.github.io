@@ -78,3 +78,5 @@ return l or r
 
 - 有些情况下`isLeft(m)`不容易实现，可以变通为`isRight(m)`，只要保证左右区域和 l r 指针的关系即可。
   如：["497. Random Point in Non-overlapping Rectangles" Random]()
+- 利用标准库提供的`LowerBound`直接实现：
+  如：["275. H-Index II" BinarySearch]()

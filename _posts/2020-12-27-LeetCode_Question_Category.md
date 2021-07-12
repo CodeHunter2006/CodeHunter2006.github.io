@@ -600,6 +600,15 @@ tags: Algorithm Leetcode
 
 ["274. H-Index" Sort]()
 
+### "275. H-Index II"
+
+- 解法： LowerBound
+  - 思路：
+    - 基于"274. H-Index"的计数逻辑，已经有序后可以利用二分查找算法实现
+    - 而本题目刚好符合 LowerBound 算法
+
+["275. H-Index II" BinarySearch]()
+
 ### "279. Perfect Squares"
 
 - 解法 1：DP

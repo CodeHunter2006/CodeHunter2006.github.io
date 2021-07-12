@@ -82,6 +82,26 @@ func search(nums []int, target int) bool {
 }
 ```
 
+### "275. H-Index II"
+
+```Go
+func hIndex(citations []int) int {
+    n := len(citations)
+    l, r := -1, n
+    for l+1 < r {
+        mid := (l+r)>>1
+        if n-mid <= citations[mid] {
+            r = mid
+        } else {
+            l = mid
+        }
+    }
+    return n-r
+    // 可以直接利用 sort 包提供的 LowerBound 算法：
+    return n - sort.Search(n, func(x int) bool { return citations[x] >= n-x })
+}
+```
+
 ### "300. Longest Increasing Subsequence"
 
 ```Go
