@@ -58,3 +58,6 @@ stderr_capture_maxbytes = 1MB
 
 - `supervisorctl restart xxx`
   也可以在命令中直接输入二级命令
+
+- supervisor 操作日志路径：
+  `/var/log/supervisor/`

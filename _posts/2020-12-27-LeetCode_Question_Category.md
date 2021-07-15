@@ -488,10 +488,13 @@ tags: Algorithm Leetcode
 
 - 解法：LineSweep
   - 思路：
-    - 将坐标点拆解为 start 和 end，然后顺序遍历处理，遍历过程中维护一个 Heap
+    - 将一栋楼的坐标点拆解为 start 和 end，然后顺序遍历处理，遍历过程中维护一个 Heap，用于计算当前轮廓点
     - 遍历过程中维护一个 maxHeight，如果当前是 start，则入堆；如果当前是 end，则删除一个同高度；
-  - 注意：
-    - 为了便于 start 和 end 排序，将 start 按负数处理
+    - 在遍历过程中，记录会造成轮廓变化的点
+  - 要点：
+    - 为了便于 start 和 end 排序，将 start 按负数处理，这样 start 会排到前面
+    - 对于同一坐标下最高的 start 会加入到最终结果数组，所以同一坐标下高度越高的 start 点应排在前面，按负数处理正好符合这个情况
+    - 遍历处理 end 点时，要从 Heap 中找到一个相同高度元素删除，这时要用到 heap.Remove 接口
 
 ["218. The Skyline Problem" LineSweep Golang]()
 
@@ -1815,6 +1818,19 @@ tags: Algorithm Leetcode
     - "查找第 K 大元素"可以利用 nth_elemet 实现，时间复杂度 O(n)
 
 ["1738. Find Kth Largest XOR Coordinate Value" BinaryOperation]()
+
+### "1818. Minimum Absolute Sum Difference"
+
+- 解法：
+  - 思路：
+    - 想要尽量降低总 diff，那么需要尝试所有元素对，找到可能的最大改变量
+    - 对于每一个 nums2，可以在 nums1 中找到最接近的两个元素进行尝试，如果 nums1 有序，则可以利用二分查找找到这两个最近的 nums1 元素
+  - 步骤：
+    1. 利用排序将 nums1 排序，可以单独将 nums1 复制达到一个数组中排序，也可以绑定 nums1 nums2 一起排序，这样可以节省容量
+    2. 遍历 nums2 数组，同时利用二分查找计算 nums1 中最接近 nums2 的两个数，结合 nums2 下标对应的 nums1 中的数，计算最大减小量
+  - 时间复杂度：O(nlogn)，空间复杂度：O(1)
+  - 其他：
+    - 利用双指针归并排序的思路，可以在步骤 2 中将时间复杂度降为 O(n)，但是由于步骤 1 已经达到 O(nlogn)，所以没有必要做这个优化
 
 ### "1833. Maximum Ice Cream Bars"
 
