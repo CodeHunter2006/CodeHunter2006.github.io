@@ -96,3 +96,19 @@ func maxIceCream(costs []int, coins int) (ans int) {
     return
 }
 ```
+
+### "1846. Maximum Element After Decreasing and Rearranging"
+
+```Go
+func maximumElementAfterDecrementingAndRearranging(arr []int) (maxVal int) {
+    n := len(arr)
+    bucket := make([]int, n+1)
+    for _, a := range arr {
+        bucket[min(a, n)]++
+    }
+    for i := 1; i <= n; i++ {
+        maxVal = min(i, maxVal+bucket[i])
+    }
+    return maxVal
+}
+```

@@ -1840,6 +1840,16 @@ tags: Algorithm Leetcode
 
 ["1738. Find Kth Largest XOR Coordinate Value" Sort]()
 
+### "1846. Maximum Element After Decreasing and Rearranging"
+
+- 解法：CountSort + Greedy
+  - 思路：
+    - 根据题目描述，可以想象为排序之后进行铺楼梯，并且当前可用砖块只能降低不能升高
+    - 首先想到可以排序+遍历的方式填补空缺，最终找到最高点
+    - 由于本题的特点，台阶必须连续，所以最高值不会超过 len(arr)，可以利用 Count Sort 进行排序
+
+["1846. Maximum Element After Decreasing and Rearranging" Sort]()
+
 ### "LCP 07. 传递信息"
 
 - 解法：DP
