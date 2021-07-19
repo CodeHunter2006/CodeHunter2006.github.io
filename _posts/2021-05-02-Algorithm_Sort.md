@@ -7,6 +7,77 @@ tags: Algorithm Leetcode
 
 记录 Sort 的算法实现
 
+### "164. Maximum Gap"
+
+```Go
+// Radix sort
+func maximumGap(nums []int) (ret int) {
+    n := len(nums)
+    if n < 2 {
+        return 0
+    }
+    maxVal := max(nums...)
+    buf := make([]int, n)
+    for exp := 1; exp <= maxVal; exp *= 10 {
+        count := make([]int, 10)
+        for _, num := range nums {
+            digit := num / exp % 10
+            count[digit]++
+        }
+        for i := 1; i < len(count); i++ {
+            count[i] += count[i-1]
+        }
+        for i := n-1; i >= 0; i-- {
+            digit := nums[i] / exp % 10
+            buf[count[digit]-1] = nums[i]
+            count[digit]--
+        }
+        copy(nums, buf)
+    }
+
+    for i := 1; i < n; i++ {
+        ret = max(ret, nums[i]-nums[i-1])
+    }
+    return ret
+}
+```
+
+```Go
+// Bucket sort
+func maximumGap(nums []int) (ret int) {
+    n := len(nums)
+    if n < 2 {
+        return 0
+    }
+
+    minVal, maxVal := min(nums...), max(nums...)
+    d := max(1, (maxVal-minVal)/(n-1))  // min distance
+    bucketSize := (maxVal-minVal)/d+1
+    b := make([][2]int, bucketSize)
+    for i := range b {
+        b[i] = [2]int{-1,-1}    // min, max
+    }
+    for _, num := range nums {
+        idx := (num-minVal)/d
+        if b[idx][0] == -1 {
+            b[idx] = [2]int{num, num}
+        } else {
+            b[idx][0] = min(b[idx][0], num)
+            b[idx][1] = max(b[idx][1], num)
+        }
+    }
+
+    for l,i := 0,1; i < len(b); i++ {
+        if b[i][0] == -1 {
+            continue
+        }
+        ret = max(ret, b[i][0]-b[l][1])
+        l = i
+    }
+    return ret
+}
+```
+
 ### "274. H-Index"
 
 ```Go

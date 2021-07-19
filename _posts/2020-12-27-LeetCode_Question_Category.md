@@ -410,6 +410,29 @@ tags: Algorithm Leetcode
 
 ["160. Intersection of Two Linked Lists" LinkedList]()
 
+### "164. Maximum Gap"
+
+- 解法：Radix Sort
+  - 思路：
+    - 最简单的思路是先快排，然后遍历找到最大间隔，但是时间复杂度是 O(nlogn)，未达到题目要求 O(n)
+    - 可以用 Radix Sort，在 O(n)内实现
+  - 要点：
+    - 准备一个与原始数组相同容量的 buf 数组，用于保存本次结果，每次遍历后写回
+    - 统计完 count 数组后，将 count 数组遍历升级为 prefix sum 数组，便于记录 buf 位置
+    - 放入 buf 时，要逆序遍历 nums 数组，这样刚好利用 count prefix sum 数组
+
+["164. Maximum Gap" Sort RadixSort]()
+
+- 解法：Bucket Sort
+  - 思路：
+    - 通过计算数组最值 maxVal、minVal，数组长度为 n，可以得出`最小间隔 d = (maxVal-minVal)/(n-1)`
+    - 可以利用 Bucket Sort，每个 Bucket 的宽度设为 d，则 bucket 内的元素一定不会成为最大间隔，最大间隔一定发生在 bucket 间
+    - 每个 Bucket 记录桶内的最大最小值，用于最后一次遍历时统计最大间隔
+  - 要点：
+    - 最小 Bucket 宽度为 1
+
+["164. Maximum Gap" Sort BucketSort]()
+
 ### "169. Majority Element"
 
 - 思路：
@@ -1839,6 +1862,16 @@ tags: Algorithm Leetcode
     - 由于 cost 范围有限(1 ～ 1e5)，可以用 bucket 排序后统计结果
 
 ["1738. Find Kth Largest XOR Coordinate Value" Sort]()
+
+### "1838. Frequency of the Most Frequent Element"
+
+- 解法：Sort + SlidingWindow
+  - 思路：
+    - 先将数组排序，则问题演化为"对连续的阶梯进行填补，能否填平"的问题
+    - 可以利用 SlidingWindow 保证 Window 内的"楼梯"可以填平
+  - 要点：
+    - 注意 r 向右移动时，所有旧有范围都需要填
+    - 注意 l 向右移动时，只需要去除对应的长度差
 
 ### "1846. Maximum Element After Decreasing and Rearranging"
 
