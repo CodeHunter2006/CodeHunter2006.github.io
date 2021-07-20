@@ -1883,6 +1883,13 @@ tags: Algorithm Leetcode
 
 ["1846. Maximum Element After Decreasing and Rearranging" Sort]()
 
+### "1877. Minimize Maximum Pair Sum in Array"
+
+- 解法：CountSort + TwoPointers
+  - 思路：
+    - 只要排序后，从左右分别拿元素相加，就能尽量最小化和
+    - 由于元素范围较小，利用 Count Sort 排序速度更快
+
 ### "LCP 07. 传递信息"
 
 - 解法：DP
