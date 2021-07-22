@@ -40,6 +40,7 @@ tags: Go
 - Interface 与 Complex 类似，可等于比较。Interface 的 Type 和 Value 两个指针值都相同时才相等
   - 推论：值类型的 Receiver 对应的 interface 变量，永远无法相等，因为 Value 指向不同地址
   - 如果两个 interface 变量进行比较，而其动态类型不匹配，则会引发 panic
+- `interface{}`是一种特殊的 Interface，可以根据实际类型决定比较指针还是指针指向的对象
 - Struct 可等于比较。所有字段都相等时相等
 - Array 可等于比较。长度、类型相同，所有元素都相等时相等
 
