@@ -1827,6 +1827,13 @@ tags: Algorithm Leetcode
 
 ["1734. Decode XORed Permutation"BinaryOperation Go]()
 
+### "1736. Latest Time by Replacing Hidden Digits"
+
+- 解法：Greedy
+  - 思路：
+    - 按照每个位置的具体情况分类讨论
+    - 优先设定左边的高位，然后处理后面位置时可以根据前面高位值设置当前值
+
 ### "1738. Find Kth Largest XOR Coordinate Value"
 
 - 解法：XOR + preSum + nth_element
@@ -1841,6 +1848,18 @@ tags: Algorithm Leetcode
     - "查找第 K 大元素"可以利用 nth_elemet 实现，时间复杂度 O(n)
 
 ["1738. Find Kth Largest XOR Coordinate Value" BinaryOperation]()
+
+### "1743. Restore the Array From Adjacent Pairs"
+
+- 解法:HashMap
+  - 思路:
+    - 这道题类似"399. Evaluate Division"，可以用 HashMap 形成关系链，可以用`map[int][]int`存储
+    - 由于最两端元素的关联元素只有 1 个，可以利用这点创建初始结果
+    - 答案可以不唯一，所以随便选一个开头元素都可以
+  - 注意:
+    - 可以利用元素总数和最末尾元素只有一个关联的特性进行遍历处理
+
+["1743. Restore the Array From Adjacent Pairs" HashTable]()
 
 ### "1818. Minimum Absolute Sum Difference"
 
@@ -1889,6 +1908,14 @@ tags: Algorithm Leetcode
   - 思路：
     - 只要排序后，从左右分别拿元素相加，就能尽量最小化和
     - 由于元素范围较小，利用 Count Sort 排序速度更快
+
+### "1893. Check if All the Integers in a Range Are Covered"
+
+- 解法：LineSweep + Bucket
+  - 思路：
+    - 利用 LineSweep 原理，将 ranges 拆分成 start end 两个端点
+    - 由于目标范围较小，可以直接用 bucket 记录拆分后的变动点累加值
+    - 最后遍历一遍 bucket，如果当前累加结果为 0 说明有未覆盖的位置，返回 false
 
 ### "LCP 07. 传递信息"
 

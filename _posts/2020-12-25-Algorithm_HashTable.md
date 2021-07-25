@@ -83,3 +83,33 @@ func subarraysDivByK(A []int, K int) int {
     return count
 }
 ```
+
+### "1743. Restore the Array From Adjacent Pairs"
+
+```Go
+func restoreArray(adjacentPairs [][]int) (ret []int) {
+    n := len(adjacentPairs)
+    g := make(map[int][]int, n+1)
+    for _, p := range adjacentPairs {
+        g[p[0]] = append(g[p[0]], p[1])
+        g[p[1]] = append(g[p[1]], p[0])
+    }
+
+    for k, e := range g {
+        if len(e) == 1 {
+            ret = append(ret, k, e[0])
+            break
+        }
+    }
+
+    for i := 1; i < n; i++ {
+        if g[ret[i]][0] == ret[i-1] {
+            ret = append(ret, g[ret[i]][1])
+        } else {
+            ret = append(ret, g[ret[i]][0])
+        }
+    }
+
+    return ret
+}
+```
