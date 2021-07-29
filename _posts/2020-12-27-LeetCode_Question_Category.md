@@ -1302,6 +1302,23 @@ tags: Algorithm Leetcode
 
 ["818. Race Car" DP Golang]()
 
+### "863. All Nodes Distance K in Binary Tree"
+
+- 解法 1: HashMap(空间复杂度 O(n))
+
+  - 思路：
+    - 题目给定了 target 指针，只要找到 target 后就能向下递归查找元素，
+      难点是没有 parent 指针，所以需要用 HashMap 帮助保存
+    - 由于每个结点 val 不同，可以用 val 作为 key，指针作为 value，遍历一遍保存到 HashMap
+    - 然后再从 target 出发，分别向 left、right、parent、brother 四个方向 dfs
+
+- 解法 2: 二叉树递归遍历+状态区分
+  - 思路：
+    - 上面的算法需要额外空间，其实通过状态区分，可以尽量少的遍历
+    - 通过每次调用或返回的状态(找到/未找到 target)，可以区分逻辑
+
+["863. All Nodes Distance K in Binary Tree" Tree]()
+
 ### "879. Profitable Schemes"
 
 - 解法：零一背包 + 三维 DP
@@ -1534,6 +1551,20 @@ tags: Algorithm Leetcode
     - 这道题的基本思路先要会："560. Subarray Sum Equals K"
     - 在 matrix 中对每列进行 preSum 压缩成一维，然后用上面现成函数
     - 注意对 matrix 的遍历至少要选取两行，所以时间复杂度是`O((m^2)*n)`
+
+### "1104. Path In Zigzag Labelled Binary Tree"
+
+- 解法：二进制表示完全二叉树 + 逻辑
+  - 思路：
+    - 本题正好符合完全二叉树特征，所以每层元素数量正好是`2^n`
+    - 每个元素找到父元素位置很容易，`/2`就可以，难点在于 zigzag 情况下特定行需要反转取值
+  - 步骤：
+    1. 先找到 label 对应的行数
+    2. 根据行数可以确定本行起始元素和下一行起始元素
+    3. 根据行数奇偶判断 label 是否需要反转处理
+    4. 然后通过`/2`处理，逐步取得父结点输出
+  - 要点：
+    - 不要一上来尝试用简单算法实现，事实证明最后只能分步骤逐步实现功能，代码量无法精简
 
 ### "1140. Stone Game II"
 
@@ -1787,6 +1818,20 @@ tags: Algorithm Leetcode
     - 类似"three sum"，遍历时利用 hashTable 结构快速判定是否有历史匹配元素
     - 由于不同下标认为是不同元素，所以需要用`map[int]int`
     - 遍历到每个元素，都遍历`1~2^22`，这些 2 的幂
+
+### "1713. Minimum Operations to Make a Subsequence"
+
+- 解法：LCS -> Rearrange + LIS + LowerBound
+  - 思路：
+    - 首先想到本题基于"1143. Longest Common Subsequence"，只需要求出最长公共子序列长度 x，然后结果就是`最小变动 = target - x`
+    - 但是本题的规模非常大：`1 <= target.length, arr.length <= 105`，这使得 1143 时间复杂度为`O(mn)`的解法不可取
+    - 由于本题"target that consists of distinct integers"的特点，可以利用 Rearrange 的方法分别重整 target 和 arr，
+      记录 target 的元素下标为`[0,1,2,3,...]`，对应 arr 只取 target 中的元素并只记录下标，形如`[1,0,5,4,2,0,3]`
+    - 接下来只要用"300. Longest Increasing Subsequence"的 LowerBound 解法就可以了
+    - LowerBound 可以自己写，也可以利用标准库函数
+    - 进一步精简，可以忽略中间的存储环节，只利用 Rearange 的 map 即可
+
+["1713. Minimum Operations to Make a Subsequence" BinarySearch]()
 
 ### "1720. Decode XORed Array"
 

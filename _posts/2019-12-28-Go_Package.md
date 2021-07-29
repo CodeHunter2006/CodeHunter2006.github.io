@@ -326,7 +326,7 @@ fmt.Println(s)	// output: 6 5 4 3 2 1
 ### sort.Search
 
 `func Search(n int, f func(int) bool) int`
-LowerBound 算法，在有序数组中查找`[0,n)`范围内满足`f`的最小下标，如果没有满足条件的，则返回 -1
+LowerBound 算法，在有序数组中查找`[0,n)`范围内满足`f`的最小下标，如果没有满足条件的，则返回 n
 
 - 利用闭包实现`f`
 - 如果二分查找范围是`[x, x+n)`，则可以`Search(n,...)`，然后在`f`函数进入后`index+x`修正范围

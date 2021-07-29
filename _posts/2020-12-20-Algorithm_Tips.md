@@ -917,7 +917,7 @@ Minimax 可以有两种解法：`DFS+memory`和`DP`。用 DFS 的方式更直观
 
 ### 多个属性用 map 或 set 排序
 
-如果多个属性用 map 或 set 排序，实现比较函数比较麻烦，可以将不同属性使用不同位的数值，优先级高的在高位。
+如果多个属性用有序 map 或 set 排序，实现比较函数比较麻烦，可以将不同属性使用不同位的数值，优先级高的在高位。
 
 如：["460. LFU Cache" Design Golang]()
 
@@ -944,6 +944,25 @@ Minimax 可以有两种解法：`DFS+memory`和`DP`。用 DFS 的方式更直观
 某些情况下，题目设定的参数规模之间是冲突的，这时要选取对结果有影响的最小范围进行迭代
 
 如："1269. Number of Ways to Stay in the Same Place After Some Steps"
+
+### Rearange 重整数组
+
+- 有些情况下，给定的数组不能符合算法需要的前提条件，这时可以利用 Rearange 重整为符合条件的数组，比如：
+
+  1. 元素太稀疏，无法用 bucket/DSU 算法
+  2. 元素包含负数，而目标算法只能用于正整数
+  3. 元素种类不同，我们只关心元素顺序关系而不关心元素值，想把顺序关系简化
+
+- Rearange 思路：
+
+  1. 利用 HashMap 记录已存在元素、利用新 array 紧密排列元素
+  2. 对源数组进行遍历，在新 array 中存储遍历到的新元素，HashMap 的 key 是旧元素的值、value 是这个元素在 array 中的下标(也就是 key 第一次出现时 array 的 length)
+  3. 然后利用结果 HashMap 和新 array 就能利用这种紧密排列的关系用算法处理了
+
+- 示例：
+  1. xxx
+  2. 这种情况也可以用整体加一个偏移量，使得最小负数转为正整数解决
+  3. "1713. Minimum Operations to Make a Subsequence"
 
 # Little Tips
 

@@ -176,6 +176,29 @@ func shipWithinDays(weights []int, D int) int {
 }
 ```
 
+### "1713. Minimum Operations to Make a Subsequence"
+
+```Go
+func minOperations(target []int, arr []int) int {
+    n := len(target)
+    m := make(map[int]int, n)
+    for i, t := range target {
+        m[t] = i
+    }
+    dp := make([]int, 0, n)
+    for _, x := range arr {
+        if newIdx, exists := m[x]; exists {
+            if idx := sort.SearchInts(dp, newIdx); idx < len(dp) {
+                dp[idx] = newIdx
+            } else {
+                dp = append(dp, newIdx)
+            }
+        }
+    }
+    return n - len(dp)
+}
+```
+
 ### "1723. Find Minimum Time to Finish All Jobs"
 
 ```Go
