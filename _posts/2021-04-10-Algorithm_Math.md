@@ -7,6 +7,29 @@ tags: Algorithm Leetcode
 
 记录 Math 的算法实现
 
+# 基础算法
+
+## GCD(Greatest Common Divisor)
+
+**最大公约数**是指多个整数共有的约数中最大的一个。两个相同整数的最大公约数是这个整数自己。
+
+最大公约数是经常用到的算法，可以用"辗转取余法"实现：
+
+```Go
+func gcd(a, b int) int {
+    for a > 0 {
+        a, b = b%a, a
+    }
+    return b
+}
+```
+
+- 思路：
+  1. 假设 a 是较小的数。其实 a b 无论谁是较小的数不影响结果
+  2. 取余时可以找到本轮的公约数，直到 a==0 则 b 就是最后结果
+
+# 题目实现
+
 ### "7. Reverse Integer"
 
 ```Go

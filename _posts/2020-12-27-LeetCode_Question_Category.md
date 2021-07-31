@@ -368,6 +368,26 @@ tags: Algorithm Leetcode
 
 ["146. LRU Cache" Golang]()
 
+### "149. Max Points on a Line"
+
+- 解法：Geometry + float 特性 + HashMap + Math(gcd)
+  - 思路：
+    - 两点可以确定一条直线，`y = ax + b`，只要确定了两个系数就可以确定一条直线
+    - 可以遍历所有两个点，求其参数 a b，如果参数相同则说明点共线，而 a 就是其斜率，需要用浮点数表达
+    - 但是计算机的浮点计算不够精确，无法精确匹配，所以只能用整数处理
+    - 考虑用两点的 x y 坐标之差作为斜率衡量标准
+    - 可以通过只计算斜率避免计算系数 b，简化计算过程
+    - 对每个点循环其他所有点，只要斜率相同，说明共线，用 HashMap 记录斜率
+    - 保存斜率信息前，先要除以**GCD**，以避免`1/2 != 2/4`的情况
+  - 优化点：
+    - 第二层循环只需要遍历后面的结点，因为前面结点的共线信息已经记录在 HashMap 里了
+    - 由于 x y 的范围较小，最大范围为`10^4`，可以用一个 int 同时保存 x y，`y + x*XBase`
+    - 点数 <=2 的情况下，可以直接返回点数
+    - 如果统计某点所在直线的共线点数已经`> n/2`，那么已经找到了结果
+    - 当找第 i 个结点时，共线点数最多为`n-i`个，如果已经找到的数已经大于这个数，则无需继续查找，因为后面的点都不可能找到更大的共线数了
+
+["149. Max Points on a Line" Geometry]()
+
 ### "152. Maximum Product Subarray"
 
 - 思路：
@@ -1441,6 +1461,19 @@ tags: Algorithm Leetcode
     - 保持当前区域为可能产生交集的 Window，逐步移动两个数组的下标
 
 ["986. Interval List Intersections" LineSweep Golang version2]()
+
+### "987. Vertical Order Traversal of a Binary Tree"
+
+- 解法：Tree + Sort
+  - 思路：
+    - 首先想到左右两边的列分别记录，单同一行、同一列可能有多个元素，所以需要三维数组比较麻烦
+    - 根据题目要求，二叉树的"前/中/后序"遍历都无法满足，所以必须考虑额外存储、排序
+    - 可以直接将所有元素的 row、col、val 保存在新数组中，然后按 col、row、val 排序
+    - 输出时相同 col 的合并输出
+  - 特点：
+    - 虽然时间复杂度稍微增高`O(n*系数)`->`O(n*logn)`，但逻辑复杂度大大降低
+
+["987. Vertical Order Traversal of a Binary Tree" Tree]()
 
 ### "993. Cousins in Binary Tree"
 

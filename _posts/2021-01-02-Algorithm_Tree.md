@@ -82,6 +82,53 @@ func distanceK(root *TreeNode, target *TreeNode, k int) (ret []int) {
 }
 ```
 
+### "987. Vertical Order Traversal of a Binary Tree"
+
+```Go
+func verticalTraversal(root *TreeNode) (ret [][]int) {
+    type nodeInfo struct{
+        Row, Col, Val int
+    }
+    var sli []*nodeInfo
+
+    var dfs func(*TreeNode, int, int)
+    dfs = func(cur *TreeNode, row, col int) {
+        if cur == nil {
+            return
+        }
+        sli = append(sli, &nodeInfo{
+            Row: row,
+            Col: col,
+            Val: cur.Val,
+        })
+        dfs(cur.Left, row+1, col-1)
+        dfs(cur.Right, row+1, col+1)
+    }
+    dfs(root, 0, 0)
+
+    sort.Slice(sli, func(a, b int) bool {
+        if sli[a].Col != sli[b].Col {
+            return sli[a].Col < sli[b].Col
+        }
+        if sli[a].Row != sli[b].Row {
+            return sli[a].Row < sli[b].Row
+        }
+        return sli[a].Val < sli[b].Val
+    })
+
+    lastCol := sli[0].Col - 1
+    for _, node := range sli {
+        if node.Col != lastCol {
+            ret = append(ret, make([]int, 0, 1))
+            lastCol = node.Col
+        }
+        l := len(ret)
+        ret[l-1] = append(ret[l-1], node.Val)
+    }
+    return ret
+}
+```
+
 ### "993. Cousins in Binary Tree"
 
 ```Go
