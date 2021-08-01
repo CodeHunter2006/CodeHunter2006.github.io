@@ -857,6 +857,53 @@ func profitableSchemes(n int, minProfit int, group []int, profit []int) (ret int
 }
 ```
 
+### "983. Minimum Cost For Tickets"
+
+```Go
+// dfs + memo
+func mincostTickets(days []int, costs []int) int {
+    memo := make([]int, 366)
+    dayMap := make(map[int]bool, len(days))
+    for _, d := range days {
+        dayMap[d] = true
+    }
+
+    var dfs func(int) int
+    dfs = func(day int) int {
+        if day > 365 {
+            return 0
+        }
+        if memo[day] > 0 {
+            return memo[day]
+        }
+        if dayMap[day] {
+            memo[day] = min(dfs(day+1)+costs[0], dfs(day+7)+costs[1], dfs(day+30)+costs[2])
+        } else {
+            memo[day] = dfs(day+1)
+        }
+        return memo[day]
+    }
+    return dfs(1)
+}
+```
+
+```Go
+// dp
+func mincostTickets(days []int, costs []int) int {
+    dp := make([]int, 365+30+1)
+    idx := len(days)-1
+    for i := 365; i > 0; i-- {
+        if idx >= 0 && i == days[idx] {
+            dp[i] = min(dp[i+1]+costs[0], dp[i+7]+costs[1], dp[i+30]+costs[2])
+            idx--
+        } else {
+            dp[i] = dp[i+1]
+        }
+    }
+    return dp[1]
+}
+```
+
 ### "1049. Last Stone Weight II"
 
 ```Go

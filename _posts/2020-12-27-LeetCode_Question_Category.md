@@ -278,6 +278,16 @@ tags: Algorithm Leetcode
 
 ["91. Decode Ways" DP Golang]()
 
+### "106. Construct Binary Tree from Inorder and Postorder Traversal"
+
+- 解法：dfs
+  - 思路：
+    - 通过某两种顺序的遍历结果创建 Tree 是比较常见的问题，思路也类似，
+      利用前/后序的特性：当前结点一定是第一个(或最后一个)元素；
+      然后通过当前结点将中序遍历数组分成左、右子树两段，再递归求的结点
+  - 要点：
+    - 利用前/后序数组时，需要一个全局的下标指示当前处理的根元素，然后利用创建子树的顺序控制这个下标的移动
+
 ### "123. Best Time to Buy and Sell Stock III"
 
 - 考点：
@@ -1485,6 +1495,27 @@ tags: Algorithm Leetcode
 ### "981. Time Based Key-Value Store"
 
 - 解法：HashMap + BinarySearch
+
+### "983. Minimum Cost For Tickets"
+
+- 解法: dfs+memo
+  - 思路：
+    - 某天买短期还是长期车票，取决于后面是否要用这张车票，而后面的结果会被重复用到。
+      所以题目可以理解为从后向前(先计算 day 数大的)的 DP
+    - 可以用 memo dfs 方式降低代码复杂度
+    - 转移公式：`cost := min(dfs(day+1)+costs[0], dfs(day+7)+costs[1], dfs(day+30)+costs[2])`
+  - 优化：
+    - 如果当前日期不存在，则无需买票，按`dfs(day+1)`继续计算
+
+["983. Minimum Cost For Tickets" DynamicPlanning dfs+memo]()
+
+- 解法：DP
+  - 思路：
+    - 依据上面的算法，改成 DP 就可以了
+    - dp 数组需要的容量比上面的 memo 大 30，以简化计算
+    - 可以利用下标逻辑跳过无效 day
+
+["983. Minimum Cost For Tickets" DynamicPlanning dp]()
 
 ### "986. Interval List Intersections"
 
