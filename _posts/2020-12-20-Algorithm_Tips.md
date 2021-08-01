@@ -259,6 +259,11 @@ Heap 是一种自动排序的容器，利用数组和有序二叉树的关系实
 
 Tree 的结构特点决定了非常适合用 DFS 算法进行遍历，注意未必只遍历一次，可以以不同的方式遍历多次获得答案。
 
+- Tree 可执行的操作：
+  - 前/中/后序遍历
+  - 寻找目标结点
+  - 寻找公共父节点
+
 ### Binary Tree（二叉树）
 
 以二叉树为基础衍生出：**完全二叉树**(每一级孩子最多为 2k 个)、搜索二叉树(Binary Search Tree 查找树)、自平衡二叉查找树（AVL Tree）、红黑树（BlackRedTree）等，
@@ -622,7 +627,8 @@ Window 不一定只向后运动，Window 的右边框还可能向左运动，只
 
 ### Rolling Hash
 
-Rolling Hash 是 Sliding Window 的一个变种，用**HashCode**的方式统计 Window 内的元素，可以在**O(n)**内判断 Window 内的**元素序列**是否重复出现。
+Rolling Hash 是 Sliding Window 的一个变种，用**HashCode**的方式 Window 内的元素压缩为一个值，
+可以在**O(n)**内判断 Window 内的**元素序列**是否重复出现。
 Rolling Hash 算法的真实名字是**Rabin-Karp algorithm**，主要用于**子字符串匹配**。
 
 - HashFunction 可以根据具体情况选择，对于字符串，可以用`x*(26^k)`作为 HashFunction。
@@ -637,10 +643,18 @@ Rolling Hash 算法的真实名字是**Rabin-Karp algorithm**，主要用于**�
 - 要考虑**Collision(Hash 碰撞)**的情况，有两种方法：
   1. 这时可以按顺序遍历比较一遍。只要碰撞次数足够低，算法性能就不会**退化**。
   2. 设定一个较好的 HashFunction，避免碰撞发生。(算法题 Case 可能凑出来，实际使用无法依赖)
+     一般来说，我们选取一个大于字符集大小（即字符串中可能出现的字符种类的数目）的**质数作为 base**，
+     再选取一个在字符串长度平方级别左右的**质数作为 mod**，产生哈希碰撞的概率就会很低。
 
 示例：
 ["1044. Longest Duplicate Substring" SlidingWindow RollingHash]()
 ["1392. Longest Happy Prefix" SlidingWindow RollingHash]()
+应用于回文["214. Shortest Palindrome" SlidingWindow RollingHash]()
+
+### KMP
+
+KMP 也是 Sliding Window 的一个变种，性能达到了子串比较的极致。
+其特点是匹配过程中中间某个位置一旦不匹配就自动跳过一定数量的元素，避免不必要的比较。
 
 ## DFS(depth first search 深度优先遍历)
 

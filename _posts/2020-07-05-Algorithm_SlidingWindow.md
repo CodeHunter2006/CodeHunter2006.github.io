@@ -44,6 +44,32 @@ func maxSlidingWindow(nums []int, k int) []int {
 }
 ```
 
+### "214. Shortest Palindrome" RollingHash
+
+```Go
+func shortestPalindrome(s string) string {
+    n := len(s)
+    Base, Mod := 26, int(1e7+1)
+    left, right, factor, best := 0, 0, 1, -1
+    for i := 0; i < n; i++ {
+        left = (left*Base + int(s[i]-'0')) % Mod
+        right = (right + int(s[i]-'0')*factor) % Mod
+        if left == right {
+            best = i
+        }
+        factor = factor * Base % Mod
+    }
+    var add []byte
+    if best != n-1 {
+        add = []byte(s[best+1:])
+    }
+    for l,r := 0, len(add)-1; l < r; l,r = l+1,r-1{
+        add[l], add[r] = add[r], add[l]
+    }
+    return string(add) + s
+}s
+```
+
 ### "1438. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit" SlidingWindow+MonotoneQueue Golang
 
 ```Go

@@ -527,6 +527,24 @@ tags: Algorithm Leetcode
 
 ["213. House Robber II" DP Golang]()
 
+### "214. Shortest Palindrome"
+
+- 解法：RollingHash + 回文简化分析
+  - 思路：
+    - 本题的关键约数是字符串长度规模`5 * 10^4`，使得通常的回文识别方式无法满足性能要求(DP 和双向遍历都是`O(n^2)`)
+    - 分析题目，可以想象出，最终的结果有三部分组成：s1 + s2 + s3，其中 s1 表示前面新增的字符串，`s == s2+s3`后面两个就是输入的参数，
+      s2 具有回文特性，这样新增的 s1 只要满足 s3 的镜像关系就可以了
+    - 所以题目简化为：寻找输入的字符串 s 的最长回文前缀子串(然后只需拼接就可得到答案)
+    - 可以利用 RollingHash 进行规模较大的回文识别，可以利用回文字符串的镜像特性，只需要某字符串从左向右(left)和从右向左(right)生成的 hash 值一致即可。
+    - 有左右两边 RollingHash 公式：`left = left*Base + s[i]`、`right = right + s[i]*factor`，
+      这里 factor 是乘积系数，伴随字符串增长，`factor = factor * Base`
+    - 求出最长回文长度后，只要把 s3 镜像，就可以作为 s1 拼接到结果中
+  - 要点：
+    - 由于字符是小写字母，Base 可以取 26，同时每个元素可以取`s[i]-'a'`
+    - 由于累加值可能很大，计算过程需要取模`int(1e9+7)`
+
+["214. Shortest Palindrome" SlidingWindow RollingHash]()
+
 ### "218. The Skyline Problem"
 
 - 解法：LineSweep
@@ -1156,6 +1174,13 @@ tags: Algorithm Leetcode
   - 在递归开始要先对当前 dp 赋一个保底值
 
 ["664. Strange Printer" DP]()
+
+### "671. Second Minimum Node In a Binary Tree"
+
+- 解法：Tree + DFS
+  - 思路：
+    - 本题单纯就是利用二叉树 dfs 的遍历方法，寻找稍大于根结点的值
+    - 在遍历时，可以利用父结点小于子节点的特性，提前结束当前子树的遍历
 
 ### "677. Map Sum Pairs"
 
