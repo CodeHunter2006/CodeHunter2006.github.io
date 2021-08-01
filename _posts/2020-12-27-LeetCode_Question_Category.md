@@ -1171,6 +1171,20 @@ tags: Algorithm Leetcode
 
 ["560. Subarray Sum Equals K" Golang]()
 
+### "616. Add Bold Tag in String"
+
+- 解法：TrieTree + LineSweep
+  - 思路：
+    - 利用 TrieTree 快速判定某个单词的开始、结束位置，记录在数组中
+    - 利用 LineSweep 的 MergeInterval 方法把开始、结束位置合并，以便合并粗体结果
+    - 最后，组装结果字符串
+  - 注意：
+    - 在 TrieTree 查找结束位置时，应尽量找靠后的结束位置，以便后面的合并
+    - 合并时，可以利用原切片合并，最后注意缩短切片总长度
+    - 拼装结果时，由于字符串操作较多，需要用`strings.Builder`
+
+["616. Add Bold Tag in String" LineSweep]()
+
 ### "633. Sum of Square Numbers"
 
 - 解法：math 分析 + 双指针
