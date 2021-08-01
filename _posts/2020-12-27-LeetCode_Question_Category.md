@@ -1182,8 +1182,10 @@ tags: Algorithm Leetcode
     - 在 TrieTree 查找结束位置时，应尽量找靠后的结束位置，以便后面的合并
     - 合并时，可以利用原切片合并，最后注意缩短切片总长度
     - 拼装结果时，由于字符串操作较多，需要用`strings.Builder`
+  - 优化：
+    - 每次取得新 bold 范围时，可以直接合并，这样后面就不必合并处理了
 
-["616. Add Bold Tag in String" LineSweep]()
+["616. Add Bold Tag in String" TrieTree]()
 
 ### "633. Sum of Square Numbers"
 

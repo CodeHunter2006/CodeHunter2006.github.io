@@ -60,6 +60,82 @@ func (this *Trie) StartsWith(prefix string) bool {
 }
 ```
 
+### "616. Add Bold Tag in String"
+
+```Go
+type TreeNode struct {
+    Children map[byte]*TreeNode
+    IsEnd bool
+}
+
+var gRoot *TreeNode
+
+func addWord(s string) {
+    cur := gRoot
+    pos := 0
+    for pos < len(s) {
+        if _, ok := cur.Children[s[pos]]; !ok {
+            cur.Children[s[pos]] = &TreeNode{ Children: make(map[byte]*TreeNode) }
+        }
+        cur = cur.Children[s[pos]]
+        pos++
+    }
+    cur.IsEnd = true
+}
+
+// findEnd 找到尽量靠后的单词结束位置
+func findEnd(s string, pos int) (ret int) {
+    ret = -1
+    cur := gRoot
+    for pos < len(s) {
+        if c, ok := cur.Children[s[pos]]; ok {
+            cur = c
+            if cur.IsEnd {
+                ret = pos
+            }
+            pos++
+        } else {
+            return ret
+        }
+    }
+    return ret
+}
+
+func addBoldTag(s string, words []string) string {
+    gRoot = &TreeNode{ Children: make(map[byte]*TreeNode) }
+    for _, w := range words {
+        addWord(w)
+    }
+
+    // 查找区间
+    var bolds []*[2]int
+    for i := range s {
+        if end := findEnd(s, i); end != -1 {
+            if len(bolds) > 0 && i <= bolds[len(bolds)-1][1]+1 {
+                bolds[len(bolds)-1][1] = max(bolds[len(bolds)-1][1], end)
+            } else {
+                bolds = append(bolds, &[2]int{i, end})
+            }
+        }
+    }
+
+    // 组装结果
+    var builder strings.Builder
+    lastPos := 0
+    for _, b := range bolds {
+        if lastPos < b[0] {
+            builder.WriteString(s[lastPos:b[0]])
+        }
+        lastPos = b[1]+1
+        builder.WriteString("<b>")
+        builder.WriteString(s[b[0]:b[1]+1])
+        builder.WriteString("</b>")
+    }
+    builder.WriteString(s[lastPos:])
+    return builder.String()
+}
+```
+
 ### "1707. Maximum XOR With an Element From Array"
 
 ```Go
