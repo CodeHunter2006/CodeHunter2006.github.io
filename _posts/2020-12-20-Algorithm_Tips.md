@@ -597,6 +597,27 @@ dijkstra 求得图中起始点到各个可达点的最短距离，并且它检�
 | Select Sort(选择排序) | 稳定   | 每次遍历选取最小的一个，替换到前面已排好序的最后一个                                                                                              | `O(n^2)`/`O(n^2)`     | `O(1)`     |                                                                         |
 | Heap Sort(堆排序)     | 不稳定 |                                                                                                                                                   |                       |            |                                                                         |
 
+### KthLargest(nth_element)
+
+"求数组中第 K 大元素"一般可以用排序、堆的办法处理，但是时间复杂度都是`O(nlogn)`。
+实际上可以借助 QuickSort 的 partition 思想将时间复杂度将为`O(n)`。
+C++ STL 里就有这个实现：`nth_element`
+
+- 思路：
+  - 首先实现 partition 函数，类似 QuickSort 的实现，但是当前指针无需在两边跳，只要遍历一遍找到中值下标即可。
+    时间复杂度是`O(n)`，但实现逻辑要比 QuickSort 简单。
+    - 具体步骤：
+      1. 设置 pivot 为最右边值(可以用随机取数法优化)
+      2. 记录一个小值下标为 l，当前下标 i，从左向右遍历
+      3. 循环中，如果 `nums[i] <= pivot` 则交换当前位置 i 到 l，然后 l++
+      4. 退出循环后，交换 l 和 r，则 l 就是 pivot 下标
+  - 在循环中调用 partition，按照二分查找思路，不断缩小 partition 的范围，最终找到目标下标，由于没有全部排序，所以节省了大量时间
+- 时间复杂度：由于每次 partition 中遍历范围在快速缩小，`partition调用次数 * partition内遍历范围 = n`，时间复杂度是`O(n)`
+- 空间复杂度：没有额外空间，`O(1)`
+
+示例：
+["215. Kth Largest Element in an Array" Sort]()
+
 ## Brute Force(暴风 bf)
 
 强行向前推进，最简单的算法。

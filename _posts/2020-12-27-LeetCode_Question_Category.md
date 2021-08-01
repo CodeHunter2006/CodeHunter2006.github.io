@@ -545,6 +545,23 @@ tags: Algorithm Leetcode
 
 ["214. Shortest Palindrome" SlidingWindow RollingHash]()
 
+### "215. Kth Largest Element in an Array"
+
+- 解法 1: Sort
+
+  - 思路：
+    - 利用标准库的 sort 排序，然后直接返回目标
+  - 时间复杂度：`O(nlogn)`
+
+- 解法 2：KthLarget(nth_element)
+  - 思路：
+    - 参考`nth_element`算法
+  - 时间复杂度：`O(n)`
+  - 其他：
+    - 虽然时间复杂度更低了，但是由于规模较小，耗时可能更长
+
+["215. Kth Largest Element in an Array" Sort]()
+
 ### "218. The Skyline Problem"
 
 - 解法：LineSweep
@@ -1408,8 +1425,8 @@ tags: Algorithm Leetcode
 
 ### "912. Sort an Array"
 
-- 快排、归并、堆排序都能在 nlogn 时间复杂度内完成
-- 快排思路：
+- 快排、归并、堆排序都能在 nlogn 时间复杂度内完成，但是快排空间复杂度为 O(1)
+- 快排思路：(partition)
   1. 将待排数组分为两部分，设定一个中值，要求遍历过程中左边小于中值、右边大于中值
   2. 设定两个指针，通过交替遍历向中心靠拢，使左右符合要求
   3. 递归左边、右边，最终达到整体有序
@@ -1417,9 +1434,9 @@ tags: Algorithm Leetcode
   - 三数取中法(效果最好)
   - 随机取值法
 
-["912. Sort an Array" QuickSort C++]()
+["912. Sort an Array" Sort QuickSort C++]()
 
-["912. Sort an Array" QuickSort Golang]()
+["912. Sort an Array" Sort QuickSort Golang]()
 
 ### "913. Cat and Mouse"
 

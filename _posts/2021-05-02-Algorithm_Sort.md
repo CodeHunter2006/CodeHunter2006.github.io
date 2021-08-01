@@ -78,6 +78,46 @@ func maximumGap(nums []int) (ret int) {
 }
 ```
 
+### "215. Kth Largest Element in an Array"
+
+```Go
+func findKthLargest(nums []int, k int) int {
+    sort.Sort(sort.Reverse(sort.IntSlice(nums)))
+    return nums[k-1]
+}
+```
+
+```Go
+func findKthLargest(nums []int, k int) int {
+    rand.Seed(time.Now().UnixNano())
+    l, r, tar := 0, len(nums)-1, len(nums)-k
+    for {
+        index := partition(nums, l, r)
+        if index == tar {
+            return nums[index]
+        } else if index > tar {
+            r = index - 1
+        } else {
+            l = index + 1
+        }
+    }
+    return -1
+}
+
+func partition(nums []int, l, r int) (ret int) {
+    x := rand.Intn(r-l+1) + l   // 随机取 pivot 优化，nums[r] == pivot
+    nums[x], nums[r] = nums[r], nums[x]
+    for i := l; i < r; i++ {
+        if nums[i] <= nums[r] {
+           nums[l], nums[i] = nums[i], nums[l]
+           l++
+        }
+    }
+    nums[l], nums[r] = nums[r], nums[l]
+    return l
+}
+```
+
 ### "274. H-Index"
 
 ```Go
@@ -147,6 +187,75 @@ func findErrorNums(nums []int) (ret []int) {
     }
 
     return ret
+}
+```
+
+### "912. Sort an Array" QuickSort C++
+
+```C++
+// 三数取中法优化函数，效果较好
+template<typename T1>
+    void selectPivotOfThree(vector<T1> &nums, int lo, int hi) {
+        int m = (lo + hi) >> 1;
+        if (nums[m] > nums[hi])
+            swap(nums[m], nums[hi]);
+        if (nums[lo] > nums[hi])
+            swap(nums[lo], nums[hi]);
+        if (nums[m] > nums[lo])
+            swap(nums[lo], nums[m]);
+    }
+
+    // 随机取数法，
+    template<typename T1>
+    void selectPivotByRand(vector<T1> &nums, int lo, int hi) {
+        int idx = lo + (rand() % (hi - lo + 1));
+        swap(nums[lo], nums[idx]);
+    }
+
+    template<typename T1>
+    void quickSort(vector<T1> &nums, int lo, int hi) {
+        if (lo >= hi) return;  // 注意这里要及时退出
+        //selectPivotOfThree<T1>(nums, lo, hi);
+        selectPivotByRand(nums, lo, hi);
+        T1 pivot = nums[lo];
+        int l = lo, r = hi;
+        while (l < r) {
+            while (l < r && nums[r] >= pivot)
+                r--;
+            swap(nums[l], nums[r]);
+            while (l < r && nums[l] <= pivot)
+                l++;
+            swap(nums[l], nums[r]);
+        }
+        quickSort(nums, lo, l);   // 注意这里不能是l-1
+        quickSort(nums, l + 1, hi);
+    }
+	vector<int> sortArray(vector<int>& nums) {
+		quickSort<int>(nums, 0, nums.size() - 1);
+		return nums;
+	}
+```
+
+### "912. Sort an Array" QuickSort Golang
+
+```Golang
+func quick(nums []int) {
+    if len(nums) <= 1 {
+        return
+    }
+    pivot, l, r := nums[0], 0, len(nums)-1
+    for l < r {
+        for l < r && nums[r] >= pivot {
+            r--
+        }
+        nums[l], nums[r] = nums[r], nums[l]
+        for l < r && nums[l] <= pivot {
+            l++
+        }
+        nums[l], nums[r] = nums[r], nums[l]
+    }
+    quick(nums[:l])
+    quick(nums[l+1:])
 }
 ```
 
