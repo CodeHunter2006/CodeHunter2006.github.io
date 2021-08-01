@@ -922,6 +922,23 @@ func longestCommonSubsequence(text1 string, text2 string) int {
 }
 ```
 
+### "1262. Greatest Sum Divisible by Three"
+
+```Go
+func maxSumDivThree(nums []int) int {
+    dp := make([]int, 3)    // 不同余数最大和
+    for _, n := range nums {
+        a, b, c := dp[0]+n, dp[1]+n, dp[2]+n
+        iA, iB, iC := a%3, b%3, c%3
+        // 必须分别更新，否则可能相互影响
+        dp[iA] = max(dp[iA], a)
+        dp[iB] = max(dp[iB], b)
+        dp[iC] = max(dp[iC], c)
+    }
+    return dp[0]
+}
+```
+
 ### "1547. Minimum Cost to Cut a Stick"
 
 ```Go

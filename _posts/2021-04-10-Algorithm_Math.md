@@ -28,6 +28,16 @@ func gcd(a, b int) int {
   1. 假设 a 是较小的数。其实 a b 无论谁是较小的数不影响结果
   2. 取余时可以找到本轮的公约数，直到 a==0 则 b 就是最后结果
 
+## 同余定理
+
+**同余定理**如果两数之差可以被 m 整除，那么两数分别对 m 取余的值相同。
+`(a-b)%m == 0 <=> a%m == b%m == k`
+
+经常结合 HashTable 记录 k 值，实现求和后的余数计算。
+
+示例：
+["974. Subarray Sums Divisible by K" HashTable Golang]()
+
 # 题目实现
 
 ### "7. Reverse Integer"

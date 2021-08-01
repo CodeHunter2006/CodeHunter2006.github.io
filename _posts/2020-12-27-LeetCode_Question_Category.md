@@ -1716,6 +1716,19 @@ tags: Algorithm Leetcode
 
 ["1239. Maximum Length of a Concatenated String with Unique Characters" Backtracking]()
 
+### "1262. Greatest Sum Divisible by Three"
+
+- 解法：DP + Math
+  - 思路：
+    - 类似"198. House Robber"，每次可以累加也可以不累加，多种状态同时记录用于后面的 DP
+    - 对某个元素累加后，对 3 取余，一定是 0 1 2 三种状态中的 1 种，而这种状态未来还可能起作用，所以要记录下来
+    - 对每种取余状态，只记录最大的和值
+  - 注意：
+    - 在更新时，由于初始过程可能存在三个状态相互影响，比如`6%3 == 9%3`，
+      所以对 dp 不同状态的赋值要分行进行，确保保存了最大值
+
+["1262. Greatest Sum Divisible by Three" DynamicPlanning]()
+
 ### "1269. Number of Ways to Stay in the Same Place After Some Steps"
 
 - 解法：DP + 规模边界条件
