@@ -54,6 +54,8 @@ tags: MySQL
   - redo log 进行刷盘比对数据页刷盘效率高，原因如下
     - redo log 体积小，毕竟只记录了哪一页修改了啥，因此体积小，刷盘快
     - redo log 是一直往末尾进行追加，属于顺序 IO。效率显然比随机 IO 来的快
+  - redo log 和 binlog 的关系
+    - bin log 是 server 层直接根据请求写入的记录，redo log 是引擎层写入的数据
 
 - MySQL 如何保证**隔离性**？
   在隔离级别为`Repeatable Read`下结合`LBCC+MVCC`是可以实现隔离性的，具体后面说明。

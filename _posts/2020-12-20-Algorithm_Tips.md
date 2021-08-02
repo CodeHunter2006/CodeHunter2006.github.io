@@ -445,7 +445,7 @@ OrderedMap CRUD 各项操作的时间复杂度是 O(logn)，适用于在遍历�
 | Floyd-Warshall | **各结点之间**的最短路径，路径可以为**负数**               | O(V^3)          |
 
 - **Relax**
-  在遍历更新每个结点对应的距离时，会逐步逼近结果，这个过程较 Relax(松弛)操作
+  在遍历更新每个结点对应的距离时，会逐步逼近结果，这个过程叫 Relax(松弛)操作
 
 示例：
 ["743. Network Delay Time" Graph]()
