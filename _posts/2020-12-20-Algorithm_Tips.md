@@ -169,6 +169,8 @@ bool cmp(const int& a,const int& b){return a > b;}
 
 单向链表、双向链表、环状链表(Ring)
 
+- 链表和 Tree 非常相似，都是以指针相关联，可以利用 DFS 或逐个元素遍历进行处理
+
 ### 算法：归并排序
 
 归并排序可以用于顺序数据结构(数组、链表)，用一个额外的空间对已有序子数组进行合并。时间复杂度 O(nlogn)，空间复杂度 O(n)
@@ -203,6 +205,20 @@ bool cmp(const int& a,const int& b){return a > b;}
 
 可以人为修改两个链表的遍历过程，从中发现相交特定，具体算法参考：
 "160. Intersection of Two Linked Lists"
+
+### 利用相邻结点保存关联关系
+
+可以利用链表紧邻的结点存储额外关联关系
+
+"138. Copy List with Random Pointer"
+
+### DFS 处理每个结点
+
+可以利用 DFS 处理每个结点，通过控制 cur 和 next 在 DFS 的执行顺序，实现正序/逆序处理。
+
+示例：
+"138. Copy List with Random Pointer"
+"206. Reverse Linked List"
 
 ## Stack(栈)
 

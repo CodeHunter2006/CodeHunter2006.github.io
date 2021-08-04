@@ -342,6 +342,24 @@ tags: Algorithm Leetcode
 
 ["137. Single Number II" BinaryOperation Go]()
 
+### "138. Copy List with Random Pointer"
+
+- 解法：dfs+memo
+  - 思路：
+    - 对于一般的结点复制，可以利用 dfs 过程，遍历每个旧结点创建新结点
+    - 为了确保 random 新结点在被引用前创建，要先处理 next 再处理 random
+    - 用`map[*Node]*Node`保存旧、新结点关系，Pointer 类型可以作为有效的 key
+  - 时间复杂度：`O(n)`
+  - 空间复杂度：`O(n)`
+
+["138. Copy List with Random Pointer" LinkedList]()
+
+- 解法：利用相邻关系保存新结点
+  - 思路：
+    - 将新结点创建在每个旧结点的后面，这样可以快速定位旧 Random 指针对应的新结点
+
+["138. Copy List with Random Pointer" LinkedList]()
+
 ### "139. Word Break"
 
 - 思路：dp
@@ -1162,6 +1180,25 @@ tags: Algorithm Leetcode
     - 利用 HashMap 统计所有砖缝位置出现次数，去掉最左右两边的缝
     - 返回`行数 - 某缝位置最大次数`
 
+### "581. Shortest Unsorted Continuous Subarray"
+
+- 解法 1: 排序
+
+  - 思路：
+    - 把数组想象成三段 ABC，其中 B 表示乱序的一段
+    - 复制数组，排序之后，遍历一遍，标记 B 的开头和结尾
+  - 时间复杂度：`O(nlogn)`
+
+- 解法 2: 遍历提取特征
+  - 思路：
+    - A 中所有元素都小于 B 中所有元素，所以只需要从右向左遍历一遍，记录 min 值和当前值的关系，就能识别出 B 和 A 的边界
+    - 同理可以遍历取得 B 和 C 的边界，也可以在一次遍历中双向求得边界
+  - 注意：
+    - l r 的初始值为`-1`(无效值)，这样可以识别出无 B 的情况，返回 0
+  - 时间复杂度：`O(n)`
+
+["581. Shortest Unsorted Continuous Subarray" Array]()
+
 ### "560. Subarray Sum Equals K"
 
 - 思路：
@@ -1170,6 +1207,28 @@ tags: Algorithm Leetcode
   - 起始处，要有`map[0]=1`，以便统计独立元素直接匹配的情况
 
 ["560. Subarray Sum Equals K" Golang]()
+
+### "611. Valid Triangle Number"
+
+- 解法 1: 排序 + 二分查找
+  - 思路：
+    - 题目是从数组中任意找到三个点，所以跟原始顺序无关，可以先排下序
+    - 假设有三条边 A B C，可以用两层循环确定其中两条边
+    - 然后根据二分查找确定是否存在第三条边，使得"两边之和大于第三边+两边之差小于第三边"
+  - 时间复杂度：O((n^2)logn)
+
+* 解法 2: 排序 + TwoPointers
+  - 思路:
+    - 首先排序
+    - 设短、中、长三边下标为`i <= j <= k`，确定 i 后，j 和 k 向右移动会形成一个范围，
+      在这个范围内都是有效的 j 值，可以利用 j k 间的 window 向右滑动的特点，利用 TwoPointers 实现
+    - 三层循环分别为 i j k，其中 k 的起始值为 i，所以可能存在`k-j`为负数的情况
+    - 优先动 k 以确定最长边范围，移动 k 时，为了确保 k 有效，需要检测 k+1 是否符合`nums[k+1]<nums[i]+nums[j]`
+  - 注意：
+    - `k - j`可能为负数，需要判断一下是否累加
+  - 时间复杂度：O(n^2)
+
+["611. Valid Triangle Number" TwoPointers]()
 
 ### "616. Add Bold Tag in String"
 

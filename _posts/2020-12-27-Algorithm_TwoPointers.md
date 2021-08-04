@@ -135,3 +135,20 @@ bool circularArrayLoop(vector<int>& nums) {
     return false;
 }
 ```
+
+### "611. Valid Triangle Number"
+
+```Go
+func triangleNumber(nums []int) (ret int) {
+    n := len(nums)
+    sort.Ints(nums)
+    for i, v := range nums {
+        k := i
+        for j := i+1; j < n; j++ {
+            for ; k+1 < n && nums[k+1] < v+nums[j]; k++ {}
+            ret += max(k-j, 0)
+        }
+    }
+    return ret
+}
+```

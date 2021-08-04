@@ -291,3 +291,29 @@ func maxSumSubmatrix(matrix [][]int, k int) (ret int) {
     return ret
 }
 ```
+
+### "581. Shortest Unsorted Continuous Subarray"
+
+```Go
+func findUnsortedSubarray(nums []int) int {
+    n := len(nums)
+    minVal, maxVal := math.MaxInt32, math.MinInt32
+    l, r := -1, -1
+    for i := 0; i < n; i++ {
+        if maxVal <= nums[i] {
+            maxVal = nums[i]
+        } else {
+            r = i
+        }
+        if minVal >= nums[n-i-1] {
+            minVal = nums[n-i-1]
+        } else {
+            l = n-i-1
+        }
+    }
+    if r == -1 {
+        return 0
+    }
+    return r-l+1
+}
+```

@@ -28,6 +28,47 @@ func deleteDuplicates(head *ListNode) *ListNode {
 }
 ```
 
+### "138. Copy List with Random Pointer"
+
+```Go
+// hash map
+var gMap = make(map[*Node]*Node)
+func copyRandomList(head *Node) *Node {
+    if head == nil {
+        return nil
+    } else if gMap[head] != nil {
+        return gMap[head]
+    }
+    newNode := &Node{ Val: head.Val }
+    gMap[head] = newNode
+    newNode.Next = copyRandomList(head.Next)
+    newNode.Random = copyRandomList(head.Random)
+    return newNode
+}
+```
+
+```Go
+// link node
+func copyRandomList(head *Node) *Node {
+    if head == nil {
+        return nil
+    }
+    for cur := head; cur != nil; cur = cur.Next.Next {
+        cur.Next = &Node{ Val: cur.Val, Next: cur.Next }
+    }
+    for cur := head; cur != nil; cur = cur.Next.Next {
+        if cur.Random != nil {
+            cur.Next.Random = cur.Random.Next
+        }
+    }
+    newHead := &Node{}
+    for cur, pre := head, newHead; cur != nil; cur, pre = cur.Next, pre.Next {
+        pre.Next, cur.Next = cur.Next, cur.Next.Next
+    }
+    return newHead.Next
+}
+```
+
 ### "142. Linked List Cycle II" Golang
 
 ```Go
