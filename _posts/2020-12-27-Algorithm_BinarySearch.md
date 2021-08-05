@@ -236,3 +236,39 @@ func minimumTimeRequired(jobs []int, k int) int {
     })
 }
 ```
+
+### "1885. Count Pairs in Two Arrays"
+
+```Go
+func countPairs(nums1 []int, nums2 []int) (ret int64) {
+    n := len(nums1)
+    diff := make([]int, n)
+    for i := 0; i < n; i++ {
+        diff[i] = nums1[i] - nums2[i]
+    }
+    sort.Ints(diff)
+
+    binarySearch := func(target, start int) int {
+        if target > diff[n-1] {
+            return n
+        }
+        l, r := start, n
+        for l+1 < r {
+            mid := (l+r)>>1
+            if diff[mid] < target {
+                l = mid
+            } else {
+                r = mid
+            }
+        }
+        return r
+    }
+
+    for i := 0; i < n; i++ {
+        idx := binarySearch(-diff[i]+1, i)
+        ret += int64(n - idx)
+    }
+
+    return ret
+}
+```

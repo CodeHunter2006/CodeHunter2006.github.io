@@ -7,6 +7,32 @@ tags: Algorithm Leetcode
 
 记录 SFS 的算法实现
 
+### "39. Combination Sum"
+
+```Go
+func combinationSum(candidates []int, target int) (ret [][]int) {
+    if len(candidates) == 0 {
+        return nil
+    } else if target == 0 {
+        return nil
+    }
+
+    for i, v := range candidates {
+        if target == v {
+            ret = append(ret, []int{v})
+        } else if target < v {
+            continue
+        } else {
+            tmpRet := combinationSum(candidates[i:], target - v)
+            for _, sli := range tmpRet {
+                ret = append(ret, append(sli, v))
+            }
+        }
+    }
+    return ret
+}
+```
+
 ### "91. Decode Ways"
 
 ```Go

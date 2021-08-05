@@ -92,6 +92,17 @@ tags: Algorithm Leetcode
 
 ["34. Find First and Last Position of Element in Sorted Array" Golang]()
 
+### "39. Combination Sum"
+
+- 解法：DFS
+  - 思路：
+    - 本题没有更好的解法，能用 DFS 解就可以了
+    - 每个元素进行尝试，然后下一层递归的 target 减去本层选定的元素
+    - 注意向下层传递数组时，范围是`[i:]`，这样本元素还可能被选中，但前面的元素就不能被重复使用了，避免结果重复
+  - 时间复杂度：`O(n^n)`
+
+["39. Combination Sum" DFS]()
+
 ### "42. Trapping Rain Water"
 
 - 思路 1:两遍遍历
@@ -277,6 +288,15 @@ tags: Algorithm Leetcode
     - 实现后发现只需要关注三个 dp 值即可，所以可以优化为 O(1)空间复杂度
 
 ["91. Decode Ways" DP Golang]()
+
+### "97. Interleaving String"
+
+- 解法：二维 DP
+  - 类似"edit distance"，进行二维 DP
+  - 设`dp[i][j]`表示 s1 前 i 个字符和 s2 前 j 个字符是否可以匹配 s3 前 i+j 个字符
+  - 有转移方程`dp[i][j] = dp[i][j] || dp[i-1][j] && s1[i-1] == s3[i+j-1]`
+
+["97. Interleaving String" DynamicPlanning]()
 
 ### "106. Construct Binary Tree from Inorder and Postorder Traversal"
 
@@ -1368,6 +1388,16 @@ tags: Algorithm Leetcode
 
 ["787. Cheapest Flights Within K Stops" Graph]()
 
+### "802. Find Eventual Safe States"
+
+- 解法：backtracking + memory
+  - 思路：
+    - 利用题目的图特性，深度优先遍历结点，如果所有子节点都是安全的，那么前节点也是安全的
+    - 一旦遍历中发现了循环，就说明一连串前结点都是非安全的，用 visited 回溯可以标识是否循环
+    - 由于规模较大`10^4`，所以需要用 memory 记录每个结点是否有过结果，避免重复搜索
+    - 生成的结果要按递增排序，而且结果的元素唯一(结点下标)，可以用 count 排序，降低时间复杂度
+    - 为了保证所有结点覆盖到，最外层循环要将每个结点作为起始结点检索一次
+
 ### "810. Chalkboard XOR Game"
 
 - 解法：XOR + 博弈论
@@ -2147,6 +2177,20 @@ tags: Algorithm Leetcode
   - 思路：
     - 只要排序后，从左右分别拿元素相加，就能尽量最小化和
     - 由于元素范围较小，利用 Count Sort 排序速度更快
+
+### "1885. Count Pairs in Two Arrays"
+
+- 解法：公式化简 + BinarySearch
+  - 思路：
+    - 题目要求的公式为：`(i < j) && (nums1[i] + nums1[j] > nums2[i] + nums2[j])`
+    - 右边可变形为：`nums1[i] - nums2[i] > nums2[j] - nums1[j]`
+    - 可以直接计算新数组：`diff[i] = nums1[i] - nums2[i]`
+    - 然后上面的可进一步变形为: `nums1[i] - nums2[i] > nums2[j] - nums1[j] => diff[i] > -diff[j]`
+    - 变形为：`diff[i] + diff[j] > 0`，至此只要在`diff`数组中找到一组正负数即可，这时 i j 已经无需顺序，找到任意两个即可
+    - 将`diff`数组排序后，设`diff[k]`满足`k >= j && diff[i] + diff[k]`，则所有的 k 都满足答案，这时答案数量为`n-k`
+    - 遍历 i，寻找`j > i && (-diff[j])`
+
+["1885. Count Pairs in Two Arrays" BinarySearch]()
 
 ### "1893. Check if All the Integers in a Range Are Covered"
 
