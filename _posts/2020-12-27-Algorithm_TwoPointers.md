@@ -136,6 +136,37 @@ bool circularArrayLoop(vector<int>& nums) {
 }
 ```
 
+```Go
+func circularArrayLoop(nums []int) bool {
+    n := len(nums)
+    next := func(cur int) int {
+        return ((cur+nums[cur])%n + n) % n
+    }
+
+    for i, num := range nums {
+        if num == 0 {
+            continue
+        }
+        slow, fast := i, next(i)
+        for nums[slow]*nums[fast] > 0 && nums[slow]*nums[next(fast)] > 0 {
+            if slow == fast {
+                if slow == next(slow) {
+                    break
+                }
+                return true
+            }
+            slow = next(slow)
+            fast = next(next(fast))
+        }
+
+        for nums[i]*nums[next(i)] > 0 {
+            nums[i], i = 0, next(i)
+        }
+    }
+    return false
+}
+```
+
 ### "611. Valid Triangle Number"
 
 ```Go

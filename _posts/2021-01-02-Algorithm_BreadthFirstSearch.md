@@ -174,6 +174,43 @@ func openLock(deadends []string, target string) int {
 }
 ```
 
+### "847. Shortest Path Visiting All Nodes"
+
+```Go
+func shortestPathLength(graph [][]int) int {
+    // 当前下标(4bit) + 状态(12bit) + 当前距离(8bit)
+    const STATE_MASK = 0b11111111111100000000
+    const DISTANCE_MASK = 0b11111111
+    n := len(graph)
+    targetMask := ((1<<n) - 1)<<8
+
+    m := make(map[int]bool, n)
+    q := make([]int, n)
+    for i := 0; i < n; i++ {
+        next := (i<<20)|(1<<(i+8))
+        q[i] = next
+        m[next] = true
+    }
+
+    for len(q) > 0 {
+        cur := q[0]
+        q = q[1:]
+        idx, curMask, dist := cur>>20, cur&STATE_MASK, cur&DISTANCE_MASK
+        if curMask == targetMask {
+            return dist
+        }
+        for _, next := range graph[idx] {
+            nextMask := (next<<20)|((1<<(next+8))|curMask)
+            if !m[nextMask] {
+                q = append(q, nextMask|(dist+1))
+                m[nextMask] = true
+            }
+        }
+    }
+    return 0
+}
+```
+
 ### "1036. Escape a Large Maze" Golang
 
 ```Golang

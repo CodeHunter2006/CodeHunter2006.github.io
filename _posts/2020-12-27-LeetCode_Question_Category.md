@@ -8,6 +8,14 @@ tags: Algorithm Leetcode
 ![LeetCode](/assets/images/2020-12-27-LeetCode_Category_1.jpg)
 记录 LeetCode 题型分类及解题思路
 
+### "5. Longest Palindromic Substring"
+
+- 解法 1: 双指针
+  - 思路：
+    - 遍历每一个位置 i
+    - 以 i 为中心向两边扩展指针 l r 检测每个元素是否对称，记录`r-l+1`最大值和当时的 l 值
+    - 注意 i 位置本身可以作为中心，也可以以 i 作为 l，即字符串是偶数的对称情况
+
 ### "7. Reverse Integer"
 
 - 解法：math
@@ -298,7 +306,7 @@ tags: Algorithm Leetcode
 
 ["97. Interleaving String" DynamicPlanning]()
 
-### "106. Construct Binary Tree from Inorder and Postorder Traversal"
+### "105. Construct Binary Tree from Preorder and Inorder Traversal"
 
 - 解法：dfs
   - 思路：
@@ -306,7 +314,12 @@ tags: Algorithm Leetcode
       利用前/后序的特性：当前结点一定是第一个(或最后一个)元素；
       然后通过当前结点将中序遍历数组分成左、右子树两段，再递归求的结点
   - 要点：
+    - 必须要包含中序遍历，才能区分左右子树所需中序遍历数组
     - 利用前/后序数组时，需要一个全局的下标指示当前处理的根元素，然后利用创建子树的顺序控制这个下标的移动
+
+### "106. Construct Binary Tree from Inorder and Postorder Traversal"
+
+- 参考"105. Construct Binary Tree from Preorder and Inorder Traversal"
 
 ### "123. Best Time to Buy and Sell Stock III"
 
@@ -501,6 +514,14 @@ tags: Algorithm Leetcode
 
 ["164. Maximum Gap" Sort BucketSort]()
 
+### "165. Compare Version Numbers"
+
+- 解法：atoi
+  - 思路：
+    - 抽象出迭代函数，可以不断抽取每一段字符串为数字
+    - 然后比较每次迭代抽取的结果
+    - 注意`1.0.0 == 1.0`的情况，需要通过标识位判断是否全部迭代结束
+
 ### "169. Majority Element"
 
 - 思路：
@@ -542,6 +563,13 @@ tags: Algorithm Leetcode
     - 由于只需要历史的两步，所以可以进一步缩减为固定变量演进
 
 ["198. House Robber" DP Golang]()
+
+### "200. Number of Islands"
+
+- 解法：DFS
+  - 思路：
+    - 外层对 x y 两个坐标循环，检查每个坐标，一旦坐标为 1 则累加结果，并执行 dfs
+    -
 
 ### "208. Implement Trie (Prefix Tree)"
 
@@ -1056,6 +1084,31 @@ tags: Algorithm Leetcode
   - 先从左向右遍历，记录每个位置左边的最小值
   - 再从右向左遍历，利用单调栈记录比当前值更大的值，当较小值出栈时进行一次条件判断
 
+### "457. Circular Array Loop"
+
+- 解法：in-place
+
+  - 思路：
+    - 可以利用原位置保存两个信息：是否被访问过 + 访问时的轮次编号
+    - 如果判断下一结点被访问过，并且方向相同，则返回 true
+  - 时间复杂度：`O(2n) => O(n)`
+  - 缺点：
+    - 由于二进制操作比较麻烦，逻辑会非常复杂
+    - 为了兼容二进制负数，也会增加逻辑复杂性
+
+- 解法(推荐)：快慢指针
+  - 思路：
+    - 题目要求`O(n)`时间复杂度和`O(1)`空间复杂度，可以利用"快慢指针 + 访问标记"的方式实现
+    - 最外层，对每个元素遍历
+    - 循环内，按照快慢指针向后查找同向位置，如果找到则返回 true
+    - 循环内，如果没有找到，则再执行一次遍历，把上面已经走过的位置值置为 0，确保未来不被遍历到
+  - 要点：
+    - 判断是否同向，可以用`x * y > 0`判断
+    - 取得下标余数，可以`((cur+val)%n + n) % n`
+  - 时间复杂度：`O(2n) => O(n)`
+
+["457. Circular Array Loop"TwoPointers]()
+
 ### "461. Hamming Distance"
 
 - **汉明距离**广泛用于多个领域，在编码理论中用于错误检测，在信息论中量化字符串之间的差异。两个整数之间的汉明距离是对应位置上数字不同的位数。
@@ -1226,7 +1279,7 @@ tags: Algorithm Leetcode
   - 由于可以重复统计，并且统计结果数是递增的，可以利用 map 进行累加，`map[A-K]==count`
   - 起始处，要有`map[0]=1`，以便统计独立元素直接匹配的情况
 
-["560. Subarray Sum Equals K" Golang]()
+["560. Subarray Sum Equals K" HashTable Golang]()
 
 ### "611. Valid Triangle Number"
 
@@ -1478,6 +1531,16 @@ tags: Algorithm Leetcode
   - 缺点：逻辑较复杂
 
 ["818. Race Car" DP Golang]()
+
+### "847. Shortest Path Visiting All Nodes"
+
+- 解法：BFS + 状态压缩
+  - 思路：
+    - 由于结点之间的距离都是 1，没有好的优化方案，只能用基本的 BFS 遍历
+    - queue 中每个结点为一个元组`tuple == {下标，状态，距离}`
+    - 由于元素数量有限(`<=12`)，可以利用二进制压缩状态，用 int 的 12 bit 表示
+
+["847. Shortest Path Visiting All Nodes" BreadthFirsSearch]()
 
 ### "863. All Nodes Distance K in Binary Tree"
 
