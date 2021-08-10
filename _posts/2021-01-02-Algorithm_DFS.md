@@ -11,24 +11,47 @@ tags: Algorithm Leetcode
 
 ```Go
 func combinationSum(candidates []int, target int) (ret [][]int) {
-    if len(candidates) == 0 {
-        return nil
-    } else if target == 0 {
+    if len(candidates) == 0 || target == 0 {
         return nil
     }
-
     for i, v := range candidates {
-        if target == v {
-            ret = append(ret, []int{v})
-        } else if target < v {
-            continue
-        } else {
-            tmpRet := combinationSum(candidates[i:], target - v)
+        if v == target {
+            ret = append(ret, []int{target})
+        } else if v < target {
+            tmpRet := combinationSum(candidates[i:], target-v)
             for _, sli := range tmpRet {
                 ret = append(ret, append(sli, v))
             }
         }
     }
+    return ret
+}
+```
+
+### "40. Combination Sum II"
+
+```Go
+func combinationSum2(candidates []int, target int) (ret [][]int) {
+    sort.Ints(candidates)
+    var dfs func([]int, []int, int)
+    dfs = func(candidates, pre []int, tar int) {
+        if tar == 0 {
+            ret = append(ret, append([]int{}, pre...))
+            return
+        }
+        for i := 0; i < len(candidates); i++ {
+            if i > 0 && candidates[i] == candidates[i-1] {
+                continue
+            }
+            if next := tar - candidates[i]; next >= 0 {
+                tmp := append(pre, candidates[i])
+                dfs(candidates[i+1:], tmp, next)
+            } else {
+                break
+            }
+        }
+    }
+    dfs(candidates, nil, target)
     return ret
 }
 ```

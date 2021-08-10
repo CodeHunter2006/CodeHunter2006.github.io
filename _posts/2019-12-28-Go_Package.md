@@ -33,6 +33,8 @@ type Interface interface {
 
 - Heap 提供了`remove`函数，需要数组下标作为参数，可以通过堆查找实现`O(logn)`删除指定元素
 
+- 对于`[]int`类型的 heap，可以直接内嵌`sort.IntSlice`类型自动实现`sort.Interface`
+
 ## container/list
 
 提供链表数据结构

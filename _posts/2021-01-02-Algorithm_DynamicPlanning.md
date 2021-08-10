@@ -438,6 +438,28 @@ func wordBreak(s string, wordDict []string) bool {
 }
 ```
 
+### "174. Dungeon Game"
+
+```Go
+func calculateMinimumHP(dungeon [][]int) int {
+    m, n := len(dungeon), len(dungeon[0])
+    dp := make([][]int, m+1)
+    for i := range dp {
+        dp[i] = make([]int, n+1)
+        for j := range dp[i] {
+            dp[i][j] = math.MaxInt32
+        }
+    }
+    dp[m-1][n], dp[m][n-1] = 1, 1
+    for i := m-1; i >= 0; i-- {
+        for j := n-1; j >= 0; j-- {
+            dp[i][j] = max(min(dp[i+1][j], dp[i][j+1])-dungeon[i][j], 1)
+        }
+    }
+    return dp[0][0]
+}
+```
+
 ### "198. House Robber"
 
 ```Go

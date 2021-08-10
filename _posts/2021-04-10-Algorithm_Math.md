@@ -217,6 +217,36 @@ int getDistance(vector<int> positions) {
 }
 ```
 
+### "313. Super Ugly Number"
+
+```Go
+func nthSuperUglyNumber(n int, primes []int) (ugly int) {
+    m := map[int]bool{1:true}
+    h := &myHeap{[]int{1}}
+    for ; n > 0; n-- {
+        ugly = heap.Pop(h).(int)
+        for _, prime := range primes {
+            if next := ugly*prime; !m[next] {
+                m[next] = true
+                heap.Push(h, next)
+            }
+        }
+    }
+    return ugly
+}
+
+type myHeap struct {
+    sort.IntSlice
+}
+func (p *myHeap) Push(x interface{}) { p.IntSlice = append(p.IntSlice, x.(int)) }
+func (p *myHeap) Pop() interface{} {
+    l := len(p.IntSlice)
+    tmp := p.IntSlice[l-1]
+    p.IntSlice = p.IntSlice[:l-1]
+    return tmp
+}
+```
+
 ### "365. Water and Jug Problem" "欧几里德算法/辗转相除法"
 
 ```C++
@@ -225,6 +255,26 @@ bool canMeasureWater(int x, int y, int z) {
 }
 int gcd(int x, int y) {
     return y == 0 ? x : gcd(y, x % y);
+}
+```
+
+### "413. Arithmetic Slices"
+
+```Go
+func numberOfArithmeticSlices(nums []int) (ret int) {
+    preStep, preCount := 2001, 1
+    for i := 1; i < len(nums); i++ {
+        if nums[i]-nums[i-1] == preStep {
+            preCount++
+        }
+        if nums[i]-nums[i-1] != preStep || i == len(nums)-1 {
+            if x := preCount - 2; x > 0 {
+                ret += (x*(1+x))/2
+            }
+            preStep, preCount = nums[i]-nums[i-1], 2
+        }
+    }
+    return ret
 }
 ```
 

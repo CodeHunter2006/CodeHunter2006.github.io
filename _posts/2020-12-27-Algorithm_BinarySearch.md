@@ -149,6 +149,41 @@ func guessNumber(r int) int {
 }
 ```
 
+### "887. Super Egg Drop"
+
+```Go
+func superEggDrop(k int, n int) int {
+    memo := make(map[int]int)
+    var dfs func(int, int) int
+    dfs = func(k, n int) (ans int) {
+        mask := n<<8+k
+        if val, exists := memo[mask]; exists {
+            return val
+        } else if n == 0 {
+        } else if k == 1 {
+            ans = n
+        } else {
+            l, r := 1, n
+            for l+1 < r {
+                mid := (l+r)>>1
+                t1, t2 := dfs(k-1, mid-1), dfs(k, n-mid)
+                if t1 < t2 {
+                    l = mid
+                } else if t1 > t2 {
+                    r = mid
+                } else {
+                    l, r = mid, mid
+                }
+            }
+            ans = 1 + min(max(dfs(k-1, l-1), dfs(k, n-l)), max(dfs(k-1, r-1), dfs(k, n-r)))
+        }
+        memo[mask] = ans
+        return ans
+    }
+    return dfs(k, n)
+}
+```
+
 ### "1011. Capacity To Ship Packages Within D Days"
 
 ```Go

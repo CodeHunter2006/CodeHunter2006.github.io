@@ -78,6 +78,24 @@ docker run -d -p 8080:8080 plantuml/plantuml-server:tomcat
 
 - 在 VSCode 的 markdown 预览中内嵌的 plantuml 可以生成可点击的链接，而 Github 博客页面可以提供一个带锚点的链接。结合两者，可以制作一个非常巨大的思维导图，然后将链接跳转到博客页面，这样既有宏观概览，也有微观解释。
 
+# 特殊语法
+
+## 注释
+
+```plantuml
+' 这里是单行注释，用英文单引号开头
+
+/'
+  这里是多行注释
+'/
+```
+
+## 箭头方向
+
+制作 Class Diagram、Deployment Diagram 时，可能发生多个元素横排相互调用的情况，布局很丑。
+可以利用`A -up-> B`这种形式指定箭头方向，可以设置各个方向，这样布局就比较合理了。
+同样的，提示框也可以用`left note ... end note`形式规定显示方向，调整布局。
+
 # 参考链接
 
 - [PlantUML 官网](http://plantuml.com/index)

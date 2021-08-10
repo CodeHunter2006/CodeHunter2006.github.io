@@ -70,15 +70,6 @@ tags: Algorithm Leetcode
 
 ["32. Longest Valid Parentheses" Brute Force]()
 
-### "35. Search Insert Position"
-
-### "49. Group Anagrams"
-
-- 思路：
-  利用 Anagram(异位词)特性，统计每个词的字母出现次数，生成一个"指纹"，然后通过 HashMap 收集相同指纹的词
-
-["49. Group Anagrams" HashTable]()
-
 ### "33. Search in Rotated Sorted Array"
 
 - 思路：
@@ -100,16 +91,35 @@ tags: Algorithm Leetcode
 
 ["34. Find First and Last Position of Element in Sorted Array" Golang]()
 
+### "35. Search Insert Position"
+
 ### "39. Combination Sum"
 
 - 解法：DFS
   - 思路：
-    - 本题没有更好的解法，能用 DFS 解就可以了
+    - 初看想用 Backtraking 实现，用 preSlice 保存已选项，逐步搜索。但是实现代码复杂度太高
+    - 可以利用逻辑特性："只有最后面一项有效，前面的项才有效"，每次 DFS 下一层返回值有效时，才组装结果
     - 每个元素进行尝试，然后下一层递归的 target 减去本层选定的元素
-    - 注意向下层传递数组时，范围是`[i:]`，这样本元素还可能被选中，但前面的元素就不能被重复使用了，避免结果重复
+  - 注意：
+    - 向下层传递数组时，范围是`[i:]`，这样本元素还可能被选中，但前面的元素就不能被重复使用了，避免结果重复
+    - `target == v`时将结果累加到`ret`中，不要直接返回，否则会丢失部分结果
   - 时间复杂度：`O(n^n)`
 
 ["39. Combination Sum" DFS]()
+
+### "40. Combination Sum II"
+
+- 解法：Backtracking
+  - 思路：
+    - 尝试用"39. Combination Sum"的解法+memory 会超时，需要通过遍历技巧避免 map **去重**
+    - 本题的关键是存在重复元素，并且结果不能重复，也就是`1,1,1`这种情况下，只能是`1/11/111`，
+      首先需要对原数组**排序**，只有当每个元素第一次被递归到的时候才能选取一次，否则直接跳过
+    - 处理当前递归时，要遍历每个元素，跳过重复元素
+    - 维护一个 preSlice，每次尝试将当前元素加入，然后递归，递归结束删除当前元素
+  - 技巧：
+    - 由于数组是递增的，只要当前元素>target，那么可以提前打断本层递归内的循环
+
+["40. Combination Sum II" DFS]()
 
 ### "42. Trapping Rain Water"
 
@@ -125,6 +135,13 @@ tags: Algorithm Leetcode
   按思路 1 计算每个水柱时，高度取决于较低的那个边。所以可以单独对高度较低的边进行遍历，这样只需要遍历一遍，并且无需额外空间
 
 ["42. Trapping Rain Water" TwoPointers Golang]()
+
+### "49. Group Anagrams"
+
+- 思路：
+  利用 Anagram(异位词)特性，统计每个词的字母出现次数，生成一个"指纹"，然后通过 HashMap 收集相同指纹的词
+
+["49. Group Anagrams" HashTable]()
 
 ### "61. Rotate List"
 
@@ -341,6 +358,26 @@ tags: Algorithm Leetcode
 
 ["123. Best Time to Buy and Sell Stock III" Golang]()
 
+### "127. Word Ladder"
+
+- 解法 1: BFS + HashTable
+
+  - 思路：
+    - 将字典保存至 hashTable 以便后续查找
+    - 利用 queue 做 BFS，queue 的元素是"(当前字符串，步数)"
+    - 尝试对每个单词的每个位置进行替换，如果在字典中找到则入队，同时将该单词从字典删除
+    - 如果当前要处理的单词和目标一致，则返回"step+1"
+  - 注意：
+    - 在替换单个字符后，要记得替换回去
+  - 改进：
+    - 可以用新旧两个队列处理，这样就无需保存 step 了
+
+- 解法 2: BFS + HashTable
+  - 思路：
+    - 上面的 BFS 每轮会将大量无关单词加入 queue，和 step 呈指数关系，所以考虑降低检索的 step 数
+    - 可以从两个方向分别进行检索，即形成三个 set：dict beginSet endSet
+    - 一旦发现下一个单词在对方的 set 中，就能找到答案
+
 ### "131. Palindrome Partitioning"
 
 - 解法：backtracking + dp
@@ -413,12 +450,16 @@ tags: Algorithm Leetcode
 
 ### "142. Linked List Cycle II"
 
-- 解法"Floyd's Tortoise and Hare"算法。
+- 解法："Floyd's Tortoise and Hare"算法
   1. 通过快慢指针判断是否存在回环，并且记录快慢指针相交位置。
   2. 从链表头部和之前的快慢指针相交位置同时发起一个慢指针循环继续向前
   3. 当两指针重叠时，就找到了回环进入点
 
 ["142. Linked List Cycle II" Golang]()
+
+### "143. Reorder List"
+
+- 解法：快慢指针 + 链表反转 + 链表归并排序
 
 ### "146. LRU Cache"
 
@@ -428,6 +469,31 @@ tags: Algorithm Leetcode
   - 在 size 发生变化时，如果 size 超过容量，则删除 list 头元素
 
 ["146. LRU Cache" Golang]()
+
+### "148. Sort List"
+
+- 解法 1：DFS + MergeSort
+
+  - 思路：
+    - 利用快慢指针快速找到本段链表的中点，DFS 对两段子链表排序，然后在对两段子链表执行 merge
+  - 注意：
+    - 递归函数声明为`func sort(head, tail *ListNode) *ListNode`，传入一段链表，返回排好序的 head
+    - 在递归末端但单元素时，要设置`if head == tail { head.Next = nil }`，这样把无用的指针打断，避免影响 merge
+    - merge 时，要创建一个辅助头结点
+  - 时间复杂度：`O(nlogn)`
+  - 空间复杂度：`O(logn)`
+
+- 解法 2(推荐): DP + MergeSort
+  - 思路：
+    - 解法 1 是"自顶向下"的思路，由于函数递归调用产生`O(logn)`的栈空间复杂度。
+    - 可以用"自底向上"的思路，类似 DP 过程，先将短链表(最短为 1)两两结合 merge，再逐步扩大长度
+    - 首先用快慢指针法计算出链表总长度
+    - 循环，设定链表长度为 1，每次循环长度翻倍，直到达到总长度
+    - 第二层循环是逐步处理所有相邻的链表，执行 merge 操作
+    - 循环内分两步分别找到链表 1 和链表 2 的 head，然后执行 merge
+    - 每轮外层循环，会遍历一遍结点，循环次数为`logn`
+  - 时间复杂度：`O(nlogn)`
+  - 空间复杂度：`O(1)`
 
 ### "149. Max Points on a Line"
 
@@ -533,6 +599,21 @@ tags: Algorithm Leetcode
 
 ["169. Majority Element" Array]()
 
+### "174. Dungeon Game"
+
+- 解法：DP
+  - 错误思路：
+    - 乍一看，就是一个普通的迷宫题，用 DP 查找"最大血量"的路径，但是有些 Case 不满足
+    - 进一步分析，题目要求是初始最小血量，所以在 DP 过程中应同时关注"造成的最低血量"
+    - 实现后，发现上述两个逻辑需要同时满足，而且这两个参数无法区分优先级，会发生逻辑冲突，无法实现 DP
+  - 正确思路：
+    - 从右下角向左上角"反向"DP，这样只需要关注最小血量即可，最后返回`dp[0][0]`
+    - 状态转移方程：`dp[i][j]=max(min(dp[i+1][j],dp[i][j+1])−dungeon(i,j),1)`
+    - DP 二维数组的初始值要设为`math.MaxInt32`表示无效值
+    - DP 二维数组需要额外的初始层，并且设定`dp[n−1][m]`和`dp[n][m-1]`的初始值为 1
+
+["174. Dungeon Game" DynamicPlanning]()
+
 ### "179. Largest Number"
 
 - 思路：
@@ -563,6 +644,15 @@ tags: Algorithm Leetcode
     - 由于只需要历史的两步，所以可以进一步缩减为固定变量演进
 
 ["198. House Robber" DP Golang]()
+
+### "199. Binary Tree Right Side View"
+
+- 解法：Tree + DFS
+  - 思路：
+    - 用中->右->左的顺序遍历结点，直接将结果记录到全局 slice
+    - 只有当前层级和结果数组长度匹配时才记录，避免重复记录同层元素
+  - 注意：
+    - 一定要全部遍历，这样可以找全
 
 ### "200. Number of Islands"
 
@@ -854,6 +944,19 @@ tags: Algorithm Leetcode
 
 ["312. Burst Balloons" DP Golang]()
 
+### "313. Super Ugly Number"
+
+- 解法：Math + BFS + Heap + HashTable
+  - 思路：
+    - **super ugly number**是指，质因数都出现在指定数组中，数组隐含包含了 1。
+      也就是未来所有生成数都要由数组中的数相乘得出
+    - 为了优先生成较小的数，可以利用最小堆实现，默认 1 入堆
+    - 每轮处理，拿堆顶跟数组中所有元素相乘然后入堆
+    - 通过处理的轮数确定是否为答案
+    - 由于乘积过程可能产生相同的元素，所以入堆前要进行 map 检查
+
+["313. Super Ugly Number" Math]()
+
 ### "322. Coin Change"
 
 - 考点：
@@ -876,6 +979,21 @@ tags: Algorithm Leetcode
     - 当前问题正好是每张票用一次并全部用掉，符合欧拉路径
 
 ["332. Reconstruct Itinerary" Graph C++]()
+
+### "336. Palindrome Pairs"
+
+- 解法：回文对逻辑分析 + TrieTree/HashMap(string)/RollingHash
+  - 思路：
+    - 两个字符串拼接为回文，长度有两种情况：相同长度/长度不同
+    - 对于相同长度的，只要找到与 A 完全反转的 B，那么"A+B"和"B+A"都是答案
+    - 对于长度不同的，假设`len(A+B) > len(A‘)`，只要较短的`A'`和`A`对称即可，
+      考虑到较长的左边、右边都要进行匹配尝试
+    - 可以先把所有字符串的特征记录在特定数据结构中，以便进行高效匹配
+    - 寻找反转匹配可以用下面三个方法：
+      1. 直接用 HashMap 保存字符串、反转字符串及下标，然后在遍历过程中匹配子字符串
+         (对于 Go 语言，由于子字符串抽取性能损耗较大，所以性能偏差)
+      2. 利用 TrieTree 保存原有字典，在遍历时进行查询
+      3. 利用 RollingHash 生成每个字符串的正向、反向 Hash，以便在遍历时匹配
 
 ### "337. House Robber III"
 
@@ -1028,6 +1146,31 @@ tags: Algorithm Leetcode
   3. 输入是保证有效的，所以直接在对应位置插入即可。
 
 ["406. Queue Reconstruction by Height" C++]()
+
+### "410. Split Array Largest Sum"
+
+- 解法：BinarySearch + Greedy
+  - 思路：
+    - 题目要求是连续子串，所以无需考虑最优分配方案，直接按连续分配即可
+    - 想要找到合适的桶容量，可以利用二分查找算法
+    - 桶的最小值，应该是最大的单个元素；桶的最大值，是所有元素的和
+
+### "413. Arithmetic Slices"
+
+- 解法：Math
+
+  - 思路：
+    - 通过手动 DP 分析，可以看出序列长度和结果间的关系：
+      `3, 1=1`
+      `4, 3=1+2`
+      `5, 6=1+2+3`
+      结果本身是等差数列求和
+    - 很容易通过遍历获得等差数列的长度，需要用到**等差数列求和公式**`sum = n(a1+an)/2`
+  - 注意：
+    - preStep 初始化为 2001，这样可以超出最大范围，以便下次替换
+    - 最后一次遍历(n-1)时，所做的处理和每次切换 step 逻辑相同
+
+["413. Arithmetic Slices" Math]()
 
 ### "416. Partition Equal Subset Sum"
 
@@ -1578,6 +1721,14 @@ tags: Algorithm Leetcode
     - 为了避免人数 j 和最底盈利 k 的后效性，要逆序遍历
 
 ["879. Profitable Schemes" DynamicPlanning]()
+
+### "887. Super Egg Drop"
+
+- 解法：BinarySearch + DP + DFS + Memo
+  - 思路：
+    - 基本思路是用前面的鸡蛋确定大概范围、最后一个鸡蛋确定具体层数。
+      比如有两个鸡蛋 100 层，即`k==2, n==100`，需要第一个鸡蛋尝试 10、20、30...，然后第二个鸡蛋再试 10 次
+    -
 
 ### "909. Snakes and Ladders"
 
