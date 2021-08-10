@@ -9,6 +9,17 @@ tags: Algorithm Leetcode
 
 # 基础算法
 
+## 等差数列前 n 项求和公式
+
+`Sn = n(a1+an)/2`
+
+示例：
+["413. Arithmetic Slices" Math]()
+
+## 等比数列前 n 项求和公式
+
+`Sn = a1(1 - q^n) / (1 - q)`
+
 ## GCD(Greatest Common Divisor)
 
 **最大公约数**是指多个整数共有的约数中最大的一个。两个相同整数的最大公约数是这个整数自己。
@@ -262,16 +273,13 @@ int gcd(int x, int y) {
 
 ```Go
 func numberOfArithmeticSlices(nums []int) (ret int) {
-    preStep, preCount := 2001, 1
+    diff, count := 2001, 0
     for i := 1; i < len(nums); i++ {
-        if nums[i]-nums[i-1] == preStep {
-            preCount++
-        }
-        if nums[i]-nums[i-1] != preStep || i == len(nums)-1 {
-            if x := preCount - 2; x > 0 {
-                ret += (x*(1+x))/2
-            }
-            preStep, preCount = nums[i]-nums[i-1], 2
+        if nums[i]-nums[i-1] == diff {
+            count++
+            ret += count
+        } else {
+            diff, count = nums[i]-nums[i-1], 0
         }
     }
     return ret
