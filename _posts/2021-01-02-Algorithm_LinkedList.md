@@ -140,6 +140,45 @@ func merge(h1, h2 *ListNode) *ListNode {
 }
 ```
 
+```Go
+func sortList(head *ListNode) *ListNode {
+    dummyHead := &ListNode{Next: head}
+    length := 0
+    for cur := head; cur != nil; length, cur = length+1, cur.Next {}
+
+    for interval := 1; interval < length; interval <<= 1 {
+        pre, cur := dummyHead, dummyHead.Next
+        for cur != nil {
+            h1 := cur
+            for i := 1; i < interval && cur.Next != nil; i++ {
+                cur = cur.Next
+            }
+            h2 := cur.Next
+            cur.Next = nil
+            cur = h2
+            for i := 1; i < interval && cur != nil && cur.Next != nil; i++ {
+                cur = cur.Next
+            }
+
+            var next *ListNode
+            if cur != nil {
+                next = cur.Next
+                cur.Next = nil
+            }
+
+            pre.Next = merge(h1, h2)
+
+            for pre.Next != nil {
+                pre = pre.Next
+            }
+            cur = next
+        }
+    }
+
+    return dummyHead.Next
+}
+```
+
 ### "160. Intersection of Two Linked Lists"
 
 ```Go
