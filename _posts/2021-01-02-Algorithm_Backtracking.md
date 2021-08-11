@@ -7,6 +7,57 @@ tags: Algorithm Leetcode
 
 记录 Backtracking 的算法实现
 
+### "39. Combination Sum"
+
+```Go
+func combinationSum(candidates []int, target int) (ret [][]int) {
+    var pre []int
+    var dfs func([]int, int)
+    dfs = func(candidates []int, tar int) {
+        if tar == 0 {
+            ret = append(ret, append([]int{}, pre...))
+            return
+        }
+        for i, v := range candidates {
+            if v > tar { continue }
+            pre = append(pre, v)
+            dfs(candidates[i:], tar-v)
+            pre = pre[:len(pre)-1]
+        }
+    }
+    dfs(candidates, target)
+    return ret
+}
+```
+
+### "40. Combination Sum II"
+
+```Go
+func combinationSum2(candidates []int, target int) (ret [][]int) {
+    sort.Ints(candidates)
+    var dfs func([]int, []int, int)
+    dfs = func(candidates, pre []int, tar int) {
+        if tar == 0 {
+            ret = append(ret, append([]int{}, pre...))
+            return
+        }
+        for i := 0; i < len(candidates); i++ {
+            if i > 0 && candidates[i] == candidates[i-1] {
+                continue
+            }
+            if next := tar - candidates[i]; next >= 0 {
+                tmp := append(pre, candidates[i])
+                dfs(candidates[i+1:], tmp, next)
+            } else {
+                break
+            }
+        }
+    }
+    dfs(candidates, nil, target)
+    return ret
+}
+```
+
 ### "78. Subsets" Golang
 
 ```Golang
@@ -27,6 +78,38 @@ func subsets(nums []int) (ret [][]int) {
     }
     dfs(0)
     return
+}
+```
+
+### "216. Combination Sum III"
+
+```Go
+func combinationSum3(k int, n int) (ret [][]int) {
+    var bigArr []int
+    for i := 1; i <= 9 && i <= n; i++ {
+        bigArr = append(bigArr, i)
+    }
+
+    var pre []int
+    var dfs func([]int, int, int)
+    dfs = func(arr []int, tar, k int) {
+        if tar == 0 && k == 0 {
+            ret = append(ret, append([]int{}, pre...))
+            return
+        } else if k == 0 {
+            return
+        }
+        for i, v := range arr {
+            if v > tar {
+                break
+            }
+            pre = append(pre, v)
+            dfs(arr[i+1:], tar-v, k-1)
+            pre = pre[:len(pre)-1]
+        }
+    }
+    dfs(bigArr, n, k)
+    return ret
 }
 ```
 

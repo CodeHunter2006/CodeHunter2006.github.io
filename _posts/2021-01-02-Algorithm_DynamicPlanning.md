@@ -725,6 +725,24 @@ func canPartition(nums []int) bool {
 }
 ```
 
+### "446. Arithmetic Slices II - Subsequence"
+
+```Go
+func numberOfArithmeticSlices(nums []int) (ret int) {
+    dp := make([]map[int]int, len(nums))
+    for i, x := range nums {
+        dp[i] = make(map[int]int)
+        for j, y := range nums[:i] {
+            d := x - y
+            cnt := dp[j][d]
+            ret += cnt
+            dp[i][d] += cnt+1
+        }
+    }
+    return ret
+}
+```
+
 ### "474. Ones and Zeroes"
 
 ```Go

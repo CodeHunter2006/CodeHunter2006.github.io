@@ -95,6 +95,51 @@ func detectCycle(head *ListNode) *ListNode {
 }
 ```
 
+### "148. Sort List"
+
+```Go
+func sortList(head *ListNode) *ListNode {
+    return sort(head, nil)
+}
+
+func sort(head, tail *ListNode) *ListNode {
+    if head == nil {
+        return head
+    } else if head.Next == tail {
+        head.Next = nil
+        return head
+    }
+    slow, fast := head, head.Next
+    for fast != tail {
+        slow, fast = slow.Next, fast.Next
+        if fast != tail {
+            fast = fast.Next
+        }
+    }
+
+    return merge(sort(head, slow), sort(slow, tail))
+}
+
+func merge(h1, h2 *ListNode) *ListNode {
+    dummyHead := &ListNode{}
+    pre := dummyHead
+    for h1 != nil && h2 != nil {
+        if h1.Val < h2.Val {
+            pre.Next, h1 = h1, h1.Next
+        } else {
+            pre.Next, h2 = h2, h2.Next
+        }
+        pre = pre.Next
+    }
+    if h1 != nil {
+        pre.Next = h1
+    } else if h2 != nil {
+        pre.Next = h2
+    }
+    return dummyHead.Next
+}
+```
+
 ### "160. Intersection of Two Linked Lists"
 
 ```Go

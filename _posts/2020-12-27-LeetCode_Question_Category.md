@@ -95,7 +95,7 @@ tags: Algorithm Leetcode
 
 ### "39. Combination Sum"
 
-- 解法：DFS
+- 解法 1：DFS
   - 思路：
     - 初看想用 Backtraking 实现，用 preSlice 保存已选项，逐步搜索。但是实现代码复杂度太高
     - 可以利用逻辑特性："只有最后面一项有效，前面的项才有效"，每次 DFS 下一层返回值有效时，才组装结果
@@ -106,6 +106,14 @@ tags: Algorithm Leetcode
   - 时间复杂度：`O(n^n)`
 
 ["39. Combination Sum" DFS]()
+
+- 解法 2: Backtracking
+  - 思路：
+    - 需要两个全局变量：pre 保存前面已添加到数组的元素、ret 用于保存结果
+    - 如果满足`tar == 0`，则将前面的数组保存，注意保存时候要复制一个数组，避免原数组被篡改
+    - 对于每个位置、可以取也可以不取
+
+["39. Combination Sum" Backtraking]()
 
 ### "40. Combination Sum II"
 
@@ -119,7 +127,7 @@ tags: Algorithm Leetcode
   - 技巧：
     - 由于数组是递增的，只要当前元素>target，那么可以提前打断本层递归内的循环
 
-["40. Combination Sum II" DFS]()
+["40. Combination Sum II" Backtraking]()
 
 ### "42. Trapping Rain Water"
 
@@ -142,6 +150,19 @@ tags: Algorithm Leetcode
   利用 Anagram(异位词)特性，统计每个词的字母出现次数，生成一个"指纹"，然后通过 HashMap 收集相同指纹的词
 
 ["49. Group Anagrams" HashTable]()
+
+### "50. Pow(x, n)"
+
+- 解法：Math
+  - 思路：
+    - 直观的想法是对 x 进行 n 次乘积，再根据 n 的符号决定最后返回的结果是否取倒数。但是这种方案会超时`pow(0.00001, 2147483647)`
+    - 正确的解法是**快速幂算法**
+  - 时间复杂度: `O(logn)`
+  - 空间复杂度: `O(logn)`
+  - 改进：
+    - 可以将 dfs 改为 dp，这样空间复杂度将为`O(1)`
+
+["50. Pow(x, n)" Math]()
 
 ### "61. Rotate List"
 
@@ -479,9 +500,12 @@ tags: Algorithm Leetcode
   - 注意：
     - 递归函数声明为`func sort(head, tail *ListNode) *ListNode`，传入一段链表，返回排好序的 head
     - 在递归末端但单元素时，要设置`if head == tail { head.Next = nil }`，这样把无用的指针打断，避免影响 merge
+    - 在设置快指针时，要分两步设置 fast，以让 slow 尽量向后
     - merge 时，要创建一个辅助头结点
   - 时间复杂度：`O(nlogn)`
   - 空间复杂度：`O(logn)`
+
+["148. Sort List" LinkedList]()
 
 - 解法 2(推荐): DP + MergeSort
   - 思路：
@@ -728,6 +752,18 @@ tags: Algorithm Leetcode
 
 ["215. Kth Largest Element in an Array" Sort]()
 
+### "216. Combination Sum III"
+
+- 解法：Backtracking
+  - 思路：
+    - 这道题是"39. Combination Sum"和"40. Combination Sum II"的加强版，有几点变更：
+      1. 备选元素数组需要自己根据入参范围创建
+      2. 有元素数量的限制：必须达到数量才计入答案、超过数量不在搜索
+      3. 每次递归中当前元素只取一次
+      4. 由于备选元素是自己制备的，是有序的，可以在`v > tar`时提前退出循环
+
+["216. Combination Sum III" Backtraking]()
+
 ### "218. The Skyline Problem"
 
 - 解法：LineSweep
@@ -811,6 +847,14 @@ tags: Algorithm Leetcode
   - 思路：
     递归调用、后根遍历，每个节点向孩子传递一个整型引用(探针)，孩子值与父值不同或者孩子值与子孙不同，探针引用都要增 1，
     注意左右孩子分别建立探针，不要相互影响。
+
+### "254. Factor Combinations"
+
+- 解法：Math + Backtracking
+  - 思路：
+    - 本题类似"39. Combination Sum"，不同点是之前要维护一个剩余数量，这里要维护一个乘积(product)
+    - 直接对所有`[1,n^(-2)]`的元素进行尝试，会超时，因为数据规模为`10^7`
+    - 可以先用数学方法(取余+相除)求得数 n 的因子列表，然后再用 Backtracking 解决
 
 ### "264. Ugly Number II"
 
@@ -1062,12 +1106,9 @@ tags: Algorithm Leetcode
 
 ### "377. Combination Sum IV"
 
-- 方法 1：
+- 解法 1：dfs+memory
 
-  - dfs+memory
-
-- 方法 2:
-  - DP
+- 解法 2:DP(多重背包)
   - 考点：
     - 统计排列组合，第一层状态循环、第二层物品循环
 
@@ -1208,6 +1249,18 @@ tags: Algorithm Leetcode
     - 排序后遍历，如果 interval 是独立的，则更新 end 值，否则 count++
 
 ["435. Non-overlapping Intervals" Greedy Golang]()
+
+### "446. Arithmetic Slices II - Subsequence"
+
+- 解法：DP + HashMap
+  - 思路：
+    - 首先手动演化一下子序列，发现子序列已有结果和新增一个的关系：`newCount = oldCount+1; total = newCount + oldCount`
+    - 设两个数字可形成"弱等差序列"，dp[i][d]是尾项为 nums[i]公差为 d 的弱等差数列的数量
+    - 用双层循环遍历，外层 i > 内层 j，`d = nums[i] - nums[j]`，则根据前面演化可得转移方程`dp[i][d] += dp[i][j] + 1`
+    - 在循环时，当已存在 d 的等差数列时才统计结果，避免弱等差数列计入结果
+    - 由于 d 的范围很大，所以用 map 保存
+
+["446. Arithmetic Slices II - Subsequence" DynamicPlanning]()
 
 ### "448. Find All Numbers Disappeared in an Array"
 
@@ -1971,6 +2024,17 @@ tags: Algorithm Leetcode
 - 技巧点：
   - 由于保证存在答案，只需要让元素自己隔离就可以，不用考虑其他元素
   - 在奇偶转换时，输出数组的前后位置也会自动隔离元素，所以不用担心出问题
+
+### "1073. Adding Two Negabinary Numbers"
+
+- 解法：Math
+  - 思路：
+    - "以-2 为进制"表示向上进位 1 时，相当于高位`*(-2)`
+    - 先手写一下，自然数 1 2 3 4 的表示方式，对"-2"进制有一定理解
+    - 然后推断低位到高位的累加模式，`sum = carray + arr[i] + arr[j]`，根据 sum 的不同情况(0/1/2/3)设置当前下一进位
+    - 利用累加模式遍历计算结果，生成时是正序的，答案要反转的，注意反转前要删除无用"前导 0"
+
+["1073. Adding Two Negabinary Numbers" Math]()
 
 ### "1074. Number of Submatrices That Sum to Target"
 

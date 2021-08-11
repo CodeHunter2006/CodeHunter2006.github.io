@@ -68,6 +68,12 @@ docker run -d -p 8080:8080 plantuml/plantuml-server:tomcat
 设置 VSCode 配置项：
 
 ```
+"plantuml.commandArgs": [
+      {
+        "plantuml.server": "http://127.0.0.1:8080",
+        "plantuml.render": "PlantUMLServer"
+      }
+    ]
 "plantuml.server": "http://127.0.0.1:8080",
 "plantuml.render": "PlantUMLServer",
 ```

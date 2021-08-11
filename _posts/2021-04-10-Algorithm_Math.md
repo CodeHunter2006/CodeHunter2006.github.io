@@ -20,6 +20,25 @@ tags: Algorithm Leetcode
 
 `Sn = a1(1 - q^n) / (1 - q)`
 
+## 求数 n 的因数
+
+```Go
+func getFactors(n int) []int {
+    if n == 1 {
+        return nil
+    }
+    var factors []int
+    for i := 2; i <= int(math.Sqrt(float64(n))); i++ {
+        if n % i == 0 {
+            factors = append(factors, i)
+            if other := n/i; other != i {
+                factors = append(factors, other)
+            }
+        }
+    }
+}
+```
+
 ## GCD(Greatest Common Divisor)
 
 **最大公约数**是指多个整数共有的约数中最大的一个。两个相同整数的最大公约数是这个整数自己。
@@ -48,6 +67,43 @@ func gcd(a, b int) int {
 
 示例：
 ["974. Subarray Sums Divisible by K" HashTable Golang]()
+
+## 快速幂算法
+
+用二分查找快速求出`pow(x, n)`，其中 x 是浮点数、n 可以为正负值。
+
+对于 n 取特定的值，可以用多次平方的方式求值，如：`x^64 = x^2 -> x^4 -> x^8 -> x^16 -> x^32 -> x^64`，
+这样只需要 6 次平方就可以得到答案，而逐步乘积要进行 64 次...
+上面这个例子是正好都是平方的关系，但如果存在非平方关系呢？如下：
+`x^77 = x^2 -> x^4 -> x^9 -> x^19 -> x^38 -> x^77`
+从左向右看，感觉其中有几个非平方跳跃`x^4 -> x^9 -> x^19`、`x^38 -> x^77`，好像没什么规律...
+但是从右向左看就可以看出规律：
+
+- 当前的幂数`n`可以由更低一级的幂数`n/2`计算得出
+- 假设第一级`n/2`的结果是`sub`，那么如果`n`为偶数，返回`sub * sub`; 如果`n`为奇数，返回`sub * sub * x`
+- 递归边界为`n == 0`返回 1
+
+LeetCode 题目："50. Pow(x, n)"
+
+```Go
+func myPow(x float64, n int) float64 {
+    if n >= 0 {
+        return quickPow(x, n)
+    }
+    return 1/quickPow(x, -n)
+}
+
+func quickPow(x float64, n int) float64 {
+    if n == 0 {
+        return 1
+    }
+    sub := quickPow(x, n/2)
+    if n & 1 == 0 {
+        return sub * sub
+    }
+    return sub * sub * x
+}
+```
 
 # 题目实现
 
@@ -405,5 +461,49 @@ int consecutiveNumbersSum(int N) {
         }
     }
     return count;
+}
+```
+
+### "1073. Adding Two Negabinary Numbers"
+
+```Go
+func addNegabinary(arr1 []int, arr2 []int) (ret []int) {
+    carray := 0
+    for i, j := len(arr1)-1, len(arr2)-1; i >= 0 || j >=0 || carray != 0 ; {
+        sum := carray
+        cur := 0
+        if i >= 0 {
+            sum += arr1[i]
+            i--
+        }
+        if j >= 0 {
+            sum += arr2[j]
+            j--
+        }
+        switch sum {
+            case 0:
+                cur, carray = 0, 0
+            case 1:
+                cur, carray = 1, 0
+            case 2:
+                cur, carray = 0, -1
+            case 3:
+                cur, carray = 1, -1
+            case -1:
+                cur, carray = 1, 1
+        }
+        ret = append(ret, cur)
+    }
+
+    l, r := 0, len(ret)-1
+    for r > 0 && ret[r] == 0 {
+        ret = ret[:r]
+        r--
+    }
+    for ; l < r; l,r = l+1,r-1 {
+        ret[l], ret[r] = ret[r], ret[l]
+    }
+
+    return ret
 }
 ```
