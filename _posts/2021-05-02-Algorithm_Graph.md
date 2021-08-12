@@ -7,6 +7,42 @@ tags: Algorithm Leetcode
 
 记录 Graph 的算法实现
 
+### "207. Course Schedule"
+
+```Go
+func canFinish(numCourses int, prerequisites [][]int) bool {
+    in := make([]int, numCourses)
+    g := make(map[int][]int)
+    for _, pre := range prerequisites {
+        g[pre[1]] = append(g[pre[1]], pre[0])
+        in[pre[0]]++
+    }
+
+    q := make([]int, 0, numCourses)
+    for i := 0; i < numCourses; i++ {
+        if in[i] == 0 {
+            q = append(q, i)
+        }
+    }
+
+    zeroCount := 0
+    for len(q) > 0 {
+        cur := q[0]
+        q = q[1:]
+        zeroCount++
+        for _, next := range g[cur] {
+            in[next]--
+            if in[next] == 0 {
+                q = append(q, next)
+            }
+        }
+        delete(g, cur)
+    }
+
+    return zeroCount == numCourses
+}
+```
+
 ### "277. Find the Celebrity"
 
 ```C++

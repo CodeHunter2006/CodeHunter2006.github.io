@@ -58,6 +58,73 @@ func numDecodings(s string) (ret int) {
 }
 ```
 
+### "297. Serialize and Deserialize Binary Tree"
+
+```Go
+// Serializes a tree to a single string.
+func (this *Codec) serialize(root *TreeNode) string {
+    var builder strings.Builder
+    var dfs func(*TreeNode)
+    dfs = func(cur *TreeNode) {
+        if cur == nil {
+            builder.WriteString("")
+            return
+        }
+        builder.WriteByte('(')
+        dfs(cur.Left)
+        builder.WriteString(fmt.Sprintf(")(%v)(", cur.Val))
+        dfs(cur.Right)
+        builder.WriteByte(')')
+    }
+    builder.WriteByte('(')
+    dfs(root)
+    builder.WriteByte(')')
+    ret := builder.String()
+    return ret
+}
+
+// Deserializes your encoded data to tree.
+func (this *Codec) deserialize(data string) *TreeNode {
+    if data == "" || data == "()" {
+        return nil
+    }
+
+    index := 0
+    var dfs func() *TreeNode
+    dfs = func() *TreeNode {
+        if index >= len(data) {
+            return nil
+        }
+
+        index++
+        if data[index] == ')' {
+            index++
+            return nil
+        }
+        cur := &TreeNode{}
+        cur.Left = dfs()
+        index++
+        negative := false
+        for ; index < len(data) && data[index] != ')'; index++ {
+            if data[index] == '-' {
+                negative = true
+                continue
+            }
+            cur.Val = cur.Val*10 + int(data[index]-'0')
+        }
+        if negative {
+            cur.Val *= -1
+        }
+        index++
+        cur.Right = dfs()
+        index++
+        return cur
+    }
+
+    return dfs()
+}
+```
+
 ### "377. Combination Sum IV" C++ DFS
 
 ```C++

@@ -170,9 +170,29 @@ bool isNumber(string s) {
 }
 ```
 
-### "69. Sqrt(x)" Newton iteration algorithm
+### "69. Sqrt(x)"
+
+```Go
+// Binary Search
+func mySqrt(x int) int {
+    if x == 0 || x == 1 {
+        return x
+    }
+    l, r := -1, x
+    for l+1 < r {
+        mid := (l+r)>>1
+        if mid*mid > x {
+            r = mid
+        } else {
+            l = mid
+        }
+    }
+    return l
+}
+```
 
 ```C++
+// Newton iteration algorithm
 long r = x;
 while (r*r > x)
     r = (r + x/r) / 2;

@@ -70,6 +70,37 @@ func maxArea(height []int) int {
 }
 ```
 
+### "15. 3Sum"
+
+```Go
+func threeSum(nums []int) (ret [][]int) {
+    n := len(nums)
+    sort.Ints(nums)
+    for l := 0; l < n; l++ {
+        if l > 0 && nums[l] == nums[l-1] {
+            continue
+        }
+        r := n-1
+
+        for m := l+1; m < n; m++ {
+            if m > l+1 && nums[m] == nums[m-1] {
+                continue
+            }
+
+            for m < r && nums[l] + nums[m] + nums[r] > 0 {
+                r--
+            }
+            if m == r {
+                break
+            } else if nums[l] + nums[m] + nums[r] == 0 {
+                ret = append(ret, []int{nums[l], nums[m], nums[r]})
+            }
+        }
+    }
+    return ret
+}
+```
+
 ### "42. Trapping Rain Water" Golang
 
 ```Go

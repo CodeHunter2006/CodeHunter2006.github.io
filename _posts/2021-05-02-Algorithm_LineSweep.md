@@ -69,6 +69,33 @@ func (p *myHeap) Pop() interface{} {
 }
 ```
 
+### "253. Meeting Rooms II"
+
+```Go
+func minMeetingRooms(intervals [][]int) (ret int) {
+    n := len(intervals)
+    sli := make([]int, n*2)
+    for i, j := 0, 0; i < n; i, j = i+1, j+2 {
+        sli[j] = intervals[i][0]<<1 + 1
+        sli[j+1] = intervals[i][1]<<1
+    }
+    sort.Ints(sli)
+
+    num := 0
+    for _, i := range sli {
+        if i & 1 == 0 {
+            num--
+        } else {
+            num++
+        }
+        if num > ret {
+            ret = num
+        }
+    }
+    return ret
+}
+```
+
 ### "850. Rectangle Area II"
 
 ```C++

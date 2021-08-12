@@ -43,6 +43,18 @@ tags: Algorithm Leetcode
 
 ["12. Integer to Roman" DivideAndConquer Golang]()
 
+### "15. 3Sum"
+
+- 解法：TwoPointers
+  - 思路：
+    - 首先对数组排序，以便可以规则的取结果，并且跳过重复元素
+    - 设定三个下标 l m r，全程保证`l < m < r`
+    - 最外层循环 l、中层循环 m、内层循环 r，由于`m < r`，所以第二层循环是`O(n)`
+    - 确定 l m 后，r 从右向左逼近，找到`nums[l] + nums[m] + nums[r] == 0`则记录答案
+    - 要点是 l 和 m 对新元素的第二轮循环开始就要避免重复数据，这样确保`[0,0,0,0]`这种只输出一个`[0,0,0]`
+
+["15. 3Sum" TwoPointers]()
+
 ### "31. Next Permutation"
 
 - 原理：
@@ -189,6 +201,8 @@ tags: Algorithm Leetcode
   - 在 1~x 之间进行二分查找，条件为`m > x/m`，注意这里没有用`m * m > x`因为可能溢出，
   - 使用`/`会比乘法慢一些，但是二分查找的时间复杂度是 O(logn)所以问题不大。
   - 使用二分查找法效率比牛顿迭代法稍高。
+
+["69. Sqrt(x)" Math Go]()
 
 ![Newton Iterate Algorithm](/assets/images/2020-12-27-LeetCode_Question_Category_69.jpeg)
 
@@ -688,13 +702,30 @@ tags: Algorithm Leetcode
 - 解法：DFS
   - 思路：
     - 外层对 x y 两个坐标循环，检查每个坐标，一旦坐标为 1 则累加结果，并执行 dfs
-    -
+    - 在 dfs 内不断对周围四个方向 dfs 探索，并将数值置为 0，避免被重复探索
+
+### "207. Course Schedule"
+
+- 解法：Topological Order
+  - 思路：
+    - 先将输入的 edge 整理成`map[from][]to`，同时整理出每个结点的入度
+    - 将所有入度为 0 的结点放入 q 中
+    - 用拓扑排序不断遍历处理 q 中元素，删除边、如果入度减为 0 则入 q
+    - 在遍历过程中记录下入度达到 0 的元素数量，最后返回`zeroCount == numCourses`
+
+["207. Course Schedule" Graph]()
 
 ### "208. Implement Trie (Prefix Tree)"
 
 - 解法：基本的 TrieTree 实现
 
 ["208. Implement Trie (Prefix Tree)" TrieTree Golang]()
+
+### "210. Course Schedule II"
+
+- 解法：Topological Order
+  - 思路：
+    - 和"207. Course Schedule"算法相同，只是要求返回拓扑排序结果
 
 ### "212. Word Search II"
 
@@ -853,6 +884,17 @@ tags: Algorithm Leetcode
     递归调用、后根遍历，每个节点向孩子传递一个整型引用(探针)，孩子值与父值不同或者孩子值与子孙不同，探针引用都要增 1，
     注意左右孩子分别建立探针，不要相互影响。
 
+### "253. Meeting Rooms II"
+
+- 解法：LineSweep
+  - 思路：
+    - 将开始、结束时间拆解成两个时间点及类型，然后按时间、类型排序，结束排在前面
+    - 用一个数做统计，遇到结束则-1、遇到开始则+1，过程中记录最大值
+  - 优化：
+    - 可以直接一个 int 即保存时间又保存类型，`value = time<<1 + (type == start ? 1 : 0)`，这样按 int 排序时 end 会自动排到前面
+
+["253. Meeting Rooms II" LineSweep]()
+
 ### "254. Factor Combinations"
 
 - 解法：Math + Backtracking
@@ -921,6 +963,18 @@ tags: Algorithm Leetcode
     - 演化时，无需把物品提前计算出来放到数组，可以直接利用`x^2;x++`遍历"物品"
 
 ["279. Perfect Squares" DynamicPlanning]()
+
+### "297. Serialize and Deserialize Binary Tree"
+
+- 解法：DFS + parse
+  - 思路：
+    - 最简单的方案是每个结点用`(x)`框起来，反序列化时利用全局 index parse 就可以，parse 时的基本单位也是`(x)`
+  - 要点：
+    - 用`strings.Builder`减少字符串拼接成本
+    - 数字转换可以用`strconv.Atoi/strconv.Parse`或自己写转换逻辑，要注意负数、字符串大小端方向问题
+    - 可以利用闭包减少参数和全局变量
+
+["297. Serialize and Deserialize Binary Tree" DFS]()
 
 ### "300. Longest Increasing Subsequence"
 
