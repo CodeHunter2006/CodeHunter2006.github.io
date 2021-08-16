@@ -1671,6 +1671,17 @@ tags: Algorithm Leetcode
     - 可以利用 RollingHash 生成子序列指纹
   - 时间复杂度：`O((N+M)*min(N,M))`
 
+### "719. Find K-th Smallest Pair Distance"
+
+- 解法：Sort + BinarySearch + TwoPointers
+  - 思路：
+    - 如果用堆的方法遍历两两元素生成距离，会超时，因为规模是`10000`
+    - 题目要求"第 k 个最小距离"，可以思考在区间`[x,y]`内的最大距离是`y-x`，可以反向推导最小距离逻辑，
+      如果所有更小距离的总数为`k-1`，那么就找到了目标。由于这个距离的范围非常大，所以需要用二分查找寻找
+    - 先对数组排序，以便用双指针法检索所有可能范围
+
+["719. Find K-th Smallest Pair Distance" TwoPointers]()
+
 ### "740. Delete and Earn"
 
 - 解法：DP + Bucket

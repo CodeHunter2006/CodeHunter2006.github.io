@@ -214,3 +214,27 @@ func triangleNumber(nums []int) (ret int) {
     return ret
 }
 ```
+
+### "719. Find K-th Smallest Pair Distance"
+
+```Go
+func smallestDistancePair(nums []int, k int) int {
+    n := len(nums)
+    sort.Ints(nums)
+    lo, hi := -1, nums[n-1]-nums[0]
+    for lo+1 < hi {
+        mid := (lo+hi)>>1
+        count, l := 0, 0
+        for r := 0; r < n; r++ {
+            for ; nums[r]-nums[l] > mid; l++ {}
+            count += r-l
+        }
+        if count >= k {
+            hi = mid
+        } else {
+            lo = mid
+        }
+    }
+    return hi
+}
+```
