@@ -175,10 +175,10 @@ bool isNumber(string s) {
 ```Go
 // Binary Search
 func mySqrt(x int) int {
-    if x == 0 || x == 1 {
+    if x == 0 {
         return x
     }
-    l, r := -1, x
+    l, r := 1, x
     for l+1 < r {
         mid := (l+r)>>1
         if mid*mid > x {

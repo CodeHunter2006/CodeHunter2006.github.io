@@ -55,6 +55,21 @@ tags: Algorithm Leetcode
 
 ["15. 3Sum" TwoPointers]()
 
+### "17. Letter Combinations of a Phone Number"
+
+- 解法: Backtraking
+
+### "25. Reverse Nodes in k-Group"
+
+- 解法 1 ：
+  - 思路：
+    - 需要实现一个函数`reverse(head, tail) (newHead, newTail)`
+    - 在遍历过程中，统计跳过的结点数量，达到数量后，则用子函数旋转并调整指针，然后继续遍历
+  - 扩展(不可取)：
+    - 可以在遍历过程中就对结点进行反转，然后按组直接调整指针
+    - 最后一组未满，需要再反转回去
+    - 用扩展方法可以降低时间复杂度，但是逻辑复杂度大大增加
+
 ### "31. Next Permutation"
 
 - 原理：
@@ -1144,6 +1159,12 @@ tags: Algorithm Leetcode
 
 - 解法 2:
 
+### "367. Valid Perfect Square"
+
+- 解法：二分查找
+  - 思路：
+    - 类似"69. Sqrt(x)"，找到目标后要验证一下
+
 ### "368. Largest Divisible Subset"
 
 - 解法：DP + LIS + 反推 DP 结果
@@ -1285,6 +1306,15 @@ tags: Algorithm Leetcode
   - 通过上述演化，可以演化为一个简易的零一背包问题(只需要保存 bool 型，无需计算价值)
 
 ["416. Partition Equal Subset Sum" Golang]()
+
+### "417. Pacific Atlantic Water Flow"
+
+- 解法：DFS
+  - 思路：
+    - 题目是某个点的水既可以向太平洋也可以向大西洋流，可以反向理解为，
+      大西洋/太平洋的水向上流到最高点，然后统计两个海洋覆盖的点的交集
+  - 改进：
+    - 可以利用 in-place 记录每个点是否能关联到某个海洋
 
 ### "421. Maximum XOR of Two Numbers in an Array"
 
@@ -2335,6 +2365,14 @@ tags: Algorithm Leetcode
     - 注意 cost 的计算需要根据当前是否为边界、curts 点来计算
 
 ["1547. Minimum Cost to Cut a Stick" DynamicPlanning]()
+
+### "1583. Count Unhappy Friends"
+
+- 解法：HashTable
+  - 思路：
+    - 设有对(x,y)利用二维 map 记录 x 在 y 之前喜欢的元素，xy 可互换
+    - 然后遍历一遍，x 优先喜欢的元素，如果刚好该元素也优先喜欢 x，则记录到 set 中
+    - 最后返回 set 容量
 
 ### "1584. Min Cost to Connect All Points"
 
