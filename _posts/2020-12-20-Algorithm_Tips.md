@@ -153,6 +153,21 @@ bool cmp(const int& a,const int& b){return a > b;}
 
 示例：["1316. Distinct Echo Substrings" SlidingWindow RollingHash]()
 
+### Kadane 算法(最大连续字段和)
+
+Kadane 是经典的最大连续字段和算法，代码如下：
+
+```python
+ans = cur = None
+for x in A:
+    cur = x + max(cur, 0)
+    ans = max(ans, cur)
+return ans
+```
+
+示例：
+["918. Maximum Sum Circular Subarray" Array]()
+
 ## Heap(堆)
 
 一般说的堆都是**Binary Heap**，利用数组和二进制关系实现的二叉树结构。堆可以是最大堆或最小堆，由 compare 规则决定。

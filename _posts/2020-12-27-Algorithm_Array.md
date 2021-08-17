@@ -317,3 +317,35 @@ func findUnsortedSubarray(nums []int) int {
     return r-l+1
 }
 ```
+
+### "918. Maximum Sum Circular Subarray"
+
+```Go
+func maxSubarraySumCircular(nums []int) int {
+    n, s := len(nums), 0
+    for _, num := range nums {
+        s += num
+    }
+    return max(kadane(nums, 1), s+kadane(nums[:n-1], -1), s+kadane(nums[1:], -1))
+}
+
+func kadane(nums []int, sign int) (ret int) {
+    ret = math.MinInt32
+    sum := 0
+    for _, num := range nums {
+        sum = max(sum+num*sign, sign*num)
+        ret = max(ret, sum)
+    }
+    return ret
+}
+
+func max(nums ...int) (ret int) {
+    ret = math.MinInt32
+    for _, num := range nums {
+        if num > ret {
+            ret = num
+        }
+    }
+    return ret
+}
+```
