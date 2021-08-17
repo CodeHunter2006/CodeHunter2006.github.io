@@ -1682,6 +1682,17 @@ tags: Algorithm Leetcode
 
 ["719. Find K-th Smallest Pair Distance" TwoPointers]()
 
+### "727. Minimum Window Subsequence"
+
+- 解法：
+  - 思路：预处理 + DP
+    - 如果知道了 s1 的每个下标后面第一次出现某字母的下标值，则可以快速跳转查询是否有符合条件的序列，
+      所以先创建上述序列
+    - 遍历 s1 ，如果`s1[i] == s2[0]`，则开启一系列匹配，如果能够找到整个 s2 序列，则记录匹配长度和起始下标
+  - 时间复杂度：`O(nm)`
+
+["727. Minimum Window Subsequence" DynamicPlanning]()
+
 ### "740. Delete and Earn"
 
 - 解法：DP + Bucket
@@ -1942,6 +1953,7 @@ tags: Algorithm Leetcode
 
 * 解法 2：Kadane
   - 思路：
+    - 错误思路：按照两个拼接数组进行 Kadane，则`[5,-3,5]`这种会被错误计算`5+(-3)+5 = 7 < 5+5 = 10`
     - 假设字符串由三段组成：`A+B+C`。那么答案可能是一段：`A/B/C`，也可能是前后两段组成`C+A`。
     - 对于一段的情况，直接用 Kadane 就可以
     - 对于两段的情况，有如下公式：`C+A = (A+B+C) - B = Sum - B`，其中`-B`表示每个元素取`-`后求得的 Kadane 结果。

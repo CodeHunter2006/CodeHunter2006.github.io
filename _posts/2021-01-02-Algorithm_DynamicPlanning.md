@@ -840,6 +840,42 @@ func strangePrinter(s string) int {
 }
 ```
 
+### "727. Minimum Window Subsequence"
+
+```Go
+func minWindow(s1 string, s2 string) string {
+    n1, n2 := len(s1), len(s2)
+    next := make([][26]int, n1)
+    var right [26]int
+    for i := range right {
+        right[i] = -1
+    }
+    for i := n1-1; i >= 0; i-- {
+        next[i] = right
+        right[s1[i]-'a'] = i
+    }
+
+    minLen, start := math.MaxInt32, 0
+    for i := 0; i < n1; i++ {
+        if s2[0] != s1[i] {
+            continue
+        }
+        posA, posB := i, 1
+        for ; posA != -1 && posB < n2; posB++ {
+            posA = next[posA][s2[posB]-'a']
+        }
+        if newLen := posA-i+1; posA != -1 && posB == n2 && newLen < minLen {
+            minLen, start = newLen, i
+        }
+    }
+
+    if minLen == math.MaxInt32 {
+        return ""
+    }
+    return s1[start: start+minLen]
+}
+```
+
 ### "818. Race Car"
 
 ```Go
