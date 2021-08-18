@@ -1024,24 +1024,25 @@ Minimax 可以有两种解法：`DFS+memory`和`DP`。用 DFS 的方式更直观
 
 如："1269. Number of Ways to Stay in the Same Place After Some Steps"
 
-### Rearange 重整数组
+### Discretization 离散化处理
 
-- 有些情况下，给定的数组不能符合算法需要的前提条件，这时可以利用 Rearange 重整为符合条件的数组，比如：
+- 有些情况下，给定的数组不能符合算法需要的前提条件，这时可以利用 Discretization 重整为符合条件的数组，比如：
 
-  1. 元素太稀疏，无法用 bucket/DSU 算法
-  2. 元素包含负数，而目标算法只能用于正整数
-  3. 元素种类不同，我们只关心元素顺序关系而不关心元素值，想把顺序关系简化
+  1. 元素太**稀疏**，无法用 bucket/DSU/BIT/ST 算法
+  2. 元素包含**负数**，而目标算法只能用于正整数
+  3. 元素种类不同，我们只关心元素**顺序关系**而不关心元素值，想把顺序关系简化
 
-- Rearange 思路：
+- Discretization 步骤：
 
-  1. 利用 HashMap 记录已存在元素、利用新 array 紧密排列元素
-  2. 对源数组进行遍历，在新 array 中存储遍历到的新元素，HashMap 的 key 是旧元素的值、value 是这个元素在 array 中的下标(也就是 key 第一次出现时 array 的 length)
-  3. 然后利用结果 HashMap 和新 array 就能利用这种紧密排列的关系用算法处理了
+  1. clone 原数组，对新数组进行排序，得到有序数组
+  2. 准备一个 HashMap，key 是元素值、value 第一次加入该元素时 HashMap 的容量。
+     遍历有序数组，构建 HashMap。HashMap 的 value 值，就是原不重复元素的 **紧密排列**
+  3. 再次按逻辑遍历原数组时，可以直接利用 HashMap 找到其在不重复元素中的序号(从 0 开始)
 
 - 示例：
-  1. xxx
-  2. 这种情况也可以用整体加一个偏移量，使得最小负数转为正整数解决
-  3. "1713. Minimum Operations to Make a Subsequence"
+  1. 元素稀疏："315. Count of Smaller Numbers After Self"
+  2. 元素有负值："315. Count of Smaller Numbers After Self"
+     这种情况也可以用整体加一个偏移量，使得最小负数转为正整数解决
 
 # Little Tips
 

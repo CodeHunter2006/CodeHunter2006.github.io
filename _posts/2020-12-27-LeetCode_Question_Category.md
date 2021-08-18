@@ -1086,6 +1086,19 @@ tags: Algorithm Leetcode
 
 ["313. Super Ugly Number" Math]()
 
+### "315. Count of Smaller Numbers After Self"
+
+- 解法：BIT + Discretization(离散化处理)
+  - 思路：
+    - 直观思路是两重循环统计，但是题目规模为`10^5`，`O(n^2)`的时间复杂度无法满足要求，
+      考虑用`O(logn)`的 BIT 优化为`O(nlogn)`
+    - 先创建一个空的 BIT，容量为所有可能元素，每个元素出现过一次就记 1，
+      这样可以用`preSum(i-1)`求得任意时刻小于 i 的元素的总和
+    - 准备好结果数组，从右向左遍历原数组，统计比该元素小的元素数量，然后将当前元素添加到 BIT
+    - 由于元素范围较大并且存在负数，无法直接使用 BIT，所以需要利用 map 进行离散化处理，具体参考代码
+
+["315. Count of Smaller Numbers After Self" BinaryIndexedTree]()
+
 ### "322. Coin Change"
 
 - 考点：
