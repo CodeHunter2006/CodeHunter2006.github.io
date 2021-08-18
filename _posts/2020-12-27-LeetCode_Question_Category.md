@@ -265,6 +265,17 @@ tags: Algorithm Leetcode
 
 ["74. Search a 2D Matrix" Array Golang]()
 
+### "76. Minimum Window Substring"
+
+- 解法：SlidingWindow
+  - 思路：
+    - 用 map 统计 target 字符串所需各个字符数量
+    - 向右滑动窗口 right 边，累加字符数量，直到满足目标条件
+    - 向右滑动窗口 left 边，去掉逐个去掉左边元素，每次执行条件检查函数，同时记录最小窗口和起始位置
+  - 优化：
+    - 每次都检查所有字母数量是否匹配比较耗时，可以利用变动时的边界条件，记录满足条件的字符数量是否有变化。
+      这样可以用数组记录、每次变化无需轮询检查所有字母
+
 ### "78. Subsets"
 
 - 迭代法：
@@ -1533,6 +1544,15 @@ tags: Algorithm Leetcode
   - 利用二分查找模板实现快速查找，用`isRight(m)`更容易实现
 
 ["528. Random Pick with Weight" Random]()
+
+### "552. Student Attendance Record II"
+
+- 解法：DP
+  - 思路：
+    - 这是一个典型的 DP 算法，根据题意可分析出 DP 状态有三个维度：当前天数 i + 已缺席数 j + 已连续迟到数 k
+    - 设`dp[i][j][k]`为第 i 天根据结尾情况而不同的记录，可以推导出状态转移方程，详情见代码
+
+["552. Student Attendance Record II" DynamicPlanning]()
 
 ### "554. Brick Wall"
 

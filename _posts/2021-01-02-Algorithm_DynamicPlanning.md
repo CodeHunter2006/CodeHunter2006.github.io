@@ -810,6 +810,45 @@ func change(amount int, coins []int) int {
 }
 ```
 
+### "552. Student Attendance Record II"
+
+```Go
+func checkRecord(n int) (ret int) {
+    const Mod = 1e9+7
+    var dp [2][2][3]int
+    dp[0][0][0] = 1
+
+    for i := 1; i <= n; i++ {
+        // P 结尾
+        for j := 0; j < 2; j++ {
+            for k := 0; k < 3; k++ {
+                dp[1][j][0] = (dp[1][j][0] + dp[0][j][k]) % Mod
+            }
+        }
+        // A 结尾
+        for k := 0; k < 3; k++ {
+            dp[1][1][0] = (dp[1][1][0] + dp[0][0][k]) % Mod
+        }
+        // L 结尾
+        for j := 0; j < 2; j++ {
+            for k := 1; k < 3; k++ {
+                dp[1][j][k] = (dp[1][j][k] + dp[0][j][k-1]) % Mod
+            }
+        }
+        dp[0] = dp[1]
+        dp[1] = [2][3]int{}
+    }
+
+    for j := 0; j < 2; j++ {
+        for k := 0; k < 3; k++ {
+            ret = (ret + dp[0][j][k]) % Mod
+        }
+    }
+
+    return ret
+}
+```
+
 ### "664. Strange Printer" Golang
 
 ```Go
