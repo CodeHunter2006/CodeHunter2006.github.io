@@ -439,6 +439,16 @@ tags: Algorithm Leetcode
     - 可以从两个方向分别进行检索，即形成三个 set：dict beginSet endSet
     - 一旦发现下一个单词在对方的 set 中，就能找到答案
 
+### "128. Longest Consecutive Sequence"
+
+- 解法：HashTable
+  - 思路：
+    - 只要排序就能解决，但题目要求时间复杂度`O(n)`，可以考虑 DSU 或 HashTable，DSU 逻辑稍复杂，用 HashTable 更容易一些
+    - 先把元素都保存到 HashTable，然后遍历每个元素
+    - 遍历时，检查当前元素左边一个元素是否存在，如果不存在则当前元素可以作为起点进行循环检索，查找最长长度
+
+["128. Longest Consecutive Sequence" HashTable]()
+
 ### "131. Palindrome Partitioning"
 
 - 解法：backtracking + dp
@@ -1114,6 +1124,20 @@ tags: Algorithm Leetcode
 
 ["324. Wiggle Sort II" Sort C++]()
 
+### "327. Count of Range Sum"
+
+- 解法：BIT + Discretization(离散化处理) + 公式变换
+  - 思路：
+    - 题目要求`i<j; lower < s(i,j) < upper`，其中`s(i,j)`可以用 preSum 实现`preSum[j]-preSum[i]`
+    - 如果直接双循环统计结果，时间复杂度为`O(n^2)`，由于数据规模高达`10^5`，所以会超时，需要进一步简化
+    - 公式变换`lower < preSum[j]-preSum[i] => preSum[i] < preSum[j]-lower`，从公式可以看出，在遍历 preSum
+      当前下标为`j`时只要统计比`preSum[j]-lower`更小的元素数量即可。同理推导出`preSum[j]-upper < preSum[i]`，
+      进一步缩小了统计范围`preSum[j]-upper < preSum[i] < preSum[j]-lower`。
+    - 对一定范围的元素数量做快速统计，可以利用 BIT 实现
+    - 由于本题的元素范围较大，需要用离散化处理可能元素，包括`preSum[i]`和`preSum[i]-upper`
+
+["327. Count of Range Sum" BinaryIndexedTree]()
+
 ### "332. Reconstruct Itinerary"
 
 - 解法：欧拉路径 Hierholzer Algorithm
@@ -1320,6 +1344,13 @@ tags: Algorithm Leetcode
 
 ["413. Arithmetic Slices" Math]()
 
+### "415. Add Strings"
+
+- 解法：
+  - 思路：
+    - 这道题是常用的进位累加思路，同时维护数组指针 p1、p2 和进位数 carry，循环处理直到三者全部"耗尽"
+    - 注意生成的结果 slice 是反向的，需要执行一次反转
+
 ### "416. Partition Equal Subset Sum"
 
 - 思路：dp
@@ -1496,6 +1527,13 @@ tags: Algorithm Leetcode
     - 计算过程中只要记录两者之差会更容易，如果最后需要值，只需要根据两者之差和所有元素和计算二元一次方程即可
 
 ["486. Predict the Winner" Minimax]()
+
+### "493. Reverse Pairs"
+
+- 解法：BIT + 离散化处理
+  - 思路：
+    - 题目类似"327. Count of Range Sum"
+    - 如果以双重循环处理时间复杂度过高，需要利用 BIT 统计符合`> 2 * nums[i]`条件的元素数量
 
 ### "494. Target Sum"
 

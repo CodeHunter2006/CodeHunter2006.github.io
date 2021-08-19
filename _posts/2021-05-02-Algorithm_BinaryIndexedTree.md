@@ -54,6 +54,7 @@ BIT 的实现方式类似 Heap，是在一个数组基础上实现类树状结�
     1. 把所有元素拷贝至`bit[1,n]`的下标内
     2. 对所有元素循环处理，设当前下标为`i`令`j = i + (i & -i)`，`bit[j] += bit[i]`，
        这个操作完成了两个动作：向同层元素右边累加 + 向上层元素累加
+  - 有些情况下每次更新只需要元素计数+1，这种情况下无需 update 函数，只需要 increase 函数就可以了
 
 示例：
 "307. Range Sum Query - Mutable"(**模板**)
@@ -193,6 +194,55 @@ func countSmaller(nums []int) []int {
         bit.Update(m[nums[i]], 1)
     }
 
+    return ret
+}
+```
+
+### "327. Count of Range Sum"
+
+```Go
+type BIT struct {
+    nums []int
+}
+func NewBIT(n int) *BIT {
+    return &BIT{nums: make([]int, n+1)}
+}
+func (p *BIT) Increase(index int) {
+    for index++; index < len(p.nums); index += index & -index {
+        p.nums[index]++
+    }
+}
+func (p *BIT) Sum(index int) (ret int) {
+    for index++; index > 0; index -= index & -index {
+        ret += p.nums[index]
+    }
+    return ret
+}
+func (p *BIT) Range(l, r int) (ret int) {
+    return p.Sum(r) - p.Sum(l-1)
+}
+
+func countRangeSum(nums []int, lower int, upper int) (ret int) {
+    n := len(nums)
+    preSum := make([]int, n+1)
+    allNums := make([]int, 1, 3*n + 1)
+    for i, v := range nums {
+        preSum[i+1] = preSum[i]+v
+        allNums = append(allNums, preSum[i+1]-upper, preSum[i+1]-lower, preSum[i+1])
+    }
+    sort.Ints(allNums)
+    m := make(map[int]int)
+    for _, num := range allNums {
+        if _, ok := m[num]; !ok {
+            m[num] = len(m)
+        }
+    }
+
+    bit := NewBIT(len(m))
+    for _, sum := range preSum {
+        ret += bit.Range(m[sum-upper], m[sum-lower])
+        bit.Increase(m[sum])
+    }
     return ret
 }
 ```

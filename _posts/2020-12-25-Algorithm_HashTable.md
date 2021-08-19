@@ -32,6 +32,28 @@ func groupAnagrams(strs []string) [][]string {
 }
 ```
 
+### "128. Longest Consecutive Sequence"
+
+```Go
+func longestConsecutive(nums []int) (ret int) {
+    m := make(map[int]bool)
+    for _, num := range nums {
+        m[num] = true
+    }
+    for num := range m {
+        if !m[num-1] {
+            count := 1
+            for m[num+1] {
+                num++
+                count++
+            }
+            ret = max(ret, count)
+        }
+    }
+    return ret
+}
+```
+
 ### "560. Subarray Sum Equals K" Golang
 
 ```Go
