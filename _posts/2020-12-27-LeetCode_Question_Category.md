@@ -419,6 +419,14 @@ tags: Algorithm Leetcode
 
 ["123. Best Time to Buy and Sell Stock III" Golang]()
 
+### "124. Binary Tree Maximum Path Sum"
+
+- 解法：DFS
+  - 思路：
+    - dfs 处理每一个节点，分情况取得两个关键 max 值：当前 dfs 的返回值、最终结果最大值
+
+["124. Binary Tree Maximum Path Sum" Tree]()
+
 ### "127. Word Ladder"
 
 - 解法 1: BFS + HashTable
@@ -2688,3 +2696,19 @@ tags: Algorithm Leetcode
   - 思路：
     - 用一般的 DP 迭代演化即可
     - 注意题目给定的 Graph 结构无需改造，直接在每轮迭代中利用边即可
+
+### "剑指 Offer 22. 链表中倒数第 k 个节点"
+
+- 解法 1：链表反转
+  - 思路：
+    - 先执行一遍链表反转，这样 tail 就成了 head
+    - 然后在执行一遍链表反转，这时根据输入参数计数 k，然后返回第二次反转后的链表中段即可
+
+["剑指 Offer 22. 链表中倒数第 k 个节点" LinkedList RevertLinkedList]()
+
+- 解法 2 ：TowPointers
+  - 思路：
+    - 两个指针 slow fast，遍历中保持 slow fast 的间隔为 k
+    - 当 fast 指向结尾的 nil 时，返回 slow 即可
+
+["剑指 Offer 22. 链表中倒数第 k 个节点" LinkedList TwoPointers]()

@@ -241,3 +241,35 @@ func maxSlidingWindow(nums []int, k int) []int {
     return ret
 }
 ```
+
+### "剑指 Offer 22. 链表中倒数第 k 个节点"
+
+```Go
+// revert linkedlist
+func getKthFromEnd(head *ListNode, k int) (ret *ListNode) {
+    revert := func(head *ListNode, maxCount int) (newHead *ListNode) {
+        for ; head != nil && maxCount > 0; maxCount-- {
+            tmp := head.Next
+            head.Next = newHead
+            newHead, head = head, tmp
+        }
+        return newHead
+    }
+    ret = revert(head, math.MaxInt32)
+    return revert(ret, k)
+}
+```
+
+```Go
+// TwoPointers
+func getKthFromEnd(head *ListNode, k int) (ret *ListNode) {
+    slow, fast := head, head
+    for ; k > 0; k-- {
+        fast = fast.Next
+    }
+    for fast != nil {
+        slow, fast = slow.Next, fast.Next
+    }
+    return slow
+}
+```

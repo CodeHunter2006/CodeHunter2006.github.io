@@ -7,6 +7,25 @@ tags: Algorithm Leetcode
 
 记录 Tree 的算法实现
 
+### "124. Binary Tree Maximum Path Sum"
+
+```Go
+var gMaxNum int
+func maxPathSum(root *TreeNode) (ret int) {
+    gMaxNum = math.MinInt32
+    var dfs func(*TreeNode) int
+    dfs = func(cur *TreeNode) (ret int) {
+        if cur == nil { return 0 }
+        l, r := dfs(cur.Left), dfs(cur.Right)
+        ret = max(cur.Val, l+cur.Val, r+cur.Val)
+        gMaxNum = max(gMaxNum, ret, l+r+cur.Val)
+        return ret
+    }
+    dfs(root)
+    return gMaxNum
+}
+```
+
 ### "337. House Robber III" Golang
 
 ```Go
