@@ -959,6 +959,22 @@ tags: Algorithm Leetcode
 
 ["264. Ugly Number II" Math Golang]()
 
+### "269. Alien Dictionary"
+
+- 解法：拓扑排序
+  - 思路：
+    - 分析题目，我们的目的是通过已知字典的字母顺序关系推导出字典字母顺序，可以用拓扑排序实现
+  - 步骤：
+    1. 用二级 map 记录先序字母和后续字母的关系，用另一个 map 记录每个字母的"入度"
+    2. 遍历所有单词、字符，创建所需 map、初始化入度
+    3. 从下标 1 开始遍历 words，比较`words[i]`和`words[i-1]`的每个字母，如果从某个字母开始不同，则可记录一个先序后序关系
+    4. 将所有入度为 0 的元素放入 queue
+    5. 用拓扑排序处理元素、同时记录答案
+    6. 最后确定答案和入度元素数量一只，说明有有效答案
+  - 注意：
+    - `["abc","ab"]`这种情况是非法的，相同前缀下字符较多的应该放在后面，要及时返回`""`
+    - 最后要检查一下结果元素数量与 indegree 元素数量是否一致，如果不一致则返回`""`
+
 ### "274. H-Index"
 
 - 解法 1：Sort + BruteForce
@@ -1781,10 +1797,6 @@ tags: Algorithm Leetcode
 
 ["740. Delete and Earn" Bucket DP Golang]()
 
-### "752. Open the Lock"
-
-- 解法：BFS
-
 ["740. Delete and Earn" BreadthFirstSearch BFS]()
 
 - 解法：`A*`
@@ -1792,6 +1804,10 @@ tags: Algorithm Leetcode
     - 利用到目标点曼哈顿距离作为额外附加距离
 
 ["740. Delete and Earn" BreadthFirstSearch `A*`]()
+
+### "752. Open the Lock"
+
+- 解法：BFS
 
 ### "765. Couples Holding Hands"
 
@@ -1829,6 +1845,14 @@ tags: Algorithm Leetcode
     - 可以利用 Dijkstra 实现，但是用 Bellmen-Ford 正好可以利用 K 个中转站的特性
 
 ["787. Cheapest Flights Within K Stops" Graph]()
+
+### "789. Escape The Ghosts"
+
+- 解法：曼哈顿距离
+  - 思路：
+    - 整个平面没有任何阻挡，所以"两点之间距离最短"，只需要求出"线段长度"就可以了。
+      如果 ghost 的距离比自己近，则 ghost 可以先跑到终点去等着，所以问题转化为判断"是否有 ghost 比自己的距离更近"
+    - 根据题目，这里的距离是**曼哈顿距离**
 
 ### "802. Find Eventual Safe States"
 
