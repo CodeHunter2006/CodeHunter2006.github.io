@@ -145,3 +145,29 @@ func containsNearbyAlmostDuplicate(nums []int, k, t int) bool {
     return false
 }
 ```
+
+### "363. Max Sum of Rectangle No Larger Than K"
+
+```Go
+func maxSumSubmatrix(matrix [][]int, k int) (ret int) {
+    m, n := len(matrix), len(matrix[0])
+    for i := 0; i < m; i++ {
+        sum := make([]int, n)
+        for j := i; j < m; j++ {
+            for k := 0; k < n; k++ {
+                sum[k] += matrix[j][k]
+            }
+            t := &treap{root:&node{}}
+            s := 0
+            for _, v := range sum {
+                s += v
+                if o := t.lowerBound(s - k); o != nil {
+                    ret = max(ret, s - o.val)
+                }
+                t.put(s)
+            }
+        }
+    }
+    return ret
+}
+```

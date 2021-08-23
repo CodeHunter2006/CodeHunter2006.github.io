@@ -255,6 +255,8 @@ func longestPalindromeSubseq(s string) int {
 示例：
 "312. Burst Balloons"
 "516. Longest Palindromic Subsequence"
+"664. Strange Printer"
+"818. Race Car"
 "1039. Minimum Score Triangulation of Polygon"
 "1547. Minimum Cost to Cut a Stick"
 
@@ -852,30 +854,62 @@ func checkRecord(n int) (ret int) {
 ### "664. Strange Printer" Golang
 
 ```Go
+// DFS + Memo
 func strangePrinter(s string) int {
-    N := len(s)
-    dp := make([][]int, N)
-    for i := range dp {
-        dp[i] = make([]int, N)
-    }
-    var dfs func(string, int, int) int
-    dfs = func(s string, i, j int) int {
-        if i > j {
-            return 0
-        } else if dp[i][j] > 0 {
-            return dp[i][j]
+    n := len(s)
+    memo := make([][]int, n)
+    for i := range memo {
+        memo[i] = make([]int, n)
+        for j := 0; j < n; j++ {
+            memo[i][j] = math.MaxInt32
         }
+    }
 
-        dp[i][j] = 1 + dfs(s, i, j-1)
-        for k := i; k < j; k++ {
-            if s[k] == s[j] {
-                // k 和 j 位置的打印次数算在前面，后面可以少算这两个字符
-                dp[i][j] = min(dp[i][j], dfs(s, i, k) + dfs(s, k+1, j-1))
+    var dfs func(int, int) int
+    dfs = func(l, r int) int {
+        if l >= r {
+            return 1
+        }
+        if memo[l][r] != math.MaxInt32 {
+            return memo[l][r]
+        }
+        if s[l] == s[r] {
+            memo[l][r] = min(dfs(l+1,r), dfs(l,r-1))
+        } else {
+            for k := l; k <= r; k++ {
+                memo[l][r] = min(memo[l][r], dfs(l,k) + dfs(k+1,r))
             }
         }
-        return dp[i][j]
+        return memo[l][r]
     }
-    return dfs(s, 0, N-1)
+    return dfs(0, n-1)
+}
+```
+
+```Go
+// 区间 DP
+func strangePrinter(s string) int {
+    n := len(s)
+    dp := make([][]int, n)
+    for i := range dp {
+        dp[i] = make([]int, n)
+    }
+
+    for i := n-1; i >= 0; i-- {
+        dp[i][i] = 1
+        for j := i+1; j < n; j++ {
+            if s[i] == s[j] {
+                dp[i][j] = dp[i][j-1]
+            } else {
+                dp[i][j] = math.MaxInt32
+                for k := i; k < j; k++ {
+                    dp[i][j] = min(dp[i][j], dp[i][k]+dp[k+1][j])
+                }
+            }
+        }
+    }
+
+    return dp[0][n-1]
 }
 ```
 

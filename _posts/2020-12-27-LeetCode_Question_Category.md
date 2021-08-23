@@ -1229,7 +1229,15 @@ tags: Algorithm Leetcode
 
 ["363. Max Sum of Rectangle No Larger Than K" Array]()
 
-- 解法 2:
+- 解法 2: OrderedMap
+  - 思路：
+    - 对行进行双重遍历，累加 ri~rj 每行的值，转化为一维数组
+    - 对一维数组进行 preSum 后，有公式`sr - sl <= k => sr - k <= sl`，这时，如果有`x >= sl`则`sr - x`可作为备选项
+    - 可以把 preSum 的遍历过程用 OrderedMap 处理，快速求出`sr - k`的`lowerBound`
+  - 时间复杂度: `O((m^2)(nlogn))`
+  - Go Treap 的实现参考"220. Contains Duplicate III"
+
+["363. Max Sum of Rectangle No Larger Than K" OrderedMap]()
 
 ### "367. Valid Perfect Square"
 
@@ -1749,12 +1757,26 @@ tags: Algorithm Leetcode
 
 ### "664. Strange Printer"
 
-- 解法 1: 范围 DP + DFS + mem
-- 思路：
-  - dp[i][j] 表示 i~j 范围最小打印的次数
-  - 对所有范围递归求解，每个范围尝试每个点为分割点
-  - 如果分割点和末尾字符一致，则末尾字符可以少打印一次，`dp[i][j] = min(dp[i][j], dfs(s, i, k) + dfs(s, k+1, j-1))`
-  - 在递归开始要先对当前 dp 赋一个保底值
+- 解法 1: 区间 DP，DFS + mem 模板
+  - 思路：
+    - dp[i][j] 表示 i~j 范围最小打印的次数
+    - 有两种转移方程：对于`s[i] == s[j]`的情况，新增左边或右边的字符不增加打印次数，`memo[l][r] = min(dfs(l+1,r), dfs(l,r-1))`
+    - 如果`s[i] != s[j]`，则从中间某点分割，求的最优解，`memo[l][r] = min(memo[l][r], dfs(l,k) + dfs(k+1,r))`。
+      由于中间段已经有结果，所以直接利用即可。
+    - 在递归开始要先对当前 dp 赋一个保底值`math.MaxInt32`
+
+["664. Strange Printer" DP]()
+
+- 解法 2: 区间 DP 模板
+  - 思路：
+    - 依据上面思路，修改为区间 DP 模板
+  - 优点：
+    - 节省了递归调用栈的空间复杂度`O(n)`
+    - 由于控制了 DP 方向，无需 Memo，节省了空间
+  - 注意点：
+    - 直接设置`dp[i][i] = 1`
+    - 遍历所有区域前，要设置初值`dp[i][j] = math.MaxInt32`，避免被初始 0 值干扰
+    - 注意 k 的范围，允许取得单个边界元素，如`dp[i][k], k == i`
 
 ["664. Strange Printer" DP]()
 
@@ -2544,6 +2566,12 @@ tags: Algorithm Leetcode
     - 用 Prim Naive 可以较短时间通过
 
 ["1584. Min Cost to Connect All Points" MST Golang]()
+
+### "1646. Get Maximum in Generated Array"
+
+- 解法：模拟
+  - 思路：
+    - 开始想要反向推导+DFS，发现中间过程和起始条件是不同的，只能用模拟的方式实现
 
 ### "1649. Create Sorted Array through Instructions"
 
