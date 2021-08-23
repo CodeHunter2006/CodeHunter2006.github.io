@@ -205,6 +205,45 @@ func Power(y int) (ret int64) {
 
 ### "1316. Distinct Echo Substrings"
 
+```Go
+// RollingHash
+func distinctEchoSubstrings(text string) (ret int) {
+    const Mod = 1e9+7
+    n := len(text)
+    maxLen := n/2
+    set := make(map[string]bool)
+    for length := 1; length <= maxLen; length++ {
+        hash1, hash2, factor := 0, 0, 1
+may_colission:
+        for i := 0; i < n; i++ {
+            if i < length {
+                hash1 = (hash1*26 + int(text[i]-'a'))%Mod
+                if i > 0 {
+                    factor = (factor*26)%Mod
+                }
+            } else if i < 2*length {
+                hash2 = (hash2*26 + int(text[i]-'a'))%Mod
+            } else {
+                hash1 = hash1 - int(text[i-2*length]-'a')*factor
+                hash1 = (hash1*26 + int(text[i-length]-'a'))%Mod
+                hash2 = hash2 - int(text[i-length]-'a')*factor
+                hash2 = (hash2*26 + int(text[i]-'a'))%Mod
+            }
+            if i >= 2*length-1 && hash1 == hash2 && !set[text[i-length+1:i+1]] {
+                for j := 0; j < length; j++ {
+                    if text[i-j] != text[i-length-j] {
+                        continue may_colission
+                    }
+                }
+                ret++
+                set[text[i-length+1:i+1]] = true
+            }
+        }
+    }
+    return ret
+}
+```
+
 ### "1392. Longest Happy Prefix"
 
 ```Go

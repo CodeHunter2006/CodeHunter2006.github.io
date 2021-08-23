@@ -2297,6 +2297,17 @@ tags: Algorithm Leetcode
   - 由于保证存在答案，只需要让元素自己隔离就可以，不用考虑其他元素
   - 在奇偶转换时，输出数组的前后位置也会自动隔离元素，所以不用担心出问题
 
+### "1063. Number of Valid Subarrays"
+
+- 解法：单调栈
+  - 思路：
+    - 转化思维方式：从某个元素开始向右遍历，当右边遇到小于起始元素的值开始统计起始元素覆盖的子数组数量
+    - 采用单调栈保存下标正好可以实现上述逻辑
+    - 每次元素从栈顶出栈时进行统计
+    - 要在最右侧增加下标`-1`，以便最后所有元素都有机会出栈
+
+["1063. Number of Valid Subarrays" Stack]()
+
 ### "1073. Adding Two Negabinary Numbers"
 
 - 解法：Math
@@ -2449,7 +2460,14 @@ tags: Algorithm Leetcode
 
 ### "1316. Distinct Echo Substrings"
 
-- 解法：RollingHash + PrefixSum
+- 解法：RollingHash
+  - 思路：
+    - 如果用三层 for 循环(下标、长度、子数组元素)，时间复杂度为`O(n^3)`，无法满足题目`2000`的规模
+    - 尝试`1~(n/2)`长度作为 RollingHash 长度，同时维护两个 hash 值滚动
+    - 用一个 set 保证不重复；用重新检查的方式避免 hash collision
+  - 时间复杂度：`O(n^2)`
+
+["1316. Distinct Echo Substrings" SlidingWindow RollingHash]()
 
 ### "1392. Longest Happy Prefix"
 

@@ -245,6 +245,7 @@ return ans
 
 示例：
 [`456. 132 Pattern`]()
+[`1063. Number of Valid Subarrays`]()
 
 ### stack 背影法
 

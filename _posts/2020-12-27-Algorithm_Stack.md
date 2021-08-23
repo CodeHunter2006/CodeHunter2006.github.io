@@ -68,3 +68,20 @@ func largestRectangleArea(heights []int) (ret int) {
     return ret
 }
 ```
+
+### "1063. Number of Valid Subarrays"
+
+```Go
+func validSubarrays(nums []int) (ret int) {
+    nums = append(nums, -1)
+    var stack []int
+    for i, v := range nums {
+        for len(stack) > 0 && nums[stack[len(stack)-1]] > v {
+            ret += i - stack[len(stack)-1]
+            stack = stack[:len(stack)-1]
+        }
+        stack = append(stack, i)
+    }
+    return ret
+}
+```
