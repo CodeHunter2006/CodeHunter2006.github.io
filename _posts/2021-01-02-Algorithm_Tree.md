@@ -87,6 +87,22 @@ func findKthNumber(n int, k int) int {
 }
 ```
 
+### "543. Diameter of Binary Tree"
+
+```Go
+func diameterOfBinaryTree(root *TreeNode) (ret int) {
+    var depth func(*TreeNode) int
+    depth = func(cur *TreeNode) int {
+        if cur == nil { return 0 }
+        l, r := depth(cur.Left), depth(cur.Right)
+        ret = max(ret, l+r+1)
+        return max(l,r)+1
+    }
+    depth(root)
+    return ret-1
+}
+```
+
 ### "863. All Nodes Distance K in Binary Tree"
 
 ```Go

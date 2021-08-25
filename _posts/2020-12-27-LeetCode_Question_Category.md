@@ -384,6 +384,10 @@ tags: Algorithm Leetcode
 
 ["97. Interleaving String" DynamicPlanning]()
 
+### "103. Binary Tree Zigzag Level Order Traversal"
+
+- 解法：中序 dfs 遍历 + 按层保存 + 偶数层反转
+
 ### "105. Construct Binary Tree from Preorder and Inorder Traversal"
 
 - 解法：dfs
@@ -398,6 +402,15 @@ tags: Algorithm Leetcode
 ### "106. Construct Binary Tree from Inorder and Postorder Traversal"
 
 - 参考"105. Construct Binary Tree from Preorder and Inorder Traversal"
+
+### "101. Symmetric Tree"
+
+- 解法：recur
+  - 思路：
+    - 首先想到 dfs 分别输出左右两棵树的元素，然后对比
+    - 还可以利用 recur 传两个参数的方式实现，子树正好也是镜像关系
+
+["101. Symmetric Tree" Recur]()
 
 ### "123. Best Time to Buy and Sell Stock III"
 
@@ -476,6 +489,12 @@ tags: Algorithm Leetcode
   - dp2[j] 表示到 j 为止最少的分割次数，设 i 为一个分割点(0 <= i <= j)使得 i+1~j 是回文，即`dp1[i+1][j] == true`，`dp2[j] = min(dp2[j], dp2[i]+1)`
 
 ["132. Palindrome Partitioning II" Golang]()
+
+### "135. Candy"
+
+- 解法：两遍遍历
+  - 思路：
+    - 分析题目的规律，如果从左向右遍历，则遇到增长情况糖数++；反之从右向左遍历也是。最终取较大值
 
 ### "136. Single Number"
 
@@ -1653,6 +1672,15 @@ tags: Algorithm Leetcode
 
 ["528. Random Pick with Weight" Random]()
 
+### "543. Diameter of Binary Tree"
+
+- 解法：Tree + Recur
+  - 思路：
+    - 根据题目，所谓"直径 diameter"就是某结点左右两边延伸的最大长度范围
+    - 递归实现，假设当前结点是最终结果，计算一个值；假设当前结点是中间结点，向上返回最长距离
+
+["543. Diameter of Binary Tree" Tree]()
+
 ### "552. Student Attendance Record II"
 
 - 解法：DP
@@ -1889,7 +1917,8 @@ tags: Algorithm Leetcode
 
 - 解法：Bellmen-Ford
   - 思路：
-    - 可以利用 Dijkstra 实现，但是用 Bellmen-Ford 正好可以利用 K 个中转站的特性
+    - 可以利用 Dijkstra 实现，但是复杂度过高
+    - 用 Bellmen-Ford 正好可以利用输入的边和 K 个中转站的特性，代码简单
 
 ["787. Cheapest Flights Within K Stops" Graph]()
 
@@ -1900,6 +1929,12 @@ tags: Algorithm Leetcode
     - 整个平面没有任何阻挡，所以"两点之间距离最短"，只需要求出"线段长度"就可以了。
       如果 ghost 的距离比自己近，则 ghost 可以先跑到终点去等着，所以问题转化为判断"是否有 ghost 比自己的距离更近"
     - 根据题目，这里的距离是**曼哈顿距离**
+
+### "797. All Paths From Source to Target"
+
+- 解法：Backtraking
+  - 思路：
+    - DAG(Directed)
 
 ### "802. Find Eventual Safe States"
 
@@ -2784,6 +2819,14 @@ tags: Algorithm Leetcode
     - 利用 LineSweep 原理，将 ranges 拆分成 start end 两个端点
     - 由于目标范围较小，可以直接用 bucket 记录拆分后的变动点累加值
     - 最后遍历一遍 bucket，如果当前累加结果为 0 说明有未覆盖的位置，返回 false
+
+### "剑指 Offer 03. 数组中重复的数字 LCOF"
+
+- 解法：Bucket + In-place + Array
+  - 思路：
+    - 理想的元素和下标一一对应，只要尝试遍历并把元素放到合适的位置，一旦出现重复元素就返回
+
+["剑指 Offer 03. 数组中重复的数字 LCOF" Array]()
 
 ### "LCP 07. 传递信息"
 

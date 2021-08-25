@@ -5,6 +5,24 @@ date: 2020-07-03 23:00:00 +0800
 tags: Algorithm Leetcode
 ---
 
+### "101. Symmetric Tree"
+
+```Go
+func isSymmetric(root *TreeNode) bool {
+    return check(root, root)
+}
+
+func check(p, q *TreeNode) bool {
+    if p == nil && q == nil {
+        return true
+    }
+    if p == nil || q == nil {
+        return false
+    }
+    return p.Val == q.Val && check(p.Left, q.Right) && check(p.Right, q.Left)
+}
+```
+
 ## 剑指 Offer 62. 圆圈中最后剩下的数字
 
 [题目](https://leetcode-cn.com/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/)、官方解答[数学 + 递归](https://leetcode-cn.com/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/solution/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-by-lee/)、[百度百科:约瑟夫环问题](https://baike.baidu.com/item/%E7%BA%A6%E7%91%9F%E5%A4%AB%E9%97%AE%E9%A2%98/3857719?fr=aladdin)

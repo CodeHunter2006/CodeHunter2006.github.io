@@ -349,3 +349,19 @@ func max(nums ...int) (ret int) {
     return ret
 }
 ```
+
+### "剑指 Offer 03. 数组中重复的数字 LCOF"
+
+```Go
+func findRepeatNumber(nums []int) int {
+    for i := range nums {
+        for nums[i] != i {
+            if nums[i] == nums[nums[i]] {
+                return nums[i]
+            }
+            nums[i], nums[nums[i]] = nums[nums[i]], nums[i]
+        }
+    }
+    return 0
+}
+```
