@@ -730,6 +730,8 @@ KMP 也是 Sliding Window 的一个变种，性能达到了子串比较的极致
 
 例：["52. N-Queens II"]()
 
+- 有时当前位置可选项不止一种，需要在多种可能性间用循环遍历
+
 ## BFS(breadth first search 广度优先遍历)
 
 dfs 逻辑容易实现但是有些情况可能会性能很差无法通过性能测试 Case，这时要考虑用 BFS。

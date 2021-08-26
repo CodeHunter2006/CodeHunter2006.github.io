@@ -412,6 +412,13 @@ tags: Algorithm Leetcode
 
 ["101. Symmetric Tree" Recur]()
 
+### "122. Best Time to Buy and Sell Stock II"
+
+- 解法：Greedy
+  - 思路：
+    - 分析规律可知，只要是上升区间，每一段都可以累积结果，
+      `ret += max(0, prices[i+1]-prices[i])`
+
 ### "123. Best Time to Buy and Sell Stock III"
 
 - 考点：
@@ -886,8 +893,8 @@ tags: Algorithm Leetcode
     - 以 OrderedMap 作为 value 的存储，可以快速判断顺序前后两个元素是否符合条件
   - 时间复杂度：O(nlog(min(n,k)))；空间复杂度：O(min(n,k))
 
-["213. House Robber II" OrderedMap RedBlackTree C++]()
-["213. House Robber II" OrderedMap Treap Golang]()
+["220. Contains Duplicate III" OrderedMap RedBlackTree C++]()
+["220. Contains Duplicate III" OrderedMap Treap Golang]()
 
 - 解法 2(推荐): SlidingWindow + Bucket + HashMap
   - 由于比较综合，这个解法属于"hard"
@@ -901,7 +908,21 @@ tags: Algorithm Leetcode
       传入`x`值和桶容量`w`，通过`x/w`计算得出桶的下标。
     - `getID`函数的负数处理比较特殊，为了避免`+0和-0`被重复计算，需要在负值时返回`(x+1)/w - 1`
 
-["213. House Robber II" Bucket Golang]()
+["220. Contains Duplicate III" Bucket Golang]()
+
+### "221. Maximal Square"
+
+- 解法：DP
+  - 思路：
+    - 首先想到暴力解法：第一重循环每个元素遍历，然后二重遍历扩展检测边是否有效。但是这种方法时间复杂度过高
+    - DP 思路：设`dp[x][y]`是以`matrix[x][y]`中以`(x,y)`为右下角坐标的一个正方形的边长。则这个边长的计算有下面三种情况：
+      1. 如果`matix[x][y]`为 1，则有三个正方形可能扩展：上方、左边、左上方，当前最大变长由其中最短边长决定，有转移方程：
+         `dp[x][y] = min(dp[x-1][y], dp[x][y-1], dp[x-1][y-1]) + 1`
+      2. 如果`matix[x][y]`是 0，则直接为 0
+      3. 如果 x y 任意为 0，则最多为 1
+    - 在 DP 遍历中统计最大边长，最后返回面积
+
+["221. Maximal Square" DynamicPalnning]()
 
 ### "229. Majority Element II"
 
@@ -1862,6 +1883,10 @@ tags: Algorithm Leetcode
   - 时间复杂度：`O(nm)`
 
 ["727. Minimum Window Subsequence" DynamicPlanning]()
+
+### "739. Daily Temperatures"
+
+- 解法：单调栈
 
 ### "740. Delete and Earn"
 

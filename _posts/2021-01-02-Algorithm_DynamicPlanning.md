@@ -511,6 +511,31 @@ func rob(nums []int) int {
 }
 ```
 
+### "221. Maximal Square"
+
+```Go
+func maximalSquare(matrix [][]byte) (ret int) {
+    n := len(matrix[0])
+    dpOld, dpNew := make([]int, n), make([]int, n)
+
+    for x := range matrix {
+        for y, v := range matrix[x] {
+            if v == '1' {
+                if x == 0 || y == 0 {
+                    dpNew[y] = 1
+                } else {
+                    dpNew[y] = min(dpOld[y],dpNew[y-1],dpOld[y-1]) + 1
+                }
+                ret = max(ret, dpNew[y])
+            }
+        }
+        dpOld, dpNew = dpNew, dpOld
+        reset(dpNew)
+    }
+    return ret*ret
+}
+```
+
 ### "213. House Robber II"
 
 ```Go
