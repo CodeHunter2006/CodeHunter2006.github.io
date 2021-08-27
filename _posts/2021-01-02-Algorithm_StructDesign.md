@@ -151,6 +151,56 @@ func (this *LRUCache) Put(key int, value int)  {
 }
 ```
 
+### "295. Find Median from Data Stream"
+
+```Go
+type minHeap struct {
+    sort.IntSlice
+}
+func (p *minHeap) Push(x interface{}) {
+    p.IntSlice = append(p.IntSlice, x.(int))
+}
+func (p *minHeap) Pop() interface{} {
+    n := len(p.IntSlice)
+    ret := p.IntSlice[n-1]
+    p.IntSlice = p.IntSlice[:n-1]
+    return ret
+}
+
+type maxHeap struct {
+    minHeap
+}
+func (p *maxHeap) Less(a, b int) bool {
+    // 这里如果用 !p.Less(a, b) 会造成死循环递归
+    return !p.minHeap.Less(a, b)
+}
+
+type MedianFinder struct {
+    minH *minHeap
+    maxH *maxHeap
+}
+func Constructor() MedianFinder {
+    return MedianFinder{
+        minH: &minHeap{},
+        maxH: &maxHeap{},
+    }
+}
+func (this *MedianFinder) AddNum(num int)  {
+    // 首先交换一次元素以确保大小值合理，即 minH 放较大值、maxH 放较小值
+    heap.Push(this.maxH, num)
+    heap.Push(this.minH, heap.Pop(this.maxH))
+    if this.minH.Len() > this.maxH.Len()+1 {
+        heap.Push(this.maxH, heap.Pop(this.minH))
+    }
+}
+func (this *MedianFinder) FindMedian() (ret float64) {
+    if (this.minH.Len()+this.maxH.Len()) & 1 == 0 {
+        return float64(this.minH.IntSlice[0]+this.maxH.IntSlice[0])/2
+    }
+    return float64(this.minH.IntSlice[0])
+}
+```
+
 ### "380. Insert Delete GetRandom O(1)"
 
 ```Go
@@ -251,6 +301,8 @@ func (this *RandomizedCollection) GetRandom() int {
     return this.b[rand.Intn(len(this.b))]
 }
 ```
+
+### "460. LFU Cache"
 
 ```Go
 type VFE struct {

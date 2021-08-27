@@ -1080,6 +1080,31 @@ tags: Algorithm Leetcode
 
 ["279. Perfect Squares" DynamicPlanning]()
 
+### "295. Find Median from Data Stream"
+
+- 解法 1: Heap
+
+  - 思路:
+    - 用上下两个堆维护所有元素，中间可以取值作为查询结果，看起来像两个尖端相对的三角形的
+    - 上面一个最小堆，下面一个最大堆，始终保持上面放最大的数据、下面放最小的数据，然后由两个堆顶决定结果
+    - 如果总数为偶数，则取两个堆顶的平均值；如果为奇数，则让上面最小堆多一个元素，取最小堆的堆顶
+  - 注意：
+    - 为了保证最小堆元素始终大于最大堆，每次新元素到来要先加入最大堆，再从最大堆 pop 一个到最小堆
+
+["295. Find Median from Data Stream" StructDesign]()
+
+- 解法 2: OrderedMap + TwoPointers
+
+  - 思路:
+    - 类似 Heap，但是用 OrderedMap 保存元素，用两个指针分别表示堆顶位置，实际上一个指针也可以
+    - 根据新加入元素的大小和元素总数的奇偶性对指针进行移动
+  - 优点:
+    - 题目要求的扩展"99% 的整数都在 0 到 100 范围内"，可以结合计数排序，超出范围的用 OrderedMap 保存
+
+- 解法 3: CountSort + TwoPointers
+  - 思路：
+    - 题目扩展"所有整数在 0 ～ 100"，可以利用 Bucket+TwoPointers 实现
+
 ### "297. Serialize and Deserialize Binary Tree"
 
 - 解法：DFS + parse
@@ -1564,6 +1589,17 @@ tags: Algorithm Leetcode
   - 时间复杂度：`O(2n) => O(n)`
 
 ["457. Circular Array Loop"TwoPointers]()
+
+### "460. LFU Cache"
+
+- 解法：HashMap + List
+  - 思路：
+    - 元素变动特性：每次一个元素频率改变时，这个频率只能增 1，所以只会影响到临近的频率列表
+    - 两个 Map：一个存储所有频率及其对应的元素链表；一个存储元素信息(值、频率、频率链表结点指针)
+    - 当有元素需要变更频率时，可以利用 map 和链表指针快速变更，链表结点插入到新频率末尾
+    - 始终记录最小频率值，如果添加新元素时容量已满，则删除一个频率最低的头部旧元素
+
+["460. LFU Cache" StructDesign]()
 
 ### "461. Hamming Distance"
 
