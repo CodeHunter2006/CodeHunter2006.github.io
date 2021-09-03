@@ -1741,7 +1741,7 @@ tags: Algorithm Leetcode
   - 带权重的随机选择
 - 解法：preSum + 二分查找
   - 利用 pre sum 计算随机用数组
-  - 利用二分查找模板实现快速查找，用`isRight(m)`更容易实现
+  - 利用二分查找模板实现快速查找，可以在生成随机整数时`+1`，这样直接利用`lowerBound`实现查找
 
 ["528. Random Pick with Weight" Random]()
 
@@ -2452,6 +2452,18 @@ tags: Algorithm Leetcode
     4. 然后通过`/2`处理，逐步取得父结点输出
   - 要点：
     - 不要一上来尝试用简单算法实现，事实证明最后只能分步骤逐步实现功能，代码量无法精简
+
+### "1109. Corporate Flight Bookings"
+
+- 解法：LineSweep + prefix sum + diff
+  - 思路：
+    - 直观的想法是遍历 bookings 把结果累加统计到结果数组。但规模较大时这种时间复杂度是`O(m*n)`
+    - 可以利用 LineSweep 思想，结合 prefix sum 思想，创建一个数组为 prefix sum 前的数组，即 diff 差分数组。
+      遍历 bookings 数据影响起始结束点
+    - 最终生成 prefix sum 为结果并返回
+  - 时间复杂度：`O(m+n)`
+
+["1109. Corporate Flight Bookings" Array]()
 
 ### "1140. Stone Game II"
 

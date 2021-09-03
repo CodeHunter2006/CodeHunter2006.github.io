@@ -204,38 +204,19 @@ func (this *Solution) Pick() []int {
 ### "528. Random Pick with Weight"
 
 ```Go
-import "math/rand"
-
 type Solution struct {
-    preSum []int
+    pre []int
 }
-
 func Constructor(w []int) Solution {
-    rand.Seed(time.Now().Unix())
-
-    preSum := make([]int, len(w))
-    for i, sum := 0, 0; i < len(w); i++ {
-        sum += w[i]
-        preSum[i] = sum
+    rand.Seed(time.Now().UnixNano())
+    for i := 1; i < len(w); i++ {
+        w[i] += w[i-1]
     }
-
-    return Solution{
-        preSum: preSum,
-    }
+    return Solution{ w }
 }
-
 func (this *Solution) PickIndex() int {
-    target := rand.Intn(this.preSum[len(this.preSum)-1])
-    l, r := -1, len(this.preSum)
-    for l + 1 < r {
-        mid := (l+r)>>1
-        if this.preSum[mid] > target {
-            r = mid
-        } else {
-            l = mid
-        }
-    }
-    return r
+    num := rand.Intn(this.pre[len(this.pre)-1])+1
+    return sort.SearchInts(this.pre, num)
 }
 ```
 

@@ -81,6 +81,7 @@ func maximumGap(nums []int) (ret int) {
 ### "215. Kth Largest Element in an Array"
 
 ```Go
+// quick sort
 func findKthLargest(nums []int, k int) int {
     sort.Sort(sort.Reverse(sort.IntSlice(nums)))
     return nums[k-1]
@@ -88,6 +89,7 @@ func findKthLargest(nums []int, k int) int {
 ```
 
 ```Go
+// nth_element
 func findKthLargest(nums []int, k int) int {
     rand.Seed(time.Now().UnixNano())
     l, r, tar := 0, len(nums)-1, len(nums)-k

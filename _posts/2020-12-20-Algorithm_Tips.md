@@ -153,6 +153,13 @@ bool cmp(const int& a,const int& b){return a > b;}
 
 示例：["1316. Distinct Echo Substrings" SlidingWindow RollingHash]()
 
+#### 差分(diff array)
+
+差分是 prefix sum 的反向逻辑处理，类似 line sweep，在 diff 数组修改起始结束点的值以达到修改 prefix sum 结果的目的。
+
+示例：
+["1109. Corporate Flight Bookings" Array]()
+
 ### Kadane 算法(最大连续字段和)
 
 Kadane 是经典的最大连续字段和算法，代码如下：
@@ -634,7 +641,7 @@ dijkstra 求得图中起始点到各个可达点的最短距离，并且它检�
 ### KthLargest(nth_element)
 
 "求数组中第 K 大元素"一般可以用排序、堆的办法处理，但是时间复杂度都是`O(nlogn)`。
-实际上可以借助 QuickSort 的 partition 思想将时间复杂度将为`O(n)`。
+实际上可以借助 QuickSort 的 partition 思想将时间复杂度降为`O(n)`。
 C++ STL 里就有这个实现：`nth_element`
 
 - 思路：
@@ -651,6 +658,7 @@ C++ STL 里就有这个实现：`nth_element`
 
 示例：
 ["215. Kth Largest Element in an Array" Sort]()
+["面试题 17.14. Smallest K LCCI"]()
 
 ## Brute Force(暴风 bf)
 
