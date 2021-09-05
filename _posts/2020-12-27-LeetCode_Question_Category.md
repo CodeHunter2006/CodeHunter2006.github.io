@@ -1498,6 +1498,16 @@ tags: Algorithm Leetcode
 
 ["421. Maximum XOR of Two Numbers in an Array"BinaryOperation Golang]()
 
+### "424. Longest Repeating Character Replacement"
+
+- 解法：SlidingWindow
+  - 思路：
+    - 可以设想一个窗口，右端向右移动，如果字符相同则不会消耗 k，可以继续增长；如果字符不同，则消耗 k，并且左边右移一次
+    - 关键是如何判断"k 消耗完了，左边要右移一次"，`maxNum + k < r - l + 1`
+    - 最后返回窗口大小就行，窗口在整个过程只会增加不会减小
+
+["424. Longest Repeating Character Replacement" SlidingWindow]()
+
 ### "435. Non-overlapping Intervals"
 
 - 解法：Greedy
@@ -1627,7 +1637,14 @@ tags: Algorithm Leetcode
   - 特点：
     - 至少采样两次，并且有`3/7`概率丢弃，所以每次采样期望次数为`2*(4/7+(4/7)^2+...)≈6`，时间复杂度 O(6n)，还是不能符合性能要求
 
-- 解法 3:
+- 解法 3: 直接取余，10000 次采样时**不通过**
+
+  - 思路：
+    - 直接取余辆次，然后求和，然后和对 10 取余，再加一，`return (rand7()+rand7())%10 + 1`
+  - 问题：
+    - `[1,4]`的出现概率要明显高于`[5~10]`，当采样数量大到一定程度就无法通过
+
+- 解法 4:
   - 思路：
     - 利用`[1,7]`找到最快接近`[1,10]`的方法，用`7*7 = 49`的方法，只需要两次`rand7()`采样就能找到最接近 40(10 的整数倍)目标
     - 保留 40 以内的有效值，期望采样次数为`2*(4/5+(4/5)^2...)≈2.4`，时间复杂度 O(2.4n)，符合性能要求

@@ -70,6 +70,23 @@ func shortestPalindrome(s string) string {
 }s
 ```
 
+### "424. Longest Repeating Character Replacement"
+
+```Go
+func characterReplacement(s string, k int) int {
+    l, maxCnt, cnt := 0, 0, make([]int, 26)
+    for r, c := range s {
+        cnt[c-'A']++
+        maxCnt = max(maxCnt, cnt[c-'A'])
+        if maxCnt + k < r - l + 1 {
+            cnt[s[l]-'A']--
+            l++
+        }
+    }
+    return len(s)-l
+}
+```
+
 ### "1438. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit" SlidingWindow+MonotoneQueue Golang
 
 ```Go
