@@ -162,6 +162,7 @@ Design Video Streaming System
 
 - Metadata Sharding
   distribute out data onto multiple machines wisely
+
   - Sharding based on UserID
     - Pros
       - fast for one user's video
@@ -176,3 +177,6 @@ Design Video Streaming System
       - hard to search video belong to one user
       - popular video will cause bottleneck, solve with cache
   - ElasticSearch
+
+- upload breakpoint resume
+  - offset
