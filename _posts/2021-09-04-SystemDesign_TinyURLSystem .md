@@ -7,8 +7,9 @@ tags: Server DesignPattern
 
 ![Tiny URL System](/assets/images/2021-09-04-SystemDesign_TinyURLSystem_1.jpeg)
 Design Tiny URL System
+(Using TinyURL-System to explain System-Design process.)
 
-# Requirement clarification
+# Requirement clarification(2min)
 
 ## functional requirement
 
@@ -30,7 +31,7 @@ Design Tiny URL System
 - may use http 302 to collect parameters，like: who/when/by whom cliked the short URL
 - be accessible through REST/RPC APIs by other services
 
-# Scale of the system - data size
+# Scale of the system - data size(5min)
 
 ## Traffic estimates
 
@@ -58,7 +59,7 @@ Design Tiny URL System
 - `cache size = 0.2 * 1.7 billion * 0.5KB = 170GB`
 - use LRU evict policy
 
-# API interface
+# API interface(1min)
 
 ```
 POST api/v1/data/shorten
@@ -74,7 +75,7 @@ return longURL for HTTP redirection
 DELETE api/v1/data/longURL
 ```
 
-# Database data-model
+# Database data-model(5min)
 
 - URL
 
@@ -95,14 +96,14 @@ DELETE api/v1/data/longURL
 - we don't need much relation between object, so we choose **nosql** like MongoDB
 - nosql also can scale up easily、high throughput
 
-# High-level design
+# High-level design(3min)
 
 1. use "base 62" to present a shortURL
    - base 64 include "+ -"
 2. if hash conflict happend, append string harsh again
 3. Generate algorithm: UUID、distributed uinque id + hash
 
-# Detail design
+# Detail design(5min)
 
 - how much characters we need for shorURL?
   total count is "30 billion" as mentioned before.
@@ -127,7 +128,7 @@ DELETE api/v1/data/longURL
 | collision、rehash            | no collision                           |
 | unpredictable                | predictable if incr 1, security issure |
 
-# Bottlenecks(follow up)
+# Bottlenecks(follow up, 5min)
 
 - how to solve "base 62 predictable" problem ?
   use a inner mapping table to avoid.
