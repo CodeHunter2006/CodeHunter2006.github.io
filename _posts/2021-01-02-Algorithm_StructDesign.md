@@ -379,3 +379,119 @@ func (this *LFUCache) Put(key int, value int)  {
     this.minFreq = 1
 }
 ```
+
+### "480. Sliding Window Median"
+
+```Go
+type hp struct {
+    sort.IntSlice
+    size int    // 有效元素数量
+    delayDelMap map[int]int
+    isBigHeap bool  // true 表示最大堆，保存负数；默认 false 表示最小堆
+}
+func (p *hp) Push(x interface{}) {
+    p.IntSlice = append(p.IntSlice, x.(int))
+}
+func (p *hp) Pop() interface{} {
+    ret := p.IntSlice[p.Len()-1]
+    p.IntSlice = p.IntSlice[:p.Len()-1]
+    return ret
+}
+func (p *hp) push(x int) {
+    p.size++
+    heap.Push(p, x)
+}
+func (p *hp) pop() int {
+    p.size--
+    return heap.Pop(p).(int)
+}
+func (p *hp) prune() {
+    // prune 时 size 不变
+    for p.Len() > 0 {
+        num := p.IntSlice[0]
+        if p.isBigHeap {
+            num = -num
+        }
+        if d, has := p.delayDelMap[num]; has {
+            if d > 1 {
+                p.delayDelMap[num]--
+            } else {
+                delete(p.delayDelMap, num)
+            }
+            heap.Pop(p)
+        } else {
+            break
+        }
+    }
+}
+
+type slidingWindow struct {
+    smallHeap *hp   // 较小元素，是最大堆，放负数
+    largeHeap *hp
+    delayDelMap map[int]int
+    windowSize int
+}
+func NewWindow(size int) *slidingWindow {
+    m := make(map[int]int)
+    return &slidingWindow{
+        smallHeap: &hp{delayDelMap: m, isBigHeap: true},
+        largeHeap: &hp{delayDelMap: m},
+        delayDelMap: m,
+        windowSize: size,
+    }
+}
+func (p *slidingWindow) makeBalance() {
+    if p.smallHeap.size > p.largeHeap.size+1 {  // 较小数堆元素允许偏多1
+        p.largeHeap.push(-p.smallHeap.pop())
+        p.smallHeap.prune()
+    } else if p.largeHeap.size > p.smallHeap.size {
+        p.smallHeap.push(-p.largeHeap.pop())
+        p.largeHeap.prune()
+    }
+}
+func (p *slidingWindow) insert(num int) {
+    if p.smallHeap.Len() == 0 || num <= -p.smallHeap.IntSlice[0] {
+        p.smallHeap.push(-num)
+    } else {
+        p.largeHeap.push(num)
+    }
+    p.makeBalance()
+}
+func (p *slidingWindow) erase(num int) {
+    p.delayDelMap[num]++
+    if num <= -p.smallHeap.IntSlice[0] {
+        p.smallHeap.size--
+        p.smallHeap.prune()
+    } else {
+        p.largeHeap.size--
+        p.largeHeap.prune()
+    }
+    p.makeBalance()
+}
+func (p *slidingWindow) getMedian() float64 {
+    if p.windowSize & 1 > 0 {
+        return float64(-p.smallHeap.IntSlice[0])
+    } else {
+        return float64(-p.smallHeap.IntSlice[0]+p.largeHeap.IntSlice[0])/2
+    }
+}
+
+func medianSlidingWindow(nums []int, k int) []float64 {
+    n := len(nums)
+    sw := NewWindow(k)
+    for _, v := range nums[:k] {
+        sw.insert(v)
+    }
+    ret := make([]float64, 0, n-k+1)
+    ret = append(ret, sw.getMedian())
+
+    for i := k; i < n; i++ {
+        sw.insert(nums[i])
+        sw.erase(nums[i-k])
+        //fmt.Println("insert",nums[i],"erase",nums[i-k],"ret", sw.getMedian(),sw.delayDelMap,sw.smallHeap.IntSlice,sw.largeHeap.IntSlice)
+        ret = append(ret, sw.getMedian())
+    }
+
+    return ret
+}
+```

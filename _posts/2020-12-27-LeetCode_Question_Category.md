@@ -1684,6 +1684,22 @@ tags: Algorithm Leetcode
 
 ["478. Generate Random Point in a Circle" Random]()
 
+### "480. Sliding Window Median"
+
+- 解法：heap + 延迟删除
+  - 思路：
+    - 这道题基于"295. Find Median from Data Stream"，但是增加了"滑动窗口需要动态删除元素"的条件
+    - 由于 heap 只能删除堆顶元素，所以需要利用 HashMap 记录已删除元素以便该元素到堆顶时再真正删除，另外维护真实的 size 以便进行 balance 处理
+    - 首先需要实现 heap，对于最大堆，可以利用"负数最小堆"的逻辑实现
+    - 为 heap 新增 prune 接口，以便发生变化时删除堆顶已被标记的元素
+    - 为 heap 新增 size 字段，以保存真实 size
+    - SlidingWindow 类作为外层封装类，同时维护一个 smallHeap(较小数、最大堆、负数) 和一个 largeHeap(较大数、最小堆、正数)
+    - SlidingWindow 对外提供三个接口：insert/erase/getMedian
+    - SlidingWindow 实现一个内部接口 balance，以便在 insert、erase 之后执行
+    - 最后先预处理一下前面 k 个元素，创建基本的 slidingWindow 对象，然后迭代后面的元素产生结果
+
+["480. Sliding Window Median" StructDesign]()
+
 ### "486. Predict the Winner"
 
 - 解法：Minimax(dfs+memo)
