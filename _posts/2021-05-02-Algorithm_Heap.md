@@ -38,6 +38,50 @@ tags: Algorithm Leetcode
 
 # 题目
 
+### "502. IPO"
+
+```Go
+type hp struct {
+    sort.IntSlice
+}
+func (p *hp) Less(a, b int) bool {
+    return p.IntSlice[a] > p.IntSlice[b]
+}
+func (p *hp) Push(x interface{}) {
+    p.IntSlice = append(p.IntSlice, x.(int))
+}
+func (p *hp) Pop() interface{} {
+    ret := p.IntSlice[p.Len()-1]
+    p.IntSlice = p.IntSlice[:p.Len()-1]
+    return ret
+}
+
+func findMaximizedCapital(k int, w int, profits []int, capital []int) int {
+    n := len(capital)
+    sortedCap := make([][2]int, 0, n)
+    for i := range capital {
+        sortedCap = append(sortedCap, [2]int{capital[i], profits[i]})
+    }
+    sort.Slice(sortedCap, func(a, b int) bool {
+        return sortedCap[a][0] < sortedCap[b][0]
+    })
+
+    h := new(hp)
+
+    for capIndex := 0; k > 0; k-- {
+        for ; capIndex < n && sortedCap[capIndex][0] <= w; capIndex++ {
+            heap.Push(h, sortedCap[capIndex][1])
+        }
+        if h.Len() == 0 {
+            break
+        }
+        w += heap.Pop(h).(int)
+    }
+
+    return w
+}
+```
+
 ### "703. Kth Largest Element in a Stream"
 
 ```Go

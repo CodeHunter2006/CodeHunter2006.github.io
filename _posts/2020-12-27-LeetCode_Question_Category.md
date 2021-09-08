@@ -1739,6 +1739,18 @@ tags: Algorithm Leetcode
 
 ["497. Random Point in Non-overlapping Rectangles" Random]()
 
+### "502. IPO"
+
+- 解法：Greedy + sort + heap
+  - 思路：
+    - 本题初看像背包问题，但仔细分析后只需要贪心算法就可以
+    - 每次有一些可达的利润，用一个最大堆维护
+    - 先对 capital 排序，以便将可达项目的净利润放入堆
+    - 每次赚取一次利润后，金额值 w 增加，然后再尝试后面的项目看是否可达
+    - 直到所有项目做完(堆空)，或 k 用尽
+
+["502. IPO" Heap]()
+
 ### "518. Coin Change 2"
 
 - 考点：
