@@ -2574,6 +2574,14 @@ tags: Algorithm Leetcode
 
 ["1178. Number of Valid Words for Each Puzzle" BinaryOperation Golang]()
 
+### "1208. Get Equal Substrings Within Budget"
+
+- 解法：SlidingWindow
+  - 思路：
+    - 题目要求 s t 两个字符串等长，只要其中一段(下标对应)的连续子串符合条件即可，用 SlidingWindow 统计最长有效子串长度
+  - 注意：
+    - 由于`type byte uint8`，所以`byte`类型做减法时可能无法取得负数，无法利用`abs`函数，需要写专用的`diff`函数取得正数差值
+
 ### "1239. Maximum Length of a Concatenated String with Unique Characters"
 
 - 解法：Backtracking + bit
