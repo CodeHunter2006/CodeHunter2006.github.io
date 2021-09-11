@@ -1843,6 +1843,12 @@ tags: Algorithm Leetcode
 
 ["560. Subarray Sum Equals K" HashTable Golang]()
 
+### "600. Non-negative Integers without Consecutive Ones"
+
+- 解法：DP
+  - 思路：
+    - 想到用 dfs 的方式尝试每一位为 0/1。由于存在重复检索，超时；尝试用 dfs+memo，由于数据规模太大，仍然超时；考虑用 DP 解决
+
 ### "611. Valid Triangle Number"
 
 - 解法 1: 排序 + 二分查找
