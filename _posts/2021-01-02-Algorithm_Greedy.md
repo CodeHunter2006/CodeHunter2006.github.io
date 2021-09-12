@@ -96,3 +96,27 @@ func eraseOverlapIntervals(intervals [][]int) (count int) {
     return count
 }
 ```
+
+### "678. Valid Parenthesis String"
+
+```Go
+func checkValidString(s string) bool {
+    minCount, maxCount := 0, 0
+    for _, c := range s {
+        if c == '(' {
+            minCount++
+            maxCount++
+        } else if c == ')' {
+            minCount = max(minCount-1, 0)
+            maxCount--
+            if maxCount < 0 {
+                return false
+            }
+        } else {
+            minCount = max(minCount-1, 0)
+            maxCount++
+        }
+    }
+    return minCount == 0
+}
+```

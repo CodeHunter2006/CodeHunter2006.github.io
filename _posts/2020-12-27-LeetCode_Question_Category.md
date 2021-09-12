@@ -1943,6 +1943,27 @@ tags: Algorithm Leetcode
 
 - 解法：TrieTree
 
+### "678. Valid Parenthesis String"
+
+- 解法 1：Stack
+  - 思路
+    - 基本思路是利用括号特性：只要中间可以配对，对两边就没有影响。可以利用栈实现这种逻辑
+    - 同时维护两个栈，leftStack starStack，在向右遍历过程中分别累加
+    - 遇到右括号，优先抵消左括号；然后再抵消星号
+    - 最后要用`*`当作右括号尝试抵消所有左括号。由于存在这种非法情况：`*(()`，所以要保存下标，
+      确保`*`一定在左括号右边才能抵消
+
+["678. Valid Parenthesis String" Stack]()
+
+- 解法 2: Greedy
+  - 思路：
+    - 可以记录 leftCount，遇到`(`则增加；遇到`)`则减一；遇到`*`则有三种可能性，所以考虑用一个范围来表示 leftCount
+    - 用 minCount maxCount 记录`(`的可能数量；注意 minCount 最小也不能低于 0
+    - 遇到`)`后，如果`maxCount < 0`，则返回 false
+    - 最后返回`minCount == 0`
+
+["678. Valid Parenthesis String" Greedy]()
+
 ### "688. Knight Probability in Chessboard"
 
 - 解法：dp

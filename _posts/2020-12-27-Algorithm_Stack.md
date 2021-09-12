@@ -69,6 +69,35 @@ func largestRectangleArea(heights []int) (ret int) {
 }
 ```
 
+### "678. Valid Parenthesis String"
+
+```Go
+func checkValidString(s string) bool {
+    var lStack, starStack []int
+    for i, c := range s {
+        if c == '(' {
+            lStack = append(lStack, i)
+        } else if c == '*' {
+            starStack = append(starStack, i)
+        } else if len(lStack) > 0 {
+            lStack = lStack[:len(lStack)-1]
+        } else if len(starStack) > 0 {
+            starStack = starStack[:len(starStack)-1]
+        } else {
+            return false
+        }
+    }
+    for i := len(lStack)-1; i >= 0; i-- {
+        if len(starStack) > 0 && starStack[len(starStack)-1] > lStack[i] {
+            starStack = starStack[:len(starStack)-1]
+        } else {
+            return false
+        }
+    }
+    return true
+}
+```
+
 ### "1063. Number of Valid Subarrays"
 
 ```Go
