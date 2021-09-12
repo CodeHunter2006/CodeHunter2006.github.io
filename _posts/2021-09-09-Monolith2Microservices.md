@@ -35,4 +35,7 @@ referance: [How to break a Monolith into Microservices](https://martinfowler.com
     - In cases where a new service ends up with a call back to the monolith, I suggest to expose a new API from the monolith, and access the API through an anti-corruption layer in the new service to make sure that the monolith concepts do not leak out.
   - Split Sticky Capabilities Early
   - Decouple Vertically and Release the Data Early
-  - Decouple What is Important to the Business and Changes Frequently
+  - Decouple What is Important to the Business and (historically)Changes Frequently
+  - Decouple Capability and not Code
+  - Go Macro First, then Micro
+  - Migrate in Atomic Evolutionary Steps
