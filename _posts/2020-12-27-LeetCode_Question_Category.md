@@ -1554,6 +1554,18 @@ tags: Algorithm Leetcode
 
 ["446. Arithmetic Slices II - Subsequence" DynamicPlanning]()
 
+### "447. Number of Boomerangs"
+
+- 解法：HashMap
+  - 思路：
+    - 只要有某三点组成的两边距离相同则符合条件
+    - 可以双重遍历，外层对每个元素循环，内层循环记录到外层元素的距离，用 HashMap 即可检测是否有相同距离的点
+    - 由于不同排列算两个结果，所以结果累加时要`*2`
+  - 优化：
+    - Go 可以在每轮遍历时重用 map 优化
+
+["447. Number of Boomerangs" HashTable]()
+
 ### "448. Find All Numbers Disappeared in an Array"
 
 - 考点：

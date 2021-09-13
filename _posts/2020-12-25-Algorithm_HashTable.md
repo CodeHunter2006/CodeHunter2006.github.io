@@ -54,6 +54,23 @@ func longestConsecutive(nums []int) (ret int) {
 }
 ```
 
+### "447. Number of Boomerangs"
+
+```Go
+func numberOfBoomerangs(points [][]int) (ret int) {
+    m := make(map[int]int)
+    for _, v1 := range points {
+        for x := range m { delete(m, x) }
+        for _, v2 := range points {
+            dist := (v1[0]-v2[0])*(v1[0]-v2[0]) + (v1[1]-v2[1])*(v1[1]-v2[1])
+            ret += m[dist] * 2
+            m[dist]++
+        }
+    }
+    return ret
+}
+```
+
 ### "560. Subarray Sum Equals K" Golang
 
 ```Go
