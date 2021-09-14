@@ -323,13 +323,26 @@ tags: Algorithm Leetcode
 
 ### "84. Largest Rectangle in Histogram"
 
-- 这道题的**单调栈**解题思路（时间复杂度 O(n)）很重要，在很多其他题中都会用到。
-- 基本原理：
-  1. 从左向右遍历，并不断将高度值的下标 push 入 stack。
-  2. 当某一位置 height 值缩小时，那么之后就很难计算前面的面积了，所以就要把前面比当前值高的 stack 出栈，并计算前面的面积。
-  3. 注意，计算面积时，宽度要当前下标和前面的"背影"相减，所以栈底是-1。
+- 解法：Monotone Stack
+  - 思路：
+    - 这道题的**Monotone Stack(单调栈)**解题思路（时间复杂度 O(n)）很重要，在很多其他题中都会用到。
+    1. 从左向右遍历，并不断将高度值的下标 push 入 stack。
+    2. 当某一位置 height 值缩小时，那么之后就很难计算前面的面积了，所以就要把前面比当前值高的 stack 出栈，并计算前面的面积。
+    3. 注意，计算面积时，宽度要当前下标和前面的"背影"相减，所以栈底是-1。
+    4. 注意，计算面积时，当前的 i 是不取的，所以要 -1。
+  - 时间复杂度：`O(n)`
 
-["84. Largest Rectangle in Histogram" Golang]()
+["84. Largest Rectangle in Histogram" Stack Golang]()
+
+### "85. Maximal Rectangle"
+
+- 解法：DP + Monotone Stack
+  - 思路：
+    - 本题基于"84. Largest Rectangle in Histogram"
+    - 可以逐步对每列进行 DP 累加统计，统计左边到目前列的连续 1 的个数
+    - 然后这个 DP 数组就可以作为`largestRectangleArea`的参数进行统计了
+  - 时间复杂度：
+    由于`largestRectangleArea`的时间复杂度为`O(n)`，所以本题目时间复杂度为`O(mn)`
 
 ### "88. Merge Sorted Array"
 

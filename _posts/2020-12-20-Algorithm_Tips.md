@@ -261,6 +261,14 @@ return ans
 
 例："84. Largest Rectangle in Histogram"、"32. Longest Valid Parentheses"
 
+### 多个栈配合
+
+有时需要多个栈配合实现算法
+
+- 示例：
+  - 两个各自存储信息，动态决定选取哪个栈顶元素
+    ["678. Valid Parenthesis String" Stack]()
+
 ## Queue(队列)
 
 符合 FIFO(先进先出)，一般从队尾入队，队首出队
