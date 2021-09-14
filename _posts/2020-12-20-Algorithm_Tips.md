@@ -93,7 +93,8 @@ tags: Algorithm Leetcode
 
 例：["33. Search in Rotated Sorted Array"]()
 
-- 由于二分查找性能极好，经常在其他算法中可以用于**猜**数字，比如猜 SlidingWindow 的 Window 长度等
+- 由于二分查找性能极好，经常在其他算法中可以用于**猜**数字。只要某个数字具有这种特性：超出一某个值后，某个判断就会一直成立，小于这个值就一直不成立；
+  或者反过来，超出某个值后条件就不成立。比如猜 SlidingWindow 的 Window 长度等
 
 示例：
 ["1044. Longest Duplicate Substring" SlidingWindow RollingHash]()

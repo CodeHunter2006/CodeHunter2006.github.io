@@ -1782,6 +1782,17 @@ tags: Algorithm Leetcode
 
 ["523. Continuous Subarray Sum" Math]()
 
+### "524. Longest Word in Dictionary through Deleting"
+
+- 解法：DP(辅助数组)
+  - 思路：
+    - 最基本的是想到用双指针，匹配比较每个字典字符串和 s，找到最大长度和字母序最小者，时间复杂度`O(d*(m+n))`d 是字典元素平均长度
+    - 在进行每轮比较时，对于字典中的字符串，最关键的是知道下一个字母在 s 中的下一个位置。可以利用 DP 把这个位置信息先统计出来，提高匹配速度
+  - 时间复杂度：
+    `O(m*32 + d*n)` m 是 s 长度，d 是字典元素平均长度，n 是字典元素数量。
+
+["524. Longest Word in Dictionary through Deleting" DynamicPlanning]()
+
 ### "525. Contiguous Array"
 
 - 解法：prefix sum + HashMap

@@ -262,6 +262,15 @@ func longestPalindromeSubseq(s string) int {
 
 ## 判断存在性
 
+## 辅助型 DP
+
+有些情况下 DP 并不能直接求出结果，但是可以帮助降低中间计算的时间复杂度。
+
+示例：
+
+- 以 DP 数组作为快速遍历字符的字典：
+  ["524. Longest Word in Dictionary through Deleting" DynamicPlanning]()
+
 # 综合类型
 
 ## dp + bit
@@ -834,6 +843,37 @@ func change(amount int, coins []int) int {
         }
     }
     return dp[amount]
+}
+```
+
+### "524. Longest Word in Dictionary through Deleting"
+
+```Go
+func findLongestWord(s string, dictionary []string) (ret string) {
+    m := len(s)
+    dp := make([][26]int, m+1)
+    for i := range dp[m] {
+        dp[m][i] = m
+    }
+    for i := m-1; i >= 0; i-- {
+        dp[i] = dp[i+1]
+        dp[i][s[i]-'a'] = i
+    }
+
+outter:
+    for _, str := range dictionary {
+        i := 0
+        for _, c := range str {
+            if dp[i][c-'a'] == m {
+                continue outter
+            }
+            i = dp[i][c-'a']+1
+        }
+        if len(str) > len(ret) || len(str) == len(ret) && str < ret {
+            ret = str
+        }
+    }
+    return
 }
 ```
 
