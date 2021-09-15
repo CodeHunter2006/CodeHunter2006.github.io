@@ -82,6 +82,44 @@ func search(nums []int, target int) bool {
 }
 ```
 
+### "162. Find Peak Element"
+
+```Go
+func findPeakElement(nums []int) int {
+    n := len(nums)
+    compare := func(pos int, toLeft bool) (isUpper bool) {
+        if pos == 0 || pos == n-1 {
+            return true
+        }
+        if toLeft {
+            return nums[pos] > nums[pos-1]
+        }
+        return nums[pos] > nums[pos+1]
+    }
+
+    l, r := 0, n-1
+    for l + 1 < r {
+        m := (l+r)>>1
+        lUp, rUp := compare(m, true), compare(m, false)
+        if lUp && rUp {
+            return m
+        } else if lUp && !rUp {
+            l = m
+        } else {
+            r = m
+        }
+    }
+    if l != r {
+        if nums[l] > nums[r] {
+            return l
+        } else {
+            return r
+        }
+    }
+    return l
+}
+```
+
 ### "275. H-Index II"
 
 ```Go

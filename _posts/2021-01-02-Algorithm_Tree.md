@@ -7,6 +7,37 @@ tags: Algorithm Leetcode
 
 记录 Tree 的算法实现
 
+### "109. Convert Sorted List to Binary Search Tree"
+
+```Go
+func sortedListToBST(head *ListNode) *TreeNode {
+    if head == nil { return nil }
+    slow, fast, pre := head, head.Next, head
+    for fast != nil {
+        pre = slow
+        slow = slow.Next
+        fast = fast.Next
+        if fast != nil {
+            fast = fast.Next
+        }
+    }
+
+    if pre == slow {
+        return &TreeNode { Val: slow.Val }
+    }
+
+    pre.Next = nil
+    next := slow.Next
+    slow.Next = nil
+    cur := &TreeNode{
+        Val : slow.Val,
+        Left: sortedListToBST(head),
+        Right: sortedListToBST(next),
+    }
+    return cur
+}
+```
+
 ### "124. Binary Tree Maximum Path Sum"
 
 ```Go

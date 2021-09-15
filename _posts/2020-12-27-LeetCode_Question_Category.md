@@ -404,6 +404,20 @@ tags: Algorithm Leetcode
 
 ["91. Decode Ways" DP Golang]()
 
+### "95. Unique Binary Search Trees II"
+
+- 解法：Backtracking + Recur
+  - 思路：
+    - 题目可以理解为给定一个数组，这个数组是顺序的，利用这个数组构造树，将根结点，放入结果数组
+    - 可以用 Recur 的思考方式，当前元素取`[1,n]`的某个元素，其 left 正好为左边子数组构造的树、右孩子同理
+    - 取当前结点可以利用 Backtraking 的思路遍历执行，然后将自结点数组排列拼装为当前树
+  - 要点：
+    - 注意边界条件`start > end`时，要返回一个有一个元素的数组，数组唯一元素是个`null`值，这样上层才好排列组合
+  - 优点：
+    - 这样生成代码简洁，而且同一子树在不同父树中重复利用，节省空间
+
+["95. Unique Binary Search Trees II" Backtraking]()
+
 ### "97. Interleaving String"
 
 - 解法：二维 DP
@@ -412,6 +426,18 @@ tags: Algorithm Leetcode
   - 有转移方程`dp[i][j] = dp[i][j] || dp[i-1][j] && s1[i-1] == s3[i+j-1]`
 
 ["97. Interleaving String" DynamicPlanning]()
+
+### "99. Recover Binary Search Tree"
+
+- 解法：双向中序遍历
+  - 思路：
+    - 手动用中序遍历写一下出错的两个树，`3 2 1`、`1 3 2 4`可以找到规律：
+      本应从左到右(左边补 -∞、右边补 +∞)递增，只有两个元素不匹配
+    - 先从左向右遍历一次，找到第一个错乱元素；再从右向左遍历一次，找到第一个错乱元素
+    - 将上面两个元素值交换即可
+    - 不用输出到数组，只要分别用两个方向的中序遍历查找到结点指针即可。
+  - 注意：
+    - 递归函数要有返回值，以便上层判断是否需要继续遍历
 
 ### "103. Binary Tree Zigzag Level Order Traversal"
 
@@ -432,6 +458,14 @@ tags: Algorithm Leetcode
 
 - 参考"105. Construct Binary Tree from Preorder and Inorder Traversal"
 
+### "109. Convert Sorted List to Binary Search Tree"
+
+- 解法：快慢指针 + 递归 + DivideAndConquer + BST
+  - 思路：
+    - 解法基于"108. Convert Sorted Array to Binary Search Tree"，利用快慢指针实现查找中点
+
+["109. Convert Sorted List to Binary Search Tree" Tree]()
+
 ### "101. Symmetric Tree"
 
 - 解法：recur
@@ -440,6 +474,12 @@ tags: Algorithm Leetcode
     - 还可以利用 recur 传两个参数的方式实现，子树正好也是镜像关系
 
 ["101. Symmetric Tree" Recur]()
+
+### "116. Populating Next Right Pointers in Each Node"
+
+- 解法：pre-order
+  - 思路：
+    - 利用先序遍历+层级 pre 结点实现
 
 ### "122. Best Time to Buy and Sell Stock II"
 
@@ -698,6 +738,25 @@ tags: Algorithm Leetcode
 - 这个解法的优点是空间复杂度为 O(1)
 
 ["160. Intersection of Two Linked Lists" LinkedList]()
+
+### "162. Find Peak Element"
+
+- 解法：BinarySearch
+
+  - 思路：
+
+    - 题目规定了所有元素都不相同，所以只需要按基本逻辑想就可以
+    - 如果一个区域左边界趋势是向右增大、同时右边界趋势是向左增大，那么一定能在中间(包括左右边界)找到 peak 下标
+    - 由于题目规定`下标 -1 n 时值为 -♾`，所以整个区域就符合上面假设，一定能找到答案
+    - 利用二分查找，每轮的 m 下标处，判断一下 m 的左右趋势，分几种情况：
+      - 如果 m 左边是向右增大、同时 m 右边是向左增大，那么 m 就是一个 peak
+      - 如果 m 左边是向左增大、同时 m 右边是向右增大，那么任意取一边继续查找就可以
+      - 如果 m 左边是向左增大、同时 m 右边是向左增大，那么应该继续在左边找；反之在右边找
+    - 元素范围`-2^31 ~ (2^31)-1`，如果想在两边加入`-♾`的辅助元素比较麻烦，必须用`int64`类型，占用较大容量。
+      可以写一个辅助函数，判别左右趋势或取出左右的值(int64 类型)。这里选用前者方案
+    - 注意：由于存在`l+1 == r`这种"锁死"的情况，循环条件应该是`l + 1 < r`，然后在循环后再判断一次
+
+["162. Find Peak Element" BinarySearch]()
 
 ### "164. Maximum Gap"
 

@@ -81,6 +81,42 @@ func subsets(nums []int) (ret [][]int) {
 }
 ```
 
+### "95. Unique Binary Search Trees II"
+
+```Go
+/**
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
+func generateTrees(n int) []*TreeNode {
+    return recur(1, n)
+}
+
+func recur(start, end int) (ret []*TreeNode) {
+    if start > end {
+        return []*TreeNode{nil}
+    }
+    for i := start; i <= end; i++ {
+        lTrees, rTrees := recur(start, i-1), recur(i+1, end)
+        for _, left := range lTrees {
+            for _, right := range rTrees {
+                cur := &TreeNode{
+                    Val: i,
+                    Left: left,
+                    Right: right,
+                }
+                ret = append(ret, cur)
+            }
+        }
+    }
+    return ret
+}
+```
+
 ### "216. Combination Sum III"
 
 ```Go
