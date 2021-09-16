@@ -488,7 +488,9 @@ tags: Algorithm Leetcode
   - 思路：
     - 利用递归函数，已知头结点，返回尾结点
     - 然后根据左右子树是否有效的条件，进行前后拼接
+
 ["114. Flatten Binary Tree to Linked List" Tree]()
+
 ### "116. Populating Next Right Pointers in Each Node"
 
 - 解法：pre-order
