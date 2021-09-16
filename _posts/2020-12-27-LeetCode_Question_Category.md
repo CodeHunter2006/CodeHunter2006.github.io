@@ -458,6 +458,13 @@ tags: Algorithm Leetcode
 
 - 参考"105. Construct Binary Tree from Preorder and Inorder Traversal"
 
+### "107. Binary Tree Level Order Traversal II"
+
+- 解法：dfs + 数组反转
+  - 思路：
+    - 先用 dfs 先序遍历 把每层的结果记录
+    - 然后对整体结果反转，得到最终答案
+
 ### "109. Convert Sorted List to Binary Search Tree"
 
 - 解法：快慢指针 + 递归 + DivideAndConquer + BST
@@ -475,11 +482,26 @@ tags: Algorithm Leetcode
 
 ["101. Symmetric Tree" Recur]()
 
+### "114. Flatten Binary Tree to Linked List"
+
+- 解法：recur
+  - 思路：
+    - 利用递归函数，已知头结点，返回尾结点
+    - 然后根据左右子树是否有效的条件，进行前后拼接
+["114. Flatten Binary Tree to Linked List" Tree]()
 ### "116. Populating Next Right Pointers in Each Node"
 
 - 解法：pre-order
   - 思路：
     - 利用先序遍历+层级 pre 结点实现
+
+### "120. Triangle"
+
+- 解法：DP
+  - 思路：
+    - 利用原有二维数组，从下到上进行 DP 演化
+    - 状态转移方程：`triangle[i][j] += min(triangle[i+1][j], triangle[i+1][j+1])`
+    - 最后返回`triangle[0][0]`
 
 ### "122. Best Time to Buy and Sell Stock II"
 
@@ -894,7 +916,11 @@ tags: Algorithm Leetcode
     - 然后再利用 Backtracking 在 board 中进行检索
   - 技巧：
     - 整个过程的关键是 TrieTree 的结点，所以无需封装，直接暴露操作就可以
-    - 由于 TrieTree 的结点一般只标记是否找到，不便与本题，所以可以增加一个`word string`记录完整字符串，以便存入结果
+    - 由于 TrieTree 的结点一般只标记是否找到，不便于本题记录结果，所以可以增加一个`word string`记录完整字符串，以便存入结果
+    - 由于函数可能被调用多次，所以 TrieTree 的根结点要在进入函数后再创建，避免多次测试时混乱
+    - 由于同一节点可能被多次找到为最终结果(不同路径组成相同单词)，可以在找到一次后设置`isWord = false`，这样可以避免重复，也无需使用 map 去重
+
+["212. Word Search II" TrieTree]()
 
 ### "213. House Robber II"
 

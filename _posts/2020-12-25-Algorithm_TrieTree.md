@@ -60,6 +60,75 @@ func (this *Trie) StartsWith(prefix string) bool {
 }
 ```
 
+### "212. Word Search II"
+
+```Go
+type Node struct {
+    child [26]*Node
+    isWord bool
+}
+
+var root *Node
+func add(s string) {
+    cur := root
+    for _, c := range s {
+        idx := c - 'a'
+        if cur.child[idx] == nil {
+            cur.child[idx] = new(Node)
+        }
+        cur = cur.child[idx]
+    }
+    cur.isWord = true
+}
+
+func findWords(board [][]byte, words []string) (ret []string) {
+    root = new(Node)
+    for _, s := range words {
+        add(s)
+    }
+
+    m, n := len(board), len(board[0])
+    visited := make([][]bool, m)
+    for i := range visited {
+        visited[i] = make([]bool, n)
+    }
+    dirs := [4][2]int{{-1,0},{1,0},{0,-1},{0,1}}
+    var pre []byte
+    var dfs func(int, int, *Node)
+    dfs = func(x int, y int, node *Node) {
+        visited[x][y] = true
+        pre = append(pre, board[x][y])
+        defer func(){
+            visited[x][y] = false
+            pre = pre[:len(pre)-1]
+        }()
+
+        if node.isWord {
+            ret = append(ret, string(pre))
+            node.isWord = false
+        }
+
+        for _, d := range dirs {
+            x1, y1 := x+d[0], y+d[1]
+            if 0 <= x1 && x1 < m && 0 <= y1 && y1 < n && !visited[x1][y1] &&
+                node.child[board[x1][y1]-'a'] != nil {
+                dfs(x1, y1, node.child[board[x1][y1]-'a'])
+            }
+        }
+    }
+
+    for i := 0; i < m; i++ {
+        for j := 0; j < n; j++ {
+            if root.child[board[i][j] - 'a'] != nil {
+                dfs(i, j, root.child[board[i][j] - 'a'])
+            }
+        }
+    }
+
+    return ret
+}
+```
+
 ### "616. Add Bold Tag in String"
 
 ```Go

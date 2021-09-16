@@ -31,6 +31,8 @@ import (
 	"math/rand"
 )
 
+const MaxLevel = 10
+
 // SkipElement is the element for Skiplist
 type SkipElement struct {
 	Value interface{}
@@ -113,7 +115,7 @@ func (p *SkipList) REnd() *SkipElement {
 func (p *SkipList) Add(key int, val interface{}) (e *SkipElement, isNew bool) {
 	level := 0
 	// get insert level by random
-	for (rand.Int() & 1) == 1 {
+	for level < MaxLevel && (rand.Int() & 1) == 1 {
 		level++
 	}
 
@@ -134,7 +136,7 @@ func (p *SkipList) Add(key int, val interface{}) (e *SkipElement, isNew bool) {
 
 		// already exists, update value
 		if curNode.next != nil && curNode.next.seq == key {
-			for tempNode := curNode; tempNode != nil; tempNode = tempNode.down {
+			for tempNode := curNode.next; tempNode != nil; tempNode = tempNode.down {
 				tempNode.Value = val
 				e = tempNode
 			}

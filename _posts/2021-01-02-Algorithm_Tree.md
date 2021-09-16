@@ -38,6 +38,30 @@ func sortedListToBST(head *ListNode) *TreeNode {
 }
 ```
 
+### "114. Flatten Binary Tree to Linked List"
+
+```Go
+func flatten(root *TreeNode)  {
+    var dfs func(*TreeNode) *TreeNode
+    dfs = func(cur *TreeNode) *TreeNode {
+        if cur == nil { return nil }
+        fmt.Println(cur.Val)
+        tmpRight, tail := cur.Right, cur
+        if cur.Left != nil {
+            cur.Right = cur.Left
+            tail = dfs(cur.Left)
+            cur.Left = nil
+            tail.Right = tmpRight
+        }
+        if tmpRight != nil {
+            tail = dfs(tmpRight)
+        }
+        return tail
+    }
+    dfs(root)
+}
+```
+
 ### "124. Binary Tree Maximum Path Sum"
 
 ```Go
