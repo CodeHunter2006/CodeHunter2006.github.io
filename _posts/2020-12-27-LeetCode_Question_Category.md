@@ -120,6 +120,16 @@ tags: Algorithm Leetcode
 
 ### "35. Search Insert Position"
 
+- 解法：LowerBound
+
+### "36. Valid Sudoku"
+
+- 解法：矩阵遍历 + bit 压缩
+  - 思路：
+    - 按照题目，只要保证行、列、格三格方向无重复数字即可，可以分别用三个数组记录
+    - 难点之一是求某一格在格数组的下标，`gridIdx := (i/3)*3 + (j/3)`
+    - 为了节省空间，可以利用一个 9 个元素的 int 数组保存结果，int 中每个位可以记录一个数字是否出现过，三个维度需要 27 个位
+
 ### "39. Combination Sum"
 
 - 解法 1：DFS
