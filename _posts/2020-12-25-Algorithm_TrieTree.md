@@ -92,7 +92,7 @@ func findWords(board [][]byte, words []string) (ret []string) {
     for i := range visited {
         visited[i] = make([]bool, n)
     }
-    dirs := [4][2]int{{-1,0},{1,0},{0,-1},{0,1}}
+    dirs := [4][2]int{ {-1,0},{1,0},{0,-1},{0,1} }
     var pre []byte
     var dfs func(int, int, *Node)
     dfs = func(x int, y int, node *Node) {
