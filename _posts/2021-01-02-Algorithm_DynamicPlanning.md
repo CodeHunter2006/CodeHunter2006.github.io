@@ -916,6 +916,23 @@ func checkRecord(n int) (ret int) {
 }
 ```
 
+### "650. 2 Keys Keyboard"
+
+```Go
+func minSteps(n int) int {
+    dp := make([]int, n+1)
+    for i := 2; i <= n; i++ {
+        dp[i] = math.MaxInt32
+        for j := 1; j*j <= i; j++ {
+            if i%j == 0 {
+                dp[i] = min(dp[i], dp[j] + i/j, dp[i/j] + j)
+            }
+        }
+    }
+    return dp[n]
+}
+```
+
 ### "664. Strange Printer" Golang
 
 ```Go

@@ -39,6 +39,8 @@ func getFactors(n int) []int {
 }
 ```
 
+- 另一种求质因数方法，参考：["650. 2 Keys Keyboard" Math]()
+
 ## GCD(Greatest Common Divisor)
 
 **最大公约数**是指多个整数共有的约数中最大的一个。两个相同整数的最大公约数是这个整数自己。
@@ -410,6 +412,23 @@ func judgeSquareSum(c int) bool {
         }
     }
     return false
+}
+```
+
+### "650. 2 Keys Keyboard"
+
+```Go
+func minSteps(n int) (ret int) {
+    for i := 2; i*i <= n; i++ {
+        for n % i == 0 {
+            n /= i
+            ret += i
+        }
+    }
+    if n > 1 {
+        ret += n
+    }
+    return ret
 }
 ```
 
