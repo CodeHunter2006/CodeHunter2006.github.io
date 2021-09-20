@@ -187,6 +187,31 @@ func guessNumber(r int) int {
 }
 ```
 
+### "673. Number of Longest Increasing Subsequence"
+
+```Go
+func findNumberOfLIS(nums []int) int {
+    dp, cnt := [][]int{}, [][]int{}
+    for _, v := range nums {
+        i := sort.Search(len(dp), func(i int) bool { return dp[i][len(dp[i])-1] >= v })
+        c := 1
+        if i > 0 {
+            k := sort.Search(len(dp[i-1]), func(k int) bool { return dp[i-1][k] < v })
+            c = cnt[i-1][len(cnt[i-1])-1] - cnt[i-1][k]
+        }
+        if i == len(dp) {
+            dp = append(dp, []int{v})
+            cnt = append(cnt, []int{0,c})
+        } else {
+            dp[i] = append(dp[i], v)
+            cnt[i] = append(cnt[i], cnt[i][len(cnt[i])-1] + c)
+        }
+    }
+    c := cnt[len(cnt)-1]
+    return c[len(c)-1]
+}
+```
+
 ### "887. Super Egg Drop"
 
 ```Go

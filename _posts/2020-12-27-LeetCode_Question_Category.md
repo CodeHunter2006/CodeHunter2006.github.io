@@ -2094,6 +2094,18 @@ tags: Algorithm Leetcode
     - 本题单纯就是利用二叉树 dfs 的遍历方法，寻找稍大于根结点的值
     - 在遍历时，可以利用父结点小于子节点的特性，提前结束当前子树的遍历
 
+### "673. Number of Longest Increasing Subsequence"
+
+- 解法：DP + BinarySearch
+  - 思路：
+    - 本题基于 ["300. Longest Increasing Subsequence" BinarySearch Golang]() 的思路
+    - 对 dp 数组新增一个维度，`dp[i]`的末位保存以 i 为连续序列长度的子序列、以当前元素为末尾的元素值，这样就记录了历史记录
+    - `cnt[i][j]`记录`dp[i][j]`对应的上升子序列的个数，`cnt[i][j]`的值由所有满足`dp[i-1][k] < d[i][j]`的`cnt[i-1][k]`累加得到
+    - 查找 i 、查找 k 都可以用二分查找法
+    - 为了方便进行`cnt[i]`的累加和运算，用 prefixSum 的形式存储，`cnt[i][0] == 0`
+
+["673. Number of Longest Increasing Subsequence" BinarySearch]()
+
 ### "677. Map Sum Pairs"
 
 - 解法：TrieTree
