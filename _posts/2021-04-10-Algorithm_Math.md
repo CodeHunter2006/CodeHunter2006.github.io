@@ -336,6 +336,25 @@ func (p *myHeap) Pop() interface{} {
 }
 ```
 
+### "326. Power of Three"
+
+```Go
+// loop
+func isPowerOfThree(n int) bool {
+    for n > 0 && n%3 == 0 {
+        n /= 3
+    }
+    return n == 1
+}
+```
+
+```Go
+func isPowerOfThree(n int) bool {
+    dividend := int(math.Pow(3, 19))
+    return n > 0 && dividend % n == 0
+}
+```
+
 ### "365. Water and Jug Problem" "欧几里德算法/辗转相除法"
 
 ```C++

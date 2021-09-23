@@ -550,6 +550,15 @@ tags: Algorithm Leetcode
 
 ["124. Binary Tree Maximum Path Sum" Tree]()
 
+### "125. Valid Palindrome"
+
+- 解法：ASCII 码
+  - 思路：
+    - 在 ASCII 码中，顺序是这样的："大写字母" < "符号" < "小写字母"
+    - 要自己实现`isAlNum`函数`return ('A' <= x && x <= 'Z') || ('a' <= x && x <= 'z') || ('0' <= x && x <= '9')`
+    - 由于大小写字母之间差不是 26(中间有符号)，所以应计算出字母距离`dist := byte('a'-'A')`
+    - 为了避免`0P`这种数字和字符间隔正好 32('a'-'A')的情况被识别为 true，需要专门逻辑，或在最初就调用`strings.ToLower`
+
 ### "127. Word Ladder"
 
 - 解法 1: BFS + HashTable
@@ -580,6 +589,15 @@ tags: Algorithm Leetcode
 
 ["128. Longest Consecutive Sequence" HashTable]()
 
+### "130. Surrounded Regions"
+
+- 解法：In-place + DFS + DivideAndConquer
+  - 思路：
+    - 题目要求是"只要能延伸到边缘的 O 的区域都保持为 O"
+    - 首先对边缘进行扫描，并用 DFS 检索，把 O 改写为 A
+      - 由于 m n 小于 3 时 O 都是在边缘的，所以无需处理，直接返回原样
+    - 再对所有元素遍历一遍，遇到 O 说明是无法触达边缘的，置为 X；遇到 A 说明是之前改变的，还原为 O
+
 ### "131. Palindrome Partitioning"
 
 - 解法：backtracking + dp
@@ -599,6 +617,10 @@ tags: Algorithm Leetcode
   - dp2[j] 表示到 j 为止最少的分割次数，设 i 为一个分割点(0 <= i <= j)使得 i+1~j 是回文，即`dp1[i+1][j] == true`，`dp2[j] = min(dp2[j], dp2[i]+1)`
 
 ["132. Palindrome Partitioning II" Golang]()
+
+### "133. Clone Graph"
+
+- 解法：DFS + HashTable
 
 ### "135. Candy"
 
@@ -1338,6 +1360,22 @@ tags: Algorithm Leetcode
   4. 使用宏函数，避免过多重复代码。
 
 ["324. Wiggle Sort II" Sort C++]()
+
+### "326. Power of Three"
+
+- 解法 1: loop
+  - 思路：
+    - n 不断除以 3，检查结果是否对 3 取余为 0
+    - 最后结果一定是 1
+
+["326. Power of Three" Math loop]()
+
+- 解法 2: Math
+  - 思路：
+    - int32 最大的 3 的幂是`3^19`，那么任意3的幂`3^x`和最大可能值有如下关系：`(3^19)/(3^x) = 3^(19-x)`
+    - 可以推出`0 <= 19-x <= 19`一定是一个整数，所以`(3^(19-x))%3 == 0`
+
+["326. Power of Three" Math]()
 
 ### "327. Count of Range Sum"
 
@@ -2163,6 +2201,14 @@ tags: Algorithm Leetcode
     - 先对数组排序，以便用双指针法检索所有可能范围
 
 ["719. Find K-th Smallest Pair Distance" TwoPointers]()
+
+### "725. Split Linked List in Parts"
+
+- 解法：LinkedList
+  - 思路：
+    - 遍历一遍求出总结点数。可以计算出分段内数量和余数
+    - 然后遍历构建每个分段，每段可以消耗余数
+    - 注意 head 指针不再返回，因此可以作为算法后段变量使用
 
 ### "727. Minimum Window Subsequence"
 

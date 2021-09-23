@@ -253,6 +253,19 @@ return a pseudo-random number in [0.0,1.0)
 `func Intn(n int) int`/`func Int31n(n int32) int32`
 return a non-negative pseudo-random number in [0,n)
 
+## reflect
+
+反射相关
+
+`func DeepEqual(x, y interface{}) bool`
+利用反射对两个对象深度比较，比较 interface 类型时，必须类型和值都相同才能 true。
+
+- 一些特殊的比较点：
+  - Func 类型如果都为 nil 则 equal，否则 not equal。即使是相同函数都 not equal
+  - "empty slice" != "nil slice"
+  - slice 不比较 cap
+  - 如果对象内存在环状依赖，算法会自动识别出这种依赖，在第二次遇到重复对象时会自动认为 equal
+
 ## regexp
 
 正则表达式类
@@ -381,6 +394,8 @@ sort.Sort(sort.Reverse(sort.IntSlice(s)))
 
 字符串操作函数
 
+`func ToLower(s string) string`
+
 `strings.Split(str, seperator string) []string`
 将字符串按照分隔符切割为多个子字符串组成的切片
 
@@ -444,6 +459,11 @@ select {
   case ...:
 }
 ```
+
+## unicode
+
+`func IsDigit(r rune) bool`
+`func IsLetter(r rune) bool`
 
 ## unsafe
 
