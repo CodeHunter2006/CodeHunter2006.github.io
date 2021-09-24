@@ -1372,7 +1372,7 @@ tags: Algorithm Leetcode
 
 - 解法 2: Math
   - 思路：
-    - int32 最大的 3 的幂是`3^19`，那么任意3的幂`3^x`和最大可能值有如下关系：`(3^19)/(3^x) = 3^(19-x)`
+    - int32 最大的 3 的幂是`3^19`，那么任意 3 的幂`3^x`和最大可能值有如下关系：`(3^19)/(3^x) = 3^(19-x)`
     - 可以推出`0 <= 19-x <= 19`一定是一个整数，所以`(3^(19-x))%3 == 0`
 
 ["326. Power of Three" Math]()
@@ -1655,6 +1655,10 @@ tags: Algorithm Leetcode
     - 最后返回窗口大小就行，窗口在整个过程只会增加不会减小
 
 ["424. Longest Repeating Character Replacement" SlidingWindow]()
+
+### "430. Flatten a Multilevel Doubly Linked List"
+
+- 解法：DFS + LinkedList
 
 ### "435. Non-overlapping Intervals"
 
