@@ -2018,6 +2018,12 @@ tags: Algorithm Leetcode
 
 ["560. Subarray Sum Equals K" HashTable Golang]()
 
+### "583. Delete Operation for Two Strings"
+
+- 解法：DP-LCS
+  - 思路：
+    - 本质上就是求 LCS("1143. Longest Common Subsequence")，然后`return m+n - 2*dp[m][n]`
+
 ### "600. Non-negative Integers without Consecutive Ones"
 
 - 解法：DP
