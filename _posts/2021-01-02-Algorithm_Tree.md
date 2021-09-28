@@ -107,6 +107,30 @@ func max(a, b int) int {
 }
 ```
 
+### "437. Path Sum III"
+
+```Go
+func pathSum(root *TreeNode, targetSum int) (ret int) {
+    m := map[int]int{0: 1}
+    var dfs func(*TreeNode, int)
+    dfs = func(cur *TreeNode, pre int) {
+        if cur == nil { return }
+        pre += cur.Val
+        ret += m[pre-targetSum]
+        m[pre]++
+        dfs(cur.Left, pre)
+        dfs(cur.Right, pre)
+        m[pre]--
+        if m[pre] == 0 {
+            delete(m, pre)
+        }
+    }
+    dfs(root, 0)
+
+    return ret
+}
+```
+
 ### "440. K-th Smallest in Lexicographical Order"
 
 ```Go

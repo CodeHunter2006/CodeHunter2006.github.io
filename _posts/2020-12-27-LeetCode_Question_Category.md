@@ -1669,6 +1669,18 @@ tags: Algorithm Leetcode
 
 ["435. Non-overlapping Intervals" Greedy Golang]()
 
+### "437. Path Sum III"
+
+- 解法：Tree + Backtraking + PrefixSum + HashMap
+  - 思路：
+    - 利用 DFS 进行遍历，并记录中间的路径元素，在叶子结点时，可以从后向前遍历求和，判断是否存在 target
+    - 但是上面的方法在每个计算时，时间复杂度为`O(n^2)`，整体时间复杂度为`O(n^3)`，性能太差，可以利用"Two Sum"的方法优化
+    - 可以利用 PrefixSum 记录路径上的前缀和，利用 Backtraking 模式维护
+    - 历史 PrefixSum 的值存储在全局 HashMap 中，假设历史数据 x 在 preSumMap 中，那么 x 出现次数可表示为`preSumMap[pre - target]`
+    - 最后统计返回结果
+
+[]
+
 ### "440. K-th Smallest in Lexicographical Order"
 
 ```
