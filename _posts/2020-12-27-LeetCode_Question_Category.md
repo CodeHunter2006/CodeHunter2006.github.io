@@ -1072,6 +1072,16 @@ tags: Algorithm Leetcode
 
 ["221. Maximal Square" DynamicPalnning]()
 
+### "223. Rectangle Area"
+
+- 解法：Geometry
+  - 思路：
+    - 基本思路：求出各自面积相加，减去相交面积即可
+    - 画两个相交的矩形进行分析，通过max min函数屏蔽数值关系的不确定性
+    - 最后通过`max(width, 0) * max(height, 0)`排除不相交的情况
+
+["223. Rectangle Area" Geometry]()
+
 ### "229. Majority Element II"
 
 - 思路：
