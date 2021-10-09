@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "MySQL 索引优化3"
-date: 20201-09-23 23:00:00 +0800
+date: 2021-09-23 23:00:00 +0800
 tags: MySQL
 ---
 

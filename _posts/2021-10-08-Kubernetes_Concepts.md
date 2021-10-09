@@ -6,11 +6,13 @@ tags: Docker K8S HighConcurrency
 ---
 
 ![kubernetes_docker](/assets/images/2021-10-08-Kubernetes_Concepts_1.svg)
-记录 K8S 常用概念，基础请参考[Kubernetes 基础概念](/2019/02/01/Kubernetes_basic/)
+记录 K8S 常用概念。
+
+基础请参考[Kubernetes 基础概念](/2019/02/01/Kubernetes_basic/)
 
 - Control Plane
   The container orchestration layer that exposes the API and interfaces to define, deploy, and manage the lifecycle of containers.
-  The control plane's components make global decisions about the cluster (for example, scheduling),
+  You can use finalizers to control garbage collection of resources. The control plane's components make global decisions about the cluster (for example, scheduling),
   as well as detecting and responding to cluster events (for example, starting up a new pod when a deployment's replicas field is unsatisfied).
 
 - kube-apiserver
@@ -59,3 +61,85 @@ tags: Docker K8S HighConcurrency
   The Kubernetes API lets you query and manipulate the state of API objects in Kubernetes (for example: Pods, Namespaces, ConfigMaps, and Events).
   Most operations can be performed through the kubectl command-line interface or other command-line tools, such as kubeadm, which in turn use the API.
   However, you can also access the API directly using REST calls.
+
+- API groups and versioning
+  To make it easier to eliminate fields or restructure resource representations,
+  Kubernetes supports multiple API versions, each at a different API path, such as `/api/v1` or `/apis/rbac.authorization.k8s.io/v1alpha1`.
+  API groups make it easier to extend the Kubernetes API.
+  The API group is specified in a REST path and in the apiVersion field of a serialized object.
+  You can config API groups by setting flag to API server, like `--runtime-config=batch/v1=false`
+
+- Kubernetes objects
+  Kubernetes objects are persistent entities in the Kubernetes system.
+  Kubernetes uses these entities to represent the state of your cluster.
+  A Kubernetes object is a "record of intent"--once you create the object, the Kubernetes system will constantly work to ensure that object exists.
+
+  - Deployment
+    an object that can represent an application running on your cluster.
+
+- Object Spec
+  Describe what state you desire for the object. The precise format of the object spec is different for every Kubernetes object
+
+- Object Management
+
+  - Imperative commands
+    operates directly on live objects in a cluster.
+  - Imperative object configuration
+    The file specified must contain a **full** definition of the object in YAML or JSON format.
+  - Declarative object configuration
+    user operates on object configuration files stored locally, however the user does not define the operations to be taken on the files.
+    Create, update, and delete operations are automatically detected per-object by kubectl.
+
+- Object Names and IDs
+  Each object in your cluster has a Name that is unique for that type of resource.
+  Every Kubernetes object also has a UID that is unique(UUID) across your whole cluster(history).
+
+- Namespaces
+  Kubernetes supports multiple virtual clusters backed by the same physical cluster.
+  These virtual clusters are called namespaces.
+
+  - The Kubernetes control plane sets an immutable label `NamespaceDefaultLabelName`,
+    The value of the label is the namespace name.
+
+- Labels
+  Labels are key/value pairs that are attached to objects, such as pods.
+  Labels are intended to be used to specify identifying attributes of objects that are meaningful and relevant to users, but do not directly imply semantics to the core system.
+  Labels can be used to organize and to select subsets of objects.
+  Labels enable users to map their own organizational structures onto system objects in a loosely coupled fashion, without requiring clients to store these mappings.
+
+- Label selectors
+  Unlike names and UIDs, labels do not provide uniqueness.
+  In general, we expect many objects to carry the same label(s).
+
+  - two types of selectors:
+    - equality-based
+      `=,==,!=`
+    - set-based
+      `in,notin,exists`
+  - Similarly the comma separator acts as an AND operator.
+    Set-based requirements can be mixed with equality-based requirements.
+    For example: `partition in (customerA, customerB),environment!=qa`.
+
+- Annotations
+  You can use Kubernetes annotations to attach arbitrary non-identifying metadata to objects.
+  Clients such as tools and libraries can retrieve this metadata.
+  You can use either labels or annotations to attach metadata to Kubernetes objects.
+  abels can be used to select objects and to find collections of objects that satisfy certain conditions.
+  In contrast, annotations are not used to identify and select objects.
+  The metadata in an annotation can be small or large, structured or unstructured, and can include characters not permitted by labels.
+  Annotations, like labels, are key/value maps.
+
+- Field Selectors
+  Field selectors let you select Kubernetes resources based on the value of one or more resource fields.
+  `=,==,!=`
+
+- **???** Finalizers
+  Finalizers are namespaced keys that tell Kubernetes to wait until specific conditions are met before it fully deletes resources marked for deletion.
+  Finalizers alert controllers to clean up resources the deleted object owned.
+  You can use finalizers to control garbage collection of resources.
+
+- Owner references
+  The Job controller also adds owner references to those Pods, pointing at the Job that created the Pods.
+  If you delete the Job while these Pods are running, Kubernetes uses the owner references (not labels) to determine which Pods in the cluster need cleanup.
+  Dependent objects have a metadata.ownerReferences field that references their owner object.
+  Kubernetes sets the value of this field automatically for objects that are dependents of other objects like ReplicaSets, DaemonSets, Deployments, Jobs and CronJobs, and ReplicationControllers.

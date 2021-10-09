@@ -885,6 +885,10 @@ tags: Algorithm Leetcode
 
 ["179. Largest Number" Array]()
 
+### "187. Repeated DNA Sequences"
+
+- 解法：HashTable + SlidingWindow + BitOperation
+
 ### "198. House Robber"
 
 - 解法：DP
