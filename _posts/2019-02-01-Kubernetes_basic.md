@@ -60,7 +60,7 @@ PodSpec 是一个描述 Pod 的 YAML 或 JSON 对象。
 
 可以对一个 Pod 贴多个 Label，然后通过 Selector 选择特定的 Pod，将 Service 或 Replication Controller 应用到上面。
 
-### Replication Controller(ReplicaSet)
+### ReplicaSet(Replication Controller)
 
 确保任意时间都有指定数量的 Pod"副本"在运行，如果监控有 Pod 发生问题，就立刻启动新的进行替换；如果 Pod 又恢复了运行，总数超出了设定，则进行关闭。
 

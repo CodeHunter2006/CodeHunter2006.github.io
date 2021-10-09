@@ -120,6 +120,9 @@ tags: Docker K8S HighConcurrency
     Set-based requirements can be mixed with equality-based requirements.
     For example: `partition in (customerA, customerB),environment!=qa`.
 
+- Set references in API objects
+  Some Kubernetes objects, such as services and replicationcontrollers, also use label selectors to specify sets of other resources, such as pods.
+
 - Annotations
   You can use Kubernetes annotations to attach arbitrary non-identifying metadata to objects.
   Clients such as tools and libraries can retrieve this metadata.
@@ -143,3 +146,33 @@ tags: Docker K8S HighConcurrency
   If you delete the Job while these Pods are running, Kubernetes uses the owner references (not labels) to determine which Pods in the cluster need cleanup.
   Dependent objects have a metadata.ownerReferences field that references their owner object.
   Kubernetes sets the value of this field automatically for objects that are dependents of other objects like ReplicaSets, DaemonSets, Deployments, Jobs and CronJobs, and ReplicationControllers.
+
+- Workloads
+  A workload is an application running on Kubernetes.
+  Whether your workload is a single component or several that work together, on Kubernetes you run it inside a set of pods.
+  In Kubernetes, a Pod represents a set of running containers on your cluster.
+
+  - Kubernetes provides several built-in workload resources:
+    - Deployment and ReplicaSet
+      Deployment is a good fit for managing a stateless application workload on your cluster.
+    - StatefulSet
+      StatefulSet lets you run one or more related Pods that do track state somehow.
+      For example, if your workload records data persistently, you can run a StatefulSet that matches each Pod with a PersistentVolume.
+    - DaemonSet
+      DaemonSet defines Pods that provide node-local facilities.
+      Every time you add a node to your cluster that matches the specification in a DaemonSet, the control plane schedules a Pod for that DaemonSet onto the new node.
+    - Job and CronJob
+      define tasks that run to completion and then stop.
+      Jobs represent one-off tasks, whereas CronJobs recur according to a schedule.
+
+- The Metrics API
+  Through the Metrics API, you can get the amount of resource **currently** used by a given node or a given pod.
+
+- ConfigMap
+  A ConfigMap is an API object used to store non-confidential data in key-value pairs.
+  Pods can consume ConfigMaps as environment variables, command-line arguments, or as configuration files in a volume.
+  (The data stored in a ConfigMap cannot exceed 1 MiB.)
+
+- Secrets
+  A Secret is an object that contains a small amount of sensitive data such as a password, a token, or a key.
+  Such information might otherwise be put in a Pod specification or in a container image.
