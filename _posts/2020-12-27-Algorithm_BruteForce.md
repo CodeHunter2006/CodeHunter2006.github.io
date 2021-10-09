@@ -54,3 +54,26 @@ func hIndex(citations []int) (h int) {
     return h
 }
 ```
+
+### "414. Third Maximum Number"
+
+```Go
+func thirdMax(nums []int) int {
+    var a, b, c *int
+    for _, v := range nums {
+        v := v
+        if a == nil || v > *a {
+            a, b, c = &v, a, b
+        } else if *a > v && (b == nil || v > *b) {
+            b, c = &v, b
+        } else if b != nil && v < *b && (c == nil || v > *c) {
+            c = &v
+        }
+    }
+
+    if c == nil {
+        return *a
+    }
+    return *c
+}
+```
