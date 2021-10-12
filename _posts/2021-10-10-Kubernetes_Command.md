@@ -53,6 +53,15 @@ tags: Docker K8S HighConcurrency
 
 # 常用命令
 
+## get
+
+查询某种资源列表
+
+- `-o yaml` 指定显示的格式
+  - `wide` 显示更多列信息
+  - `yaml` 以 yaml 显示更详细信息
+  - `json` 以 json 显示
+
 `kubectl get ns`
 获取 namespace 列表
 
@@ -62,11 +71,24 @@ tags: Docker K8S HighConcurrency
 `kubectl get pod -n xxx -o yaml`
 以 yaml 格式展示结果，内容非常详细
 
-`kubectl describe pod xxx -n xxx`
-获取指定 pod 的详细信息
+## create
+
+`kubectl create xxx_name --image=xxx`
+创建一个 pod，运行一个 container。这个操作本质上是创建了一个 deployment，`xxx_name`就是 deployment 的名称。
+
+## apply
+
+创建或更新资源配置文件，在配置文件中指定资源类型和参数，文件中可以分多段，也可以直接执行文件夹。
 
 `kubectl apply -f nginx-pod.yaml`
 声明式配置资源
+
+## describe
+
+`kubectl describe pod xxx -n xxx`
+获取指定 pod 的详细信息
+
+## 其他
 
 `kubectl create deployment hello-minikube --image=k8s.gcr.io/echoserver:1.4`
 部署一个 Application

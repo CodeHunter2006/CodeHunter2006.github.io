@@ -114,6 +114,10 @@ xxx.com/xxx v0.1.1 h1:xxxxxxx
   如果 V1 和 V2 是两个子版本，则需要 A B 各自的 go.mod 文件中指定精确版本号，这样就可以正确编译了。
   如果 V1 和 V2 是两个子版本，但是没有精确指定版本号，则会自动拿其中最新的主版本编译。
 
+## 是否采用 vendor 锁定版本？
+
+一般局域网 gitLab 或代理可靠的情况下，在 go.mod 中指定明确的版本号即可锁定，不需要维护 vendor。
+
 ## 常见问题
 
 - go mod init 在没有接 module 名字的时候是执行不了的，会报错 go: cannot determine module path for source directory。可以这样执行：`$ go mod init github.com/jiajunhuang/hello`

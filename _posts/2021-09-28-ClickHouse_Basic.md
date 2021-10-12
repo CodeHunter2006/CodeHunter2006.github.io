@@ -7,6 +7,7 @@ tags: ClickHouse
 
 ![ClickHouse](/assets/images/2021-09-28-ClickHouse_Basic_1.png)
 
+- 缩写 CK 或 CH
 - 由俄罗斯 xxx 在 xxx 开源
 - OLAP
 - 列存储，适合存储宽表数据

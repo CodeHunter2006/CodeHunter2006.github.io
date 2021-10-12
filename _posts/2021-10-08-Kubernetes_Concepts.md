@@ -10,6 +10,8 @@ tags: Docker K8S HighConcurrency
 
 基础请参考[Kubernetes 基础概念](/2019/02/01/Kubernetes_basic/)
 
+# Overview
+
 - Control Plane
   The container orchestration layer that exposes the API and interfaces to define, deploy, and manage the lifecycle of containers.
   You can use finalizers to control garbage collection of resources. The control plane's components make global decisions about the cluster (for example, scheduling),
@@ -147,23 +149,92 @@ tags: Docker K8S HighConcurrency
   Dependent objects have a metadata.ownerReferences field that references their owner object.
   Kubernetes sets the value of this field automatically for objects that are dependents of other objects like ReplicaSets, DaemonSets, Deployments, Jobs and CronJobs, and ReplicationControllers.
 
-- Workloads
-  A workload is an application running on Kubernetes.
-  Whether your workload is a single component or several that work together, on Kubernetes you run it inside a set of pods.
-  In Kubernetes, a Pod represents a set of running containers on your cluster.
+## Workloads
 
-  - Kubernetes provides several built-in workload resources:
-    - Deployment and ReplicaSet
-      Deployment is a good fit for managing a stateless application workload on your cluster.
-    - StatefulSet
-      StatefulSet lets you run one or more related Pods that do track state somehow.
-      For example, if your workload records data persistently, you can run a StatefulSet that matches each Pod with a PersistentVolume.
-    - DaemonSet
-      DaemonSet defines Pods that provide node-local facilities.
-      Every time you add a node to your cluster that matches the specification in a DaemonSet, the control plane schedules a Pod for that DaemonSet onto the new node.
-    - Job and CronJob
-      define tasks that run to completion and then stop.
-      Jobs represent one-off tasks, whereas CronJobs recur according to a schedule.
+A workload is an application running on Kubernetes.
+Whether your workload is a single component or several that work together, on Kubernetes you run it inside a set of pods.
+In Kubernetes, a Pod represents a set of running containers on your cluster.
+
+- Kubernetes provides several built-in workload resources:
+
+  - Deployment and ReplicaSet
+    Deployment is a good fit for managing a stateless application workload on your cluster.
+  - StatefulSet
+    StatefulSet lets you run one or more related Pods that do track state somehow.
+    For example, if your workload records data persistently, you can run a StatefulSet that matches each Pod with a PersistentVolume.
+  - DaemonSet
+    DaemonSet defines Pods that provide node-local facilities.
+    Every time you add a node to your cluster that matches the specification in a DaemonSet, the control plane schedules a Pod for that DaemonSet onto the new node.
+  - Job and CronJob
+    define tasks that run to completion and then stop.
+    Jobs represent one-off tasks, whereas CronJobs recur according to a schedule.
+
+## Services, Load Balancing, and Networking
+
+- Kubernetes networking addresses four concerns:
+
+  - Containers within a Pod use networking to communicate via loopback.
+  - Cluster networking provides communication between different Pods.
+  - The Service resource lets you expose an application running in Pods to be reachable from outside your cluster.
+  - You can also use Services to publish services only for consumption inside your cluster.
+
+- Services
+  An abstract way to expose an application running on a set of Pods as a network service.These Pods are exposed through endpoints.
+  Kubernetes gives Pods their own IP addresses and a single **DNS name** for a set of Pods, and can load-balance across them.
+
+  - Supported protocols：TCP UDP SCTP HTTP PROXY
+  - Discovering services："environment variables" and "DNS"
+
+- Topology-aware traffic routing
+  The label matching between the source and destination lets you, as a cluster operator, designate sets of Nodes that are "closer" and "farther" from one another.
+
+- DNS
+  Kubernetes creates DNS records for services and pods. You can contact services with consistent DNS names instead of IP addresses.
+
+- Exposing the Service
+  Kubernetes supports two ways of doing this:
+
+  - NodePorts
+  - LoadBalancers
+
+![Ingress](/assets/images/2021-10-08-Kubernetes_Concepts_2.png)
+
+- Ingress
+  An API object that manages external access to the services in a cluster, typically HTTP.
+  Ingress may provide load balancing, SSL termination and name-based virtual hosting.
+
+- Ingress Controllers
+  In order for the Ingress resource to work, the cluster must have an ingress controller running.
+
+- EndpointSlices
+  EndpointSlices provide a simple way to track network endpoints within a Kubernetes cluster.
+  They offer a more scalable and extensible alternative to Endpoints.
+  The control plane automatically creates EndpointSlices for any Kubernetes Service that has a selector specified.
+
+- Service Internal Traffic Policy
+  Service Internal Traffic Policy enables internal traffic restrictions to only route internal traffic to endpoints within the node the traffic originated from.
+  The "internal" traffic here refers to traffic originated from Pods in the current cluster.
+  This can help to reduce costs and improve performance.
+
+## Storage
+
+## Task
+
+- Horizontal Pod Autoscaler
+  The Horizontal Pod Autoscaler automatically scales the number of Pods in a replication controller, deployment, replica set or stateful set based on observed CPU utilization (or, with custom metrics support, on some other application-provided metrics).
+  Note that Horizontal Pod Autoscaling does not apply to objects that can't be scaled, for example, DaemonSets.
+
+## API
+
+- GV GVK GVR
+  - GV
+    Api Group & Version
+  - GVK
+    Group Version Kind
+  - GVR
+    Group Version Resource
+
+## Others
 
 - The Metrics API
   Through the Metrics API, you can get the amount of resource **currently** used by a given node or a given pod.
@@ -176,3 +247,17 @@ tags: Docker K8S HighConcurrency
 - Secrets
   A Secret is an object that contains a small amount of sensitive data such as a password, a token, or a key.
   Such information might otherwise be put in a Pod specification or in a container image.
+
+- Garbage Collection
+  Garbage collection is a collective term for the various mechanisms Kubernetes uses to clean up cluster resources.
+  This allows the clean up of resources like the following:
+  - Failed pods
+  - Completed Jobs
+  - Objects without owner references
+  - Unused containers and container images
+  - Dynamically provisioned PersistentVolumes with a StorageClass reclaim policy of Delete
+  - Stale or expired CertificateSigningRequests (CSRs)
+  - Nodes deleted in the following scenarios:
+    - On a cloud when the cluster uses a cloud controller manager
+    - On-premises when the cluster uses an addon similar to a cloud controller manager
+  - Node Lease objects
