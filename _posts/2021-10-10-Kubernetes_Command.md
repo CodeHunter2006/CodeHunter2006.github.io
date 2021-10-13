@@ -39,17 +39,23 @@ tags: Docker K8S HighConcurrency
   - type
     指定资源类型，如 deployment、pod、service
   - name
-    指定资源的名称
+    指定资源的名称，如果不指定名称，则针对整个类型执行，如`get`获取该类型的列表
   - flag
     指定额外的可选参数，如 `-l`
 
 - 可以用`kubectl --help`查询可用 command，列表自带分类。
 
-- 注意默认情况下命令都是针对`default` namespace 执行的，一般都要设置`--namespace`参数，缩写为`-ns`
+- 注意默认情况下命令都是针对`default` namespace 执行的，一般都要设置`--namespace`参数，缩写为`-n`
 
 - 可以用`kubectl api-resources`查看 K8S 中的资源，可以看到"SHORTNAMES"表示其缩写，在命令中可以利用。
 
 - 注意`kubectl`命令对资源名称结尾的`s`并不强制要求，可以带也可不带
+
+# 基本配置
+
+安装 kubectl 工具：`brew install kubernetes-cli helm`，这个命令可以将 helm 工具顺便安装好。
+
+连接 API-Server 需要配置好"cube config"文件，在 mac 中在`~/.cube/config`。
 
 # 常用命令
 
@@ -65,7 +71,7 @@ tags: Docker K8S HighConcurrency
 `kubectl get ns`
 获取 namespace 列表
 
-`kubectl get pod -n xxx`
+`kubectl -n xxx get pod`
 获取 xxx namespace 下的 pod 列表
 
 `kubectl get pod -n xxx -o yaml`
@@ -86,7 +92,21 @@ tags: Docker K8S HighConcurrency
 ## describe
 
 `kubectl describe pod xxx -n xxx`
-获取指定 pod 的详细信息
+获取指定 pod 的详细信息。其中的`state`、`event`是比较重要的调试信息。
+
+## log
+
+`kubectl logs pod testpod`
+
+查看标准输出
+
+## exec
+
+`kubectl -n xxx exec -it testpod bash`
+登录到指定的 pod 执行命令
+
+`kubectl -n xxx exec -it testpod -c testcontainer`
+登录到指定的 container 执行命令
 
 ## 其他
 

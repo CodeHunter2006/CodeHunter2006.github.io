@@ -12,7 +12,7 @@ Log Structured-Merge(LSM) Tree 和 B+ 树相对应，适用于写多读少的 OL
 # 应用场景
 
 在 OLTP 中，MySQL 采用 B+ 树，其特点是可以快速读取数据，但其写入性能较差。
-而某些 OLTP 场景中，写入性能要求很高，而读取性能相对要求低，这时可以考虑用 LSM-Tree，
+而某些 OLTP 场景中，写入性能要求很高，而读取/修改性能相对要求低，这时可以考虑用 LSM-Tree，
 它非常适合保存 Key-Value 类型的数据，因此几乎是 NoSQL 的必选方案
 ，事实上 Hbase、Cassandra、Leveldb、RocksDB 在底层都应用了这种数据结构。
 
