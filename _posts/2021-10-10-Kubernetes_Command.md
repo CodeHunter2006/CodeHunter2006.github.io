@@ -108,6 +108,11 @@ tags: Docker K8S HighConcurrency
 `kubectl -n xxx exec -it testpod -c testcontainer`
 登录到指定的 container 执行命令
 
+## cordon/uncordon
+
+`kubectl cordon $NODENAME`
+将 Node 从调度中独立出来，以避免这个 Node 中的 Pod 运行状态发生变更，可用于调错时保存现场。
+
 ## 其他
 
 `kubectl create deployment hello-minikube --image=k8s.gcr.io/echoserver:1.4`

@@ -251,6 +251,7 @@ In Kubernetes, a Pod represents a set of running containers on your cluster.
 - Garbage Collection
   Garbage collection is a collective term for the various mechanisms Kubernetes uses to clean up cluster resources.
   This allows the clean up of resources like the following:
+
   - Failed pods
   - Completed Jobs
   - Objects without owner references
@@ -261,3 +262,14 @@ In Kubernetes, a Pod represents a set of running containers on your cluster.
     - On a cloud when the cluster uses a cloud controller manager
     - On-premises when the cluster uses an addon similar to a cloud controller manager
   - Node Lease objects
+
+- cordon
+  Marking a node as unschedulable prevents the scheduler from placing new pods onto that Node but does not affect existing Pods on the Node.
+  This is useful as a preparatory step before a node reboot or other maintenance.
+  `kubectl cordon $NODENAME`
+
+- drain
+  You can use kubectl drain to **safely**(graceful termination) evict all of your pods from a node before you perform maintenance on the node.
+  `kubectl drain <node name>`
+  Once it returns (without giving an error), you can power down the node.
+  If you leave the node in the cluster during the maintenance operation, you need to run `kubectl uncordon <node name>` resume scheduling new pods onto the node.
