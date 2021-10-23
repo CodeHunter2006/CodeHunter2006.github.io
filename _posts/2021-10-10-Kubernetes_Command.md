@@ -120,3 +120,9 @@ tags: Docker K8S HighConcurrency
 
 `kubectl expose deployment hello-minikube --type=NodePort --port=8080`
 向外暴露 Application 到 8080 端口
+
+`kubectl scale rc redis --replicas=3`
+执行扩容缩容
+
+`kubectl rolling-update redis -f redis-rc.update.yaml`
+滚动升级
