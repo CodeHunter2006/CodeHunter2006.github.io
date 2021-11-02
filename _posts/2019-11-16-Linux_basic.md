@@ -56,6 +56,9 @@ unix/linux 系统的基本思想是：**一切皆文件**。即各种文件、�
 `/var/log/`
 系统日志目录
 
+`/etc/resolv.conf`
+域名解析服务器 IP 地址
+
 # 常用服务
 
 ## crontab

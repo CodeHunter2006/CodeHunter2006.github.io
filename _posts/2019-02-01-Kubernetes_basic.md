@@ -69,7 +69,7 @@ PodSpec 是一个描述 Pod 的 YAML 或 JSON 对象。
 
 ### Service
 
-定义一系列 Pod 以及访问这些 Pod 的策略的一层抽象。Service 通过 Label 找到 Pod 组。
+定义一系列 Pod 以及访问这些 Pod 的策略的一层抽象，本质上就是请求的转发规则。Service 通过 Label 找到 Pod 组。
 
 首先每个 Service 要定义一个名称、绑定一些 Pod，然后这个 Service 会提供 DNS 服务，只要查找特定名称就能找到可用的 IP 地址。并且 Servie 会对多台 Pod 提供透明的负载均衡，请求会被分发到代理(kube-proxy)完成。
 
