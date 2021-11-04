@@ -10,6 +10,8 @@ tags: Docker K8S HighConcurrency
 
 ## Service
 
+提供一种抽象的"服务"概念，为一种服务提供一个唯一入口，其内部可以通过 LB 策略分配到实际的 Pod。
+
 ```yml
 kind: Service # 资源类型
 apiVersion: v1 # 资源版本
@@ -55,7 +57,49 @@ Session_Affinity: None # 亲和属性
     Headless 模式，不指定 IP，直接根据 svc 名，用内部域名的形式访问。
     `servicename.svc.cluster.local`，其中`svc.cluster.local`是可以在集群配置的
 
+## Ingress
+
+提供 Nginx 的功能：反向代理、7 层 LB。其本质就是通过 IngressController 监听配置规则生成 Nginx 的配置。
+
+```yml
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-http
+  namespace: dev
+spec:
+  tls: # https 需要的密钥
+    - hosts: # https 支持的 host 数组
+        - nginx.test.com
+      secretName: tls-secret # 指定密钥
+  rules: # 规则数组
+    - host: nginx.test.com # 转发的域名/IP
+      http: # http 80 端口
+        paths: # 转发 path 数组
+          - path: /
+            backend:
+              serviceName: nginx-service # 内部 service 名
+              servicePort: 80 # service 暴露的端口
+```
+
+- 创建密钥步骤：
+  1. 生成证书(这里指自己测试用密钥，正式密钥需要正式第三方颁发的证书才可以)
+     `openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout tls.key -out tls.crt -suj "/C=CN/ST=BJ/)-nginx/CN-test.com"`
+  2. 创建密钥
+     `kubectl create secret tls tls-secret --key tls.key --cert tls.crt`
+
+```yml
+# describe 项
+Default backend: default-http-backend:80(<none>) # Nginx 对外提供的端口
+Rules: # Host 映射规则
+  Host           Path Backends
+  ----           ---- --------
+  nginx.test.com  /   nginx-service:80 (xx.xx.xx.xx:80,...)
+```
+
 ## Deployment
+
+提供一个部署流程，可以指定部署一系列资源进行部署。
 
 ```yml
 apiVersion: apps/v1

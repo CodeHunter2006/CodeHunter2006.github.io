@@ -216,6 +216,13 @@ concatenate 将文本连接并输出到标准输出
 `cat xxx`
 查看文件文本内容
 
+## dig
+
+查询域名相关信息
+
+`dig @ns1.google.com www.google.com`
+从指定的 DNS 服务器`ns1.google.com`查询域名`www.google.com`，其中 DNS 服务器可以填 IP 地址。
+
 ### zcat
 
 与 cat 类似，处理压缩文件
