@@ -13,6 +13,21 @@ tags: English
     - Chair Person
     - Meeting Leader
   - verbs
+    - **attend**
+      - attend a meeting
+      - (informal) go to a meeting
+    - **participate**
+      - participate in a meeting
+      - (informal) take part in a meeting
+    - **hold**
+      - hold a meeting
+      - (informal) have a meeting
+    - **chair**
+      - chair a meeting
+      - (informal) run/lead a meeting
+    - **postpone**
+      - postpone the meeting
+      - (informal) put off the meeting
     - **run through**
       to read, look at, or explain something quickly
       - Alex, could you run through the main points from the report please?
@@ -143,6 +158,8 @@ tags: English
       Could you say that again?
     - Could you find another place?
     - Could you speak up?
+  - whistle(echo sound noise)
+    - please mute your mic when not speaking to avoid wistle
   - network lag
     - Sorry I interrupted, you were saying...?
     - Sorry, I'm having problems with my connection. Give me a minute here.
