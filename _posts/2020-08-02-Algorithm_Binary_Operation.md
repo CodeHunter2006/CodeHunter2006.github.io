@@ -324,6 +324,20 @@ func singleNumber(nums []int) int {
 }
 ```
 
+### "268. Missing Number"
+
+```Go
+func missingNumber(nums []int) int {
+    xor, n := 0, len(nums)
+    for i, num := range nums {
+        xor ^= num
+        xor ^= i
+    }
+    xor ^= n
+    return xor
+}
+```
+
 ### "421. Maximum XOR of Two Numbers in an Array"
 
 ```Go

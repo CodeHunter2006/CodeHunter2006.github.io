@@ -60,6 +60,7 @@ Session_Affinity: None # 亲和属性
 ## Ingress
 
 提供 Nginx 的功能：反向代理、7 层 LB。其本质就是通过 IngressController 监听配置规则生成 Nginx 的配置。
+过多的向外暴露的 Service 会占用集群节点的端口，而对外端口资源是有限的，所以需要用 Ingress 转发。
 
 ```yml
 apiVersion: extensions/v1beta1
@@ -122,4 +123,114 @@ spec:
           image: nginx: 1.17.1  # 镜像版本
           ports:
           - containerPort: 80   # 对容器外部开放的端口号
+```
+
+## PersistentVolume(PV)
+
+PV 是集群级别的资源，为底层存储提供了一层抽象，可以绑定到容器上。
+
+```yml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv1
+spec:
+  nfs: # 存储类型，与底层存储对应
+    path: /root/data/pv1
+    server: xxx.xxx.xxx.xxx
+  capacity: # 存储能力，目前只支持存储空间的设置
+    storage: 1Gi
+  accessMode: # 访问模式
+    - ReadWriteMany
+  storageClassName: xxx # 存储类别
+  persistentVolumeReclaimPolicy: Recycle # 回收策略
+```
+
+- 存储类型
+  底层存储类型不同，对应的 spec 子选项会有不同
+- 存储能力
+  目前只有存储容量设置，未来可能有 IOPS 等指标
+- 访问模式
+  - ReadWrightOnce(RWO): 读写，但是只能被单个节点挂载
+  - ReadOnlyMany(ROX): 只读，可以被多个节点挂载
+  - ReadWriteMany(RWX): 读写，可以被多个节点挂载
+- 回收策略
+  当 PV 不再被使用后的处理方式
+  - Retain(保留)，保留数据，需要管理员手动清理
+  - Recycle(回收)，清除 PV 中的数据，相当于`rm -rf /thevolume/*`
+  - Delete(删除)，常见于云服务商的存储服务
+- 存储类别
+
+  - 具有特定类别的 PV 只能与请求了该类别的 PVC 进行绑定
+  - 未设定类别的 PV 只能与不请求任何类别的 PVC 进行绑定
+
+- 状态
+  一个 PV 的生命周期可能处于四种不同阶段：
+  - Available(可用)：可用状态，未被绑定
+  - Bound(已绑定)：表示 PV 已被 PVC 绑定
+  - Released(已释放)： 表示 PVC 被删除，但是资源还未被集群重新声明
+  - Failed(失败)：表示该 PV 的自动回收失败
+
+```yml
+# describe
+status: Bound # 绑定状态
+claim: namespace1/pvc1 # 绑定到某命名空间下的某个 pvc
+reason: #
+```
+
+- status
+  - Bound 已绑定
+  - Available 待绑定
+
+## PersistentVolumeClaim(PVC)
+
+PVC 用于向 cluster 申请存储。
+由于 PVC 的 spec 和 PV 很相近，所以不再解释。
+
+```yml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc
+  namespace: dev
+spec:
+  accessModes:
+  selector: # 采用 label 对 PV 选择
+  storageClassName:
+  resources: # 请求空间
+    requests:
+      storage: 1Gi
+```
+
+```yml
+# describe
+
+status: Pending # 绑定状态
+```
+
+- status
+  - Pending 未找到合适的 PV，挂起
+  - Bound 已绑定到 PV
+
+## Pod
+
+```yml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod1
+  namespace: dev
+spec:
+  containers: # container 数组
+    - name: nginx1
+      image: nginx:1.0
+      cmmand: ["/bin/sh", "-c", ";"]
+      volumeMounts:
+        - name: volume1
+          mountPath: /root/
+  volumes:
+    - name: volume1
+      persistentVolumeClaim:
+        claimName: pvc1
+        readOnly: false
 ```

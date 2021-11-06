@@ -15,6 +15,7 @@ tags: Algorithm Leetcode
 
 示例：
 ["413. Arithmetic Slices" Math]()
+["268. Missing Number" Math Golang]()
 
 ## 等比数列前 n 项求和公式
 
@@ -253,6 +254,19 @@ func nthUglyNumber(n int) int {
         }
     }
     return dp[n]
+}
+```
+
+### "268. Missing Number"
+
+```Go
+func missingNumber(nums []int) int {
+    n, sum := len(nums), 0
+    total := n*(n+1)/2
+    for _, num := range nums {
+        sum += num
+    }
+    return total - sum
 }
 ```
 

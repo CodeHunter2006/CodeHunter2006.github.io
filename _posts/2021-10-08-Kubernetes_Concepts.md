@@ -218,6 +218,19 @@ In Kubernetes, a Pod represents a set of running containers on your cluster.
 
 ## Storage
 
+- Volume
+  At its core, a volume is a directory, possibly with some data in it, which is accessible to the containers in a pod.
+  Volumes can not mount onto other volumes or have hard links to other volumes.
+  Each Container in the Pod's configuration must independently specify where to mount each volume.
+
+- PersistentVolume(PV)
+  It is a resource in the **cluster level** just like a node is a cluster resource.
+  PVs are volume plugins like Volumes, but have a lifecycle independent of any individual Pod that uses the PV.
+
+- PersistentVolumeClaim(PVC)
+  PVC is a request for storage by a user.
+  It is similar to a Pod. Pods consume node resources and PVCs consume PV resources.
+
 ## Task
 
 - Horizontal Pod Autoscaler

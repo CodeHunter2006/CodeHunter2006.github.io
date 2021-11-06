@@ -1161,6 +1161,32 @@ tags: Algorithm Leetcode
 
 ["264. Ugly Number II" Math Golang]()
 
+### "268. Missing Number"
+
+- 解法 1: 排序
+
+  - 时间复杂度：O(nlogn)
+
+- 解法 2: HashMap
+
+  - 空间复杂度：O(n)
+
+- 解法 3: XOR
+  - 思路：
+    - 利用"异或两次可消除"的特性，先对数组遍历求一个 xor 值
+    - 再对`[0,n]`进行一次遍历叠加 xor 值
+    - 最后的 xor 值即为缺少的元素
+
+["268. Missing Number" BinaryOperation Golang]()
+
+- 解法 4: Math
+  - 思路：
+    - 按照等差数列求和公式`total = n(n+1)/2`可以求得`[0,n]`元素完整时的总和
+    - 然后再求得数组元素和`sum`
+    - 最终缺失的元素就是`total - sum`
+
+["268. Missing Number" Math Golang]()
+
 ### "269. Alien Dictionary"
 
 - 解法：拓扑排序
