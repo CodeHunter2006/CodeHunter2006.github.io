@@ -100,7 +100,7 @@ Rules: # Host 映射规则
 
 ## Deployment
 
-提供一个部署流程，可以指定部署一系列资源进行部署。
+提供一个部署流程，可以指定部署一系列资源进行部署。会启动 ReplicaSet 维护指定数量的 Pod。
 
 ```yml
 apiVersion: apps/v1
@@ -124,6 +124,75 @@ spec:
           ports:
           - containerPort: 80   # 对容器外部开放的端口号
 ```
+
+## StatefulSet
+
+适合处理"有状态"的 Pod，即 Pod 重启后名称、网络地址、存储不变。
+
+- 和 Deployment 功能类似，但不依赖 ReplicaSet，而是直接控制 Pod
+- 创建 Pod 时，自动为每个 Pod 实例创建唯一名称，序号`[0,n)`
+- Pod 用 Headless 模式，直接通过内部域名访问，重启后域名不变
+- PVC 的创建也是与 Pod 名称绑定，确保 Pod 重启后加载同一 PVC，需要设置 volumeClaimTemplates
+- 用 ControllerRevision 进行多版本 template 管理，可以用于滚动升级，
+- 升级时 StatefulSet 会按序号删除旧 Pod，自动创建同名新 Pod。默认每个 Pod 按顺序逐个升级。
+
+```yml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: web
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  serviceName: "nginx"
+  replicas: 3 # default is 1
+  podManagementPolicy: OrderedReady # 管理策略
+  updateStragegy: RollingUpdate # 升级策略
+  partition: 0 # default 0, old version pod num when rolling update
+  revisionHistoryLimit: 10 # keep history to rollback, default 10
+  template: # Pod template
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: nginx
+          image: k8s.gcr.io/nginx-slim:0.8
+          ports:
+            - containerPort: 80
+              name: web
+          volumeMounts:
+            - name: www
+              mountPath: /usr/share/nginx/html
+  volumeClaimTemplates: # PVC templates
+    - metadata:
+        name: www
+      spec:
+        accessModes: ["ReadWriteOnece"]
+        storageClassName: "my-storage-class"
+        resources:
+          requests:
+            storage: 1Gi
+```
+
+- Pod 管理策略
+  - OrderedReady(默认值)
+    在扩缩容时，要保证顺序。扩容时保证前面序号的 Pod 处于 Ready 状态后，再创建后面的 Pod；缩容时先删除序号最大的。
+  - Parallel
+    扩缩容 Pod 时无需等待。
+- Pod 升级策略
+  - RollingUpdate(默认)
+  - OnDelete
+    禁止主动升级，只有删除 Pod 后才自动用新版本创建
+- partition
+  升级新版本时保留旧版本 Pod 的数量，可用于**灰度升级**
+
+- pod 名称：
+  `nginx-web-0`
+- pvc 名称：
+  `www-storage-nginx-web-0`
 
 ## PersistentVolume(PV)
 
