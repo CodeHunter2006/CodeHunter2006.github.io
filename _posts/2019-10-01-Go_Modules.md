@@ -12,6 +12,11 @@ Go Modules 是 Golang 1.11 版本时加入的模块依赖管理解决方案，�
 
 Modules(模块)是可以被依赖的代码单元，可以包含多个 Package(包)。
 
+- 一个工程属于一个 Module，文件夹、package、文件名之间是没有固定关系的
+- 通常 package 名和文件所属文件夹是同名的，只有项目的根文件夹不需要符合这个要求
+- 如根文件夹可以是任何名字，其中的多个 go 文件可以声明为不同的 package，其中`package main`下的将被编译为主程序；其他的 package 会被 import 时导入
+- `import "xxx"`导入的本质是导入一个**文件夹**，如果这个文件夹在本地没有而需要从 github 导入，则自动`go get`对应的 module
+
 `go.mod`文件用于描述当前项目依赖哪些模块及依赖方式。每个被依赖的模块会记录版本号、地址、备选版本、不选版本等信息，以便未来通过网络下载构建时能够精确产生出最终编译结果。
 
 Go Proxy 用于依赖包的查找和下载，可以备选多个代理网址。不同项目依赖的相同模块在本地只存储一份，避免重复存储导致容量暴涨问题(比如 node.js 的 npm)。
@@ -118,6 +123,29 @@ xxx.com/xxx v0.1.1 h1:xxxxxxx
 
 一般局域网 gitLab 或代理可靠的情况下，在 go.mod 中指定明确的版本号即可锁定，不需要维护 vendor。
 
+## module 的版本号语义
+
+我们用三级版本号表示一个 module 的版本：
+`vMAJOR.MINOR.PATCH`
+
+- v：表示版本
+- MAJOR：主版本，通常是大版本升级，导致向前不兼容
+- MINOR：次版本，通常是向下兼容的 feture
+- PATCH：修订版本，如一些 bugfix
+
+默认情况下执行`go get`是不会升级主版本号的，因为大版本不兼容。需要执行`go get -u`进行升级。
+
+在版本升级时，会在 github 中打 tag，比如`v3.0.0`。
+import module 时，可以在后面跟大版本号，而代码中继续直接使用包名即可，如：
+
+```Go
+import "xxx/abc/v3" // v3.0.0
+
+func main() {
+  abc.Func1() // 继续使用包名
+}
+```
+
 ## 常见问题
 
 - go mod init 在没有接 module 名字的时候是执行不了的，会报错 go: cannot determine module path for source directory。可以这样执行：`$ go mod init github.com/jiajunhuang/hello`
@@ -129,3 +157,4 @@ xxx.com/xxx v0.1.1 h1:xxxxxxx
 - 另外，如果没有梯子，`https://github.com/golang`是`https://golang.org`的镜像，可以手动下载
 - Go Modules 下编译动态库(.so)会有问题，目前 Go 的项目是以源码依赖编译为主的，在硬盘、内存没有因为可执行文件体积过大而产生问题前，不需要考虑动态库。
 - 私有包如果不想发布到网上，需要手动添加 require ，然后 replace 进行替换，将私有包指向本地 module 所在的绝对或相对路径。一般用相对路径更通用。
+- 使用 replace 时要非常小心，如果有 A B 两个模块分别依赖 C 的两个版本，而 replace 只重定向了其中一个版本，可能会导致版本问题而编译不过。
