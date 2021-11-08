@@ -140,6 +140,11 @@ contexts:
 `kubectl cordon $NODENAME`
 将 Node 从调度中独立出来，以避免这个 Node 中的 Pod 运行状态发生变更，可用于调错时保存现场。
 
+## set image
+
+`kubectl set image statefulset nginx-web nginx=nginx:mainline`
+向名为"nginx-web"设置新版本的 Pod 镜像，进行升级。
+
 ## 其他
 
 `kubectl create deployment hello-minikube --image=k8s.gcr.io/echoserver:1.4`

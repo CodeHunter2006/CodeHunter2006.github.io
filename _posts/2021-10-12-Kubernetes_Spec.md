@@ -193,10 +193,97 @@ spec:
   `nginx-web-0`
 - pvc 名称：
   `www-storage-nginx-web-0`
+- Pod 中用`controller-revision-hash`来标识当前版本
+
+# Storage
+
+- Volume 是 Pod 中能够被多个容器访问的共享目录，被定义在 Pod 上，被多个容器挂载到具体的文件目录下。
+- Volume 类型：
+  - 简单存储：EmptyDir、HostPath、NFS
+  - 高级存储：PV、PVC
+  - 配置存储：ConfigMap、Secret
+
+## EmptyDir
+
+EmptyDir 是在 Pod 被分配到 Node 时创建的，初始值为空，K8S 会自动分配一个目录，当 Pod 销毁时，EmptyDir 中的数据也会被删除。
+
+- 可作为应用临时存储空间
+- 多个 Container 共享数据
+
+EmptyDir 是直接定义在 Pod spec 中的：
+
+```yml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: volume-emptydir
+  namespace: dev
+spec:
+  containers:
+    - name: nginx
+      image: ngxin:1.17.1
+      ports:
+        - containerPort: 80
+      volumeMounts: # 将 pod 生命的 logs-volume 挂载到 /var/log/nginx
+        - name: logs-volume
+          mountPath: /var/log/nginx
+    - name: busybox
+      image: busybox:1.30
+      command: ["/bin/sh", "-c", "tail -f /logs/access.log"] # 动态读取指定内容
+      volumeMounts: # 将 logs-volume 挂载到 /logs
+        - name: logs-volume
+          mountPath: /logs
+  volumes: # 声明 volume
+    - name: logs-volume
+      emptyDir: {} # 指定类型，无需具体参数
+```
+
+## HostPath
+
+将 Node 主机中一个实际目录挂载到 Pod 中，Pod 销毁时数据不销毁。
+
+```yml
+# 同 EmptyDir 示例
+volumes:
+  - name: logs-volume
+    hostPath:
+      path: /root/logs
+      type: DirectoryOrCreate # 目录存在就使用，不存在就先创建后再使用
+```
+
+- type:
+  - DirectoryOrCreate
+    目录存在就使用，不存在就先创建后再使用
+  - Directory
+    目录必须存在，不自动创建
+  - FileOrCreate
+    文件，同 DirectoryOrCreate
+  - File
+    文件必须存在
+  - Socket
+    unix 套接字必须存在
+  - CharDevice
+    字符设备必须存在
+  - BlockDevice
+    块设备必须存在
+
+## NFS(Net File System)
+
+NFS 是一个网络文件存储系统，可以搭建一台 NFS，然后 Pod 中存储直接连接到 NFS 系统上，这样可以避免 Pod 迁移到其他 Node 上存储丢失的情况。
+
+```yml
+# 同 EmptyDir 示例
+volumes:
+  - name: logs-volume
+    nfs:
+      server: xxx.xxx.xx.xx # nfs服务器地址
+      path: /root/data/nfs # 共享文件路径
+```
 
 ## PersistentVolume(PV)
 
 PV 是集群级别的资源，为底层存储提供了一层抽象，可以绑定到容器上。
+PV 可由对存储比较了解的 K8S 管理员设置，PVC 可由开发人员直接使用，这样降低了各自的复杂度。
 
 ```yml
 apiVersion: v1
@@ -281,7 +368,40 @@ status: Pending # 绑定状态
   - Pending 未找到合适的 PV，挂起
   - Bound 已绑定到 PV
 
-## Pod
+## ConfigMap
+
+用来存储配置信息，key 对应文件、value 对应文件内容。
+configMap 支持动态更新(需要一定时间)。
+
+```yml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap
+  namespace: dev
+data: # 对应的数据
+  info1: | # 文件名，下面是文件内容
+    field1: 0
+    field2: hello
+  info2: |
+    xxxyyyzzz
+---
+kind: Pod
+spec:
+  containers:
+    - name: nginx
+      volumeMounts: # configmap 挂载目录
+        - name: config
+          mountPath: /configmap/config
+  volumes:
+    - name: config
+      configMap:
+        - name: configmap
+```
+
+## Secret
+
+# Pod
 
 ```yml
 apiVersion: v1
