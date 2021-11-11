@@ -161,13 +161,6 @@ option optimize_for = LITE_RUNTIME;
 // 注意执行 protoc 命令的当前目录要与 import 相匹配，以免找不到路径
 import "xxx/xxx.proto";
 
-// 枚举类型第一个字段序号必须为 0
-enum SexType {
-    option allow_alias = true;
-    WOMAN = 0;
-    MAN = 1;
-    MALE = 1;
-}
 
 // 每个字段后面都要有数字，表示该字段的唯一标志，可用于版本变化后向后兼容
 message Role {
@@ -182,6 +175,15 @@ message Role {
 
 // 结构体类型 message，可嵌套
 message Person {
+    // 通过 message/enum 嵌套实现命名空间
+    // 枚举类型第一个字段序号必须为 0
+    enum SexType {
+        option allow_alias = true;
+        WOMAN = 0;
+        MAN = 1;
+        MALE = 1;
+    }
+
     required int id = 1;    // required 表示该字段必须设置
     optional string name = 2;   // optional 表示该字段为可选
     SexType sex = 3;    // 可以包含枚举

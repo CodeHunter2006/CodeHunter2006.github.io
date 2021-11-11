@@ -125,6 +125,26 @@ spec:
           - containerPort: 80   # 对容器外部开放的端口号
 ```
 
+## DaemonSet
+
+确保全部(或一些) Node 上运行一个 Pod 的副本。当有新 Node 加入 cluster 时，也会为他新增一个 Pod。
+当有 Node 从集群移除时，Pod 也会被回收。删除 DaemonSet 将会删除它创建的所有 Pod。
+
+- 典型用法：
+  - 在每个 Node 上运行日志收集或监控程序，如：filebeat、logstash、Prometheus Node Exporter
+  - 在每个 Node 上定时拉取代码、镜像，已确保一定的缓存，避免冷启动速度慢
+
+```yml
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: nginx-daemonset
+  labels:
+    app: nginx
+spec:
+  template: # 同 Deployment，只是没有 replicas
+```
+
 ## StatefulSet
 
 适合处理"有状态"的 Pod，即 Pod 重启后名称、网络地址、存储不变。
@@ -194,6 +214,78 @@ spec:
 - pvc 名称：
   `www-storage-nginx-web-0`
 - Pod 中用`controller-revision-hash`来标识当前版本
+
+## Job
+
+批量处理一次性任务。
+
+- 当 Job 创建的 Pod 执行成功结束时，Job 将记录成功结束的 Pod 数量
+- 当成功结束的 Pod 达到指定的数量时，Job 将完成执行
+
+```yml
+apiVersion: batch/v1 # 版本号
+kind: Job
+metadata:
+  name:
+  namespace:
+  labels:
+    controller: job
+spec:
+  completions: 3 # 指定需要成功运行 Pods 的次数，默认 1
+  parallelism: 2 # 任意时刻并发运行的 Pod 的数量，默认 1(队列)
+  activeDeadlineSeconds: 30 # 制定 Job 运行的时间限制(秒)，超时终止
+  backoffLimit: 6 # 失败后重试次数，默认 6
+  manualSelector: true # 是否可以使用 selector 选择 Pod，默认 false
+  selector: # 指定控制器管理哪些 Pod
+    matchLabels:
+      app: counter-pod
+    matchExpression: # Expressions 匹配
+      - { key: app, operator: In, values: [counter-pod] }
+  template: # 创建 Pod 副本的模板
+    metadata:
+      labels:
+        app: counter-pod
+    spec:
+      restartPolicy: Never # 这里只能设置为 Never 或 OnFailure
+      cantainers:
+        - name: counter
+          image: busybox:1.30
+          command:
+            [
+              "bin/sh",
+              "-c",
+              "for i in 9 8 7 6 5 4 3 2 1; do echo $i;sleep 2;done",
+            ]
+```
+
+## CronJob(CJ)
+
+CronJob 可以控制 Job 间接管理 Pod 资源对象，可以指定时间点及重复运行的方式，相当于 Linux 中的 cron 任务。
+
+```yml
+apiVersion: batch/v1beta1 # 版本号
+kind: CronJob
+metadata:
+  name:
+  namespace:
+  labels:
+    controller: cronjob
+spec:
+  schedule: # cron 格式的运行时间点
+  concurrencyPolicy: # 兵法之行策略，用于定义前一次作业运行尚未完成时的动作
+  failedJobHistoryLimit: 1 # 为失败的任务保留历史记录数，默认为 1
+  successfulJobHistoryLimit: 3 # 为成功执行的任务保留的历史记录数，默认为 3
+  startingDeadlineSeconds: # 启动作业的超时时长(秒)
+  jobTemplate: # 为 cronjob 定义 job 控制器模板
+```
+
+- concurrencyPolicy:
+  - Allow
+    允许 Jobs 并发运行(默认)
+  - Forbid
+    禁止并发运行，如果上一次运行尚未完成，则跳过下一次运行
+  - Replace
+    替换，取消当前正在运行的作业并用新作业替换它
 
 # Storage
 
@@ -400,6 +492,44 @@ spec:
 ```
 
 ## Secret
+
+和 configMap 功能类似，可以对数据进行 base64 编码保存、自动解码，**并不是真正的加密**。
+
+- 使用流程：
+  1. 创建 secret 资源，将 value 内容以 base64 编码
+  2. 创建 Pod，绑定 secret 为 volume
+  3. 在 Pod 中，直接读取 secret 对应的 key(读取文件)，可以自动返回解码后的原始数据内容
+
+```yml
+apiVersion: v1
+metadata:
+  name: secret
+  namespace: dev
+type: Opaque
+data:
+  username: YWRtaW4= # 原文 "admin" 经 base64 编码后的结果
+  password: MTIzNDU2
+---
+kind: Pod
+spec:
+  containers:
+    - name: nginx
+      volumeMounts: # secret 挂载目录
+        - name: config
+          mountPath: /secret/config
+  volumes:
+    - name: config
+      secret:
+        - secretName: secret
+```
+
+```yml
+# describe
+Data
+====
+password: 6 bytes # 将真实内容隐藏
+username: 5 bytes
+```
 
 # Pod
 
