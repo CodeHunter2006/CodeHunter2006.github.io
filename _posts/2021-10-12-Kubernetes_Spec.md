@@ -98,9 +98,42 @@ Rules: # Host 映射规则
   nginx.test.com  /   nginx-service:80 (xx.xx.xx.xx:80,...)
 ```
 
-## Deployment
+## ReplicaSet(RS)
 
-提供一个部署流程，可以指定部署一系列资源进行部署。会启动 ReplicaSet 维护指定数量的 Pod。
+```yml
+apiVersion: apps/v1 # 版本号
+kind: ReplicaSet # 类型
+metadata:
+  name: rsname
+  namespace: dev
+  labels:
+    controller: rs
+spec:
+  replicas: 3 # 副本数量，默认 1
+  selector: # pod 选择器
+    matchLabels: # Labels 匹配规则
+      app: nginx-pod
+    matchExpressions: # Expressions 匹配规则
+      - { key: app, operator: In, values: [nginx-pod] }
+  template: # 创建 pod 副本的模板
+    metadata:
+      labels:
+        app: nginx-pod
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.17.1
+          ports:
+            - containerPort: 80
+```
+
+## Deployment(Deploy)
+
+K8S 1.2 引入，提供一个部署流程，可以指定部署一系列资源进行部署。会启动 ReplicaSet 维护指定数量的 Pod。
+
+- 支持 ReplicaSet 的所有功能
+- 支持发布的停止、继续
+- 支持版本的滚动更新和版本回退
 
 ```yml
 apiVersion: apps/v1
@@ -110,10 +143,18 @@ metadata:
   namespace: dev
 spec:
   replicas: 3   # 目标是三个实例
+  revisionHistoryLimit: 3 # 保留历史版本，默认 10
+  paused: false # 暂停部署，默认 false
+  progressDeadlineSeconds: 600 # 部署超时时间(s)，默认 600
+  strategy: # 策略
+    type: RollingUpdate # 滚动更新策略
+    rollingUpdate:  # 滚动更新
+      maxSurge: 30% # 最大额外可存在的副本数，可以为百分比或整数
+      maxUnavailable: 30% # 最大不可用状态的 pod 数，可以为百分比或整数
   selector:
     matchLabels:
       app: nginx-pod
-  template:   # 指定要部署的实例对应的模板
+  template:   # 指定要部署的 pod 实例对应的模板
     metadata: # 要部署的实例的元数据
       labels: # 制定多个 label
         app: nginx-pod
@@ -124,6 +165,17 @@ spec:
           ports:
           - containerPort: 80   # 对容器外部开放的端口号
 ```
+
+- revisionHistoryLimit
+  保留历史版本以便进行版本回退，通过保留 RS 实现
+
+- 调用`get`命令后各字段解释：
+  - READY
+    处于 READY 状态的 Pod 数量 / 总数量
+  - UP-TO-DATA
+    处于最新版本的 Pod 数量
+  - AVAILABLE
+    当前可用 Pod 数量
 
 ## DaemonSet
 
