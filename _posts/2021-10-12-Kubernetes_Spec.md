@@ -146,11 +146,11 @@ spec:
   revisionHistoryLimit: 3 # 保留历史版本，默认 10
   paused: false # 暂停部署，默认 false
   progressDeadlineSeconds: 600 # 部署超时时间(s)，默认 600
-  strategy: # 策略
+  strategy: # 镜像更新策略
     type: RollingUpdate # 滚动更新策略
     rollingUpdate:  # 滚动更新
-      maxSurge: 30% # 最大额外可存在的副本数，可以为百分比或整数
-      maxUnavailable: 30% # 最大不可用状态的 pod 数，可以为百分比或整数
+      maxSurge: 30% # 更新过程中，最大额外可存在的副本数，可以为百分比或整数，默认 25%
+      maxUnavailable: 30% # 最大不可用状态的 pod 数，可以为百分比或整数，默认 25%
   selector:
     matchLabels:
       app: nginx-pod
@@ -166,16 +166,26 @@ spec:
           - containerPort: 80   # 对容器外部开放的端口号
 ```
 
+- Deployment 自动创建的 RS 的 name 是在 Deployment name 后边加`-xxx`随机码。
+  其他子资源也都是相同命名方法。
+
 - revisionHistoryLimit
   保留历史版本以便进行版本回退，通过保留 RS 实现
 
 - 调用`get`命令后各字段解释：
+
   - READY
     处于 READY 状态的 Pod 数量 / 总数量
   - UP-TO-DATA
     处于最新版本的 Pod 数量
   - AVAILABLE
     当前可用 Pod 数量
+
+- 镜像更新策略
+  - Recreate
+    创建出新的 Pod 前会先杀掉所有已存在的 Pod
+  - RollingUpdate(默认值)
+    滚动更新，杀死一部分旧版本，启动一部分新版本
 
 ## DaemonSet
 

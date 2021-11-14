@@ -88,12 +88,15 @@ contexts:
 
 ## get
 
-查询某种资源列表
+查询某种资源列表，也可以同时查询多种，用','隔开。
 
 - `-o yaml` 指定显示的格式
+
   - `wide` 显示更多列信息
   - `yaml` 以 yaml 显示更详细信息
   - `json` 以 json 显示
+
+- `-w` 显示了当前内容后继续`watch`变化。如果在命令中指定了 name，则新增资源不会被 watch 到。
 
 `kubectl get ns`
 获取 namespace 列表
@@ -109,6 +112,9 @@ contexts:
 `kubectl create xxx_name --image=xxx`
 创建一个 pod，运行一个 container。这个操作本质上是创建了一个 deployment，`xxx_name`就是 deployment 的名称。
 
+- `-- record`
+  记录创建过程的更新信息
+
 ## apply
 
 创建或更新资源配置文件，在配置文件中指定资源类型和参数，文件中可以分多段，也可以直接执行文件夹。
@@ -120,6 +126,13 @@ contexts:
 
 `kubectl describe pod xxx -n xxx`
 获取指定 pod 的详细信息。其中的`state`、`event`是比较重要的调试信息。
+
+## edit
+
+编辑对应 Resource 的 Spec 文件
+
+`kubectl edit deploy deploy-name -n`
+用 vi 打开界面编辑 Deployment，保存后执行。
 
 ## log
 
@@ -140,7 +153,16 @@ contexts:
 `kubectl cordon $NODENAME`
 将 Node 从调度中独立出来，以避免这个 Node 中的 Pod 运行状态发生变更，可用于调错时保存现场。
 
-## set image
+## scale
+
+扩/缩容
+
+`kubectl scale deploy deploy-name --replicas=5 -n dev`
+变更 Deployement 的 Pod 数量
+
+## set
+
+设置 spec 的值
 
 `kubectl set image statefulset nginx-web nginx=nginx:mainline`
 向名为"nginx-web"设置新版本的 Pod 镜像，进行升级。
