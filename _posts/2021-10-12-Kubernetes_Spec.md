@@ -182,10 +182,26 @@ spec:
     当前可用 Pod 数量
 
 - 镜像更新策略
+
   - Recreate
     创建出新的 Pod 前会先杀掉所有已存在的 Pod
   - RollingUpdate(默认值)
     滚动更新，杀死一部分旧版本，启动一部分新版本
+
+- 版本回退
+  升级时会创建新的 ReplicaSet，但是旧的不会删除，以便版本回退。
+
+- 金丝雀(Canary)发布(灰度发布)
+  在 Deployment 设置了新版镜像后立刻暂停，这时候只有极少数的新版 Pod 启动，观察一段时间后，再决定是回滚还是继续升级。
+  `kubectl set image deploy deploy-name nginx=nginx:1.17.4 -n dev && kubectl rollout pause deployment deploy-name -n dev`
+  - 可以用`kubectl rollout status deploy deploy-name -n dev`查看状态
+  - 如果新版 Pod 没有问题，则执行`kubectl rollout resume deploy deploy-name -n dev`继续
+  - 如果新版有问题，则执行`kubectl rollout undo deploy deploy-name --to-revision=1 -n dev`回滚
+
+## HPA
+
+可以用 HPA(Horizontal Pod Autoscaler)控制器自动化、智能化的实现扩缩容，避免手工执行`kubectl scale`命令。
+HPA 可以获取每个 Pod 的利用率，然后和 HPA 中定义的指标进行对比，同时计算出需要伸缩的具体值，最后实现 Pod 数量的调整。
 
 ## DaemonSet
 

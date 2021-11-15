@@ -134,12 +134,6 @@ contexts:
 `kubectl edit deploy deploy-name -n`
 用 vi 打开界面编辑 Deployment，保存后执行。
 
-## log
-
-`kubectl logs pod testpod`
-
-查看标准输出
-
 ## exec
 
 `kubectl -n xxx exec -it testpod bash`
@@ -147,6 +141,32 @@ contexts:
 
 `kubectl -n xxx exec -it testpod -c testcontainer`
 登录到指定的 container 执行命令
+
+## log
+
+`kubectl logs pod testpod`
+
+查看标准输出
+
+## rollout
+
+版本升级相关功能
+
+`kubectl rollout undo deploy deploy-name --to-revision=1 -n dev`
+将版本回退到"revision 1"
+
+- `status`
+  显示当前升级状态
+- `history`
+  显示升级历史记录
+- `pause`
+  暂停版本升级过程
+- `resume`
+  继续已经暂停的版本升级过程
+- `restart`
+  重启版本升级过程
+- `undo`
+  回滚到上一级版本(可以使用`--to-revision` 回滚到指定版本，`status`可查看 revision 号)
 
 ## cordon/uncordon
 
