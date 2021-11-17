@@ -86,6 +86,18 @@ contexts:
 
 # 常用命令
 
+## api-versions
+
+查看 K8S 集群内所有资源对应的版本号
+
+`kubectl api-versions`
+
+## api-resources
+
+查看 K8S 集群内所有可以支持的资源类型
+
+`kubectl api-resources`
+
 ## get
 
 查询某种资源列表，也可以同时查询多种，用','隔开。
@@ -142,6 +154,23 @@ contexts:
 `kubectl -n xxx exec -it testpod -c testcontainer`
 登录到指定的 container 执行命令
 
+## explain
+
+分层说明某个资源的 sepc 项
+
+`kubectl explain pod`
+显示一级属性说明
+
+`kubectl explain pod.metadata`
+解释`metadata`属性及其二级属性
+
+## expose
+
+自动创建一个 serveice(svc)，向外暴露端口。
+
+`kubectl expose deployment hello-minikube --type=NodePort --port=8080`
+向外暴露 Application 到 8080 端口
+
 ## log
 
 `kubectl logs pod testpod`
@@ -168,6 +197,12 @@ contexts:
 - `undo`
   回滚到上一级版本(可以使用`--to-revision` 回滚到指定版本，`status`可查看 revision 号)
 
+## run
+
+自动创建一个 Deployment 运行指定 镜像。
+
+`kubectl run deploy-name --image=nginx:1.17.1 --requests=cpu=100m -n dev`
+
 ## cordon/uncordon
 
 `kubectl cordon $NODENAME`
@@ -187,13 +222,17 @@ contexts:
 `kubectl set image statefulset nginx-web nginx=nginx:mainline`
 向名为"nginx-web"设置新版本的 Pod 镜像，进行升级。
 
+## top
+
+查看资源使用情况
+
+`kubectl top pod -n dev`
+查看 Pod 资源的 CPU、Memory 使用情况
+
 ## 其他
 
 `kubectl create deployment hello-minikube --image=k8s.gcr.io/echoserver:1.4`
 部署一个 Application
-
-`kubectl expose deployment hello-minikube --type=NodePort --port=8080`
-向外暴露 Application 到 8080 端口
 
 `kubectl scale rc redis --replicas=3`
 执行扩容缩容

@@ -8,6 +8,36 @@ tags: Docker K8S HighConcurrency
 ![kubernetes_docker](/assets/images/20190201_kubernetes_docker.jpg)
 记录各种 Resource 类型的常用 Sepc(清单文件配置项)及常用 Describe 项。
 
+# Pod
+
+- Pod 中可能有多个容器，至少有一个根容器，根容器的作用：
+  - 以它为依据，评估整个 Pod 的健康状态
+  - 可以再跟容器上设置 IP 地址，其他容器都以此 IP 实现 Pod 内部的网络通信(容器分配不同 Port)
+- Pod 内部的通讯采用虚拟二层网络技术实现，例如 Flannel
+
+```yml
+apiVersion: v1 # K8S 资源版本号，必须可以用 `kubectl api-versions` 查询到
+kind: Pod # 类型，由 K8S 内部定义，必须可以用 `kubectl api-resources` 查询到
+metadata:
+  name: pod1
+  namespace: dev
+spec:
+  containers: # container 数组
+    - name: nginx1
+      image: nginx:1.0
+      cmmand: ["/bin/sh", "-c", ";"]
+      volumeMounts:
+        - name: volume1
+          mountPath: /root/
+  volumes:
+    - name: volume1
+      persistentVolumeClaim:
+        claimName: pvc1
+        readOnly: false
+```
+
+# Network
+
 ## Service
 
 提供一种抽象的"服务"概念，为一种服务提供一个唯一入口，其内部可以通过 LB 策略分配到实际的 Pod。
@@ -97,6 +127,8 @@ Rules: # Host 映射规则
   ----           ---- --------
   nginx.test.com  /   nginx-service:80 (xx.xx.xx.xx:80,...)
 ```
+
+# Controller
 
 ## ReplicaSet(RS)
 
@@ -202,6 +234,35 @@ spec:
 
 可以用 HPA(Horizontal Pod Autoscaler)控制器自动化、智能化的实现扩缩容，避免手工执行`kubectl scale`命令。
 HPA 可以获取每个 Pod 的利用率，然后和 HPA 中定义的指标进行对比，同时计算出需要伸缩的具体值，最后实现 Pod 数量的调整。
+HPA 通过操作 Deployment 实现功能。
+
+```yml
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: hpa-name
+  namespace: dev
+spec:
+  minReplicas: 1 # 最小 pod 数量
+  maxReplicas: 10 # 最大 pod 数量
+  targetCPUUtilizationPercentage: 30 # CPU 使用率指标
+  scaleTargetRef: # 制定要控制的 pod 信息，通过 Deployment 作用
+    apiVersion: app/v1
+    kind: Deployment
+    name: nginx
+```
+
+- `get`命令结果
+  - TARGETS
+    显示实际 CPU 负载/设定 CPU 负载
+  - REPLICAS
+    实际的 Pod 数
+
+```yml
+// describe
+```
+
+- 扩容后，如果负载降低到阈值以下，会自动逐步缩容
 
 ## DaemonSet
 
@@ -607,27 +668,4 @@ Data
 ====
 password: 6 bytes # 将真实内容隐藏
 username: 5 bytes
-```
-
-# Pod
-
-```yml
-apiVersion: v1
-kind: Pod
-metadata:
-  name: pod1
-  namespace: dev
-spec:
-  containers: # container 数组
-    - name: nginx1
-      image: nginx:1.0
-      cmmand: ["/bin/sh", "-c", ";"]
-      volumeMounts:
-        - name: volume1
-          mountPath: /root/
-  volumes:
-    - name: volume1
-      persistentVolumeClaim:
-        claimName: pvc1
-        readOnly: false
 ```
