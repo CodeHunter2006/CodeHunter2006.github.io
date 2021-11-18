@@ -16,15 +16,37 @@ tags: Docker K8S HighConcurrency
 - Pod 内部的通讯采用虚拟二层网络技术实现，例如 Flannel
 
 ```yml
-apiVersion: v1 # K8S 资源版本号，必须可以用 `kubectl api-versions` 查询到
-kind: Pod # 类型，由 K8S 内部定义，必须可以用 `kubectl api-resources` 查询到
+# 一级清单 spec
+apiVersion: <string> # K8S 资源版本号，必须可以用 `kubectl api-versions` 查询到
+kind: <string> # 类型，由 K8S 内部定义，必须可以用 `kubectl api-resources` 查询到
+metadata: <Object> # 元数据，主要是资源标识和说明，常用的有 name、namespace、labels 等
+spec: <Object> # 描述，是配置中最重要的部分，对各种资源配置详细描述
+status: <Object> # 状态信息，内容无需定义，由 kubernetes 自动生成
+```
+
+```yml
+# spec 二级属性
+containers: <[]Object> 容器列表，用于定义容器的详细信息
+nodeName: <string> 根据nodeName值将pod调度到指定node节点
+nodeSelector: <map> 同上，用于调度到满足条件的 node 节点
+hostNetwork: <boolean> 是否使用主机网络模式，默认为 false，如果设置为 true，表示使用宿主机网络
+volumes: <[]Object> 存储卷，用于定义 pod 上挂载的存储
+restartPolicy: <string> 重启策略，表示 Pod 在遇到故障时候的处理策略
+```
+
+```yml
+# 示例
+apiVersion: v1
+kind: Pod
 metadata:
   name: pod1
   namespace: dev
+  labels:
+    user: username
 spec:
   containers: # container 数组
     - name: nginx1
-      image: nginx:1.0
+      image: nginx:1.17.0
       cmmand: ["/bin/sh", "-c", ";"]
       volumeMounts:
         - name: volume1
@@ -34,6 +56,23 @@ spec:
       persistentVolumeClaim:
         claimName: pvc1
         readOnly: false
+```
+
+- get 命令返回结果说明
+  - READY
+    pod 中 container 的就绪状态`就绪数/总数`
+  - STATUS
+    pod 状态
+  - RESTARTS
+    pod 重启次数
+  - AGE
+    pod 创建后的存在时间。重启不影响 AGE
+
+```yml
+# describe
+IP: xxx.xxx.xx.xx # K8S 分配的内网 IP
+Events: # 记录 pod 运行中的一系列关键事件
+  Type(事件类型) Reason(触发动作) Age(发生时点) From(事件来源) Message(事件内容)
 ```
 
 # Network
@@ -208,7 +247,7 @@ spec:
 
   - READY
     处于 READY 状态的 Pod 数量 / 总数量
-  - UP-TO-DATA
+  - UP-TO-DATE
     处于最新版本的 Pod 数量
   - AVAILABLE
     当前可用 Pod 数量
@@ -348,9 +387,9 @@ spec:
 - partition
   升级新版本时保留旧版本 Pod 的数量，可用于**灰度升级**
 
-- pod 名称：
+- pod 名称示例：
   `nginx-web-0`
-- pvc 名称：
+- pvc 名称示例：
   `www-storage-nginx-web-0`
 - Pod 中用`controller-revision-hash`来标识当前版本
 
