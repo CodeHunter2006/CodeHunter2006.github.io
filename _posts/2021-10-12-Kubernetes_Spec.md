@@ -16,7 +16,7 @@ tags: Docker K8S HighConcurrency
 - Pod 内部的通讯采用虚拟二层网络技术实现，例如 Flannel
 
 ```yml
-# 一级清单 spec
+# kubectl explain pod
 apiVersion: <string> # K8S 资源版本号，必须可以用 `kubectl api-versions` 查询到
 kind: <string> # 类型，由 K8S 内部定义，必须可以用 `kubectl api-resources` 查询到
 metadata: <Object> # 元数据，主要是资源标识和说明，常用的有 name、namespace、labels 等
@@ -25,13 +25,52 @@ status: <Object> # 状态信息，内容无需定义，由 kubernetes 自动生�
 ```
 
 ```yml
-# spec 二级属性
+# kubectl explain pod.spec
 containers: <[]Object> 容器列表，用于定义容器的详细信息
 nodeName: <string> 根据nodeName值将pod调度到指定node节点
 nodeSelector: <map> 同上，用于调度到满足条件的 node 节点
 hostNetwork: <boolean> 是否使用主机网络模式，默认为 false，如果设置为 true，表示使用宿主机网络
 volumes: <[]Object> 存储卷，用于定义 pod 上挂载的存储
 restartPolicy: <string> 重启策略，表示 Pod 在遇到故障时候的处理策略
+```
+
+```yml
+# kubectl explain pod.spec.containers
+name: <string> # 容器名称
+image: <string> # 容器需要的镜像地址
+imagePullPolicy: <string> # 镜像拉取策略
+command: <[]string> # 容器的启动命令列表，如不指定，使用打包时使用的启动命令
+args: <[]string> # 容器的启动命令需要的参数列表
+env: <[]Object> # 容器环境变量的配置
+ports: <[]Object> # 容器需要暴露的端口号列表
+resource: <Object> # 资源限制的资源请求的设置
+```
+
+- imagePullPolicy 镜像拉取策略
+
+  - Always
+    总是从远程仓库拉取镜像
+  - IfNotPresent
+    本地有则优先用本地的，本地没有则用远程的
+  - Never
+    只使用本地的，从不去远程仓库拉取，本地没有就报错
+  - 如果 image 填写了具体的版本号，则默认值为 IfNotPresent
+  - 如果 image 填写的 latest 或未填写(等价于 latest)，则默认值为 Always
+
+- 问题：command 本身是字符数组，可以满足命令+参数的功能，为什么还需要 args？
+  这两项在 spec 中其实是覆盖实现 Dockerfile 中 ENTRYPOINT 的功能。
+  - 如果 command 和 args 都没写，那么用 Dockerfile 的配置
+  - 如果只写了 command，那么 Dockerfile 默认的配置会被忽略，执行 command
+  - 如果只写了 args，那么 Dockerfile 中配置的 ENTRYPOINT 命令会被执行，使用 args 作为参数
+  - 如果 command 和 args 都写了，那么 Dockerfile 的配置被忽略，执行 command 并追加 args 参数
+
+```yml
+# kubectl explain pod.spec.containers.ports
+name: <string> # 端口名称，如果指定，必须保证 name 在 pod 中是惟一的
+containerPort: <integer> # 容器要监听的端口 (0, 65536]
+hostPort: <integer> # 容器要在主机上公开的端口，如果设置，主机上只能运行容器的一个副本(一般不设置)
+hostIP: <string> # 要讲外部端口绑到的主机 IP (一般不设置)
+protocol: <string> # 端口协议。必须是 UDP/TCP/SCTP。默认为TCP。
 ```
 
 ```yml
@@ -47,7 +86,13 @@ spec:
   containers: # container 数组
     - name: nginx1
       image: nginx:1.17.0
+      imagePullPolicy: IfNotPresent
       cmmand: ["/bin/sh", "-c", ";"]
+      env: # 环境变量由多个 key-value 组成
+        - name: "username" # 环境变量名
+          value: "admin" # 环境变量值
+        - name: "password"
+          value: "123456"
       volumeMounts:
         - name: volume1
           mountPath: /root/
