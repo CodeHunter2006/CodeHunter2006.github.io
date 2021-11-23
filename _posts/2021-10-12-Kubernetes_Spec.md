@@ -69,9 +69,25 @@ resource: <Object> # 资源限制的资源请求的设置
 name: <string> # 端口名称，如果指定，必须保证 name 在 pod 中是惟一的
 containerPort: <integer> # 容器要监听的端口 (0, 65536]
 hostPort: <integer> # 容器要在主机上公开的端口，如果设置，主机上只能运行容器的一个副本(一般不设置)
-hostIP: <string> # 要讲外部端口绑到的主机 IP (一般不设置)
+hostIP: <string> # 要将外部端口绑到的主机 IP (一般不设置)
 protocol: <string> # 端口协议。必须是 UDP/TCP/SCTP。默认为TCP。
 ```
+
+- 一般只设置`containerPort`即可
+- 访问容器中的程序时，可以用`podIP:containerPort`
+
+```yml
+# kubectl explain pod.spec.containers.resources
+resources: # 资源配额
+  request: # 要求的资源下限，不满足则无法运行
+    cpu: "1" # CPU core 数，可以为整数或小数
+    memory: "10Mi" # 内存容量
+  limits: # 资源上限
+    cpu: "2"
+    memory: "1Gi"
+```
+
+- memory 可选项：Gi、Mi、G、M 等
 
 ```yml
 # 示例
@@ -119,6 +135,20 @@ IP: xxx.xxx.xx.xx # K8S 分配的内网 IP
 Events: # 记录 pod 运行中的一系列关键事件
   Type(事件类型) Reason(触发动作) Age(发生时点) From(事件来源) Message(事件内容)
 ```
+
+- pod 生命周期
+  - pod 创建
+  - 运行初始化容器(init container)
+  - 运行主容器(main container)
+    - 容器启动后钩子(post start)、容器终止前钩子(pre stop)
+    - 容器活性监测(liveness probe)、就绪性探测(readiness probe)
+  - pod 终止
+- 在整个生命周期中， pod 会出现 5 种状态(相位)：
+  - Pending(挂起)：apiserver 已创建了 pod 资源对象，但它尚未被调度完成或仍处于下载镜像过程中
+  - Running(运行中)：pod 已经被调度至某节点，并且所有容器都已经被 kubelete 创建完成
+  - Succeeded(成功)：pod 中的所有容器都已经成功终止并且不会被重启
+  - Failed(失败)：所有容器都已经终止，但至少有一个容器终止失败，即容器返回了非 0 的退出状态
+  - Unknown(未知)：apiserver 无法正常获取到 pod 对象的状态信息，通常由网络通信失败导致
 
 # Network
 

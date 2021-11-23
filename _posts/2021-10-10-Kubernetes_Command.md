@@ -148,7 +148,7 @@ contexts:
 
 ## exec
 
-`kubectl -n xxx exec -it testpod bash`
+`kubectl -n xxx exec -it testpod -- bash`
 登录到指定的 pod 执行命令
 
 `kubectl -n xxx exec -it testpod -c testcontainer`
