@@ -27,6 +27,7 @@ status: <Object> # 状态信息，内容无需定义，由 kubernetes 自动生�
 ```yml
 # kubectl explain pod.spec
 containers: <[]Object> 容器列表，用于定义容器的详细信息
+initContainers: <[]Object> 初始化容器列表
 nodeName: <string> 根据nodeName值将pod调度到指定node节点
 nodeSelector: <map> 同上，用于调度到满足条件的 node 节点
 hostNetwork: <boolean> 是否使用主机网络模式，默认为 false，如果设置为 true，表示使用宿主机网络
@@ -44,6 +45,8 @@ args: <[]string> # 容器的启动命令需要的参数列表
 env: <[]Object> # 容器环境变量的配置
 ports: <[]Object> # 容器需要暴露的端口号列表
 resource: <Object> # 资源限制的资源请求的设置
+livenessProbe: <Object> # 存活性探针
+readinessProbe: <Objet> # 就绪性探针
 ```
 
 - imagePullPolicy 镜像拉取策略
@@ -137,18 +140,50 @@ Events: # 记录 pod 运行中的一系列关键事件
 ```
 
 - pod 生命周期
+
   - pod 创建
   - 运行初始化容器(init container)
+    - 初始化容器提供主容器镜像中不具备的工具程序或自定义代码，可为主容器创造依赖条件
+    - 初始化容器必须按照定义的顺序执行，直至结束，如果中间某个失败，K8S 会一直重启直到完成
   - 运行主容器(main container)
-    - 容器启动后钩子(post start)、容器终止前钩子(pre stop)
-    - 容器活性监测(liveness probe)、就绪性探测(readiness probe)
+    - 容器启动后钩子(post start)、容器终止前钩子(pre stop)。钩子的三种执行方式(配置 container.lifecycle)：
+      - `exec` 执行指定的命令，以命令返回 exitCode 为准，0 为成功。如`cat /test/testfile.txt`
+      - `tcpSocket` 访问指定的 tcp socket，如果可以建立连接则算成功。
+      - `httpGet` 访问指定的 http 网址，如果返回状态码在`[200,399]`则算成功。
+    - 容器活性监测(liveness probe)、就绪性探测(readiness probe)。
+      探针的探测方式和上面钩子函数的方式相同，有三种方法。
+      如果经过探测，pod 状态不符合预期，那么 K8S 会"摘除"该实例，不再承担业务流量。两种探针：
+      - liveness probes: 存活性探针，用于检测应用实例当前是否处于正常运行状态，如果不是，则 K8S **重启容器**
+        - 可以访问特定 url 判断是否存活
+      - readiness probes: 就绪性探针，用于检测应用实例当前是否可以接收请求，如果不能，K8S 不会**转发流量**
+        - 可以访问本机的特定 url 判断服务是否就绪
   - pod 终止
+
 - 在整个生命周期中， pod 会出现 5 种状态(相位)：
+
   - Pending(挂起)：apiserver 已创建了 pod 资源对象，但它尚未被调度完成或仍处于下载镜像过程中
   - Running(运行中)：pod 已经被调度至某节点，并且所有容器都已经被 kubelete 创建完成
   - Succeeded(成功)：pod 中的所有容器都已经成功终止并且不会被重启
   - Failed(失败)：所有容器都已经终止，但至少有一个容器终止失败，即容器返回了非 0 的退出状态
   - Unknown(未知)：apiserver 无法正常获取到 pod 对象的状态信息，通常由网络通信失败导致
+
+- pod 创建过程：
+  1. 用户通过 kubectl 或其他 api 客户端提交需要创建的 pod 信息给 apiServer
+  2. apiServer 开始生成 pod 对象的信息，并将信息存入 etcd，然后返回确认信息至客户端
+  3. apiServer 开始反映 etd 中的 pod 对象变化，其它组件用 watch 机制来跟踪检查 apiServer 上的变动
+  4. scheduler 发现有新的 pod 对象要创建，开始为 pod 分配主机并将结果信息更新至 apiServer
+  5. node 节点上的 kubelet 发现有 pod 调度过来，尝试调用 docker 启动容器，并将结果回送至 apiServer
+  6. apiServer 将接收到的 pod 状态信息存入 etcd 中
+- pod 终止过程：
+  1. 用户向 apiServer 发送删除 pod 对象的命令
+  2. apiServer 中的 pod 对象信息会随着时间的推移而更新，在宽限期内(默认 30s)，pod 被视为 dead
+  3. 将 pod 标记为 terminating 状态
+  4. kubelet 在监控到 pod 对象转为 terminating 状态的同时启动 pod 关闭过程
+  5. 端点控制器在监控到 pod 对象的关闭行为时将其从所有匹配到此端点的 service 资源的端点列表中移除
+  6. 如果当前 pod 对象定义了 preStop 钩子处理器，则在其标记为 terminating 后即会以同步的方式启动执行
+  7. pod 对象中的容器进程收到**停止**信号
+  8. 宽限期结束后，若 pod 中还存在仍在运行的进程，那么 pod 对象会收到**立即终止**的信号
+  9. kubelet 请求 apiServer 将此 pod 资源的宽限期设置为 0 从而完成删除操作，此时 pod 对于用户已不可见
 
 # Network
 

@@ -171,6 +171,20 @@ contexts:
 `kubectl expose deployment hello-minikube --type=NodePort --port=8080`
 向外暴露 Application 到 8080 端口
 
+## label
+
+标签相关操作
+
+`kubectl label pods foo unhealthy=true`
+为某个 pod 第一次设置一个 label
+
+- `--overwrite` 覆盖写入
+- `--all` 不指定 resourceName 设置到所有资源
+- `--resource-version=1` 指定 resource-version 下才起作用，避免冲突
+
+`kubectl label pods foo bar-`
+删除 label
+
 ## log
 
 `kubectl logs pod testpod`
