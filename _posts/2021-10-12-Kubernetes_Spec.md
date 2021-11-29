@@ -36,6 +36,58 @@ restartPolicy: <string> 重启策略，表示 Pod 在遇到故障时候的处理
 ```
 
 ```yml
+# 示例
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod1
+  namespace: dev
+  labels:
+    user: username
+spec:
+  containers: # container 数组
+    - name: nginx1
+      image: nginx:1.17.0
+      imagePullPolicy: IfNotPresent
+      cmmand: ["/bin/sh", "-c", ";"]
+      env: # 环境变量由多个 key-value 组成
+        - name: "username" # 环境变量名
+          value: "admin" # 环境变量值
+        - name: "password"
+          value: "123456"
+      volumeMounts:
+        - name: volume1
+          mountPath: /root/
+  volumes:
+    - name: volume1
+      persistentVolumeClaim:
+        claimName: pvc1
+        readOnly: false
+```
+
+- get 命令返回结果说明
+
+  - READY
+    pod 中 container 的就绪状态`就绪数/总数`
+  - STATUS
+    pod 状态
+  - RESTARTS
+    pod 重启次数
+  - AGE
+    pod 创建后的存在时间。重启不影响 AGE
+
+- 可以通过 `describe` 命令结果中的**Events**查看运行情况的事件
+
+```yml
+# describe
+IP: xxx.xxx.xx.xx # K8S 分配的内网 IP
+Events: # 记录 pod 运行中的一系列关键事件
+  Type(事件类型) Reason(触发动作) Age(发生时点) From(事件来源) Message(事件内容)
+```
+
+## container 设置
+
+```yml
 # kubectl explain pod.spec.containers
 name: <string> # 容器名称
 image: <string> # 容器需要的镜像地址
@@ -92,72 +144,37 @@ resources: # 资源配额
 
 - memory 可选项：Gi、Mi、G、M 等
 
-```yml
-# 示例
-apiVersion: v1
-kind: Pod
-metadata:
-  name: pod1
-  namespace: dev
-  labels:
-    user: username
-spec:
-  containers: # container 数组
-    - name: nginx1
-      image: nginx:1.17.0
-      imagePullPolicy: IfNotPresent
-      cmmand: ["/bin/sh", "-c", ";"]
-      env: # 环境变量由多个 key-value 组成
-        - name: "username" # 环境变量名
-          value: "admin" # 环境变量值
-        - name: "password"
-          value: "123456"
-      volumeMounts:
-        - name: volume1
-          mountPath: /root/
-  volumes:
-    - name: volume1
-      persistentVolumeClaim:
-        claimName: pvc1
-        readOnly: false
-```
+## 生命周期
 
-- get 命令返回结果说明
-  - READY
-    pod 中 container 的就绪状态`就绪数/总数`
-  - STATUS
-    pod 状态
-  - RESTARTS
-    pod 重启次数
-  - AGE
-    pod 创建后的存在时间。重启不影响 AGE
+- pod 创建
+- 运行初始化容器(init container)
+  - 初始化容器提供主容器镜像中不具备的工具程序或自定义代码，可为主容器创造依赖条件
+  - 初始化容器必须按照定义的顺序执行，直至结束，如果中间某个失败，K8S 会一直重启直到完成
+- 运行主容器(main container)
+  - 容器启动后钩子(post start)、容器终止前钩子(pre stop)。钩子的三种执行方式(配置 container.lifecycle)：
+    - `exec` 执行指定的命令，以命令返回 exitCode 为准，0 为成功。如`cat /test/testfile.txt`
+    - `tcpSocket` 访问指定的 tcp socket，如果可以建立连接则算成功。
+    - `httpGet` 访问指定的 http 网址，如果返回状态码在`[200,399]`则算成功。
+  - 容器活性监测(liveness probe)、就绪性探测(readiness probe)。
+    探针的探测方式和上面钩子函数的方式相同，有三种方法。
+    如果经过探测，pod 状态不符合预期，那么 K8S 会"摘除"该实例，不再承担业务流量。两种探针：
+    - liveness probes: 存活性探针，用于检测应用实例当前是否处于正常运行状态，如果不是，则 K8S **重启容器**
+      - 可以访问特定 url 判断是否存活
+    - readiness probes: 就绪性探针，用于检测应用实例当前是否可以接收请求，如果不能，K8S 不会**转发流量**
+      - 可以访问本机的特定 url 判断服务是否就绪
+- pod 终止
 
 ```yml
-# describe
-IP: xxx.xxx.xx.xx # K8S 分配的内网 IP
-Events: # 记录 pod 运行中的一系列关键事件
-  Type(事件类型) Reason(触发动作) Age(发生时点) From(事件来源) Message(事件内容)
+# kubectl explain pod.spec.containers.liveneesProbe
+exec <Object>     # 执行指定的命令
+tcpSocket <Object>  # 连接特定的 TCP
+httpGet <Object>  # 访问指定的 http/https url
+initialDelaySecond <integer>  # 容器启动后等待多少秒执行第一次探测
+timeoutSeconds <integer>  # 探测超时秒数。默认 1 秒，最小 1 秒
+periodSeconds <integer>   # 执行探测的间隔秒数。默认 10 秒，最小 1 秒
+failureThreshold <integer>    # 连续探测失败多少次才被认定为失败。默认 3， 最小 1
+successThreshold <integer>    # 连续探测成功多少次才被认定为成功。默认 1
 ```
-
-- pod 生命周期
-
-  - pod 创建
-  - 运行初始化容器(init container)
-    - 初始化容器提供主容器镜像中不具备的工具程序或自定义代码，可为主容器创造依赖条件
-    - 初始化容器必须按照定义的顺序执行，直至结束，如果中间某个失败，K8S 会一直重启直到完成
-  - 运行主容器(main container)
-    - 容器启动后钩子(post start)、容器终止前钩子(pre stop)。钩子的三种执行方式(配置 container.lifecycle)：
-      - `exec` 执行指定的命令，以命令返回 exitCode 为准，0 为成功。如`cat /test/testfile.txt`
-      - `tcpSocket` 访问指定的 tcp socket，如果可以建立连接则算成功。
-      - `httpGet` 访问指定的 http 网址，如果返回状态码在`[200,399]`则算成功。
-    - 容器活性监测(liveness probe)、就绪性探测(readiness probe)。
-      探针的探测方式和上面钩子函数的方式相同，有三种方法。
-      如果经过探测，pod 状态不符合预期，那么 K8S 会"摘除"该实例，不再承担业务流量。两种探针：
-      - liveness probes: 存活性探针，用于检测应用实例当前是否处于正常运行状态，如果不是，则 K8S **重启容器**
-        - 可以访问特定 url 判断是否存活
-      - readiness probes: 就绪性探针，用于检测应用实例当前是否可以接收请求，如果不能，K8S 不会**转发流量**
-        - 可以访问本机的特定 url 判断服务是否就绪
-  - pod 终止
 
 - 在整个生命周期中， pod 会出现 5 种状态(相位)：
 
@@ -168,13 +185,16 @@ Events: # 记录 pod 运行中的一系列关键事件
   - Unknown(未知)：apiserver 无法正常获取到 pod 对象的状态信息，通常由网络通信失败导致
 
 - pod 创建过程：
+
   1. 用户通过 kubectl 或其他 api 客户端提交需要创建的 pod 信息给 apiServer
   2. apiServer 开始生成 pod 对象的信息，并将信息存入 etcd，然后返回确认信息至客户端
   3. apiServer 开始反映 etd 中的 pod 对象变化，其它组件用 watch 机制来跟踪检查 apiServer 上的变动
   4. scheduler 发现有新的 pod 对象要创建，开始为 pod 分配主机并将结果信息更新至 apiServer
   5. node 节点上的 kubelet 发现有 pod 调度过来，尝试调用 docker 启动容器，并将结果回送至 apiServer
   6. apiServer 将接收到的 pod 状态信息存入 etcd 中
+
 - pod 终止过程：
+
   1. 用户向 apiServer 发送删除 pod 对象的命令
   2. apiServer 中的 pod 对象信息会随着时间的推移而更新，在宽限期内(默认 30s)，pod 被视为 dead
   3. 将 pod 标记为 terminating 状态
@@ -184,6 +204,116 @@ Events: # 记录 pod 运行中的一系列关键事件
   7. pod 对象中的容器进程收到**停止**信号
   8. 宽限期结束后，若 pod 中还存在仍在运行的进程，那么 pod 对象会收到**立即终止**的信号
   9. kubelet 请求 apiServer 将此 pod 资源的宽限期设置为 0 从而完成删除操作，此时 pod 对于用户已不可见
+
+- 重启策略(pod.spec.restartPolicy)
+  当存活性探针检测到失败时，就需要重启 container，这时候要依照重启策略执行。
+  - 重启策略选项：
+    - Always(默认值)
+      容器失效时，自动重启该容器
+    - OnFailure
+      容器终止运行且退出码为"非 0"时重启
+    - Never
+      不重启
+  - 重启策略适用于 pod 对象中的所有容器，首次需要重启的容器，将立即进行重启。为了防止不断重启造成性能问题，
+    如果重启失败将按照退让策略尝试重启，退让延迟时长每次分别为 10s、20s、40s、80s、160s、300s，
+    达到 300s 后将不再增大延迟，每隔 300s 重试
+
+## 调度
+
+默认情况下，Pod 在哪个 Node 节点运行是由 Scheduler 组件采用相应的算法计算出来的，这个过程不收人工控制。
+有些情况下我们想人工控制 Pod 的调度，K8S 提供下面四种调度方式：
+
+- 自动调度(无特殊设置)
+  完全有 Scheduler 经过一系列计算得出
+- 定向调度(强制性)
+  - 定向调度是强制性的，如果不满足则 pod 运行失败
+  - NodeName 直接指定 nodeName
+  - NodeSelector 指定满足 label 匹配条件的 node
+- 亲和性调度
+  - NodeAffinity 优先调度到指定 node，比如特定硬件资源
+    - requiredDuringSchedulingIgnoreDuringExecution
+      - **强制**调度到匹配的 node 节点，相比定向调度，支持更丰富的匹配模式
+      - 可以同时设置多个条件，terms 间是 or 的关系；matchExpressions 间是 and 的关系
+    - preferedDuringSchedulingIgnoreDuringExecution
+      - **非强制** 匹配 node。
+      - 可以设置多个匹配条件，每个条件可设置一个权重`weight`，根据权重匹配
+  - PodAffinity 以已经运行的 Pod 作为参照，优先调度到亲和的 Pod 相同的 node。例如：频繁网络通信的 pod，可以减少网络损耗
+    - 同样有"强制"和"非强制"两种匹配方式
+  - PodAntiAffinity 与上面相反，避开符合条件的 Pod。例如：提供相同网络功能的 pod，可以通过反亲和性实现更好的负载均衡
+- 污点(容忍)
+  - Taints 在 Node 设置后，可以避免 Pod 分配到上面，或者驱逐 Pod。
+  - Toleration 可以在 Pod 设置容忍，这样还是可以调度到有 Taint 的 Node 上。
+
+### Node 亲和性
+
+```yml
+# pod.spec.affinity.nodeAffinity
+requiredDuringSchedulingIgnoreDuringExecution <[]Object> # 必须匹配才调度，强制
+  nodeSelectorTerms # 节点选择列表
+    matchFields # 按节点字段选择
+    matchExpressions  # 按节点标签选择
+      key # 键
+      value # 值
+      operator  # 关系符： Exists, DoesNotExist, In, NotIn, Gt, Lt
+```
+
+- NodeAffinity 注意事项：
+  - 如果同时定义了 nodeSelector 和 nodeAffinity，那么必须两个条件都得到满足，Pod 才能运行在指定的 Node 上
+  - 如果 nodeAffinity 指定了多个 nodeSelectorTerms，那么只需要其中一个能够匹配成功即可
+  - 如果一个 nodeSelectorTerms 中有多个 matchExpressions，则一个节点必须满足所有的才能匹配成功
+  - 如果一个 Pod 所在的 Node 在 Pod 运行期间其标签发生了变化，不再符合该 Pod 的节点亲和性需求，则系统将**忽略**此变化
+
+### Pod 亲和性
+
+```yml
+# explain pod.spec.affinity.podAffinity
+requiredDuringSchedulingIgnoredDuringExecution <[]Object> # 硬限制
+  namespaces  # 指定参照 pod 的 namespace
+  topologyKey # 指定调度作用域
+  labelSelector # 标签选择器
+    matchExpressions  # 按 pod 标签列出的选择器列表
+      key
+      values
+      operator
+    matchLabels # 指多个 matchExpressions 映射的内容
+preferredDuringSchedulingIgnoredDuringExecution <[]Object> # 软限制
+  podAffinityTerm # 选项
+    namespaces
+    topologyKey
+    labelSelector
+      matchExpressions
+        key
+        values
+        operator
+      matchLabels
+  weight  # 倾向权重，[1, 100]
+```
+
+- topologyKey(调度作用域)
+  找到目标参照 Pod 后，根据目标 Pod 的哪些方面进行亲和性调度。如：
+  - `kubernetes.io/hostname` 以 Node 节点为区分维度
+  - `beta.kubernetes.io/os` 以 Node 节点的操作系统类型为区分维度
+
+### taint
+
+- taint 格式：`key=value:effect`，"key=value"是污点的标签，effect 描述污点的作用，有下面三项：
+
+  - PreferNoSchedule: K8S 尽量避免把 Pod 调度到具有该污点的 Node 上，除非没有别的 Node 可调度
+  - NoSchedule: K8S 将不会把 Pod 调度到具有该污点的 Node 上，但不会影响当前 Node 上已存在的 Pod
+  - NoExecute: K8S 将不会把 Pod 调度到具有该污点的 Node 上，同时会将 Node 上已存在的 Pod 驱离
+
+- K8S 的 master 节点默认带污点`node-role.kubernetes.io/master:NoSchedule`，所以一般不分配 Pod
+
+### toleration
+
+```yml
+# explain pod.spec.tolerations
+tolerations: # 可添加多个容忍项
+  - key: "taintKey" # 要容忍的污点的 key
+    operator: "Equal" # 操作符
+    value: "taintValue" # 容忍的污点 value
+    effect: "NoExecute" # 添加容忍的规则，这个规则必须和 node 标记的污点规则一致
+```
 
 # Network
 

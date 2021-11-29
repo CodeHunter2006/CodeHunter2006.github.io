@@ -6,7 +6,8 @@ tags: Docker K8S HighConcurrency
 ---
 
 ![kubernetes_docker](/assets/images/20190201_kubernetes_docker.jpg)
-记录 K8S 常用命令，练习命令可以用[minikube](https://minikube.sigs.k8s.io/docs/start/)
+记录 K8S 常用命令，练习命令可以用[minikube](https://minikube.sigs.k8s.io/docs/start/),
+命令参考[kubectl Cheat Sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)
 
 # 相关概念
 
@@ -109,6 +110,7 @@ contexts:
   - `json` 以 json 显示
 
 - `-w` 显示了当前内容后继续`watch`变化。如果在命令中指定了 name，则新增资源不会被 watch 到。
+- `--show-labels` 显示标签
 
 `kubectl get ns`
 获取 namespace 列表
@@ -235,6 +237,19 @@ contexts:
 
 `kubectl set image statefulset nginx-web nginx=nginx:mainline`
 向名为"nginx-web"设置新版本的 Pod 镜像，进行升级。
+
+## taint
+
+设置污点
+
+`kubectl taint nodes node1 key=value:effect`
+设置污点
+
+`kubectl taint nodes node1 key:effect-`
+去除污点
+
+`kubectl taint nodes node1 key-`
+去除所有污点
 
 ## top
 
