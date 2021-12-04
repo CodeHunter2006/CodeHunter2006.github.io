@@ -526,6 +526,12 @@ iptables -nv -L
 
 `pkill procname`
 
+## pstree
+
+以树状形式显示进程及其子进程，如果没有指定进程 ID 则显示所有进程
+
+`pstree`
+
 ## 变量操作
 
 ### set

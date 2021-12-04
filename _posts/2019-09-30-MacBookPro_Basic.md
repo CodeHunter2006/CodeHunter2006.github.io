@@ -205,12 +205,11 @@ export CLICOLOR=1
 | Ctrl+r        | 搜索以前使用命令         |
 | Ctrl+u        | 删除当前到开始的内容     |
 | Ctrl+k        | 清除至当前行尾           |
-| option+方向键 | 单词为单位移动           |
 | Ctrl+c        | 停止运行                 |
 | Ctrl+s        | 暂停屏幕输出             |
 | Ctrl+q        | 恢复屏幕输出             |
 | alt+left      | 跳到上一个单词           |
-| alt+right     | 跳到下一个单词           |
+| alt/opt+right | 跳到下一个单词           |
 | ctrl+w        | 删除当前至开头的一个单词 |
 
 ### 在命令行打开 finder
