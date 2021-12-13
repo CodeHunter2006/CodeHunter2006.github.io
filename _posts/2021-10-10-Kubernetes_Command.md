@@ -58,33 +58,6 @@ tags: Docker K8S HighConcurrency
 
 连接 API-Server 需要配置好"cube config"文件，在 mac 中在`~/.cube/config`。
 
-## context
-
-在命令中，经常要加`-n xxx`来区分 namespace，为了避免频繁输入重复命令内容，K8S 命令行工具提供了 context 功能。
-可以在 config 文件中配置或用命令创建 context，配置文件如下：
-
-```yml
-contexts:
-  - context:
-      cluster: cluster1
-      user: cluster1-developer
-    name: context1
-  - context:
-      namespace: name2
-    name: context2
-```
-
-可选 context 参数为`namespace` `cluster` `user`
-
-- `kubectl config get-contexts`
-  显示 context 列表
-- `kubectl config current-context`
-  显示当前选中的 context
-- `kubectl config set-context ctx-dev --namespace=development --cluster=kubernetes --user=kubernetes-admin`
-  创建 context
-- `kubectl config use-context ctx-dev`
-  选择 context
-
 # 常用命令
 
 ## api-versions
