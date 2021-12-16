@@ -45,3 +45,17 @@ tags: Go
 - Array 可等于比较。长度、类型相同，所有元素都相等时相等
 
 - Slice、map、function 不可比较，除非是和 nil 值比较。
+
+- 可以利用 function 的"不可比较"特性，让指定的 struct 不能被比较：
+
+  ```Go
+  // DoNotCompare can be embedded in a struct to prevent comparability.
+  type DoNotCompare [0]func() // 数组 len 为 0，不占空间
+  type T struct {
+    name string
+    DoNotCompare
+  }
+  func main() {
+    fmt.Println(T{} == T{}) // 由于存在 func 类型对象比较，编译不过
+  }
+  ```

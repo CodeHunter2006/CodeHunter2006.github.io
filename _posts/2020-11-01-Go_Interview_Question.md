@@ -161,3 +161,20 @@ func GetErr() error {
     return nil
 }
 ```
+
+# 5
+
+- 下面代码会如何运行？输出什么？
+
+```Go
+func main() {
+  s := []int{1,2,3,4,5}
+  for _, v:=range s {
+    s =append(s, v)
+    fmt.Printf("len(s)=%v\n",len(s))
+  }
+}
+```
+
+- `range`是 Go 的语法糖，可以理解为一个只触发一次的函数，调用时就确定了 len
+- sli、map 是相同逻辑
