@@ -54,9 +54,11 @@ tags: Docker K8S HighConcurrency
 
 # 基本配置
 
-安装 kubectl 工具：`brew install kubernetes-cli helm`，这个命令可以将 helm 工具顺便安装好。
+- 安装 kubectl 工具：`brew install kubernetes-cli helm`，这个命令可以将 helm 工具顺便安装好。
 
-连接 API-Server 需要配置好"cube config"文件，在 mac 中在`~/.cube/config`。
+- 连接 API-Server 需要配置好"cube config"文件，在 mac 中在`~/.cube/config`。
+
+- 可以用`lens`代替`dashboard`提供 UI，`brew install --cask lens`
 
 # 常用命令
 
