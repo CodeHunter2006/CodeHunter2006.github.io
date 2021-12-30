@@ -948,3 +948,47 @@ Data
 password: 6 bytes # 将真实内容隐藏
 username: 5 bytes
 ```
+
+# CRD(Custom Resource Definition)
+
+CRD 是一种自定义资源，可以自己导入资源模板从而在 K8S 中创建自己的资源类型。
+CRD 在 K8S 开源周边中应用很普遍，执行 `kubectl get crd` 就可以获取 CRD 列表，
+比如前面说的**hpa**其实就是一种 CRD 资源。
+
+CRD 要先定义再使用(创建资源)
+
+```yml
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  # 称必须与下面的spec字段匹配，格式为: <plural>.<group>
+  name: crontabs.crd.test.com
+spec:
+  # 用于REST API的组名称: /apis/<group>/<version>
+  group: crd.test.com
+  versions:
+    - name: v1
+      # 每个版本都可以通过服务标志启用/禁用。
+      served: true
+      # 必须将一个且只有一个版本标记为存储版本。
+      storage: true
+  scope: Namespaced # 指定crd资源作用范围在命名空间或集群
+  names:
+    # URL中使用的复数名称: /apis/<group>/<version>/<plural>
+    plural: crontabs
+    # 在CLI(shell界面输入的参数)上用作别名并用于显示的单数名称
+    singular: crontab
+    kind: CronTab
+    # 短名称允许短字符串匹配CLI上的资源，意识就是能通过kubectl 在查看资源的时候使用该资源的简名称来获取。
+    shortNames:
+      - ct
+  validation: # 创建资源时，对资源中各字段的验证机制
+  additionalPrinterColumns: # 定义在 `kubectl get xxx` 中以列表显示时，显示哪些列
+    - name: Replicas
+      type: integer
+      JSONPath: .spec.replicas
+      subresources:
+  scale: # 定义 `kubectl scale` 时应该执行什么伸缩动作，如果没有定义则资源创建后无法伸缩
+    specReplicasPath: .spec.replicas
+    statusReplicasPath: .status.replicas
+```
