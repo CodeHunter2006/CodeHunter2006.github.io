@@ -199,6 +199,21 @@ tags: Docker K8S HighConcurrency
 `kubectl cordon $NODENAME`
 将 Node 从调度中独立出来，以避免这个 Node 中的 Pod 运行状态发生变更，可用于调错时保存现场。
 
+## port-forward
+
+将 K8S 集群内部端口暴露在 localhost
+
+`kubectl port-forward -n namespace svc/mysql 3307:3306`
+将 localhost:3307 转发到目标的 3306 端口
+
+`kubectl port-forward -n namespace pod/xxx 123 456 789`
+同时转发三个端口，localhost 和 target 端口号相同
+
+- `svc/xxx` 转发 service
+- `pod/xxx` 转发 podName 对应的 pod
+- `deploy/xxx` 转发 deployment
+- `rs/xxx` 转发 rs
+
 ## scale
 
 扩/缩容
