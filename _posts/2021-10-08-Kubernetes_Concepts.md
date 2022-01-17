@@ -96,6 +96,12 @@ tags: Docker K8S HighConcurrency
   Each object in your cluster has a Name that is unique for that type of resource.
   Every Kubernetes object also has a UID that is unique(UUID) across your whole cluster(history).
 
+  - name character count limit 53.
+    as statefulset pods add a label "controller-revision-hash" which is `10 hash chars + 53 sts name chars`,
+    and label character count limit is 63
+  - must begin and end with an alphanumeric character ( [a-z0-9A-Z] ),
+    could contain dashes ( - ), underscores ( \_ ), dots ( . ), and alphanumerics between.
+
 - Namespaces
   Kubernetes supports multiple virtual clusters backed by the same physical cluster.
   These virtual clusters are called namespaces.
@@ -108,6 +114,11 @@ tags: Docker K8S HighConcurrency
   Labels are intended to be used to specify identifying attributes of objects that are meaningful and relevant to users, but do not directly imply semantics to the core system.
   Labels can be used to organize and to select subsets of objects.
   Labels enable users to map their own organizational structures onto system objects in a loosely coupled fashion, without requiring clients to store these mappings.
+
+  - label value character count limit 63(0~63)
+  - unless empty, must begin and end with an alphanumeric character ( [a-z0-9A-Z] ),
+    could contain dashes ( - ), underscores ( \_ ), dots ( . ), and alphanumerics between.
+  - keys can refer to Annotations
 
 - Label selectors
   Unlike names and UIDs, labels do not provide uniqueness.
@@ -133,6 +144,13 @@ tags: Docker K8S HighConcurrency
   In contrast, annotations are not used to identify and select objects.
   The metadata in an annotation can be small or large, structured or unstructured, and can include characters not permitted by labels.
   Annotations, like labels, are key/value maps.
+
+  - Valid annotation keys have two segments: an optional prefix and name, separated by a slash ( / ).
+    The name segment is required and must be 63 characters or less,
+    beginning and ending with an alphanumeric character ( [a-z0-9A-Z] ) with dashes ( - ),
+    underscores ( \_ ), dots ( . ), and alphanumerics between
+  - The prefix is optional and must be a valid DNS subdomain (such as "company.com")
+  - annotation values can be any character
 
 - Field Selectors
   Field selectors let you select Kubernetes resources based on the value of one or more resource fields.
