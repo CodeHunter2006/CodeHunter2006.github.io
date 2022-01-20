@@ -49,7 +49,7 @@ spec:
     - name: nginx1
       image: nginx:1.17.0
       imagePullPolicy: IfNotPresent
-      cmmand: ["/bin/sh", "-c", ";"]
+      command: ["/bin/sh", "-c", ";"]
       env: # 环境变量由多个 key-value 组成
         - name: "username" # 环境变量名
           value: "admin" # 环境变量值

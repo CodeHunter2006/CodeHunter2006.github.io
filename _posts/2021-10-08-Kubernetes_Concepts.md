@@ -39,6 +39,8 @@ tags: Docker K8S HighConcurrency
   In Kubernetes, controllers are control loops that watch the state of your cluster,
   then make or request changes where needed. Each controller tries to move the current cluster state closer to the desired state.
 
+  - When pod state is unexpected, the controller will do **Reconcile** to the desired state.
+
 - kube-controller-manager
   Control plane component that runs controller processes.
   Some types of these controllers are:
@@ -187,6 +189,15 @@ In Kubernetes, a Pod represents a set of running containers on your cluster.
     define tasks that run to completion and then stop.
     Jobs represent one-off tasks, whereas CronJobs recur according to a schedule.
 
+- Custom Resources Definition(CRD)
+  You can define your own resource based on basic resources.
+
+- Operators
+  Operators are software extensions to Kubernetes that make use of custom resources to manage applications and their components.
+  Operators follow Kubernetes principles, notably the control loop.
+  Kubernetes' operator pattern concept lets you extend the cluster's behaviour without modifying the code of Kubernetes itself by linking controllers to one or more custom resources.
+  Operators are clients of the Kubernetes API that act as controllers for a Custom Resource.
+
 ## Services, Load Balancing, and Networking
 
 - Kubernetes networking addresses four concerns:
@@ -258,12 +269,22 @@ In Kubernetes, a Pod represents a set of running containers on your cluster.
 ## API
 
 - GV GVK GVR
+
   - GV
     Api Group & Version
   - GVK
     Group Version Kind
   - GVR
     Group Version Resource
+
+- Role and ClusterRole
+  An RBAC Role or ClusterRole contains rules that represent a set of permissions.
+  Permissions are purely additive (there are no "deny" rules).
+  - A Role always sets permissions within a particular namespace;
+    when you create a Role, you have to specify the namespace it belongs in.
+  - ClusterRole, by contrast, is a non-namespaced resource.
+    The resources have different names (Role and ClusterRole) because a Kubernetes object always has to be either namespaced or not namespaced;
+    it can't be both.
 
 ## Others
 

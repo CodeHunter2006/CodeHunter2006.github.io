@@ -170,7 +170,7 @@ tags: Docker K8S HighConcurrency
 
 ## rollout
 
-版本升级相关功能
+版本升级相关功能，可作用于 deployment/replicaset/deamonset
 
 `kubectl rollout undo deploy deploy-name --to-revision=1 -n dev`
 将版本回退到"revision 1"
@@ -179,12 +179,14 @@ tags: Docker K8S HighConcurrency
   显示当前升级状态
 - `history`
   显示升级历史记录
+  - `--revision=xxx`
+    查看历史版本的具体 yaml 内容
 - `pause`
   暂停版本升级过程
 - `resume`
   继续已经暂停的版本升级过程
 - `restart`
-  重启版本升级过程
+  滚动重启
 - `undo`
   回滚到上一级版本(可以使用`--to-revision` 回滚到指定版本，`status`可查看 revision 号)
 
@@ -252,9 +254,6 @@ tags: Docker K8S HighConcurrency
 
 `kubectl create deployment hello-minikube --image=k8s.gcr.io/echoserver:1.4`
 部署一个 Application
-
-`kubectl scale rc redis --replicas=3`
-执行扩容缩容
 
 `kubectl rolling-update redis -f redis-rc.update.yaml`
 滚动升级
