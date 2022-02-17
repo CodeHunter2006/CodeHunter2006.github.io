@@ -300,6 +300,13 @@ In Kubernetes, a Pod represents a set of running containers on your cluster.
   A Secret is an object that contains a small amount of sensitive data such as a password, a token, or a key.
   Such information might otherwise be put in a Pod specification or in a container image.
 
+- Requests and limits
+
+  - Requests
+    Set the minimum request resources for pod. If no enough resources, pod can not run.
+  - Limits
+    set the limits of the pod. If exceed the limit memory, OOM will happen.
+
 - Garbage Collection
   Garbage collection is a collective term for the various mechanisms Kubernetes uses to clean up cluster resources.
   This allows the clean up of resources like the following:

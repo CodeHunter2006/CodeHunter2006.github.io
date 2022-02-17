@@ -170,7 +170,7 @@ tags: Docker K8S HighConcurrency
 
 ## rollout
 
-版本升级相关功能，可作用于 deployment/replicaset/deamonset
+对 Controller 下 Pod 进行批量滚动操作，可作用于 deployment/replicaset/deamonset
 
 `kubectl rollout undo deploy deploy-name --to-revision=1 -n dev`
 将版本回退到"revision 1"
@@ -206,7 +206,7 @@ tags: Docker K8S HighConcurrency
 将 K8S 集群内部端口暴露在 localhost
 
 `kubectl port-forward -n namespace svc/mysql 3307:3306`
-将 localhost:3307 转发到目标的 3306 端口
+打通 localhost:3307 和目标的 3306 端口
 
 `kubectl port-forward -n namespace pod/xxx 123 456 789`
 同时转发三个端口，localhost 和 target 端口号相同
