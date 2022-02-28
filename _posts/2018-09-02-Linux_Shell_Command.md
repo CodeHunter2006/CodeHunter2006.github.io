@@ -542,6 +542,10 @@ iptables -nv -L
 `export VALUE_NAME="value"`
 设置环境变量
 
+`export VALUE_NAME=${VALUE_NAME:-default}`
+
+- `${VALUE_NAME:-default}` 表示如果变量不存在，则用`:-`后面的默认值替代；如果存在则不作替换
+
 `echo $VALUE_NAME`
 输出(环境)变量的值
 

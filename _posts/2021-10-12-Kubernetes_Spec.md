@@ -43,6 +43,7 @@ metadata:
   name: pod1
   namespace: dev
   labels:
+    type: cnchTSO
     user: username
 spec:
   containers: # container 数组
