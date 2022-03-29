@@ -13,6 +13,23 @@ tags: English
   - I'll keep you updated.
 
 - Small Acknowledge
+
   - cool
   - ye
   - yep
+  - sure
+  - that make sense
+
+- Seek for solution
+
+  - Is there any workaround?
+  - Here is a way to solve the problem.
+  - I'm investigating into this.
+
+- Processing something
+  - Checking
+  - Doing xx stuff
+  - Handling
+  - Investigate
+  - Researching
+  - I'm already on it.
