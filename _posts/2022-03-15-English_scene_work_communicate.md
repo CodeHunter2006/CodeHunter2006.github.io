@@ -26,6 +26,11 @@ tags: English
   - Here is a way to solve the problem.
   - I'm investigating into this.
 
+- Ask for help
+
+  - are you able to do ...
+  - clould you help to do ...
+
 - Processing something
   - Checking
   - Doing xx stuff
