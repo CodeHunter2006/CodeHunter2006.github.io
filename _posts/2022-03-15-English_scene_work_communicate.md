@@ -25,6 +25,7 @@ tags: English
   - Is there any workaround?
   - Here is a way to solve the problem.
   - I'm investigating into this.
+  - need to explore further
 
 - Ask for help
 
@@ -32,9 +33,13 @@ tags: English
   - clould you help to do ...
 
 - Processing something
+
   - Checking
   - Doing xx stuff
   - Handling
   - Investigate
   - Researching
   - I'm already on it.
+
+- Ask for progress
+  - any luck with ...?
