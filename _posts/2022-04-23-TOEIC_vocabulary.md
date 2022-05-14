@@ -63,15 +63,12 @@ tags: English
 - newsletter (某组织定期发送的)内部通讯，简报
 - travel agent 旅行社
 - mechanic 机械工
-- dealer 商人
 - maintenance 维护保养
 - auto repair shop 汽车修理厂
 - headlight 车前灯
 - in stock 有现货
 - concern vi.担心；影响；
 - concern about 担心...
-- depart vi.启程，触发
-- departure n.启程，离开；
 - coupon 优惠券；
 - voucher 代金券；
 - gathering n.聚会
@@ -80,7 +77,6 @@ tags: English
 - inconvenience 不便
 - mechanical problem 机械故障
 - thoroughly 全面地；彻底地；
-- seminar 研讨会；
 - be impressed with 对...印象深刻
 - stun 使震惊
 
@@ -100,7 +96,8 @@ tags: English
 - cabinet 档案柜；橱柜；
 - calendar 日历；日程历；
 - schedule 时间表；计划表；
-- clerk 办事员；书记；
+- clerk ...员(的人)；书记；
+- sales clerk 售货员
 - directory 人名地址薄；(计算机)文件夹，目录；
 - filing 归档
 - in-tray 待处理文件盒
@@ -216,6 +213,216 @@ tags: English
 
 # Commerce 贸易
 
+- bid 投标；出价；
+- quote 报价
+- quota 定量；定额；配额；
+- competitor 竞争对手
+- consolidate 结合；强化；
+- corporate 团体的；公司的；法人的；
+- credible 可信的；可靠的；
+- debit 借方；借项；
+- earnings 薪水；收益；
+- export 输出；出口(贸易)；出口货
+- import 输入；进口；输入物；
+- tariff 关税
+- haggle 讨价还价
+- invoice 发票；发货清单；完成工作的清单
+- long-range 长期的；远程的
+- stock 现货；存货；
+- supply n.供应(品)；库存；vt.供应(物品)
+- payment 支付；付款；
+- voucher 保证人；凭证；代金券；
+- lade 装载；装货；
+- bill 票据；账单；法案；传单；钞票；
+- bill of lading 提货单
+- commodity 商品，农产品；
+- consignee 收件人；受托人；
+- contractor 立契约人；承包商；
+- cost-effective 符合成本效益的
+- dealer 商人；经销商；
+- due adj.应付的；到期的；该发生的；
+- endorse 背书；支援；赞同；
+- inventory 详细目录；清单；存货；
+- letter of credit 担保书；信用状；
+- order n.订货；订单；汇票；汇单；
+- shipment 一批货
+- patent n.专利；vt.取得...的专利；
+- surplus n.过剩的量；盈余；adj.过剩的；剩余的；
+- trademark (注册)商标
+- warehouse 仓库；货架；大卖场；
+
+# Business Meeting & Negotiation 商务会议及谈判
+
+- adjourn 休会；延期；
+- agreement 同意；协定；
+- amendment 修正方案
+- approval 赞成；同意；
+- attentive 注意的；留心的；
+- brainstorm 头脑风暴
+- concede 容忍；让步；
+- convince vt.使信服
+- cross-reference 前后参照
+- dispute 争端；争吵；
+- reconcile 调和；调解；
+- settlement 协议；支付
+- articulate 能清楚有力地表达思想感情的；表达能力强的；
+- attorney 律师
+- compromise 妥协；折中；和解；
+- conclusive 决定性的；毋庸置疑的；
+- consensus 一致的意见；共识；
+- converse 谈话；交谈；
+- criterion 标准；规范；
+- demonstration 示范；(游行)示威
+- diplomacy 外交(手腕)；交际手段；
+- dissuade 劝阻
+- on behalf of 代表
+- petition n.请愿(书)；vi.请愿
+- premise 前提
+- seminar 研讨会；
+- statement 声明；陈述
+
+# Technology & Equipment 科技及装备
+
+- facilitate 促进；使(更)容易
+- outlet 出口；排水口；销售店；商行；插座
+- substandard 不合规格的；次等的；标准以下的；
+- automaton 自动操作装置；机器人；
+- devise 设计；发明；策划；
+- outage 电力中断；断电；
+- pertroleum 石油
+- static n.静电干扰；adj.静止的；静态的；静电的；
+
+# Computer 电脑
+
+- compliance 服从；顺从；附和；屈从；
+- retrieval 取回；恢复；
+- state-of-the-art 使用最先进技术的；达到最高水准的；
+- up-to-date 最近的；最新的；
+- floppy(disk) 软盘
+- know-how 技能；专业知识；窍门；
+- modem 调制解调器
+- omit 省略；删除；疏忽；
+- transmission 传输；传送；
+
+# Business Correspondence & Advertisement 商业书信及广告
+
+- appendix 附录
+- campaign 战役；竞选活动；宣传活动；
+- cohesive 有黏着力的；有结合力的；凝聚性的；
+- confidential 秘密的；机密的；
+- conrrespondence 通信；信件；
+- dictate 口述；支配；命令；
+- elaborate v.详尽说明；adj.详尽的；精心制作的；
+- inquire 询问；调查；
+- jot down 略记；匆匆记下；
+- leaflet 传单
+- promote 发扬；晋升；促进；
+- publicity n.公开；宣传；尽人皆知
+- revise 修订；修改；校订；
+- affirm 坚称；申明；断言；确认；
+- banner 旗帜
+- circular 广告；传单；
+- composition 写作；作品；作文；作曲；
+- convene 集合；聚集；开会；
+- assemble 集合；聚集；装配；
+- courier 递送急件的信差；邮务专递公司；
+- draft 草稿；汇票；
+- enclose 装入；放入封套；
+- issue 流出；放出；发行；发布；
+- layout 规划；设计；编排；
+- legible (字迹)可以辨认的；易读的；
+- postage 邮资
+- proofread 校正；校对；
+- restate 再声明；重新叙述；(换一种方式)重说；
+- stationery 文具；信纸；
+- write-up n.报告书；v.详细写；
+
+# Travel 旅游
+
+- accomodation 适应；住所；膳宿；
+- boarding pass 登机牌
+- brochure 小册子
+- checkout n.结账退房的时间；v.办理退房；结账离开；
+- confirmation n.确认
+- customs 海关；关税
+- depart vi.启程，触发
+- departure n.启程，离开；
+- en route (法)在途中
+- expedition 探险；远征队；
+- itinerary 行程表；
+- lodge n.小屋；旅馆；vi.住宿；投宿；
+- peak season 旺季
+- sightseeing n.观光；游览；
+- suite (旅馆的)套房
+- baggage claim 行李提领处
+- breathtaking 惊人的；惊险的；惊艳的；
+- carry-on 登机行李；手提行李；
+- concierge 门房；看门人；管理员；
+- cruise 乘船游览；
+- deluxe 豪华的；高级的；
+- exotic 异国风情的；异国的；
+- fasten 系紧；拴住；扣住；
+- flight attendant 空中服务员
+- jet lag 时差；
+- luggage 行李
+- porter 搬运工；门房；
+- round-trip 来回的；双程的；
+- stopover n.中途停留
+- vacant 空的；未被占用的；
+- voyage n.航行；旅行；
+
+# transportation(Air,Ocean,Land) 交通运输(空、海、陆)
+
+- buckle n.搭钩
+- buckle up v.系安全带
+- cargo 货物
+- convertible (活动顶篷式)敞篷车
+- crash landing 迫降
+- ground crew 地勤人员
+- jaywalk 不遵守交通规则穿越马路；闯红灯；
+- launch 发射；开始；
+- navigate 航行；驾驶；
+- taxicab 出租车
+- transit n.运输；通过
+- acrophobia 恐高症
+- airliner 大型客机
+- aviation 飞行；航空学；
+- cabin 小屋；客舱；机舱；
+- commuter 通勤者
+- conveyance 运输；交通工具；
+- ferry 渡轮
+- freight 货运；货物；
+- jeopardy 风险；危险；危难；
+- life vest 救生衣
+- pedestrian 行人；步行者；
+- runway 飞机跑道；
+- timetable 时间表；时刻表；
+
+# Shorpping 购物
+
+- bazaar 市场；集市；
+- client 顾客；委托人；
+- distributor 供应商；经销商；
+- retailer 零售商
+- itemize 详细列举；分条列举；
+- neon sign 霓虹灯招牌
+- pickpocket 扒手
+- pushcart 手推车
+- reimburse 偿还；补偿；
+- solicit 请求；恳求；
+- trendy 时髦的；流行的；
+- wholesale adj.批发的;adv.大量地；大批地；
+- bargain n.便宜货；廉价品；v.讨价还价；
+- cash register 收银机
+- drugstore 兼卖杂货的药房
+- flea market 跳蚤市场
+- patron n.(老)顾客；赞助人；
+- refund n.退款；v.退换；赔偿；
+- thrift 节俭；节约；
+- vender 小贩
+- warranty 保证书
+- workmanship 技巧；手艺；
+
 # 熟词僻义
 
 - story 单位，(楼)层；故事；
@@ -227,7 +434,7 @@ tags: English
 - reach 联系，联络；到达
 - jumper 套头毛衣(男)；无袖连衣裙(女)；跳跃者；
 - last vi.持续；adj.最后的；
-- board 董事会；模板；
+- board 董事会；木板；
 - charge 要价；收费；
 - straw 吸管；稻草；
 - convention 大会；管理；
@@ -235,6 +442,8 @@ tags: English
 - come by 作短暂拜访；经过；
 - token (情感的)表示；证明；令牌；
 - conduct 指挥；施行；传导；
+- state vt.陈述，说明，表明；n.状态；声明；
+- device 图案；设计；装置；设备；
 
 - come in 上市；进来
 - pick up 买；(开车)接载；取走；
