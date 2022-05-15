@@ -420,8 +420,140 @@ tags: English
 - refund n.退款；v.退换；赔偿；
 - thrift 节俭；节约；
 - vender 小贩
-- warranty 保证书
+- warranty 保证书；保修卡；
 - workmanship 技巧；手艺；
+
+# Dining Out 在外用餐
+
+- bland (食物)淡而无味的；(人)温和的；无刺激性的；
+- crave 渴望
+- delicacy 佳肴
+- fragrant 有香味的；芳香的；
+- ingredient 成分；配料；配方；
+- liquor 烈酒(如威士忌)
+- munch 用力嚼；大声咀嚼；
+- palatable 美味的；顺耳的；怡人的；
+- pass up 放过；错过；
+- portion 部分；一份；
+- ravenous 极饿的；贪婪的；
+- refreshment(s) 茶点(常用复数)
+- silverware 银器；镀银餐具
+- specialty 专攻；专业；专长；特制品；
+- aperitif 饭前酒；
+- appetizer 开胃菜；
+- beverage 饮料(除水之外)
+- buffet 自助餐
+- chopsticks 筷子
+- cuisine 烹调；烹调之食品；
+- dessert 餐后甜点
+- entree 主菜
+- hors d'oeuvre 开胃小菜
+- leftovers 剩饭剩菜
+- menu 菜单
+- napkin 餐巾
+- parched 焦干的；极渴的；
+- pastry 用面团和油酥烤成的小甜点心
+- preservative 防腐剂
+- recipe 食谱；烹饪法；秘诀
+- seasoning 调味品；佐料；
+- snack n.小吃；点心；vi.吃点心
+- spice 香料；调味品；
+
+# Social Contact 社交
+
+- acquaintance 相识但不很熟之人
+- associate n.同事；伙伴；vt.联想；交往；
+- banquet 酒席；正式的宴会；
+- courtesy 礼貌；礼仪；好意；殷勤
+- distinguished 卓越的；杰出的；著名的；
+- embrace n.拥抱；v.拥抱；围绕；包括；
+- etiquitte 礼节；规范；
+- farewell 一路平安；再见；告别；
+- get-together (非正式的社交)聚会
+- greeting n.致敬；问候；(复数)致意；赞词；
+- lavish 过分大方的；浪费的；丰富的；
+- nosy 好管闲事的；爱打听的；
+- protocol 外交礼节；条约草案；
+- regards 问候；致意；
+- salute 向...打招呼；向...行军礼；向...表示敬意；
+- acknowledge 承认；承认...之存在、权力；表示感谢
+- compliment 赞扬；恭维；
+- criticize 批评；
+- eloquent 口才好的；雄辩的；
+- extend 延伸；延续；扩大；延长；给予；提供；
+- favorable 令人满意的；博得赞许的；有帮助的；有利的；
+- gossip n.闲话；流言；vi.说闲话；
+- hilarious 狂欢的；令人捧腹的；
+- intrude 闯入；侵入；把...强加于；
+- modest 谦逊的；适度的；朴实的；端庄的；
+- nuisance 讨厌之人、事、物
+- prompt adj.准时的；按时的；迅速的；
+- run into 偶遇；碰上；
+- scandal 丑闻；引人愤慨之事；
+
+# Entertainment & Mass Media 娱乐及大众传播媒体
+
+- amuse 使欢乐；使愉快；使发笑；
+- ballet 芭蕾舞
+- celebrity 名人；名声；
+- cue 暗示；提示；
+- drama 戏剧；剧本；
+- fare 车票；票价；
+- headline (报纸的)标题；头条新闻；
+- periodical 期刊；杂志；
+- premiere 首次公演；首映；
+- scriptwriter 剧作家；编剧；
+- symphony 交响曲
+- ticket office 售票处
+- applaud 鼓掌；赞同；
+- audition n.试听；试演；
+- carnival 狂欢；嘉年华会；巡回娱乐表演；
+- choreography 舞蹈设计；编舞；
+- circus 马戏团
+- critic 批评家；评论家；吹毛求疵的人；
+- curtain call 谢幕
+- editorial 社论
+- finale 结局；乐曲的最后部分；
+- playwright 剧作家
+- preview 试映；预告片；
+- rehearsal 预演；排练；
+- stunt 特技；噱头；
+
+# Sports & Recreational Activities 运动及休闲活动
+
+- aerobics 有氧运动
+- coach 教师；教练；
+- defeat n.(己方)失败；击败(对方)vt.战胜(对方)；(己方)战败
+- fitness 适合；恰当；身体健康
+- gym 健身房；体育馆；
+- league 联盟；同盟；
+- marathon 马拉松；耐力比赛；
+- mountaineering 登山运动
+- recreation 娱乐；消遣；
+- relaxation 松弛；缓和；休息；娱乐；
+- rigor 严格；严苛；艰苦；
+- soccer 足球
+- stadium 体育场
+- stroll 散步；闲逛；
+- time-out 暂停
+- trophy 奖品；奖杯；战利品；
+- usher 引座员；招待员；
+- billiards 撞球；桌球；
+- combative 好战的；好斗的
+- default n.违约；弃权；v.不履行(契约书)
+- forfeit n.罚款；丧失；vt.丧失；被没收
+- referee n.裁判员；仲裁者；
+- runner-up 亚军；第二名；
+- spectator 观众；旁观者；
+- tactic n.(常用复数)战略；策略；
+- tournament n.比赛；锦标赛；
+- umpire n.裁判；仲裁
+- volleyball 排球
+
+# Medicine & Insurance 医疗及保险
+
+- alleviate vt.减轻；缓和
+- contagious 接触传染的
 
 # 熟词僻义
 
