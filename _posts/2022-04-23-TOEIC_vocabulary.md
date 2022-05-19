@@ -90,6 +90,33 @@ tags: English
 - give/deliver a presentation 演讲；作报告
 - take over 接管；接替；
 
+# 熟词僻义
+
+- story 单位，(楼)层；故事；
+- suggest 暗示；建议；
+- directions 操作说明；方向；
+- produce n.农产品；vt.生产；
+- post n.柱、杆；n.邮政，包裹；vt.邮寄；
+- track 足迹、踪迹；小路；轨道
+- reach 联系，联络；到达
+- jumper 套头毛衣(男)；无袖连衣裙(女)；跳跃者；
+- last vi.持续；adj.最后的；
+- board 董事会；木板；
+- charge 要价；收费；
+- straw 吸管；稻草；
+- convention 大会；管理；
+- arrange 安排；整理；
+- come by 作短暂拜访；经过；
+- token (情感的)表示；证明；令牌；
+- conduct 指挥；施行；传导；
+- state vt.陈述，说明，表明；n.状态；声明；
+- device 图案；设计；装置；设备；
+
+- come in 上市；进来
+- pick up 买；(开车)接载；取走；
+
+# 分场景高频词
+
 ## Office Matters 办公室事宜
 
 - appointment 约定，约会
@@ -121,7 +148,7 @@ tags: English
 - colleague 同事
 - associate n.同事；v.联系；
 
-# Personnel & Management 人事及管理
+## Personnel & Management 人事及管理
 
 - consultation 咨询；商量；
 - curriculum vitae(CV) (拉丁语)履历
@@ -144,7 +171,7 @@ tags: English
 - pension 退休金
 - nominee 被提名者；
 
-# Business Development 业务扩展
+## Business Development 业务扩展
 
 - accrue v. 产生；增加；积累；
 - amass 积累；
@@ -179,7 +206,7 @@ tags: English
 - allot 分配；划拨；
 - secure v.获得；使安全；
 
-# Finance & Investment 财务及投资
+## Finance & Investment 财务及投资
 
 - account 账目；账单；账户；
 - accountant 会计师；
@@ -211,7 +238,7 @@ tags: English
 - stockholder 证券和股票经纪人
 - yield 生产量；收益；生产；
 
-# Commerce 贸易
+## Commerce 贸易
 
 - bid 投标；出价；
 - quote 报价
@@ -251,7 +278,7 @@ tags: English
 - trademark (注册)商标
 - warehouse 仓库；货架；大卖场；
 
-# Business Meeting & Negotiation 商务会议及谈判
+## Business Meeting & Negotiation 商务会议及谈判
 
 - adjourn 休会；延期；
 - agreement 同意；协定；
@@ -281,7 +308,7 @@ tags: English
 - seminar 研讨会；
 - statement 声明；陈述
 
-# Technology & Equipment 科技及装备
+## Technology & Equipment 科技及装备
 
 - facilitate 促进；使(更)容易
 - outlet 出口；排水口；销售店；商行；插座
@@ -292,7 +319,7 @@ tags: English
 - pertroleum 石油
 - static n.静电干扰；adj.静止的；静态的；静电的；
 
-# Computer 电脑
+## Computer 电脑
 
 - compliance 服从；顺从；附和；屈从；
 - retrieval 取回；恢复；
@@ -304,7 +331,7 @@ tags: English
 - omit 省略；删除；疏忽；
 - transmission 传输；传送；
 
-# Business Correspondence & Advertisement 商业书信及广告
+## Business Correspondence & Advertisement 商业书信及广告
 
 - appendix 附录
 - campaign 战役；竞选活动；宣传活动；
@@ -337,7 +364,7 @@ tags: English
 - stationery 文具；信纸；
 - write-up n.报告书；v.详细写；
 
-# Travel 旅游
+## Travel 旅游
 
 - accomodation 适应；住所；膳宿；
 - boarding pass 登机牌
@@ -371,7 +398,7 @@ tags: English
 - vacant 空的；未被占用的；
 - voyage n.航行；旅行；
 
-# transportation(Air,Ocean,Land) 交通运输(空、海、陆)
+## transportation(Air,Ocean,Land) 交通运输(空、海、陆)
 
 - buckle n.搭钩
 - buckle up v.系安全带
@@ -398,7 +425,7 @@ tags: English
 - runway 飞机跑道；
 - timetable 时间表；时刻表；
 
-# Shorpping 购物
+## Shorpping 购物
 
 - bazaar 市场；集市；
 - client 顾客；委托人；
@@ -423,7 +450,7 @@ tags: English
 - warranty 保证书；保修卡；
 - workmanship 技巧；手艺；
 
-# Dining Out 在外用餐
+## Dining Out 在外用餐
 
 - bland (食物)淡而无味的；(人)温和的；无刺激性的；
 - crave 渴望
@@ -459,7 +486,7 @@ tags: English
 - snack n.小吃；点心；vi.吃点心
 - spice 香料；调味品；
 
-# Social Contact 社交
+## Social Contact 社交
 
 - acquaintance 相识但不很熟之人
 - associate n.同事；伙伴；vt.联想；交往；
@@ -491,7 +518,7 @@ tags: English
 - run into 偶遇；碰上；
 - scandal 丑闻；引人愤慨之事；
 
-# Entertainment & Mass Media 娱乐及大众传播媒体
+## Entertainment & Mass Media 娱乐及大众传播媒体
 
 - amuse 使欢乐；使愉快；使发笑；
 - ballet 芭蕾舞
@@ -519,7 +546,7 @@ tags: English
 - rehearsal 预演；排练；
 - stunt 特技；噱头；
 
-# Sports & Recreational Activities 运动及休闲活动
+## Sports & Recreational Activities 运动及休闲活动
 
 - aerobics 有氧运动
 - coach 教师；教练；
@@ -550,32 +577,357 @@ tags: English
 - umpire n.裁判；仲裁
 - volleyball 排球
 
-# Medicine & Insurance 医疗及保险
+## Medicine & Insurance 医疗及保险
 
 - alleviate vt.减轻；缓和
 - contagious 接触传染的
+- emergency room 急诊室
+- general hospital 综合医院
+- investigator 调查员
+- mandatory 命令的；强制的；义务的；
+- outpatient 门诊病人
+- premium 奖品；额外费用；保费；
+- severe 严格的；严苛的；严重的；
+- stroke 脑血管破裂或阻塞；中风
+- terms 条文；条款；付款条件；价钱；
+- vital 非常必要的；极其重要的；生死攸关的；生气勃勃的；
+- antibiotic 抗生素
+- commission 佣金
+- comprehensive 全面的；广泛的；
+- converage 报道范围；保险范围；
+- excruciating 极痛苦的；极度的；
+- fraud 诈骗；骗局；骗子；
+- handicap 残障；不利条件；障碍；
+- indemnity 损害保障；损害赔偿；
+- intensive care unit 加护病房；
+- liable 有义务的；应负责的；易于...的；倾向于...的；
+- organ donor 器官捐赠者；
+- pharmaceutical 制药的；药品的；
+- purification 洗净；净化；
+- trauma 外伤；心灵的伤；
+- vaive 放弃；弃权；
 
-# 熟词僻义
+## Housing 住房
 
-- story 单位，(楼)层；故事；
-- suggest 暗示；建议；
-- directions 操作说明；方向；
-- produce n.农产品；vt.生产；
-- post n.柱、杆；n.邮政，包裹；vt.邮寄；
-- track 足迹、踪迹；小路；轨道
-- reach 联系，联络；到达
-- jumper 套头毛衣(男)；无袖连衣裙(女)；跳跃者；
-- last vi.持续；adj.最后的；
-- board 董事会；木板；
-- charge 要价；收费；
-- straw 吸管；稻草；
-- convention 大会；管理；
-- arrange 安排；整理；
-- come by 作短暂拜访；经过；
-- token (情感的)表示；证明；令牌；
-- conduct 指挥；施行；传导；
-- state vt.陈述，说明，表明；n.状态；声明；
-- device 图案；设计；装置；设备；
+- appliance 设备；器具；工具；家用电器；
+- burglar 窃贼；夜间入室行窃的小偷；
+- community 社区
+- garbage disposal 垃圾处理机
+- landlord 地主；房东；
+- laundry 洗衣店；要洗或已洗好的衣物；
+- lease n.租约；vt.出租；租用；
+- mettress 床垫
+- mortgage 抵押贷款
+- ornament n.装饰(动作)；装饰品；
+- plumbing 水管设施
+- possession n.所有；个人财产；
+- real estate 不动产
+- renovate vt.更新；修复；恢复；
+- rural 乡下的；田园的；
+- suburb n.(常用复数)郊区；近郊；
+- urban 都市的；都市式的
+- balcony 阳台；包厢；
+- chore 家务难事；困难、烦琐、无趣的工作
+- down payment 头期款；预付金；订金；
+- furnishings 家具；室内摆设；
+- garage 车库；修车厂；
+- kitchenware 厨房用具
+- laundromat 自助洗衣店
+- lawn 草坪；草地；
+- loan shark 放高利贷者；
+- messy 杂乱的；肮脏的；
+- porch 门廊；游廊；
+- property 财产；地产；
+- relocate 重新安置；迁徙；
+- residence 住所；公馆；居住
+- storage 储藏；藏室
+- utility 公共事业；实用
 
-- come in 上市；进来
-- pick up 买；(开车)接载；取走；
+## Product Research and Development 产品调研与开发
+
+- bandwagon effect 花车效应；攀比效应；跟风效应；
+- empathy 移情作用；神入；
+- enquire 询问；打听；调查；
+- fad 时尚；一时流行的狂热；
+- hierachy 等级制度；统治集团；阶级组织
+- imitate 模仿；仿效；仿制；伪造
+- mastermind 优秀的策划者；幕后操作的人；智囊
+- originality 创意；新奇；原始
+- aesthetic 有美感的；审美的；美学的；
+- determinant 决定因素
+- domestic 家里的，家庭的；本国的，国内的
+- door-to-door 按户访问的；按户送达的
+- orient 使适应，使熟悉情况或环境；使朝向
+- psychology 心理状态，心理学
+- questionnaire 调查表，问卷
+- symbolize 采用象征；用符号表现；
+- workable 可使用的；可操作的；可行的
+
+## Quality Control 质量管理
+
+- abnormal 不正常的；不规则的
+- ageing 成熟；老化
+- defect 缺陷；不足
+- nonconforming 不一致的；不合格的
+- quality gate 质量门；质量阀(即在达到下一道工序前，本工序的产品必须严格达到特定的品质标准)
+- yardstick 标准；准绳；码尺
+- aberration 色差；偏差
+- airless 不通风的；密闭的
+- fatigue 疲劳，疲惫
+- genre 种类；属类；流派
+- intrinsic 内部的；固有的；真正的
+- job shop 加工车间
+
+## Marketing and Customer Service 市场营销与客户服务
+
+- clearance 清仓；批准；许可
+- deferred payment 延期付款；分期付款
+- follow-up 后续服务工作
+- impulse 冲动；刺激；推动
+- intimate 亲密的；隐私的
+- lookism 容貌歧视
+- motive 动机，目的；主题
+- offset 弥补；抵消
+- privilege 特权；特殊待遇
+- remittance 汇款
+- self-concept 自我概念
+- tie-in sale 搭售，搭卖
+- customary 习惯性的；惯例的
+- discrimination 歧视
+- feel/be inclined to 倾向...的
+- intangible 无形的；切实的
+- perception 知觉；感觉
+- personality 个性
+- popularity 普及；流行；声望
+- retention 维系；保留；保持
+- supplementary 附加的；补足的
+- stereotype 典范；老套
+- subculture 亚文化
+
+## Job Application & Interview 工作申请与面试
+
+- trainee 新兵；练习生，实习生
+- reference 介绍信；证明书
+- diploma 毕业证书，学位证书；奖状
+- vacancy 空缺；空位；空白
+- promotion from within(PFW) 内部晋升
+- posting n.公布；邮递；布置
+- degree 学位
+- validity 有效性；正确；正确性
+- norm 标准；规范
+- cutoff score 录用分数线
+- job knowledge 业务知识
+- unstructured 无社会组织的；松散的；非正式组成的
+- vocational 职业的；行业的
+
+## Pay & Promotion 薪酬与晋升
+
+- payroll 工资册；在职人员工薪名册
+- wage 工资；代价；报偿
+- raise n.上升；加薪
+- windfall 外快；意外之财
+- overtime pay 加班费
+- punch 打孔
+- paycheck 付薪水的支票，薪水
+- merit pay 绩效工资
+- unpaid adj.未付款的；(税收)未缴纳的；无报酬的
+- income tax 所得税
+- take-home adj.(工资扣税等后)实得的
+- managerial adj.经理的；管理上的
+- fine n.罚款
+- minimum wage 最低工资
+- piecework 计件工作
+- ceiling 上限；天花板
+- probation 试用；试用期
+- demonstrate vt.证明；展示；论证
+- post 岗位；职位
+- persistent adj.固执的；坚持的；持久稳固的
+- overpay vt.多付给(某人)钱，给(某人)过高报酬
+- nominate vt.推荐；提名
+- seniority n.年长；职位高；资历
+- acting adj.代理的
+- deputy 代理的
+- devotion n.献身，奉献；忠诚
+
+## Welfare Benefits 员工福利待遇
+
+- wellbeing 幸福；福利；安乐
+- betterment n.改善，改进；改良
+- vacation 假期；(房屋)搬出
+- welfare 福利；幸福；福利事业
+- allowance 津贴；零用钱；允许
+- subsidy 补贴；津贴；补贴金
+- insurance 保险；保险费；赔偿金
+- check n.支票
+- leave n.许可，同意；休假
+- serverance pay 遣散费
+- endowment 捐赠；捐助；捐款
+- housing 房屋；住房供给
+- unemployment 失业；失业率；失业人数
+- follower 追随者；属下；拥护者
+- ownership 所有权；物主身份
+- cafeteria 自助餐厅
+- maternity 产科的；孕妇的
+
+## Rules & Regulations 公司规章制度
+
+- confidentiality 机密；[计]机密性
+- disciplinary 训诫的；规律的；训练的
+- appeal 呼吁，请求；上诉
+- referral 参照；提及；被推举的人
+- harassment 骚扰；烦恼
+- rule [数]规则；条例，规章制度；
+- enforce 实施，执行；强迫，强制
+- violate 违反；侵犯，妨碍
+- accounting 会计，会计学
+- reimbursement 退还，偿还；报销
+- misconduct 不端行为；处理不当
+- expense-report system 报销制度
+- subordinate adj.下级的；n.部属；部下，下级
+- key account training 大客户培训
+- attendance management 考勤管理
+- structure 制度
+- applicable 可适用的；可应用的；合适的
+- conform 符合；遵照
+- supervise 监督，管理；指导
+- precaution 预防，防备；预防措施
+- affair 事情；事务；私事
+- retain 保持；雇
+- stipulate 规定；保证
+- fulfillment 履行；实行
+- lateness 晚；迟
+- absenteeism n.旷工；旷课；无故缺席
+- detain 拘留；留住
+- penalty n.罚款，罚金；处罚
+- outsourcing n.外包；外购；外部采购
+- compensatory 补偿的，赔偿的
+- prevail vi.盛行，流行；战胜，获胜
+- deem vt.认为，视作；相信
+- hereunder adv.在此之下；在下面
+- submission 投降；提交(物)
+- beforehand adv.事先；预先；adj.提前的；预先准备好的；
+
+## Signing a Contract 签订合同
+
+- secure (确保)争取到;弄到
+- honor vt.履行；信守
+- annul vt.取消；废除；宣告无效
+- abide by v.遵守；信守；承担...的后果
+- breach n.违反
+- countersign vt.会签；副署；确认
+- tear up v.取消(合同)
+- arbitration n.公断，仲裁
+- draw up 草拟，起草
+- renewal n.更新，恢复；续约
+- stipulation n.规定；约定；条款
+- endorsement n.背书；签注(文件)
+- withdraw vt.撤走；拿走；(从银行)取(钱)
+- revoke vt.撤回，取消；废除
+- irrevocable adj.不可改变的；不能取消的；不能挽回的；
+- definite adj.一定的；确切的；
+- ratify vt.批准；认可
+- hinder vi.妨碍，阻碍；成为阻碍
+- consortium n.财团；联合；合伙
+- original n.原件；正本
+- jurisdiction n.司法权，审判权，管辖权
+- counterpart (契约、合同)副本，复制品；相对物
+- inspection n.检查，检验；验收条款
+- memorandum n.备忘录；便笺
+
+## Telephone Calls 接打电话
+
+- conference call 会议电话
+- crossed lines 电话干扰
+- long distance call 长途电话
+- mouthpiece 传化机；话筒
+- engaged 使用中的，忙碌的；占线的
+- collect call 对方付费电话
+- put through 接通(电话)；使穿过；使从事
+- ring vi.按铃；敲钟
+- correspond vi.符合，一致；通信
+- emergency 紧急情况；突发事件；非常时刻
+- reach vt.达到；抵达；找到
+- incoming 进来的，到来的；即将就任的
+- outgoing 出发的，外出的；即将离职的
+- get through v.接通电话；度过，熬过(困难时期等)
+- signal n.信号；暗号；导火线
+- voicemail 语音信箱
+- rental n.租金收入，租金；租赁
+- note down v.记录某事；记下某事
+- transfer vi.(使)转移；调任
+- arrangement n.布置；整理；准备；约定，商定；
+
+## Feelings,Emotions,Attitudes & Sensations 感觉、情绪、态度及知觉
+
+- affection n.感情；钟爱
+- anticipate v.预见；期待；在...之前行动；预先考虑；提前使用
+- detest vt.憎恶；痛恨；嫌恶
+- disgust n.作呕；厌恶；反感；vt.导致反感
+- distress n.悲痛；贫困；危难
+- esteem n.好评；尊敬；vt.极看重；敬重
+- fascination n.入迷；着迷；强烈吸引力；魅力
+- gloomy adj.幽暗的；令人沮丧的；忧郁的；没有希望的
+- impartial adj.不偏袒的；不偏见的；公正的
+- impulsive 冲动的
+- irritated 被激怒的；发炎的；疼痛的
+- objective n.目标；adj.客观的
+- prejudice 偏见；歧视
+- repulsive 令人反感的；令人厌恶的
+- tranquility n.平静；安宁
+- contentment n.满意；满足
+- devoted adj.挚爱的；忠诚的；热忱的
+- disposition n.倾向；性格；气质；性情
+- elegant adj.高雅的；有品位的；上等的
+- entice vt.诱惑；引诱
+- fancy adj.精心设计的；特级的；花哨的；昂贵的
+- fondness n.钟爱；溺爱；嗜好；癖好
+- hideous adj.丑的吓人的；丑恶的；可憎的
+- impression n.意念；印象；不太明确的感觉或想法
+- instinct n.天性；本能；直觉
+- nasty adj.肮脏的；不道德的；恶毒的；令人不愉快的；严重的
+- perceive v.感知；察觉；理会
+- provoke vt.激怒；引起；激起
+- startle v.惊吓；使吓一跳
+- upset v.使心烦意乱；使不舒服；使失败；打翻
+
+## Other Important Nouns & Verbs 其他重要名词及动词
+
+- call waiting 电话插播(拨打电话过程中新来电的提醒)
+- endeavor n.努力；尽力；v.试图；尝试
+- identity n.身份；本体；相同；同一
+- implication n.含义；暗示；牵连
+- prohibit vt.防止；阻止
+- sustain vt.维持；持续；支撑；蒙受
+- undertake vt.承担；许诺；保证
+- assurance n.保证；担保；自信；把握
+- reassure vt.使安心；使放心；使恢复信心；再保证
+- clarify v.澄清；使纯净
+- impact n.碰撞力；影响；行动
+- incentive n.鼓励；诱因
+- proceed vi.着手；继续进行
+- submit v.认输；使服从；提出
+- speculate v.沉思；思索；猜测；推测；投机
+
+## Other Important Adjectives & Adverbs 其他重要形容词及副词
+
+- ample adj.广大的；宽敞的；充足的
+- dreadful adj.令人恐怖的；令人害怕的；
+- exceptional adj.例外的；异常的；特别优秀的
+- exquisite adj.精细的；精美的；(感觉)敏锐的；细致的
+- farfetched adj.牵强的；不大可信的；不自然的
+- in light of 按照；根据
+- ingenious 有巧思的；灵敏的；有创意的
+- instant adj.立即的；快速方便的(食品)
+- legitimate adj.合法的；正当的；婚生的
+- oblivious adj.遗忘的；易忘的；不注意的；不在意的
+- substantially adv.相当大地；基本上；本质地
+- unprecedented adj.史无前例的；空前的
+- versatile adj.多才多艺的；有多种用途的
+- extraordinary adj.特别的；格外的；值得注意的
+- inferior adj.品质差的；下等的；下级的
+- irresistible adj.极为诱人的；无法抗拒的
+- noteworthy 值得注意的；显著的
+- on and off adv.断断续续地；偶尔；有时
+- self-explanatory adj.不需要加以说明的；不言自明的
+- ultimately adv.最后；最终
+- vague adj.含糊不清的；模糊不清的
