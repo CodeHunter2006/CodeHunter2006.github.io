@@ -206,6 +206,56 @@ TOEIC 中对于考时态的情况，往往句子会包含一些不认识的单�
   - have to
   - must
 
+# 动词不定式
+
+动词不定式由"to+动词原形"构成，具有动词的性质，在句中可以作主语、宾语、补语、表语、状语、定语等。
+
+- 可以接不定式作宾语的动词
+
+  - ask 要求
+    He asked to come with us.
+  - want 想要
+    I want to tell you something.
+  - agree/care/hope/learn/prepare/manage/decide/plan/deseve/promise/expect/refuse/fail/struggle/hesitate/arrange/consent
+  - 总结可以接不定式作宾语的动词，都是一些及物动词，同时后面的宾语可以比较宽泛。
+
+- 动词 + 宾语 + 不定式
+
+  - advise 建议
+    He advised me to wait until tomorrow.
+  - encourage/allow/expect/invite/ask/order/remind/force/tell/warn/instruct
+
+- be + 形容词 + 不定式
+
+  - be able to do 有能力做...
+    I will be able to overcome my present problems.
+  - glad/unable/willing/liable/likely/eager/easy/reluctant/sorry
+
+- 名词 + 不定式
+  不定式像形容词一样起到修饰名词的作用
+
+  - time to do 做...的时间
+    It's time to eat dinner.
+
+- 形式主语 it
+  不定式作主语时，如果主语太长，可以将主语部分放到句子最后，用 it 作形式主语。
+
+  - It + 系动词 + difficult/possible/important + for 宾语 + 不定式
+  - **It is** neccessary **for us to take** measures to deal with the new situation.
+  - 上面等价于 **To take measures to deal with the new situation** is neccessary for us. 但这样"头重脚轻"，所以一般替换成前面的形式。
+
+- 不定式的副词性用法
+  不定式可以像副词一样修饰形容词、动词以及副词，表示目的、结果、原因等。
+  - 目的：为了...，为了...的目的
+    The document was revised to clarify ambiguous points.
+  - 结果：结果...；成为...
+    - "only + 不定式" 表示出乎意料的结果
+    - He lift a stone only to hit himself.
+  - 原因：由于...，因为...
+    - "表示感情的形容词或动词 + 不定式" 表示产生某种情绪的原因。
+    - I'm glad to meet you.
+    - I'm sorry to bother you.
+
 # 介词
 
 ## in
