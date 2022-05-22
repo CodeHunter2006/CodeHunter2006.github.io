@@ -45,6 +45,10 @@ tags: English
 
 # 答题技巧
 
+- 通用
+
+  - "is being"、"has been" 的区分非常重要，"being"是长音，"been"是短音。
+
 - part1 看图选项
 
   - "need to" 很难从图片看出，通常都是错误选项
@@ -62,5 +66,5 @@ tags: English
   - 有些错误答案故意进行无关联想
   - 有些错误答案会跟随前面选项的逻辑联想，和题目无关
 
-- 通用
-  - "is being"、"has been" 的区分非常重要，"being"是长音，"been"是短音。
+- part3 对话主题
+  - 经常通过换一种表达作为答案

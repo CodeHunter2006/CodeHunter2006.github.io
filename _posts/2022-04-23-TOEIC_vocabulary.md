@@ -79,6 +79,15 @@ tags: English
 - thoroughly 全面地；彻底地；
 - be impressed with 对...印象深刻
 - stun 使震惊
+- vicious circle 恶性循环；循环论证
+- virtuous circle 良性循环
+- largely 很大程度上，主要地
+- profound adj.影响深刻的
+- remark n.评语
+- frequent customer 常客
+- remainder 剩余部分
+- prevalent adj.盛行的，普遍的
+- rain check n.延期；专用免费票(延期盖章票根)
 
 - hang from 从...悬挂；
 - sth. looks good on sb. 穿...好看
