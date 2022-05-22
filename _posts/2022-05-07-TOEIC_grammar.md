@@ -180,6 +180,12 @@ TOEIC 中对于考时态的情况，往往句子会包含一些不认识的单�
 
 - Without Andrew Dottin's exceptional effort and expertise, we would never have succeeded in winning the prize.
 
+3. 在表示命令、建议、要求等一类动词的名词性从句中，往往使用虚拟语气，由"should+动词原形"构成，其中"should"可省略。
+
+- 如：order/suggest/propose/require/demand/request,insist,command
+
+I suggest that we (should) hold a meeting next week.
+
 ## 省略 if
 
 在虚拟语气中，如果省略了 if，则剩下的部分要使用倒装语序。

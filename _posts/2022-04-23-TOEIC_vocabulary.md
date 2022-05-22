@@ -88,6 +88,7 @@ tags: English
 - remainder 剩余部分
 - prevalent adj.盛行的，普遍的
 - rain check n.延期；专用免费票(延期盖章票根)
+- job vacancy 岗位空缺
 
 - hang from 从...悬挂；
 - sth. looks good on sb. 穿...好看
@@ -364,7 +365,7 @@ tags: English
 - courier 递送急件的信差；邮务专递公司；
 - draft 草稿；汇票；
 - enclose 装入；放入封套；
-- issue 流出；放出；发行；发布；
+- issue 流出；放出；发行；发布；分发
 - layout 规划；设计；编排；
 - legible (字迹)可以辨认的；易读的；
 - postage 邮资
