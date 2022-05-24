@@ -89,7 +89,47 @@ tags: English
 - prevalent adj.盛行的，普遍的
 - rain check n.延期；专用免费票(延期盖章票根)
 - job vacancy 岗位空缺
+- director 主管，主任；董事
+- press release (向记者发布的)新闻稿
+- circulate 散发；流传；散布；循环
+- color scheme 配色
+- awards ceremony 颁奖仪式，颁奖典礼
+- morale 士气；精神面貌
+- inform 通知；告知
+- out of toner 没有墨粉了
+- place an order 订购，下单
+- executive meeting 常务会议，高层会议
+- get reimbursed 报销
+- reception 接待处；服务台
+- unpack v.打开(箱子/盒子/行李)；取出；解除...的负担
+- feature article 特写，专题文章
+- finalize 最后确定；最终敲定
+- edition 版，版本
+- front page 头版
+- photocopier 复印机
+- repairman 维修工
+- at the latest 最迟
+- hopefully 但愿
+- raise 募捐，筹款
+- be sold at half price 半价销售
+- proceeds 收入，收益
+- be donated to 捐赠给
+- nonprofit organization 非营利机构，非营利组织
+- aid 救助，援助
+- main entrance 正门，主要入口
+- subtotal 部分合计，小计
+- amount payable 应付金额
+- training session 培训课程
+- session (某项活动的)一段时间，一场；(议会等的)会议，(法庭的)开庭；
+- venue n.(事件的)发生地点，(活动的)场所
+- complimentary adj.免费赠送的；赞美的，表示钦佩的
+- workplace 工作场所
+- avenue 大街；(通向大宅子的)林荫道；途径，渠道
+- refreshment 食物和饮料；恢复活力;
+- beverage 饮料
+- shortly after 不久之后，很快
 
+- have consequnences for 对...产生影响
 - hang from 从...悬挂；
 - sth. looks good on sb. 穿...好看
 - make an exchange 调换；
@@ -99,6 +139,12 @@ tags: English
 - go on vacation 去度假
 - give/deliver a presentation 演讲；作报告
 - take over 接管；接替；
+- help out 帮助...做事
+- lend a hand 帮忙做...
+- mean to 计划；打算；准备
+- make a donation to 捐赠给...
+- be reduced by 减少，降低，下降
+- be under construction 在建造中
 
 # 熟词僻义
 
@@ -121,6 +167,10 @@ tags: English
 - conduct 指挥；施行；传导；
 - state vt.陈述，说明，表明；n.状态；声明；
 - device 图案；设计；装置；设备；
+- cause 事业；追求；目标；理想；原因
+- launch 推出，发布(新产品)；开展；发射
+- event 社交场合，既定活动；赛事，比赛项目；事件，大事
+- refresh 恢复精神；喝饮料，吃点心；刷新
 
 - come in 上市；进来
 - pick up 买；(开车)接载；取走；
@@ -395,7 +445,7 @@ tags: English
 - breathtaking 惊人的；惊险的；惊艳的；
 - carry-on 登机行李；手提行李；
 - concierge 门房；看门人；管理员；
-- cruise 乘船游览；
+- cruise 乘船游览；巡航
 - deluxe 豪华的；高级的；
 - exotic 异国风情的；异国的；
 - fasten 系紧；拴住；扣住；
@@ -407,6 +457,7 @@ tags: English
 - stopover n.中途停留
 - vacant 空的；未被占用的；
 - voyage n.航行；旅行；
+- in-flight movie 机上电影
 
 ## transportation(Air,Ocean,Land) 交通运输(空、海、陆)
 
@@ -434,6 +485,9 @@ tags: English
 - pedestrian 行人；步行者；
 - runway 飞机跑道；
 - timetable 时间表；时刻表；
+- tailwind 顺风
+- airspeed 空速，飞行速度
+- descend 下来；下降
 
 ## Shorpping 购物
 
