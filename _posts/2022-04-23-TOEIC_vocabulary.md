@@ -128,6 +128,47 @@ tags: English
 - refreshment 食物和饮料；恢复活力;
 - beverage 饮料
 - shortly after 不久之后，很快
+- person in charge 负责人
+- leave for the day 下班
+- expense report 费用报告
+- repay 偿还，偿付
+- brand-new 崭新的，全新的
+- exclusively 独占地；专有地；完全地
+- in terms of 在...方面
+- sales force 销售人员；销售队伍
+- continued 继续的，持续的
+- farewell party 送别会
+- marketing division 市场部
+- listen up 听好了
+- market research surveys 市场问卷调查
+- boost 使增长；推动；增强；提高(信心或士气)
+- credential 证书；凭据
+- head office 总部，总公司
+- please note that 请注意...
+- on top of 另外；加之；除...之外(还)
+- great deals 优价
+- a range of 一系列；各种
+- stunning 极美的
+- discontinue 中断；停止，终止
+- indicate v.表明；暗示；指出
+- domestic spending 国内消费
+- steep adj.陡峭的；急剧的
+- walking distance n.步行可达的距离；很近的距离
+- board of directors 董事会
+- relocate 迁移；搬迁
+- jet lag n.飞行时差综合征；时差反应
+- for many years to come 未来的许多年
+- municipal adj.城市的，市政的
+- muticipal gallery 市立美术馆
+- refurbishment n.翻新；整修
+- due adj.到期的，预期的；应有的，应得的；
+- surge n.激增；(水、风)汹涌；v.激增；(水、风)奔腾；
+- surgeon n.外科医生
+- surgery n.外科手术
+- delicate adj.技术性很强的；注重细节的
+- soar 急剧增加；高飞
+- debut v.首次登台，首次亮相；首次推出(新产品)；n.首次登台；(新事物)问世
+- Fahrenheit 华氏度
 
 - have consequnences for 对...产生影响
 - hang from 从...悬挂；
@@ -135,6 +176,7 @@ tags: English
 - make an exchange 调换；
 - have an appointment with ... 和...约好了(见面)
 - notify A of B 把 B 告知/通知 A
+- inform A about B 把 B 通知 A
 - make an appointment 预约
 - go on vacation 去度假
 - give/deliver a presentation 演讲；作报告
@@ -145,6 +187,18 @@ tags: English
 - make a donation to 捐赠给...
 - be reduced by 减少，降低，下降
 - be under construction 在建造中
+- turn in 上交
+- hand in 上交
+- drop by 顺道拜访；造访
+- familiarize oneself with 熟悉...
+- send around 分发，发送
+- make a purchase 购买；采购
+- wander off 走失，迷路；离开(正题)
+- drop off 下降
+- waste center 废弃物处理中心
+- suffer from 受...折磨；因...受苦
+- be due to... 预期，预计
+- due to 由于
 
 # 熟词僻义
 
@@ -171,6 +225,8 @@ tags: English
 - launch 推出，发布(新产品)；开展；发射
 - event 社交场合，既定活动；赛事，比赛项目；事件，大事
 - refresh 恢复精神；喝饮料，吃点心；刷新
+- grab (匆忙地)拿，取；抓紧(吃、睡等)；抓住
+- record adj.创纪录的；vt.记录
 
 - come in 上市；进来
 - pick up 买；(开车)接载；取走；
@@ -214,6 +270,7 @@ tags: English
 - curriculum vitae(CV) (拉丁语)履历
 - eligible 合格的；
 - executive 行政或管理人员
+- president 经理
 - lay off
 - occupation 职业
 - part-time 兼职的；非全日制的
@@ -427,7 +484,7 @@ tags: English
 ## Travel 旅游
 
 - accomodation 适应；住所；膳宿；
-- boarding pass 登机牌
+- boarding pass 登机牌(写着登机相关信息)
 - brochure 小册子
 - checkout n.结账退房的时间；v.办理退房；结账离开；
 - confirmation n.确认
@@ -458,6 +515,7 @@ tags: English
 - vacant 空的；未被占用的；
 - voyage n.航行；旅行；
 - in-flight movie 机上电影
+- congestion 堵塞，拥堵
 
 ## transportation(Air,Ocean,Land) 交通运输(空、海、陆)
 
@@ -488,6 +546,9 @@ tags: English
 - tailwind 顺风
 - airspeed 空速，飞行速度
 - descend 下来；下降
+- snowfall n.降雪；降雪量
+
+- make delivery 交货；送货
 
 ## Shorpping 购物
 
@@ -706,6 +767,7 @@ tags: English
 - residence 住所；公馆；居住
 - storage 储藏；藏室
 - utility 公共事业；实用
+- fireplace 壁炉
 
 ## Product Research and Development 产品调研与开发
 
@@ -864,7 +926,8 @@ tags: English
 - detain 拘留；留住
 - penalty n.罚款，罚金；处罚
 - outsourcing n.外包；外购；外部采购
-- compensatory 补偿的，赔偿的
+- compensatory adj.补偿的，赔偿的
+- compensation n.补偿金；补偿；
 - prevail vi.盛行，流行；战胜，获胜
 - deem vt.认为，视作；相信
 - hereunder adv.在此之下；在下面
