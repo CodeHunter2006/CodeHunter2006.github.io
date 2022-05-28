@@ -575,12 +575,42 @@ It is obvious that the hungry rabbit had already eaten a carrot for dinner this 
   - 如果宾语从句中是永恒的事实则可以用一般现在时
   - I knew (that) the sun rises in the east.
 
+## 表语从句
+
+- **系动词**也叫联系动词，如 be 动词(am/is/are)/taste/like 等，它的功能近似于给前后的词画等号
+  - 例：I am a rabbit. The carrot tastes good.
+  - 上面的 rabbit/good 都是与主语等价的补充说明的，所以叫**主语补语**也叫**表语**
+
+表语从句，就是用从句充当系动词后的表语。看起来就像前面学过的主语从句，把从句移到系动词之后一样。
+
+- 表语从句：The problem is that the rabbit is hungry.
+- 主语从句：That the rabbit is hungry is a problem.
+
 ## 状语从句
+
+状语从句也叫副词从句，一般补充说明动词、形容词、副词等。
+
+- 由于状语从句相当于副词，所以也叫**副词从句**
+- 由于状语做补充说明，所以分类较多，分为 9 种：
+
+  - 时间副词从句
+  - 地点副词从句
+  - 比较副词从句
+  - 条件副词从句
+  - 让步副词从句
+  - 方式副词从句
+  - 原因副词从句
+  - 目的副词从句
+  - 结果副词从句
+
+### 时间副词从句
+
+1. 在某一时间点之前，从句引导词**before**
 
 - until 引导的时间状语从句使用现在/现在完成时表达将来时态
 
   - Due to the poor economy, most of the employees will put off taking a summer vacation until the domestic economy **has improved**.
 
-- onece 引导条件状语从句
-
 - while 引导时间状语从句，表示**同时**
+
+- onece 引导条件状语从句
