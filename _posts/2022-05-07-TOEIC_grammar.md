@@ -411,15 +411,176 @@ for, and, nor, but, or, yet, so
 5. 可引导名词性从句的连词
    that, if, whether
 
-# 从句
+# 代词
 
-从句是一个完整的句子，与主句配合，在句子里其某种作用。
+# 关系代词
 
-- 从句有六种：
+- 先行词是人时用 who 或者 that，不能用 which，which 的先行词是物
+
+# 英语基本句型分类
+
+1. 简单句 Simple Sentences，不能再拆分
+2. 复合句 Compound Sentences，不分主次
+3. 复杂句 Complex Sentences，主句+从句
+
+- 基本句型：
+  - 主语+动词
+  - 主语+动词+宾语
+  - 主语+动词+间接宾语+直接宾语
+  - 主语+动词+宾语+(宾语)补语
+  - 主语+(系)动词+(主语)补语(表语)
+  - 其他成分还有：定语、状语、同位语
+
+# Clause 从句
+
+从句是一个完整的句子，作为主句的某种成分起作用。
+
+- 例：I saw that the rabbit ate a carrot.
+
+  - "I saw" 是主句(main clause)
+  - "that the rabbit ate a carrot" 是从句(subordinate clause)，作为主句的宾语成分
+    - "that" 是从句的引导词
+  - 它们合在一起，可以分类为**复杂句**
+
+- 根据从句在主句中的成分划分，从句三大类、六小类：
+
   - 名词性从句
     - 主语从句
     - 表语从句
     - 宾语从句
     - 同位语从句
-  - 定语从句
-  - 状语从句
+  - 定语从句(形容词从句/关系从句)
+  - 状语从句(副词从句)
+
+## 定语从句
+
+- 这种从句相当于一个大的形容词，所以也叫**形容词从句**
+- 在句中做定语，所以叫**定语从句**
+- 由于定语从句前面要以关系词做引导，所以叫**关系从句**
+
+### 思维方式
+
+- 普通例句：
+  - The rabbit is eating a carrot.
+  - 兔子在吃一根萝卜.
+- 增加定语：
+  - 兔子在吃一根我买来的胡萝卜
+    - 在中文中会自然把"我买来的"作为"胡萝卜"的定语，每个定语都自动跟右边的名词自动结合
+  - The rabbit is eating a carrot that I bought.
+    - 英文中需要**关系词**"that"代替**先行词**"carrot"放在另一个完整句子中作为补充说明。
+- 优缺点：
+  - 中文优点是形式统一，但是较多定语时主句的词就会被隔开，如：
+    **一只**几个月前就开始在 B 站上传视频专门教英语的讨人喜爱的**兔子**。
+  - 英文需要费事加关系词补充，但较多定语时仍然可以很快找到原主句的关键词(主谓宾)，如：
+    **This is a rabbit** who started uploading videos since a few ...
+    - 另外英文这种结构也比较容易实现套娃结构，即从句中的词再次以从句补充说明
+
+### 构成
+
+1. 关系代词引导的形容词从句：
+   用 that/who/whom/whose/which 这些代词作为关系词引导形容词从句，只需要把关系词前置即可。
+
+- 例 1：
+  - The rabbit is eating a carrot **that** I bought.
+  - 其从句原本可写为：I bought a carrot
+  - 替换名词为关系代词：I bought that
+  - 然后把关系代词前置：that I bought
+  - 最后把主句从句组合即可，这种引导方式的好处是从句中除了关系代词原本的词序不变
+- 例 2：
+  - The teacher **whom** I saw yesterday is a rabbit.
+  - 从句原句：I saw the teacher yesterday
+  - 替换名词为关系代词：I saw whom yesterday
+  - 关系代词前置：whom I saw yesterday
+  - 最后按原顺序组合，除引导词外，主从句原词序不变
+
+that 和 which 有时可以替换
+
+- 如果先行词是**唯一**，必须用 that
+
+  - 例：Tha rabbit ate the largest carrot that I've ever seen.
+
+- 如果先行词是**多选一**，可以用 which 或 that
+  - 例：The rabbit ate a carrot which I bought.
+  - 技巧：如果还可以用"which"提问对象，则说明**多选一**
+  - 如：which carrot you bought?
+
+2. 关系副词引导的形容词从句：
+
+有些词的词性是副词，和之前代词作用相同，同样是代替前面的先行词引导定语从句，这些词就叫关系副词。
+
+- This was the place **where** the rabbit ate the carrot.
+- This is the reason **why** the rabbit ate the carrot.
+- That was the day **when** the rabbit ate the carrot for the first time.
+
+关系副词可转为关系代词：
+`关系副词 = 介词 + 关系代词`
+
+- This was the place **at which** the rabbit ate the carrot.
+- This is the reason **for which** the rabbit ate the carrot.
+- That was the day **on which** the rabbit ate the carrot for the first time.
+
+### 限定性和非限定性
+
+- 限定性定语从句：
+  - The rabbit ate the carrot which was on the table.
+    - 定语从句限定 carrot 的范围/性质，"兔子吃的胡萝卜是桌子上的那个胡萝卜"
+- 非限定性定语从句：
+
+  - The rabbit ate the carrot, which was on the the table.
+  - 等价于：The rabbit ate the carrot, the carrot was on the table.
+  - 从句只相当于省略了前面相同的词"the carrot"，没有限定作用，**直接去掉对主句也无影响**
+
+- 非限定性定语从句可能指代整句话
+  - The rabbit ate the carrot, which was not surprising.
+
+## 主语从句
+
+That the rabbit ate a carrot is obvious.
+
+英语逻辑：看到**引导词**"That"，就立即意识到后面的句子(主谓宾)是从句。
+
+上面是对确定的内容的主语从句，还可以把不确定的内容做主语，同样引导词要放在前面。
+
+Whether/Where/When/How the rabbit ate the carrot is obvious.
+Who ate the carrot is obvious.
+What the rabbit ate is obvious.
+
+### it 引导的主语从句
+
+有时主语从句较长，导致整句话头重脚轻，如：
+That the hungry rabbit had already eaten a carrot for dinner this evening is obvious.
+
+这时可以改为**形式主语**"It"引导的主语从句：
+It is obvious that the hungry rabbit had already eaten a carrot for dinner this evening.
+
+- 这里的"it"指代后面整个主语从句。
+
+## 宾语从句
+
+- 常常省略引导词 that
+
+  - I know (that) the rabbit ate a carrot.
+  - 只有 that 可以省略，whether/who/what/where/when/how 等都不能省略
+  - 如果省略 that 可能造成歧义或语法错误，则不能省略
+    - I didn't know that the rabbit ate the carrot and that you saw it.
+
+- 宾语从句表否定时，**否定加在谓语动词前**
+
+  - I don't think (that) the rabbit is smart.
+
+- 宾语从句时态要与主句一致
+  - 主句是过去时，宾语从句也是过去时
+    - 如果宾语从句是现在时，那就产生了"未卜先知"的逻辑矛盾
+  - I knew (that) the rabbit liked carrots.
+  - 如果宾语从句中是永恒的事实则可以用一般现在时
+  - I knew (that) the sun rises in the east.
+
+## 状语从句
+
+- until 引导的时间状语从句使用现在/现在完成时表达将来时态
+
+  - Due to the poor economy, most of the employees will put off taking a summer vacation until the domestic economy **has improved**.
+
+- onece 引导条件状语从句
+
+- while 引导时间状语从句，表示**同时**

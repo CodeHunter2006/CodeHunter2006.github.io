@@ -169,6 +169,22 @@ tags: English
 - soar 急剧增加；高飞
 - debut v.首次登台，首次亮相；首次推出(新产品)；n.首次登台；(新事物)问世
 - Fahrenheit 华氏度
+- profits n.[会计]收益，红利；盈利
+- advantages n.优势；特点
+- flaw n.缺点；裂痕
+- multinational corporation n.跨国公司
+- secure 牢固的；安全的；争取到
+- vigorously 剧烈；强度大
+- aging adj.老化的
+- power plant 发电厂
+- mechanical problem 机械问题
+- nationality n.民族；国籍
+- monetary adj.货币的
+- monetary policy 货币政策
+- central bank 中央银行(央行)
+- standard interest rate 基准利率
+- unanimously adv.一致同意地，全体
+- committee n.委员会
 
 - have consequnences for 对...产生影响
 - hang from 从...悬挂；
@@ -199,6 +215,8 @@ tags: English
 - suffer from 受...折磨；因...受苦
 - be due to... 预期，预计
 - due to 由于
+- put off 推迟，延迟
+- take a vacation 过假期
 
 # 熟词僻义
 
@@ -516,6 +534,7 @@ tags: English
 - voyage n.航行；旅行；
 - in-flight movie 机上电影
 - congestion 堵塞，拥堵
+- traffic congestion 交通拥堵
 
 ## transportation(Air,Ocean,Land) 交通运输(空、海、陆)
 
