@@ -69,6 +69,19 @@ No, they don't. 是的，他们工作不努力。
 
 TOEIC 中对于考时态的情况，往往句子会包含一些不认识的单词，但实际上只要识别出关键的表达时间的词直接选答案就可以了。
 
+## 一般现在时
+
+- 这里强调**一般**，有三种情况：
+  - 简单的
+    - Rabbits eat carrots.
+  - 默认的(习惯/客观事实)
+    - The sun rises in the east.
+  - 普通的
+
+## 一般将来时
+
+非常**确定**将来会发生的事。
+
 ## 现在完成时(have + 过去分词)
 
 表示过去的一个动作到现在还持续有影响。
@@ -606,11 +619,88 @@ It is obvious that the hungry rabbit had already eaten a carrot for dinner this 
 ### 时间副词从句
 
 1. 在某一时间点之前，从句引导词**before**
+   - The rabbit ate a carrot at home before the wolf stopped by.
+   - 也可以把从句提前：Before the wolf stopped by, the rabbit ate a carrot at home.
+2. 在某一时间点之中(当时)，从句引导词：**when/while/as**
+   - The rabbit was eating a carrot when I reached home.
+   - The rabbit was eating a carrot while I was making a video.
+   - I ate a carrot as I make the video.
+   - when 强调某个时间点，有"突然"之意
+   - while 强调一个时间段内
+   - as 表示同时进行，一边...一边...
+3. 在某一时间点之后，引导词：**after**
+   - The rabbit ate a carrot after the wolf stopped by.
+4. 从之前某一时间点开始算，引导词：**since**
+   - The rabbit has shared three carrotes since the wolf stopped by.
+   - 往往主句用**完成时态**，自从从句时间点之后主句一直在...(已经完成了 x 次)
+5. 直到之后某一时间点，引导词：**until**
+   - The rabbit waited until the wolf stopped by.
+   - 表达像 since 的对立面，从某一时间点算起，直到之后的某一时间点
+6. 一...就...，引导词：**ass soon as**
+7. 下次...，引导词：**the next time**
 
 - until 引导的时间状语从句使用现在/现在完成时表达将来时态
 
   - Due to the poor economy, most of the employees will put off taking a summer vacation until the domestic economy **has improved**.
 
-- while 引导时间状语从句，表示**同时**
+### 条件副词从句
 
-- onece 引导条件状语从句
+- **if** 作为引导词
+
+  - If you like this video, you will give it a thumbs-up.
+  - If you don't like this video, you will not git it a thumbs-up.
+
+- **unless** 作为引导词，表示"if not"
+
+  - 可以直接改写上面第二句：
+    Unless you like this video, you will not give it a thumbs-up.
+
+- 其他引导词：**provided, as long as, in case**
+
+- 条件句总是比主句在时间上**落后**一个时间段
+
+  - If I saw a carrot, I would eat it.
+
+- **onece** 引导条件状语从句
+
+### 让步副词从句
+
+让步副词从句是基于条件副词从句，阐述"相反/相对"的意思。
+
+- **Even** 作为引导词，表示假设
+
+  - Even if I see a carrot, I will not eat it.
+  - 即使我看到了一根胡萝卜，我也不会吃它。
+  - 这里去掉 "Even"，仍然是一个有效的条件状语从句
+
+- **Although** 作为引导词，表示事实
+
+  - Although I see a carrot, I will not eat it.
+  - 尽管我看到了一根胡萝卜，但我不会吃它。
+  - 这里 Although 可以用 **though/even though** 替换
+
+- 注意，中文里有"虽然...但是..."两个词来表让步，英语中只通过让步副词从句表达，所以主句中不要加"but"
+
+- 对未知情况让步：**no matter + what/who/where/how**
+  - No matter what happens, I will not eat the carrot.
+  - "no matter"可以用**regardless of**替换
+
+### 原因副词从句
+
+- **because**作为引导词
+  - The rabbit ate the carrot because he was hungry.
+- **since**作为引导词
+  - Since you are hungry, you can eat the carrot.
+  - 注意这里 Since 是"既然"的意思，不是"自从"
+  - since 还有"众所周知"的意思
+- **as**作为引导词
+
+  - As you were not here, we ate the carrot without you.
+  - 这里 as 是"表原因"，不是"像"
+  - as 还表示"显而易见"的事实
+
+- 三者区别：
+  - 语气严重程度：because > since > as
+  - 语序差异：
+    - because 引导的从句放在主句前后都可以
+    - since/ass 引导的从句只能放在主句前

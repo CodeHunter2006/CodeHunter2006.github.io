@@ -30,12 +30,15 @@ tags: English
 
 # part 7
 
+- part 7 主要考检索、略读能力，所以一定要先看答案，再根据题材读重点部分找答案
+
 - 词汇是阅读理解的根本
   - 一篇文章有 5 个以上的生词，理解文章就有难度
   - 学习过程中要背诵短文中出现的同意替换词汇
 - 要根据文章类型掌握文章结构，决定哪些部分要格外注意，哪些部分可以一带而过
 
 - 对于新的双文章题目，答题时间是一样的，主要考察信息检索能力。要根据问题，其中一篇要仔细看，另一篇是简单检索。
+- 新的"寻找句子合适位置"的题目，可以先完成其他题目，再读一下句子，再根据句意在文章空格处找到合适句意位置。
 
 ## 文章类型分析
 
@@ -207,9 +210,47 @@ Memo 是公司内部向员工传达公司的政策、业务程序、新员工入
   - What does the article suggest Mr. Smith do?
   - For what is the report intended?
 
-7. Other 其他
+7. Chat Screen Shot 聊天截图
 
-invoice 发票、receipt 收据、telephone message 电话信息、book review 书籍评论。
+- 聊天记录/截图的结构
+
+  - 每条的时间、发送者、头像
+
+- 提问类型：
+
+  - 对话的主题是什么
+    - 看一句或第一段就能搞清
+  - 关于特定人物的信息
+    - 根据名字找到人物然后往后找
+  - 关于暗示信息
+    - 这种需要通读全文，再找到答案
+  - 询问某个特定词/短语表达的意义
+    - 这种一般只需要向前看一段就可以找到答案
+
+- 真题中的问题：
+  - What is suggested(暗示) about Ms. Forster?
+  - At 11:12 A.M., what does Ms. Hong mean when she writes, "Absolutely"?
+
+8. telephone message 电话(留言)信息
+
+- 电话信息的结构：
+  电话信息是秘书帮忙记录下的信息。
+
+  - For: 信息接收人
+  - DATE/TIME: 打电话的时间
+  - CALLER: 打电话的人
+  - OF: 电话是关于...事情
+  - PHONE: 打电话人的电话号码
+  - MESSAGE：留言内容
+  - TAKEN BY: 记录留言的人
+
+- 提问类型：
+  - 打电话的目的
+  - 打电话方想要看留言的人做什么事
+
+9. Other 其他
+
+invoice 发票、receipt 收据、book review 书籍评论。
 
 - 真题中的问题
   - What kind of document is this?

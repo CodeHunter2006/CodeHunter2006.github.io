@@ -9,7 +9,6 @@ tags: English
 
 # 生词
 
-- overhaul vi.彻底检修，全面改造；
 - test book n.考卷；
 - merchandise n.商品、货品；
 - brick wall n.砖墙；
@@ -32,7 +31,7 @@ tags: English
 - a letter of consent 同意书
 - by ... time 到...截止
 - gradually 逐渐地，逐步地
-- receipt 收据，收条；购物小票
+- receipt n.收据，收条；购物小票；收到
 - fax n.传真机；v.传真
 - supply closet 储藏室
 - copier 复印机
@@ -90,6 +89,8 @@ tags: English
 - rain check n.延期；专用免费票(延期盖章票根)
 - job vacancy 岗位空缺
 - director 主管，主任；董事
+- managing director 总经理
+- marketing director 市场销售主管
 - press release (向记者发布的)新闻稿
 - circulate 散发；流传；散布；循环
 - color scheme 配色
@@ -122,7 +123,6 @@ tags: English
 - training session 培训课程
 - session (某项活动的)一段时间，一场；(议会等的)会议，(法庭的)开庭；
 - venue n.(事件的)发生地点，(活动的)场所
-- complimentary adj.免费赠送的；赞美的，表示钦佩的
 - workplace 工作场所
 - avenue 大街；(通向大宅子的)林荫道；途径，渠道
 - refreshment 食物和饮料；恢复活力;
@@ -185,6 +185,85 @@ tags: English
 - standard interest rate 基准利率
 - unanimously adv.一致同意地，全体
 - committee n.委员会
+- irritate v.激怒；使烦躁
+- herewith adv.因此；用此方法
+- past due balance 逾期未付金额
+- due amount 金额，到期金额
+- enclose herewith 随信附上
+- the other day n.不久前的一天；几天前
+- props n.道具
+- scenery n.景色
+- sightseeing n.游览，观光
+- oncoming 迎面而来的；即将到来的
+- upcoming 即将来临的
+- introductory 引言的，导论的；介绍性的
+- reference manual 参考手册
+- aggravate v.使加重，使恶化
+- temporarily 暂时地
+- metropolitan area 大都会区
+- upon 一旦...就...；在...上
+- packed 充满...的；富含...的；
+- expressway n.(美国)高速公路
+- interior adj.内部的；n.内部；
+- slate v.计划，安排；
+- measurement n.测量值，尺寸；
+- floor plan 平面图
+- minutes 会议记录
+- survey form 调查表
+- overwhelming adj.压倒性的
+- enlist v.(使)参军，(使)入伍；取得，赢得(帮助)；
+- place orders 订购，下订单
+- managerial 经理的；管理上的；
+- joint operation 联合经营，共同经营
+- utilize 利用，使用；
+- customer base 客户群
+- high-end (尤指电子产品)最高档的，高端的，最昂贵的
+- handset 电话听筒
+- joint company 联营公司，联合公司
+- flyer 传单
+- promotion n.促销；晋升
+- prescription 处方
+- dermatology 皮肤科
+- scent 香味
+- negative effect 负面影响；负效应
+- measure n.度量单位；计量标准；办法；v.测量；估量；
+- gauge n.测量仪器；尺度，标准；v.估计；测量
+- regularly 定时地；定期地；经常地
+- dirt 灰尘，尘土
+- blower 鼓风机
+- crack 缝隙；裂缝
+- turn-up 为提升机器的性能对其调制
+- record label 唱片公司
+- entrepreneur 企业家
+- top honor 最高荣誉
+- entitle 给予...权利；给予...资格
+- in advance 预先，提前
+- autographed 签名的，亲笔签名的
+- artwork 艺术作品
+- works of art 艺术品
+- faded painting 褪色的画
+- fine arts 美术
+- modern arts 现代艺术
+- archivist 档案管理员
+- assess 评估；评价
+- possess 占有；拥有；具备，具有
+- preserve 保持；保存
+- pieces of art 艺术作品
+- artistic world 艺术世界
+- aura 气质；气氛；氛围
+- all the more 更加；愈发
+- driving force 驱动力，推动力
+- placement 放置；布置；部署；(人员的)安插，安置
+- world history 世界史
+- acumen 敏锐；聪明
+- prospect 可能性；前景；前途
+- in person 亲自；本人；直接；当面
+- remarkably 不同寻常地；非凡地；引人注目地
+- car manufacturer 汽车制造商
+- plaintiff 原告；起诉人
+- plaint n.感叹；诉苦
+- ballroom 舞厅
+- occasion 重大活动；仪式；庆典
 
 - have consequnences for 对...产生影响
 - hang from 从...悬挂；
@@ -217,6 +296,27 @@ tags: English
 - due to 由于
 - put off 推迟，延迟
 - take a vacation 过假期
+- go into effect 开始实施；生效；有效
+- take up to 需要长达...时间
+- set off 动身，出发，启程
+- turn off the expressway 从高速路出来
+- be slated for 预定...；计划...
+- plan out 周密地计划；详尽地安排；
+- in an effort to do 努力...
+- hold up 延搁；交通堵塞；
+- in terms of 在...方面；就...来说；关于...
+- keep one's figers crossed 祈求好运
+- over the course of 在...的过程中
+- work one's way into 进入...
+- be recognized by 得到...的认可
+- set about 着手，开始
+- be well received by 受到...的好评，深受...的欢迎
+- be an honor to do 很荣幸...
+- be in awe of 对...无比崇敬；对...敬畏
+- add to 增加；添加；增添
+- to the point where 到...的程度
+- in compensation for 作为对...的赔偿
+- emerge as 显露；露头；立足成为...
 
 # 熟词僻义
 
@@ -237,7 +337,7 @@ tags: English
 - come by 作短暂拜访；经过；
 - token (情感的)表示；证明；令牌；
 - conduct 指挥；施行；传导；
-- state vt.陈述，说明，表明；n.状态；声明；
+- state vt.陈述，说明，表明；声称；n.状态；声明；
 - device 图案；设计；装置；设备；
 - cause 事业；追求；目标；理想；原因
 - launch 推出，发布(新产品)；开展；发射
@@ -245,9 +345,14 @@ tags: English
 - refresh 恢复精神；喝饮料，吃点心；刷新
 - grab (匆忙地)拿，取；抓紧(吃、睡等)；抓住
 - record adj.创纪录的；vt.记录
+- feature v.以...为主演；以...为主要内容；描写...的特征 n.功能
+- relative adj.相比较而言的，比较的；相关联的；n.亲戚，亲属；
+- text n.文本；vt.给...发送(手机)短信
+- spell n.(某种活动、天气等的)一段短暂时间，一阵；n.拼写；v.拼写；
+- exceptional adj.优异的；非凡的；例外的；特殊的；
 
 - come in 上市；进来
-- pick up 买；(开车)接载；取走；
+- pick up (贸易或经济)好转，改善；买；(开车)接载；取走；
 
 # 分场景高频词
 
@@ -281,6 +386,7 @@ tags: English
 - tardy 迟缓的；迟到的；
 - colleague 同事
 - associate n.同事；v.联系；
+- reschedule 重新安排...的时间；重新计划；将...改期
 
 ## Personnel & Management 人事及管理
 
@@ -489,7 +595,7 @@ tags: English
 - assemble 集合；聚集；装配；
 - courier 递送急件的信差；邮务专递公司；
 - draft 草稿；汇票；
-- enclose 装入；放入封套；
+- enclose 装入；装入信封；随函附上
 - issue 流出；放出；发行；发布；分发
 - layout 规划；设计；编排；
 - legible (字迹)可以辨认的；易读的；
@@ -535,6 +641,7 @@ tags: English
 - in-flight movie 机上电影
 - congestion 堵塞，拥堵
 - traffic congestion 交通拥堵
+- heavy traffic 交通拥堵
 
 ## transportation(Air,Ocean,Land) 交通运输(空、海、陆)
 
@@ -569,7 +676,7 @@ tags: English
 
 - make delivery 交货；送货
 
-## Shorpping 购物
+## Shopping 购物
 
 - bazaar 市场；集市；
 - client 顾客；委托人；
@@ -593,6 +700,13 @@ tags: English
 - vender 小贩
 - warranty 保证书；保修卡；
 - workmanship 技巧；手艺；
+- giveaway 赠品
+- special deal 特价(销售)
+- terms and conditions 条款
+- backorder 延期未交订货
+- delivery rate 配送费，递送费率
+- complimentary adj.免费赠送的；赞美的，表示钦佩的
+- food court 美食广场
 
 ## Dining Out 在外用餐
 
@@ -787,6 +901,14 @@ tags: English
 - storage 储藏；藏室
 - utility 公共事业；实用
 - fireplace 壁炉
+- furnance 火炉；熔炉
+- flue n.烟道；暖气管
+- combustion n.燃烧；(化学)氧化；
+- fossil fuels 化石燃料
+- overhaul vi.彻底检修，全面改造；
+- refurbish v.整修，重新装修
+- renovate v.修复，翻新(尤指建筑物)
+- all-electric 只用电照明(和取暖)的；全都用电的
 
 ## Product Research and Development 产品调研与开发
 
@@ -864,6 +986,7 @@ tags: English
 - job knowledge 业务知识
 - unstructured 无社会组织的；松散的；非正式组成的
 - vocational 职业的；行业的
+- step donw 辞职；下台；让位，退位；
 
 ## Pay & Promotion 薪酬与晋升
 

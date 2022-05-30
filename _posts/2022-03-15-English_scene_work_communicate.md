@@ -44,3 +44,5 @@ tags: English
 
 - Ask for progress
   - any luck with ...?
+  - not much progress from my end
+  - that's all from my end
