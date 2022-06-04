@@ -599,6 +599,19 @@ It is obvious that the hungry rabbit had already eaten a carrot for dinner this 
 - 表语从句：The problem is that the rabbit is hungry.
 - 主语从句：That the rabbit is hungry is a problem.
 
+## 同位语从句
+
+- **同位语**就是用不同方式把一个概念再说一遍，(前/后)用","隔开(不隔开语法会乱)
+
+  - My teacher, Papa Rabbit, likes carrots.
+  - I like my teacher, Papa Rabbit.
+  - 上面分别是主语和宾语的同位语。
+
+- 同位语从句常在句中修饰抽象的名词
+  - The fact **that the rabbit ate the carrot** did not surprise me.
+  - 由于已经有了引导词 that，所以无需用","隔开
+  - 注意中文翻译和英文顺序一般相反，抽象词放后边：**兔子吃了胡萝卜**这个事实并没让我吃惊。
+
 ## 状语从句
 
 状语从句也叫副词从句，一般补充说明动词、形容词、副词等。
@@ -636,12 +649,26 @@ It is obvious that the hungry rabbit had already eaten a carrot for dinner this 
 5. 直到之后某一时间点，引导词：**until**
    - The rabbit waited until the wolf stopped by.
    - 表达像 since 的对立面，从某一时间点算起，直到之后的某一时间点
+   - until 引导的时间状语从句使用现在/现在完成时表达将来时态
+   - Due to the poor economy, most of the employees will put off taking a summer vacation until the domestic economy **has improved**.
 6. 一...就...，引导词：**ass soon as**
 7. 下次...，引导词：**the next time**
 
-- until 引导的时间状语从句使用现在/现在完成时表达将来时态
+### 地点副词从句
 
-  - Due to the poor economy, most of the employees will put off taking a summer vacation until the domestic economy **has improved**.
+- **where**作引导词
+  - The rabbit ate the carrot where he found it.
+- 引导词：where 的强调形式：**wherever/everywhere/anywhere**
+
+### 比较副词从句
+
+我们常见的一些句子，其实是比较副词从句的省略版本，如：
+
+- He is smater (than me/than i am).
+- This carrot is bigger (than that one/than that one is).
+- 省略的部分用代词宾格是口语用法，正式用法应该是完整从句。
+
+- **than** 是引导词
 
 ### 条件副词从句
 
@@ -704,3 +731,7 @@ It is obvious that the hungry rabbit had already eaten a carrot for dinner this 
   - 语序差异：
     - because 引导的从句放在主句前后都可以
     - since/ass 引导的从句只能放在主句前
+
+### 结果副词从句
+
+- **so that**作为引导词

@@ -347,9 +347,12 @@ link 创建一个文件或文件夹的链接，这样可以在修改一处时影
 
 - 注意，如果权限不足，不会显示进程 ID 及进程名称，需要 sudo 执行
 
-`lsof -i tcp:8080`
+`lsof -i :8080`
 list open files
 查看指定的端口是什么程序占用
+
+`lsof -i tcp:8080`
+指定端口协议
 
 查看<设定>最大连接数
 ulimit -n <newValue>
@@ -736,6 +739,16 @@ sed -i "" "s/要查找的文本/替换后的文本/g" `grep -rl --include='*.go'
 显示两个文件的差异
 
 # 远程通信
+
+## curl
+
+进行网络访问，可以支持各种协议、代理
+
+`curl http://www.baidu.com`
+访问网址，可以指定协议、ip 地址、端口号
+
+- `--proxy socks5://localhost:9050`
+  通过代理访问
 
 ## ssh
 

@@ -264,6 +264,21 @@ tags: English
 - plaint n.感叹；诉苦
 - ballroom 舞厅
 - occasion 重大活动；仪式；庆典
+- overcharge v.对...要价/收费 过高
+- industry leader 行业领袖
+- proximity n.(时间、空间、关系的)靠近，亲近；
+- celebrity (尤指娱乐界的)名人，明星
+- professionalism 专业技巧；高超的水准
+- accompany 陪伴；伴随；和...一起发生(或同时存在)
+- unforeseen 出乎意料的；未预见到的；
+- circumstance 情形；境况；(尤指)经济情况；客观环境；
+- rearrange 重整；重新安排；重新排列
+- reward 奖赏；奖励；酬谢；
+- now and again 不时地；时而
+- award-winning 获奖的；(尤指)获大奖的
+- selected 挑选出来的
+- access to 接近；有权使用；通向...的入口；
+- residual adj.残留的；(数量）剩余的；n.(数量)剩余；残差；
 
 - have consequnences for 对...产生影响
 - hang from 从...悬挂；
@@ -317,6 +332,13 @@ tags: English
 - to the point where 到...的程度
 - in compensation for 作为对...的赔偿
 - emerge as 显露；露头；立足成为...
+- be positioned on 位于...
+- show xx around 领 xx 参观；带 xx 巡视
+- in full 全部地
+- confirm that (通常指通过信件或电话)确定，确认(安排或预约)
+- as a way of 作为...的一个方法
+- team up with 与...合作
+- make a booking 预约；预订；
 
 # 熟词僻义
 
@@ -350,6 +372,9 @@ tags: English
 - text n.文本；vt.给...发送(手机)短信
 - spell n.(某种活动、天气等的)一段短暂时间，一阵；n.拼写；v.拼写；
 - exceptional adj.优异的；非凡的；例外的；特殊的；
+- complex n.综合大楼；adj.复杂的
+- phone vt.给...打电话；n.电话
+- offer n.(商品的)特价，特惠；v.给予(物)
 
 - come in 上市；进来
 - pick up (贸易或经济)好转，改善；买；(开车)接载；取走；
@@ -446,6 +471,7 @@ tags: English
 - crew 全体工作人员；
 - allot 分配；划拨；
 - secure v.获得；使安全；
+- branch (企业或组织的)分支机构，分部，分店
 
 ## Finance & Investment 财务及投资
 
@@ -466,7 +492,7 @@ tags: English
 - overdraft 透支
 - revenue 岁入；税收；
 - withdrawal 收回；提款；
-- deposit 付押金；放置；
+- deposit v.付押金；放置；n.订金；保证金；(租赁的)押金；(尤指定期)存款；
 - depression 萧条；沮丧；
 - discrepancy 差异；
 - fiscal 财政的；会计的；
@@ -673,6 +699,7 @@ tags: English
 - airspeed 空速，飞行速度
 - descend 下来；下降
 - snowfall n.降雪；降雪量
+- bus route 公共汽车线路
 
 - make delivery 交货；送货
 
@@ -773,6 +800,7 @@ tags: English
 - modest 谦逊的；适度的；朴实的；端庄的；
 - nuisance 讨厌之人、事、物
 - prompt adj.准时的；按时的；迅速的；
+- promptly adv.立刻；马上；及时；
 - run into 偶遇；碰上；
 - scandal 丑闻；引人愤慨之事；
 
@@ -909,6 +937,9 @@ tags: English
 - refurbish v.整修，重新装修
 - renovate v.修复，翻新(尤指建筑物)
 - all-electric 只用电照明(和取暖)的；全都用电的
+- move-in date 入住日期
+- rental n.租赁；租金；租用物；
+- living quarter 居住区
 
 ## Product Research and Development 产品调研与开发
 
@@ -929,6 +960,7 @@ tags: English
 - questionnaire 调查表，问卷
 - symbolize 采用象征；用符号表现；
 - workable 可使用的；可操作的；可行的
+- specifications 规格；具体要求
 
 ## Quality Control 质量管理
 
