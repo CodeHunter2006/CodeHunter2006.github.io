@@ -10,57 +10,26 @@ tags: English
 # 生词
 
 - test book n.考卷；
-- merchandise n.商品、货品；
-- brick wall n.砖墙；
-- cyclist n.骑自行车的人；
-- sidewalk n.人行道；
 - in the distance 在远处
 - utensil 器皿，器具；
-- copy paper 复印纸
 - for a while 暂时
-- express mail 快递
 - scissors 剪刀
 - exchange 调换，更换；交换；
-- sales goal 销售目标
 - workshop 研习班，研讨会
-- marketing 市场营销
 - auditorium 会堂，礼堂
-- sales report 销售报告
-- sales analysis 销售分析
 - in a minute 立刻，马上
-- a letter of consent 同意书
 - by ... time 到...截止
 - gradually 逐渐地，逐步地
-- receipt n.收据，收条；购物小票；收到
-- fax n.传真机；v.传真
 - supply closet 储藏室
-- copier 复印机
-- assistant n.助理
-- assistance n.帮助
-- work as a ... 以...身份工作
-- regular employee 正式员工
-- board memeber 董事会成员
 - had better 最好做某事
-- due date 到期日
 - ... or so 大约，左右
-- deliver 递送
-- call it a day 收工
-- delivery fee 投递费；运送费；
 - potted plant 盆栽植物
-- exchange rate 汇率
 - upcoming adj.即将发生(到来)的
-- personnel 人事相关的
 - official 官方的；正式的；
 - press conference 新闻发布会
-- stroll 散步
-- city limits 市区范围
-- shipping cost 运费
-- purchase 购买
 - keynote 基调，主旨
 - keynote speaker 主题发言人
-- warehouse 仓库；货栈
 - newsletter (某组织定期发送的)内部通讯，简报
-- travel agent 旅行社
 - mechanic 机械工
 - maintenance 维护保养
 - auto repair shop 汽车修理厂
@@ -88,17 +57,12 @@ tags: English
 - prevalent adj.盛行的，普遍的
 - rain check n.延期；专用免费票(延期盖章票根)
 - job vacancy 岗位空缺
-- director 主管，主任；董事
-- managing director 总经理
-- marketing director 市场销售主管
 - press release (向记者发布的)新闻稿
 - circulate 散发；流传；散布；循环
 - color scheme 配色
 - awards ceremony 颁奖仪式，颁奖典礼
 - morale 士气；精神面貌
 - inform 通知；告知
-- out of toner 没有墨粉了
-- place an order 订购，下单
 - executive meeting 常务会议，高层会议
 - get reimbursed 报销
 - reception 接待处；服务台
@@ -135,12 +99,10 @@ tags: English
 - brand-new 崭新的，全新的
 - exclusively 独占地；专有地；完全地
 - in terms of 在...方面
-- sales force 销售人员；销售队伍
 - continued 继续的，持续的
 - farewell party 送别会
 - marketing division 市场部
 - listen up 听好了
-- market research surveys 市场问卷调查
 - boost 使增长；推动；增强；提高(信心或士气)
 - credential 证书；凭据
 - head office 总部，总公司
@@ -163,13 +125,9 @@ tags: English
 - refurbishment n.翻新；整修
 - due adj.到期的，预期的；应有的，应得的；
 - surge n.激增；(水、风)汹涌；v.激增；(水、风)奔腾；
-- surgeon n.外科医生
-- surgery n.外科手术
 - delicate adj.技术性很强的；注重细节的
 - soar 急剧增加；高飞
-- debut v.首次登台，首次亮相；首次推出(新产品)；n.首次登台；(新事物)问世
 - Fahrenheit 华氏度
-- profits n.[会计]收益，红利；盈利
 - advantages n.优势；特点
 - flaw n.缺点；裂痕
 - multinational corporation n.跨国公司
@@ -179,10 +137,6 @@ tags: English
 - power plant 发电厂
 - mechanical problem 机械问题
 - nationality n.民族；国籍
-- monetary adj.货币的
-- monetary policy 货币政策
-- central bank 中央银行(央行)
-- standard interest rate 基准利率
 - unanimously adv.一致同意地，全体
 - committee n.委员会
 - irritate v.激怒；使烦躁
@@ -203,17 +157,12 @@ tags: English
 - metropolitan area 大都会区
 - upon 一旦...就...；在...上
 - packed 充满...的；富含...的；
-- expressway n.(美国)高速公路
 - interior adj.内部的；n.内部；
 - slate v.计划，安排；
 - measurement n.测量值，尺寸；
-- floor plan 平面图
 - minutes 会议记录
-- survey form 调查表
 - overwhelming adj.压倒性的
 - enlist v.(使)参军，(使)入伍；取得，赢得(帮助)；
-- place orders 订购，下订单
-- managerial 经理的；管理上的；
 - joint operation 联合经营，共同经营
 - utilize 利用，使用；
 - customer base 客户群
@@ -238,18 +187,10 @@ tags: English
 - top honor 最高荣誉
 - entitle 给予...权利；给予...资格
 - in advance 预先，提前
-- autographed 签名的，亲笔签名的
-- artwork 艺术作品
-- works of art 艺术品
-- faded painting 褪色的画
-- fine arts 美术
-- modern arts 现代艺术
 - archivist 档案管理员
 - assess 评估；评价
 - possess 占有；拥有；具备，具有
 - preserve 保持；保存
-- pieces of art 艺术作品
-- artistic world 艺术世界
 - aura 气质；气氛；氛围
 - all the more 更加；愈发
 - driving force 驱动力，推动力
@@ -264,8 +205,6 @@ tags: English
 - plaint n.感叹；诉苦
 - ballroom 舞厅
 - occasion 重大活动；仪式；庆典
-- overcharge v.对...要价/收费 过高
-- industry leader 行业领袖
 - proximity n.(时间、空间、关系的)靠近，亲近；
 - celebrity (尤指娱乐界的)名人，明星
 - professionalism 专业技巧；高超的水准
@@ -302,7 +241,6 @@ tags: English
 - drop by 顺道拜访；造访
 - familiarize oneself with 熟悉...
 - send around 分发，发送
-- make a purchase 购买；采购
 - wander off 走失，迷路；离开(正题)
 - drop off 下降
 - waste center 废弃物处理中心
@@ -368,13 +306,13 @@ tags: English
 - grab (匆忙地)拿，取；抓紧(吃、睡等)；抓住
 - record adj.创纪录的；vt.记录
 - feature v.以...为主演；以...为主要内容；描写...的特征 n.功能
-- relative adj.相比较而言的，比较的；相关联的；n.亲戚，亲属；
-- text n.文本；vt.给...发送(手机)短信
+- relative n.亲戚，亲属；adj.相比较而言的，比较的；相关联的；
+- text vt.给...发送(手机)短信 n.文本；
 - spell n.(某种活动、天气等的)一段短暂时间，一阵；n.拼写；v.拼写；
 - exceptional adj.优异的；非凡的；例外的；特殊的；
 - complex n.综合大楼；adj.复杂的
 - phone vt.给...打电话；n.电话
-- offer n.(商品的)特价，特惠；v.给予(物)
+- offer n.(商品的)特价，特惠；工作邀请；v.给予(物)
 
 - come in 上市；进来
 - pick up (贸易或经济)好转，改善；买；(开车)接载；取走；
@@ -406,12 +344,17 @@ tags: English
 - operator 接线生
 - overtime 加班的时间
 - portfolio 作品(夹)；公事包；
-- shrthand 速记；速记法；
+- shorthand 速记；速记法；
 - stapler 订书机
 - tardy 迟缓的；迟到的；
 - colleague 同事
 - associate n.同事；v.联系；
 - reschedule 重新安排...的时间；重新计划；将...改期
+- call it a day 收工
+- copy paper 复印纸
+- fax n.传真机；v.传真
+- copier 复印机
+- out of toner 没有墨粉了
 
 ## Personnel & Management 人事及管理
 
@@ -436,6 +379,16 @@ tags: English
 - dividend 分红
 - pension 退休金
 - nominee 被提名者；
+- assistant n.助理
+- assistance n.帮助
+- work as a ... 以...身份工作
+- regular employee 正式员工
+- personnel 人事相关的
+- director 主管，主任；董事
+- managing director 总经理
+- marketing director 市场销售主管
+- managerial 经理的；管理上的；
+- industry leader 行业领袖
 
 ## Business Development 业务扩展
 
@@ -504,6 +457,11 @@ tags: English
 - shareholder 股东
 - stockholder 证券和股票经纪人
 - yield 生产量；收益；生产；
+- profits n.[会计]收益，红利；盈利
+- monetary adj.货币的
+- monetary policy 货币政策
+- central bank 中央银行(央行)
+- standard interest rate 基准利率
 
 ## Commerce 贸易
 
@@ -544,6 +502,10 @@ tags: English
 - surplus n.过剩的量；盈余；adj.过剩的；剩余的；
 - trademark (注册)商标
 - warehouse 仓库；货架；大卖场；
+- exchange rate 汇率
+- purchase 购买
+- make a purchase 购买；采购
+- place an order 订购，下单
 
 ## Business Meeting & Negotiation 商务会议及谈判
 
@@ -574,6 +536,7 @@ tags: English
 - premise 前提
 - seminar 研讨会；
 - statement 声明；陈述
+- due date 到期日
 
 ## Technology & Equipment 科技及装备
 
@@ -668,6 +631,7 @@ tags: English
 - congestion 堵塞，拥堵
 - traffic congestion 交通拥堵
 - heavy traffic 交通拥堵
+- travel agent 旅行社
 
 ## transportation(Air,Ocean,Land) 交通运输(空、海、陆)
 
@@ -700,6 +664,14 @@ tags: English
 - descend 下来；下降
 - snowfall n.降雪；降雪量
 - bus route 公共汽车线路
+- cyclist n.骑自行车的人；
+- sidewalk n.人行道；
+- express mail 快递
+- deliver 递送
+- delivery fee 投递费；运送费；
+- city limits 市区范围
+- shipping cost 运费
+- expressway n.(美国)高速公路
 
 - make delivery 交货；送货
 
@@ -734,6 +706,10 @@ tags: English
 - delivery rate 配送费，递送费率
 - complimentary adj.免费赠送的；赞美的，表示钦佩的
 - food court 美食广场
+- merchandise n.商品、货品；
+- receipt n.收据，收条；购物小票；收到
+- place orders 订购，下订单
+- overcharge v.对...要价/收费 过高
 
 ## Dining Out 在外用餐
 
@@ -831,6 +807,14 @@ tags: English
 - preview 试映；预告片；
 - rehearsal 预演；排练；
 - stunt 特技；噱头；
+- autographed 签名的，亲笔签名的
+- artwork 艺术作品
+- works of art 艺术品
+- faded painting 褪色的画
+- fine arts 美术
+- modern arts 现代艺术
+- pieces of art 艺术作品
+- artistic world 艺术世界
 
 ## Sports & Recreational Activities 运动及休闲活动
 
@@ -862,6 +846,7 @@ tags: English
 - tournament n.比赛；锦标赛；
 - umpire n.裁判；仲裁
 - volleyball 排球
+- stroll 散步
 
 ## Medicine & Insurance 医疗及保险
 
@@ -892,6 +877,8 @@ tags: English
 - purification 洗净；净化；
 - trauma 外伤；心灵的伤；
 - vaive 放弃；弃权；
+- surgeon n.外科医生
+- surgery n.外科手术
 
 ## Housing 住房
 
@@ -940,6 +927,8 @@ tags: English
 - move-in date 入住日期
 - rental n.租赁；租金；租用物；
 - living quarter 居住区
+- brick wall n.砖墙；
+- floor plan 平面图
 
 ## Product Research and Development 产品调研与开发
 
@@ -961,6 +950,7 @@ tags: English
 - symbolize 采用象征；用符号表现；
 - workable 可使用的；可操作的；可行的
 - specifications 规格；具体要求
+- debut v.首次登台，首次亮相；首次推出(新产品)；n.首次登台；(新事物)问世
 
 ## Quality Control 质量管理
 
@@ -1002,6 +992,13 @@ tags: English
 - supplementary 附加的；补足的
 - stereotype 典范；老套
 - subculture 亚文化
+- sales goal 销售目标
+- marketing 市场营销
+- market research surveys 市场问卷调查
+- survey form 调查表
+- sales report 销售报告
+- sales analysis 销售分析
+- sales force 销售人员；销售队伍
 
 ## Job Application & Interview 工作申请与面试
 
@@ -1018,7 +1015,7 @@ tags: English
 - job knowledge 业务知识
 - unstructured 无社会组织的；松散的；非正式组成的
 - vocational 职业的；行业的
-- step donw 辞职；下台；让位，退位；
+- step down 辞职；下台；让位，退位；
 
 ## Pay & Promotion 薪酬与晋升
 
@@ -1107,6 +1104,7 @@ tags: English
 - hereunder adv.在此之下；在下面
 - submission 投降；提交(物)
 - beforehand adv.事先；预先；adj.提前的；预先准备好的；
+- board memeber 董事会成员
 
 ## Signing a Contract 签订合同
 
@@ -1134,6 +1132,7 @@ tags: English
 - counterpart (契约、合同)副本，复制品；相对物
 - inspection n.检查，检验；验收条款
 - memorandum n.备忘录；便笺
+- a letter of consent 同意书
 
 ## Telephone Calls 接打电话
 

@@ -139,7 +139,7 @@ TOEIC 中对于考时态的情况，往往句子会包含一些不认识的单�
   - 要求：ask/demand/require
 
 - The property custodian has requested that any overdue equipment be returned by the end of the week.
-- Hesuggested that she spent/spend the weekend with him.
+- He suggested that she spent/spend the weekend with him.
   - 这里选 (should)spend，原形
 
 3. 有表示"重要的、必需的、义务的"等含义的形容词时，that 从句中的动词用原形(省略 should)
@@ -236,7 +236,7 @@ I suggest that we (should) hold a meeting next week.
   - want 想要
     I want to tell you something.
   - agree/care/hope/learn/prepare/manage/decide/plan/deseve/promise/expect/refuse/fail/struggle/hesitate/arrange/consent
-  - 总结可以接不定式作宾语的动词，都是一些及物动词，同时后面的宾语可以比较宽泛。
+  - 总结：可以接不定式作宾语的动词，都是一些及物动词，同时后面的宾语可以比较宽泛。
 
 - 动词 + 宾语 + 不定式
 
@@ -360,7 +360,7 @@ for free, for good(永远), for rent, for sale
 
 ## by
 
-不能与冠词一起使用
+- 不能与冠词一起使用
 
 1. 交通及通信方式
 
@@ -730,7 +730,7 @@ It is obvious that the hungry rabbit had already eaten a carrot for dinner this 
   - 语气严重程度：because > since > as
   - 语序差异：
     - because 引导的从句放在主句前后都可以
-    - since/ass 引导的从句只能放在主句前
+    - since/as 引导的从句只能放在主句前
 
 ### 结果副词从句
 
