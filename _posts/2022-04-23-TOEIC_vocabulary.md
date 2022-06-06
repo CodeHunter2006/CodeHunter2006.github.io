@@ -218,6 +218,14 @@ tags: English
 - selected 挑选出来的
 - access to 接近；有权使用；通向...的入口；
 - residual adj.残留的；(数量）剩余的；n.(数量)剩余；残差；
+- roofed area 被屋顶遮盖的区域
+- lean v.倚靠
+- railing 栏杆，围栏
+- sip v.小口喝，抿；
+- outdoor cafe 室外咖啡馆
+- chalkboard 黑板
+- archway 拱门
+- showcase 陈列柜；橱窗；
 
 - have consequnences for 对...产生影响
 - hang from 从...悬挂；
@@ -277,6 +285,10 @@ tags: English
 - as a way of 作为...的一个方法
 - team up with 与...合作
 - make a booking 预约；预订；
+- climb staircase 爬楼梯
+- lean on railing 倚靠栏杆
+- be packed with 挤满；塞满；
+- clean off (table) 收拾(桌子)
 
 # 熟词僻义
 
@@ -289,7 +301,7 @@ tags: English
 - reach 联系，联络；到达
 - jumper 套头毛衣(男)；无袖连衣裙(女)；跳跃者；
 - last vi.持续；adj.最后的；
-- board 董事会；木板；
+- board v.登上(火车/飞机) n.董事会；木板；
 - charge 要价；收费；
 - straw 吸管；稻草；
 - convention 大会；管理；
@@ -313,6 +325,7 @@ tags: English
 - complex n.综合大楼；adj.复杂的
 - phone vt.给...打电话；n.电话
 - offer n.(商品的)特价，特惠；工作邀请；v.给予(物)
+- roof v.给...盖上屋顶；遮蔽；n.屋顶
 
 - come in 上市；进来
 - pick up (贸易或经济)好转，改善；买；(开车)接载；取走；
