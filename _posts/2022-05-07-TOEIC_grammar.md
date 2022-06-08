@@ -677,6 +677,8 @@ It is obvious that the hungry rabbit had already eaten a carrot for dinner this 
   - If you like this video, you will give it a thumbs-up.
   - If you don't like this video, you will not git it a thumbs-up.
 
+  - if 还可以换为**only if**，意思相同，加强语气
+
 - **unless** 作为引导词，表示"if not"
 
   - 可以直接改写上面第二句：

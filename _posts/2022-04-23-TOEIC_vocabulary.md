@@ -37,8 +37,6 @@ tags: English
 - in stock 有现货
 - concern vi.担心；影响；
 - concern about 担心...
-- coupon 优惠券；
-- voucher 代金券；
 - gathering n.聚会
 - official announcement 官方通知
 - be supposed to 应该
@@ -93,7 +91,6 @@ tags: English
 - beverage 饮料
 - shortly after 不久之后，很快
 - person in charge 负责人
-- leave for the day 下班
 - expense report 费用报告
 - repay 偿还，偿付
 - brand-new 崭新的，全新的
@@ -226,6 +223,30 @@ tags: English
 - chalkboard 黑板
 - archway 拱门
 - showcase 陈列柜；橱窗；
+- up to date (up-to-date) adj.最新的；现代的；
+- office n.办公室
+- dental clinic 牙科诊所
+- every other 每隔一个的
+- machine washable 可机洗的
+- dry-clean 干洗
+- patio (挨着房子的)露台，平台；
+- light show 灯光表演
+- wipe off 擦掉
+- security pass 通行证
+- bar exam 律师资格证考试
+- That's what I heard. 我听说是这样的。
+- turnout n.出席人数；参加人数；
+- farewell party 送别会，欢送会
+- on Sundays 在星期天(= every Sunday)
+- publicize 宣传；宣扬；
+- department store 百货商店；百货公司；
+- flower basket 花篮
+- identification badge 身份识别卡(证)
+- photo identification 带相片的身份证件
+- encouraging 令人鼓舞的；振奋人心的；
+- quite a few 不少，相当多；
+- on numerous occasions 多次
+- preapproved 预先批准的
 
 - have consequnences for 对...产生影响
 - hang from 从...悬挂；
@@ -289,6 +310,16 @@ tags: English
 - lean on railing 倚靠栏杆
 - be packed with 挤满；塞满；
 - clean off (table) 收拾(桌子)
+- cut sth. in half 将...切成两半
+- come up with 想出，提出(计划、想法等)
+- slip one's mind 忘掉，遗忘
+- have one's hands full 手里有很多工作要做，很忙，忙的不可开交
+- sign up for 注册；报名参加；
+- turn in 上交；提交；交付；
+- file a tax return 提交报税表
+- come to 总共，共计
+- be entitled to 有资格，有权利
+- look over (快速)翻阅，浏览；
 
 # 熟词僻义
 
@@ -305,6 +336,7 @@ tags: English
 - charge 要价；收费；
 - straw 吸管；稻草；
 - convention 大会；管理；
+- get together 开会；聚会；聚到一起
 - arrange 安排；整理；
 - come by 作短暂拜访；经过；
 - token (情感的)表示；证明；令牌；
@@ -324,11 +356,13 @@ tags: English
 - exceptional adj.优异的；非凡的；例外的；特殊的；
 - complex n.综合大楼；adj.复杂的
 - phone vt.给...打电话；n.电话
-- offer n.(商品的)特价，特惠；工作邀请；v.给予(物)
+- offer n.(商品的)特价，特惠；工作邀请；提供的东西；v.给予(物)
 - roof v.给...盖上屋顶；遮蔽；n.屋顶
+- attraction 游览胜地；吸引力；
 
 - come in 上市；进来
 - pick up (贸易或经济)好转，改善；买；(开车)接载；取走；
+- in the order of 大约；按……次序
 
 # 分场景高频词
 
@@ -367,7 +401,12 @@ tags: English
 - copy paper 复印纸
 - fax n.传真机；v.传真
 - copier 复印机
+- copy machine 复印机
 - out of toner 没有墨粉了
+- dress code 着装标准
+- commuting time 通勤时间
+- be stuck in traffic 遇上堵车
+- leave for the day 下班
 
 ## Personnel & Management 人事及管理
 
@@ -402,6 +441,15 @@ tags: English
 - marketing director 市场销售主管
 - managerial 经理的；管理上的；
 - industry leader 行业领袖
+- job fair 招聘会
+- Accounting 会计部
+- layoff n.解雇；下岗；停工期；
+- layoffs 裁员
+- closure (企业、工厂等的)永久性关闭，停业
+- vacancy (工作或职位的)空缺
+- qualified (通过考试)取得资格的，有资格的，合格的
+- applicant 申请人
+- be in charge of 主管；全面负责；统领
 
 ## Business Development 业务扩展
 
@@ -550,6 +598,7 @@ tags: English
 - seminar 研讨会；
 - statement 声明；陈述
 - due date 到期日
+- trade fair 商品交易会；商品展销会；
 
 ## Technology & Equipment 科技及装备
 
@@ -598,7 +647,7 @@ tags: English
 - courier 递送急件的信差；邮务专递公司；
 - draft 草稿；汇票；
 - enclose 装入；装入信封；随函附上
-- issue 流出；放出；发行；发布；分发
+- issue 流出；放出；发行；(报刊的)期，号，次；发布；分发；
 - layout 规划；设计；编排；
 - legible (字迹)可以辨认的；易读的；
 - postage 邮资
@@ -645,6 +694,9 @@ tags: English
 - traffic congestion 交通拥堵
 - heavy traffic 交通拥堵
 - travel agent 旅行社
+- printable ticket 可打印车票
+- reservation confirmation 预约确认(书)
+- baggage claim 取行李处；行李领取处；
 
 ## transportation(Air,Ocean,Land) 交通运输(空、海、陆)
 
@@ -685,6 +737,7 @@ tags: English
 - city limits 市区范围
 - shipping cost 运费
 - expressway n.(美国)高速公路
+- unload 卸下(货物)；从...上卸货；
 
 - make delivery 交货；送货
 
@@ -723,8 +776,15 @@ tags: English
 - receipt n.收据，收条；购物小票；收到
 - place orders 订购，下订单
 - overcharge v.对...要价/收费 过高
+- grocery 食品杂货店
+- groceries 杂货；食品；生活用品
+- coupon 优惠券；
+- voucher 代金券；
+- gift voucher 礼券；
+- redeem 偿还；兑现；付清；
+- inconvenience 不便；麻烦；困难
 
-## Dining Out 在外用餐
+## Dining Out & Food 在外用餐和食物
 
 - bland (食物)淡而无味的；(人)温和的；无刺激性的；
 - crave 渴望
@@ -759,6 +819,17 @@ tags: English
 - seasoning 调味品；佐料；
 - snack n.小吃；点心；vi.吃点心
 - spice 香料；调味品；
+- nutritional information 营养信息
+- wheat flour 小麦粉
+- canola oil 菜籽油
+- palm oil 棕榈油
+- corn syrup 玉米糖浆
+- corn starch 玉米淀粉
+- artificial flavoring 人造调味剂
+- caramel coloring 焦糖色素
+- nut allergy 坚果过敏
+- almonds 杏仁
+- buttery 含黄油的；涂黄油的
 
 ## Social Contact 社交
 
@@ -942,6 +1013,9 @@ tags: English
 - living quarter 居住区
 - brick wall n.砖墙；
 - floor plan 平面图
+- furnished 带家具的
+- furniture 家具
+- at no extra cost 没哟额外的费用
 
 ## Product Research and Development 产品调研与开发
 
@@ -1022,6 +1096,7 @@ tags: English
 - promotion from within(PFW) 内部晋升
 - posting n.公布；邮递；布置
 - degree 学位
+- business management 企业管理；商务管理；
 - validity 有效性；正确；正确性
 - norm 标准；规范
 - cutoff score 录用分数线
@@ -1029,6 +1104,8 @@ tags: English
 - unstructured 无社会组织的；松散的；非正式组成的
 - vocational 职业的；行业的
 - step down 辞职；下台；让位，退位；
+- Human Resources 人力资源(部)
+- How are you finding it? 你觉得怎么样
 
 ## Pay & Promotion 薪酬与晋升
 
@@ -1078,6 +1155,7 @@ tags: English
 - ownership 所有权；物主身份
 - cafeteria 自助餐厅
 - maternity 产科的；孕妇的
+- days off 休息日；休假日
 
 ## Rules & Regulations 公司规章制度
 
@@ -1091,6 +1169,7 @@ tags: English
 - violate 违反；侵犯，妨碍
 - accounting 会计，会计学
 - reimbursement 退还，偿还；报销
+- fare 旅费；路费；车费；
 - misconduct 不端行为；处理不当
 - expense-report system 报销制度
 - subordinate adj.下级的；n.部属；部下，下级
