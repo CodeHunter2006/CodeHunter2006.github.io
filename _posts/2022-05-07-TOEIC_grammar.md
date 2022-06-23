@@ -130,15 +130,17 @@ TOEIC 中对于考时态的情况，往往句子会包含一些不认识的单�
 - If the software industry **will collapse/collapse**, many small firms will go bankrupt.
 - 上面从句都应是一般现在时
 
-2. 主句中有表提议、主张、要求、命令等的动词时，that 从句中的动词用原形(省略 should)
+2. 主句中有表提议、主张、要求、命令等的动词时，that 从句中的动词用 should+原形
+
+- that 和 should 都可以省略
 
 - 关键词:
 
-  - 提议：suggest/propose
+  - 提议：suggest/propose/advise/recommend
   - 主张：insist/urge
-  - 要求：ask/demand/require
+  - 要求：ask/demand/require/order/request
 
-- The property custodian has requested that any overdue equipment be returned by the end of the week.
+- The property custodian has requested (that) any overdue equipment (should) be returned by the end of the week.
 - He suggested that she spent/spend the weekend with him.
   - 这里选 (should)spend，原形
 

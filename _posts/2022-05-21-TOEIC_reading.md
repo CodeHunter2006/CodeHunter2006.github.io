@@ -277,3 +277,11 @@ invoice 发票、receipt 收据、book review 书籍评论。
   - According to the information, What is a criterion for making a decision?
   - When was this invoice written?
   - When must the bill be paid?
+
+# 错题
+
+- \_ is a questionnaire designed to provide the information needed for a thorough evaluation of your particular spinal problem.
+  - A Attach, B Attached, C Attaching, D Attachment
+  - 陷阱：在 is 前应该放主语，所以想填 Attachment
+  - 正确的答案是 Attached，正确的语序是 A questionnaire is attached，为了让 questionnaire 接近后面的修饰词，所以进行了倒装
+  - 类似的词还有 include 和 enclose

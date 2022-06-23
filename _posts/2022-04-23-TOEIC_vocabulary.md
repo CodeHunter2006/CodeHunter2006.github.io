@@ -166,7 +166,6 @@ tags: English
 - high-end (尤指电子产品)最高档的，高端的，最昂贵的
 - handset 电话听筒
 - joint company 联营公司，联合公司
-- flyer 传单
 - promotion n.促销；晋升
 - prescription 处方
 - dermatology 皮肤科
@@ -241,18 +240,44 @@ tags: English
 - publicize 宣传；宣扬；
 - department store 百货商店；百货公司；
 - flower basket 花篮
+- identification n.身份证明；身份证件；
 - identification badge 身份识别卡(证)
 - photo identification 带相片的身份证件
 - encouraging 令人鼓舞的；振奋人心的；
 - quite a few 不少，相当多；
 - on numerous occasions 多次
 - preapproved 预先批准的
+- let's say 比如说(用作插入语)
+- heatwave 热量；奇热的时期；
+- letting up (指持续的令人不快的过程)停止，缓和，减弱
+- meteorologist 气象学家
+- Celsius 摄氏(温度)的
+- virtually adv.几乎；实际上；事实上；虚拟的；
+- disregard 不理会；不顾；漠视
+- complaint n.投诉；抱怨；
+- streamline v.使(机构或过程)效率更高，精简；
+- extremely adv.极度，非常; 不可以修饰动词，只能修饰形容词和副词；
+- significantly adv.显著地；
+- inroad n.袭击
+- make inroads into 侵袭，侵入，打入
+- charity organization 慈善机构
+- endorse (公开地)赞同，支持
+- agree to/with 同意...
+- appeal 呼吁；恳请；恳求；
+- considerate adj.体贴的，体谅的，考虑周到的；
+- considerable adj.相当大的；相当重要的；
+- inappropriate adj.不适用的；不适合的；不得体的；
+- mishandling 处理不当
+- consumer negligence 消费者的疏忽
+- negligence n.疏忽，大意；
+- otherwise adv.表否定；否则，不然；不同的，另外的；除此以外；
 
 - have consequnences for 对...产生影响
 - hang from 从...悬挂；
 - sth. looks good on sb. 穿...好看
 - make an exchange 调换；
 - have an appointment with ... 和...约好了(见面)
+- make an appointment 预约
 - notify A of B 把 B 告知/通知 A
 - inform A about B 把 B 通知 A
 - make an appointment 预约
@@ -320,6 +345,15 @@ tags: English
 - come to 总共，共计
 - be entitled to 有资格，有权利
 - look over (快速)翻阅，浏览；
+- go over 仔细检查；认真讨论
+- be turned in to 收听，收看，把频道调在
+- upon -ing 一...就...
+- be alarmed 惊恐的；担心的；
+- in due course 在适当的时候
+- be the case 情况属实，是这样；
+- exchange A for B 用 A 交换 B
+- in an effort to do... 努力...
+- spread throughout 传遍，遍布；
 
 # 熟词僻义
 
@@ -359,6 +393,7 @@ tags: English
 - offer n.(商品的)特价，特惠；工作邀请；提供的东西；v.给予(物)
 - roof v.给...盖上屋顶；遮蔽；n.屋顶
 - attraction 游览胜地；吸引力；
+- 1 through 5 prep.(介词)数字 1 到 5；通过...；
 
 - come in 上市；进来
 - pick up (贸易或经济)好转，改善；买；(开车)接载；取走；
@@ -414,7 +449,8 @@ tags: English
 - curriculum vitae(CV) (拉丁语)履历
 - eligible 合格的；
 - executive 行政或管理人员
-- president 经理
+- president 经理；总统
+- resident 居民
 - lay off
 - occupation 职业
 - part-time 兼职的；非全日制的
@@ -450,6 +486,13 @@ tags: English
 - qualified (通过考试)取得资格的，有资格的，合格的
 - applicant 申请人
 - be in charge of 主管；全面负责；统领
+- personnel manager 人事部经理
+- application form 申请表，申请书
+- secretary position 秘书职位
+- reference n.介绍信，推荐信；v.参考；查阅；咨询；
+- set up 安排；创建；建立；
+- hand over 交出；移交
+- handover n.移交
 
 ## Business Development 业务扩展
 
@@ -523,6 +566,9 @@ tags: English
 - monetary policy 货币政策
 - central bank 中央银行(央行)
 - standard interest rate 基准利率
+- stock brokerage company 证券公司
+- late charge 滞纳金
+- remaining balance 余额
 
 ## Commerce 贸易
 
@@ -662,8 +708,10 @@ tags: English
 - boarding pass 登机牌(写着登机相关信息)
 - brochure 小册子
 - checkout n.结账退房的时间；v.办理退房；结账离开；
+- checkout counter 收银台；结账处；
+- checking account 活期存款账户
 - confirmation n.确认
-- customs 海关；关税
+- customs 海关；关税；风俗；习惯
 - depart vi.启程，触发
 - departure n.启程，离开；
 - en route (法)在途中
@@ -693,10 +741,23 @@ tags: English
 - congestion 堵塞，拥堵
 - traffic congestion 交通拥堵
 - heavy traffic 交通拥堵
-- travel agent 旅行社
+- travel agent n.旅行社；旅行代理商；旅行社职员(并不是导游)
 - printable ticket 可打印车票
 - reservation confirmation 预约确认(书)
 - baggage claim 取行李处；行李领取处；
+- guide v.带领；指导；n.导游；向导；指南(手册)；
+- tour guide n.导游
+- sffety gear 安全装置
+- strongly recommend 强烈推荐；强烈建议；
+- spa n.温泉浴场，水疗馆；
+- sauna n.桑拿；
+- cathedral n.大教堂
+- non-guest 非客人
+- to this day 至今，迄今，直到现在
+- renowned 有名的；有声望的；
+- step inside 进入
+- information booth 问讯处
+- information kiosk 信息亭；问讯处；
 
 ## transportation(Air,Ocean,Land) 交通运输(空、海、陆)
 
@@ -761,9 +822,11 @@ tags: English
 - flea market 跳蚤市场
 - patron n.(老)顾客；赞助人；
 - refund n.退款；v.退换；赔偿；
+- rebate n.折扣；v.扣除；退还(部分付款)
+- subtract vt. 减去
 - thrift 节俭；节约；
 - vender 小贩
-- warranty 保证书；保修卡；
+- warranty n.证书；保修卡；保证；
 - workmanship 技巧；手艺；
 - giveaway 赠品
 - special deal 特价(销售)
@@ -783,6 +846,13 @@ tags: English
 - gift voucher 礼券；
 - redeem 偿还；兑现；付清；
 - inconvenience 不便；麻烦；困难
+- operate v.经营，营业；管理，运营；运作
+- around the clock 不分昼夜；日夜不停
+- operate around the clock n.24 小时营业地
+- operating hours 营业时间
+- flyer 传单
+- remain open 继续营业
+- no money down 零首付；无需支付预付款；
 
 ## Dining Out & Food 在外用餐和食物
 
@@ -958,6 +1028,7 @@ tags: English
 - liable 有义务的；应负责的；易于...的；倾向于...的；
 - organ donor 器官捐赠者；
 - pharmaceutical 制药的；药品的；
+- phamacy 药房；药店；
 - purification 洗净；净化；
 - trauma 外伤；心灵的伤；
 - vaive 放弃；弃权；
@@ -1016,6 +1087,7 @@ tags: English
 - furnished 带家具的
 - furniture 家具
 - at no extra cost 没哟额外的费用
+- amenity n.方便条件，遍历设施；
 
 ## Product Research and Development 产品调研与开发
 
@@ -1038,6 +1110,7 @@ tags: English
 - workable 可使用的；可操作的；可行的
 - specifications 规格；具体要求
 - debut v.首次登台，首次亮相；首次推出(新产品)；n.首次登台；(新事物)问世
+- unveil v.为...揭幕；公布；推出；出台
 
 ## Quality Control 质量管理
 
@@ -1297,6 +1370,7 @@ tags: English
 - impact n.碰撞力；影响；行动
 - incentive n.鼓励；诱因
 - proceed vi.着手；继续进行
+- proceeds n.收入，收益；
 - submit v.认输；使服从；提出
 - speculate v.沉思；思索；猜测；推测；投机
 
@@ -1323,3 +1397,4 @@ tags: English
 - self-explanatory adj.不需要加以说明的；不言自明的
 - ultimately adv.最后；最终
 - vague adj.含糊不清的；模糊不清的
+- pamper oneself 宠爱自己

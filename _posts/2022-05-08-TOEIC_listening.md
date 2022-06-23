@@ -48,6 +48,9 @@ tags: English
 - 通用
 
   - "is being"、"has been" 的区分非常重要，"being"是长音，"been"是短音。
+  - 题目如果是：`What does the man mean when he says, "xxxx"`
+    - 这里的`xxxx`往往是一种常用语气/语义表达方法
+    - 通常答案无需和后面联系，听到这里结合场景就可以推测出说话人的语义
 
 - part1 看图选项
 

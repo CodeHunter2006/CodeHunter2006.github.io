@@ -114,6 +114,9 @@ docker save ...
 docker load ...
 ```
 
+`docker logs container_name`
+查看标准输出日志
+
 `docker commit container_name image_name`
 将 container 导出为镜像
 
