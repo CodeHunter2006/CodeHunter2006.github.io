@@ -49,6 +49,7 @@ Memo 是公司内部向员工传达公司的政策、业务程序、新员工入
 - 备忘录的结构
 
   - 写备忘录时，通常先给出发送者、接受者、主题和日期
+  - 备忘录可能会有"Subject"或"RE"(in regard to)表明文章的主题
   - 正文第一段说明备忘录的目的
   - 第二段写具体内容
 
@@ -59,11 +60,16 @@ Memo 是公司内部向员工传达公司的政策、业务程序、新员工入
   - 对具体内容提问
 
 - 真题中的问题
+
   - What is the purpose of this memo?
   - What is going to happen on May 11?
   - How will john respond to this memo?
   - What is Johnson Company planning to do?
   - What are they instructed to do?
+
+- 备忘录与公示 高频核心句式
+  - The purpose of the seminar is the training of the presentation skills.
+  - Please refamiliarize yourselves with the following pool safety precautions.
 
 2. Letter 书信
 
@@ -80,12 +86,22 @@ Memo 是公司内部向员工传达公司的政策、业务程序、新员工入
   - 寄信人姓名
 
 - 相关问题类型
+
   - 对主题或目的提问
     答案很容易在开头部分找到。一般在 I'm writing in regard to.../This is a letter to.../We are please to...等表达之后就是目的。
   - 对具体内容提问
     - 提及附件的部分
     - 提及具体事项的部分
     - 对收信人、寄信人的提问
+
+- 邮件、传真、信函 高频核心句式
+  - I really appreciate your offer...
+  - I very much look forward to working with you.
+  - As agreed, meetings will be held every second Tuesday,...
+  - We continue to be committed to providing you with the highest standards of service
+  - On behalf of everyone here at Deerwood Ltd, I would like to congratulate on your recent...
+  - Based on the requirements stated in the ad, I believed that I possess a unique mix of experience and...
+  - The purpose of this is to convey
 
 3. E-mail 电子邮件
 
@@ -116,6 +132,7 @@ Memo 是公司内部向员工传达公司的政策、业务程序、新员工入
   - Who wrote this e-mail?
 
 - 电子邮件中常用的缩写
+
   - AFAIN as far as I know
   - BFN before for now
   - BTW by the way
@@ -123,6 +140,21 @@ Memo 是公司内部向员工传达公司的政策、业务程序、新员工入
   - ASAP as soon as possible
   - IOW in other words
   - OTOH on the other hand
+
+- 邮件、传真、信函 高频核心句式：
+  - Dear Personnel Director
+  - To whom it may concern 致负责人——不能明确具体收信人时
+  - With reference to your letter of 20 September, ...
+  - I am writing to enquire about/apologize for/confirm ...
+  - I would be grateful if you could ... 如果贵公司(您)可以...的话，我将万分感谢
+  - I would be delighted to ... 如果...就好了。(乐意做...)
+  - I am afraid that ... 恐怕我...
+  - Please find enclosed ... 请确认附加的...
+  - Enclosed you will find... 附加了...，请您确认
+  - Thank you for your help...
+  - Please contact us again if there are any problems/questions.
+  - I look forward to hearing from you soon.
+  - Yours faithfully = Yours sincerely = Best wishes = Best regards 谨上，敬启
 
 4. Notice & Announcement 通知和公告
 
@@ -184,7 +216,14 @@ Memo 是公司内部向员工传达公司的政策、业务程序、新员工入
     - What is NOT a stated advantage of the program?
 
 - 选项技巧
+
   - 招聘广告通常不会以打电话方式联系，所以"打电话"一定是不选的
+
+- 广告 高频核心句式
+  - We are pleased to introduce our frequent-saver program to provide our valued customers...
+  - While you're here, feel free to take advantage of our many amenities...
+  - Applicants must enjoy working with customers and be comfortable using...
+  - This is a limited time offer. 此商品(服务)属于限时提供。——强调商品销售时间的表达
 
 6. Article & Report 新闻报道和报告
 
@@ -228,8 +267,14 @@ Memo 是公司内部向员工传达公司的政策、业务程序、新员工入
     - 需要先找到这个词，阅读对应句子，然后向前看一段就可以找到答案
 
 - 真题中的问题：
+
   - What is suggested(暗示) about Ms. Forster?
   - At 11:12 A.M., what does Ms. Hong mean when she writes, "Absolutely"?
+
+- 报道 高频核心句式
+  - Stock prices have tended to be lower, yet vary from day to day. 股价处于持续下滑，但每天都有所变动。
+  - They couldn't properly cope with the rise in the production cost.
+  - Carolina restaurant has gone out of business... 卡罗丽娜饭店停止营业...
 
 8. telephone message 电话(留言)信息
 
@@ -271,12 +316,50 @@ Memo 是公司内部向员工传达公司的政策、业务程序、新员工入
 invoice 发票、receipt 收据、book review 书籍评论。
 
 - 真题中的问题
+
   - What kind of document is this?
   - What kind of letter is this?
   - What is the purpose of this chart?
   - According to the information, What is a criterion for making a decision?
   - When was this invoice written?
   - When must the bill be paid?
+
+- 其他短文 高频核心句式
+  - You ar cordially invided to the annual... 诚邀阁下参加年度...——邀请函
+  - Yes, I want to receive 12 issues of The Florida Horse for only $55 annually. 是的，我想申请订阅每年 55 美元 12 期的《佛罗里达大马报》。——订阅申请信
+  - PLEASE CALL 电话留言——电话提示
+  - TELEPHONED 来过电话——电话提示
+
+# 同义替换
+
+- 数字同义替换
+
+  - to double its imports
+    - imports increase 100 percent
+  - a minimum of five years
+    - at least five years
+  - every two days
+    - every other day
+  - weekly
+    - once a week
+  - quarterly 每季度
+    - every three months
+    - 4 times a year
+  - we are open every day but Monday
+    - six days per week
+
+- 替换语句
+  通常是用简约方式替换繁杂方式。
+  - DMX Corporation plans to manufacture its telephone equipment in Hong Kong.
+    - The company will manufacture telephone there
+  - vary from day to day
+    - continue to change
+  - oversee a meeting
+    - supervise the discussion
+  - reduce expenses
+    - cut down spending
+  - There was unanimous rejection of...被一致否决
+    - Everyone was against... 所有人都反对...
 
 # 错题
 

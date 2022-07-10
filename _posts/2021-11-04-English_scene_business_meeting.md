@@ -53,7 +53,7 @@ tags: English
       to make something clearer or easier to understand
       - I know this is a lot of information, so please let me know if
         you need me to clarify anything.
-    - **commont (on)**
+    - **comment (on)**
       to express an opinion about someone or something
       - Would anyone else like to comment on this?
     - **rush**

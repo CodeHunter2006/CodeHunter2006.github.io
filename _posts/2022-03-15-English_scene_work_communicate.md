@@ -41,8 +41,11 @@ tags: English
   - Researching
   - Let me check on it.
   - I'm already on it.
+  - He's working on it.
 
 - Ask for progress
   - any luck with ...?
   - not much progress from my end
   - that's all from my end
+  - xxx at this moment
+  - in recent days ...

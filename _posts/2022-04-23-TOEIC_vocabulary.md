@@ -79,13 +79,11 @@ tags: English
 - be donated to 捐赠给
 - nonprofit organization 非营利机构，非营利组织
 - aid 救助，援助
-- main entrance 正门，主要入口
 - subtotal 部分合计，小计
 - amount payable 应付金额
 - training session 培训课程
 - session (某项活动的)一段时间，一场；(议会等的)会议，(法庭的)开庭；
 - venue n.(事件的)发生地点，(活动的)场所
-- workplace 工作场所
 - avenue 大街；(通向大宅子的)林荫道；途径，渠道
 - refreshment 食物和饮料；恢复活力;
 - beverage 饮料
@@ -158,6 +156,7 @@ tags: English
 - slate v.计划，安排；
 - measurement n.测量值，尺寸；
 - minutes 会议记录
+- minute-taking 写会议记录
 - overwhelming adj.压倒性的
 - enlist v.(使)参军，(使)入伍；取得，赢得(帮助)；
 - joint operation 联合经营，共同经营
@@ -271,6 +270,63 @@ tags: English
 - consumer negligence 消费者的疏忽
 - negligence n.疏忽，大意；
 - otherwise adv.表否定；否则，不然；不同的，另外的；除此以外；
+- nature of the work 工作性质
+- send in 递送
+- remedy 纠正；补救；矫正；
+- toll-free (电话号码)免费拨打的
+- on-site 现场的，当地的；
+- at all times 始终，总是；
+- function n.功能；函数；v.工作；运转；运行；
+- workmanship 工艺；手艺；
+- adverse 不利的；有害的；
+- residential 居住的；住宅区的；居民区的；
+- ordinance 法令；法规；条例；
+- onset (尤指令人不快的)开始，开端，肇始；
+- plow 犁，耕；开路；
+- outperform 做得比...好；比...更高效；
+- weigh 有...重；重；称...的重量；称
+- snap photos v.拍照
+- video footage 视频
+- representative n.代表，代理人
+- stated on... 声称，宣称，声明；
+- work out v.锻炼；解决；算出；弄懂；
+- How do you like ...? 你喜欢...吗？
+- consecutive adj.连续的，不断的；
+
+  - successive adj.连续的；继承的；
+
+- institute n.研究所，学院，学会；v.制定(制度、规则)；提出(诉讼)；
+- institutional adj.机构的；惯例化的；
+- for the tenth consecutive year 连续 10 年
+- ever-expanding adj.不断扩大的；不断扩展的；
+- unbeatable adj.无与伦比的；无可匹敌的；无法战胜的；无敌的；
+- digital camera n.数码相机；
+- incoming (短信、电话)发过来的，打进来的；(飞机、乘客)即将到达的；(时间)即将到来的；
+- straight away adv.立刻，马上；
+- saving n.节省，节约；
+- why not ... 为什么不...呢？ = 我提议应该...
+- before and after (某个时间点)前后
+
+  - Now women work both before and after having their children.
+
+- membership pack 会员包
+- incur v.招致；带来；遭受
+- in place adj.适当的；adv.在适当的地方；在通常的位置；
+- open a crack 开一个缝
+- soak 浸；泡；
+- admin fee 管理费；手续费；
+- enrollment fee 报名费；注册费；
+- superb adj.极佳的；卓越的；
+- subscription n.会员费；订阅费；捐助款；
+- plot v.画出；标出；
+- plot A onto a graph 在图表上绘制出 A 的曲线
+- put forward suggestions 提出建议；
+- compulsory adj.强制性的；强迫的；义务的；
+- entail vt.使...必然发生；势必造成；使...成为必需；
+- asterisk 星号
+- master class 专家授课；高级讲习班；大师班；
+- address n.地址；演讲；v.演讲；设法解决；
+- law n.[lɔː]法律
 
 - have consequnences for 对...产生影响
 - hang from 从...悬挂；
@@ -278,11 +334,13 @@ tags: English
 - make an exchange 调换；
 - have an appointment with ... 和...约好了(见面)
 - make an appointment 预约
+- schedule an appointment 安排时间见面
 - notify A of B 把 B 告知/通知 A
 - inform A about B 把 B 通知 A
 - make an appointment 预约
 - go on vacation 去度假
 - give/deliver a presentation 演讲；作报告
+- give a talk/speech/address 演讲
 - take over 接管；接替；
 - help out 帮助...做事
 - lend a hand 帮忙做...
@@ -337,6 +395,7 @@ tags: English
 - clean off (table) 收拾(桌子)
 - cut sth. in half 将...切成两半
 - come up with 想出，提出(计划、想法等)
+- come up 走进；走到跟前；
 - slip one's mind 忘掉，遗忘
 - have one's hands full 手里有很多工作要做，很忙，忙的不可开交
 - sign up for 注册；报名参加；
@@ -354,6 +413,27 @@ tags: English
 - exchange A for B 用 A 交换 B
 - in an effort to do... 努力...
 - spread throughout 传遍，遍布；
+- unable to do sth. 不能做某事
+- incapable of doing sth. 不能做某事
+- have no trouble doing 做...没有困难
+- take one's reservation 接受某人的预订
+- leave off 剔除，排除(在名单之外)；停止，中断(做某事)；
+- run the risk of doing 冒着...的风险
+- spend time doing 花时间...
+- pop out 匆忙出去；突然走出；弹出；
+- apply to 适用于；应用于；
+- except for 除...之外
+- be busy doing 忙于...
+- enroll in 登记入学，注册；报名参加；
+  - enrollment 登记；注册；
+- in accordance with 按照；依据；
+- with regard to 关于；至于；
+- be out of town 不在城里，在外地；出门；
+- take advantage of 利用
+- look into 考察；调查；研究；
+- across from 在...对面
+- line up in a row 排成一排
+- lie against 靠在...上；
 
 # 熟词僻义
 
@@ -361,6 +441,7 @@ tags: English
 - suggest 暗示；建议；
 - directions 操作说明；方向；
 - produce n.农产品；vt.生产；
+  - manufacture vt.生产；
 - post n.柱、杆；n.邮政，包裹；vt.邮寄；
 - track 足迹、踪迹；小路；轨道
 - reach 联系，联络；到达
@@ -394,6 +475,11 @@ tags: English
 - roof v.给...盖上屋顶；遮蔽；n.屋顶
 - attraction 游览胜地；吸引力；
 - 1 through 5 prep.(介词)数字 1 到 5；通过...；
+- recall v.(产品)召回；记起；
+- name v.提名；任命；给...命名；n.名字
+- rate n.价格，费用；速度、速率；比率、率；
+- stream n.班，组；数据流；vi.流动；
+- module n.(大学课程的)单元，模块；程序模块；
 
 - come in 上市；进来
 - pick up (贸易或经济)好转，改善；买；(开车)接载；取走；
@@ -421,7 +507,7 @@ tags: English
 - bulletin 告示；公报；
 - carbon copy 用复写纸复制的副本
 - xerox 影音，复印；
-- extension 延长期；电话分机
+- extension 延长期；电话分机，内线；
 - intercom 对讲机
 - operator 接线生
 - overtime 加班的时间
@@ -442,12 +528,16 @@ tags: English
 - commuting time 通勤时间
 - be stuck in traffic 遇上堵车
 - leave for the day 下班
+- amount of work 工作量
+- workload 工作量，工作负荷；
+- workplace 工作场所
 
 ## Personnel & Management 人事及管理
 
 - consultation 咨询；商量；
 - curriculum vitae(CV) (拉丁语)履历
 - eligible 合格的；
+- eligible for 有...资格；符合...条件；
 - executive 行政或管理人员
 - president 经理；总统
 - resident 居民
@@ -465,7 +555,7 @@ tags: English
 - resign 辞职
 - subsidy 津贴；补贴；
 - dividend 分红
-- pension 退休金
+- pension 退休金；抚恤金；
 - nominee 被提名者；
 - assistant n.助理
 - assistance n.帮助
@@ -493,12 +583,23 @@ tags: English
 - set up 安排；创建；建立；
 - hand over 交出；移交
 - handover n.移交
+- transition n.交接；过渡；
+- two weeks' notice (离职前)提前两周通知(公司)
+- release A form B 将 A 从 B 免职
+- tenure n.任期，任职期间；(房屋的)居住权；(土地的)使用权，使用期；
+- coworker 同事
+- highly-experienced 经验丰富的；
+- I'd like to get an application for employment. 我想申请一份工作。
+- oversee v.监管；管理；无意中看到；
+- administrative 经营的；管理的；行政的；
+- annual leave balance 剩余年假；
 
 ## Business Development 业务扩展
 
 - accrue v. 产生；增加；积累；
 - amass 积累；
-- acquisition n.获得的东西；v.获得；习得；
+- phaseout 分阶段(或逐步)的停止(或结束、完成等)
+- acquisition n.(对公司的)收购;获得的东西；v.获得；习得；
 - asset 有用的东西；优点；资产；
 - corporation 法人；公司
 - cutback 减少；取消；
@@ -523,12 +624,13 @@ tags: English
 - preliminary 初步的；开始的；
 - prosperity 繁荣；成功；兴隆；
 - thrive 茂盛；兴旺；繁荣；
-- scheme 计划；设计；图谋；
+- scheme 计划；方案；设计；图谋；
 - undervalue 低估价值；看轻；
 - crew 全体工作人员；
 - allot 分配；划拨；
 - secure v.获得；使安全；
 - branch (企业或组织的)分支机构，分部，分店
+- all around the globe adv.全世界
 
 ## Finance & Investment 财务及投资
 
@@ -546,6 +648,7 @@ tags: English
 - fluctuation 波动；涨跌；
 - gross 总共的；全部的；
 - inflation 通货膨胀
+- inflate (使)充气；(使)膨胀；抬高(物价)；(使)(物价)涨高；
 - overdraft 透支
 - revenue 岁入；税收；
 - withdrawal 收回；提款；
@@ -558,7 +661,8 @@ tags: English
 - ledger 总账；分类账；
 - overdue 过期未付的；
 - remuneration 报酬；酬劳；
-- shareholder 股东
+- share n.股份；股票；
+- shareholder 股东；股票持有人；
 - stockholder 证券和股票经纪人
 - yield 生产量；收益；生产；
 - profits n.[会计]收益，红利；盈利
@@ -569,6 +673,11 @@ tags: English
 - stock brokerage company 证券公司
 - late charge 滞纳金
 - remaining balance 余额
+- tend v.走向，趋向；倾向于；
+- pay into 把钱/支票存入银行
+- expected return 预期回报；
+- paycheck n.付薪水的支票，薪水
+- operating budget n.营业预算；
 
 ## Commerce 贸易
 
@@ -603,6 +712,7 @@ tags: English
 - endorse 背书；支援；赞同；
 - inventory 详细目录；清单；存货；
 - letter of credit 担保书；信用状；
+- pre-addressed 写好收件人地址的
 - order n.订货；订单；汇票；汇单；
 - shipment 一批货
 - patent n.专利；vt.取得...的专利；
@@ -640,7 +750,7 @@ tags: English
 - dissuade 劝阻
 - on behalf of 代表
 - petition n.请愿(书)；vi.请愿
-- premise 前提
+- premise n.前提，假设；(企业或机构使用的)房屋及土地；经营场所；办公场所；
 - seminar 研讨会；
 - statement 声明；陈述
 - due date 到期日
@@ -675,10 +785,12 @@ tags: English
 - campaign 战役；竞选活动；宣传活动；
 - cohesive 有黏着力的；有结合力的；凝聚性的；
 - confidential 秘密的；机密的；
+- confident adj.自信的；
 - conrrespondence 通信；信件；
 - dictate 口述；支配；命令；
 - elaborate v.详尽说明；adj.详尽的；精心制作的；
 - inquire 询问；调查；
+- inquire about 询问；打听；
 - jot down 略记；匆匆记下；
 - leaflet 传单
 - promote 发扬；晋升；促进；
@@ -690,9 +802,10 @@ tags: English
 - composition 写作；作品；作文；作曲；
 - convene 集合；聚集；开会；
 - assemble 集合；聚集；装配；
-- courier 递送急件的信差；邮务专递公司；
+- courier 快递员；快递公司；
 - draft 草稿；汇票；
 - enclose 装入；装入信封；随函附上
+- attach 附上；贴上；
 - issue 流出；放出；发行；(报刊的)期，号，次；发布；分发；
 - layout 规划；设计；编排；
 - legible (字迹)可以辨认的；易读的；
@@ -701,6 +814,13 @@ tags: English
 - restate 再声明；重新叙述；(换一种方式)重说；
 - stationery 文具；信纸；
 - write-up n.报告书；v.详细写；
+- as our guest, ... 作为我们的顾客，有...权益
+  - 通常出现在企业团体宣传自身商品配套服务的传单上
+  - As our guest, you are also entitled to use the complimentary shuttle bus service to an from the airport.
+- spokesman 男发言人
+- spokeswoman 女发言人
+- spokesperson 发言人
+- reputation n.名誉，名声；
 
 ## Travel 旅游
 
@@ -708,6 +828,7 @@ tags: English
 - boarding pass 登机牌(写着登机相关信息)
 - brochure 小册子
 - checkout n.结账退房的时间；v.办理退房；结账离开；
+- check out 结账退房；结账离开；了解清楚；核实，查实；
 - checkout counter 收银台；结账处；
 - checking account 活期存款账户
 - confirmation n.确认
@@ -758,6 +879,11 @@ tags: English
 - step inside 进入
 - information booth 问讯处
 - information kiosk 信息亭；问讯处；
+- Netherlands n.荷兰
+- Dutch adj.荷兰的；n.荷兰人；
+- airfare n.飞机票价
+- lodging n.寄宿；借宿；
+- off-peak adj.非高峰(时间)的；淡(季)的；
 
 ## transportation(Air,Ocean,Land) 交通运输(空、海、陆)
 
@@ -771,12 +897,14 @@ tags: English
 - launch 发射；开始；
 - navigate 航行；驾驶；
 - taxicab 出租车
+- cab 出租车；计程车；
 - transit n.运输；通过
 - acrophobia 恐高症
 - airliner 大型客机
 - aviation 飞行；航空学；
 - cabin 小屋；客舱；机舱；
 - commuter 通勤者
+- convey v.运输；传递；表达；
 - conveyance 运输；交通工具；
 - ferry 渡轮
 - freight 货运；货物；
@@ -799,6 +927,8 @@ tags: English
 - shipping cost 运费
 - expressway n.(美国)高速公路
 - unload 卸下(货物)；从...上卸货；
+- shuttle 摆渡车；织布机的梭子；航天飞机；
+- shuttle bus 摆渡巴士；
 
 - make delivery 交货；送货
 
@@ -812,7 +942,7 @@ tags: English
 - neon sign 霓虹灯招牌
 - pickpocket 扒手
 - pushcart 手推车
-- reimburse 偿还；补偿；
+- reimburse 偿还；补偿；报销；
 - solicit 请求；恳求；
 - trendy 时髦的；流行的；
 - wholesale adj.批发的;adv.大量地；大批地；
@@ -822,21 +952,25 @@ tags: English
 - flea market 跳蚤市场
 - patron n.(老)顾客；赞助人；
 - refund n.退款；v.退换；赔偿；
+- nonrefundable adj.不可归还的；不可退还的；
 - rebate n.折扣；v.扣除；退还(部分付款)
 - subtract vt. 减去
 - thrift 节俭；节约；
 - vender 小贩
-- warranty n.证书；保修卡；保证；
+- warranty (card) n.证书；保修卡；保证；
 - workmanship 技巧；手艺；
 - giveaway 赠品
 - special deal 特价(销售)
 - terms and conditions 条款
 - backorder 延期未交订货
 - delivery rate 配送费，递送费率
+- be on sale 降价出售的
 - complimentary adj.免费赠送的；赞美的，表示钦佩的
+- free 免费的；
 - food court 美食广场
 - merchandise n.商品、货品；
 - receipt n.收据，收条；购物小票；收到
+- original receipt 收据原件
 - place orders 订购，下订单
 - overcharge v.对...要价/收费 过高
 - grocery 食品杂货店
@@ -852,7 +986,10 @@ tags: English
 - operating hours 营业时间
 - flyer 传单
 - remain open 继续营业
+- stay open 继续运营，运转
 - no money down 零首付；无需支付预付款；
+- main entrance 正门，主要入口
+- customer services 客服中心；顾客服务处，客户服务部；售后服务；
 
 ## Dining Out & Food 在外用餐和食物
 
@@ -941,7 +1078,7 @@ tags: English
 - celebrity 名人；名声；
 - cue 暗示；提示；
 - drama 戏剧；剧本；
-- fare 车票；票价；
+- fare 车票；票价；旅费；路费；
 - headline (报纸的)标题；头条新闻；
 - periodical 期刊；杂志；
 - premiere 首次公演；首映；
@@ -1087,7 +1224,19 @@ tags: English
 - furnished 带家具的
 - furniture 家具
 - at no extra cost 没哟额外的费用
-- amenity n.方便条件，遍历设施；
+- amenity n.方便条件，便利设施；
+- bathtub 浴盆，浴缸；
+- fire hydrant 消防栓；消防龙头；
+- landlord n.房东；地主；
+- install vt.安装；
+- air conditioner n.空调机；
+- housing development 住宅开发；住宅开发区；
+- arm chair 有扶手的椅子；
+- vase n.花瓶
+- flower vase n.花瓶
+- stairway n.楼梯
+- stairs n.楼梯；梯级；
+- fence n.篱笆
 
 ## Product Research and Development 产品调研与开发
 
@@ -1132,7 +1281,7 @@ tags: English
 - clearance 清仓；批准；许可
 - deferred payment 延期付款；分期付款
 - follow-up 后续服务工作
-- impulse 冲动；刺激；推动
+- impulse 冲动；刺激；推动；一时兴起的念头；
 - intimate 亲密的；隐私的
 - lookism 容貌歧视
 - motive 动机，目的；主题
@@ -1159,6 +1308,7 @@ tags: English
 - sales report 销售报告
 - sales analysis 销售分析
 - sales force 销售人员；销售队伍
+- sales representative n.销售代表
 
 ## Job Application & Interview 工作申请与面试
 
@@ -1215,7 +1365,7 @@ tags: English
 - betterment n.改善，改进；改良
 - vacation 假期；(房屋)搬出
 - welfare 福利；幸福；福利事业
-- allowance 津贴；零用钱；允许
+- allowance 津贴；零用钱；允许；限额；
 - subsidy 补贴；津贴；补贴金
 - insurance 保险；保险费；赔偿金
 - check n.支票
@@ -1283,6 +1433,7 @@ tags: English
 - arbitration n.公断，仲裁
 - draw up 草拟，起草
 - renewal n.更新，恢复；续约
+- renew v.重新开始；更新；
 - stipulation n.规定；约定；条款
 - endorsement n.背书；签注(文件)
 - withdraw vt.撤走；拿走；(从银行)取(钱)
