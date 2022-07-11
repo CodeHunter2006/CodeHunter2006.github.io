@@ -327,6 +327,13 @@ tags: English
 - master class 专家授课；高级讲习班；大师班；
 - address n.地址；演讲；v.演讲；设法解决；
 - law n.[lɔː]法律
+- tile n.瓷砖，地砖；平铺；v.铺砖、铺瓦；(计算机)平铺；
+- booth n.电话亭；摊位；岗亭；(隔开的)小间；
+- metal pole n.金属杆
+- cast v.投射(光线或阴影)；
+- exterior n.外部；外貌；adj.外部的；表面的；
+- deserted adj.空无一人的；被抛弃的；
+- publishing 出版业
 
 - have consequnences for 对...产生影响
 - hang from 从...悬挂；
@@ -696,7 +703,7 @@ tags: English
 - haggle 讨价还价
 - invoice 发票；发货清单；完成工作的清单
 - long-range 长期的；远程的
-- stock 现货；存货；
+- stock n.现货；存货；v.存储；把...填满；
 - supply n.供应(品)；库存；vt.供应(物品)
 - payment 支付；付款；
 - voucher 保证人；凭证；代金券；
@@ -755,6 +762,7 @@ tags: English
 - statement 声明；陈述
 - due date 到期日
 - trade fair 商品交易会；商品展销会；
+- reach a compromise 达成妥协
 
 ## Technology & Equipment 科技及装备
 
@@ -826,6 +834,7 @@ tags: English
 
 - accomodation 适应；住所；膳宿；
 - boarding pass 登机牌(写着登机相关信息)
+- present your passport 请出示你的护照
 - brochure 小册子
 - checkout n.结账退房的时间；v.办理退房；结账离开；
 - check out 结账退房；结账离开；了解清楚；核实，查实；
@@ -884,6 +893,7 @@ tags: English
 - airfare n.飞机票价
 - lodging n.寄宿；借宿；
 - off-peak adj.非高峰(时间)的；淡(季)的；
+- abroad adv.到国外；在国外；
 
 ## transportation(Air,Ocean,Land) 交通运输(空、海、陆)
 
@@ -929,6 +939,12 @@ tags: English
 - unload 卸下(货物)；从...上卸货；
 - shuttle 摆渡车；织布机的梭子；航天飞机；
 - shuttle bus 摆渡巴士；
+- crosswalk n.人行横道；
+- intersection n.交点；道路交叉口；十字路口；
+- vihicle n.车辆；交通工具；
+- curb n.马路牙子；控制，抑制；v.控制，抑制；
+- cycle v.骑自行车；循环；n.自行车；循环；
+- cross the street 过马路
 
 - make delivery 交货；送货
 
@@ -1037,6 +1053,7 @@ tags: English
 - nut allergy 坚果过敏
 - almonds 杏仁
 - buttery 含黄油的；涂黄油的
+- foyer n.门厅；大厅；休息室；
 
 ## Social Contact 社交
 
@@ -1078,6 +1095,7 @@ tags: English
 - celebrity 名人；名声；
 - cue 暗示；提示；
 - drama 戏剧；剧本；
+- dramatically adv.急剧地；戏剧性地；引人注目地；
 - fare 车票；票价；旅费；路费；
 - headline (报纸的)标题；头条新闻；
 - periodical 期刊；杂志；
@@ -1106,6 +1124,7 @@ tags: English
 - modern arts 现代艺术
 - pieces of art 艺术作品
 - artistic world 艺术世界
+- cinema 电影院
 
 ## Sports & Recreational Activities 运动及休闲活动
 
@@ -1237,6 +1256,7 @@ tags: English
 - stairway n.楼梯
 - stairs n.楼梯；梯级；
 - fence n.篱笆
+- stool 凳子
 
 ## Product Research and Development 产品调研与开发
 
@@ -1309,6 +1329,7 @@ tags: English
 - sales analysis 销售分析
 - sales force 销售人员；销售队伍
 - sales representative n.销售代表
+- sales figures 销售数字
 
 ## Job Application & Interview 工作申请与面试
 
@@ -1447,6 +1468,7 @@ tags: English
 - jurisdiction n.司法权，审判权，管辖权
 - counterpart (契约、合同)副本，复制品；相对物
 - inspection n.检查，检验；验收条款
+- inspect v.检查；视察；
 - memorandum n.备忘录；便笺
 - a letter of consent 同意书
 
