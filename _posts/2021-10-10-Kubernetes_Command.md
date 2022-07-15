@@ -250,6 +250,8 @@ tags: Docker K8S HighConcurrency
 `kubectl top pod -n dev`
 查看 Pod 资源的 CPU、Memory 使用情况
 
+- cpu 的单位 1CPU = 100m
+
 ## 其他
 
 `kubectl create deployment hello-minikube --image=k8s.gcr.io/echoserver:1.4`

@@ -49,6 +49,7 @@ tags: English
 - virtuous circle 良性循环
 - largely 很大程度上，主要地
 - profound adj.影响深刻的
+- found v.建立；成立；创立；
 - remark n.评语
 - frequent customer 常客
 - remainder 剩余部分
@@ -117,6 +118,8 @@ tags: English
 - for many years to come 未来的许多年
 - municipal adj.城市的，市政的
 - muticipal gallery 市立美术馆
+- civic adj.城镇的，市政的；公民的，市民的；
+- civic center 市民中心
 - refurbishment n.翻新；整修
 - due adj.到期的，预期的；应有的，应得的；
 - surge n.激增；(水、风)汹涌；v.激增；(水、风)奔腾；
@@ -130,6 +133,8 @@ tags: English
 - vigorously 剧烈；强度大
 - aging adj.老化的
 - power plant 发电厂
+- plant 厂
+- manufacturing plant 生产厂；制造工厂；
 - mechanical problem 机械问题
 - nationality n.民族；国籍
 - unanimously adv.一致同意地，全体
@@ -182,6 +187,7 @@ tags: English
 - top honor 最高荣誉
 - entitle 给予...权利；给予...资格
 - in advance 预先，提前
+- advance v.(使)前进，(使)向前移动；发展，进步；n.前进；进展；
 - archivist 档案管理员
 - assess 评估；评价
 - possess 占有；拥有；具备，具有
@@ -254,6 +260,10 @@ tags: English
 - virtually adv.几乎；实际上；事实上；虚拟的；
 - disregard 不理会；不顾；漠视
 - complaint n.投诉；抱怨；
+- comply with 遵守
+- be compliant with 顺从
+- compliant adj.顺从的，顺服的；
+- be in compliance with 遵从；与...一致；
 - streamline v.使(机构或过程)效率更高，精简；
 - extremely adv.极度，非常; 不可以修饰动词，只能修饰形容词和副词；
 - significantly adv.显著地；
@@ -334,6 +344,45 @@ tags: English
 - exterior n.外部；外貌；adj.外部的；表面的；
 - deserted adj.空无一人的；被抛弃的；
 - publishing 出版业
+- keen adj.渴望的；热情的；
+- nerve n.勇气；胆量；
+- nervous adj.神经紧张的；担忧的，焦虑的；
+- a large selection of adj.多种多样的，各式各样的；大量的；
+- adhere v.遵守(时间、协议)；粘附；
+- checkup n.检查；健康检查；
+- medical checkup 体检
+- stain n.污点，污渍；
+- cramped adj.狭窄的；难懂的；
+- forthcoming adj.即将发生的；即将来临的；
+- as a token of 作为...的标志
+- token n.代币；象征，标志；礼券，代金；(语言学)符号；(计算机)令牌；
+- come prepared 有备而来；
+- weatherman 男天气预报员
+- forecast 预报；预测；
+- podium n.讲台；(乐队的)指挥台；
+- humanitarian work n.人道主义工作；
+- charity 慈善机构
+- volunteer 志愿者；义务工作者；义工；
+- nonprofit organization 非营利机构，非营利组织；
+- founding member 创始会员；创始成员；
+- gap year 间隔年，空档年(源自英国，指学生离开学校一段时间，经历一些学习以外的事情)
+- disaster relief n.救灾，赈灾；
+- alliance n.联盟，同盟；联合，结盟；
+- headquarters n.总部；总公司；
+- headquarter v.将(组织的)总部设在某地；设立总部；
+- slot (时间表、计划中的)时段；位置；
+- timeslot 时段，时间段；
+- first-come, first-served n.先到先得(原则)
+- band n.乐队；带装物；
+- as though 好像...似的，仿佛...一样
+- unattended adj.无人看管的；无人照料的；
+- as long as 只要...；和...一样长；
+- afterward 之后
+- in order that 为了，以...为目的
+- given (that) 考虑到...
+- provided (that) 假如，如果，只要；
+- prior to 在...之前
+- on top of 另外；熟练掌握；在...之上；紧接着；
 
 - have consequnences for 对...产生影响
 - hang from 从...悬挂；
@@ -362,6 +411,7 @@ tags: English
 - send around 分发，发送
 - wander off 走失，迷路；离开(正题)
 - drop off 下降
+- drop sth. off 把...放在，把...放下；把...交给某处；
 - waste center 废弃物处理中心
 - suffer from 受...折磨；因...受苦
 - be due to... 预期，预计
@@ -375,6 +425,7 @@ tags: English
 - be slated for 预定...；计划...
 - plan out 周密地计划；详尽地安排；
 - in an effort to do 努力...
+- in appreciation of... 欣赏，赏识；感谢，感激；
 - hold up 延搁；交通堵塞；
 - in terms of 在...方面；就...来说；关于...
 - keep one's figers crossed 祈求好运
@@ -390,7 +441,7 @@ tags: English
 - in compensation for 作为对...的赔偿
 - emerge as 显露；露头；立足成为...
 - be positioned on 位于...
-- show xx around 领 xx 参观；带 xx 巡视
+- show sb. around 领某人参观；带某人巡视
 - in full 全部地
 - confirm that (通常指通过信件或电话)确定，确认(安排或预约)
 - as a way of 作为...的一个方法
@@ -401,7 +452,7 @@ tags: English
 - be packed with 挤满；塞满；
 - clean off (table) 收拾(桌子)
 - cut sth. in half 将...切成两半
-- come up with 想出，提出(计划、想法等)
+- come up with 想出，提出(计划、想法等)；提议；
 - come up 走进；走到跟前；
 - slip one's mind 忘掉，遗忘
 - have one's hands full 手里有很多工作要做，很忙，忙的不可开交
@@ -420,6 +471,7 @@ tags: English
 - exchange A for B 用 A 交换 B
 - in an effort to do... 努力...
 - spread throughout 传遍，遍布；
+- throughout prep.遍及，到处；自始至终，贯穿整个时期；
 - unable to do sth. 不能做某事
 - incapable of doing sth. 不能做某事
 - have no trouble doing 做...没有困难
@@ -441,6 +493,21 @@ tags: English
 - across from 在...对面
 - line up in a row 排成一排
 - lie against 靠在...上；
+- It depends. 看情况而定
+- take care of 处理；照顾；
+- get right on 立即去做
+- put down 记录；写下；
+- make it to 赶上；到达；及时赶到；
+- be on the same page 意见一致，有共识；
+- have a chance of doing 有机会做某事
+- have a chance to do 有机会做某事
+- pretain to 与...相关；属于...；适用于...；
+- miss out 没有参加，错过；遗漏，漏掉；
+- clear up 解决(问题)；消除(误会)；揭开(谜团)
+- keep someone posted 不断为某人提供消息(或信息)
+- be based at 设在...(地点)；基于...；
+- set in (不好的事情)开始；到来；流行；
+- enter an emergency 进入紧急状态；
 
 # 熟词僻义
 
@@ -449,6 +516,10 @@ tags: English
 - directions 操作说明；方向；
 - produce n.农产品；vt.生产；
   - manufacture vt.生产；
+  - product n.产品，制品；
+  - producer n.生产者；制片人；
+  - production n.生产；制造；
+  - productivity n.生产率；生产力；
 - post n.柱、杆；n.邮政，包裹；vt.邮寄；
 - track 足迹、踪迹；小路；轨道
 - reach 联系，联络；到达
@@ -487,6 +558,12 @@ tags: English
 - rate n.价格，费用；速度、速率；比率、率；
 - stream n.班，组；数据流；vi.流动；
 - module n.(大学课程的)单元，模块；程序模块；
+- head v.朝着(某地点)前进；n.头；
+- fair n.集市，展览会；adj.公平的；adv.公平地；
+- position n.职位；位置；
+- jam v.堵住；n.果酱
+- backup n.堵塞；备用品，备用；备份；
+- retreat n.静养处，隐居地；撤退；v.撤退；隐蔽；
 
 - come in 上市；进来
 - pick up (贸易或经济)好转，改善；买；(开车)接载；取走；
@@ -538,13 +615,16 @@ tags: English
 - amount of work 工作量
 - workload 工作量，工作负荷；
 - workplace 工作场所
+- work extra hours 加班
+- working hours 工作时间
 
 ## Personnel & Management 人事及管理
 
 - consultation 咨询；商量；
 - curriculum vitae(CV) (拉丁语)履历
-- eligible 合格的；
+- eligible 合格的；符合条件的；
 - eligible for 有...资格；符合...条件；
+- eligibility n.适任，合格；
 - executive 行政或管理人员
 - president 经理；总统
 - resident 居民
@@ -584,11 +664,12 @@ tags: English
 - applicant 申请人
 - be in charge of 主管；全面负责；统领
 - personnel manager 人事部经理
+- application n.书面申请；申请书，申请表；应用，实施；应用程序；
 - application form 申请表，申请书
 - secretary position 秘书职位
 - reference n.介绍信，推荐信；v.参考；查阅；咨询；
 - set up 安排；创建；建立；
-- hand over 交出；移交
+- hand over 交出；移交；分发；
 - handover n.移交
 - transition n.交接；过渡；
 - two weeks' notice (离职前)提前两周通知(公司)
@@ -599,7 +680,10 @@ tags: English
 - I'd like to get an application for employment. 我想申请一份工作。
 - oversee v.监管；管理；无意中看到；
 - administrative 经营的；管理的；行政的；
+- administration office 行政办公室；
 - annual leave balance 剩余年假；
+- job fair booth n.招聘会展位
+- job security 工作保障；就业保障；
 
 ## Business Development 业务扩展
 
@@ -638,6 +722,10 @@ tags: English
 - secure v.获得；使安全；
 - branch (企业或组织的)分支机构，分部，分店
 - all around the globe adv.全世界
+- go bankrupt 破产
+- go out of business 不再经营
+- dissolved 解散
+- in the short term 从短期来看，短期内
 
 ## Finance & Investment 财务及投资
 
@@ -763,6 +851,7 @@ tags: English
 - due date 到期日
 - trade fair 商品交易会；商品展销会；
 - reach a compromise 达成妥协
+- partnership n.伙伴关系；合作关系；
 
 ## Technology & Equipment 科技及装备
 
@@ -774,6 +863,7 @@ tags: English
 - outage 电力中断；断电；
 - pertroleum 石油
 - static n.静电干扰；adj.静止的；静态的；静电的；
+- Technical Support n.技术支持；技术支持部；
 
 ## Computer 电脑
 
@@ -786,6 +876,7 @@ tags: English
 - modem 调制解调器
 - omit 省略；删除；疏忽；
 - transmission 传输；传送；
+- screenshot 屏幕截图
 
 ## Business Correspondence & Advertisement 商业书信及广告
 
@@ -828,6 +919,7 @@ tags: English
 - spokesman 男发言人
 - spokeswoman 女发言人
 - spokesperson 发言人
+- guest speaker 特邀演讲者
 - reputation n.名誉，名声；
 
 ## Travel 旅游
@@ -838,13 +930,15 @@ tags: English
 - brochure 小册子
 - checkout n.结账退房的时间；v.办理退房；结账离开；
 - check out 结账退房；结账离开；了解清楚；核实，查实；
+- check in (在旅馆)登记入住；(在机场)办理登机手续，检票登机；
 - checkout counter 收银台；结账处；
 - checking account 活期存款账户
 - confirmation n.确认
 - customs 海关；关税；风俗；习惯
-- depart vi.启程，触发
+- depart vi.启程，出发；
 - departure n.启程，离开；
 - en route (法)在途中
+- alternative route 替代路线
 - expedition 探险；远征队；
 - itinerary 行程表；
 - lodge n.小屋；旅馆；vi.住宿；投宿；
@@ -894,6 +988,12 @@ tags: English
 - lodging n.寄宿；借宿；
 - off-peak adj.非高峰(时间)的；淡(季)的；
 - abroad adv.到国外；在国外；
+- downtown adj.商业区的；市中心的；n.城市的中心区；商业区；
+- resort n.游览胜地；
+- go away 离开外出(尤指度假)
+- lakeside 湖岸；湖边；
+- excursion n.短途旅行；远足；
+- grocery store 杂货店；
 
 ## transportation(Air,Ocean,Land) 交通运输(空、海、陆)
 
@@ -912,7 +1012,7 @@ tags: English
 - acrophobia 恐高症
 - airliner 大型客机
 - aviation 飞行；航空学；
-- cabin 小屋；客舱；机舱；
+- cabin (尤指森林、群山中的)小木屋；客舱；机舱；
 - commuter 通勤者
 - convey v.运输；传递；表达；
 - conveyance 运输；交通工具；
@@ -945,6 +1045,14 @@ tags: English
 - curb n.马路牙子；控制，抑制；v.控制，抑制；
 - cycle v.骑自行车；循环；n.自行车；循环；
 - cross the street 过马路
+- registered (信或包裹)挂号的；
+- airmail 航空邮递
+- shipping label 运输标签；出货标签；
+- return shipping 退还，退回；
+- Overpass Road 立交桥路
+- dockworker n.码头工人；
+- tow v.拖，牵引(车、船等)
+- tow away 拖走
 
 - make delivery 交货；送货
 
@@ -967,6 +1075,7 @@ tags: English
 - drugstore 兼卖杂货的药房
 - flea market 跳蚤市场
 - patron n.(老)顾客；赞助人；
+- patronage n.(对餐馆、酒店或其他生意的)惠顾，光顾；资助，赞助；
 - refund n.退款；v.退换；赔偿；
 - nonrefundable adj.不可归还的；不可退还的；
 - rebate n.折扣；v.扣除；退还(部分付款)
@@ -992,9 +1101,11 @@ tags: English
 - grocery 食品杂货店
 - groceries 杂货；食品；生活用品
 - coupon 优惠券；
+- discount coupon 优惠券，折扣券，折价券；
 - voucher 代金券；
 - gift voucher 礼券；
 - redeem 偿还；兑现；付清；
+- redeemable adj.可交换的，可兑换的；
 - inconvenience 不便；麻烦；困难
 - operate v.经营，营业；管理，运营；运作
 - around the clock 不分昼夜；日夜不停
@@ -1003,9 +1114,12 @@ tags: English
 - flyer 传单
 - remain open 继续营业
 - stay open 继续运营，运转
+- run v.经营，运行；运转，运作；使运行；
 - no money down 零首付；无需支付预付款；
 - main entrance 正门，主要入口
 - customer services 客服中心；顾客服务处，客户服务部；售后服务；
+- menswear 男装
+- discounted 已折扣的
 
 ## Dining Out & Food 在外用餐和食物
 
@@ -1054,6 +1168,7 @@ tags: English
 - almonds 杏仁
 - buttery 含黄油的；涂黄油的
 - foyer n.门厅；大厅；休息室；
+- ice tea n.冰茶；
 
 ## Social Contact 社交
 
@@ -1075,6 +1190,7 @@ tags: English
 - acknowledge 承认；承认...之存在、权力；表示感谢
 - compliment 赞扬；恭维；
 - criticize 批评；
+- critical 极重要的；关键的；严重的，有危险的；
 - eloquent 口才好的；雄辩的；
 - extend 延伸；延续；扩大；延长；给予；提供；
 - favorable 令人满意的；博得赞许的；有帮助的；有利的；
@@ -1092,7 +1208,7 @@ tags: English
 
 - amuse 使欢乐；使愉快；使发笑；
 - ballet 芭蕾舞
-- celebrity 名人；名声；
+- celebrity n.(尤指娱乐界的)名人；名声；
 - cue 暗示；提示；
 - drama 戏剧；剧本；
 - dramatically adv.急剧地；戏剧性地；引人注目地；
@@ -1103,7 +1219,8 @@ tags: English
 - scriptwriter 剧作家；编剧；
 - symphony 交响曲
 - ticket office 售票处
-- applaud 鼓掌；赞同；
+- applaud v.鼓掌；赞同；
+- applause n.掌声；喝彩；
 - audition n.试听；试演；
 - carnival 狂欢；嘉年华会；巡回娱乐表演；
 - choreography 舞蹈设计；编舞；
@@ -1125,6 +1242,8 @@ tags: English
 - pieces of art 艺术作品
 - artistic world 艺术世界
 - cinema 电影院
+- tournament n.锦标赛；
+- local traffic news 当地交通新闻
 
 ## Sports & Recreational Activities 运动及休闲活动
 
@@ -1206,7 +1325,6 @@ tags: English
 - plumbing 水管设施
 - possession n.所有；个人财产；
 - real estate 不动产
-- renovate vt.更新；修复；恢复；
 - rural 乡下的；田园的；
 - suburb n.(常用复数)郊区；近郊；
 - urban 都市的；都市式的
@@ -1220,6 +1338,7 @@ tags: English
 - lawn 草坪；草地；
 - loan shark 放高利贷者；
 - messy 杂乱的；肮脏的；
+- mess n.脏乱；困境；麻烦；混乱；v.弄乱，弄脏；玩弄；
 - porch 门廊；游廊；
 - property 财产；地产；
 - relocate 重新安置；迁徙；
@@ -1233,7 +1352,7 @@ tags: English
 - fossil fuels 化石燃料
 - overhaul vi.彻底检修，全面改造；
 - refurbish v.整修，重新装修
-- renovate v.修复，翻新(尤指建筑物)
+- renovate vt.更新；修复(尤指建筑物)；恢复；
 - all-electric 只用电照明(和取暖)的；全都用电的
 - move-in date 入住日期
 - rental n.租赁；租金；租用物；
@@ -1257,6 +1376,8 @@ tags: English
 - stairs n.楼梯；梯级；
 - fence n.篱笆
 - stool 凳子
+- removal company 搬运公司
+- outskirt 市郊，郊区；
 
 ## Product Research and Development 产品调研与开发
 
@@ -1322,6 +1443,7 @@ tags: English
 - stereotype 典范；老套
 - subculture 亚文化
 - sales goal 销售目标
+- sales target 销售目标
 - marketing 市场营销
 - market research surveys 市场问卷调查
 - survey form 调查表
@@ -1337,6 +1459,7 @@ tags: English
 - reference 介绍信；证明书
 - diploma 毕业证书，学位证书；奖状
 - vacancy 空缺；空位；空白
+- job vacancies 职位空缺
 - promotion from within(PFW) 内部晋升
 - posting n.公布；邮递；布置
 - degree 学位
@@ -1350,6 +1473,8 @@ tags: English
 - step down 辞职；下台；让位，退位；
 - Human Resources 人力资源(部)
 - How are you finding it? 你觉得怎么样
+- employment fair 招聘会
+- recruitment agency 职业介绍所
 
 ## Pay & Promotion 薪酬与晋升
 
@@ -1493,6 +1618,7 @@ tags: English
 - rental n.租金收入，租金；租赁
 - note down v.记录某事；记下某事
 - transfer vi.(使)转移；调任
+- transferable adj.可转让的；可转移的；
 - arrangement n.布置；整理；准备；约定，商定；
 
 ## Feelings,Emotions,Attitudes & Sensations 感觉、情绪、态度及知觉
@@ -1521,6 +1647,7 @@ tags: English
 - fondness n.钟爱；溺爱；嗜好；癖好
 - hideous adj.丑的吓人的；丑恶的；可憎的
 - impression n.意念；印象；不太明确的感觉或想法
+- impressive adj.给人印象深刻的；了不起的；
 - instinct n.天性；本能；直觉
 - nasty adj.肮脏的；不道德的；恶毒的；令人不愉快的；严重的
 - perceive v.感知；察觉；理会
@@ -1534,6 +1661,7 @@ tags: English
 - endeavor n.努力；尽力；v.试图；尝试
 - identity n.身份；本体；相同；同一
 - implication n.含义；暗示；牵连
+- imply v.暗示
 - prohibit vt.防止；阻止
 - sustain vt.维持；持续；支撑；蒙受
 - undertake vt.承担；许诺；保证
@@ -1543,6 +1671,7 @@ tags: English
 - impact n.碰撞力；影响；行动
 - incentive n.鼓励；诱因
 - proceed vi.着手；继续进行
+- proceed to 朝...前进
 - proceeds n.收入，收益；
 - submit v.认输；使服从；提出
 - speculate v.沉思；思索；猜测；推测；投机
@@ -1571,3 +1700,10 @@ tags: English
 - ultimately adv.最后；最终
 - vague adj.含糊不清的；模糊不清的
 - pamper oneself 宠爱自己
+
+# 错题
+
+- The investment by Won Intrenational is the \_\_ largest foreign direct investment in the nation's financial industry.
+  - A quite, B much, C every, D single
+  - 空格位于定冠词 the 和最高级 largest 之间，需要填一个能修饰最高级形容词的副词。
+  - 排除法： quite 能修饰形容词/副词原级；much 修饰形容词/副词比较级；every 修饰可数名词单数；只有 single 合适(但字典没查到)。

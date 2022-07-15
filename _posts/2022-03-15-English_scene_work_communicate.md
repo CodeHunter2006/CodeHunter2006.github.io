@@ -11,6 +11,8 @@ tags: English
 
   - Please let me know if anything happend.
   - I'll keep you updated.
+  - I'll send the file through PM(Private Message) after meeting.
+  - I'll ping(message) you when there is any progress.
 
 - Small Acknowledge
 
