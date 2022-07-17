@@ -323,6 +323,7 @@ I suggest that we (should) hold a meeting next week.
   - in + 部门，in the accounting department
 
 - 固定短语
+
   - in one's opinion
   - in front of
   - in the future
@@ -344,6 +345,10 @@ I suggest that we (should) hold a meeting next week.
   - in seesion/out of session
   - in stock(有货)/out of stock
   - in print(销售中)/out of print
+
+- 特殊情况：
+  - I will be back **in** three days. 我三天(大概时间)**后**回来。
+  - I will be back **within** three days. 我三天**之内**回来。
 
 ## on
 
