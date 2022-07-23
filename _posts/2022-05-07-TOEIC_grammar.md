@@ -7,6 +7,33 @@ tags: English
 
 ![TOEIC](/assets/images/2022-04-23-TOEIC_vocabulary_1.jpg)
 
+# 分词
+
+## 现在分词和过去分词作形容词的差别
+
+- 现在分词表主动+发生原因，翻译为"令人..."
+- 过去分词表被动+结果状态，翻译为"感到...；受到..."
+
+- The question confused me.
+  - The question is confusing. 这个问题是令人困惑的。
+  - I am confused by the question. 我被这个问题弄糊涂了。
+- This toy interests me.
+  - This toy is interesting. 这个玩具非常有趣。
+  - I am interested in the toy. 我对这个玩具感兴趣。
+
+# 动名词
+
+- 一些 to (作为介词) 后接动名词的表达：
+  - be committed to doing 尽心尽力做某事
+  - be dedicated to doing 献身于...
+  - be decided to doing 决心做某事
+  - be devoted to doing 致力于做某事
+  - be opposed to doing 反对做某事
+  - be used to doing 习惯于做某事
+  - be accustomed to doing 习惯于做某事
+  - look forward to doing 期待做某事
+  - object to doing 反对做某事
+
 # 主谓一致
 
 - 单数名词+单数谓语、复数名词+复数谓语
@@ -582,6 +609,8 @@ that 和 which 有时可以替换
   - 等价于：The rabbit ate the carrot, the carrot was on the table.
   - 从句只相当于省略了前面相同的词"the carrot"，没有限定作用，**直接去掉对主句也无影响**
 
+- which 可做非限性或限性定语从句的引导词，也就是前面可以有","；that 只能做限定定语的引导词；
+
 - 非限定性定语从句可能指代整句话
   - The rabbit ate the carrot, which was not surprising.
 
@@ -729,7 +758,7 @@ It is obvious that the hungry rabbit had already eaten a carrot for dinner this 
 
   - If I saw a carrot, I would eat it.
 
-- **onece** 引导条件状语从句
+- **once** 引导条件状语从句
 
 ### 让步副词从句
 

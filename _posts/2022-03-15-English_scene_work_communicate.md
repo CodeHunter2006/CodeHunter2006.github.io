@@ -46,8 +46,17 @@ tags: English
   - He's working on it.
 
 - Ask for progress
+
   - any luck with ...?
   - not much progress from my end
   - that's all from my end
   - xxx at this moment
   - in recent days ...
+
+- Describe product state
+
+  - It's not working now
+  - The change is effective!
+
+- Ask question
+  - May I ask a silly question ?
