@@ -14,7 +14,6 @@ tags: English
 - utensil 器皿，器具；
 - for a while 暂时
 - scissors 剪刀
-- exchange 调换，更换；交换；
 - workshop 研习班，研讨会
 - auditorium 会堂，礼堂
 - in a minute 立刻，马上
@@ -259,6 +258,7 @@ tags: English
 - virtually adv.几乎；实际上；事实上；虚拟的；
 - disregard 不理会；不顾；漠视
 - complaint n.投诉；抱怨；
+- Complaint Department n.顾客服务室，客户咨询室；
 - comply with 遵守
 - be compliant with 顺从
 - compliant adj.顺从的，顺服的；
@@ -357,6 +357,7 @@ tags: English
 - medical checkup 体检
 - stain n.污点，污渍；
 - cramped adj.狭窄的；难懂的；
+- ramp n.斜面，斜坡，坡面；
 - forthcoming adj.即将发生的；即将来临的；
 - as a token of 作为...的标志
 - token n.代币；象征，标志；礼券，代金；(语言学)符号；(计算机)令牌；
@@ -447,6 +448,7 @@ tags: English
 - as of 在...时；从...起；自...开始；
 - amongst prep.在...中；被...环绕；
 - in recent times 在近代；
+- then and there 当时当地；当场；
 
 - have consequnences for 对...产生影响
 - hang from 从...悬挂；
@@ -600,6 +602,10 @@ tags: English
 - take note (对...)留意；注意(到...)；
 - interfere with 妨碍，阻碍；
 - keep an open mind in 对...保持开放的心态
+- do one's utmost 尽全力
+  - utmost adj.极度的；
+- pay tribute to 称赞；歌颂；向...致敬；
+  - tribute n.礼物；颂词；贡品；
 
 # 熟词僻义
 
@@ -667,6 +673,9 @@ tags: English
 - shoot v.开枪(或其它武器)；射杀，射伤；投球，射门；拍摄(电影照片等)；n.与 v 相应的名词
 - shooting n.(电影的)拍摄，摄制；射击；
 - hit v.(商品等)上市；击打；
+- sole adj.唯一的；n.鞋底；脚掌；
+- stand n.(运动场上的)观众台；v.站；
+- hire v.租用；雇佣；
 
 - come in 上市；进来
 - come to 总共，共计(数字)；来到(地点)
@@ -845,6 +854,7 @@ tags: English
 - go out of business 不再经营
 - dissolved 解散
 - in the short term 从短期来看，短期内
+- in recent times 在近代/当代；
 
 ## Finance & Investment 财务及投资
 
@@ -942,6 +952,7 @@ tags: English
 - surplus n.过剩的量；盈余；adj.过剩的；剩余的；
 - trademark (注册)商标
 - warehouse 仓库；货架；大卖场；
+- depot n.仓库；库房；
 - exchange rate 汇率
 - purchase 购买
 - make a purchase 购买；采购
@@ -985,6 +996,8 @@ tags: English
 - partnership n.伙伴关系；合作关系；
 - price range n.(期望的)价格范围，价格幅度；
 - meet xxx conditions 满足...条件
+- recess v.休会，休庭；n.休会，休庭；
+- narrate v.讲(故事)
 
 ## Technology & Equipment 科技及装备
 
@@ -1023,6 +1036,7 @@ tags: English
 - elaborate v.详尽说明；adj.详尽的；精心制作的；
 - inquire 询问；调查；
 - inquire about 询问；打听；
+- consult v.咨询；商量；商讨；商议；
 - jot down 略记；匆匆记下；
 - leaflet 传单；小册子；
 - promote 发扬；晋升；促进；
@@ -1082,6 +1096,7 @@ tags: English
 - itinerary 行程表；
 - lodge n.小屋；旅馆；vi.住宿；投宿；
 - peak season 旺季
+- season ticket 季票，月票；长期票；套票；
 - sightseeing n.观光；游览；
 - suite (旅馆的)套房
 - baggage claim 行李提领处
@@ -1138,6 +1153,7 @@ tags: English
 - department store 百货商店；百货公司；
 - population n.(某一国家或地区的)全体人民；人口；
 - tourism n.旅游业；
+- tourism industry 旅游业；
 - mainstay n.支柱；中坚；主要的桅杆；
 - parking attendant 泊车员；停车场服务员；
 - attendant n.服务人员；随从；伴行人员；adj.伴随的，随之产生的；伺候的；陪伴的；到场的；
@@ -1235,6 +1251,7 @@ tags: English
 - trendy 时髦的；流行的；
 - wholesale adj.批发的;adv.大量地；大批地；
 - bargain n.便宜货；廉价品；v.讨价还价；
+- at a bargain price 以低廉的价格；
 - cash register 收银机
 - cashier n.出纳(员)；收银员；
 - drugstore 兼卖杂货的药房
@@ -1242,7 +1259,6 @@ tags: English
 - patron n.(老)顾客；赞助人；
 - patronage n.(对餐馆、酒店或其他生意的)惠顾，光顾；资助，赞助；
 - refund n.退款；v.退换；赔偿；
-- nonrefundable adj.不可退还的；
 - nonrefundable adj.不可归还的；不可退还的；
 - rebate n.折扣；v.扣除；退还(部分付款)
 - subtract vt. 减去
@@ -1302,6 +1318,9 @@ tags: English
 - expenditure n.花费；开销；支出；
 - demand for sth. 对...需求
 - slow demand 放缓的需求；
+- prize draw 抽奖；
+- exchange 调换，更换；交换；
+- exchange-only policy 只可更换政策；
 
 ## Dining Out & Food 在外用餐和食物
 
@@ -1338,7 +1357,7 @@ tags: English
 - recipe 食谱；烹饪法；秘诀
 - seasoning 调味品；佐料；
 - snack n.小吃；点心；vi.吃点心
-- spice 香料；调味品；
+- spice[spaɪs] n.香料；调味品；
 - nutritional information 营养信息
 - wheat flour 小麦粉
 - canola oil 菜籽油
@@ -1352,6 +1371,10 @@ tags: English
 - buttery 含黄油的；涂黄油的
 - foyer n.门厅；大厅；休息室；
 - ice tea n.冰茶；
+- diner n.(餐馆里的)进餐者；
+- dinner n.正餐，晚饭；晚会，宴会；
+- hearty adj.丰盛的；
+- dietary adj.饮食的，有关饮食的；
 
 ## Social Contact 社交
 
@@ -1439,7 +1462,9 @@ tags: English
 - live music n.现场音乐，实况音乐；
 - live adj.现场演出的；现场直播的；活的，有生命的；n.生存，活着；生活；居住；
 - cater v.提供餐饮服务，承办酒席；满足，迎合；
+- caterer n.餐饮供应者；酒席承办者；
 - piece n.(报纸、杂志上的)文章；作品；艺术品；
+- standup routine 单人表演；
 
 ## Sports & Recreational Activities 运动及休闲活动
 
@@ -1508,6 +1533,8 @@ tags: English
 - surge v.激增；急剧上升；突飞猛进；n.激增；
 - kidney stone 肾结石；
 - clinical adj.临床的；
+- obese adj.肥胖的；臃肿的；
+- overweight adj.太胖的；超重的；
 
 ## Housing 住房
 
@@ -1592,6 +1619,7 @@ tags: English
 - shutter n.(照相机的)快门；百叶窗；
 - duplex n.复式建筑；跃层公寓；占两层楼的公寓套房(duplex house)；
 - acre 英亩；
+- blender n.(食物)搅拌器；
 
 ## Product Research and Development 产品调研与开发
 
@@ -1620,7 +1648,8 @@ tags: English
 
 - abnormal 不正常的；不规则的
 - ageing 成熟；老化
-- defect 缺陷；不足
+- defect n.缺陷；不足
+- faulty adj.有问题的，有毛病的，出故障的；错误的；
 - nonconforming 不一致的；不合格的
 - quality gate 质量门；质量阀(即在达到下一道工序前，本工序的产品必须严格达到特定的品质标准)
 - yardstick 标准；准绳；码尺
@@ -1753,6 +1782,7 @@ tags: English
 - cafeteria 自助餐厅
 - maternity 产科的；孕妇的
 - days off 休息日；休假日
+- beneficiary n.受益人；受惠者；
 
 ## Rules & Regulations 公司规章制度
 
@@ -1913,6 +1943,9 @@ tags: English
 - Garden of Eden 伊甸园；
 - commercial space n.商业空间，办公空间，商业用房；
 - catwalk n.时装表演太；T 型台；
+- dominate v.统治；在...占首要地位；
+- ethos n.气质，精神特质；风气；
+- tune n.曲子，曲调；v.调音；
 
 ## Other Important Adjectives & Adverbs 其他重要形容词及副词
 
@@ -1957,6 +1990,12 @@ tags: English
 - extraneousely adv.外来地；无关地；
 - astronomical adj.及其巨大的，天文数字的；天文学的；天体的；
 - drastically adv.大大地；彻底地；激烈地；
+- staggering adj.令人大吃一惊的；令人震惊的；
+- conscious adj.注意到的；意识到的；有意识的；
+- swift adj.快的，迅速的；
+- striking adj.引人注目的；异乎寻常的；显著的；
+- pristine adj.一尘不染的；崭新的；
+- momentous adj.重大的；
 
 # 错题
 
