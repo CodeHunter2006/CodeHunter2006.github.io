@@ -178,3 +178,20 @@ func main() {
 
 - `range`是 Go 的语法糖，可以理解为一个只触发一次的函数，调用时就确定了 len
 - sli、map 是相同逻辑
+
+# 6
+
+- 下面代码会输出吗？
+
+```Go
+func main() {
+  runtime.GOMAXPROCS(1)
+  go func() {
+    fmt.Println("sub goroutine")
+  }()
+
+  for {}
+}
+```
+
+- 在 1.14 版(包括)之后，可以成功打印"sub goroutine"；在 1.14 版之前会锁死；

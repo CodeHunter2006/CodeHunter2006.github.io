@@ -136,8 +136,16 @@ M 是真正的执行线程，P 在执行时会唤醒一个 M，然后拿所属�
 
 ## 调度协调
 
-Go 1.14 增加了一种异步调度机制，避免 G 中有 for 循环导致卡死的问题：
+Go 1.14 增加了一种异步调度机制，避免 G 中有 for 循环(其中无可调度机会)导致卡死的问题：
 为了防止一个 G 始终占用 CPU，每过 10ms `sysmon` 会调度一次，判断 P 中记录的当前执行 G 的执行时间，如果超过 10ms 则向该线程发送一个特定 SIG，之后就会触发调度。
+
+- 具体流程：
+  1. M 注册一个 SIGURG 信号的处理函数：sighandler。
+  2. sysmon 线程检测到执行时间过长的 goroutine、GC stw 时，会向相应的 M（或者说线程，每个线程对应一个 M）发送 SIGURG 信号。
+  3. 收到信号后，内核执行 sighandler 函数，通过 pushCall 插入 asyncPreempt 函数调用。
+  4. 回到当前 goroutine 执行 asyncPreempt 函数，通过 mcall 切到 g0 栈执行 gopreempt_m。
+  5. 将当前 goroutine 插入到全局可运行队列，M 则继续寻找其他 goroutine 来运行。
+  6. 被抢占的 goroutine 再次调度过来执行时，会继续原来的执行流。
 
 # 一些设计点
 

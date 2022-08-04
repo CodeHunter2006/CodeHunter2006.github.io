@@ -86,6 +86,7 @@ tags: Docker K8S HighConcurrency
 
 - `-w` 显示了当前内容后继续`watch`变化。如果在命令中指定了 name，则新增资源不会被 watch 到。
 - `--show-labels` 显示标签
+- `-A` 显示所有 namespace 下的资源，在不知道具体 namespace 情况下可以使用，列表中有 namespace 列
 
 `kubectl get ns`
 获取 namespace 列表
