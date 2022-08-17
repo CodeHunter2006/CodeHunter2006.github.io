@@ -10,8 +10,20 @@ tags: English
 
 - 键盘字符
 
+  - '`' grave, backtick 反引号
   - `~` tilde[ˈtɪldə]，波浪线
-  - `-` dash，破折号，连接号
+  - `!` exclamation, bang, 叹号
+  - `@` at
+  - `#` pound, hash
+  - `$` dollar
+  - `%` percent
+  - `^` carat(克拉), hat, exponent(指数)
+  - `&` and, ampersand
+  - `*` asterisk(星号)
+  - `(` open parenthesis, left parenthesis
+  - `)` close parenthesis, right parenthesis
+  - `( )` parentheses, round brackets(括号)
+  - `-` dash(破折号)，hyphen(连字符), minus(减号)
   - `_` underline, 下划线
 
 - `[1, 100)`

@@ -120,9 +120,27 @@ docker load ...
 `docker commit container_name image_name`
 将 container 导出为镜像
 
+- `docker tag img_name`
+  为镜像设定 name
+
 `docker exec [OPTIONS] CONTAINER COMMAND [ARG...]`
 在运行的容器中执行命令
 
 - `-d` 分离模式，在后台运行
 - `-i` 即使没有附加也保持 STDIN 打开
 - `-t` 分配一个伪终端
+
+- `docker build -f dockerFile -t imageName .`
+  通过指定的`dockerFile` buid 出指定镜像文件到`.`
+
+- `docker search imageName`
+  搜索 docker hub 中是否有镜像
+
+- `docker login`
+  登录到一个镜像库，如果不指定镜像库，则默认登录官方镜像库(docker-hub)
+
+  - `-u userName`
+  - `-p password`
+
+- `docker logout`
+  登出镜像库，如果不指定，则默认登出 docker-hub。

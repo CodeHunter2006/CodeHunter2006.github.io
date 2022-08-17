@@ -19,6 +19,7 @@ tags: English
   - cool
   - ye
   - yep
+  - yup yup
   - sure
   - that make sense
 

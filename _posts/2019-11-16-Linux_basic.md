@@ -16,6 +16,15 @@ tags: Linux
 
 unix/linux 系统的基本思想是：**一切皆文件**。即各种文件、设备都可以像文件一样进行操作，以流的方式读入、输出、跳转。
 
+## inode(index node) 和 fd(file descriptor) 的关系
+
+inode 是文件的索引，记录文件的位置、属性、大小等，大概磁盘百分之一会用来保存 inode，并且 inode 数量是有限的(虽然一般情况下不会超限)。
+
+linux 是多用户系统，所以一个文件可能被多个用户打开，这时就需要为每一个打开记录 offset，这就需要用 fd 资源记录。
+
+- 一个 inode 可以对应于多个 fd。
+- 可以用`ulimit -n`查看用户可占用的最大 fd 数量，这个数量默认为 256，是可以修改的。超过会报错："too many open files"
+
 ## hard link(硬连接), symbolic link(符号连接/软连接), alias(mac)
 
 每个 linux 文件实体都会绑定一个唯一的 Inode Index(节点索引)，并且会默认分配一个 hard link，这个 hard link 就是我们通常看到的一个"文件"，结构如下：

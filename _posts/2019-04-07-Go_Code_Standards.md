@@ -91,6 +91,12 @@ package regexp
 func Compile(str string) (regexp *Regexp, err error) {
 ```
 
+# 行内长度
+
+这要根据最新的通用屏幕尺寸决定，目前不要超过 120 个字符
+
+- 如果是 interface 的声明，则不要折行，一般不需要看太多次
+
 # 命名
 
 使用短命名，长名字并不会自动使得事物更易读，文档注释会比格外长的名字更有用。
@@ -135,6 +141,8 @@ func Compile(str string) (regexp *Regexp, err error) {
 - 包名应该为小写单词，不要使用下划线或者混合大小写。
 - 不用复数。例如 net/url，而不是 nets/urls
 - package 名与目录名一致
+- 如果要创建多级关系，不要在 package 名加`_`，而应直接嵌套多层 package，方便未来扩展。
+  如`decode_utf8`应改为`decode/utf8`
 
 ## 接口名
 
@@ -207,6 +215,18 @@ mixedCaps 小写开头，不可导出
 一般面向对象语言都有自动生成 Getter/Setter 的功能，Go 没有这个功能，由使用者自己实现即可。
 Go 的 Getter 不需要在前面加`Get`前缀，直接以大写开头的字段名 Method 就可以做 Getter。Setter 可以和其他语言一样，以`Set`作为前缀。
 
+## enum
+
+有时会利用 type+const 定义 enum 类型，这时 enum 类型名称前要有完整前缀，这样便于使用，如：
+
+```Go
+type StatusType string
+const (
+    StatusTypeUp = "up"
+    StatusTypeDown = "down"
+)
+```
+
 # 控制结构
 
 ## if
@@ -241,6 +261,32 @@ if b {
 
 - if 嵌套不要超过 4 层(包括第一层)，否则造成可维护性问题
 
+- 尽量减少 if 嵌套深度，利于读代码和写 UT
+
+```Go
+// 错误示例:
+if a == 0 {
+    if b == 0 {
+        // do sth.
+    } else {
+        return
+    }
+} else {
+    return
+}
+
+// 正确示例:
+if a != 0 {
+    return
+}
+
+if b != 0 {
+    return
+}
+
+// do sth.
+```
+
 ## switch
 
 - 如果 case 较多，可以考虑用 map 的常量路由方式，提高代码可维护性
@@ -257,6 +303,11 @@ for i := 0; i < 10; i++ {
 ```
 
 - 函数中循环嵌套不要超过 3 层(包括第一层)，即使不考虑性能，会造成可维护性问题
+
+## return/break/continue
+
+- 为了凸显出逻辑的跳转，应该在 return/break/continue 前加一个空行
+- 如果在 if 中直接 continue/break/return 则无需空行
 
 ## range
 
@@ -375,19 +426,22 @@ if err != nil {
 package main
 
 import (
+    // Go 自带 package
     "fmt"
     "hash/adler32"
     "os"
 
-    "appengine/user"
-    "appengine/foo"
-
+    // 第三方 package
     "code.google.com/p/x/y"
     "github.com/foo/bar"
+
+    // 自己工程内 package
+    "appengine/user"
+    "appengine/foo"
 )
 ```
 
-`goimports`实现了自动格式化
+`goimports`实现了自动格式化，对于手动加的空行会自动保留
 
 # 缩写
 
@@ -417,7 +471,7 @@ urlPony 或者 URLPony
 
 - 名称
 
-统一采用单字母'p'而不是 this，me 或者 self
+统一采用单字母'p/c'而不是 this，me 或者 self
 
 ```
 type T struct{}

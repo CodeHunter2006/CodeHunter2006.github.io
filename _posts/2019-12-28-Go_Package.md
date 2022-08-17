@@ -293,6 +293,9 @@ var reRet []string = regexp.MustCompile(`pattern`).FindStringSubmatch(`string`)
 `var numCPU = runtime.GOMAXPROCS(0)`
 返回用户指定的最大 P 数量。如果没有设置，默认值为 CPU 核数
 
+`runtime.Caller(skip int) (pc uintptr, file string, line int, ok bool)`
+返回调用栈帧信息，`skip >= 0`。如果是 0，表示打印调用`Caller`的这行代码信息。
+
 ### runtime/trace
 
 to generate traces for the Go execution tracer

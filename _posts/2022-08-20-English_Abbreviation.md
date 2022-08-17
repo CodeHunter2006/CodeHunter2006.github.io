@@ -18,6 +18,9 @@ tags: English
 - `wdyt` what do you think?
 - `Np` no problem
 - `YOLO` You Only Live Once
+- `cf` confirm
+- `hv` have
+- `tgt` together
 
 # work
 

@@ -18,7 +18,7 @@ tags: Server
 记录日志时，确保服务器主机的日志输出是落到本地磁盘，而不是网络模拟磁盘。如果是网络模拟磁盘，可能造成输出日志抢占业务带宽的情况。
 
 - 不同日志等级：
-  - info 对 log 划分等级，info 级别只输出最关键的信息，够后面追查就可以，默认只开启 info 级别日志。请求入口、出口处的日志级别为 info。其他级别还有 error、warn、debug。注意 fatal、panic 级别的 log 不能乱用，会导致程序退出，通常只在程序初始化时做及时退出的使用。error 日志输出时，通常伴有 error 对象值的输出。这时 error 对象中不应重复包含 tranceId，并且最好包含调用栈信息。(具体参照《Go error 最佳实践》)
+  - info 对 log 划分等级，info 级别只输出最关键的信息，够后面追查就可以，默认只开启 info 级别日志。请求入口、出口处的日志级别为 info。其他级别还有 error、warn、debug。注意 fatal、panic 级别的 log 不能乱用，会导致程序退出，通常只在程序初始化时做及时退出的使用。error 日志输出时，通常伴有 error 对象值的输出。这时 error 对象中不应重复包含 tranceId，并且最好包含调用栈信息。(具体参照[《Go error 最佳实践》](/2020/08/18/2020-03-22-Go_error_best_practice.md))
 
 输出 log 时，最好以结构化、Key-Value 形式输出 log，这样便于利用 ELK 收集、查询日志。
 
