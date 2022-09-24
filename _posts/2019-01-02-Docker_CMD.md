@@ -144,3 +144,7 @@ docker load ...
 
 - `docker logout`
   登出镜像库，如果不指定，则默认登出 docker-hub。
+
+- `doccker system`
+  查看各种系统信息
+  - `df` 磁盘占用情况

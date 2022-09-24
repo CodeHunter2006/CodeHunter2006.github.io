@@ -47,6 +47,8 @@ users: # user 信息
 - `kubectl config set-context context1 --namespace=development --cluster=cluster1 --user=user1`
   创建 context 可选参数为`namespace` `cluster` `user`
 
+  - 设置了`namespace`后可以修改默认的`namespace`，自己还是可以加上指定的`namespace`的
+
 - `kubectl config get-contexts`
   显示 context 列表
 

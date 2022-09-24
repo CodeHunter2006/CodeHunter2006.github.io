@@ -10,7 +10,7 @@ tags: English
 - Sync Up
 
   - Please let me know if anything happend.
-  - I'll keep you updated.
+  - I'll keep you updated/posted.
   - I'll send the file through PM(Private Message) after meeting.
   - I'll ping(message) you when there is any progress.
 
@@ -60,4 +60,9 @@ tags: English
   - The change is effective!
 
 - Ask question
+
   - May I ask a silly question ?
+
+- program
+  - understand the code
+  - safeguarding code

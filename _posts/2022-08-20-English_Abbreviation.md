@@ -28,5 +28,6 @@ tags: English
 - `WIP` work in progress
 - `TBA` to be assured
 - `PM` private message
+- `thx` thanks
 
 # tech

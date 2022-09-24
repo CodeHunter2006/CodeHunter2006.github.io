@@ -95,6 +95,7 @@ func Compile(str string) (regexp *Regexp, err error) {
 
 这要根据最新的通用屏幕尺寸决定，目前不要超过 120 个字符
 
+- 对于宽屏来说显示 200 字符也绰绰有余，之所以设置成 120 字符是为了 compare 页面能正常显示
 - 如果是 interface 的声明，则不要折行，一般不需要看太多次
 
 # 命名

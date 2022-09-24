@@ -360,11 +360,15 @@ ulimit -n <newValue>
 内存总容量查询
 free
 
-运行某个".sh"文件
+## 运行某个".sh"文件
+
+```bash
 bash file.sh
 sh file.sh
-sh -x file.sh // 在执行命令时显示执行细节
+sh -x file.sh # 在执行命令时显示执行细节
 ./file.sh
+VERSION=123 ./file.sh # 在执行命令时，可以设置环境变量
+```
 
 ## df
 
@@ -382,6 +386,13 @@ disk use 查看磁盘使用情况
 
 `du -s /usr/* |sort -nr`
 查看指定文件夹下各文件和文件夹容量高，并按从大到小排列，单位(KB)
+
+## sort
+
+对多行内容排序
+
+- `-u`
+  去重
 
 ## top
 
