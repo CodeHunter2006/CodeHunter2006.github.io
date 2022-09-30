@@ -64,5 +64,10 @@ tags: English
   - May I ask a silly question ?
 
 - program
+
   - understand the code
   - safeguarding code
+
+- Describe
+  - Let’s say ...
+  - Take ... as an example

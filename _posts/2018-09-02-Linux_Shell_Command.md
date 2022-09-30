@@ -537,7 +537,12 @@ iptables -nv -L
 向进程发送信号。在不设定信号序号时默认发送`SIGTERM`。
 
 `kill -l`
-显示可发送信号列表。
+显示可发送信号列表。共有 64 种信号可供使用。
+
+- 常用信号：
+  - `-KILL/-9` SIGKILL，强制杀死进程
+  - `-HUP/-1` SIGHUP，重新加载进程
+  - `-TERM/-15` SIGTERM，正常停止进程
 
 ## pkill
 

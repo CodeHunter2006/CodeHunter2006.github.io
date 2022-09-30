@@ -44,6 +44,14 @@ type options struct {
   caching bool
 }
 
+func (p *options) apply(opts []Option) *options {
+	for _, opt := range opts {
+		opt.apply(p)
+	}
+
+  return p
+}
+
 // Option overrides behavior of Connect.
 type Option interface {
   apply(*options)
@@ -72,14 +80,10 @@ func Connect(
   addr string,
   opts ...Option,
 ) (*Connection, error) {
-  options := options{
+  options := (&options{
     timeout: defaultTimeout,
     caching: defaultCaching,
-  }
-
-  for _, o := range opts {
-    o.apply(&options)
-  }
+  }).apply(opts)
 
   // ...
 }

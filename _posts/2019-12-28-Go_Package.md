@@ -415,6 +415,9 @@ sort.Sort(sort.Reverse(sort.IntSlice(s)))
 `strings.Builder`
 用于字符串拼接`builder.WriteString("test")`，在大量字符串拼接时性能远高于`+`，只在最后`builder.String()`时申请一次内存。
 
+`func NewReader(s string) *Reader`
+将 string 转为 io.Reader
+
 ## time
 
 提供时间日期相关操作
