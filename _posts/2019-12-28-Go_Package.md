@@ -164,6 +164,15 @@ func testErrorGroup() {
 `ioutil.ReadDir`
 读出文件夹中的子文件列表，列表按照名称排序，其中有可能包含文件夹元素
 
+`ioutil.Discard`
+用于抛弃读出的数据
+
+```Go
+// 有时收到 http response 后不关心 body 内容，可以直接丢弃
+defer res.Body.Close()
+_, _ = io.Copy(ioutil.Discard, res.Body)
+```
+
 ## bufio
 
 可以对 IO 进行方便的遍历

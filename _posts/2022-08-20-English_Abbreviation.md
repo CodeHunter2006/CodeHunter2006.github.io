@@ -29,5 +29,6 @@ tags: English
 - `TBA` to be assured
 - `PM` private message
 - `thx` thanks
+- `reg` regarding
 
 # tech

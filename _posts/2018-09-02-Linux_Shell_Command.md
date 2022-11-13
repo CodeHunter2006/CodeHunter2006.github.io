@@ -517,6 +517,14 @@ poweroff 关机
 clock --show 查看硬件时间
 clock --hctosys 将硬件时间应用到系统时间
 
+## timedatectl
+
+查看设置时区
+
+- `timedatectl | grep "Time zone"` 查看时区
+- `timedatectl list-timezones` 查看所有可用时区
+- `timedatectl set-timezone UTC` 设置时区为 UTC
+
 ## cp
 
 `cp -Rf /home/user1/* /root/temp/`
@@ -560,8 +568,10 @@ iptables -nv -L
 
 ### set
 
-`set -e`
-一旦脚本中发生返回值非 0 的情况，立刻停止脚本执行
+- `-e`
+  一旦脚本中发生返回值非 0 的情况，立刻停止脚本执行
+- `-x`
+  执行命令时，会先显示指令及其参数
 
 `export VALUE_NAME="value"`
 设置环境变量
@@ -777,6 +787,9 @@ sed -i "" "s/要查找的文本/替换后的文本/g" `grep -rl --include='*.go'
 
 - `--proxy socks5://localhost:9050`
   通过代理访问
+- `--output fileName` 输出 body 到指定文件
+- `--output -` 输出 body 到 console
+- `-D -` 输出 header 到 console
 
 ## ssh
 
