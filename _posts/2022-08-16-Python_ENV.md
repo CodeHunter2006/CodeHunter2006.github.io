@@ -113,3 +113,5 @@ virtualenv 和 `pyenv-virtualenv`插件功能相同
 - `virtualenv -p /usr/bin/python2.7 venv` 创建时指定 python 版本
 - `source venv/bin/activate` 激活虚拟环境
 - `deactivate` 关闭虚拟环境
+
+- 删除虚拟环境时，在虚拟环境关闭状态下直接删除创建的文件夹即可

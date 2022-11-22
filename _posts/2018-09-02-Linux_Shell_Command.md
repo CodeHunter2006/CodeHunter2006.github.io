@@ -706,6 +706,9 @@ xxx,id:456,xxx
 
 `some command |xargs command`
 
+- `docker images|grep "xxx.xxx.xxx"|awk -F " " '{print $3}'|xargs docker rmi`
+  删除指定 repo 下的所有 docker 镜像
+
 ## wc
 
 word, line, character, and byte count

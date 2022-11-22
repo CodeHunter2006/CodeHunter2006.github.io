@@ -446,6 +446,9 @@ t := time.Parse(timeLayout, str)
 
 - 由于对象内部构造细节，无法直接比较，time 的比较要用专用函数`after/before`，相等也要用`func (t Time) Equal(u Time) bool`
 
+- `func (t Time) Equal(u Time) bool`
+  比较两个 Time 对象是否相等，会考虑到时区问题。注意用`t1 == t2`的方式比较可能存在问题。
+
 ### ticker
 
 - 使用 ticker 时，可能由于 ticker 设置时间较长同时没有及时关闭而导致的 ticker 泄漏，可以用`defer ticker.Stop()`解决。
