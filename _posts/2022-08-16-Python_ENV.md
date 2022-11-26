@@ -39,6 +39,12 @@ pip 用于各种包的安装，随 python 版本变更，可执行程序名称�
 - `pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple`
   设置 pip 的源
 
+- `pip freeze > requirements.txt`
+  将当前项目的依赖导出
+
+- `pip install -r requirements.txt`
+  安装项目依赖
+
 - 常用 pip 源：
   - douban
     `python3 -m pip install xxx -i http://pypi.douban.com/simple/ --trusted-host pypi.douban.com`
