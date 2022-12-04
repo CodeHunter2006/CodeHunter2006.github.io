@@ -14,5 +14,9 @@ tags: English
     - all the best for your exam.
 
 - time
+
   - `for the time being, ...`
     - 当前，相当于`at present`
+
+- thank you
+  - not at all 不客气
