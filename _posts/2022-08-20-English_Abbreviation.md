@@ -21,6 +21,7 @@ tags: English
 - `cf` confirm
 - `hv` have
 - `tgt` together
+- `omg` Oh my god.
 
 # work
 
