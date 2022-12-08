@@ -194,3 +194,90 @@ function_with_arguments(c=1, a=2, b=3)
 # The keyword arguments are {'c':1, 'a':2, 'b'=3}
 # 2 3 1
 ```
+
+## 带有参数的装饰器
+
+有时需要给装饰器增加参数，实现方案同样基于"闭包"。装饰器本质上就是一个函数，这个函数执行时会返回一个可执行的函数。
+为了添加装饰器参数，我们只需要在外层再套一层函数添加参数，这层的参数将被作为闭包变量使用。
+
+```Python
+def decorator_maker_with_arguments(decorator_arg1, decorator_arg2, decorator_arg3):
+    def decorator(func):
+        def wrapper(function_arg1, function_arg2, function_arg3) :
+            "This is the wrapper function"
+            print("The wrapper can access all the variables\n"
+                  "\t- from the decorator maker: {0} {1} {2}\n"
+                  "\t- from the function call: {3} {4} {5}\n"
+                  "and pass them to the decorated function"
+                  .format(decorator_arg1, decorator_arg2,decorator_arg3,
+                          function_arg1, function_arg2,function_arg3))
+            return func(function_arg1, function_arg2,function_arg3)
+
+        return wrapper
+
+    return decorator
+
+pandas = "Pandas"
+@decorator_maker_with_arguments(pandas, "Numpy","Scikit-learn")
+def decorated_function_with_arguments(function_arg1, function_arg2,function_arg3):
+    print("This is the decorated function and it only knows about its arguments: {0}"
+           " {1}" " {2}".format(function_arg1, function_arg2,function_arg3))
+
+decorated_function_with_arguments(pandas, "Science", "Tools")
+# The wrapper can access all the variables
+#     - from the decorator maker: Pandas Numpy Scikit-learn
+#     - from the function call: Pandas Science Tools
+# and pass them to the decorated function
+# This is the decorated function, and it only knows about its arguments: Pandas Science Tools
+```
+
+## 调试装饰器
+
+你应该已经注意到了，装饰器会把原函数封装起来。这导致原函数的名称、文档字符串和参数列表被封装在闭包中。例如当你想获取`decorated_function_with_arguments`的**元数据**时，我们只能看到 warapper 的闭包元数据。这将导致难以调试。
+
+```Python
+decorated_function_with_arguments.__name__
+# 'wrapper'
+decorated_function_with_arguments.__doc__
+# 'This is the wrapper function'
+```
+
+为了解决这个问题，Python 提供了一个`functools.wraps`装饰器。这个装饰器可以将原函数的元数据拷贝到闭包中。示例如下：
+
+```Python
+import functools
+
+def uppercase_decorator(func):
+    @functools.wraps(func)
+    def wrapper():
+        return func().upper()
+    return wrapper
+
+@uppercase_decorator
+def say_hi():
+    "This will say hi"
+    return 'hello there'
+
+say_hi()
+# 'HELLO THERE'
+
+say_hi.__name__
+# 'say_hi'
+say_hi.__doc__
+# 'This will say hi'
+```
+
+建议你尽量在所有定义装饰器的地方使用`functools.wraps`，这将节省你大量的令人头疼的调试时间。
+
+## Python 装饰器总结
+
+装饰器可以动态的改变原函数/方法/类而不必使用继承或修改原函数。使用装饰器可以确保你的代码**DRY**(Don't Repeat Yourself)。
+
+装饰器的常用场景：
+
+- 在 Python 框架中进行授权处理
+- 打 log
+- 度量函数执行时间
+- 同步处理
+
+想要了解更多装饰器知识，可以查看 Python 官方文档[Decorator Library](https://wiki.python.org/moin/PythonDecoratorLibrary)
