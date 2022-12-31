@@ -121,3 +121,15 @@ virtualenv 和 `pyenv-virtualenv`插件功能相同
 - `deactivate` 关闭虚拟环境
 
 - 删除虚拟环境时，在虚拟环境关闭状态下直接删除创建的文件夹即可
+
+## 结合 vscode 使用
+
+使用 vscode 时，要设置合适的 python 路径才能正确解析代码。可以利用项目中的`.vscode/settings.json`，添加下面配置：
+
+```json
+{
+  "python.defaultInterpreterPath": ".../venv/bin/python",
+  "python.analysis.extraPaths": [".../venv/lib/python2.7/site-packages"],
+  "python.autoComplete.extraPaths": [".../venv/lib/python2.7/site-packages"]
+}
+```

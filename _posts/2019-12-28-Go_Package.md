@@ -210,6 +210,9 @@ log 相关
 `os.Getenv("HOME")`
 获取环境变量，返回字符串
 
+`func Getwd() (dir string, err error)`
+获取当前当前目录的绝对路径
+
 ### os.signal
 
 可以设置监听哪些系统信号

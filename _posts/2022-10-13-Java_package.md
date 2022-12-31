@@ -18,3 +18,8 @@ tags: Java
 
 - `public static void checkArgument(boolean expression, @Nullable Object errorMessage)`
   检查 expression 是否为 true，如果为 false，则将 errorMessage 作为异常抛出。
+
+## `java.lang`
+
+- `String System.setProperty(String key, String value)`
+  设置一个全局系统变量，如果有旧值则作为返回值。设置后可以在其他地方用`System.getProperty`获取

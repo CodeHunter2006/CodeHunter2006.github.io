@@ -160,3 +160,4 @@ func main() {
 - 私有包如果不想发布到网上，需要手动添加 require ，然后 replace 进行替换，将私有包指向本地 module 所在的绝对或相对路径。一般用相对路径更通用。
 - 使用 replace 时要非常小心，如果有 A B 两个模块分别依赖 C 的两个版本，而 replace 只重定向了其中一个版本，可能会导致版本问题而编译不过。
 - 如果在本项目中需要同时使用同一个包的不同版本，可以用 replace 创建出两个不同的路径，例如其中一个是 `replace pkg.org1 pkg.org@xxx`，这样就能在工程中使用 `pkg.org1` 了
+- 新的 module name 允许直接将版本号写在其中，如`gopkg.in/yaml.v2`，使用时可以直接用`yaml.UnMarshal()`
