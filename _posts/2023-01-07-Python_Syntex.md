@@ -7,6 +7,10 @@ tags: Python
 
 记录 Python 特殊语法点
 
+## 变量
+
+- 用`_`开头的变量可以避免被导出
+
 ## module(模块)
 
 module 是 python 代码重用的的基本单元，一个 module 就是一个`xx.py`文件，这里的`xx`就是模块名。
