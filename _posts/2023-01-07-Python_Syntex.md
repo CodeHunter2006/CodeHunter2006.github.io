@@ -27,6 +27,20 @@ module 要用包来组织，包对应于文件夹，文件夹名就是包名。�
 - 在文件夹中放入`__init__.py`表示这个文件夹是一个包，里面的代码会在包第一次被加载时执行
 - 在`__init__.py`可以设置变量`__all__ = ["echo", "surround", "reverse"]`如果用`from xxx import *`的导入方式，则会只导入`__all__`指定的元素
 
+## 在文件中区分导入和脚本执行
+
+在`import xxx`和`python xxx.py`时都会执行脚本中的代码，但有些代码只想在被作为脚本时执行，比如`main()`函数，可以用下面方式区分：
+
+```python
+# def 语句总会被执行
+def main():
+	pass
+
+if __name__ == '__main__':
+	# 这里的 main() 只有非 import 执行时才会调用
+	main()
+```
+
 ## bytes 与 str
 
 str 是字符串，通常用`""`或`''`构造，底层编码为 Unicode 字符(0-65535)

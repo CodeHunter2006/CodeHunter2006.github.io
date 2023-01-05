@@ -143,8 +143,10 @@ say_hi()
 # ['HELLO', 'THERE']
 ```
 
-你可能注意到了，上面两个装饰器的执行流程只能是**从下到上**的，即先转换为大写再分割为数组。
-为了方便记忆，你可以按照**先执行内部(原始函数、第一层装饰器)，再执行外部(更外层装饰器)**的顺序理解。
+你可能注意到了，上面两个装饰器的执是需要有顺序的，执行的顺序和`wrapper`中`function()`的调用位置相关。
+上面的顺序为`split_string 调用 function()前`、`uppercase_decorator 调用 function()前`、`function()调用`、`uppercase_decorator 调用 function()后`、`split_string 调用 function()后`
+可以看出就像一个**剥洋葱**的过程，这种模式也叫**责任链模式(Chain of Responsibility Pattern)**。
+
 同一个装饰器也可以被装饰在一个被装饰函数上多次，每一次装饰都是独立的。这也是符合**装饰器模式**的。
 
 ## 在装饰器中截取被装饰函数的参数
