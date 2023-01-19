@@ -28,8 +28,10 @@ tags: English
 - `FYI` for your information
 - `WIP` work in progress
 - `TBA` to be assured
+- `TBD` to be done
 - `PM` private message
 - `thx` thanks
 - `reg` regarding
+- `ISTM` it seems to me，我认为
 
 # tech
