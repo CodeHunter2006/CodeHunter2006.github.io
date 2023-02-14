@@ -85,7 +85,10 @@ export HISTFILESIZE=1000     # 设置文件中的history命令的个数
 查看当前使用的用户名
 
 `uname -a`
-查看操作系统信息
+查看所有操作系统信息
+
+`uname -m`
+显示架构信息
 
 `cat /etc/issue`
 查看 CentOS 系统版本
@@ -218,6 +221,9 @@ concatenate 将文本连接并输出到标准输出
 `cat xxx1 xx2`
 查看文件文本内容，多个文件则顺序输出
 
+`cat > file1`
+将后面的用户输入写入文件中，以`ctl+c`结束
+
 ## dig
 
 查询域名相关信息
@@ -277,6 +283,8 @@ no hang up(不挂起)，将当前命令的输出改为当前目录的 nohup.out 
 `nohup Command [ Arg … ] [ & ]`
 在后台执行某个命令，重定向输出到 nohup.out
 
+- `&`通常要用这个参数使进程后台运行
+
 ## ifconfig
 
 查看 IP 信息
@@ -307,6 +315,13 @@ link 创建一个文件或文件夹的链接，这样可以在修改一处时影
 
 `sleep 1h`
 休眠 1 小时
+
+## command
+
+执行一个命令或显示相关信息
+
+- `command -v zsh`
+  判断当前命令安装位置(是否已安装)
 
 ## ps
 
@@ -481,11 +496,15 @@ top 命令显示的字段详解：
 
 ## 把执行结果重定向到文件
 
-cmd > file // 覆盖原有文件
-cmd >> file // 追加到原文件后面
-cmd 1> file // 只重定向 stdout
-cmd 2> file // 只重定向 stderr
-cmd &> /dev/null // 抛弃所有的 log
+`cmd > file` // 覆盖原有文件
+`cmd >> file` // 追加到原文件后面
+`cmd 1> file` // 只重定向 stdout
+`cmd 2> file` // 只重定向 stderr
+`cmd 1,2> file` // 同时重定向 stdout 和 stderr
+`cmd &> /dev/null` // 抛弃所有的 log
+`cmd < file` // 将后面文件作为前面命令的输入
+`cmd << endChar` // 将终端输入作为前面命令的输入，直到终端输入指定的结束符`endChar`后结束
+`cmd <<<"test"` // 将后面的字符串作为前面命令的输入
 
 \$? -eq 0 // 判断前面执行的命令是否成功，一般成功返回 0，失败返回 1
 
@@ -499,6 +518,8 @@ dpkg -i xxx.deb
 apt-get update //更新最新的软件版本列表
 apt-get upgrade //将所有软件更新到最新版本，系统也可能升级
 apt-get install xxx //安装某个软件
+
+- 在`/etc/apt/sources.list`存放着软件源，可以根据网络情况更新
 
 压缩文件夹
 tar -zcvf /home/xahot.tar.gz /xahot --exclude=xxx

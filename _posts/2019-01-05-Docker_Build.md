@@ -13,12 +13,15 @@ Docker 镜像可以通过在容器中进行命令操作创建，但更好的方�
 
 设定此次编译的目标镜像的基础镜像
 
-```
-FROM alpine:3.8
-```
+`FROM [--platform=<platform>] <image> [AS <name>]`
+
+- `FROM alpine:3.8`
+  以`alpine:3.8`为当前基础镜像进行操作
 
 - `FROM aaa as bbb`
   这里的 bbb 是某个中间镜像，之后可以被 copy 调用把中间生成文件拷走
+
+- `--platform=arch` 可以指定架构类型，如`linux/arm64`
 
 ### MAINTAINER
 
@@ -40,6 +43,14 @@ RUN echo 'hello world!' \
 ### COPY
 
 将 DockerFile 所在目录下的文件复制到容器中，会在容器中自动创建相应文件夹
+
+### ADD
+
+ADD 和 COPY 功能基本相同，COPY 相比更简易常用。
+
+- ADD 独有的两个功能：
+  - 解压压缩文件并把它们添加到镜像中
+  - 从 url 拷贝文件到镜像中
 
 ### EXPOSE
 

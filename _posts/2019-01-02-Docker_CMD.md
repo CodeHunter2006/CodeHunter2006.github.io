@@ -45,12 +45,17 @@ Ctrl+P+Q
 
 下载一个镜像
 
-```
-// ":tag"为可选项
-docker pull repository_name/image_name:tag
-```
+- `docker pull repository_name/image_name:tag`
+  运行一个镜像为容器
+  - ":tag"为可选项，默认为 latest
+  - `--platform arch` 默认情况下会根据当前系统架构自动选择，可选项：`linux/arm64`、`linux/amd64`等
 
-运行一个镜像为容器
+# run
+
+- `docker run xxx`
+  运行某个镜像
+
+- `--rm`容器退出时自动销毁
 
 ```
 docker run ...
@@ -105,13 +110,13 @@ docker rmi ...
 导出镜像文件
 
 ```
-docker save ...
+docker save -o file.tar xx:xx
 ```
 
 导入镜像文件
 
 ```
-docker load ...
+docker load < file.tar
 ```
 
 `docker logs container_name`
@@ -120,8 +125,8 @@ docker load ...
 `docker commit container_name image_name`
 将 container 导出为镜像
 
-- `docker tag img_name`
-  为镜像设定 name
+- `docker tag [OPTIONS] IMAGE[:TAG] [REGISTRYHOST/][USERNAME/]NAME[:TAG]`
+  标记本地镜像，并且将其归入某一仓库
 
 `docker exec [OPTIONS] CONTAINER COMMAND [ARG...]`
 在运行的容器中执行命令

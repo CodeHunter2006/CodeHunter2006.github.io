@@ -76,8 +76,28 @@ if err != nil {
 
 ## errors
 
-`errors.New("this is an error")`
-新建一个 error 对象
+```Go
+import "github.com/pkg/errors"  // 这个包继承了内置的`errors`，提供了更好的功能
+
+err1 := errors.New("this is an error")  // 创建 error 对象
+err2 := errors.WithMessage(err1, "upper level error") // wrap with message
+
+fmt.Println(err)  // output all error message
+// upper level error: this is an error
+
+fmt.Printf("%+v", err) // output call all message and stacks
+/*
+upper level error: this is an error
+main.main
+    /usr/three/main.go:11
+main.main
+    /usr/three/main.go:15
+*/
+
+```
+
+- ``
+  新建一个 error 对象
 
 ## errorgroup
 

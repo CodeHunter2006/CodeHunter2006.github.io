@@ -7,6 +7,28 @@ tags: Python
 
 Python 常用包记录
 
+## 内置函数
+
+- `type(object)`
+  返回对象的类型
+
+- `isinstance(object,classinfo)`
+  判断对象是否匹配类型，考虑继承关系
+  - `classinfo`可以为元组形式`isinstance(object,(str,int,list))`，表示只要满足其中一个类型即可
+
+```python
+class A:
+    pass
+
+class B(A):
+    pass
+
+isinstance(A(), A)    # returns True
+type(A()) == A        # returns True
+isinstance(B(), A)    # returns True
+type(B()) == A        # returns False
+```
+
 ## datetime
 
 datetime 包可以用于时间的各种计算，其中有几个关键类型：
@@ -47,6 +69,13 @@ origin_data = base64.b64decode(base64_data)
 print(origin_data.decode())
 ```
 
+## json
+
+json 操作
+
+- `str1 = json.dumps(obj)` 对象转 json 字符串
+- `obj1 = json.loads(str1)` json 字符串转对象
+
 ## pyjwt
 
 实现 jwt(JSON Web Token) 编解码
@@ -72,4 +101,27 @@ import yaml
 
 yamlContent = 'key1: "value1"'
 yamlDict = yaml.load(yamlContent)
+```
+
+## pipdeptree
+
+可以用命令查看 python 包的依赖关系
+
+- `pipdeptree`
+  显示依赖树
+
+## requests
+
+简化 http 请求
+
+```python
+import requests
+
+response = requests.get("https://www.baidu.com")
+print(response.text)	# 返回的文本响应
+
+bodyStr = "{\"content\": \"123\"}"
+auth=('username', 'password')		# basic auth
+headers={"Content-Type":"application/json"}
+response = requests.post("https://xxx/xxx", data = bodyStr, headers = headers, auth = auth)
 ```

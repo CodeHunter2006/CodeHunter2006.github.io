@@ -45,6 +45,12 @@ pip 用于各种包的安装，随 python 版本变更，可执行程序名称�
 - `pip install -r requirements.txt`
   安装项目依赖
 
+- `pip show requests`
+  显示包的基本信息，其中包括哪些包依赖这个包
+
+- `pip index versions requests`
+  显示有哪些可用的版本
+
 - 常用 pip 源：
   - douban
     `python3 -m pip install xxx -i http://pypi.douban.com/simple/ --trusted-host pypi.douban.com`
@@ -133,3 +139,14 @@ virtualenv 和 `pyenv-virtualenv`插件功能相同
   "python.autoComplete.extraPaths": [".../venv/lib/python2.7/site-packages"]
 }
 ```
+
+# 用 python 自身的多版本功能
+
+- `python -m venv ./venv`
+  在当前 venv 文件夹下创建虚拟环境
+
+- `source ./venv/bin/activate`
+  进入虚拟环境
+
+- `deactivate`
+  退出虚拟环境

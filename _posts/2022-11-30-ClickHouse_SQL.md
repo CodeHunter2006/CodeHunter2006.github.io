@@ -28,3 +28,7 @@ create TABLE test_db.test_table_dist on cluster test_cluster as test_db.test_tab
 ```SQL
 select query_id, query, event_time, exception from system.query_log where query like '%test_table%' order by event_time desc limit 20;
 ```
+
+- 查询
+
+- 注意查询时，字符串值要以`'`包围
