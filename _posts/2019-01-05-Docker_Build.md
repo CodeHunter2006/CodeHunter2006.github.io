@@ -40,6 +40,14 @@ RUN echo 'hello world!' \
     > /home/user1/file1.txt
 ```
 
+### ENV
+
+设置环境变量，在后续命令中就可以使用这个环境变量了。
+
+`ENV <key> <value>`
+
+- 示例：`ENV PATH="${PATH}:/opt/gtk/bin"`
+
 ### COPY
 
 将 DockerFile 所在目录下的文件复制到容器中，会在容器中自动创建相应文件夹

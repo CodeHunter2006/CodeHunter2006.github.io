@@ -7,6 +7,16 @@ tags: Linux
 
 ![top](/assets/images/2018-09-02-Linux_Shell_Command_2.jpg)
 
+# 基本用法
+
+- 在 shell 中执行`man cmdName`可以查看帮助手册(如果有的话)
+- 同样，用`cmdName --help`也可以查看帮助信息
+
+- `cmdName -xyz --name`
+  - 可以用上面两种方式加 flag，有些 flag 后面可以跟参数
+  - 这种单`-`符号表示后面每个字母表示一个 flag，如上面表示`-x -y -z`
+  - 这种双`--`符号后必须跟完整 flag 名
+
 # 命令
 
 ## 进程相关操作
@@ -809,6 +819,13 @@ sed -i "" "s/要查找的文本/替换后的文本/g" `grep -rl --include='*.go'
 显示两个文件的差异
 
 # 远程通信
+
+## ping
+
+- `ping domain/ipAddress`
+  以`ipv4`协议 ping 目标 ip 或域名，如果 ping 域名，则会自动域名解析
+
+- `ping6 ipv6Address`
 
 ## curl
 
