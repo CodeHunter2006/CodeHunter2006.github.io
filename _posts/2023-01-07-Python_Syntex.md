@@ -148,10 +148,27 @@ def func1(param1: int, param2: str) -> dict {
 ```
 
 - 类型要用特殊类型名表达，不可以用`literal`表达
+
   - 比如`(int,int)`正确的表达是`Tuple(int, int)`
   - 可用类型参考：[typing — Support for type hints](https://docs.python.org/3/library/typing.html)
 
+- `callable`
+  可以用来作为类型，表示可被调用的函数。也可以用来做类型判断函数，如果是函数则返回`True`
+
 # 逻辑控制
+
+## pass
+
+python 的 if 等逻辑控制语句后不允许什么都不做，所以引入了 pass，作为占位语句。
+
+```python
+if xx:
+  pass
+
+def func1:
+  pass
+
+```
 
 ## if
 
@@ -164,6 +181,37 @@ def func1(param1: int, param2: str) -> dict {
 ## 逻辑运算符
 
 - `and or not`
+
+## while
+
+```python
+
+while condition:
+  pass
+else: # else 是可选的，表示退出 while 时执行一次
+  pass
+```
+
+- 感觉这`else`完全没用啊，while 执行完毕继续执行的代码就是只执行一次
+
+## for
+
+for 用来对容器进行迭代
+
+```python
+for item in collection:
+    print(item)
+    pass
+else: # 同样可选
+    pass
+```
+
+## continue, break
+
+- continue 和 break 的基本用法和其他语言一样
+- Python 不支持双层循环中，直接操作外层循环
+
+- **注意**如果循环包含`else`，那么`break`将导致`else`失效。`continue`不会影响`else`。
 
 ## 三目运算符
 
@@ -187,6 +235,73 @@ Python 的推导式语法允许从一种集合导出另一种集合，这里的"
     字典推导式的数据源只能是更低维度的类型，比如 list set tuple
   - 可以利用`dict.items()`作为数据源进行推导
     `{ key_expr: value_expr for (k,v) in dict_src [if condition] }`
+
+## 迭代器
+
+迭代器是一个对象，可以被`next(it)`不断调用返回结果。
+
+```python
+list=[1,2,3]
+it = iter(list)  # 用内置的 iter 函数创建迭代器
+print(next(it)) # 1
+print(next(it)) # 2
+print(next(it)) # 3
+print(next(it)) # exception: StopIteration
+
+it = iter(list)
+for x in it:  # 可以用 for 迭代
+    print (x, end=" ")  # 1 2 3
+
+# 自定义可迭代类
+class MyNumbers:
+  max = 0
+  a = 0
+  def __init__(self, max):
+    self.max = max
+
+  def __iter__(self):
+    self.a = 0
+    return self
+
+  def __next__(self):
+    if self.a <= self.max:
+      x = self.a
+      self.a += 1
+      return x
+    else:
+      raise StopIteration # 用 StopIteration exception 表示结束
+
+myObj = MyNumbers(2)
+myiter = iter(myObj)
+
+for x in myiter:
+    print(x, end=" ") # 0 1 2
+```
+
+## yield
+
+使用了 yield 的函数被称为**生成器**，其中 yield 类似 return，但是再次执行该函数时，逻辑将从 yield 下一行继续执行。
+
+```python
+def _generator(times: int) -> int:
+    x = 0
+    while x < times:
+        yield x # 这里返回了结果，但是调用栈转到下一行、暂停
+        print("go on " + str(x))
+        x += 1
+
+def testYield():
+    iter = _generator(3)  # 生成器执行后产生一个迭代器
+    for item in iter:
+        print(item)
+testYield()
+#0
+#go on 0
+#1
+#go on 1
+#2
+#go on 2
+```
 
 # 函数
 

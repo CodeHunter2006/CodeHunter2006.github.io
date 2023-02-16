@@ -7,6 +7,8 @@ tags: Python
 
 Python 常用包记录
 
+# python 自带包
+
 ## 内置函数
 
 - `type(object)`
@@ -75,6 +77,36 @@ json 操作
 
 - `str1 = json.dumps(obj)` 对象转 json 字符串
 - `obj1 = json.loads(str1)` json 字符串转对象
+
+## sys
+
+系统相关
+
+- `sys.path.insert(0, '/tmp')`
+  将指定的路径加入到 path 中的最前面(第 0 个位置)
+
+## traceback
+
+用于打印调用栈
+
+- `traceback.print_stack()`
+  打印调用栈
+
+## threading
+
+多线程相关
+
+```python
+import threading
+
+lock = threading.Lock() # 创建一个互斥锁
+
+lock.acquire()  # 获取锁
+
+lock.release()  # 释放锁
+```
+
+# 第三方包
 
 ## pyjwt
 
