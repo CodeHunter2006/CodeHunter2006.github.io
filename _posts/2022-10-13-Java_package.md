@@ -14,6 +14,22 @@ tags: Java
 - `static byte[] copyOfRange(byte[] original, int from, int to)`
   取得子数组
 
+## `java.util.Date`
+
+提供时间相关
+
+```java
+import java.util.Date;
+
+static main() {
+    Date startTime = new Date();  // get now time
+    int waitSeconds = 100;
+    while ((new Date()).getTime() - startTime.getTime() < (waitSeconds * 1000)) {
+        Thread.sleep(1000);
+    }
+}
+```
+
 ## `com.google.common.base.Preconditions`
 
 - `public static void checkArgument(boolean expression, @Nullable Object errorMessage)`
