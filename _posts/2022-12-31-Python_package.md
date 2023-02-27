@@ -31,6 +31,16 @@ isinstance(B(), A)    # returns True
 type(B()) == A        # returns False
 ```
 
+## string
+
+- `string.join(iterable)`
+  将当前字符串作为分割符，将迭代列表元素进行分割后，组成新的字符串
+
+```python
+print(' '.join(['Python', 'is', 'a', 'fun', 'programming', 'language']))
+# Output: Python is a fun programming language
+```
+
 ## datetime
 
 datetime 包可以用于时间的各种计算，其中有几个关键类型：
