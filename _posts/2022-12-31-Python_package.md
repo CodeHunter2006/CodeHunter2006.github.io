@@ -33,6 +33,8 @@ type(B()) == A        # returns False
 
 ## string
 
+### join
+
 - `string.join(iterable)`
   将当前字符串作为分割符，将迭代列表元素进行分割后，组成新的字符串
 
@@ -40,6 +42,29 @@ type(B()) == A        # returns False
 print(' '.join(['Python', 'is', 'a', 'fun', 'programming', 'language']))
 # Output: Python is a fun programming language
 ```
+
+### format
+
+```python
+# 打印 hello world!
+"{} {}!".format("hello", "world") # 直接按顺序占位
+"{1} {0}!".format("world", "hello") # 通过下标占位
+"{name1} {name2}".format(name1="hello", name2="world")  # 通过参数名占位
+"{price:.2f} dollars!".format(price=2)  # 2.00 dollars! 参数名占位加指定格式
+
+# 用 f/F string 可以实现用当前变量作为参数名占位格式化
+name1 = "hello"; name2 = "world"
+f"{name1} {name2}!"
+```
+
+- [特殊格式示例](https://docs.python.org/3/library/string.html#formatexamples)
+
+### strip
+
+- `str.strip([chars])`
+
+删除字符串前后的指定字符，如果不传参数默认为空格和换行。
+传入的字符串会被看作是字符数组，每个字符都独立被用于删除操作。
 
 ## datetime
 
