@@ -23,7 +23,7 @@ tags: English
 - `tgt` together
 - `omg` Oh my god.
 
-# work
+# work message
 
 - `FYI` for your information
 - `WIP` work in progress
@@ -33,5 +33,6 @@ tags: English
 - `thx` thanks
 - `reg` regarding
 - `ISTM` it seems to me，我认为
+- `ETA` Estimated Time of Arrival
 
 # tech

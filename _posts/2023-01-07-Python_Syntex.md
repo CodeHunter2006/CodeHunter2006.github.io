@@ -114,7 +114,7 @@ x = (1, "2", {3})
 `None`在 Python 中是一个对象，有其特定类型 NoneType。
 如果一个变量未定义，则会直接报错，不会允许继续执行下去，这和 Javascript 的 undefine 是不同的。
 
-创建一个变量但不确定类型时，可以用`x = None`
+创建一个变量但不确定类型和值时，可以用`x = None`
 
 ## enum
 
@@ -177,17 +177,23 @@ def func1:
 
 ```
 
+- 用三个下点`...`和`pass`的作用完全相同
+
 ## if
 
 - 在 Python 的逻辑表达式中，`None`、`False`、`0`、`""(空字符串)`、`[](空列表)`、`()(空元组)`、`{}(空字典)`都相当于`False`。
 
-- 如何区分`None`？
+- 如何判断变量值是否为`None`？
   - `if X is None:`
   - `if X is not None:`相当于`if not (X is None)`
 
 ## 逻辑运算符
 
 - `and or not`
+
+## 比较运算符
+
+- Python 允许多个`==`连续相等比较，如果
 
 ## while
 
@@ -346,6 +352,8 @@ module 是 python 代码重用的的基本单元，一个 module 就是一个`xx
 - 使用`import xx`导入模块名，具体元素需要`xx.a`调用
 - 使用`from xx import *`导入模块内的所有全局变量/函数
 - 使用`from xx import a, b`精确导入所需元素
+- 使用`from ..aa.bb import c`可以导入上层 package 的子 package，这里两个点`..`表示上一层
+- 使用`from ...aa.bb import c`可以一直向上找到某个 package，其子 package 包含`aa.bb`
 
 # package(包)
 
