@@ -217,6 +217,14 @@ for item in collection:
     pass
 else: # 同样可选
     pass
+
+# 如果每个元素是个 tuple，则可以用多个字段承接元素
+for v1, v2, v3 in tuple_collection:
+  pass
+
+# 可以利用 items 函数将 dict{k:v} 转为 list[(k,v)...]
+for k, v in d.items():
+  pass
 ```
 
 ## continue, break
@@ -471,6 +479,28 @@ print (v1 + v2) # Vector (7, 8)
 ## `@classmethod`
 
 相当于声明 class 中的一个方法为类的静态方法，该函数的第一个参数为这个类本身，这个参数可以用来执行`__init__`构造函数
+
+```python
+class A:
+  field = 0 # 对象的成员变量或类的成员变量
+
+  def __init__(self, x):
+        self.field = x
+
+  @classmethod
+  def cls_f(cls, y):
+    obj1 = cls(y) # 可以用 cls 表示对象构造函数
+    cls.field = y
+    return obj1
+
+o = A.cls_f(1)
+print(o.field, A.field) # 1 1
+o = A.cls_f(1)
+print(o.field, A.field) # 1 2
+```
+
+- 如果经过了构造函数，创建了新对象，则成员变量是**对象的成员变量**
+- 如果直接通过类名调用，则成员变量是**类的成员变量**
 
 # 常用函数
 

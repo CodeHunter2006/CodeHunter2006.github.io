@@ -623,9 +623,6 @@ iptables -nv -L
 - `-x`
   执行命令时，会先显示指令及其参数
 
-`export VALUE_NAME="value"`
-设置环境变量
-
 `export VALUE_NAME=${VALUE_NAME:-default}`
 
 - `${VALUE_NAME:-default}` 表示如果变量不存在，则用`:-`后面的默认值替代；如果存在则不作替换
@@ -635,6 +632,19 @@ iptables -nv -L
 
 `unset VALUE_NAME`
 删除环境变量
+
+### export
+
+设置全局环境变量，即当前命令结束后，当前 session 仍然保持环境变量。
+
+- `export`
+  查看现有的所有环境变量
+
+- `export VALUE_NAME="value"`
+  设置环境变量，值可以放在双引号中；也可以不放在双引号中，但是不能有空格
+
+- `export name1=value1 name2=value2`
+  一次性设置多个变量
 
 # 命令相关操作
 
