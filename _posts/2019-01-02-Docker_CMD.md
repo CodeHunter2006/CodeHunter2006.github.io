@@ -56,6 +56,8 @@ Ctrl+P+Q
   运行某个镜像
 
 - `--rm`容器退出时自动销毁
+- `-P` Publish all exposed ports to random ports
+- `-v outterPath:innerPath` 映射内外文件夹
 
 ```
 docker run ...
@@ -79,11 +81,11 @@ docker ps
 docker ps -a
 ```
 
-查看一个容器的详细信息
+- `docker inspect containerName`
+  查看一个容器的详细信息，比如 ip 地址
 
-```
-docker inspect ...
-```
+- `docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' containerName`
+  查看容器的 ip 地址
 
 查看当前所有镜像
 

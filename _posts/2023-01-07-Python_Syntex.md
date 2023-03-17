@@ -193,7 +193,10 @@ def func1:
 
 ## 比较运算符
 
-- Python 允许多个`==`连续相等比较，如果
+- Python 允许多个`==`连续相等比较，如果都相等则成立，如 `if a == b == c == d:`
+
+- `obj1 is obj2`
+  判断两个对象指针是否指向同一对象
 
 ## while
 
@@ -256,6 +259,14 @@ Python 的推导式语法允许从一种集合导出另一种集合，这里的"
     字典推导式的数据源只能是更低维度的类型，比如 list set tuple
   - 可以利用`dict.items()`作为数据源进行推导
     `{ key_expr: value_expr for (k,v) in dict_src [if condition] }`
+
+## 拉姆达表达式 lambda
+
+- 注意，拉姆达不是函数，只是一个表达式
+
+`lambda [arg1][,arg2]: expression`
+
+例：`cmp = lambda x, y: x >= y`
 
 ## 迭代器
 
@@ -438,6 +449,9 @@ class C(A, B): # C 继承自 A 和 B
 c = C(2)  # 调用构造函数
 c.f()  # f 2
 ```
+
+- 判断是否是实例`isinstance(object, class)`
+  子孙类对象也会返回`True`
 
 - 类的专有方法：
   - `__init__` : 构造函数，在生成对象时调用

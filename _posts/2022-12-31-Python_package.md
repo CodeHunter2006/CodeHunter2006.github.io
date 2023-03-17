@@ -191,4 +191,7 @@ bodyStr = "{\"content\": \"123\"}"
 auth=('username', 'password')		# basic auth
 headers={"Content-Type":"application/json"}
 response = requests.post("https://xxx/xxx", data = bodyStr, headers = headers, auth = auth)
+
+print(response.status_code)
+responseDict = response.json()  # 将结果 json 转为级联 dict
 ```
