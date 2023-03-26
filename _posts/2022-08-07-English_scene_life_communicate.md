@@ -19,4 +19,9 @@ tags: English
     - 当前，相当于`at present`
 
 - thank you
+
   - not at all 不客气
+
+- symbol
+  - `orz`
+    下跪姿势。膜拜、悔恨、崩溃。

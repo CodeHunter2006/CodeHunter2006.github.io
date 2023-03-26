@@ -98,6 +98,33 @@ cron 是 Linux 自带的 service 提供定时执行命令的功能，类似 Wind
   `/sbin/service crond start`
   则系统启动时就会运行 cron 服务
 
+## 服务管理
+
+Linux 服务管理两种方式 service 和 systemctl
+
+systemd 是 Linux 系统最新的初始化系统(init),作用是提高系统的启动速度，尽可能启动较少的进程，尽可能更多进程并发启动。
+
+systemd 对应的进程管理命令是 systemctl
+
+systemctl 命令兼容了 service，即 systemctl 也会去/etc/init.d 目录下，查看，执行相关程序
+
+### 常用命令
+
+- `systemctl redis start`
+  启动服务
+
+- `systemctl redis stop`
+  关闭服务
+
+- `systemctl enable redis`
+  开机启动
+
+- `restart` 重启
+- `reload` 重新载入配置。只修改不载入不会生效。
+- `disable` 关闭开机启动
+- `status` 查看状态
+- `systemctl list-units --type=service -all` 列出所有服务
+
 # 内核机制
 
 ## 系统中断
