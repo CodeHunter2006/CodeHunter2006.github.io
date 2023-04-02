@@ -21,7 +21,7 @@ tags: Java
 ### for each
 
 ```java
-for (int item in items) {
+for (int item : items) {
   //...
 }
 ```

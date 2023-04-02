@@ -45,6 +45,11 @@ multiline
 string
 with out escape character
 """
+
+# f-string, f字符串
+# 在字符串前加'f/F'表示一个字符串自动添加format函数，用{xx}做字符串替换
+# 用 { 和 } 做大括号转义
+str4 = f"str4 {str2} bracket: {{, another bracket: }} "
 ```
 
 - Python 不支持单字符类型，单字符在 Python 中也是作为一个字符串使用。
