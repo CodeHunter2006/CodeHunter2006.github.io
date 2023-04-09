@@ -384,6 +384,9 @@ list open files
 `lsof -i tcp:8080`
 指定端口协议
 
+- `lsof -i -P|grep pid`
+  根据 pid 查看端口连接情况
+
 查看<设定>最大连接数
 ulimit -n <newValue>
 
@@ -618,6 +621,8 @@ iptables -nv -L
 
 ### set
 
+设置环境变量
+
 - `-e`
   一旦脚本中发生返回值非 0 的情况，立刻停止脚本执行
 - `-x`
@@ -632,6 +637,9 @@ iptables -nv -L
 
 `unset VALUE_NAME`
 删除环境变量
+
+- `xxx=111 yyy=222 cmd args`
+  运行命令时带临时环境变量
 
 ### export
 

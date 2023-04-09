@@ -115,10 +115,15 @@ readinessProbe: <Objet> # 就绪性探针
 
 - 问题：command 本身是字符数组，可以满足命令+参数的功能，为什么还需要 args？
   这两项在 spec 中其实是覆盖实现 Dockerfile 中 ENTRYPOINT 的功能。
+
   - 如果 command 和 args 都没写，那么用 Dockerfile 的配置
   - 如果只写了 command，那么 Dockerfile 默认的配置会被忽略，执行 command
   - 如果只写了 args，那么 Dockerfile 中配置的 ENTRYPOINT 命令会被执行，使用 args 作为参数
   - 如果 command 和 args 都写了，那么 Dockerfile 的配置被忽略，执行 command 并追加 args 参数
+
+- 技巧：如何实现 pod 启动后进入等待避免`crash`?
+  - 启动命令设置为`command: ["/bin/sh", "-c", "tail -f /dev/null"]`，这样就可以一直等待
+  - 为了避免重新创建 pod，要把`readinessProbe`设置为合理参数
 
 ```yml
 # kubectl explain pod.spec.containers.ports

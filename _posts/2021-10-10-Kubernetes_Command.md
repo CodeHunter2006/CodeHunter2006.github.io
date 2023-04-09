@@ -58,6 +58,8 @@ tags: Docker K8S HighConcurrency
 
 - 连接 API-Server 需要配置好"cube config"文件，在 mac 中在`~/.cube/config`。
 
+  - 默认将使用这个配置文件，如果需要利用其他配置文件，可以用设置参数`kubectl --kubeconfig xxx get namespace`
+
 - 可以用`lens`代替`dashboard`提供 UI，`brew install --cask lens`
 
 # 常用命令
@@ -121,7 +123,7 @@ tags: Docker K8S HighConcurrency
 
 编辑对应 Resource 的 Spec 文件
 
-`kubectl edit deploy deploy-name -n`
+`kubectl edit deploy deploy-name -n xx`
 用 vi 打开界面编辑 Deployment，保存后执行。
 
 ## exec

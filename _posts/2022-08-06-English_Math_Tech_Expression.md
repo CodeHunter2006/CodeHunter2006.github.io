@@ -10,7 +10,7 @@ tags: English
 
 - 键盘字符
 
-  - '`' grave, backtick 反引号
+  - `` ` `` grave, backtick 反引号
   - `~` tilde[ˈtɪldə]，波浪线
   - `!` exclamation, bang, 叹号
   - `@` at

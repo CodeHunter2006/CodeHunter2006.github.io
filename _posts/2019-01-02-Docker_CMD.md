@@ -128,7 +128,18 @@ docker load < file.tar
 将 container 导出为镜像
 
 - `docker tag [OPTIONS] IMAGE[:TAG] [REGISTRYHOST/][USERNAME/]NAME[:TAG]`
-  标记本地镜像，并且将其归入某一仓库
+  重命名本地镜像，并且将其归入某一仓库
+
+- `docker push REGISTRYHOST:5000/USERNAME/NAME:latest`
+  将镜像推送到远端仓库
+
+  - `REGISTRYHOST`是仓库 host，可以是 dockerhub 或自建仓库
+  - `USERNAME` 是仓库中的账号名
+  - `NAME` 是镜像名
+  - `latest` 是版本 tag
+
+- `docker pull [REGISTRYHOST:5000/]USERNAME/NAME:latest`
+  拉取镜像到本地。如果不设`REGISTRYHOST`则使用默认仓库。
 
 `docker exec [OPTIONS] CONTAINER COMMAND [ARG...]`
 在运行的容器中执行命令

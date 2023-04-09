@@ -5,6 +5,11 @@ date: 2022-11-30 22:00:00 +0800
 tags: ClickHouse
 ---
 
+- Linux 和 macOS 安装 ch：`curl https://clickhouse.com/ | sh`
+
+  - 启动 server `./clickhouse server`
+  - 启动 client `./clickhouse client`
+
 - 创建表
 
 ```SQL
