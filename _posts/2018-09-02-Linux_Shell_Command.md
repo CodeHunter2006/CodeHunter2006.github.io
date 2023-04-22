@@ -865,7 +865,7 @@ sed -i "" "s/要查找的文本/替换后的文本/g" `grep -rl --include='*.go'
 
 - `--proxy socks5://localhost:9050`
   通过代理访问
-- `--output fileName` 输出 body 到指定文件
+- `--output/-o fileName` 输出 body 到指定文件
 - `--output -` 输出 body 到 console
 - `-D -` 输出 header 到 console
 
