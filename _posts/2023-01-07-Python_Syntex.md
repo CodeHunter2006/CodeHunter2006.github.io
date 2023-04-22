@@ -83,6 +83,13 @@ bytes 是二进制字节数组，用`b''`构造，底层存储字节(0-255)
 - `%`
   相当于`format`函数，如：`"H%sllo" % "e" # Hello`
 
+### 常用函数
+
+```python
+# 生成新的字符串，由指定字符串分割
+','.join(['1','2']) # "1,2"
+```
+
 ## dict
 
 - `**`紧贴 dict 变量前面，如`func1(**dict1)`，表示把 dict 以`key1=value1, ...`的形式展开。通常作为一个函数的参数使用。
@@ -113,6 +120,11 @@ x = (1, "2", {3})
 - `max(tuple)` 返回最大值
 - `min(tuple)` 返回最小值
 - `tuple(iterable)` 将可迭代序列转为元组
+
+### 单元素元组
+
+- 单元素元组用这种方式表达：`(10, )` 注意多了个`,`
+  - 由于`(10)`既可以表示一个元组，也可以表示数学中的一个数字(括号被视为优先级标志)
 
 ## None
 
@@ -233,6 +245,13 @@ for v1, v2, v3 in tuple_collection:
 # 可以利用 items 函数将 dict{k:v} 转为 list[(k,v)...]
 for k, v in d.items():
   pass
+```
+
+### List Comprehensions(列表生成式)
+
+```python
+test = [1,2]
+testStr = [str(x) for x in test]  # 生成为字符串数组
 ```
 
 ## continue, break

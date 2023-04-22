@@ -40,3 +40,8 @@ select query_id, query, event_time, exception from system.query_log where query 
 - 查询
 
 - 注意查询时，字符串值要以`'`包围
+
+# 函数
+
+- `hasAny(target_array, ['str1', 'str2'])`
+  - 判断`Nullable(Array(String))`类型的数组中是否包含目标字符串
