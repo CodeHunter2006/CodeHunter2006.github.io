@@ -52,6 +52,9 @@ tags: Docker K8S HighConcurrency
 
 - 注意`kubectl`命令对资源名称结尾的`s`并不强制要求，可以带也可不带
 
+- `--dry-run=client -oyaml` 命令从并不从客户端真正发出，用来查看发出的命令
+- `--dry-run=server -oyaml` 命令在服务端不进行持久化，用来检查命令是否有逻辑错误
+
 # 基本配置
 
 - 安装 kubectl 工具：`brew install kubernetes-cli helm`，这个命令可以将 helm 工具顺便安装好。

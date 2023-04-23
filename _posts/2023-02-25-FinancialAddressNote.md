@@ -2,7 +2,7 @@
 layout: post
 title: "金融类演讲笔记"
 date: 2023-02-25 22:00:00 +0800
-tags: Book
+tags: book
 ---
 
 ## 付鹏 "长白山高峰论坛演讲" 2023/2
