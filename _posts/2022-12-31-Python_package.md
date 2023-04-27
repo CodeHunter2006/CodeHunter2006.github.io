@@ -195,3 +195,13 @@ response = requests.post("https://xxx/xxx", data = bodyStr, headers = headers, a
 print(response.status_code)
 responseDict = response.json()  # 将结果 json 转为级联 dict
 ```
+
+## pyflakes
+
+提供基本的语法扫描功能
+
+- `python -m file1.py file2.py ...`
+  扫描指定代码 path
+
+- `python -m pyflakes ./folder1/* | grep -Ev 'but never used|imported but unused|redefinition of unused|may be undefined|unable to detect undefined names'`
+  扫描指定文件夹下所有`.py`文件，并且忽略常见的 warning
