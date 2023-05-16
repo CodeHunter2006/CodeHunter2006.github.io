@@ -19,4 +19,11 @@ def after_request_func(result):
   print('request {} {} {} {}'.format(request.method, request.path, request.args, jsonBody))
   result.status_code = 200
   return result
+
+# 从 url 中取得数组
+# http://test.com/test?tag=tag1&tag=tag2
+@app.route('/test')
+def hello():
+    tags = requests.args.getlist('tag')
+    print('tags')
 ```

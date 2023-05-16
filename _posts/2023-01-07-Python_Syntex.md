@@ -11,6 +11,7 @@ tags: Python
 
 - 用空格缩进作为"代码块"的标志，必须严格遵守，同一缩进下的代码被认为是顺序关系
 - 一行的多个表达式可以用`;`隔开，从而执行多个语句
+- 如果一行写不下跨行，则用`\`在上一行结尾
 
 # 注释
 
@@ -113,6 +114,28 @@ Python 支持三种数字类型：int float complex
 set1 = {1,2,3}
 ```
 
+- set 的"交/并/差"操作
+
+```python
+s1 = set([1,2])
+s2 = set([2,3])
+s3 = set([1,2,3])
+
+# 交集
+s1 & s2 # {2}
+
+# 并集
+s1 | s2 # {1,2,3}
+
+# 差集
+s1 - s2 # {1}
+s2 - s1 # {3}
+
+# 判断子集
+s1 >= s2 # False, s1 包含或等于 s2
+s3 > s1 # True, s3 包含 s1
+```
+
 ## tuple(元组)
 
 相当于一个固定内容的数组，数组内容无法修改，并且元素类型可以不同。
@@ -170,18 +193,23 @@ print(Weekday.wednesday.value)   # 3
 Python 作为一个脚本是不支持参数和返回值设置类型的，但是为了减少类型匹配问题，Python3.3 增加了`-> type`和`xx: type`语法，为函数返回值或参数设置预期类型，供开发者和工具参考。不过仅供参考，运行时不做类型检查。
 
 ```python
+# 变量类型用 : type 表示
 # 参数类型用 : type 表示
 # 返回值类型用 -> type 表示
 # 还可以设置默认值
 def func1(param1: int, param2: str = "default") -> dict {
+  var1: int = param1
 }
 ```
 
 - 类型要用特殊类型名表达，不可以用`literal`表达
 
-  - 比如`(int,int)`正确的表达是`typing.Tuple[int, int]`
-    - 注意，是`typing`包下的类，参数要以`[]`
   - 可用类型参考：[typing — Support for type hints](https://docs.python.org/3/library/typing.html)
+  - 比如`(int,int)`正确的表达是`typing.Tuple[int, int]`
+    - 注意，是`typing`包下的类，并且参数要以`[]`包裹
+  - 比如**嵌套**类型`typing.List[typing.Tuple[str, str]]`
+  - 比如有**不定项** tuple`Tuple[int, ...]`
+  - 注意，这里的`typing.Dict`等**只能用于类型描述**，不可以真的当成类型去实例化对象，如`x = typing.Dict()`将会报错
 
 - `callable`
   可以用来作为类型，表示可被调用的函数。也可以用来做类型判断函数，如果是函数则返回`True`
@@ -221,6 +249,22 @@ def func1:
 
 - `obj1 is obj2`
   判断两个对象指针是否指向同一对象
+
+## in 成员判断运算符
+
+in 可以用于 str, list, set, dict(key), tuple 的成员判断
+
+```python
+a = 1
+b = (1,2,3)
+c = [1,2,3]
+d = {1:"a",2:"b",c:"3"}
+e = {1,2,3}
+f = "123"
+
+# 下面判断都返回 True
+if a in b...
+```
 
 ## while
 

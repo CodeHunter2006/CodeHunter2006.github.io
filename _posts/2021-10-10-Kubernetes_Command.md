@@ -258,6 +258,19 @@ tags: Docker K8S HighConcurrency
 
 - cpu 的单位 1CPU = 100m
 
+## cp
+
+在当前主机和容器间拷贝文件
+
+- `kubectl cp -n namespace [-c containerName] podName:relativePath targeFilePath`
+  拷贝容器中的文件到本机
+
+  - 如果只有一个 container，则无需填`-c containerName`
+  - podName 后的地址是相对地址，不能以`/`开头
+  - 相对地址是基于`WORKDIR`开始的
+
+- 从本机拷贝到容器中只要调换参数即可
+
 ## 其他
 
 `kubectl create deployment hello-minikube --image=k8s.gcr.io/echoserver:1.4`

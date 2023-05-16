@@ -196,6 +196,18 @@ print(response.status_code)
 responseDict = response.json()  # 将结果 json 转为级联 dict
 ```
 
+## pprint
+
+打印嵌套对象。
+pprint 只能用于一般测试，因为它无法把输出结果放到字符串中，在有 logger 时会使用不便，不过 logger 一般都有嵌套打印功能。
+
+```python
+from pprint import pprint
+
+x = {'a': {'b': 'c'}}
+pprint(x) # {'a': {'b': 'c'}}
+```
+
 ## pyflakes
 
 提供基本的语法扫描功能
