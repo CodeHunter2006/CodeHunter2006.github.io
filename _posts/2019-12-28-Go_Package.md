@@ -7,6 +7,8 @@ tags: Go
 
 Go 常用包的功能，及注意点
 
+# 官方
+
 ## context
 
 为多携程调用提供三种功能：传值、超时、取消。
@@ -149,50 +151,6 @@ func testErrorGroup() {
 	}
 }
 ```
-
-## "github.com/sourcegraph/conc"
-
-便于并发的处理
-
-```go
-import (
-  "github.com/sourcegraph/conc"
-  "github.com/sourcegraph/conc/pool"
-  "github.com/sourcegraph/conc/panics"
-)
-
-
-func main() {
-  for i := 0; i < 10; i++ {
-		wg.Go(func() {
-      //...
-		})
-	}
-  // 所有 goroutine 结束才返回
-  // 如果某一 groutine 发生 panic 则会被捕获到
-	pan := wg.WaitAndRecover()
-
-  ctx := context.Background()
-	p := pool.NewWithResults[string](). // 创建可返回结果的携程池
-		WithMaxGoroutines(2). // when no more worker, new will be blocked
-		WithContext(ctx)      // when first error happend, all will be cancel
-  for i := 0; i < 10; i++ {
-    p.Go(func(c context.Context) (ret string, err error) {  // 执行
-      // ...
-    })
-  }
-
-	// if panic happend in one of the goroutine, p.Wait() will cause panic
-	pc.Try(func() { rets, err = p.Wait() })
-	// pc.Repanic()	// re propagate panic
-	p1 := pc.Recovered() // catch panic
-	fmt.Println(rets, err, p1)
-}
-```
-
-## "go.uber.org/atomic"
-
-把原有的 atomic 函数封装成方便使用的类，如`atomic.Int64`
 
 ## flag
 
@@ -568,6 +526,66 @@ select {
 
 `unsafe.Sizeof(x)`
 传入任意变量，返回该变量对应类型所占字节数
+
+# 第三方
+
+## "go.uber.org/atomic"
+
+把原有的 atomic 函数封装成方便使用的类，如`atomic.Int64`
+
+## "github.com/sourcegraph/conc"
+
+便于并发的处理
+
+```go
+import (
+  "github.com/sourcegraph/conc"
+  "github.com/sourcegraph/conc/pool"
+  "github.com/sourcegraph/conc/panics"
+)
+
+
+func main() {
+  for i := 0; i < 10; i++ {
+		wg.Go(func() {
+      //...
+		})
+	}
+  // 所有 goroutine 结束才返回
+  // 如果某一 groutine 发生 panic 则会被捕获到
+	pan := wg.WaitAndRecover()
+
+  ctx := context.Background()
+	p := pool.NewWithResults[string](). // 创建可返回结果的携程池
+		WithMaxGoroutines(2). // when no more worker, new will be blocked
+		WithContext(ctx)      // when first error happend, all will be cancel
+  for i := 0; i < 10; i++ {
+    p.Go(func(c context.Context) (ret string, err error) {  // 执行
+      // ...
+    })
+  }
+
+	// if panic happend in one of the goroutine, p.Wait() will cause panic
+	pc.Try(func() { rets, err = p.Wait() })
+	// pc.Repanic()	// re propagate panic
+	p1 := pc.Recovered() // catch panic
+	fmt.Println(rets, err, p1)
+}
+```
+
+## github.com/jinzhu/copier
+
+利用反射嵌套拷贝结构体间的同名成员
+
+## github.com/go-redsync/redsync/v4
+
+redis 分布式锁
+
+## github.com/davecgh/go-spew/spew
+
+递归打印复杂嵌套对象
+
+`spew.Printf("myVar1: %v -- myVar2: %+v", myVar1, myVar2)`
 
 ## golang.org/x/text
 

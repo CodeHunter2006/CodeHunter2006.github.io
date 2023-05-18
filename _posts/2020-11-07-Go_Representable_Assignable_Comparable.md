@@ -48,6 +48,8 @@ tags: Go
 
 - 可以利用 function 的"不可比较"特性，让指定的 struct 不能被比较：
 
+  - 同样的原理，如果 struct 定义了 receiver，则无法比较
+
   ```Go
   // DoNotCompare can be embedded in a struct to prevent comparability.
   type DoNotCompare [0]func() // 数组 len 为 0，不占空间
