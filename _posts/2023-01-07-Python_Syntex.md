@@ -104,7 +104,10 @@ Python 支持三种数字类型：int float complex
 
 ### dict 内置函数
 
-- `dict.items()`返回一个 dict 内容的 list，形如：`[(key1,value1), (key2,value2), ...]`
+- `dict.items()`
+  返回一个 dict 内容的 list，形如：`[(key1,value1), (key2,value2), ...]`
+- `pop(key[,default])`
+  删除对应的 key 的 item，并返回对应的 value。可以设定 default 值，如果没有 key 则返回 defualt value。
 
 ## set
 
@@ -209,6 +212,7 @@ def func1(param1: int, param2: str = "default") -> dict {
     - 注意，是`typing`包下的类，并且参数要以`[]`包裹
   - 比如**嵌套**类型`typing.List[typing.Tuple[str, str]]`
   - 比如有**不定项** tuple`Tuple[int, ...]`
+  - **可能返回 None** `Optional[str]`
   - 注意，这里的`typing.Dict`等**只能用于类型描述**，不可以真的当成类型去实例化对象，如`x = typing.Dict()`将会报错
 
 - `callable`
@@ -302,7 +306,7 @@ for k, v in d.items():
 
 ```python
 test = [1,2]
-testStr = [str(x) for x in test]  # 生成为字符串数组
+testStr = [str(x) for x in test if True]  # 生成为字符串数组
 ```
 
 ## continue, break
@@ -428,6 +432,22 @@ testYield()
 ## 参数默认值
 
 - 可以赋默认值：`def test(param1: str = '')`
+
+## 返回 tuple
+
+- 函数可以一次 return 多个值，这些值将合为一个 tuple 作为该函数的返回值
+- 返回 tuple 时，接收方可以用一个变量接收 tuple 整体，也可以通过多个变量接收 tuple 中的元素
+- 如果不需要接收某个元素，则用`_`占位
+
+```Python
+def func1():
+  return "hello", "world", 1
+
+t = func1()
+print(t)  # ("hello", "world", 1)
+x, y, _ = func1()
+print(x, y) # hello world
+```
 
 # 变量
 
@@ -595,3 +615,11 @@ print(o.field, A.field) # 1 2
 
 - `dir(SampleClass)`
   查看类的成员
+
+# 反射
+
+- `getattr(object, name[, default])`
+  输入对象、成员名，返回成员的引用
+
+- `hasattr(object，name)`
+  判断对象是否有指定名字的成员
