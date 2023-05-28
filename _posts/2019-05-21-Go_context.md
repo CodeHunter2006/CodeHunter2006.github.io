@@ -110,7 +110,7 @@ func TODO() Context
 
 在 [Go Concurrency Patterns: Context - The Go Blog](https://blog.golang.org/context) 中讲述了 Google API 的一段代码，如何利用 Context 对象进行超时撤销、数据返回。其中有一些代码调用模式比较典型，在这里分析一下(直接在代码加注释)：
 
-```
+```Go
 func handleSearch(w http.ResponseWriter, req *http.Request) {
     // ctx is the Context for this handler. Calling cancel closes the
     // ctx.Done channel, which is the cancellation signal for requests
@@ -132,7 +132,7 @@ func handleSearch(w http.ResponseWriter, req *http.Request) {
 
 这是最初的根 goroutine，不可以被撤销。注意最后一句，当下一级 Context 和 CancelFunc 同时创建好之后，立即 defer CancelFunc 的调用，也就是无论最后是超时还是返回了正确值，都会调用 CancelFunc。
 
-```
+```Go
 func httpDo(ctx context.Context, req *http.Request, f func(*http.Response, error) error) error {
     // Run the HTTP request in a goroutine and pass the response to f.
     // 注意，这里为什么设置缓冲区为1，因为不希望子goroutine被阻塞(不读就会阻塞对方)，
