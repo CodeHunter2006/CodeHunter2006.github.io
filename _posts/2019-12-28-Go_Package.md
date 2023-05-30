@@ -577,6 +577,26 @@ func main() {
 
 利用反射嵌套拷贝结构体间的同名成员
 
+## github.com/jmoiron/jsonq
+
+方便的对 json/yaml 深度嵌套结构进行查询，通常先将 json/yaml 解析为`map[string]interface{}`类型，然后再用 jsonq 查询
+
+```Go
+import (
+	"strings"
+	"encoding/json"
+	"github.com/jmoiron/jsonq"
+)
+
+data := map[string]interface{}{}
+dec := json.NewDecoder(strings.NewReader(jsonstring))
+dec.Decode(&data)
+jq := jsonq.NewQuery(data)
+
+// data["subobj"]["subarray"][1] -> 2
+jq.Int("subobj", "subarray", "1")
+```
+
 ## github.com/go-redsync/redsync/v4
 
 redis 分布式锁
