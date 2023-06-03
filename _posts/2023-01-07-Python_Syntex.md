@@ -47,6 +47,12 @@ string
 with out escape character
 """
 
+# 用 () 将多个字符串包裹，即使换行也能自动连接，不添加换行符
+str4 = ('another'
+        'multiline'
+        'example' 'last')
+print(str4) # anothermultilineexamplelast
+
 # f-string, f字符串
 # 在字符串前加'f/F'表示一个字符串自动添加format函数，用{xx}做字符串替换
 # 用 { 和 } 做大括号转义
