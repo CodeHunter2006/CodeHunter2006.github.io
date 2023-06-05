@@ -255,6 +255,13 @@ def func1:
 
 - `not`除了判断`bool/None`之外，还可以判断`dict/set/tuple`为空的情况。`not {} # True`
 
+- `or` 除了做"逻辑或"的 bool 表达之外，还可以根据左右两边的表达式是否为 None，返回非 None 结果
+  ```Python
+  x = 1
+  y = None
+  print(x or y)  # 1
+  ```
+
 ## 比较运算符
 
 - Python 允许多个`==`连续相等比较，如果都相等则成立，如 `if a == b == c == d:`

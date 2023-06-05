@@ -64,5 +64,3 @@ func Compile(str string) (regexp *Regexp, err error) {
 
 - 上面的类型强转涉及的类型最好在本包中，否则可能引起 Panic
 - 可以尝试强转败，就通过 fmt.Errorf("%v", err) 返回新 error，这样意料之外的类型也不会引起再次 Panic 了
-
-# 20230605 一些 error 相关新的最佳实践

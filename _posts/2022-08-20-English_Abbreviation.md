@@ -34,5 +34,6 @@ tags: English
 - `reg` regarding
 - `ISTM` it seems to me，我认为
 - `ETA` Estimated Time of Arrival
+- `POC` Point Of Contact，对接人；Proof of Concept，概念验证；
 
 # tech
