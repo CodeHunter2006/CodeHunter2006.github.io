@@ -10,7 +10,7 @@ tags: [tensorflow]
 ## 环境要求
 
 - Linux/MacOS
-- Python 3.5 及更高版本
+- Python 3.9 及更高版本
 - Virtualenv
 - Git
 
@@ -55,7 +55,7 @@ tags: [tensorflow]
 
 ##### DAG 操作
 
-登陆管理平台
+登陆管理平台，用户名：admin, 密码：admin
 ![login page](https://www.tensorflow.org/static/tfx/tutorials/tfx/images/airflow_workshop/airflow-login.png)
 运行 taxi 流水线
 ![DAG](https://www.tensorflow.org/static/tfx/tutorials/tfx/images/airflow_workshop/dag-home-full.png)
