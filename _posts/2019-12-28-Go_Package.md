@@ -98,9 +98,6 @@ main.main
 
 ```
 
-- ``
-  新建一个 error 对象
-
 ## errorgroup
 
 errorgroup 综合了 waitGroup 和 context 的能力，可以同时等待多个协程、返回错误、协程 cancel
