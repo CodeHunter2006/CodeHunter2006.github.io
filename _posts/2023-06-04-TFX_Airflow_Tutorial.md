@@ -5,6 +5,8 @@ date: 2023-06-04 10:11:30
 tags: [tensorflow]
 ---
 
+![TensorFlowExtend](/assets/images/2023-06-04-TFX_Airflow_Tutorial_0.png)
+
 # Tutorial
 
 ## 环境要求
@@ -56,13 +58,13 @@ tags: [tensorflow]
 ##### DAG 操作
 
 登陆管理平台，用户名：admin, 密码：admin
-![login page](https://www.tensorflow.org/static/tfx/tutorials/tfx/images/airflow_workshop/airflow-login.png)
+![login page](/assets/images/2023-06-04-TFX_Airflow_Tutorial_1.png)
 运行 taxi 流水线
-![DAG](https://www.tensorflow.org/static/tfx/tutorials/tfx/images/airflow_workshop/dag-home-full.png)
+![DAG](/assets/images/2023-06-04-TFX_Airflow_Tutorial_2.png)
 
-[![TensorFlow](https://www.tensorflow.org/static/tfx/tutorials/tfx/images/airflow_workshop/dag-buttons.png)](https://www.tensorflow.org/static/tfx/tutorials/tfx/images/airflow_workshop/dag-buttons.png)
+![TensorFlow](/assets/images/2023-06-04-TFX_Airflow_Tutorial_3.png)
 
-![dag-button-refresh](https://www.tensorflow.org/static/tfx/tutorials/tfx/images/airflow_workshop/dag-button-refresh.png)
+![dag-button-refresh](/assets/images/2023-06-04-TFX_Airflow_Tutorial_4.png)
 
 ### 3. 打开一个新的终端窗口，在该窗口中执行下面的命令，打开对每个组件进行性能分析的 notebook
 
@@ -74,4 +76,4 @@ tags: [tensorflow]
     jupyter notebook
 ```
 
-![login page](https://www.tensorflow.org/static/tfx/tutorials/tfx/images/airflow_workshop/notebook-ipynb.png)
+![login page](/assets/images/2023-06-04-TFX_Airflow_Tutorial_5.png)
