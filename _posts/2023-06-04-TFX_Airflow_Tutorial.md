@@ -62,9 +62,7 @@ tags: [tensorflow]
 运行 taxi 流水线
 ![DAG](/assets/images/2023-06-04-TFX_Airflow_Tutorial_2.png)
 
-![TensorFlow](/assets/images/2023-06-04-TFX_Airflow_Tutorial_3.png)
-
-![dag-button-refresh](/assets/images/2023-06-04-TFX_Airflow_Tutorial_4.png)
+![TensorFlow](/assets/images/2023-06-04-TFX_Airflow_Tutorial_3.png)![dag-button-refresh](/assets/images/2023-06-04-TFX_Airflow_Tutorial_4.png)
 
 ### 3. 打开一个新的终端窗口，在该窗口中执行下面的命令，打开对每个组件进行性能分析的 notebook
 
