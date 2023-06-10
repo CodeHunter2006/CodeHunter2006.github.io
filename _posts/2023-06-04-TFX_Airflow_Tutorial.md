@@ -27,7 +27,7 @@ tags: [tensorflow]
 
 
     git clone https://github.com/tensorflow/tfx.git
-    cd ~/tfx/tfx/tfx/examples/airflow_workshop/setup
+    cd ~/tfx/tfx/tfx/examples/airflow_workshop/taxi/setup
     ./setup_demo.sh
 ```
 
@@ -70,7 +70,7 @@ tags: [tensorflow]
     # Open yet another new terminal window, and in that window ...
     # Assuming that you've cloned the TFX repo into ~/tfx
     source ~/tfx-env/bin/activate
-    cd ~/tfx/tfx/tfx/examples/airflow_workshop/notebooks
+    cd ~/tfx/tfx/tfx/examples/airflow_workshop/taxi/notebooks
     jupyter notebook
 ```
 
