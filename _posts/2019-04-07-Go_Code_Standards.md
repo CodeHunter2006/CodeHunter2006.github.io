@@ -472,7 +472,7 @@ urlPony 或者 URLPony
 
 - 名称
 
-统一采用单字母'p/c'而不是 this，me 或者 self
+统一采用单字母'p/c'而不是 this，me 或者 self。也可以用对应类型的首字母，如`(o *Object)`
 
 ```
 type T struct{}

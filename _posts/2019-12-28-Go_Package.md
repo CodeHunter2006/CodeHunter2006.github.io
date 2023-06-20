@@ -165,6 +165,28 @@ func testErrorGroup() {
 
 - `%02d` 打印整形时前面补`0`，保留`2`位
 
+## http
+
+http 请求相关
+
+```Go
+req, err := http.NewRequest(http.MethodPost, "url", strings.NewReader("body"))
+if err != nil {
+  return err
+}
+req.URL.RawQuery = url.Values{"key":"value"}.Encode()
+req.Header.Set("Content-Type", "charset=UTF-8")
+req.SetBasicAuth("username", "password")
+
+resp, err := http.DefaultClient.Do(req)
+if err != nil {
+  return err
+}
+defer resp.Body.Close()
+
+body, err := io.ReadAll(resp.Body)
+```
+
 ## io
 
 `func MultiWriter(writers ...Writer) Writer`
@@ -276,6 +298,15 @@ Parse 函数可以从字符串解析出 url.URL 的对象指针，url.URL 包含
 ## math
 
 `func Sqrt(x float64) float64`
+
+### code snippet
+
+```Go
+func RoundFloat(val float64, precision uint) float64 {
+	ratio := math.Pow(10, float64(precision))
+	return math.Round(val*ratio) / ratio
+}
+```
 
 ## math/rand
 
@@ -597,6 +628,35 @@ jq.Int("subobj", "subarray", "1")
 ## github.com/go-redsync/redsync/v4
 
 redis 分布式锁
+
+## github.com/avast/retry-go
+
+方便的进行 retry
+
+```Go
+import "github.com/avast/retry-go"
+
+func target() (string, error) {
+  return "", fmt.Errorf("error")
+}
+
+func main() {
+  var ret string
+  var err error
+  retry.Do(func() error {
+    ret, err = target()
+  }, retry.Attempts(3))
+
+  if err != nil {}
+  fmt.Println(ret)
+}
+```
+
+## github.com/google/uuid
+
+提供 UUID 生成功能
+
+`log.Println(uuid.New().String())`
 
 ## github.com/davecgh/go-spew/spew
 
