@@ -16,7 +16,7 @@ def after_request_func(result):
     jsonBody = request.get_json()
   except Exception as e:
     pass    # no json body
-  print('request {} {} {} {}'.format(request.method, request.path, request.args, jsonBody))
+  print('request {} {} {} {} {}, response {} "{}" "{}"'.format(request.remote_addr,request.method, request.path, request.args, jsonBody, result.status_code, result.status, result.data))
   result.status_code = 200
   return result
 

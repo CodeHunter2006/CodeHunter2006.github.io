@@ -235,11 +235,20 @@ locate -r xxx 正则查找
 
 concatenate 将文本连接并输出到标准输出
 
+- `-n` 加行号
+
 `cat xxx1 xx2`
 查看文件文本内容，多个文件则顺序输出
 
 `cat > file1`
 将后面的用户输入写入文件中，以`ctl+c`结束
+
+## tac
+
+和`cat`命令名正好反向，可以倒序显示文件的每行，行中的内容是正序的，只是多行之前倒序。
+
+`cat -n xxx.txt|tac|grep -m "error"`
+查找 log 中最新的 5 个 error 发生的行号
 
 ## dig
 
@@ -815,7 +824,10 @@ word, line, character, and byte count
 截取文件最后一段
 
 `tail 200 xxx.log`
-从 200 行向后截取
+从 200 行开始显示，显示 200 行以后的
+
+`tail -n 200`
+显示最后 200 行
 
 - `tail -20f xxx.log`
   截取最后 20 行

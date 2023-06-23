@@ -90,7 +90,7 @@ time2 -= timedelta(minutes = 5)
 print(time2)    # 2022-01-05 09:19:52
 
 during = time1 - time2  # 计算差值，获得 timedelta 类型
-print(during.total_seconds())
+print(during.total_seconds()) # 一定要用 total_seconds() 获取 float 绝对值，seconds 等都是获得自己范围内的值
 ```
 
 ## base64
@@ -112,6 +112,32 @@ json 操作
 
 - `str1 = json.dumps(obj)` 对象转 json 字符串
 - `obj1 = json.loads(str1)` json 字符串转对象
+
+## logging
+
+打印 log
+
+```python
+import logging
+
+logger = logging.getLogger()
+logger.setLevel(logging.DEBUG)
+
+LOG_FORMAT = "%(asctime)s - %(levelname)s - %(message)s"
+DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
+formatter = logging.Formatter(fmt=LOG_FORMAT, datefmt=DATE_FORMAT)
+
+stream_handler = logging.StreamHandler(stream=sys.stdout)
+stream_handler.setFormatter(formatter)
+
+logger.addHandler(stream_handler)
+
+def testLog():
+    logger.debug("debug log") # 2023-06-21 21:42:17 - DEBUG - debug log
+    logger.info("info log")
+
+testLog()
+```
 
 ## sys
 
@@ -139,6 +165,21 @@ lock = threading.Lock() # 创建一个互斥锁
 lock.acquire()  # 获取锁
 
 lock.release()  # 释放锁
+```
+
+## time
+
+`time.sleep(1)  # second`
+进程挂起
+
+## uuid
+
+生成 uuid
+
+```python
+from uuid import uuid4
+
+print(uuid4())
 ```
 
 # 第三方包
