@@ -253,7 +253,17 @@ def func1:
 
 - `and or not`
 
-- `not`除了判断`bool/None`之外，还可以判断`dict/set/tuple`为空的情况。`not {} # True`
+- `not`除了判断`bool/None`之外，还可以判断`string/int/float/dict/set/list/tuple`为零值或空情况。
+
+```python
+# 以下全为 True
+not ""
+not 0
+not 0.0
+not {}
+not []
+not ()
+```
 
 - `or` 除了做"逻辑或"的 bool 表达之外，还可以根据左右两边的表达式是否为 None，返回非 None 结果
   ```Python
