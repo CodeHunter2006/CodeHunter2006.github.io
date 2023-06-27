@@ -61,7 +61,8 @@ str4 = f"str4 {str2} bracket: {{, another bracket: }} "
 
 - Python 不支持单字符类型，单字符在 Python 中也是作为一个字符串使用。
 
-- 可以用`变量[头下标:尾下标]`截取子字符串。`0`为开始值，`-1`为最后一个字符，以此类推。
+- 可以用`变量[头下标:尾下标]`**左闭右开**区间截取子字符串。`0`为开始值，`-1`为最后一个字符，以此类推。
+  - 如果下标超过合理范围，则会自动修正到合理范围，如果无法修正，则返回空 list。不会报错
 
 ### bytes 与 str
 
@@ -103,6 +104,10 @@ Python 支持三种数字类型：int float complex
 
 - `print(1/2) # 0.5`
   两个整型相除时，会自动转为浮点型
+
+## bool
+
+- string -> bool 转换时的坑：`bool("False")`的结果是`True`，想要设置为`False`要用空字符串
 
 ## dict
 
@@ -341,6 +346,18 @@ testStr = [str(x) for x in test if True]  # 生成为字符串数组
 
 - **注意**如果循环包含`else`，那么`break`将导致`else`失效。`continue`不会影响`else`。
 
+## with
+
+对于系统资源如文件、数据库连接、socket 而言，使用之后必须要关闭，`with`可以很好的实现这个逻辑。
+
+```python
+with expression [as variable]:
+    #with-block
+
+with open(file, "w") as f:
+    f.write("hello python")
+```
+
 ## 三目运算符
 
 Python 中支持三目运算语法：
@@ -456,7 +473,8 @@ testYield()
 
 ## 参数默认值
 
-- 可以赋默认值：`def test(param1: str = '')`
+- 可以赋默认值：`def test(param1: int, param2: str = '')`
+- 注意，带默认值的参数必须放在参数最后，
 
 ## 返回 tuple
 
@@ -480,9 +498,41 @@ print(x, y) # hello world
 
 - Python 有类似 Go 的**并列赋值**语法: `a, b, c = 1, "2", (3)`
 
+## 系统变量
+
+python 有下面几个系统变量，随时可以使用
+
+- `__file__`：当前文件绝对路径
+- `__name__`: 当前模块路径
+- `__package__`: 当前模块所在的包名
+- `__dict__` ：当前类的字典（包括静态属性、动态方法）
+
 # 异常处理
 
 Python 的异常处理与 Java 基本相同。
+
+```python
+def test():
+  try:
+      result = x / y
+  except ZeroDivisionError:
+      print("division by zero!")
+  except Exception as e:
+      print(e)
+      raise
+  else:
+      print("result is", result)
+  finally:
+      print("executing finally clause")
+```
+
+- `try`和`except`是必选语句，其它都是可选的
+- `except` 的类型要从上到下越来越泛化，最后是`Exception`
+- 捕获异常后，就不会向上抛出异常了。如果想处理后继续向上抛出，直接`raise`即可
+- 具体类型后可跟`as name`，后面就可以操作这个捕获的异常对象
+- `else`是上面都没有满足时走的路径。由于`Exception`是所有异常的父类型，所以通常有`Exception`作为兜底后，就不会走`else`了
+- `finally`后是无论如何都会走的代码，不管是否发生异常都会走。如果外层存在循环并且上面处理有**continue**或**break**，仍然会执行`finally`的代码。
+  - `finally`可用于关闭文件或连接，这种情况用`with`更合适
 
 # module(模块)
 

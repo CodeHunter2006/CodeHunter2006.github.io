@@ -106,6 +106,15 @@ origin_data = base64.b64decode(base64_data)
 print(origin_data.decode())
 ```
 
+## inspect
+
+代码反射相关
+
+```python
+# 打印当前代码文件及行数
+print(f'{__file__} {inspect.currentframe().f_lineno}')
+```
+
 ## json
 
 json 操作
@@ -258,3 +267,16 @@ pprint(x) # {'a': {'b': 'c'}}
 
 - `python -m pyflakes ./folder1/* | grep -Ev 'but never used|imported but unused|redefinition of unused|may be undefined|unable to detect undefined names'`
   扫描指定文件夹下所有`.py`文件，并且忽略常见的 warning
+
+## py-spy
+
+python 进程运行情况查询
+
+- `py-spy dump --pid {}`
+  查看进程调用堆栈
+
+- `py-spy top --pid {}`
+  获取函数调用消耗
+
+- `py-spy record -o profile.svg --pid {}`
+  生成火焰图
