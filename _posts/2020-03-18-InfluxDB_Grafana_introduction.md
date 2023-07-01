@@ -53,6 +53,7 @@ Grafana 是一个纯 HTML+JS 的 web 应用，是一个开源仪表盘工具，�
 - 丰富的数据源接口，支持 InfluxDB、MySQL、ElasticSearch、PostgreSQL 等多数据源
 - 丰富的 API 接口，方便自动化程序调用
 - 监控 dashboard 导入导出，制作好模板后导入后修改参数即可实现实时监控
+- 可方便的设置全局变量，动态变更整个 board 的显示参数
 - 支持复杂的告警规则及邮件告警
 
 # 常见问题

@@ -536,6 +536,18 @@ top 命令显示的字段详解：
 - `readlink -f ./xx`
   显示文件的绝对路径
 
+## reboot
+
+重启系统，一般不轻易使用，需要有 root 权限。
+
+- `重启`等价于`shutdown -r now`
+
+## shutdown
+
+关机
+
+- `shutdown -h now`
+
 ## dirname
 
 从路径字符串中提取最末的文件夹路径
@@ -600,6 +612,13 @@ clock --hctosys 将硬件时间应用到系统时间
 - `timedatectl list-timezones` 查看所有可用时区
 - `timedatectl set-timezone UTC` 设置时区为 UTC
 
+## tr
+
+translate，转换或删除子字符串
+
+- `tr 'str1' 'str2'`
+  把字符串中的 str1 替换为 str2
+
 ## cp
 
 `cp -Rf /home/user1/* /root/temp/`
@@ -652,9 +671,10 @@ iptables -nv -L
 
 `export VALUE_NAME=${VALUE_NAME:-default}`
 
+- `${VAR_NAME}` 引用变量
 - `${VALUE_NAME:-default}` 表示如果变量不存在，则用`:-`后面的默认值替代；如果存在则不作替换
 
-`echo $VALUE_NAME`
+`echo $VALUE_NAME`/`echo ${VALUE_NAME}`
 输出(环境)变量的值
 
 `unset VALUE_NAME`
@@ -770,9 +790,9 @@ awk 可以遍历文件或标准输入的每一行，进行处理，功能强大�
 一个 awk 脚本通常由：BEGIN 语句块、能够使用模式匹配的通用语句块、END 语句块 3 部分组成，这三个部分是可选的。
 任意一个部分都可以不出现在脚本中，脚本通常是被 单引号 或 双引号 中。
 
-- `-F "xxx"`指定处理一行数据时的分割符
+- `-F "xxx"`指定处理一行数据时的分割符，默认为`" "`
   - 分割符是正则表达式，可以用`-F "[, ]"`，同时把`,`和` `作为分隔符
-- 分割之后，可以用`$1`、`$2`...取得被分割后的每个子串
+- 分割之后，可以用`$1`、`$2`...取得被分割后的每个子串，`$0`表示输入的整行内容
 
 - 假设有`test.log`文件内容如下：
 
@@ -790,15 +810,74 @@ xxx,id:456,xxx
 456
 ```
 
+### 全局变量
+
+- `$1, $2`
+  表示第几个参数
+- `$0`
+  表示一行所有的传入数据
+- `NR`
+  number of record 行数
+- `NF`
+  number of field 多少个参数
+- `FNR`
+  file number of record 当前文件的行数记录。如果多个文件，NR 记录所有文件行数。
+- `FS`
+  Field seperator 列分割符 默认是" "(空白符)
+- `RS`
+  Rcoerd seperator 行分割符： 默认是"\n"
+- `OFS`
+  Output Field seperater 输出分隔符。默认是"\n"
+
+### print 子命令
+
+- `print($1, " ", $2)`
+  在两个字符串中增加空格
+
+### if else 功能
+
+在三个逻辑块中都可以使用 if 判断
+
+- `awk -F " " '{ if ($1==1) print "A"; else if ($1==2) print "B"; else print "C" }'`
+  根据分割后的第一个子串打印不同内容，注意每个 if 语句以`;`结尾。其中`else if`是可选的，并且可以有多个。
+
+### 变量
+
+变量无需声明，直接使用。
+
+- 如果为数，默认为 0
+- 如果为字符串，默认为""
+
+`awk '{a += 1; print a}'`
+
+### array/map 操作
+
+awk 中的数组是关联数组(Associative Array)，本质是一个默认顺序的 hashtable，其中 key 可以为 string 也可以为 int
+
+- `awk -F " " '{ map[$1]=$3 } END { for (ele in map) { print (map[ele]);} }'`
+  用 map 做统计
+
+- `{ delete array }`
+  删除数组
+
+- `for (key in array) delete array[key];`
+  删除数组元素
+
+### 利用 ++ 进行累加运算
+
+- `awk '{ if ($1=1) a++; } END { print a; }'`
+
 ## xargs
 
 可以捕获一个命令的输出(管道/stdin)，然后传递给另外一个命令。
-对前面的输出，xargs 可以将其分成多段传给新命令，避免新命令参数数量溢出。
+对前面的输出，xargs 可以将其分成多段传给新命令，避免新命令参数数量溢出；也可以将多行组合成一个命令的参数。
 
 `some command |xargs command`
 
 - `-I {}`
-  将输入替换后面的替换符，如`|xargs -I {} grep "{}_xx" file`，将传入的内容替换到后面`{}`位置
+  Interchange(替换)，将输入替换后面的替换符，如`|xargs -I {} grep "{}_xx" file`，将传入的内容替换到后面`{}`位置
+- `-l`
+  line，将多行内容中间添加空格作为命令输入，如`|xargs -l2`两行内容合并作一行
 
 - `docker images|grep "xxx.xxx.xxx"|awk -F " " '{print $3}'|xargs docker rmi`
   删除指定 repo 下的所有 docker 镜像
