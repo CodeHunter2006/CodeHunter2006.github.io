@@ -79,6 +79,12 @@ tags: MySQL
 * int(m)
   m 表示显示时如果不足 m 位，则自动左补 0
 
+# 常量
+
+- `CURRENT_TIMESTAMP`
+  当前时间戳
+  `xxx timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP`
+
 # 常见问题
 
 - 用`mysql -h xxx -uxxxx -pxxx`连接时，报 1045 错误

@@ -999,6 +999,17 @@ sed -i "" "s/要查找的文本/替换后的文本/g" `grep -rl --include='*.go'
 - `alias l="ls -lah"`
   给命令设置别名，简化操作
 
+## uniq
+
+过滤整理文件中的重复行
+
+- `uniq -c`
+  count, 统计每行的出现次数，统计结果为`行内容 出现次数`
+- `-d`
+  repeated, 重复项只输出一次
+- `-u`
+  unique，是输出出现过一次的内容
+
 # bash 语法
 
 ## 顺序执行
@@ -1115,6 +1126,15 @@ for i in {1..10}
 do
 echo $i
 done
+```
+
+### 每行文本内容循环
+
+- `for do done`
+
+```shell
+# 把 host 作为变量
+for host in `cat list|grep "ip"|awk -F "ip" '{print $1}'`; do echo $host; done| sort -rk1
 ```
 
 ## 数组

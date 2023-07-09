@@ -10,6 +10,11 @@ tags: ClickHouse
   - 启动 server `./clickhouse server`
   - 启动 client `./clickhouse client`
 
+- `on cluster xxx`
+  在 clickhouse 中的特殊语法。执行 DDL 时加上`on cluster`可以自动在集群所有节点执行该 DDL。
+  其原理是客户端把请求打到某个初始节点执行时，该节点会根据配置中的集群拓扑结构把请求分别打到所有节点(所有主备)执行，分别执行完毕返回到初始节点后，初始节点再把结果返回给客户端。
+  查询时，只要使用了分布式表，就会以同样的请求路径执行查询。
+
 - 创建表
 
 ```SQL
