@@ -151,6 +151,13 @@ insmod
 将文件安装到内核
 通常是驱动。
 
+## md5
+
+生成 md5 字符串，用于文件校验
+
+- `md5 filename`
+  生成文件的 md5 字符串
+
 ## date
 
 `date +"%Y-%m-%d %H:%M:%S"`
@@ -579,14 +586,6 @@ apt-get install xxx //安装某个软件
 
 - 在`/etc/apt/sources.list`存放着软件源，可以根据网络情况更新
 
-压缩文件夹
-tar -zcvf /home/xahot.tar.gz /xahot --exclude=xxx
-tar -zcvf 打包后生成的文件名全路径 要打包的目录 要排除的目录名
-tar –xvf file.tar 解压 tar 包
-tar -xzvf file.tar.gz 解压 tar.gz
-tar -xjvf file.tar.bz2 解压 tar.bz2
-tar –xZvf file.tar.Z 解压 tar.Z
-
 ## zip/unzip
 
 `zip -r target.zip srcFolder`
@@ -938,6 +937,16 @@ sed -i "" "s/要查找的文本/替换后的文本/g" `grep -rl --include='*.go'
 - 批量替换指定文件夹下的所有文件内容，递归所有子文件夹
   - `-i`后的第一个字符串可以指定备份文件的名称，如果不想备份，可以指定为`""`
 
+## split
+
+将文件拆分
+
+- `split -b 100M filename "target_prefix_"`
+  拆分文件为 100MB 上限的多个文件，以字母`aa/ab/ac`作为后缀
+
+- `cat target_prefix_* > filename`
+  将上面分割的文件合并为目标文件，由于后缀符合字母顺序，会自动按顺序合并
+
 ## tailf
 
 与 tail 功能相同，会从文件开头读起，并对末尾保持观察。
@@ -947,6 +956,16 @@ sed -i "" "s/要查找的文本/替换后的文本/g" `grep -rl --include='*.go'
 
 `tailf -20 xxx.log`
 从最后 20 行开始观察文件
+
+## tar
+
+压缩文件夹
+tar -zcvf /home/xahot.tar.gz /xahot --exclude=xxx
+tar -zcvf 打包后生成的文件名全路径 要打包的目录 要排除的目录名
+tar –xvf file.tar 解压 tar 包
+tar -xzvf file.tar.gz 解压 tar.gz
+tar -xjvf file.tar.bz2 解压 tar.bz2
+tar –xZvf file.tar.Z 解压 tar.Z
 
 ## diff
 

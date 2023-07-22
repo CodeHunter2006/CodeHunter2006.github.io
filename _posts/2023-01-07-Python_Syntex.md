@@ -119,6 +119,8 @@ Python 支持三种数字类型：int float complex
   返回一个 dict 内容的 list，形如：`[(key1,value1), (key2,value2), ...]`
 - `pop(key[,default])`
   删除对应的 key 的 item，并返回对应的 value。可以设定 default 值，如果没有 key 则返回 defualt value。
+- `dict.update(dict2)`
+  把 dict2 里的 key-value 覆盖到 dict，dict 特有的 key 保持不变。
 
 ## set
 
@@ -157,6 +159,8 @@ s3 > s1 # True, s3 包含 s1
 ```python
 x = (1, "2", {3})
 ```
+
+- 在赋值时，可以自动实现`unpack`，即把一个 tuple 对象分解成对应数量的变量赋值，如：`x, y, z = (1, 2, 3)`
 
 ### 元组内置函数
 
@@ -201,6 +205,9 @@ print(type(Weekday.wednesday))   # <enum 'Weekday'>
 print(Weekday.wednesday.name)    # wednesday
 print(Weekday.wednesday.value)   # 3
 ```
+
+- 遇到 json 序列化报错时`TypeError: Object of type 'eekday' is not JSON serializable`，
+  可以用多继承解决：`class Weekday(int, Enum):`
 
 ## 预期类型元数据(type hints)
 
@@ -251,8 +258,11 @@ def func1:
 - 在 Python 的逻辑表达式中，`None`、`False`、`0`、`""(空字符串)`、`[](空列表)`、`()(空元组)`、`{}(空字典)`都相当于`False`。
 
 - 如何判断变量值是否为`None`？
+
   - `if X is None:`
   - `if X is not None:`相当于`if not (X is None)`
+
+- python 没有 `switch` 语法，只能用`elif`实现
 
 ## 逻辑运算符
 
@@ -378,8 +388,8 @@ Python 的推导式语法允许从一种集合导出另一种集合，这里的"
 
   - `{ key_expr: value_expr for value in collection [if condition] }`
     字典推导式的数据源只能是更低维度的类型，比如 list set tuple
-  - 可以利用`dict.items()`作为数据源进行推导
-    `{ key_expr: value_expr for (k,v) in dict_src [if condition] }`
+  - 可以利用`dict.items()`(返回`[(k,v)]`)作为数据源进行推导
+    `{ key_expr: value_expr for (k,v) in dict_src.items() [if condition] }`
 
 ## 拉姆达表达式 lambda
 
@@ -467,14 +477,39 @@ testYield()
 - 在 python 中，`strings`, `tuples`, 和 `numbers` 是不可更改(immutable)的对象，而 `list`, `dict` 等则是可更改(mutable)的对象。
   不可更改的对象按"值"传参，即函数中的变量实际上是新的变量，函数中的修改不会影响函数外变量；可更改的对象按"引用"传参，可以修改外部变量。
 
+## 关键字参数
+
+- 传参顺序与定义顺序不一致时，可以使用关键字传参
+- 关键字传参一定要放在普通参数的后边(右边)，如果关键字参数重复设置了前面的参数则会报错
+
+```python
+def f(x: int, y: str):
+  pass
+
+f(y = "y", x = 1)
+```
+
+## 声明 ※ 参数
+
+- 声明函数时可以用`*`作为参数分割关键字参数，要求调用传参时`*`后面的必须用关键字参数
+
+```python
+def func(x, y, *, z):
+  pass
+
+func(1, 3, z=3)
+```
+
 ## 不定长参数
 
 - 在函数定义时，最右边可以带一个不定长参数`def functionname([formal_args,] *var_args_tuple ):`，这里`var_args_tuple`是一个 tuple，包含了所有后面未命名的参数的值
 
+- `def functionname([formal_args,] **var_args_dict):`，这里`var_args_dict`是一个 dict，包含了后面所有关键字参数，但是如果调用方只传了一个参数，则这里`var_args_dict`并不一定是一个 dict，而是与这一个参数类型一致。(感觉这是个 python bug)
+
 ## 参数默认值
 
 - 可以赋默认值：`def test(param1: int, param2: str = '')`
-- 注意，带默认值的参数必须放在参数最后，
+- 注意，带默认值的参数必须放在参数最后
 
 ## 返回 tuple
 
@@ -573,7 +608,7 @@ if __name__ == '__main__':
 - 作用域就是一个变量名对应的查找范围，从近到远分为 4 层：L(Local)->E(Enclosing)->G(Global)->B(Built-in)
 - 只有模块（module），类（class）以及函数（def、lambda）才会引入新的作用域，其它的代码块（如 if/elif/else/、try/except、for/while 等）是不会引入新的作用域的，也就是 if 中定义的新变量其实直接定义在 Local 作用域中了，在 if 外层也是可以访问的。
 
-- 在`.py`中定义的变量是全局变量，但是在函数中要使用时要用`global xx`声明一下，否则函数中的变量为局部变量
+- 在`.py`中定义的变量是全局变量，可以在函数中使用。但函数中想定义全局变量供外部使用，要用`global xx`声明一下，否则函数中的变量为局部变量。
 
 - 在函数内定义函数形成闭包时，可以在内部函数中用`nonlocal xx`声明该变量为上层函数中的变量，否则默认为局部变量
 
@@ -594,7 +629,7 @@ if __name__ == '__main__':
 
 Python 的面向对象支持多继承。
 
-- 多继承时`X(A,B,C)`如果有相同方法名而子类中未指定，则从左向右广度优先遍历。
+- 多继承时`X(A,B,C)`如果有相同方法名而子类中未指定，则从左向右广度优先遍历。即左边的优先级更高。
 
 ```python
 class A:
@@ -619,6 +654,12 @@ class C(A, B): # C 继承自 A 和 B
 c = C(2)  # 调用构造函数
 c.f()  # f 2
 ```
+
+- 子类访问父类对象的属性时，直接`self.xxx`访问即可
+- 子类访问父类对象的函数时，可以用`super().xxx()`
+
+- 子类重写`__init__`函数后就不会自动调父类的构造函数
+- 子类调用父类构造函数，可以用`super().__init__(xx,xx)`
 
 - 判断是否是实例`isinstance(object, class)`
   子孙类对象也会返回`True`
@@ -685,6 +726,10 @@ print(o.field, A.field) # 1 2
 
 - 如果经过了构造函数，创建了新对象，则成员变量是**对象的成员变量**
 - 如果直接通过类名调用，则成员变量是**类的成员变量**
+
+## `@staticmethod`
+
+与`@classmethod`修饰符相比，函数中无需传入`cls`参数
 
 # 常用函数
 

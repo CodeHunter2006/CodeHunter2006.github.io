@@ -27,3 +27,50 @@ def hello():
     tags = requests.args.getlist('tag')
     print('tags')
 ```
+
+## 在 request 处理过程中传递全局变量
+
+```python
+from flask import (g)
+
+@app.before_request
+def func1():
+  g.field1 = "test"  # 先定义变量，这样后面使用时不会报未定义
+
+# 后面可以直接读取和写入
+```
+
+- 如果没有预先定义，后面使用时会报错：`'_AppCtxGlobals' object has no attribute xxx`
+
+## 用参数渲染页面模板并返回
+
+```html
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+{% autoescape false %}
+  test url {{ url_param }}
+{% endautoescape %}
+</body>
+</html>
+```
+
+- 用`{{ param }}` 设置参数
+- 用`{% xxx %}`设置渲染参数
+  - 默认会开启 html 危险符号转义，比如 url 中的`&`符号会被转移为`&amp;`。
+  - 用`{% autoescape false %}`暂时关闭渲染时的转义
+
+```python
+from flask import (
+    Flask,
+    render_template,
+    Response,
+)
+
+app = Flask(__name__)
+app.template_folder = 'path'  # 设置模板文件夹绝对路径
+args = {'param1' = 1, 'url_param' = "xxx"}
+out_html = render_template('index.html', **args)  # 渲染模板文件夹内的文件
+return Response(out_html, mimetype='text/html') # 返回时设置
+```
