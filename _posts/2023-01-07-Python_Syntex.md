@@ -94,7 +94,7 @@ bytes 是二进制字节数组，用`b''`构造，底层存储字节(0-255)
 ### 常用函数
 
 ```python
-# 生成新的字符串，由指定字符串分割
+# 用字符串 list 生成新的字符串，由指定字符串分割
 ','.join(['1','2']) # "1,2"
 ```
 
@@ -117,10 +117,15 @@ Python 支持三种数字类型：int float complex
 
 - `dict.items()`
   返回一个 dict 内容的 list，形如：`[(key1,value1), (key2,value2), ...]`
-- `pop(key[,default])`
-  删除对应的 key 的 item，并返回对应的 value。可以设定 default 值，如果没有 key 则返回 defualt value。
+- `dict.pop(key[,default])`
+  删除对应的 key 的 item，并返回对应的 value。
+  - 可以设定 default 值，如果没有 key 则返回 defualt value
+  - 如果没有这个元素且没有设定 defualt 值，则报错"key 不存在"
 - `dict.update(dict2)`
   把 dict2 里的 key-value 覆盖到 dict，dict 特有的 key 保持不变。
+
+- `del testDict['name']`
+  删除一个元素
 
 ## set
 
@@ -208,6 +213,10 @@ print(Weekday.wednesday.value)   # 3
 
 - 遇到 json 序列化报错时`TypeError: Object of type 'eekday' is not JSON serializable`，
   可以用多继承解决：`class Weekday(int, Enum):`
+
+- 使用`package pymysql`时可能遇到`object has no attribute 'translate'`，因为不识别 Enum 类型，需要强转成 int 型使用
+
+- 为了避免上面两个报错，可以不继承任何类创建`Weekday`类，但是无法保证"不重复"和"不可修改"特性，需要在使用中注意。
 
 ## 预期类型元数据(type hints)
 
@@ -588,6 +597,7 @@ module 要用包来组织，包对应于文件夹，文件夹名就是包名。�
 - 在`__init__.py`可以设置变量`__all__ = ["echo", "surround", "reverse"]`如果用`from xxx import *`的导入方式，则会只导入`__all__`指定的元素
 - 模块如果被间接导入多次，只会被加载一次，`__init__.py`只会被调用一次
 - 如果多个模块都在一个包中，并且这些模块依赖相同的外部包，就可以把这些 import 语句放入`__init__.py`中，避免重复
+- 在`__init__.py`可以提前写好`from self.package import class1`来指定可被导出的类或全局变量
 
 ## 在文件中区分导入和脚本执行
 
@@ -613,6 +623,7 @@ if __name__ == '__main__':
 - 在函数内定义函数形成闭包时，可以在内部函数中用`nonlocal xx`声明该变量为上层函数中的变量，否则默认为局部变量
 
 - 关于下划线`_`和作用域的关系
+
   - 在 class 中，函数名以双下划线`__`开头，则该函数由于 Python 的重命名机制，会自动在外部和子类隐藏，相当于其他语言`private`的作用
   - 在变量或函数名前加一个下划线`_`表示一种命名规范，这种变量或函数不推荐在外部使用或子类重写，应该被当做`private`看待，但是实际上是可以访问到的
   - 在变量后面加下划线，通常用于避免和关键字冲突，例如：`int_`
@@ -624,6 +635,9 @@ if __name__ == '__main__':
     - 容器类操作
     - 可调用对象
     - 序列化
+
+- `del v1`
+  删除变量。之后再引用会报"未定义"错误。
 
 # 面向对象
 
