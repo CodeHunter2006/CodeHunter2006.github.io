@@ -42,6 +42,9 @@ select query_id, query, event_time, exception from system.query_log where query 
 - `system.parts`
   分区情况
 
+- `system.kafka_tables`
+  kafka 消费表情况
+
 - `select * from test_db.test_table_local`
   查询分布式表中当前节点的 local 表
 

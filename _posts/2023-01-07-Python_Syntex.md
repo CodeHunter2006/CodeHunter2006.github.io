@@ -117,6 +117,11 @@ Python 支持三种数字类型：int float complex
 
 - `dict.items()`
   返回一个 dict 内容的 list，形如：`[(key1,value1), (key2,value2), ...]`
+
+- `dict.copy()`
+  返回浅复制对象
+- `dict.get(key, default=None)`
+  返回指定 key 的值，如果不存在，返回 default 值
 - `dict.pop(key[,default])`
   删除对应的 key 的 item，并返回对应的 value。
   - 可以设定 default 值，如果没有 key 则返回 defualt value
@@ -134,6 +139,8 @@ Python 支持三种数字类型：int float complex
 ```python
 set1 = {1,2,3}
 ```
+
+- 用`{}`创建一个空集合时，其实默认创建了 dict 类型。用`set()`创建空集合更合适。
 
 - set 的"交/并/差"操作
 
@@ -156,6 +163,11 @@ s2 - s1 # {3}
 s1 >= s2 # False, s1 包含或等于 s2
 s3 > s1 # True, s3 包含 s1
 ```
+
+### set 内置函数
+
+- `set.add(x)`
+  添加一个元素
 
 ## tuple(元组)
 
@@ -185,6 +197,16 @@ x = (1, "2", {3})
 如果一个变量未定义，则会直接报错，不会允许继续执行下去，这和 Javascript 的 undefine 是不同的。
 
 创建一个变量但不确定类型和值时，可以用`x = None`
+
+## 各类型通用函数
+
+- `len(x)`
+  可以对 dict/set/list/tuple 进行计算，返回元素个数
+
+- `+`
+  - 数字相加
+  - 字符串拼接
+  - list 拼接
 
 ## enum
 
@@ -588,6 +610,24 @@ module 是 python 代码重用的的基本单元，一个 module 就是一个`xx
 - 使用`from ..aa.bb import c`可以导入上层 package 的子 package，这里两个点`..`表示上一层
 - 使用`from ...aa.bb import c`可以一直向上找到某个 package，其子 package 包含`aa.bb`
 
+- 使用`from package import item`时，package 可以是**PythonPath**下的系统包/第三方包，也可以是自己当前文件夹下的包；而用`import package`时只能引用 PythonPath 下的包，需要提前把想引用的包的根目录加入到 PythonPath
+- `import package as alia_name` 也可以导入自定义包
+
+加入 PythonPath 的两种方法：
+
+1. 临时方法：
+
+```python
+import sys
+sys.path.append('absolute_path')
+```
+
+2. 永久方法 1：
+   在对应的 python 安装路径下找到`xxx.pth`文件，在其中添加自定义包所在根文件夹
+
+3. 永久方法 2：
+   在`.bashrc`文件中，追加一行：`export PYTHONPATH=${PYTHONPATH}:/absolute_path`
+
 # package(包)
 
 module 要用包来组织，包对应于文件夹，文件夹名就是包名。包和文件夹一样，可以有嵌套结构，通过`.`分隔。
@@ -745,11 +785,6 @@ print(o.field, A.field) # 1 2
 
 与`@classmethod`修饰符相比，函数中无需传入`cls`参数
 
-# 常用函数
-
-- `dir(SampleClass)`
-  查看类的成员
-
 # 反射
 
 - `getattr(object, name[, default])`
@@ -757,3 +792,9 @@ print(o.field, A.field) # 1 2
 
 - `hasattr(object，name)`
   判断对象是否有指定名字的成员
+
+- `dir(SampleClass)`
+  查看类的成员
+
+- `vars(obj)`
+  查看对象实例的成员

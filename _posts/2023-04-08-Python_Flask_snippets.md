@@ -38,6 +38,7 @@ def func1():
   g.field1 = "test"  # 先定义变量，这样后面使用时不会报未定义
 
 # 后面可以直接读取和写入
+g.get("field1", None) # 读取时用 get
 ```
 
 - 如果没有预先定义，后面使用时会报错：`'_AppCtxGlobals' object has no attribute xxx`
