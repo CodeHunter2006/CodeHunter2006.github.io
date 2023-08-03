@@ -664,6 +664,12 @@ func main() {
 
 `spew.Printf("myVar1: %v -- myVar2: %+v", myVar1, myVar2)`
 
+## https://github.com/kisielk/godepgraph
+
+可以打印 Go 的包依赖关系，依赖 Graphviz 组件可以进一步生成图。
+
+`godepgraph ./pkg/api`
+
 ## golang.org/x/text
 
 实现了各种文本编码、字符集相关操作

@@ -144,6 +144,7 @@ logger.addHandler(stream_handler)
 def testLog():
     logger.debug("debug log") # 2023-06-21 21:42:17 - DEBUG - debug log
     logger.info("info log")
+    logger.exception(f"{e}")  # 打印 error 时，同时打印调用栈
 
 testLog()
 ```
