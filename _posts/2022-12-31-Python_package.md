@@ -149,6 +149,19 @@ def testLog():
 testLog()
 ```
 
+## re
+
+regex 正则表达式相关
+
+```python
+import re
+
+date = "09/03/2022"
+pattern = re.compile("(\d{2})\/(\d{2})\/(\d{4})")   # 编译出模式对象
+match = pattern.match(date) # pattern 可多次 match，如果匹配则返回 match 对象；不匹配返回 None
+print(match.groups()[0]) # 返回捕获的组
+```
+
 ## sys
 
 系统相关
@@ -174,9 +187,13 @@ type(sys.argv[1]) # 调用脚本时传入的参数从下标 1 开始，元素类
 - `traceback.print_stack()`
   打印调用栈
 
+## thread
+
+这个包比较特殊，是隐藏包，一般用`threading`代替。如果非要使用，可以`import _thread as thread`
+
 ## threading
 
-多线程相关
+多线程相关高级功能
 
 ```python
 import threading
@@ -186,6 +203,44 @@ lock = threading.Lock() # 创建一个互斥锁
 lock.acquire()  # 获取锁
 
 lock.release()  # 释放锁
+```
+
+### 启动线程
+
+```python
+import threading, time
+
+def func(p1: int):
+  while True:
+    print(p1)
+    time.sleep(1)
+
+t1 = threading.Thread(target=func, args=(1,))
+t2 = threading.Thread(target=func, args=(2,))
+
+t1.start()
+t2.start()
+```
+
+### 线程专用成员变量 threading.local()
+
+有时，某个变量想要不同线程区分开，可以用下面方法实现。
+
+```python
+g_basic_var = threading.local() # 这个变量在所有线程都可见，但其内的成员变量只在一个线程中定义
+
+g_basic_var.X = 1
+
+def set_var(x: int):
+  g_basic_var.X = x
+
+def print_var():
+  print(f"{g_basic_var.X}")
+
+# 如果只有一个线程调用 print_var()，则输出默认值 1
+# 如果第二个线程未调用 set_var 就调 print_var()，则报错：
+# "exceptions.AttributeError:'thread._local' object has no attribute 'X'"
+# 因为成员必须在每个线程中独立初始化，不同线程相互隔离
 ```
 
 ## time
