@@ -156,6 +156,17 @@ testLog()
 - `sys.path.insert(0, '/tmp')`
   将指定的路径加入到 path 中的最前面(第 0 个位置)
 
+- `sys.argv`
+  传递进程调用时传入的参数
+
+```python
+import sys
+
+len(sys.argv) # 默认长度为 1，sys.argv[0] 中保存启动时的py文件名
+
+type(sys.argv[1]) # 调用脚本时传入的参数从下标 1 开始，元素类型都是 str
+```
+
 ## traceback
 
 用于打印调用栈
