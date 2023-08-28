@@ -122,6 +122,8 @@ json 操作
 - `str1 = json.dumps(obj)` 对象转 json 字符串
 - `obj1 = json.loads(str1)` json 字符串转对象
 
+- 注意，python 的 set 类型无法兼容 json，会报错。如果必须使用，可以转为 List[str] 或 dict 替代。
+
 ## logging
 
 打印 log

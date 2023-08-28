@@ -122,9 +122,19 @@ Python 支持三种数字类型：int float complex
 
 - string -> bool 转换时的坑：`bool("False")`的结果是`True`，想要设置为`False`要用空字符串
 
+## list
+
+### list 内置函数
+
+- `list.append(obj)` 在末尾添加元素
+- `list.count(obj)` 统计元素出现次数
+- `list.extend(seq)` 传入一个序列，在原序列末尾追加新序列的所有值
+
 ## dict
 
 - `**`紧贴 dict 变量前面，如`func1(**dict1)`，表示把 dict 以`key1=value1, ...`的形式展开。通常作为一个函数的参数使用。
+- `dict(xx=11)`
+  用 dict 作为构造函数，可以直接把 key-value 列表传入，如`dict(a=1, b=2)`
 
 ### dict 内置函数
 
@@ -144,6 +154,8 @@ Python 支持三种数字类型：int float complex
   删除对应的 key 的 item，并返回对应的 value。
   - 可以设定 default 值，如果没有 key 则返回 defualt value
   - 如果没有这个元素且没有设定 defualt 值，则报错"key 不存在"
+- `dict.popitem()`
+  返回并删除字典中的最后一对键和值
 - `dict.update(dict2)`
   把 dict2 里的 key-value 覆盖到 dict，dict 特有的 key 保持不变。
 

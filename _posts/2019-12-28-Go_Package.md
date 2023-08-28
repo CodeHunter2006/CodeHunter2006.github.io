@@ -471,6 +471,9 @@ sort.Sort(sort.Reverse(sort.IntSlice(s)))
 
 `func ToLower(s string) string`
 
+- `strings.EqualFold(a, b string) bool`
+  忽略大小写下，是否相等
+
 `strings.Split(str, seperator string) []string`
 将字符串按照分隔符切割为多个子字符串组成的切片
 
