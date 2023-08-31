@@ -28,6 +28,9 @@ def hello():
     print('tags')
 ```
 
+- `request.headers.get('xxx')`
+  获取 header 时，由于 header 的 key 不区分大小写，所以无论大小写都可以获取到正确的结果。 header 在传递过程中 key 的大小写可能被修改。
+
 ## 在 request 处理过程中传递全局变量
 
 ```python
@@ -50,17 +53,17 @@ g.get("field1", None) # 读取时用 get
     <meta charset="UTF-8">
 </head>
 <body>
-{% autoescape false %}
+{ % autoescape false % }
   test url {{ url_param }}
-{% endautoescape %}
+{ % endautoescape % }
 </body>
 </html>
 ```
 
-- 用`{{ param }}` 设置参数
-- 用`{% xxx %}`设置渲染参数
+- 用`{ { param } }` 设置参数
+- 用`{ % xxx % }`设置渲染参数
   - 默认会开启 html 危险符号转义，比如 url 中的`&`符号会被转移为`&amp;`。
-  - 用`{% autoescape false %}`暂时关闭渲染时的转义
+  - 用`{ % autoescape false % }`暂时关闭渲染时的转义
 
 ```python
 from flask import (
