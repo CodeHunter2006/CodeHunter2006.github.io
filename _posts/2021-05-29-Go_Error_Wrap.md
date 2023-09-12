@@ -57,6 +57,7 @@ func (e *wrapError) Unwrap() error {
 - 利用 `wraped := fmt.Errorf("test %w", err)`的`%w`就可以对原始 err 进行 wrapping
 
 - 用`errors.Is(wrapedErr, tarErr)`可以判定`tarErr`是否包含在`wrapedErr`中
+  - 注意这里的第二个参数`tarErr`应该是一个指针的地址，这样方便为指针创建指向的对象。如果直接传 nil 指针会报错。
 
 ```Go
 var tarErrorPointer *MyError
