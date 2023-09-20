@@ -16,6 +16,25 @@ tags: Java
   - 有无参构造器
   - 通过 Set/Get 暴露成员属性
 
+## 数据类型
+
+### 修饰符
+
+- **final**
+  - 修饰变量，表示常量，只能初始化时赋值
+  - 修饰方法，表示不能被重写，与 abstract 正好相反
+  - 修饰类，表示不能被继承，比如 String, Interger 以及其他包装类
+
+### 容器文本初始化(initialize with literals)
+
+```java
+import java.util.*;
+
+public class A {
+  private static final List<String> LIST = new ArrayList<String>(Arrays.asList("1", "2", "3"));
+}
+```
+
 ## 流程控制
 
 ### for each
@@ -23,16 +42,6 @@ tags: Java
 ```java
 for (int item : items) {
   //...
-}
-```
-
-## 容器文本初始化(initialize with literals)
-
-```java
-import java.util.*;
-
-public class A {
-  private static final List<String> LIST = new ArrayList<String>(Arrays.asList("1", "2", "3"));
 }
 ```
 
