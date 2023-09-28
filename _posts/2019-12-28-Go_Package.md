@@ -608,6 +608,18 @@ func main() {
 
 利用反射嵌套拷贝结构体间的同名成员
 
+## github.com/go-co-op/gocron
+
+定时任务
+
+```go
+
+func main() {
+  	scheduler := gocron.NewScheduler(time.UTC)
+    s.CronWithSeconds("*/1 * * * * *").Do(task) // every second
+}
+```
+
 ## github.com/jmoiron/jsonq
 
 方便的对 json/yaml 深度嵌套结构进行查询，通常先将 json/yaml 解析为`map[string]interface{}`类型，然后再用 jsonq 查询
@@ -626,6 +638,17 @@ jq := jsonq.NewQuery(data)
 
 // data["subobj"]["subarray"][1] -> 2
 jq.Int("subobj", "subarray", "1")
+```
+
+## github.com/wI2L/jsondiff
+
+比较两个 json 字符串，返回差异。可以忽略多余的空格等。
+
+```Go
+patch, err := jsondiff.CompareJSON(str1, str2)
+if err != nil {
+}
+log.Pringln(patch)
 ```
 
 ## github.com/go-redsync/redsync/v4
@@ -676,3 +699,12 @@ func main() {
 ## golang.org/x/text
 
 实现了各种文本编码、字符集相关操作
+
+## gopkg.in/yaml.v2
+
+yaml 操作，用法和 json 包类似。
+
+```Go
+if err := yaml.Unmarshal([]byte(str), &config); err != nil {
+}
+```
