@@ -187,6 +187,11 @@ defer resp.Body.Close()
 body, err := io.ReadAll(resp.Body)
 ```
 
+### 常见问题
+
+- response 返回了 `\x1f\x8b\x08...` 乱码
+  - 原因：服务端返回的响应头 Content-Encoding: gzip
+
 ## io
 
 `func MultiWriter(writers ...Writer) Writer`

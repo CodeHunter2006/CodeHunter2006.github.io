@@ -80,3 +80,22 @@ args = {'param1' = 1, 'url_param' = "xxx"}
 out_html = render_template('index.html', **args)  # 渲染模板文件夹内的文件
 return Response(out_html, mimetype='text/html') # 返回时设置
 ```
+
+## 启动异步进程
+
+```python
+# 定义子进程函数 long_task
+# 其中还可以正常使用 Flask 框架的 request 对象
+
+# 在 handler 函数中添加下面代码：
+from multiprocessing import Process
+async_process = Process(
+    target=long_task,
+    daemon=True,
+    kwargs={"param1":1, "param2": "2"}
+)
+async_process.start()
+
+# 启动子进程后 handler 就可以正常返回
+# 之后子进程会执行，完毕后退出
+```

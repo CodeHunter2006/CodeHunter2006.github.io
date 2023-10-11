@@ -46,3 +46,12 @@ main.main
 - 在`errors.WithMessage`中包含了`Wrap`逻辑，包装底层 error 同时增加错误信息，并且信息自动追加到字符串左边
 - `errors.Cause`和`errors.Unwrap`实现相同，只是函数名不同
 - 打印时`"%v"`可打印基本信息，`"+v"`可打印所有信息
+
+# 在包中定义 const 类型的 error 对象，以便外部用于比较
+
+```Go
+const Nil = NilError("nil")
+
+type NilError string
+func (e NilError) Error() string { return string(e) }
+```
