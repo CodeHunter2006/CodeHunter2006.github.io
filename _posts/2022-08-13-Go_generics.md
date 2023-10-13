@@ -64,3 +64,27 @@ func testGeneric() {
   - 某些情况下泛型和接口是通用的，这种情况下应优先使用接口，因为接口设计更成熟、简单，泛型在抽象和性能都没有改进
 
 # 其他
+
+## 返回零值
+
+下面编译会报错 "cannot use nil as T value in return statement"
+
+```Go
+func test[T any]() (T, error) {
+  return nil, nil
+}
+```
+
+可以用两种办法解决：
+
+```Go
+func test[T any]() (T, error) {
+  var v T // 用零值局部变量返回
+  return v, nil
+}
+
+// 利用具名返回值更优雅
+func test[T any]() (t T, err error) {
+  return
+}
+```

@@ -76,6 +76,8 @@ if err != nil {
 - unmarshal 时，如果传入了`interface`(无论是`interface{}`还是特定类型的`interface`)，
   如果 interface 已经指向了有效对象，则会 unarshal 成功；如果指向 nil，则会 panic。
 
+- json `[1, "2"]` 用 `[]interface{}` 类型解析时会把`1`解析为`float64`类型，底层思路是尽量把信息保留下来避免丢失。
+
 ## errors
 
 ```Go
