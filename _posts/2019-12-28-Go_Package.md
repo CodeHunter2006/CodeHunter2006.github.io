@@ -707,9 +707,9 @@ func main() {
 
 实现了各种文本编码、字符集相关操作
 
-## gopkg.in/yaml.v2
+## gopkg.in/yaml.v3
 
-yaml 操作，用法和 json 包类似。
+yaml 操作，用法和 json 包类似。v3 版本修复`map[interface{}]interface{}`的类型问题。
 
 ```Go
 if err := yaml.Unmarshal([]byte(str), &config); err != nil {
