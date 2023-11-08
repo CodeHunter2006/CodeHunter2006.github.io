@@ -127,6 +127,8 @@ systemctl 命令兼容了 service，即 systemctl 也会去/etc/init.d 目录下
 - `systemctl enable redis`
   开机启动
 
+- `systemctl --user ...`
+  通常要加上`--user`flag，管理用户空间的服务
 - `restart` 重启
 - `reload` 重新载入配置。只修改不载入不会生效。
 - `disable` 关闭开机启动

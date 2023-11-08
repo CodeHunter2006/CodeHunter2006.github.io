@@ -39,6 +39,9 @@ create TABLE test_db.test_table_dist on cluster test_cluster as test_db.test_tab
 select query_id, query, event_time, exception from system.query_log where query like '%test_table%' order by event_time desc limit 20;
 ```
 
+- `system.tables`
+  表情况
+
 - `system.parts`
   分区情况
 
@@ -53,6 +56,12 @@ select query_id, query, event_time, exception from system.query_log where query 
 
 - 注意查询时，字符串值要以`'`包围
 
+- 导入文件
+  `clickhouse-client --format_csv_delimiter=";" -q 'insert into table_name format CSV' < test.csv`
+
+- 导出文件
+  `select * from table_name limit 0,100 into outfile 'tmp.csv' format CSV;`
+
 # 函数
 
 ## 表函数
@@ -60,6 +69,13 @@ select query_id, query, event_time, exception from system.query_log where query 
 - `cluster('cluster_name', db.table[, sharding_key])`
   `SELECT * FROM cluster('{cluster}', default.example_table);`
   用于对一个集群中多个节点同时执行查询操作的函数。集群列表定义在"remote_servers"中。
+
+  - 第一个参数集群名
+  - 第二个参数是想查的库表名
+  - 第三个参数是 replica 编号，(1)-第一个，(2)-第二个...，默认为 1。(0)-全部 replica，从第一个开始找，相当于(1,2,3)如果有三个 replica 的话。
+
+- `host()`
+  查询当前节点 ip
 
 ## 数组函数
 

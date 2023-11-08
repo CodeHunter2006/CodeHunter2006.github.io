@@ -51,6 +51,9 @@ tags: ClickHouse
 - 分布式
 
   - CK 是比较粗暴的 Share-Nothing 方式，不同分区不共享数据
+  - 一个集群由多个 shard 组成，每个 shard 可以有多个 replica
+  - shard 内的 replica 存储的数据是一致的，在查询时可以分担流量
+  - shard 内其中一个 replica 是主，其它是备
 
 - 数据存储时的文件
 

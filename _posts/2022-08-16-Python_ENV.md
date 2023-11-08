@@ -150,3 +150,12 @@ virtualenv 和 `pyenv-virtualenv`插件功能相同
 
 - `deactivate`
   退出虚拟环境
+
+# requirements 语法示例
+
+```
+package_name  // 只有包名，不指定版本号，可以任意版本
+package_name==1.2.3 // 明确指定版本号
+package_name<=1.2.3 // 指定最高版本号
+package_name~=1.2.3 // 只要与 1.2.3 兼容的版本都可以
+```
