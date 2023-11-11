@@ -397,6 +397,22 @@ else: # else 是可选的，表示退出 while 时执行一次
 
 ## for
 
+利用**range**函数对整型迭代
+
+```python
+# 从下标 0 开始，循环 n 次
+for i in range(3):   # 结果是 0,1,2
+  print(i)
+
+# 对区间迭代，左闭右开
+for i in range(1,3):  # 结果是 1,2
+  print(i)
+
+# 左闭右开区间内，步长为 2
+for i in range(1, 5, 2)  # 结果是 1,3
+  print(i)
+```
+
 for 用来对容器进行迭代
 
 ```python
