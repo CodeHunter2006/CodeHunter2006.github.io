@@ -167,6 +167,21 @@ func testErrorGroup() {
 
 - `%02d` 打印整形时前面补`0`，保留`2`位
 
+### Scan
+
+用于从字符串读取数据到变量，支持的类型包括基本类型，`[]byte`，`string`，`struct`，`slice`，`map`等
+
+```Go
+// 从 stdin 读入多个数据
+a, b := 0, 0
+fmt.Scan(&a, &b)
+
+// 从 string 读入多个数据
+var s string
+var i int
+Sscanf(" 1234567 ", "%5s%d", &s, &i)
+```
+
 ## http
 
 http 请求相关

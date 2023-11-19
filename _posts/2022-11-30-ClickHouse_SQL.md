@@ -72,7 +72,8 @@ select query_id, query, event_time, exception from system.query_log where query 
 
   - 第一个参数集群名
   - 第二个参数是想查的库表名
-  - 第三个参数是 replica 编号，(1)-第一个，(2)-第二个...，默认为 1。(0)-全部 replica，从第一个开始找，相当于(1,2,3)如果有三个 replica 的话。
+  - 第三个参数是 replica 编号，`(1)`-第一个，`(2)`-第二个...，默认为 1。
+    - `0`-全部 replica，从第一个开始找，相当于(1,2,3...)如果有三个 replica 的话。注意 0 外面没有括号。
 
 - `host()`
   查询当前节点 ip
