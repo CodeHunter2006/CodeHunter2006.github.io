@@ -671,7 +671,7 @@ iptables -nv -L
 `export VALUE_NAME=${VALUE_NAME:-default}`
 
 - `${VAR_NAME}` 引用变量
-- `${VALUE_NAME:-default}` 表示如果变量不存在，则用`:-`后面的默认值替代；如果存在则不作替换
+- `VALUE_NAME = ${VALUE_NAME:-$default}` 表示如果变量不存在，则用`:-`后面的默认值替代，如果存在则不作替换。这里 default 是另一个变量；如果没有`$`则是字符串
 
 `echo $VALUE_NAME`/`echo ${VALUE_NAME}`
 输出(环境)变量的值
