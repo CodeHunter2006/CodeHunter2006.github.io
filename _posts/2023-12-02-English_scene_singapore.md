@@ -28,6 +28,7 @@ tags: English
 - Check In，酒店入住，飞机值机。
 - Check Out，在酒店办理离开手续，飞机出站。
 - Plate，餐厅；碟子；
+- Eatery，食堂，餐馆；
 - Roof Top Bar，楼顶酒吧
 - Lobby，酒店入口大厅
 - Wellness Corner，酒店大厅中提供免费水和水果的地方
@@ -58,7 +59,10 @@ tags: English
   - 有各个旅游景点的小岛，环球影城、马来西亚美食街、西索炮台等
 - Lifeguard，海滩救生员
 - Fort Siloso，西索炮台，圣淘沙上的景点
+
   - 二战时 2 万英军守卫的炮台，由于日军利用泰国的自行车从后方突袭而集体投降
+
+- tanjong，海峡
 
 # Food
 
@@ -86,6 +90,8 @@ tags: English
 - Indian Curry，印度咖喱，一种浓汤，可以蘸饼或米饭吃
 - Curry Puff，咖喱角，像烤饺子，包咖喱馅
 - Puff，n.泡芙；vi.膨胀；vt.喷出；
+- Curry Fish Head，咖喱鱼头
+- Salted Eggs Fish Skin，咸蛋鱼皮
 
 - Assorted Cheese Platter，奶酪拼盘
 
