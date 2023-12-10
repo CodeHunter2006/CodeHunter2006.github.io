@@ -13,7 +13,7 @@ tags: Git
 
 ## 方案原理
 
-- 利用 git-crypt 工具，它可以在 git 仓库中添加加密文件
+- 利用开源的 [git-crypt](https://github.com/AGWA/git-crypt) 工具，它可以在 git 仓库中添加加密文件
 - 在 git 提交时加密，在 git 拉取时解密，这样就实现了在本地明文、在 github 上加密的效果
 - 自动加解密是基于 git 的`gitattribute`工作机制，每次提交和拉取时，都会自动执行 git-crypt 命令
 - 在外部文件夹或网络保存秘钥，可以在本地执行`git crypt lock`和`git crypt unlock /key/path`加密解密当前 repo，避免本机内容泄露
@@ -82,4 +82,4 @@ tags: Git
   - lock 后 push，确保 repo 已不再加密文件
   - 用备份明文文件覆盖、提交
 
-- 可以利用网络密码机制保存秘钥，这样就更安全了
+- 可以利用 GCP 网络密码机制保存秘钥，这样就更安全了
