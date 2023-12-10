@@ -78,6 +78,10 @@ if err != nil {
 
 - json `[1, "2"]` 用 `[]interface{}` 类型解析时会把`1`解析为`float64`类型，底层思路是尽量把信息保留下来避免丢失。
 
+- 有时 struct 中成员类型是 int64，一个 uint64 的数值可能报错 "json: cannot unmarshal number xxxxxx into Go struct field"
+  - Go 中没有 uint64，所以会报错
+  - 这种情况下，可以把类型改为 float64，一方面可以接受数值不会报错；另一方面这个数字往往是溢出后的情况，不需要太精确。
+
 ## errors
 
 ```Go
