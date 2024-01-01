@@ -29,8 +29,16 @@ ORDER BY tuple();
 - 创建分布式表
 
 ```SQL
+-- Distributed 参数：集群名、库名、对应的 local 表名，
 create TABLE test_db.test_table_dist on cluster test_cluster as test_db.test_table_local
-      ENGINE = Distributed("test_cluster", "test_db", "test_table_dist", rand());
+      ENGINE = Distributed("test_cluster", "test_db", "test_table_dist_local", rand());
+```
+
+- 利用 AS 和 LIKE 建表
+
+```SQL
+-- AS 表示利用原表的元数据建表，后面可选项 ENGINE 可以修改表引擎
+CREATE TABLE db1.new_table_name AS db2.old_table_name ENGINE = Distributed("test_cluster", "test_db", "test_table_dist", rand());
 ```
 
 - 查询执行的历史 SQL
@@ -61,6 +69,13 @@ select query_id, query, event_time, exception from system.query_log where query 
 
 - 导出文件
   `select * from table_name limit 0,100 into outfile 'tmp.csv' format CSV;`
+
+## INSERT INTO
+
+```SQL
+-- 一次插入多行数据，每行数据用 () 包裹，括号间用 , 分割，括号内列值以 , 分割
+INSERT INTO table_name FORMAT VALUES (1, '1'),(2, '2')
+```
 
 # 函数
 

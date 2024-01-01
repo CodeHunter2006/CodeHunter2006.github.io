@@ -491,6 +491,11 @@ In a modern computer there may be dozens of processors, each with its own local 
 ```Golang
 package memo
 
+import (
+	"sync"
+	"time"
+)
+
 type Func func(key string) (interface{}, error)
 
 type result struct {
@@ -532,7 +537,67 @@ func (memo *Memo) Get(key string) (value interface{}, err error) {
         e.res.value, e.res.err = memo.f(key)
         close(e.ready) // broadcast ready condition
     }
+
     return e.res.value, e.res.err
+}
+```
+
+- generic version
+
+```Golang
+package memo
+
+import (
+	"context"
+	"sync"
+	"time"
+)
+
+// K-key, R-result
+
+type Func[K comparable, R any] func(ctx context.Context, key K) (R, error)
+
+type result[R any] struct {
+	value R
+	err   error
+}
+
+type entry[R any] struct {
+	res         result[R]
+	invalidTime time.Time     // the time that cache become invalid
+	ready       chan struct{} // closed when res is ready
+}
+
+func New[K comparable, R any](f Func[K, R], duration time.Duration) *Memo[K, R] {
+	return &Memo[K, R]{f: f, duration: duration, cache: make(map[K]*entry[R])}
+}
+
+type Memo[K comparable, R any] struct {
+	f        Func[K, R]
+	mu       sync.Mutex    // guards cache
+	duration time.Duration // cache valid duration
+	cache    map[K]*entry[R]
+}
+
+func (memo *Memo[K, R]) Get(ctx context.Context, key K) (value R, err error) {
+	memo.mu.Lock()
+	e := memo.cache[key]
+	if e != nil && e.invalidTime.After(time.Now()) {
+		// This is a repeat request for this key.
+		memo.mu.Unlock()
+		<-e.ready // wait for ready condition
+	} else {
+		// This is the first request for this key.
+		// This goroutine becomes responsible for computing
+		// the value and broadcasting the ready condition.
+		e = &entry[R]{invalidTime: time.Now().Add(memo.duration), ready: make(chan struct{})}
+		memo.cache[key] = e
+		memo.mu.Unlock()
+		e.res.value, e.res.err = memo.f(ctx, key)
+		close(e.ready) // broadcast ready condition
+	}
+
+	return e.res.value, e.res.err
 }
 ```
 

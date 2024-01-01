@@ -91,7 +91,7 @@ bytes 是二进制字节数组，用`b''`构造，底层存储字节(0-255)
 - `[a:b]`
   用下标以"左闭右开"截取子字符串
 - `in`
-  如果字符串中包含给定的字符则返回`True`，如：`'H' in "Hello" # True`
+  如果字符串中包含给定的子字符串则返回`True`，如：`'H' in "Hello" # True`
 - `not in`
   与上面相反
 - `r/R`
@@ -168,7 +168,7 @@ Python 支持三种数字类型：int float complex
 - `dict.popitem()`
   返回并删除字典中的最后一对键和值
 - `dict.update(dict2)`
-  把 dict2 里的 key-value 覆盖到 dict，dict 特有的 key 保持不变。
+  把 dict2 里的 key-value 覆盖到 dict，dict 已有的 key 保持不变。
 
 - `del testDict['name']`
   删除一个元素
@@ -219,6 +219,7 @@ x = (1, "2", {3})
 ```
 
 - 在赋值时，可以自动实现`unpack`，即把一个 tuple 对象分解成对应数量的变量赋值，如：`x, y, z = (1, 2, 3)`
+- 可以利用下标，直接取得某个元素，如：`print(x[1])`
 
 ### 元组内置函数
 

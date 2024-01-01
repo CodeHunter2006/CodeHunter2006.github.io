@@ -89,7 +89,7 @@ from datetime import datetime, timedelta, timezone
 
 time1 = datetime.now(tz = timezone.utc)   # 创建 datetime，不传时区参数则默认系统时区
 time1 += timedelta(days = 5)    # 可以调整时间
-timeStr = tarTime.strftime("%Y-%m-%d %H:%M:%S")  # datetime 转字符串
+timeStr = tarTime.strftime("%Y-%m-%d %H:%M:%S")  # datetime 转字符串，默认系统时区
 print(timeStr)  # 2022-01-05 09:19:52
 
 # 字符串转 datetime，同时设定时区
@@ -99,6 +99,8 @@ print(time2)    # 2022-01-05 09:19:52
 
 during = time1 - time2  # 计算差值，获得 timedelta 类型
 print(during.total_seconds()) # 一定要用 total_seconds() 获取 float 绝对值，seconds 等都是获得自己范围内的值
+
+print(time1 > time2)  # 可以直接用符号比较 datetime 对象
 ```
 
 ## base64
