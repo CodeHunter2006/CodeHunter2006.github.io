@@ -56,12 +56,17 @@ Ctrl+P+Q
   运行某个镜像
 
 - `--rm`容器退出时自动销毁
-- `-P` Publish all exposed ports to random ports
-- `-v outterPath:innerPath` 映射内外文件夹
+- `-P` Publish all exposed ports to random ports，将容器内的端口暴漏为外部主机的随机端口
+- `-p outterPort:innerPort` 将容器内的端口暴漏为外部主机的指定端口，可以设置多个
+- `-v outterPath:innerPath` 映射内外文件夹，可以设置多个
+- `--name containerName` 为容器指定名称
 
-```
-docker run ...
-```
+# start
+
+- `docker start -i xxx`
+  - 以`docker run -it ...`启动后，退出 terminal 时容器也停止了，用这个命令可以继续运行
+
+# stop
 
 优雅的(等待容器一段时间)停止一个容器
 
