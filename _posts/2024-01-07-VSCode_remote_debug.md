@@ -41,6 +41,8 @@ tags: Go IDE VSCode
 
 - 在 container 中安装 dlv
 
+  - 最简单的安装方法是利用 Go 编译，然后拷贝到目标 path 下
+
   ```s
     $ GO111MODULE=on GOBIN=/tmp/ go install github.com/go-delve/delve/cmd/dlv@master
     $ mv /tmp/dlv $GOPATH/bin/dlv-dap
@@ -91,6 +93,7 @@ tags: Go IDE VSCode
 
 - [ ] 日志只能在 terminal 中看到，无法在 VSCode 的"DEBUG CONSOLE"中看到
 - [ ] 为什么编译要加`-gcflags=all="-N -l"`
+- [ ] docker 在 mac 默认不支持 ipv6
 
 # 参考
 
