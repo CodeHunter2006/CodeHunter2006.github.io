@@ -95,8 +95,11 @@ tags: ClickHouse
 - 关于排序`order by`
   - 在分区内部保证有序
   - MergeTree 表引擎，`order by`是**必须的**
-- 可指定分区`partition by`
-  在查询时
+- 分区字段，paritition by
+  分区的目的是限制一次查询的范围，比如可以按日期的天进行分区
+  - 建表时可以指定分区字段，写入时会根据字段值自动分区，读取时可以加分区限定
+- 分片字段，shard key
+  分片的目的是多个节点并行读取，避免单机瓶颈。shard key 使数据能够经过 hash 尽量分散到不同节点上。
 - 关于 client
   - client 查询时，可以看到分区内数据情况
 - 本机数据保存目录 `/var/lib/clickhouse`
