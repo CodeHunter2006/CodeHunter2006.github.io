@@ -45,6 +45,7 @@ func testGeneric() {
   - `~int32` 底层以`int32`实现的各种类型
   - `int32 | int64 | float32` 用`|`间隔各种可能类型
   - `any` 新增的关键字，"任意类型"，其本质是`interface{}`的一个别名
+    - **应该在所有地方尽可能用 any 替代 interface{}，更易理解**
   - `comparable` 新增的关键字，"可比较"，要求该类型需满足`==`和`!=`
   - 另外，Go 定义了一个常用的约束包: https://pkg.go.dev/golang.org/x/exp/constraints
 - 结构体声明方式与函数类似`type XXX[T any] struct{...}`
