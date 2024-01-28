@@ -218,6 +218,9 @@ body, err := io.ReadAll(resp.Body)
 `func MultiWriter(writers ...Writer) Writer`
 将多个 Writer 融合，每次写入会同时写入这些 Writer
 
+`io.NopCloser(r io.Reader) io.ReadCloser`
+自动判别输入的 reader 是否有对应的 writer 接口，如果没有则封装执行`Close()`时什么也不做
+
 ## io/ioutil
 
 提供简易的 IO 操作
@@ -365,6 +368,7 @@ return a non-negative pseudo-random number in [0,n)
 正则表达式类
 
 ```Go
+// 匹配找到分组，分组下标按照可能找到的位置排列，第 0 位置是整个匹配的字符串
 var reRet []string = regexp.MustCompile(`pattern`).FindStringSubmatch(`string`)
 ```
 
