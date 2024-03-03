@@ -41,11 +41,25 @@ create TABLE test_db.test_table_dist on cluster test_cluster as test_db.test_tab
 CREATE TABLE db1.new_table_name AS db2.old_table_name ENGINE = Distributed("test_cluster", "test_db", "test_table_dist", rand());
 ```
 
+```SQL
+-- 重命名表
+RENAME TABLE db1.old_table_name TO db1.new_table_name;
+```
+
 - 查询执行的历史 SQL
 
 ```SQL
 select query_id, query, event_time, exception from system.query_log where query like '%test_table%' order by event_time desc limit 20;
 ```
+
+- system.query_log 关键字段：
+
+  - query_id：查询 id
+  - query：查询语句
+  - event_time：查询时间
+  - exception：异常信息
+  - query_duration_ms：查询耗时
+  - type: 执行动作类型(START/FINISH)
 
 - `system.tables`
   表情况
@@ -76,6 +90,28 @@ select query_id, query, event_time, exception from system.query_log where query 
 -- 一次插入多行数据，每行数据用 () 包裹，括号间用 , 分割，括号内列值以 , 分割
 INSERT INTO table_name FORMAT VALUES (1, '1'),(2, '2')
 ```
+
+## RENAME COLUMN
+
+`ALTER TABLE table_name RENAME COLUMN [IF EXISTS] column_name_from TO column_name_to;`
+
+## ATTACH/DETACH TABLE
+
+对元数据文件进行操作
+
+- `DETACH TABLE [IF EXISTS] [db.] name`
+  将表卸载
+
+- `ATTACH TABLE [IF NOT EXISTS] [db.] name`
+  将表加载
+
+## SETTINGS
+
+在执行 SQL 时设定参数
+
+`select * from system.query_log SETTINGS max_execution_time=10`
+
+- `max_execution_time` 执行的秒数
 
 # 函数
 

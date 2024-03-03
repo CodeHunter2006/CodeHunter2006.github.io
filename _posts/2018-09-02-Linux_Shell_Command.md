@@ -395,6 +395,9 @@ link 创建一个文件或文件夹的链接，这样可以在修改一处时影
   - TIME 进程实际使用 CPU 时间
   - COMMAND 命令和参数
 
+`ps -eo pid,lstart,cmd`
+查看进程准确启动时间
+
 `netstat -ntlp`
 查看进程端口使用情况，只显示端口号和进程 ID，需要结合`ps aux`命令查找进程名
 
