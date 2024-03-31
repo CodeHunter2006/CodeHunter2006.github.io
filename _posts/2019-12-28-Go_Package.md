@@ -369,7 +369,9 @@ return a non-negative pseudo-random number in [0,n)
 
 ```Go
 // 匹配找到分组，分组下标按照可能找到的位置排列，第 0 位置是整个匹配的字符串
-var reRet []string = regexp.MustCompile(`pattern`).FindStringSubmatch(`string`)
+re := regexp.MustCompile(`pattern`)
+var reRet []string = re.FindStringSubmatch(`string`)
+matches := regex.FindAllStringSubmatch(`string`, -1)
 ```
 
 ## runtime

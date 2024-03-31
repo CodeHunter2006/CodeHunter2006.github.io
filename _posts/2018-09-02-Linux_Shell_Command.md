@@ -403,6 +403,12 @@ link 创建一个文件或文件夹的链接，这样可以在修改一处时影
 
 - 注意，如果权限不足，不会显示进程 ID 及进程名称，需要 sudo 执行
 
+## lsof
+
+查看 fd 占用情况
+
+- `-p pid` 指定进程号
+
 `lsof -i :8080`
 list open files
 查看指定的端口是什么程序占用
@@ -413,7 +419,7 @@ list open files
 - `lsof -i -P|grep pid`
   根据 pid 查看端口连接情况
 
-查看<设定>最大连接数
+查看<系统设定>最大连接数
 ulimit -n <newValue>
 
 内存总容量查询
@@ -1207,6 +1213,10 @@ find -newer abc
 ## 查找某 log 中 2000 行之后的匹配项
 
 `tail 2000 xxx.log|grep "test"`
+
+## 查看某进程的限制信息
+
+- `cat /proc/<pid>/limits | grep 'Max open files'`
 
 # 常见错误
 
