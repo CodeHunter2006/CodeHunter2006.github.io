@@ -172,6 +172,8 @@ Python 支持三种数字类型：int float complex
   返回并删除字典中的最后一对键和值
 - `dict.update(dict2)`
   把 dict2 里的 key-value 覆盖到 dict，dict 已有的 key 保持不变。
+- `dict.setdefault(key, default=None)`
+  如果 key 对应的 value 不存在，设置默认值
 
 - `del testDict['name']`
   删除一个元素
