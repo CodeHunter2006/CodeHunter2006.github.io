@@ -135,6 +135,30 @@ systemctl 命令兼容了 service，即 systemctl 也会去/etc/init.d 目录下
 - `status` 查看状态
 - `systemctl list-units --type=service -all` 列出所有服务
 
+### 配置文件
+
+- Linux 中.service 文件是某项服务对应的配置文件，可用于 systemd 管理和控制的服务的设置。
+- .service 文件通常包含 3 个模块，即[Unit]控制单元，表示启动顺序和依赖关系；[Service]服务，表示服务的定义；[Install]安装，表示如何安装配置文件。
+- .service 文件配置的服务常用 systemd 管理。然而，systemd 有系统和用户区分；系统（/user/lib/systemd/system/）、用户（/etc/lib/systemd/user/）。一般系统管理员手工创建的单元文件建议存放在/etc/systemd/system/目录下面。
+
+```ini
+[Unit]
+Description=httpd	    #当前配置文件的描述信息
+After=network.target    #表示当前服务是在那个服务后面启动，一般定义为网络服务启动后启动
+
+[Service]
+Type=forking			#定义启动类型
+ExecStart=/usr/local/apache/bin/apachectl start 	#定义启动进程时执行的命令。
+ExecReload=/usr/local/apache/bin/apachectl restart  #重启服务时执行的命令
+ExecStop=/usr/local/apache/bin/apachectl stop		#定义关闭进程时执行的命令。
+PrivateTmp=true										#是否分配独立空间
+Environment="SECRET=123"  # 设置多个环境变量
+Environment="ANOTHER_SECRET=abc"
+
+[Install]
+WantedBy=multi-user.target    #表示多用户命令行状态
+```
+
 # 内核机制
 
 ## 系统中断
