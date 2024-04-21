@@ -161,6 +161,19 @@ func testErrorGroup() {
 
 可以获得各种类型的参数，无法获得无参数标记的参数
 
+```Go
+
+func main() {
+// 一定要先执行 parse
+flag.Parse()
+
+// 获取参数
+var port int
+flag.IntVar(&port, "port", 8080, "server port")
+}
+
+```
+
 ## fmt
 
 - `%+v` 格式符表示递归打印数据结构的字段名和值
