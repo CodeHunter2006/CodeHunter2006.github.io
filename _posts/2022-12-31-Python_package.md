@@ -31,6 +31,18 @@ isinstance(B(), A)    # returns True
 type(B()) == A        # returns False
 ```
 
+## argparse
+
+命令行参数解析
+
+```python
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument('-n', '--name', help='set name', type=str, default='unknow', required=False)
+args = parser.parse_args()
+print(args.name)
+```
+
 ## string
 
 ### join
@@ -192,12 +204,18 @@ len(sys.argv) # 默认长度为 1，sys.argv[0] 中保存启动时的py文件名
 type(sys.argv[1]) # 调用脚本时传入的参数从下标 1 开始，元素类型都是 str
 ```
 
+- `exc_type, exc_value, exc_traceback = system.exc_info()`
+  返回异常信息，包括异常类型、异常信息、调用栈
+
 ## traceback
 
 用于打印调用栈
 
 - `traceback.print_stack()`
   打印调用栈
+
+- `traceback.format_exception(exc_type, exc_value, exc_traceback)`
+  将异常信息转为字符串
 
 ## thread
 
@@ -253,6 +271,48 @@ def print_var():
 # 如果第二个线程未调用 set_var 就调 print_var()，则报错：
 # "exceptions.AttributeError:'thread._local' object has no attribute 'X'"
 # 因为成员必须在每个线程中独立初始化，不同线程相互隔离
+```
+
+## multiprocessing
+
+多进程相关功能，与线程相比有更好的独立性，一个进程挂掉不影响别的进程，但无法共享变量和锁。
+
+```python
+# 创建进程
+p = multiprocessing.Process(target=func, args=(1,))
+p.start()
+
+# 等待进程结束
+p.join()
+
+# 获取进程状态
+p.is_alive()
+
+# 终止进程
+p.terminate()
+
+# 获取进程 id
+p.pid
+
+# 获取进程名
+p.name
+```
+
+# 启动进程
+
+```python
+import multiprocessing
+
+def func(p1: int):
+  while True:
+    print(p1)
+    time.sleep(1)
+
+p1 = multiprocessing.Process(target=func, args=(1,))
+p1.start()
+
+p2 = multiprocessing.Process(target=func, args=(2,))
+p2.start()
 ```
 
 ## time

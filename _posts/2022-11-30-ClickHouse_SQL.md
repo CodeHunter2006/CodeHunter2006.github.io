@@ -5,6 +5,8 @@ date: 2022-11-30 22:00:00 +0800
 tags: ClickHouse
 ---
 
+- [官方参考文档](https://clickhouse.com/docs/en/sql-reference)
+
 - Linux 和 macOS 安装 ch：`curl https://clickhouse.com/ | sh`
 
   - 启动 server `./clickhouse server`
@@ -133,4 +135,8 @@ INSERT INTO table_name FORMAT VALUES (1, '1'),(2, '2')
 ## 数组函数
 
 - `hasAny(target_array, ['str1', 'str2'])`
+
   - 判断`Nullable(Array(String))`类型的数组中是否包含目标字符串
+
+- `groupArray` 将聚合时的字段值聚合成数组
+  - `select count(), groupArray(host()) ... group by ...`
