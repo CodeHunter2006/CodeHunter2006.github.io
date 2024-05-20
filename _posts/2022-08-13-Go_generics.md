@@ -50,7 +50,7 @@ func testGeneric() {
   - 另外，Go 定义了一个常用的约束包: https://pkg.go.dev/golang.org/x/exp/constraints
 - 结构体声明方式与函数类似`type XXX[T any] struct{...}`
 - interface 语法也进行了扩展，可以增加**类型逼近**(Type Approximation)声明
-- 通常调用泛型函数/结构体之前要用`[]`声明实际类型，但有些情况下可以类似 C++ 的 auto，自动根据上下文推断类型，从而可以省略实际类型声明
+- 通常调用泛型函数/结构体之前要用`[]`声明实际类型，但有些情况下可以类似 C++ 的 auto，自动根据上下文推断类型，从而可以**省略类型声明**
 
 # 限制
 

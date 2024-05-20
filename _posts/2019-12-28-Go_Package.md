@@ -82,6 +82,30 @@ if err != nil {
   - Go 中没有 uint64，所以会报错
   - 这种情况下，可以把类型改为 float64，一方面可以接受数值不会报错；另一方面这个数字往往是溢出后的情况，不需要太精确。
 
+```Go
+struct Test {
+  ignored int64 `json:"-"`  // 忽略该字段
+}
+```
+
+- 可以通过重写`MarshalJSON/UnmarshalJSON`方法实现自定义的 json 序列化和反序列化
+
+```Go
+func (o TestType) MarshalJSON() ([]byte, error) {
+  return []byte(fmt.Sprintf("%d", o)), nil
+}
+
+func (o *TestType) UnmarshalJSON(data []byte) error {
+  var i int64
+  err := json.Unmarshal(data, &i)
+  if err != nil {
+    return err
+  }
+  *o = TestType(i)
+  return nil
+}
+```
+
 ## errors
 
 ```Go

@@ -115,6 +115,17 @@ INSERT INTO table_name FORMAT VALUES (1, '1'),(2, '2')
 
 - `max_execution_time` 执行的秒数
 
+## FORMAT
+
+放在 SQL 末尾，指定返回格式
+
+- `JSON`
+  JSON 格式
+- `CSV`
+  逗号分隔值
+- `TSV`
+  制表符分隔值
+
 # 函数
 
 ## 表函数
@@ -131,6 +142,8 @@ INSERT INTO table_name FORMAT VALUES (1, '1'),(2, '2')
 
 - `host()`
   查询当前节点 ip
+- `tcpPort()`
+  查询当前节点 tcp 端口
 
 ## 数组函数
 
