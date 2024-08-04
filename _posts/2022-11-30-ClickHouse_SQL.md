@@ -97,12 +97,18 @@ INSERT INTO table_name FORMAT VALUES (1, '1'),(2, '2')
 
 `ALTER TABLE table_name RENAME COLUMN [IF EXISTS] column_name_from TO column_name_to;`
 
+## MODIFY SETTING
+
+- 修改表的 setting 值，默认每个表的各 setting 值是有默认值的，可以通过这个语句修改
+
+`ALTER TABLE db.table MODIFY SETTING setting1 = 100, setting2 = 200;`
+
 ## ATTACH/DETACH TABLE
 
 对元数据文件进行操作
 
 - `DETACH TABLE [IF EXISTS] [db.] name`
-  将表卸载
+  将表卸载，卸载表将无效，在 system.tables 中删除，但是 show create table 可以看到
 
 - `ATTACH TABLE [IF NOT EXISTS] [db.] name`
   将表加载

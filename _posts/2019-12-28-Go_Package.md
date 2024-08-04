@@ -223,6 +223,22 @@ var i int
 Sscanf(" 1234567 ", "%5s%d", &s, &i)
 ```
 
+### 重写 String 函数
+
+- 可以编写自定义 String 函数，用于 fmt 打印
+
+```Go
+type MyStruct struct {
+    Field1 string
+    Field2 int
+}
+
+func (s MyStruct) String() string {
+    // 在这里编写自定义的字符串表示逻辑
+    return fmt.Sprintf("Field1: %s, Field2: %d", s.Field1, s.Field2)
+}
+```
+
 ## http
 
 http 请求相关

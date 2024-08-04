@@ -110,7 +110,7 @@ time2 -= timedelta(minutes = 5)
 print(time2)    # 2022-01-05 09:19:52
 
 during = time1 - time2  # 计算差值，获得 timedelta 类型
-print(during.total_seconds()) # 一定要用 total_seconds() 获取 float 绝对值，seconds 等都是获得自己范围内的值
+print(during.total_seconds(), during.days) # 一定要用 total_seconds() 获取 float 绝对值，seconds 等都是获得自己范围内的值
 
 print(time1 > time2)  # 可以直接用符号比较 datetime 对象
 ```
@@ -177,6 +177,19 @@ testLog()
 
 regex 正则表达式相关
 
+```
+在 Python 的 re 模块中，以下这些符号通常需要用 \ 进行转义：
+
+点号 . ：表示匹配任意字符（除了换行符）。如果要匹配点号本身，需要写成 \. 。
+方括号 [] ：用于定义字符类。如果要匹配方括号本身，需要写成 \[ 和 \] 。
+花括号 {} ：用于指定重复次数。如果要匹配花括号本身，需要写成 \{ 和 \} 。
+圆括号 () ：用于分组。如果要匹配圆括号本身，需要写成 \( 和 \) 。
+反斜线 \ ：如果要匹配反斜线本身，需要写成 \\ 。
+问号 ? ：表示匹配 0 次或 1 次。如果要匹配问号本身，需要写成 \? 。
+加号 + ：表示匹配 1 次或多次。如果要匹配加号本身，需要写成 \+ 。
+星号 * ：表示匹配 0 次或多次。如果要匹配星号本身，需要写成 \* 。
+```
+
 ```python
 import re
 
@@ -184,6 +197,13 @@ date = "09/03/2022"
 pattern = re.compile("(\d{2})\/(\d{2})\/(\d{4})")   # 编译出模式对象
 match = pattern.match(date) # pattern 可多次 match，如果匹配则返回 match 对象；不匹配返回 None
 print(match.groups()[0]) # 返回捕获的组
+
+
+# 查找命名分组
+pattern = re.compile("(?P<month>\d{2})\/(?P<day>\d{2})\/(?P<year>\d{4})")
+match = pattern.match(date)
+if match:
+  print(match.group("month"))
 ```
 
 ## sys
