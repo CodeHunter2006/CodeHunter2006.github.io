@@ -132,6 +132,11 @@ INSERT INTO table_name FORMAT VALUES (1, '1'),(2, '2')
 - `TSV`
   制表符分隔值
 
+# 索引
+
+- `SAMPLE BY xxx`
+  建立采样索引，如果查询时用到采样语句，则起作用，如`ORDER BY random()`
+
 # 函数
 
 ## 表函数
