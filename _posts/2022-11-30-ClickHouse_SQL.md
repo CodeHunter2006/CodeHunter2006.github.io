@@ -63,6 +63,9 @@ select query_id, query, event_time, exception from system.query_log where query 
   - query_duration_ms：查询耗时
   - type: 执行动作类型(START/FINISH)
 
+- `system.clusters`
+  集群的 shard、replica、host、port 配置信息
+
 - `system.tables`
   表情况
 
@@ -71,6 +74,9 @@ select query_id, query, event_time, exception from system.query_log where query 
 
 - `system.kafka_tables`
   kafka 消费表情况
+
+- `system.mutations`
+  异步执行需要耗时的任务，比如转换类型、HA replica 间同步 DDL
 
 - `select * from test_db.test_table_local`
   查询分布式表中当前节点的 local 表
