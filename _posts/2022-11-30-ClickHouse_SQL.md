@@ -113,10 +113,10 @@ INSERT INTO table_name FORMAT VALUES (1, '1'),(2, '2')
 
 对元数据文件进行操作
 
-- `DETACH TABLE [IF EXISTS] [db.] name`
+- `DETACH TABLE [IF EXISTS] [db.]name`
   将表卸载，卸载表将无效，在 system.tables 中删除，但是 show create table 可以看到
 
-- `ATTACH TABLE [IF NOT EXISTS] [db.] name`
+- `ATTACH TABLE [IF NOT EXISTS] [db.]name [ON CLUSTER clusterName]`
   将表加载
 
 ## SETTINGS
