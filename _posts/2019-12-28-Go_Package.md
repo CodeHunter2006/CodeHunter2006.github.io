@@ -777,6 +777,10 @@ func main() {
 
 `spew.Printf("myVar1: %v -- myVar2: %+v", myVar1, myVar2)`
 
+## https://github.com/Velocidex/ordereddict
+
+模仿 Python 的 collections.OrderedDict 类，以插入顺序为输出顺序，可以 map 避免乱序的问题。
+
 ## https://github.com/kisielk/godepgraph
 
 可以打印 Go 的包依赖关系，依赖 Graphviz 组件可以进一步生成图。
