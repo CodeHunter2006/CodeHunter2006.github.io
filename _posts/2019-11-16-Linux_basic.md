@@ -135,6 +135,8 @@ systemctl 命令兼容了 service，即 systemctl 也会去/etc/init.d 目录下
 - `status` 查看状态
 - `systemctl list-units --type=service -all` 列出所有服务
 
+- 有时修改了配置文件路径，查找对应的配置文件路径：`find / -name "<service_name>.service" 2>/dev/null`
+
 ### 配置文件
 
 - Linux 中.service 文件是某项服务对应的配置文件，可用于 systemd 管理和控制的服务的设置。

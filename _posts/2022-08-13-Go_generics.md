@@ -89,3 +89,8 @@ func test[T any]() (t T, err error) {
   return
 }
 ```
+
+## 自带的泛型函数
+
+- min/max
+  - 从 1.21 版引入的泛型函数，可以方便计算

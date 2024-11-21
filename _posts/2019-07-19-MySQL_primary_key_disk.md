@@ -70,11 +70,25 @@ show variables like 'innodb_page_size'
   - 如果表记录经常插入、删除，即使表内记录总量不是很大，ID 也可能快速用完，这种情况可以需要使用 bigint。
     无符号 bigint 最大值为 18446744073709551615，完全够用了
 
-# 最佳实践：is_delete 删除标记
+# 最佳实践：
 
-如果删除某个元素，会导致对应的索引存储位置形成空洞。由于 MySQL 要保证索引的高效，这时可能引发文件连锁整理，造成性能急剧下降。
-可以设立一个`is_delete`字段，`tiny_int`型即可，默认为 0 表示不删除，删除时设置为 1。这样就可以避免由于删除导致的重排。
+```Go
+CREATE TABLE your_table (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    data VARCHAR(255),
+    ctime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  // 创建时间
+    mtime TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,  // 变更时间
+    is_delete TINY_INT DEFAULT 0, // 软删除标记，0-未删除；1-已删除
+);
+```
 
-当数据积累较多时，再考虑重新整理、删除旧数据。
+- is_delete 软删除标记
 
-`is_delete`要设索引，这样可以在查询中快速过滤掉无效值。例如某些场景下，未删除的实际占少数，这样就可以快速缩小查询范围，提高效率。
+  - 如果删除某个元素，会导致对应的索引存储位置形成空洞。由于 MySQL 要保证索引的高效，这时可能引发文件连锁整理，造成性能急剧下降。
+    可以设立一个`is_delete`字段，`tiny_int`型即可，默认为 0 表示不删除，删除时设置为 1。这样就可以避免由于删除导致的重排。
+  - 当数据积累较多时，再考虑重新整理、删除旧数据。
+  - `is_delete`要设索引，这样可以在查询中快速过滤掉无效值。例如某些场景下，未删除的实际占少数，这样就可以快速缩小查询范围，提高效率。
+
+- ctime/mtime 数据创建、变更时间记录
+  - 这两个字段有助于后期维护，可方便判断关键时点
+  - 在对软删除记录清理时，可以结合 mtime 和 is_delete 判断是否可以批量删掉

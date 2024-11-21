@@ -791,6 +791,24 @@ func main() {
 
 实现了各种文本编码、字符集相关操作
 
+## github.com/jmoiron/sqlx
+
+实现了各种方便的 SQL 查询
+
+```Go
+// 对指定的 id 数组进行查询
+ids := []int{1,2,3}
+query, args, err := sqlx.In("select * from xxx where id in (?);", ids)
+if err != nil {
+  return err
+}
+query = bm.tx.Rebind(query)
+
+if err := bm.tx.SelectContext(ctx, &res, query, args...); err != nil {
+  return err
+}
+```
+
 ## gopkg.in/yaml.v3
 
 yaml 操作，用法和 json 包类似。v3 版本修复`map[interface{}]interface{}`的类型问题。

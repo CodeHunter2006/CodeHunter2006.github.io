@@ -117,6 +117,8 @@ VOLUME /data/dbout /data/dbin
 
 - `ARG <参数名>[=<默认值>]`
 
+- 在执行`FROM xx`之后会让之前的`ARG`失效，所以一定要在执行一次参数导入
+
 ### LABEL
 
 为镜像添加一些元数据

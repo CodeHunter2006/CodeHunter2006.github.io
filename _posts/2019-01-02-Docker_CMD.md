@@ -55,7 +55,7 @@ Ctrl+P+Q
 - `docker run xxx`
   运行某个镜像
 
-- `--rm`容器退出时自动销毁
+- `--rm`容器退出时自动销毁，可用于临时测试
 - `-P` Publish all exposed ports to random ports，将容器内的端口暴漏为外部主机的随机端口
 - `-p outterPort:innerPort` 将容器内的端口暴漏为外部主机的指定端口，可以设置多个
 - `-v outterPath:innerPath` 映射内外文件夹，可以设置多个
@@ -113,6 +113,11 @@ docker rmi ...
 ```
 
 ※如果镜像之间有依赖关系，那么必须先删除子镜像才能删除根镜像
+
+```bash
+# 删除一系列，"<none>:<none>" 镜像
+docker rmi $(docker images -f "dangling=true" -q)
+```
 
 导出镜像文件
 
