@@ -99,8 +99,8 @@ tags: Docker K8S HighConcurrency
 `kubectl -n xxx get pod`
 获取 xxx namespace 下的 pod 列表
 
-`kubectl get pod -n xxx -o yaml`
-以 yaml 格式展示结果，内容非常详细
+`kubectl get pod <pod_name> -n xxx -o yaml`
+以 yaml 格式展示结果，内容非常详细。可以指定具体实例名。
 
 ## create
 
@@ -119,8 +119,12 @@ tags: Docker K8S HighConcurrency
 
 ## describe
 
-`kubectl describe pod xxx -n xxx`
-获取指定 pod 的详细信息。其中的`state`、`event`是比较重要的调试信息。
+`kubectl describe pod pod_name -n xxx`
+获取某种指定负载对象的详细信息(spec、运行时)，包括资源的创建时间、事件、标签、注解等更多的细节信息。
+
+- 一个 workload(deployment、pod、service...) 启动后会自然产生一系列运行时信息，可以用 describe 查看
+  - 如 pod 的`state`、`event`
+  - 如 deployment 的 `Replicas: 2 current / 2 desired`
 
 ## edit
 
@@ -281,3 +285,13 @@ tags: Docker K8S HighConcurrency
 
 `kubectl get endpoints`
 显示 svc 和对应接入点(ip+port)的对应关系
+
+# 命令场景
+
+## pod 启动后未 ready，需要到 container 查看
+
+1. `kubectl describe pod xxx`
+   查看 pod 在哪些节点有实例
+2. 来到对应 node `docker ps|grep xxx`
+   找到对应的 container
+3. `docker exec -it xxx bash` 进入查看

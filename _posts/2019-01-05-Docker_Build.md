@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Docker build CMD"
+title: "Dockerfile build CMD"
 date: 2019-01-05 09:00:00 +0800
 tags: Docker
 ---
@@ -22,6 +22,7 @@ Docker 镜像可以通过在容器中进行命令操作创建，但更好的方�
   这里的 bbb 是某个中间镜像，之后可以被 copy 调用把中间生成文件拷走
 
 - `--platform=arch` 可以指定架构类型，如`linux/arm64`
+  - 如果不指定这个参数，会以当前执行 Dockerfile 的主机的架构作为默认架构
 
 ### MAINTAINER
 
