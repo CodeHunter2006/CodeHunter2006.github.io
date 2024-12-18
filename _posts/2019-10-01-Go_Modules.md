@@ -138,6 +138,7 @@ xxx.com/xxx v0.1.1 h1:xxxxxxx
 - PATCH：修订版本，如一些 bugfix
 
 默认情况下执行`go get`是不会升级主版本号的，因为大版本不兼容。需要执行`go get -u`进行升级。
+如果想升级下小版本，可以主动指定版本`go get xxx@vx.x.x`
 
 在版本升级时，会在 github 中打 tag，比如`v3.0.0`。
 import module 时，可以在后面跟大版本号，而代码中继续直接使用包名即可，如：

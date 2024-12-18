@@ -206,6 +206,16 @@ if match:
   print(match.group("month"))
 ```
 
+## copy
+
+深拷贝
+
+```Python
+import copy
+original_list = [1, 2, 3, [4, 5]]
+copied_list = copy.deepcopy(original_list)
+```
+
 ## sys
 
 系统相关
