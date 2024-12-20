@@ -88,20 +88,27 @@ HTTP 协议的请求报文和响应报文的结构基本相同
 
 - 1xx 过程中
   - 100 continue
+  - 101 Switching Protocols, 协议切换
 - 2xx 成功
   - 200 OK
+  - 201 Created, 已创建
+  - 206 Partial Content, 返回部分内容
 - 3xx 重定向
+  - 304 Not Modified，如首部未改变，客户端可重用
 - 4xx 客户端错误
   - 400 用户请求通用错误；
   - 403 用户无该路径权限；
   - 404 路径不存在；
   - 405 Method Not Allowed;
+  - 406 Not Acceptable, 如 xml/json 差异
   - 408 服务器等待客户端请求时超时;
+  - 499 Nginx 自定义错误, 客户端还未接收完 response 就关闭了连接
 - 5xx 服务器错误
   - 500 服务器内部通用错误；
   - 501 Not Implemented
   - 502 bad gateway
-    有时请求已经打到 LB/Nginx 了，但是后面的服务出了问题
+    有时请求已经打到 LB/Nginx 了, 但是后面的服务出了问题
+  - 503 服务不可用, 如 CPU 内存等造成的资源不足
   - 504 Gateway Timeout
 
 ## 1.0 1.1 2.0
