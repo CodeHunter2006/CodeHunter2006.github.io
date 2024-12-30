@@ -817,3 +817,25 @@ yaml 操作，用法和 json 包类似。v3 版本修复`map[interface{}]interfa
 if err := yaml.Unmarshal([]byte(str), &config); err != nil {
 }
 ```
+
+## snippets
+
+```Go
+func MysqlRealEscapeString(value string) string {
+    var sb strings.Builder
+    for i := 0; i < len(value); i++ {
+        c := value[i]
+        switch c {
+        case '\\', 0, '\n', '\r', '\'', '"':
+            sb.WriteByte('\\')
+            sb.WriteByte(c)
+        case '\032':
+            sb.WriteByte('\\')
+            sb.WriteByte('Z')
+        default:
+            sb.WriteByte(c)
+        }
+    }
+    return sb.String()
+}
+```
