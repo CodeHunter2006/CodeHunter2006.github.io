@@ -12,7 +12,7 @@ binlog(binary log)二进制日志，是 MySQL 最重要的日志，记录了所�
 
 1. **主从复制**
    mysql replication 在 master 端开启 binlog，master 将二进制日志传递给 slave 端进行同步，是数据一致
-2. **数据回复**
+2. **数据恢复**
    通过 binlog 记录历史变化，用 mysqlbinlog 工具来恢复数据
 
 - 一般说开启 binlog 日志大概会有 1%的性能损耗
