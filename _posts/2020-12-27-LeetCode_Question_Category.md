@@ -10,11 +10,17 @@ tags: Algorithm Leetcode
 
 ### "5. Longest Palindromic Substring"
 
-- 解法 1: 双指针
+- 解法 1: 双指针, 中心扩散
   - 思路：
     - 遍历每一个位置 i
     - 以 i 为中心向两边扩展指针 l r 检测每个元素是否对称，记录`r-l+1`最大值和当时的 l 值
     - 注意 i 位置本身可以作为中心，也可以以 i 作为 l，即字符串是偶数的对称情况
+
+### "6. Zigzag Conversion"
+
+- 解法 1：模拟法
+  - 利用边界条件让方向切换
+    - 如果行数为 1 则不切换方向(方向值为 0)，所以方向初始值`1%numRows`
 
 ### "7. Reverse Integer"
 
@@ -24,6 +30,21 @@ tags: Algorithm Leetcode
   - 可以利用`ret*10`处理前对`math.MinInt32/10`和`math.MaxInt32/10`做判断，预判最终结果
 
 ["7. Reverse Integer" math]()
+
+### "8. String to Integer (atoi)"
+
+- 解法：遍历字符，按状态进行切换
+  - 可以利用状态模式，更好理解
+
+### "9. Palindrome Number"
+
+- 解法：
+  - 最简单思路是转为字符串，然后字符串判断是否对称
+  - 可以参考"7. Reverse Integer"转为反转数字，同时剪短原数字，然后比较
+    - 注意可能出现两种对称(12321, 1221)，所以比较时每步要比较两种情况
+    - 可以只转换一半，这样可以避免转换后溢出的情况
+
+["9. Palindrome Number]()
 
 ### "11. Container With Most Water"
 
@@ -36,12 +57,23 @@ tags: Algorithm Leetcode
 
 ### "12. Integer to Roman"
 
-- 解法：DC
-  - 思路：
+- 解法 1：DC
+  - 思路 1：
     - 根据当前 10 进制尾数选择字符
     - 根据不同情况拼接字符
+- 解法 2：math
+  - 利用阿拉伯数字和罗马数字的兑换规律，把罗马数字组合成可能对应的阿拉伯数字列表，按从大到小的顺序把传入的阿拉伯数字减小，同时拼装结果
+  - 利用 stings.Builder 可以提高字符串拼装效率
+  - 由于 Go 里没有 OrderedMap，所以用结构体数字代替，在其它语言可以直接用 OrderedMap 更简单
 
 ["12. Integer to Roman" DivideAndConquer Golang]()
+
+### "13. Roman to Integer"
+
+- 解法: map
+  - 顺序遍历每个字符，记录前一个字符以备减去操作
+  - 记录下罗马字符和数字映射关系、罗马数字前缀是否减去字符的映射关系(如 V 前的 I 会导致减去)
+  - 如果需要减去则先减去两倍，然后再正常加上当前数值。如：当前 V 前一个是 I，则当前值`ret += 5 - 2*1`
 
 ### "15. 3Sum"
 

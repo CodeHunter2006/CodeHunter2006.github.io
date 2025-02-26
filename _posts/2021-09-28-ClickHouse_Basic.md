@@ -100,6 +100,8 @@ tags: ClickHouse
   - 建表时可以指定分区字段，写入时会根据字段值自动分区，读取时可以加分区限定
 - 分片字段，shard key
   分片的目的是多个节点并行读取，避免单机瓶颈。shard key 使数据能够经过 hash 尽量分散到不同节点上。
+  - shard key 底层是用 bucket 的概念实现的，本质上是 partition 的下一级分区
+  - bucket 可以提高并行处理能力，将数据分成更小的单元；在做聚合处理时，可以进行局部优化，只读取 sharding key 相关的 bucket。
 - 关于 client
   - client 查询时，可以看到分区内数据情况
 - 本机数据保存目录 `/var/lib/clickhouse`

@@ -126,6 +126,64 @@ func reverse(x int) (ret int) {
 }
 ```
 
+### "9. Palindrome Number"
+
+```Go
+func isPalindrome(x int) bool {
+    if x < 0 || (x%10 == 0 && x != 0) {
+        return false
+    }
+
+    anti := 0
+    for x > anti {
+        anti = anti*10 + x%10
+        x /= 10
+    }
+
+    return x == anti || x == anti/10
+}
+```
+
+### "12. Integer to Roman"
+
+```Go
+import "strings"
+
+type Int2Roman struct {
+    Num int
+    Char string
+}
+
+var gInt2Roman []Int2Roman = []Int2Roman{
+    {Num:1000, Char:"M"},
+    {Num:900, Char:"CM"},
+    {Num:500, Char:"D"},
+    {Num:400, Char:"CD"},
+    {Num:100, Char:"C"},
+    {Num:90, Char:"XC"},
+    {Num:50, Char:"L"},
+    {Num:40, Char:"XL"},
+    {Num:10, Char:"X"},
+    {Num:9, Char:"IX"},
+    {Num:5, Char:"V"},
+    {Num:4, Char:"IV"},
+    {Num:1, Char:"I"},
+}
+
+func intToRoman(num int) string {
+    sb := new(strings.Builder)
+
+    for _, i2r := range gInt2Roman {
+        for num >= i2r.Num {
+            sb.WriteString(i2r.Char)
+            num -= i2r.Num
+        }
+    }
+
+    return sb.String()
+}
+```
+
 ### "65. Valid Number"
 
 ```C++

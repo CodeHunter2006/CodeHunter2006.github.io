@@ -71,6 +71,7 @@ tags: Algorithm Leetcode
 - 可以用`fmt.Println(x)`来输出 log
 - 可以用`fmt.Printf("%b", x)`输出二进制
 - leetcode 运行 Go 代码时，报"Runtime error"，一般是有死循环了。
+- 可以用`max.Pow(2,3)`来表示`2^3`(2 的三次方)，在 Go 中`^`表示按位异或
 
 # 数据结构
 
