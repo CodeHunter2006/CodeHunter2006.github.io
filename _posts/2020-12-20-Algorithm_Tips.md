@@ -68,6 +68,7 @@ tags: Algorithm Leetcode
 
 ### Golang 技巧
 
+- 无需手动添加`import`导入包语句，只要包名和变量名不冲突就会自动添加
 - 可以用`fmt.Println(x)`来输出 log
 - 可以用`fmt.Printf("%b", x)`输出二进制
 - leetcode 运行 Go 代码时，报"Runtime error"，一般是有死循环了。

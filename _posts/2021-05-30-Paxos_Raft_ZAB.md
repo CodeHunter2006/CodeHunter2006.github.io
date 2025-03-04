@@ -9,12 +9,12 @@ tags: Algorithm Distribute
 
 # 基本概念
 
-根据**CAP Theorem**，分布式系统不能同时满足三点：Consistency(一致性)、Availability(可用性)、Partition Tolerance(分区容错性)
+根据**CAP Theorem**(CAP 定理)，分布式系统不能同时满足三点：Consistency(一致性)、Availability(可用性)、Partition Tolerance(分区容错性)
 
 - CP
-  MongoDB、HBase、Redis、Zookeeper(ZAB)、Etcd(Raft)
+  MongoDB、HBase、Redis(MasterSlave 模式)、Zookeeper(ZAB)、Etcd(Raft)
 - AP
-  CouchDB、Cassandra、DynamoDB、Riak
+  CouchDB、Cassandra、DynamoDB、Riak、Consul(Gossip)、Redis(Cluster 模式, Gossip)
 - CA
   RDBMS
 

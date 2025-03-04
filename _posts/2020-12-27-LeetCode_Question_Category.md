@@ -83,13 +83,25 @@ tags: Algorithm Leetcode
     - 设定三个下标 l m r，全程保证`l < m < r`
     - 最外层循环 l、中层循环 m、内层循环 r，由于`m < r`，所以第二层循环是`O(n)`
     - 确定 l m 后，r 从右向左逼近，找到`nums[l] + nums[m] + nums[r] == 0`则记录答案
-    - 要点是 l 和 m 对新元素的第二轮循环开始就要避免重复数据，这样确保`[0,0,0,0]`这种只输出一个`[0,0,0]`
+    - 要点是 l、m、r 对新元素的第二轮循环开始就要避免重复数据，这样确保`[0,0,0,0]`这种只输出一个`[0,0,0]`
 
 ["15. 3Sum" TwoPointers]()
+
+### "16. 3Sum Closest"
+
+- 解法：TwoPointers
+  - 思路：
+    - 思路和"15. 3Sum"是一致的，两层循环，O(n^2)
+    - 由于无法精确找到结果，所以 r 的缩小逻辑有所不同，每次 r 变更后都要检测一次结果，不能一直缩小
 
 ### "17. Letter Combinations of a Phone Number"
 
 - 解法: Backtraking
+
+### "18. 4Sum"
+
+- 解法：TwoPointers
+  - 参照"15. 3Sum"，两层外层循环，然后双指针一层循环，O(n^3)
 
 ### "25. Reverse Nodes in k-Group"
 

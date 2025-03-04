@@ -568,6 +568,15 @@ sort.Sort(sort.Reverse(sort.IntSlice(s)))
 `func NewReader(s string) *Reader`
 将 string 转为 io.Reader
 
+## strconv
+
+字符串和各种类型间的转换
+
+- `func FormatFloat(f float64, fmt byte, prec, bitSize int) string`
+  把 float 类型转为字符串。有时涉及浮点位数的处理，如"获取浮点数小数点后位数"，可以先转为字符串再处理，否则容易受浮点精度问题影响。
+  - fmt 输出格式，如果想输出所有小数不想被 e 替换，可以用`f`格式
+  - prec 精度，默认 `-1`
+
 ## time
 
 提供时间日期相关操作
