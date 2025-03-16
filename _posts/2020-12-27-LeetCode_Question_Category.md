@@ -102,6 +102,17 @@ tags: Algorithm Leetcode
 
 - 解法：TwoPointers
   - 参照"15. 3Sum"，两层外层循环，然后双指针一层循环，O(n^3)
+  - 每层循环要考虑进行过一次后要自动跳过重复项
+
+### "19. Remove Nth Node From End of List"
+
+- 解法：快慢指针法
+  - 快指针先向前 n 步，然后慢指针和快指针一起向后，直到快指针为 nil
+  - 注意慢指针始终指向要删除节点的前一个，以便后续操作
+
+### "20. Valid Parentheses"
+
+- 解法：栈
 
 ### "25. Reverse Nodes in k-Group"
 

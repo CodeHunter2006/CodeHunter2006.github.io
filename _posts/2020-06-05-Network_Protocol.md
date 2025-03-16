@@ -102,6 +102,7 @@ HTTP 协议的请求报文和响应报文的结构基本相同
   - 405 Method Not Allowed;
   - 406 Not Acceptable, 如 xml/json 差异
   - 408 服务器等待客户端请求时超时;
+  - 429 客户端请求过频繁
   - 499 Nginx 自定义错误, 客户端还未接收完 response 就关闭了连接
 - 5xx 服务器错误
   - 500 服务器内部通用错误；
