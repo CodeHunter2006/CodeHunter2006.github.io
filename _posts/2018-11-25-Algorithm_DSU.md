@@ -24,6 +24,7 @@ class DSU{
     private:
     vector<int> parent_; // 用于集合关联，默认每个元素自己是一个集合。
     vector<int> rank_;   // 将孩子较少的节点合并到节点较多的节点，减少查找次数。
+
     public:
     DSU(int N) {
         parent_.resize(N);
@@ -31,16 +32,19 @@ class DSU{
             parent_[i] = i;
         rank_.resize(N, 1);    // rank默认数为1
     }
+
     int find(int x) { // 每次查找，都递归进行合并，避免层数过高。
         if (parent_[x] != x)
             parent_[x] = find(parent_[x]);
         return parent_[x];
     }
+
     int find(int x, int &outSize) {    // 可以查找当前集合总数
         if(parent_[x] != x) parent_[x] = find(parent_[x]);
         outSize = rank_[parent_[x]];
         return parent_[x];
     }
+
     bool doUnion(int x, int y) {
         int xr = find(x), yr = find(y);
         if(xr == yr)
@@ -79,12 +83,14 @@ func NewDSU(size int) (res *DSU) {
         res.parents[i] = i
         res.ranks[i] = 1
     }
+
     return
 }
 
 func (p *DSU) Find(x int) (root int, err error) {
     if x < 0 || x >= len(p.parents) {
         err = errors.New("invalid index")
+
         return
     }
 
@@ -92,12 +98,14 @@ func (p *DSU) Find(x int) (root int, err error) {
         p.parents[x], _ = p.Find(p.parents[x])
     }
     root = p.parents[x]
+
     return
 }
 
 func (p *DSU) Union(x ,y int) (res bool, err error) {
     if x < 0 || x >= len(p.parents) || y < 0 || y >= len(p.parents) {
         err = errors.New("invalid index")
+
         return
     }
 
@@ -106,6 +114,7 @@ func (p *DSU) Union(x ,y int) (res bool, err error) {
 
     if xRoot == yRoot {
         res = false
+
         return
     }
 
@@ -117,6 +126,7 @@ func (p *DSU) Union(x ,y int) (res bool, err error) {
         p.ranks[yRoot] += p.ranks[xRoot]
     }
     res = true
+
     return
 }
 ```
