@@ -5,6 +5,8 @@ date: 2025-03-17 22:00:00 +0800
 tags: Java
 ---
 
+![class_loader](/assets/images/2025-03-17-Java_ClassLoader_0.jpg)
+
 # Java 程序的启动并运行的过程(Java 中的类都是动态加载的，是语言灵活性的根源)
 
 - JVM 启动(Launcher)
@@ -15,7 +17,7 @@ tags: Java
   - 在这个过程中，可能会触发其它类的加载
 
 - 类加载流程
-  ![picture_alt](/assets/images/2025-03-17-Java_ClassLoader_1.png)
+  ![process](/assets/images/2025-03-17-Java_ClassLoader_1.png)
 
 # Java8 内置的类加载器
 
@@ -57,7 +59,7 @@ public class BuiltinClassLoaderTest {
     - 在 JVM 中通常使用`C/C++`语言原生实现，因此打印出来为`null`
 
 三者类关系如图:
-![picture_alt](/assets/images/2025-03-17-Java_ClassLoader_2.png)
+![class](/assets/images/2025-03-17-Java_ClassLoader_2.png)
 
 - 从 JVM 的角度来看，只有两种类加载器
   - 一种是 BootstrapClassLoader，它是 JVM 的一部分，使用`C/C++`原生实现
@@ -78,7 +80,7 @@ public class BuiltinClassLoaderTest {
   - 对于用户自定义的类加载器，默认的"父"类加载器是 AppClassLoader
 
 类加载过程如图:
-![picture_alt](/assets/images/2025-03-17-Java_ClassLoader_3.png)
+![sequence](/assets/images/2025-03-17-Java_ClassLoader_3.png)
 
 - 优先由"父"类加载器加载，如果"父"类加载器无法加载，则自己再尝试加载，最后都无法加载指定的类则抛出`ClassNotFoundException`
 - 这样的好处是越顶层的类加载器对其可见的类总是会被优先加载。
@@ -324,7 +326,7 @@ public static <S> ServiceLoader<S> load(Class<S> servcie) {
 - 实现原理：基于 Java 的类加载器来实现，当模块或应用发生改变时(如监听文件变化)，使用新的 ClassLoader 来加载它们
 
 Tomcat 热加载自定义类
-![picture_alt](/assets/images/2025-03-17-Java_ClassLoader_4.png)
+![tomcat](/assets/images/2025-03-17-Java_ClassLoader_4.png)
 
 # 数组类的加载
 
