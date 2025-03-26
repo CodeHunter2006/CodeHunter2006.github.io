@@ -1005,6 +1005,13 @@ tar –xZvf file.tar.Z 解压 tar.Z
 - `--output -` 输出 body 到 console
 - `-D -` 输出 header 到 console
 
+## wget
+
+拉取网页到文件
+
+`wget http://example.com/index.html`
+将在本地生成`index.html`文件
+
 ## ssh
 
 ## scp
