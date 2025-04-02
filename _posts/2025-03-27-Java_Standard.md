@@ -105,6 +105,80 @@ tags: Java
   - 正例：数据库字段的 bigint 必须与类属性的 Long 类型相对应。
   - 反例：某业务的数据库表 id 字段定义类型为 bigint unsigned, 实际类对象属性为 Integer，随着 id 越来越大，
     超过 Integer 的表示范围而溢出成为负数，此时数据库 id 不支持存入负数抛出异常产生线上故障。
+- _强制_ 禁止使用构造方法 BigDecimal(double) 的方式把 double 值转化为 BigDecimal 对象。
+  - 说明：BigDecimal(double)存在精度损失风险，在精确计算或值比较的场景中可能会导致业务逻辑异常。
+    如：`BigDecimal g = new BigDecimal(0.1F);`实际的存储值为：`0.100000001490116119384765625`
+  - 正例：优先推荐入参为 String 的构造方法，或使用 BigDecimal 的 valueOf 方法，此方法内部其实执行了 Double 的 toString，
+    而 Double 的 toString 按 Double 的实际能表达的精度对数尾进行了截断。
+    - `BigDecimal recommend1 = new BigDecimal("0.1");`
+    - `BigDecimal recommend2 = BigDecimal.valueOf(0.1);`
+- 关于**基本数据类型与包装数据类型**的使用标准如下：
+  - _强制_ 所有的 POJO 类属性必须使用包装数据类型
+  - _强制_ RPC 方法的返回值和参数必须使用包装数据类型
+  - _推荐_ 所有的局部变量使用基本数据类型
+  - 说明：POJO 类属性没有初值是提醒使用者在需要使用时，必须自己显式地进行赋值，任何 NPE 问题，或者入库检查，都由使用者来保证。
+  - 正例：数据库的查询结果可能是 null，因为自动拆箱，用基本数据类型接收有 NPE 风险
+  - 反例：某业务的交易报表上显示成交总额涨跌情况，即正负`x%`，`x`为基本数据类型，调用的 RPC 服务，调用不成功时，返回的是默认值，
+    页面显示为`0%`，这是不合理的，应该显示成中划线`-`。所以包装数据类型的 null 值，能够表示额外的信息，如：远程调用失败、异常退出。
+- _强制_ 定义 DO/PO/DTO/VO 等 POJO 类时，不要设定任何属性**默认值**。
+  - 反例：某业务的 DO 的 createTime 默认值为 new Date(); 但是这个属性在数据提取时并没有置入具体值，在更新其它字段时又附带更新了此字段，
+    导致创建时间被修正成当前时间。
+- _强制_ 序列化类新增属性时，请不要修改 serialVersionUID 字段，避免反序列失败；如果完全不兼容升级，避免反序列化混乱，那么请修改 serialVersionUID 值。
+- _强制_ 构造方法里面禁止加入任何业务逻辑，如果有初始化逻辑，请放在`init()`方法中。
+- _强制_ POJO 类必须写 toString 方法。使用 IDE 中的工具 source > generate toString 时，如果继承了另一个 POJO 类，注意在前面加一下 super.toString()。
+  - 说明：在方法执行抛出异常时，可直接调用 POJO 的 toString() 方法打印其属性值，便于排查问题。
+- _强制_ 禁止在 POJO 类中，同时存在对应属性 xxx 的 isXxx() 和 getXxx() 方法。
+  - 说明：框架在调用属性的提取方法时，并不能确定哪个方法一定是被优先调用到，神坑之一。
+
+## 日期时间
+
+- _强制_ 日期格式化时，传入 pattern 中表示年份统一使用小写的 y。
+  - 说明：日期格式化时，yyyy 表示当天所在的年，而大写的 YYYY 代表 week in which year(JDK7 之后引入的概念)，意思是当天所在的周属于的年份，
+    一周从周日开始，周六结束，只要本周跨年，返回的 YYYY 就是下一年。
+  - 反例：某程序员因使用`YYYY/MM/dd`进行日期格式化，`2017/12/31`执行结果为`2018/12/31`，造成线上故障。
+- _强制_ 在日期格式中分清楚大写的 M 和小写的 m，大写的 H 和小写的 h 分别指代的意义。
+  - 说明：日期格式中的这两对字母表意如下：
+    - M 表示月份
+    - m 表示分钟
+    - H 表示 24 小时制
+    - h 表示 12 小时制
+- _强制_ 获取当前毫秒数：`System.currentTimeMillis();`而不是`new Date().getTime();`
+  - 说明：获取纳秒级时间，则使用`System.nanoTime()`的方式。在 JDK8 中，针对统计时间等场景，推荐使用 Instant 类。
+- _强制_ 不允许在程序任何地方中使用`java.sql.Date/Time/Timestamp`
+  - 说明：
+    - `java.sql.Date`不记录时间，getHours() 抛出异常
+    - `java.sql.Time`不记录日期，getYear() 抛出异常
+    - `java.sql.Timestamp`在构造方法`super((time/1000)*1000)`，在 Timestamp 属性 fastTime 和 nanos 分别存储秒和纳秒信息，造成冗余。
+  - 反例：`java.util.Date.after(Date)`进行时间比较时，当入参是`java.sql.Timestamp`时，会触发 JDK BUG(JDK9 已修复)，可能导致比较时的意外结果。
+- _强制_ 禁止在程序中写死一年为 365 天，避免在公历闰年时出现日期转换错误或程序逻辑错误。
+
+  - 正例：
+
+    ```java
+    // 获取今年的天数
+    int daysOfThisYear = LocalDate.now().lengthOfYear();
+    // 获取指定某年的天数
+    LocalDate.of(2011, 1, 1).lengthOfYear();
+    ```
+
+  - 反例：
+    ```java
+    // 第一种情况：在闰年 366 天时，出现数组越界异常
+    int[] dayArray = new int[365];
+    // 第二种情况： 一年有效期的会员制，2020 年 1 月 26 日注册，硬编码 365 返回的却是 2021 年 1 月 25 日
+    Calendar calendar = Calendar.getInstance();
+    calendar.set(2020, 1, 26);
+    calendar.add(Calendar.DATE, 365);
+    ```
+
+## 集合处理
+
+- _强制_ 关于 hashCode 和 equals 的处理，遵循如下规则：
+  - 只要覆写 equals，就必须覆写 hashCode。
+  - 因为 Set 存储的是不重复的对象，一句 hashCode 和 equals 进行判断，所以 Set 存储的对象必须覆写这两种方法。
+  - 如果自定义对象作为 Map 的键，那么必须覆写 hashCode 和 equals。
+- _强制_ 判断所有集合内部的元素是否为空，使用 isEmpty() 方法，而不是`size() == 0`的方式。
+  - 说明：某些集合中，前者的时间复杂度为`O(1)`，而且可读性更好。
 
 # 参考链接
 

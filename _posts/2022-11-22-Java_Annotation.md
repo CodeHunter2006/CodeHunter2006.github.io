@@ -108,7 +108,7 @@ public @interface MyAnnotation {
 }
 ```
 
-2. 定义 APT
+2. 定义 APT(Annotation Processing Tool)
 
 - 利用`java.lang.annotation.Annotation`包取得注解的 key-value 并执行动作
 

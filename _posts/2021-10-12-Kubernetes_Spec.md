@@ -967,7 +967,7 @@ CRD 要先定义再使用(创建资源)
 apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
 metadata:
-  # 称必须与下面的spec字段匹配，格式为: <plural>.<group>
+  # 名称必须与下面的spec字段匹配，格式为: <plural>.<group>
   name: crontabs.crd.test.com
 spec:
   # 用于REST API的组名称: /apis/<group>/<version>

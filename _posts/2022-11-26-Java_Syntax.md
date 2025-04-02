@@ -58,7 +58,9 @@ for (int item : items) {
 - 关于**别名**
   Java 不支持在`import`时定义包或类的别名，如果有同名类需要同时使用，可以直接用包含全包名的类名。由于 Java 的包名就是域名的反向文本，所以不会出现全包名的冲突。
 
-## 移位
+## 数学运算
+
+### 移位
 
 - `>>>`
   无符号右移。由于 Java 中没有`unsigned`类型，所以在做移位操作时始终需要考虑符号位的处理。
@@ -71,3 +73,29 @@ for (int item : items) {
 
 - `obj1.getClass().equals(ClassA.class)`
   精确匹配类型
+
+- 在 priave 方法中调自己的 private 方法或变量时，可以**省略 this.**。除非存在歧义的情况才需要加 this
+
+## 函数式编程
+
+### lambda 函数
+
+Java 8 引入的一种简洁的表示可传递给方法或存储在变量中的代码块的方式。它可以被看作是一种匿名函数，一种没有名称但有参数列表、函数体和返回值（在某些情况下可以自动推断）的函数。
+
+- Lambda 表达式的基本语法形式为：`(parameters) -> expression` 或者`(parameters) -> { statements; }`
+
+- 场景：
+  - 可以用于函数式接口：`Runnable runnable = () -> System.out.println("Hello from Lambda");`
+  - 可以用于集合操作`numbers.stream().filter(num -> num % 2==0).forEach(System.out::println);`
+    - 这里通过`filter`接收一个条件 lambda 过滤出想要的元素
+    - 然后通过`forEach`接收一个`Consumer`函数式接口，打印结果
+
+### 函数式接口
+
+java8 引入，只包含一个抽象方法的接口，可以用 Lambda 函数直接赋值而生成对象，用于函数式编程
+
+例如 `org.springframework.data.jpa.domain.Specification`
+
+```java
+Specification<User> ageSpec = (root, query, builder) -> builder.greaterThan(root.get("age"), 30);
+```
