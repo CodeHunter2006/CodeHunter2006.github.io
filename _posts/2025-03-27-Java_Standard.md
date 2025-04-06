@@ -179,6 +179,29 @@ tags: Java
   - 如果自定义对象作为 Map 的键，那么必须覆写 hashCode 和 equals。
 - _强制_ 判断所有集合内部的元素是否为空，使用 isEmpty() 方法，而不是`size() == 0`的方式。
   - 说明：某些集合中，前者的时间复杂度为`O(1)`，而且可读性更好。
+- _强制_ 在使用 java.util.stream.Collectors 类的 toMap() 方法转为集合时，一定要使用参数类型为 BinaryOperator，
+  参数名为 mergeFunction 的方法，否则当出现相同 key 时会抛出 illegalStateException 异常。
+  - 说明:参数 mergeFunction 的作用是当出现 key 重复时，自定义对 value 的处理策略。
+  - 正例：
+    ```java
+    List<Pair<String, Double>> pairArrayList = new ArrayList<>(3);
+    pairArrayList.add(new Pair<>("version", 12.10));
+    pairArrayList.add(new Pair<>("version", 12.19));
+    pairArrayList.add(new Pair<>("version", 6.28));
+    // 生成的 map 集合中只有一个键值对：{"version"=6.28}
+    Map<String, Double> map = pairArrayList.stream().collect(Collectors.toMap(Pair::getKey, Pair::getValue, (v1, v2) -> v2));
+    ```
+- _强制_ 在使用`java.util.stream.Collectors`类的`toMap()`方法转为 Map 集合时，一定要注意当 value 为 null 时会抛出 NPE 异常。
+  - 说明：在`java.util.HashMap`的 merge 方法里会进行如下的判断：
+    ```java
+    if (value == null || remappingFunction == null)
+      throw new NullPonterException();
+    ```
+- _强制_ ArrayList 的 subList 结果不可强转成 ArrayList，否则会抛出 ClassCastException 异常：
+  `java.util.RandomAccessSubList cannot be cast to java.util.ArrayList`。
+  - 说明：`subList()`返回的是 ArrayList 的内部类 SubList，并不是 ArrayList 本身，而是 ArrayList 的一个视图，
+    对于 SubList 的所有操作最终会反映到原列表上。
+- _强制_ 使用 Map 的方法 keySet()/values()/entrySet()
 
 # 参考链接
 
