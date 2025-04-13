@@ -164,7 +164,7 @@ docker load < file.tar
 - `docker search imageName`
   搜索 docker hub 中是否有镜像
 
-- `docker login`
+- `docker login [私有镜像库地址]`
   登录到一个镜像库，如果不指定镜像库，则默认登录官方镜像库(docker-hub)
 
   - `-u userName`
