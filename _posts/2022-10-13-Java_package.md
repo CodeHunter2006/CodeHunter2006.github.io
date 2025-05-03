@@ -79,6 +79,10 @@ public class MyClass {
 }
 ```
 
+### `lombok.experimental.UtilityClass`
+
+声明一个类为工具类，无法被继承，只能使用 static 方法。
+
 ### `lombok.Builder`
 
 自动为 POJO 类生成 builder 模式需要的方法
@@ -133,6 +137,12 @@ annotation，标记参数等可为 null
 ### `org.springframework.context.ApplicationContextAware`
 
 当一个类实现了这个接口，Spring 容器会在创建该类的实例时，自动将 ApplicationContext（应用上下文）注入到这个类中。这样，在这个类内部就可以方便地获取 Spring 容器中的其他 bean、资源等信息。
+
+## org.springframework.scheduling
+
+定时任务
+
+### `org.springframework.scheduling.annotation.Scheduled`
 
 ## org.springframework.web.server
 
