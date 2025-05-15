@@ -175,7 +175,7 @@ tags: Java
 
 - _强制_ 关于 hashCode 和 equals 的处理，遵循如下规则：
   - 只要覆写 equals，就必须覆写 hashCode。
-  - 因为 Set 存储的是不重复的对象，一句 hashCode 和 equals 进行判断，所以 Set 存储的对象必须覆写这两种方法。
+  - 因为 Set 存储的是不重复的对象，依据 hashCode 和 equals 进行判断，所以 Set 存储的对象必须覆写这两种方法。
   - 如果自定义对象作为 Map 的键，那么必须覆写 hashCode 和 equals。
 - _强制_ 判断所有集合内部的元素是否为空，使用 isEmpty() 方法，而不是`size() == 0`的方式。
   - 说明：某些集合中，前者的时间复杂度为`O(1)`，而且可读性更好。
@@ -201,7 +201,140 @@ tags: Java
   `java.util.RandomAccessSubList cannot be cast to java.util.ArrayList`。
   - 说明：`subList()`返回的是 ArrayList 的内部类 SubList，并不是 ArrayList 本身，而是 ArrayList 的一个视图，
     对于 SubList 的所有操作最终会反映到原列表上。
-- _强制_ 使用 Map 的方法 keySet()/values()/entrySet()
+- _强制_ 使用 Map 的方法 keySet()/values()/entrySet() 返回集合对象时，不可以对其进行添加元素操作，否则会抛出 UnsupportedOperationException 异常。
+- _强制_ Collections 类返回的对象，如：emptyList()/singletonList() 等都是 immutable list，不可对其进行添加或者删除元素的操作。
+  - 反例：如果查询无结果，返回 Collections.emptyList() 空集合对象，调用方一旦在返回的集合中进行了添加元素的操作，就会触发 UnsupportedOperationException 异常。
+- _强制_ 在 subList 场景中，**高度注意**对父集合元素的增加或删除，均会导致子列表的遍历、增加、删除产生 ConcurrentModificationException 异常。
+  - 说明：抽查表名，90%的程序员对此知识点都有错误的认知。
+- _强制_ 使用集合转数组的方法，必须使用集合的`toArray(T[] array)`，传入的是类型完全一致、长度为 0 的空数组。
+  - 反例：直接使用 toArray 无参方法存在问题，此方法返回值只能是 Object[] 类，若强转其它类型数组将出现 ClassCastException 错误。
+  - 正例：
+    ```Java
+      List<String> list = new ArrayList<>(2);
+      list.add("xxx");
+      list.add("yyy");
+      String[] array = list.toArray(new String[0]);
+    ```
+  - 说明：使用 toArray 带参方法，数组空间大小的 length:
+    1. 等于 0，动态创建与 size 相同的数组，性能最好。
+    2. 大于 0 但小于 size，重新创建大小等于 size 的数组，增加 GC 负担。
+    3. 等于 size，在高并发情况下，数组创建完成之后，size 正在变大的情况下，负面影响与 2 相同。
+    4. 大于 size，空间浪费，且在 size 处插入 null 值，存在 NPE 隐患。
+- _强制_ 使用 Collection 接口任何实现类的 addAll() 方法时，要对输入的集合参数进行 NPE 判断。
+  - 说明：在 ArrayList#addAll 方法的第一行代码即`Object[] a = c.toArray();`其中 c 为输入集合参数，如果为 null，则直接抛出异常。
+- _强制_ 使用工具类 Arrays.asList() 把数组转换成集合时，不能使用其修改集合(长度)相关的方法，它的 add/remove/clear 方法会抛出
+  UnsupportedOperationException 异常。
+  - 说明：asList 的返回对象是一个 Arrays 内部类，并没有实现集合的修改方法。Arrays.asList 体现的是适配器模式，只是转换接口，后台的数据仍是数组。
+    ```Java
+    String[] str = new String[]{"a", "b"};
+    List list = Arrays.asList(str);
+    ```
+    - `list.add("c");` 运行时异常。
+    - `str[0] = "c";` list 中的元素也会随之修改，反之亦然。
+- _强制_ 泛型通配符`<？ extends T>`来接收返回的数据，此写法的泛型集合不能使用 add 方法，而`<? supper T>`不能使用 get 方法，两者在接口调用赋值的场景中容易出错。
+  - 说明：扩展说一下`PECS(Producer Extends, Consumer Super)`原则，即频繁往外读取内容的，适合用`<? extends T>`; 经常往里插入的，适合用`<? supper T>`
+- _强制_ 在无泛型限制定义的集合赋值给泛型限制的集合时，在使用集合元素时，需要进行 instanceof 判断，避免抛出 ClassCastException 异常。
+  说明：笔记泛型是在 JDK5 后才出现，考虑到向前兼容，编译器是允许非泛型集合与泛型集合相互赋值。
+  反例：
+
+  ```java
+  List<String> generics = null;
+  List notGenerics = new ArrayList(10);
+  notGenerics.add(new Object());
+  notGenerics.add(new Integer(1));
+  generics = notGenerics;
+  // 此处抛出 ClassCastException 异常
+  String string = generics.get(0);
+  ```
+
+- _强制_ 不要在 foreach 循环里进行元素的 remove/add 操作。remove 元素请使用 iterator 方式，如果并发操作，需要对 iterator 对象加锁。
+  - 正例：
+    ```java
+    List<String> list = new ArrayList<>();
+    list.add("1");
+    list.add("2");
+    Iterator<String> iterator = list.iterator();
+    while (iterator.hasNext()) {
+      String item = iterator.next();
+      if (删除元素的条件) {
+        iterator.remove();
+      }
+    }
+    ```
+  - 反例：
+    ```java
+    for (String item : list) {
+      if ("1".equals(item)) {
+        list.remove(item);
+      }
+    }
+    ```
+  - 说明：返利中的执行结果肯定会出乎大家的意料，那么试一下把 "1" 换成 "2" 会是同样的结果吗？
+    - "1"可以正常删除；"2"会报错"java.util.ConcurrentModificationException"
+- _强制_ 在 JDK7 版本及以上，Comparator 实现类要满足如下三个条件，不然 Arrays.sort, Collections.sort 会抛`IllegalArgumentException`异常。
+
+  - 说明：三个条件如下：
+    1. x, y 的比较结果和 y, x 的比较结果相反。
+    2. x > y, y > z, 则 x > z。
+    3. x = y, 则 x, z 比较结果和 y, z 比较结果相同。
+  - 反例：下例中没有处理相等的情况，交换两个对象判断结果并不互反，不符合第一个条件，在实际使用中可能会出现异常。
+
+    ```java
+    new Comparator<Student>() {
+      @Override
+      public int compare(Student o1, Student o2) {
+        return o1.getId() > o2.getId() ? 1 : -1;
+      }
+    }
+
+    ```
+
+## 并发处理
+
+- _强制_ 获取单例对象需要保证线程安全，其中的方法也要保证线程安全。
+  - 说明：资源驱动类、工具类、单例工厂类都需要注意。
+- _强制_ 创建线程或线程池时请指定有意义的线程名称，方便出错时回溯。
+  - 正例：自定义线程工厂，并且根据外部特征进行分组，比如，来自同一机房的调用，把机房编号赋值给 whatFeatureOfGroup:
+    ```java
+    public class UserThreadFactory implements ThreadFactory {
+      private final String namePrefix;
+      private final AtomicInteger nextId = new AtomicInteger(1);
+      // 定义线程组名称，在利用 jstack 来排查问题时，非常有帮助
+      UserThreadFactory(String whatFeatureOfGroup) {
+        namePrefix = "FromUserThreadFactory's" + whatFeatureOfGroup + "-Worker-";
+      }
+      @Override
+      public Thread newThread(Runnable task) {
+        String name = namePrefix + nextId.getAndIncrecement();
+        Thread thread = new Thread(null, task, name, 0, false);
+        System.out.println(thread.getName());
+        return thread;
+      }
+    }
+    ```
+- _强制_ 线程资源必须通过线程池提供，不允许在应用中自行显示创建线程。
+  - 说明：线程池的好处是减少在创建和销毁线程上所小号的时间以及系统资源的开销，解决资源不足的问题。如果不使用线程池，
+    有可能造成系统创建大量同类线程而导致消耗完内存，或者"过度切换"的问题。
+- _强制_ 线程池不允许使用 Executors 去创建，而是通过 ThreadPoolExecutor 的方式，这样的处理方式让写的同学更加明确线程池的运行规则，规避资源耗尽的风险。
+  - 说明：Executors 返回的线程池对象的弊端如下：
+    1. FixedThreadPool 和 SingleThreadPool
+       允许的**请求队列长度**为`Integer.MAX_VALUE`，可能会堆积大量的请求，从而导致 OOM。
+    2. CachedThreadPool:
+       允许的**创建线程数量**为`Integer.MAX_VALUE`，可能会创建大量的请求，从而导致 OOM。
+    3. ScheduledThreadPool:
+       允许的**请求队列长度**为`Integer.MAX_VALUE`，可能会堆积大量的请求，从而导致 OOM。
+- _强制_ SimpleDateFormat 是线程不安全的类，一般不要定义为 static 变量，如果定义为 static，必须加锁，或者使用 DateUtils 工具类。
+  - 正例：注意线程安全，使用 DateUtils。亦推荐如下处理：
+    ```java
+    private static final ThreadLocal<DateFormat> dateStyle = new ThreadLocal<DateFormat>() {
+      @Overide
+      protected DateFormat initialValue() {
+        return new SimpleDateFormat("yyyy-MM-dd");
+      }
+    }
+    ```
+  - 说明：如果是 JDK8 的应用，可以使用 Instant 代替 Date, LocalDateTime 代替 Calendar, DateTimeFormatter 代替 SimpleDateFormat，
+    官方给出的解释：simple beautiful strong immutable thread-safe。
 
 # 参考链接
 

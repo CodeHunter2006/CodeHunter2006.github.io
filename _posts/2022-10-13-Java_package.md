@@ -41,6 +41,31 @@ static main() {
 - `String System.setProperty(String key, String value)`
   设置一个全局系统变量，如果有旧值则作为返回值。设置后可以在其他地方用`System.getProperty`获取
 
+## `java.lang.ThreadLocal`
+
+一个线程局部变量工具类，用于为每个使用该变量的线程都创建一个独立的副本，每个线程都可以独立地改变自己的副本，而不会影响其他线程所对应的副本。
+通过合理使用 ThreadLocal，可以高效地实现线程安全的局部变量管理，不必加锁，避免多线程环境下的数据竞争问题、提高执行效率。
+
+- 注意事项
+  - 内存泄漏风险：
+    1. 若 ThreadLocal 变量为静态且持有大对象（如数据库连接），需在线程结束前调用 remove()释放资源。
+    2. 在线程池环境中（如 Tomcat、Spring），线程会被复用，必须在请求处理完成后调用 remove()，否则可能导致数据混乱或内存泄漏。
+  - 初始化方式：
+    使用 withInitial()方法（Java 8+）替代重写 initialValue()，代码更简洁。
+  - 继承性：
+    使用 InheritableThreadLocal 可让子线程继承父线程的 ThreadLocal 值。
+- 最佳实践:
+  - 静态常量：
+    通常将 ThreadLocal 定义为 private static final，确保全局唯一。
+  - 泛型约束：
+    使用泛型明确存储的数据类型，避免类型转换错误。
+  - try-finally 包裹：
+    在可能抛出异常的场景中，用 try-finally 确保 remove()被调用。
+
+## `javax.annotation.PostConstruct`
+
+- 用于注释方法，被注释的方法将在对象构造之后被自动调用
+
 # 第三方
 
 ## `com.google.common.base.Preconditions`
@@ -118,6 +143,18 @@ public class SecurityAspect {
 
 # Spring
 
+## `org.springframework.stereotype`
+
+Spring 框架基本分层注解
+
+- `org.springframework.stereotype.Controller`
+  负责处理 HTTP 请求，将请求转发给服务层进行业务处理，并将处理结果返回给客户端
+- `org.springframework.stereotype.Service`
+  服务层负责处理业务逻辑，协调不同数据访问层操作，封装业务规则。
+  使用 @Service 注解后，Spring 容器会自动扫描并将带有该注解的类注册为一个 Bean，这样就可以在其他组件中通过依赖注入的方式使用该服务。
+- `org.springframework.stereotype.Service`
+  主要用于标识数据访问层（DAO）组件，负责与数据库进行交互。服务层组件（@Service）通常会调用数据访问层组件（@Repository）来完成业务逻辑。
+
 ### `org.springframework.lang.Nullable`
 
 annotation，标记参数等可为 null
@@ -133,6 +170,10 @@ annotation，标记参数等可为 null
 ## org.springframework.context
 
 上下文相关操作
+
+### `org.springframework.context.annotation.ComponentScan`
+
+设定扫描 Component 的根目录列表，通常作为 Application 的注解。
 
 ### `org.springframework.context.ApplicationContextAware`
 
@@ -159,7 +200,7 @@ class
 
 获取本次请求的上下文，可以获取 request 和 response
 
-## JPA(Java Persistance API)
+## JPA(Jakarta Persistance API)
 
 简化 DAO 操作
 
@@ -184,3 +225,7 @@ interface 通过函数名规约语法实现 DML 操作
 用于以一种灵活且类型安全的方式构建复杂的查询条件。
 
 - 函数式接口，可以用 Lambda 函数赋值
+
+### `jakarta.persistence.Lob`
+
+用于标注实体类中的大对象（Large Object）属性

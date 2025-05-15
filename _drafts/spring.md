@@ -1,0 +1,8 @@
+- 多个 maven module 间可以依赖融合形成树状组织，合并为一个项目
+- Spring Boot 框架基本用法
+  - 运行前对各个组件进行注解标记
+  - 启动时根据扫描目录逐步加载各个组件，形成树形依赖结构
+  - 根据 Starter 组件进行线程启动
+- 启动过程可以打 log
+  - 在启动命令中加`--debug`
+  - 或在`application.yml`配置`debug: true`

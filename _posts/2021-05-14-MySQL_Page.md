@@ -76,7 +76,7 @@ Tablespace(表空间)->Table(表)->Segment(段)->Extent(区)->Page(页)
 
 ```SQL
 `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id',
-`is_deleted` tinyint(4) NOT NULL DEFAULT '0' COMMENT '是否逻辑删除：0：未删除，1：已删除',
+`is_deleted` tinyint(2) NOT NULL DEFAULT '0' COMMENT '是否逻辑删除：0：未删除，1：已删除',
 `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
 `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间'
 ```
