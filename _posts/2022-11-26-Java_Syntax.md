@@ -81,6 +81,9 @@ for (int item : items) {
 
 - 在 priave 方法中调自己的 private 方法或变量时，可以**省略 this.**。除非存在歧义的情况才需要加 this
 
+- 在 interface 中可以用 default 关键字修饰方法，相当于在 abstract 类中定义了默认方法，如：
+  `default void preProcess(String id) {}`
+
 ## 函数式编程
 
 ### lambda 函数

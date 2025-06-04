@@ -179,6 +179,23 @@ annotation，标记参数等可为 null
 
 当一个类实现了这个接口，Spring 容器会在创建该类的实例时，自动将 ApplicationContext（应用上下文）注入到这个类中。这样，在这个类内部就可以方便地获取 Spring 容器中的其他 bean、资源等信息。
 
+## org.springframework.beans.factory.annotation
+
+### `org.springframework.beans.factory.annotation.Value`
+
+用于将外部配置值注入到 Bean 的字段、方法参数或构造函数参数中。它支持从多种配置源读取值，包括属性文件、环境变量、命令行参数等。
+
+```java
+@Component
+public class MyService {
+    @Value("${app.name}")
+    private String appName; // 从 application.properties 读取 app.name 的值
+
+    @Value("${server.port:8080}") // 默认值 8080
+    private int serverPort;
+}
+```
+
 ## org.springframework.scheduling
 
 定时任务

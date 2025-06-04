@@ -335,6 +335,150 @@ tags: Java
     ```
   - 说明：如果是 JDK8 的应用，可以使用 Instant 代替 Date, LocalDateTime 代替 Calendar, DateTimeFormatter 代替 SimpleDateFormat，
     官方给出的解释：simple beautiful strong immutable thread-safe。
+- _强制_ 必须回收自定义的 TreadLocal 变量记录的当前线程的值，尤其在线程池场景下，线程经常会被复用，如果不清理自定义的 ThreadLocal 变量，可能会影响后续业务逻辑和造成泄漏等问题。
+  尽量在代码中使用 try-finally 块进行回收。
+  - 正例：
+    ```java
+    objectThreadLocal.set(userInfo);
+    try {
+      // ...
+    } finally {
+      objectThreadLocal.remove();
+    }
+    ```
+- _强制_ 高并发时，同步调用应该去考量锁的性能损耗。能用无锁数据结构，就不要用锁；能锁区块，就不要锁整个方法体；能用对象锁，就不要用类锁。
+  - 说明：尽可能使用加锁的代码块工作量尽可能的小，避免在所代码块中调用 RPC 方法。
+- _强制_ 对多个资源、数据库表、对象同时加锁时，需要保持一致的加锁顺序，否则可能会造成死锁。
+  - 说明：线程 1 需要对表 A、B、C 依次全部加锁后才可以进行更新操作，那么线程 2 的加锁顺序也必须是 A、B、C，否则可能出现死锁。
+- _强制_ 在使用阻塞等待获取锁的方式中，必须在 try 代码块之外，并且在加锁方法与 try 代码块之间没有任何可能抛出异常的方法调用，避免加锁成功后，在 finnaly 中无法解锁。
+
+  - 说明 1：在 lock 方法与 try 代码块之间的方法调用抛出异常，无法解锁，造成其它线程无法成功获取锁。
+  - 说明 2：如果 lock 方法在 try 代码块内，可能由于其它方法抛出异常，导致在 finally 代码块中，unlock 对未加锁的对象解锁，它会调用 AQS 的 tryRelease 方法(取决于具体实现类)，抛出 illegalMonitorStateException 异常。
+  - 说明 3：在 Lock 对象的 Lock 方法实现中可能抛出 unchecked 异常，产生的后果与说明 2 相同。
+  - 正例：
+
+    ```java
+    Lock lock = new XxxLock();
+    // ...
+    lock.lock();
+    try {
+      doSomething();
+      doOthers();
+    } finally {
+      lock.unlock();
+    }
+    ```
+
+  - 反例：
+    ```java
+    Lock lock = new XxxLock();
+    // ...
+    try {
+      // 如果此处抛出异常，则直接执行 finally 代码块
+      doSomething();
+      // 无论加锁是否成功，finally 代码块都会执行
+      lock.lock();
+      doOthers();
+    } finally {
+      lock.unlock();
+    }
+    ```
+
+- _强制_ 在使用尝试机制来获取锁的方式中，进入业务代码块之前，必须先判断当前线程是否持有锁。
+  锁的释放规则与锁的阻塞等待方式相同。
+  - 说明：Lock 对象的 unlock 方法在执行时，它会调用 AQS 的 tryRelease 方法（取决于具体实现类），如果当前线程不持有锁，则抛出 IllegalMonitorStateException 异常。
+  - 正例：
+    ```java
+    Lock lock = new XxxLock();
+    // ...
+    boolean isLocked = lock.tryLock();
+    if (isLocked) {
+      try {
+        doSomething();
+        doOthers();
+      } finally {
+        lock.unlock();
+      }
+    }
+    ```
+- _强制_ 并发修改同一记录时，避免更新丢失，需要加锁。要么在应用层加锁，要么在缓存加锁，要么在数据层使用乐观锁，使用 version 作为更新一句。
+  - 说明：如果每次访问冲突小于 20%，推荐使用乐观锁，否则使用悲观锁。乐观锁的重试次数不得小于 3 次。
+- _强制_ 多线程并行处理任务时，Timer 运行多个 TimeTask 时，只要其中之一没有捕获抛出的异常，其它任务便会自动终止运行，使用 ScheduledExecutorService 则没有这个问题。
+
+## 控制语句
+
+- _强制_ 在一个 switch 块内，每个 case 要么通过 continue/break/return 等来终止，要么注释说明程序将继续执行到哪一个 case 为止；在一个 switch 块内，都必须包含一个 default 语句并且放在最后，即使它什么代码也没有。
+  - 说明：注意 break 是退出 switch 语句块，而 return 是退出方法体。
+- _强制_ 当 switch 括号内的变量类型为 String 并且此变量为外部参数时，必须先进行 null 判断。
+  - 反例：如下的代码输出是什么？
+    ```java
+    public class SwitchString {
+      public static void main(String[] args) {
+        method(null);
+      }
+      public static void method(String param) {
+        switch(param) {
+          // 肯定不是进入这里
+          case "sth":
+            System.out.println("it's sth");
+            break;
+          // 也不是进入这里
+          case "null":
+            System.out.println("it's null");
+            break;
+          // 也不是这里
+          default:
+            System.out.println("default");
+        }
+      }
+    }
+    ```
+- _强制_ 在`if/else/for/while/do`语句中必须使用大括号。
+  - 反例: `if (condition) statements;`
+  - 说明: 即使只有一行代码，也要采用大括号的编码方式
+- _强制_ 三目运算符`condition ? 表达式1 : 表达式2`中，高度注意表达式 1 和 2 在类型对齐时，可能抛出因自动拆箱导致的 NPE 异常。
+
+  - 说明：以下两种场景会触发类型对齐的拆箱操作：
+    1. 表达式 1 或 2 的值只要有一个是原始类型。
+    2. 表达式 1 或 2 的值的类型不一致，会强制拆箱升级成表示范围更大的那个类型。
+  - 反例：
+
+    ```java
+    Integer a = 1;
+    Integer b = 2;
+    Integer c = null;
+    Boolean flag = false;
+    // a*b 的结果是 int 类型，那么 c 会强制拆箱成 int 类型，抛出 NPE 异常
+    Integer result = (flag ? a*b : c);
+    ```
+
+- _强制_ 在高并发场景中，避免使用"等于"判断作为中断或退出的条件。
+  - 说明：如果并发控制没有处理好，容易产生等值判断被"击穿"的情况，使用大于或小于的区间判断条件来代替。
+  - 反例：判断剩余奖品数量等于 0 时，终止发放奖品，但因为并发处理错误导致奖品数量瞬间变成了负数，这样的话，活动无法终止。
+
+## 注释规约
+
+- _强制_ 类、类属性、类方法的注释必须使用 Javadoc 规范，使用`/** 内容 */`格式，不得使用`// xxx`方式。
+  - 说明：在 IDE 编辑窗口中，Javadoc 方式会提示相关注释，生成 Javadoc 可以正确输出相应注释；在 IDE 中，工程调用方法时，不进入方法即可悬浮提示方法、参数、返回值的意义，提高阅读效率。
+- _强制_ 所有的抽象方法(包括接口中的方法)必须要用 Javadoc 注释、除了返回值、参数异常说明外，还必须指出该方法做什么事情，实现什么功能。
+  - 说明：对于子类的实现要求，或者调用注意事项，请一并说明。
+- _强制_ 所有类都必须添加创建者和创建日期。
+  - 说明：在设置模板时，注意 IDEA 的@author 为`${USER}`，而 eclipse 的@author 为`${user}`，大小有区别，而日期的设置统一为 yyyy/MM/dd 的格式。
+  - 正例：
+  ```java
+  /**
+    *
+    * @author test
+    * @date 20250604
+    *
+    **/
+  ```
+- _强制_ 方法内部单行注释，在被注释语句上方另起一行，使用 // 注释。方法内部多行注释用 /\* \*/ 注释，注意与代码对齐。
+- _强制_ 所有的枚举类型字段必须要有注释，说明每个数据项的用途。
+
+## 前后端端规约
+
+- _强制_ 前后端交互的 API，需要明确协议、域名、路径、请求方法、请求内容、状态码、响应体。
 
 # 参考链接
 
