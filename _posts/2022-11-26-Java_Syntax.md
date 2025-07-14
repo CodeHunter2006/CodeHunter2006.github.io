@@ -84,6 +84,24 @@ for (int item : items) {
 - 在 interface 中可以用 default 关键字修饰方法，相当于在 abstract 类中定义了默认方法，如：
   `default void preProcess(String id) {}`
 
+## 异常机制
+
+- 通过`try {...} catch (Exception e) {...} finally {...}`的方式捕获代码段抛出的异常
+- catch 可以有多次，从精确到粗放
+
+```java
+java.lang.Object
+    └── java.lang.Throwable
+        ├── java.lang.Error       (系统级错误)
+        ├── java.lang.Exception   (程序可处理的异常)
+            └── java.lang.RuntimeException  (运行时异常)
+```
+
+- Throwable 是所有异常的根类
+- Error 表示系统级或 JVM 无法恢复的错误，通常情况程序不用捕获
+  - 涉及二方类加载时可能抛出 NoSuchMethodError，有些情况也得捕获
+- Exception 表示程序可处理的异常，是业务代码中最常处理的类型
+
 ## 函数式编程
 
 ### lambda 函数
