@@ -58,6 +58,8 @@ pip 用于各种包的安装，随 python 版本变更，可执行程序名称�
     `python3 -m pip install xxx -i https://pypi.tuna.tsinghua.edu.cn/simple`
   - python 官方
     `https://pypi.python.org/simple/`
+  - 安装本地 clone 下来的 SDK 工程
+    `pip install ./xxx_sdk/.` 会把里面所有包都安装到当前环境中
 
 # pyenv
 
