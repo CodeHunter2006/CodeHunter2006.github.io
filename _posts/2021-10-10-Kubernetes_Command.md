@@ -294,4 +294,10 @@ tags: Docker K8S HighConcurrency
    查看 pod 在哪些节点有实例
 2. 来到对应 node `docker ps|grep xxx`
    找到对应的 container
-3. `docker exec -it xxx bash` 进入查看
+3. `kubectl exec -it <pod-name> -c <container-name> -- /bin/bash` 进入查看
+
+# CRD
+
+## 查找某个 CRD 的实例
+
+`kubectl get rayclusters.ray.io --all-namespaces`

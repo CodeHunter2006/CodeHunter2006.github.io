@@ -332,3 +332,11 @@ In Kubernetes, a Pod represents a set of running containers on your cluster.
   `kubectl drain <node name>`
   Once it returns (without giving an error), you can power down the node.
   If you leave the node in the cluster during the maintenance operation, you need to run `kubectl uncordon <node name>` resume scheduling new pods onto the node.
+
+- event
+  Event 本身是 Kubernetes 中的一种标准资源，和 Pod、Deployment 一样可以被监听，用于实时获取集群中发生的各类事件（如 Pod 调度失败、镜像拉取成功、节点资源不足等）。
+  - 核心字段：
+    - type：事件类型（Normal 表示正常操作，Warning 表示警告 / 错误）。
+    - reason：事件原因（如 Pulling 表示正在拉取镜像，FailedScheduling 表示调度失败）。
+    - message：事件的详细描述信息。
+    - involvedObject：事件关联的资源（如某个 Pod、Node 等）。

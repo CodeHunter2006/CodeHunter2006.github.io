@@ -16,6 +16,7 @@ Helm chart 是在 K8S spec 的基础上，利用 Go template 实现了"模板+�
   chart 可以用 VCS(如 git) 控制起来。
 - **release**
   chart 每次部署会生成一个 release 实例，chart 和 release 的关系就像面向对象中 class 和 object 的关系。
+  release 保存在 k8s 对应 namespace 下的 secrete 中，名称格式：`sh.helm.release.v1.<release-name>.v<version>`
 - **repository**
   用于存储 chart 的仓库
 - **derective**
@@ -113,6 +114,9 @@ Helm chart 是在 K8S spec 的基础上，利用 Go template 实现了"模板+�
   ```
 
 # 常用命令
+
+- `helm list`
+  查看已安装的 chart
 
 - `helm get manifest helmName`
   显示 helmChart 清单，显示结果以`---`分割 yaml 文件。
