@@ -4,5 +4,8 @@
   - 启动时根据扫描目录逐步加载各个组件，形成树形依赖结构
   - 根据 Starter 组件进行线程启动
 - 启动过程可以打 log
+
   - 在启动命令中加`--debug`
   - 或在`application.yml`配置`debug: true`
+
+- spring 的 `application.yml` 是配置模板，只有在里面的配置才会被读取

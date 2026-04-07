@@ -304,7 +304,6 @@ def func1(param1: int, param2: str = "default") -> dict {
 ```
 
 - 类型要用特殊类型名表达，不可以用`literal`表达
-
   - 可用类型参考：[typing — Support for type hints](https://docs.python.org/3/library/typing.html)
   - 比如`(int,int)`正确的表达是`typing.Tuple[int, int]`
     - 注意，是`typing`包下的类，并且参数要以`[]`包裹
@@ -338,7 +337,6 @@ def func1:
 - 在 Python 的逻辑表达式中，`None`、`False`、`0`、`""(空字符串)`、`[](空列表)`、`()(空元组)`、`{}(空字典)`都相当于`False`。
 
 - 如何判断变量值是否为`None`？
-
   - `if X is None:`
   - `if X is not None:`相当于`if not (X is None)`
 
@@ -476,12 +474,10 @@ Python 中支持三目运算语法：
 Python 的推导式语法允许从一种集合导出另一种集合，这里的"集合"不是狭义的 set，而是广义的 container。
 
 - 列表推导式
-
   - `[out_exp_res for out_exp in input_list [if condition with out_exp]]`
     把符合条件的元素导出到新列表，如果没有条件则全部导入
 
 - 字典推导式
-
   - `{ key_expr: value_expr for value in collection [if condition] }`
     字典推导式的数据源只能是更低维度的类型，比如 list set tuple
   - 可以利用`dict.items()`(返回`[(k,v)]`)作为数据源进行推导
@@ -864,3 +860,28 @@ print(o.field, A.field) # 1 2
 
 - `vars(obj)`
   查看对象实例的成员
+
+# 异步
+
+- Python 3.5 引入
+- **async def**， 用来定义 异步函数（协程函数），只能配合 **await** 使用，不能直接普通调用
+  - 只有 async 函数里才能用 await
+  - async 函数不能直接调用，必须：await 函数() 或 asyncio.run(函数())
+  - await 后面只能跟 可等待对象（async 函数、task、future 等）
+- 适合 IO 密集型：网络请求、数据库、文件、API
+
+```Python
+import asyncio
+
+# 异步函数
+async def hello():
+    return "Hello async"
+
+# 必须在异步环境里运行
+async def main():
+    result = await hello()  # ✅ 必须 await
+    print(result)
+
+# 运行入口
+asyncio.run(main())
+```

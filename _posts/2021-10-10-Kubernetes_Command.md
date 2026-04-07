@@ -14,7 +14,6 @@ tags: Docker K8S HighConcurrency
 - 在 K8S 中**一切皆资源**，我们的命令本质上是对资源的操作或配置。
 
 - 三种资源管理方式：
-
   - 命令式对象管理：
     `kubectl run nginx-pod --image=nginx:1.15.1 --port=80`
   - 命令式对象配置：
@@ -34,7 +33,6 @@ tags: Docker K8S HighConcurrency
 - kubectl 命令语法：
   `kubectl [command] [type] [name] [flags]`
   一般前两个参数是必须的，后面是可选的。
-
   - command
     指定要对资源执行的操作，如 create、get、delete
   - type
@@ -60,7 +58,6 @@ tags: Docker K8S HighConcurrency
 - 安装 kubectl 工具：`brew install kubernetes-cli helm`，这个命令可以将 helm 工具顺便安装好。
 
 - 连接 API-Server 需要配置好"cube config"文件，在 mac 中在`~/.cube/config`。
-
   - 默认将使用这个配置文件，如果需要利用其他配置文件，可以用设置参数`kubectl --kubeconfig xxx get namespace`
 
 - 可以用`lens`代替`dashboard`提供 UI，`brew install --cask lens`
@@ -84,7 +81,6 @@ tags: Docker K8S HighConcurrency
 查询某种资源列表，也可以同时查询多种，用','隔开。
 
 - `-o yaml` 指定显示的格式
-
   - `wide` 显示更多列信息
   - `yaml` 以 yaml 显示更详细信息
   - `json` 以 json 显示
@@ -101,6 +97,12 @@ tags: Docker K8S HighConcurrency
 
 `kubectl get pod <pod_name> -n xxx -o yaml`
 以 yaml 格式展示结果，内容非常详细。可以指定具体实例名。
+
+`kubectl get node`
+获取节点列表
+
+`kubectl get pods --all-namespaces -o wide --field-selector spec.nodeName='x.x.x.146'`
+查看某 node 上有哪些 pod
 
 ## create
 
@@ -268,7 +270,6 @@ tags: Docker K8S HighConcurrency
 
 - `kubectl cp -n namespace [-c containerName] podName:relativePath targeFilePath`
   拷贝容器中的文件到本机
-
   - 如果只有一个 container，则无需填`-c containerName`
   - podName 后的地址是相对地址，不能以`/`开头
   - 相对地址是基于`WORKDIR`开始的
