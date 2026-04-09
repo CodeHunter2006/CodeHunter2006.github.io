@@ -315,6 +315,54 @@ def func1(param1: int, param2: str = "default") -> dict {
 - `callable`
   可以用来作为类型，表示可被调用的函数。也可以用来做类型判断函数，如果是函数则返回`True`
 
+```python
+from typing import Generic, TypeVar
+
+# 1. 定义类型变量 T
+# 定义一个类型变量，名字叫 T
+# 只能是 int 或 str
+T = TypeVar("T", int, str)
+
+# 必须是 Number 的子类（int/float 都可以）
+from numbers import Number
+T = TypeVar("T", bound=Number)
+
+# 2. 继承 Generic[T]，变成泛型类
+class Box(Generic[T]):
+    def __init__(self, value: T):
+        self.value = value
+
+# 3. 使用：指定泛型类型
+int_box = Box[int](123)    # 明确装 int
+str_box = Box[str]("hello") # 明确装 str
+
+# 4. IDE 完美识别类型！
+print(int_box.value)  # IDE 知道是 int，自动提示方法
+print(str_box.value)  # IDE 知道是 str，自动提示方法
+```
+
+- TypeVar：定义类型变量（给 “任意 / 某一类类型” 起个名字）
+- Generic：定义泛型类 / 泛型函数的基类，让自定义类支持泛型
+- Python 内置的 list/dict/set 都是泛型，底层就是用 TypeVar + Generic 实现的
+
+```python
+from typing import Type
+
+class Person:
+    pass
+
+p = Person()  # 实例
+Person        # 类本身
+
+def func(person_inst: Person, person_cls: Type[Person]):
+    person_cls()  # 利用传入的类创建实例
+    pass
+
+func(Person(), Person)
+```
+
+- 类本身也可以作为变量保存起来，之后用于构造函数
+
 # 逻辑控制
 
 ## pass
@@ -846,6 +894,23 @@ print(o.field, A.field) # 1 2
 ## `@staticmethod`
 
 与`@classmethod`修饰符相比，函数中无需传入`cls`参数
+
+## `@abstractmethod`
+
+```python
+from abc import ABC, abstractmethod
+
+# 继承 ABC → 变成抽象类
+class Animal(ABC):
+    # 标记抽象方法：子类必须实现！
+    @abstractmethod
+    def speak(self):
+        pass
+
+    # 普通方法：子类可以直接用
+    def eat(self):
+        print("吃东西")
+```
 
 # 反射
 

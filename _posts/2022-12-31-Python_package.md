@@ -128,6 +128,29 @@ origin_data = base64.b64decode(base64_data)
 print(origin_data.decode())
 ```
 
+## functools
+
+functools.partial 给函数 “提前绑定” 一部分参数，生成一个新的、参数更少的函数，也叫"偏函数"/"部分应用函数"。
+
+```python
+def power(x, n):
+    return x ** n
+
+power(2, 2)
+power(3, 2)
+power(4, 2)
+
+# 大量地方只需要算平方（n=2），不想每次都写 n=2
+from functools import partial
+
+square = partial(power, n=2)
+
+# 之后可直接避免参数 n
+print(square(2))   # 4
+print(square(3))   # 9
+print(square(4))   # 16
+```
+
 ## inspect
 
 代码反射相关
@@ -214,6 +237,46 @@ if match:
 import copy
 original_list = [1, 2, 3, [4, 5]]
 copied_list = copy.deepcopy(original_list)
+```
+
+## queue
+
+线程安全的队列
+
+- 核心功能
+  提供 3 种队列：FIFO、LIFO、优先级队列
+  自带 阻塞 / 超时 机制，非常适合生产者 - 消费者模型
+  多线程下安全存取，不用自己加锁
+  可以控制队列大小，防止无限占内存
+
+```python
+import queue
+
+# 1. 普通队列：先进先出 FIFO（最常用）
+q = queue.Queue(maxsize=5)  # maxsize：队列最大长度，满了之后再 put 会阻塞
+
+# 2. 栈式队列：后进先出 LIFO
+q = queue.LifoQueue()
+
+# 3. 优先级队列：数字越小越先出
+q = queue.PriorityQueue()
+
+q = queue.Queue()
+
+# 放数据
+q.put(111)
+q.put(222)
+q.put(333)
+
+# 取数据（默认阻塞）
+print(q.get())  # 111
+print(q.get())  # 222
+
+# 标记任务完成（配合 join 使用）
+q.task_done()
+
+# 阻塞直到队列所有任务都被 task_done()
+q.join()
 ```
 
 ## sys
@@ -328,7 +391,7 @@ p.pid
 p.name
 ```
 
-# 启动进程
+启动进程
 
 ```python
 import multiprocessing
@@ -361,6 +424,10 @@ print(uuid4())
 ```
 
 # 第三方包
+
+## pydantic
+
+使用@field_validator装饰器实现自定义字段校验逻辑（如路径格式检查、参数范围校验等），无需编写冗长的校验代码
 
 ## pyjwt
 

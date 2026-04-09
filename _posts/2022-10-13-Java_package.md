@@ -112,6 +112,55 @@ public class MyClass {
 
 自动为 POJO 类生成 builder 模式需要的方法
 
+## `com.github.benmanes.caffeine.cache`
+
+Caffeine（com.github.benmanes.caffeine.cache）是 Java 生态中性能最优的本地缓存库，基于 W-TinyLFU 淘汰算法，在并发吞吐量、命中率、内存效率上全面超越 Guava Cache，是 Spring 5+ 默认本地缓存实现。
+
+- 核心功能（特性）
+  - 超高性能：O (1) 读写、并发无锁设计，高并发下吞吐量远高于 Guava/ConcurrentHashMap
+  - 智能淘汰：W-TinyLFU 算法（频率 + 热度 + 时间窗口），接近理论最优命中率
+  - 灵活过期
+    expireAfterWrite：写入后固定时长过期
+    expireAfterAccess：最后一次访问后过期
+    expireAfter(Expiry)：动态自定义过期（每条不同 TTL）
+    refreshAfterWrite：后台异步刷新（不阻塞读）
+  - 容量控制
+    maximumSize：最大条目数
+    maximumWeight + weigher：按权重 / 内存大小淘汰
+  - 自动加载
+    LoadingCache：get 时自动加载（原子、防击穿）
+    AsyncLoadingCache：异步加载（CompletableFuture）
+  - 引用类型
+    weakKeys / weakValues：弱引用（GC 时自动回收）
+    softValues：软引用（内存不足时回收）
+  - 监控统计
+    recordStats()：命中率、加载时间、淘汰数、请求量
+  - 事件监听
+    removalListener：条目过期 / 淘汰 / 删除时回调
+    线程安全：全并发安全，无锁 / 分段锁设计
+
+## `io.github.bucket4j`
+
+Bucket4j（io.github.bucket4j） 是 Java 生态中最主流、高性能的令牌桶算法（Token Bucket）限流库，用于精准控制请求速率、防止系统过载，支持单机与分布式场景，是 API 网关、微服务限流的首选方案。
+
+- 核心功能
+  - 令牌桶算法实现：经典流量控制模型，支持平滑限流 + 突发流量容忍。
+  - 高精度：纯整数运算，无浮点数误差，纳秒级时间精度。
+  - 高性能：无锁设计，高并发下吞吐量极高、低延迟。
+  - 灵活限流规则
+    - 多带宽叠加（如：每秒 100 次 + 每分钟 1000 次）
+    - 多种令牌填充策略
+      - greedy（贪婪，匀速平滑）
+      - intervallyAligned（间隔对齐，整点批量填充）
+    - 初始令牌数、容量控制
+  - 丰富 API
+    - tryConsume()：尝试消费（非阻塞）
+    - asBlocking()：阻塞等待令牌
+    - asAsync()：异步 CompletableFuture
+    - 令牌回滚、动态修改配置
+  - 分布式支持：基于 Redis、Hazelcast、Ignite 等实现跨节点统一限流。
+  - 监控与监听：获取可用令牌数、消耗统计、移除监听器。
+
 # AOP(Aspect - Oriented Programming) 面相切面编程
 
 - 对 Java 类、方法的各个时间点(对象，创建前、创建后、析构前、析构后；方法，调用前、调用后、正常返回后、异常后)进行回调函数处理
