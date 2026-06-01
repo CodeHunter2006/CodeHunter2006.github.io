@@ -539,6 +539,45 @@ Python 的推导式语法允许从一种集合导出另一种集合，这里的"
 
 例：`cmp = lambda x, y: x >= y`
 
+### 常见的"闭包晚绑定(Late Binding)"问题
+
+Python 闭包的晚绑定是指：闭包中引用的变量，不是在定义时赋值，而是在函数调用时才去查找最新值。
+lambda 作为匿名函数，天生是闭包，这个问题会非常典型。
+
+- 错误示例：
+
+```python
+# 预期：funcs[0]()=0, funcs[1]()=1, funcs[2]()=2
+funcs = []
+for i in [0, 1, 2]:
+    # 把 lambda 加入列表
+    funcs.append(lambda: i)
+
+# 实际调用
+print(funcs[0]())  # 输出 2 ❌
+print(funcs[1]())  # 输出 2 ❌
+print(funcs[2]())  # 输出 2 ❌
+```
+
+为什么全是 2？
+lambda 是闭包，捕获了变量 i
+晚绑定：lambda 不会在定义时保存 i 的值
+循环结束后，i 最终变成了 2
+调用时，所有 lambda 都去查当前的 i，所以全是 2
+
+利用函数默认参数在定义时就绑定值的特性，强制提前绑定，修正后：
+
+```python
+funcs = []
+for i in [0, 1, 2]:
+    # i=x：定义时就把当前 i 赋值给默认参数 x
+    funcs.append(lambda x=i: x)
+
+print(funcs[0]())  # 0 ✅
+print(funcs[1]())  # 1 ✅
+print(funcs[2]())  # 2 ✅
+```
+
 ## 迭代器
 
 迭代器是一个对象，可以被`next(it)`不断调用返回结果。
