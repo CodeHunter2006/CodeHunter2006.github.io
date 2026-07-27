@@ -132,6 +132,12 @@ Python 支持三种数字类型：int float complex
 - `print(1/2) # 0.5`
   两个整型相除时，会自动转为浮点型
 
+### 特殊操作符
+
+- `//` floor，返回 int
+- `/` 返回 float
+- `**` 幂运算
+
 ## bool
 
 - string -> bool 转换时的坑：`bool("False")`的结果是`True`，想要设置为`False`要用空字符串

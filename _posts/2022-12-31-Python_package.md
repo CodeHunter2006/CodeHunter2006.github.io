@@ -516,3 +516,6 @@ python 进程运行情况查询
 
 - `py-spy record -o profile.svg --pid {}`
   生成火焰图
+
+- `--local/-l`
+  打印调用栈的同时打印出变量，便于分析
