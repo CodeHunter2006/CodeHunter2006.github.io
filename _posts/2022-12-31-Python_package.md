@@ -514,7 +514,7 @@ python 进程运行情况查询
 - `py-spy top --pid {}`
   获取函数调用消耗
 
-- `py-spy record -o profile.svg --pid {}`
+- `py-spy record -o profile.svg --pid {} --duration 30`
   生成火焰图
 
 - `--local/-l`
