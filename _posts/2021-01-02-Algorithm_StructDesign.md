@@ -7,6 +7,55 @@ tags: Algorithm Leetcode
 
 记录 LeetCode 中常见的据结构设计
 
+### "4. Median of Two Sorted Arrays"
+
+```Go
+func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
+    w := Wrapper{nums1, nums2}
+    sort.Sort(w)
+
+    if w.Len() == 0 {
+        return 0.0
+    } else if w.Len() % 2 == 1 {
+        return float64(w.Get(w.Len()/2))
+    } else {
+        return (float64(w.Get(w.Len()/2 - 1)) + float64(w.Get(w.Len()/2))) / 2.0
+    }
+}
+
+type Wrapper struct {
+    Array1, Array2 []int
+}
+func (w Wrapper) Get(i int) int {
+    if i < len(w.Array1)  {
+        return w.Array1[i]
+    } else {
+        return w.Array2[i-len(w.Array1)]
+    }
+}
+func (w Wrapper) set(i, val int) {
+    if i < len(w.Array1) {
+        w.Array1[i] = val
+    } else {
+        w.Array2[i-len(w.Array1)] = val
+    }
+}
+func (w Wrapper) Len() int {
+    return len(w.Array1) + len(w.Array2)
+}
+func (w Wrapper) Less(i, j int) bool {
+    if w.Get(i) < w.Get(j) {
+        return true
+    }
+    return false
+}
+func (w Wrapper) Swap(i, j int) {
+    tmp := w.Get(i)
+    w.set(i, w.Get(j))
+    w.set(j, tmp)
+}
+```
+
 ### "65. Valid Number"
 
 ```Go

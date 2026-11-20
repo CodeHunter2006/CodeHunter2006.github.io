@@ -8,6 +8,53 @@ tags: Algorithm Leetcode
 ![LeetCode](/assets/images/2020-12-27-LeetCode_Category_1.jpg)
 记录 LeetCode 题型分类及解题思路
 
+### "4. Median of Two Sorted Arrays"
+
+- 解法 1: 大数组排序
+  - 思路：
+    - 创建一个能容纳所有元素的数组，把两个数组元素都放进去
+    - 排序
+    - 区分长度奇数/偶数返回结果
+  - 优点：
+    - 逻辑简单
+  - 缺点：
+    - 时间空间复杂度都高一点
+
+["4. Median of Two Sorted Arrays" Array]()
+
+- 解法 2: 利用 Adapter 模式，把两个数组包在一套数组接口内
+  - 思路:
+    - 创建一个封装类 Wrapper，实现 Sort 所需接口
+    - 创建 Wrapper 对象、排序
+    - 区分长度奇数/偶数返回结果
+  - 优点：
+    - 思路简单
+    - 空间复杂度低，几乎没有额外使用内存
+  - 缺点：
+    - 代码量大
+    - 对元素操作间接导致时间复杂度高一些
+
+["4. Median of Two Sorted Arrays" Struct Design]()
+
+- 解法 3: 利用两个数组独立的游标查找中位数
+  - 思路：
+    - 假设只有一个总的数组，根据元素总数计算中位数下标位置
+    - 按顺序循环处理每个元素，两个数组独立进行游标后移，直到找到中位数下标
+    - 根据奇偶元素数量返回结果
+  - 优点：- 思路简单 - 时间复杂度 O(log(n))，空间复杂度 O(1)
+
+["4. Median of Two Sorted Arrays" Two Pointers]()
+
+- 解法 4(官方解)：二分查找 + 情况讨论 + 中介线划分
+  - 思路：
+    - 假设有个中线可以同时把数组1和数组2分割为四段，然后根据奇偶讨论贴近中线的四个元素，最终返回结果
+    - 要讨论各种情况，比如数组1完全在中线左边、右边...
+    - 原数组均有序，可以利用二分查找法快速查找中点
+  - 优点：
+    - 性能最优解，时间复杂度 O(log(n))
+  - 缺点：
+    - 逻辑较复杂
+
 ### "5. Longest Palindromic Substring"
 
 - 解法 1: 双指针, 中心扩散
@@ -22,6 +69,8 @@ tags: Algorithm Leetcode
   - 利用边界条件让方向切换
     - 如果行数为 1 则不切换方向(方向值为 0)，所以方向初始值`1%numRows`
 
+- 解法 2：直接构造，计算每行下个字符的下标
+
 ### "7. Reverse Integer"
 
 - 解法：math
@@ -35,6 +84,7 @@ tags: Algorithm Leetcode
 
 - 解法：遍历字符，按状态进行切换
   - 可以利用状态模式，更好理解
+  - 利用 int64 记录结果，然后用 math.MaxInt32 和 math.MinInt32 判断是否超出阈值
 
 ### "9. Palindrome Number"
 
@@ -43,17 +93,32 @@ tags: Algorithm Leetcode
   - 可以参考"7. Reverse Integer"转为反转数字，同时剪短原数字，然后比较
     - 注意可能出现两种对称(12321, 1221)，所以比较时每步要比较两种情况
     - 可以只转换一半，这样可以避免转换后溢出的情况
+    - 把负数、以 0 结尾的非 0 数先过滤掉，必然不对称
 
-["9. Palindrome Number]()
+["9. Palindrome Number" Math]()
+
+### "10. Regular Expression Matching"
+
+- 解法：动态规划
+  - 设动态规划二维数组 f，分别比 s 和 p 容量 +1，以便容纳初始状态: "空字符串相匹配"
+  - 设 f[i][j] 表示 s[i-1] 和 p[j-1] 是否匹配，i 是 s 下标+1，j 是 p 下标+1
+  - 基本的状态转移方程：如果 s[i-1] == p[j-1] 则 f[i][j] = f[i][j] || f[i-1][j-1]，即当前如果字符匹配，则前一个状态如果匹配，可以认定当前状态是匹配的
+  - 特殊状态转移：如果 p[j-1] 为 '\*'，p[j-2] 元素可被忽略，不影响结果；并且这时如果 p[j-2] 和 s[i-1] 匹配，则可以忽略 s[i]，取 s[i-1] 结果也可以
+  - 可以先写个匹配函数，以方便比较 '.'，和下标转换。注意函数中 i == 0 没有意义
+  - 循环时，先对 s 循环，i 下标从 0 开始(p 里可能存在 \*，所以 s[-1] 有意义)；后对 p 循环，j 下标从 1 开始(p[-1]没有意义)
+
+["10. Regular Expression Matching" Dynamic Planning]()
 
 ### "11. Container With Most Water"
 
 - 解法 1(推荐)：
-
   - 高度、距离都是影响水量的值，其中高度的权重更大，所以在循环缩小距离时保持较高的高度让高度较小的一方遍历。
 
-- 解法 2：
-  - 利用动态规划法，分别计算当前位置左边最大高度、右边最大高度，算法较易理解，但是需要占用额外空间。
+["11. Container With Most Water" Two Pointers]()
+
+- 解法 2：单调栈
+  - 本质和解法1相同，不过先把一端入栈，然后从另一端遍历，再结合栈顶和当前位置高度进行出栈或遍历
+  - 缺点：会额外占用内存
 
 ### "12. Integer to Roman"
 
@@ -225,10 +290,8 @@ tags: Algorithm Leetcode
 
 - 思路 1:两遍遍历
   假设每一个下标对应一个水柱，则水柱的高度由此位置最左和最右 bar 的高度综合决定。
-
   1. 从左向右遍历一遍，记录每个下标对应的左边最高的 bar 高度
   2. 从右向左遍历一遍，一边遍历一边计算累加当前位置的水柱高度，`水柱高度 = min(left, right) * height`
-
   - 时间复杂度 O(n)，空间复杂度 O(n)
 
 - 思路 2:双指针
@@ -293,7 +356,6 @@ tags: Algorithm Leetcode
 ### "69. Sqrt(x)"
 
 - 二分查找法:
-
   - 在 1~x 之间进行二分查找，条件为`m > x/m`，注意这里没有用`m * m > x`因为可能溢出，
   - 使用`/`会比乘法慢一些，但是二分查找的时间复杂度是 O(logn)所以问题不大。
   - 使用二分查找法效率比牛顿迭代法稍高。
@@ -418,7 +480,6 @@ tags: Algorithm Leetcode
 ### "90. Subsets II"
 
 - 解法 1: backtracking + memory
-
   - 思路：
     - 利用 backtraking 对每个元素执行"取/不取"操作
     - 将所有元素拼接成字符串作为唯一标识，用`map[string]struct{}`进行重复判别
@@ -617,7 +678,6 @@ tags: Algorithm Leetcode
 ### "127. Word Ladder"
 
 - 解法 1: BFS + HashTable
-
   - 思路：
     - 将字典保存至 hashTable 以便后续查找
     - 利用 queue 做 BFS，queue 的元素是"(当前字符串，步数)"
@@ -758,7 +818,6 @@ tags: Algorithm Leetcode
 ### "148. Sort List"
 
 - 解法 1：DFS + MergeSort
-
   - 思路：
     - 利用快慢指针快速找到本段链表的中点，DFS 对两段子链表排序，然后在对两段子链表执行 merge
   - 注意：
@@ -853,9 +912,7 @@ tags: Algorithm Leetcode
 ### "162. Find Peak Element"
 
 - 解法：BinarySearch
-
   - 思路：
-
     - 题目规定了所有元素都不相同，所以只需要按基本逻辑想就可以
     - 如果一个区域左边界趋势是向右增大、同时右边界趋势是向左增大，那么一定能在中间(包括左右边界)找到 peak 下标
     - 由于题目规定`下标 -1 n 时值为 -♾`，所以整个区域就符合上面假设，一定能找到答案
@@ -1051,7 +1108,6 @@ tags: Algorithm Leetcode
 ### "215. Kth Largest Element in an Array"
 
 - 解法 1: Sort
-
   - 思路：
     - 利用标准库的 sort 排序，然后直接返回目标
   - 时间复杂度：`O(nlogn)`
@@ -1219,11 +1275,9 @@ tags: Algorithm Leetcode
 ### "268. Missing Number"
 
 - 解法 1: 排序
-
   - 时间复杂度：O(nlogn)
 
 - 解法 2: HashMap
-
   - 空间复杂度：O(n)
 
 - 解法 3: XOR
@@ -1293,7 +1347,6 @@ tags: Algorithm Leetcode
 ### "279. Perfect Squares"
 
 - 解法 1：DP
-
   - 思路：
     - 可以看称"完全背包"问题，目标数字`n`就是背包容量，`x^2`可以看作是物品，物品数量数量不限
     - 附加条件：用**最少**的物品个数，**刚好**填满背包
@@ -1310,7 +1363,6 @@ tags: Algorithm Leetcode
 ### "295. Find Median from Data Stream"
 
 - 解法 1: Heap
-
   - 思路:
     - 用上下两个堆维护所有元素，中间可以取值作为查询结果，看起来像两个尖端相对的三角形的
     - 上面一个最小堆，下面一个最大堆，始终保持上面放最大的数据、下面放最小的数据，然后由两个堆顶决定结果
@@ -1321,7 +1373,6 @@ tags: Algorithm Leetcode
 ["295. Find Median from Data Stream" StructDesign]()
 
 - 解法 2: OrderedMap + TwoPointers
-
   - 思路:
     - 类似 Heap，但是用 OrderedMap 保存元素，用两个指针分别表示堆顶位置，实际上一个指针也可以
     - 根据新加入元素的大小和元素总数的奇偶性对指针进行移动
@@ -1349,7 +1400,6 @@ tags: Algorithm Leetcode
 **LIS**是动态规划的常见问题
 
 - 考点：
-
   - 一维数组二维 DP、LIS(最长上升子序列)
 
 - 解法 1：
@@ -1389,7 +1439,6 @@ tags: Algorithm Leetcode
 ### "312. Burst Balloons"
 
 - 解法(推荐)： DFS + Memory
-
   - 思路：
     - 用 memo[i][j]记录[i,j]区间内的最大值
     - 假设打破气球的位置是 k，`i <= k <= j`，我们假设 k 是区间内最后一个打破的气球，这样容易计算
@@ -1519,7 +1568,6 @@ tags: Algorithm Leetcode
 ### "338. Counting Bits"
 
 - 解法 1: bit
-
   - 利用`onesCount`算法，计算 0~n 每一个数的结果
   - 时间复杂度：`O(n*32)`，假设 32 位整型
 
@@ -1683,7 +1731,6 @@ tags: Algorithm Leetcode
 ### "413. Arithmetic Slices"
 
 - 解法：Math
-
   - 思路：
     - 通过手动 DP 分析，可以看出序列长度和结果间的关系：
       `3, 1=1`
@@ -1859,7 +1906,6 @@ tags: Algorithm Leetcode
 ### "457. Circular Array Loop"
 
 - 解法：in-place
-
   - 思路：
     - 可以利用原位置保存两个信息：是否被访问过 + 访问时的轮次编号
     - 如果判断下一结点被访问过，并且方向相同，则返回 true
@@ -1905,21 +1951,18 @@ tags: Algorithm Leetcode
 ### "470. Implement Rand10() Using Rand7()"
 
 - 解法 1: 暴力采样，100 次采样时**不通过**
-
   - 思路：
     - 用 10 个`[1,7]`采样结果相加得到`[10,70]`，然后`/10`取得结果
   - 特点：
     - 时间复杂度固定 O(7n)->O(n)，但是不符合性能要求
 
 - 解法 2: 拒绝采样，1000 次采样时**不通过**
-
   - 思路：
     - 采样两次求和，如果范围在`[2,11]`，则返回`[2,11]-1`，否则循环找到合适随机值
   - 特点：
     - 至少采样两次，并且有`3/7`概率丢弃，所以每次采样期望次数为`2*(4/7+(4/7)^2+...)≈6`，时间复杂度 O(6n)，还是不能符合性能要求
 
 - 解法 3: 直接取余，10000 次采样时**不通过**
-
   - 思路：
     - 直接取余辆次，然后求和，然后和对 10 取余，再加一，`return (rand7()+rand7())%10 + 1`
   - 问题：
@@ -2110,7 +2153,6 @@ tags: Algorithm Leetcode
 ### "581. Shortest Unsorted Continuous Subarray"
 
 - 解法 1: 排序
-
   - 思路：
     - 把数组想象成三段 ABC，其中 B 表示乱序的一段
     - 复制数组，排序之后，遍历一遍，标记 B 的开头和结尾
@@ -2307,7 +2349,6 @@ tags: Algorithm Leetcode
 ### "718. Maximum Length of Repeated Subarray"
 
 - 解法 1：dp
-
   - 思路：
     - 类似"edit distance"，进行二维 DP
   - 时间复杂度：`O(M*N)`
@@ -2460,7 +2501,6 @@ tags: Algorithm Leetcode
 ### "818. Race Car"
 
 - 考点：复杂问题建模
-
   - 已知：可以用 A 加速、R 减速到 0 并反转方向、target 是最终目标位置、求最少指令数
   - 令$A^k$表示连续 k 个 A，则在同方向走$2^k-1$步可表示为
     $$A^{k_0}RA^{k_1}...A{k_n}R$$
@@ -2473,7 +2513,6 @@ tags: Algorithm Leetcode
     这个表达式的物理意义是，如果已经超过了 target，那么就该停下向后开，否则冲出去太长的距离再往回折返肯定是不划算的
 
 - 解法 1: Dijkstra
-
   - 思路：
     - 设位置为 i，每个位置可以最多加速${k_j}$次。根据上面分析可得${k_j} \leq K$，
       从 i 点可以向后加速${k_j}$次然后调头，每个加速和调头都会增加一次指令步数
@@ -2489,7 +2528,6 @@ tags: Algorithm Leetcode
 ["818. Race Car" Dijkstra Golang]()
 
 - 解法 2: BFS + memory
-
   - 把"位置+速度"作为一个基本单元，放在 queue 里进行 BFS，每次遍历尝试继续加速或减速
   - 由于规模较大"10000"，所以要进行 memory 剪枝，以"位置+速度"作为 key 保存在 map 中
     - 由于规模在`1~10000`之内，同时速度是"2^n"，可以用一个 32 位表示一个 key"位置+速度+速度方向"，
@@ -2529,7 +2567,6 @@ tags: Algorithm Leetcode
 ### "863. All Nodes Distance K in Binary Tree"
 
 - 解法 1: HashMap(空间复杂度 O(n))
-
   - 思路：
     - 题目给定了 target 指针，只要找到 target 后就能向下递归查找元素，
       难点是没有 parent 指针，所以需要用 HashMap 帮助保存
@@ -3033,7 +3070,6 @@ tags: Algorithm Leetcode
 
 - 解法 1:
   利用 C++ STL 的 multiset 实现。在遍历过程中维护最大、最小值及中间元素。如果是其他语言，如 Golang 需要手写 Treap 结构。
-
   - 时间复杂度 O(nlogn)，每次维护 tree 需要 logn，空间复杂度 O(n)
 
 - 解法 2: 滑窗+单调队列
@@ -3148,7 +3184,6 @@ tags: Algorithm Leetcode
 ### "1707. Maximum XOR With an Element From Array"
 
 - 解法 1: XOR + TrieTree + DP
-
   - 思路：
     - 假设给定了集合 nums 不限制 mi，求 xi 的过程可以看作从左向右查看二进制位匹配的过程，
       由于 XOR 运算，最好的结果是两位不同，可以把原始 nums 每个元素放入二进制树的 TrieTree，然后遍历取得最大值

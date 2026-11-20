@@ -31,6 +31,61 @@ void* myMemcpy(void *dest, const void* src, unsigned int count) {
 }
 ```
 
+### "4. Median of Two Sorted Arrays"
+
+```Go
+func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
+    m, n := len(nums1), len(nums2)
+    total := m + n
+    if total == 0 {
+        return 0.0
+    }
+
+    targetIndex := (total - 1)/2
+    targetEvenIndex := total/2
+    var ret float64
+
+    index1, index2 := 0, 0
+    curIndex := 0
+
+    for curIndex <= targetEvenIndex {
+        curVal := 0
+        if index1 < len(nums1) && index2 < len(nums2) {
+            if nums1[index1] < nums2[index2] {
+                curVal = nums1[index1]
+                index1++
+            } else {
+                curVal = nums2[index2]
+                index2++
+            }
+        } else if index1 < len(nums1) {
+            curVal = nums1[index1]
+            index1++
+        } else {
+            curVal = nums2[index2]
+            index2++
+        }
+
+        if total%2 == 1 {
+            if curIndex == targetIndex {
+                return float64(curVal)
+            }
+        } else {
+            if curIndex == targetIndex {
+                ret += float64(curVal)
+            } else if curIndex == targetEvenIndex {
+                ret += float64(curVal)
+                return ret/2.0
+            }
+        }
+
+        curIndex++
+    }
+
+    return ret
+}
+```
+
 ### "11. Container With Most Water"
 
 ```Go

@@ -46,6 +46,30 @@ func Search(n int, f func(int) bool) int {
 }
 ```
 
+### "4. Median of Two Sorted Arrays" Golang
+
+```Go
+func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
+    m, n := len(nums1), len(nums2)
+    total := m+n
+    if total == 0 {
+        return 0
+    }
+
+    a := make([]int, 0, total)
+    a = append(a, nums1...)
+    a = append(a, nums2...)
+
+    sort.Ints(a)
+
+    if total % 2 == 1 {
+        return float64(a[total/2])
+    } else {
+        return (float64(a[total/2 - 1]) + float64(a[total/2]))/2.0
+    }
+}
+```
+
 ### "31. Next Permutation" Golang
 
 ```Go
